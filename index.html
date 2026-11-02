@@ -214,7 +214,7 @@ html.light, body.light {
                 <i class="fa-solid fa-rotate"></i>
                 <span>ذكر جديد</span>
             </button>
-            <span id="dhikr-counter-text" class="font-mono text-xs px-2.5 py-1 rounded-lg bg-black/30 text-cream-100 border border-gold/20">1 / 8</span>
+            <span id="dhikr-counter-text" dir="ltr" class="font-mono text-xs px-2.5 py-1 rounded-lg bg-black/30 text-cream-100 border border-gold/20 inline-block text-center min-w-[55px]">1 / 8</span>
         </div>
     </div>
     <div class="my-auto py-2">
@@ -644,7 +644,21 @@ html.light, body.light {
                 <span>إضافة اسم متوفى جديد (ليظهر لجميع المستخدمين):</span>
             </h4>
             <div class="space-y-2">
-                <input type="text" id="deceased-input" placeholder="اسم المتوفى (مثال: المرحوم الحاج أحمد...)" class="w-full bg-black/60 border border-accent-blue/40 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-accent-blue shadow-sm">
+                <input type="text" id="deceased-input" placeholder="اسم المتوفى (مثال: الحاج رشيد مجيد...)" class="w-full bg-black/60 border border-accent-blue/40 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-accent-blue shadow-sm">
+                
+                <!-- خيارات الجنس -->
+                <div class="flex items-center gap-4 px-1 py-1 text-xs text-cream-100">
+                    <span class="font-bold text-accent-blue">الجنس:</span>
+                    <label class="flex items-center gap-1.5 cursor-pointer">
+                        <input type="radio" name="deceased-gender" value="ذكر" checked class="accent-accent-blue">
+                        <span>المرحوم (ذكر)</span>
+                    </label>
+                    <label class="flex items-center gap-1.5 cursor-pointer">
+                        <input type="radio" name="deceased-gender" value="أنثى" class="accent-accent-blue">
+                        <span>المرحومة (أنثى)</span>
+                    </label>
+                </div>
+
                 <button onclick="playClickSound(); addDeceasedCloud()" class="w-full py-2.5 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/80 transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer">
                     <i class="fa-solid fa-plus"></i>
                     <span>حفظ وإضافة للسحابة</span>
@@ -664,6 +678,13 @@ html.light, body.light {
             <i class="fa-solid fa-book-open"></i>
         </div>
         <h3 class="text-lg font-bold text-accent-blue" id="reading-for-name">إهداء ثواب الفاتحة إلى: المرحوم</h3>
+        
+        <!-- عدادات المشاهدات والقراءات المكتملة -->
+        <div class="flex items-center justify-center gap-6 text-xs text-amber-300 font-bold bg-black/40 py-2 rounded-xl border border-accent-blue/20">
+            <span><i class="fa-solid fa-eye ml-1 text-accent-blue"></i>المشاهدات: <span id="modal-views-count" class="font-mono text-white">0</span></span>
+            <span><i class="fa-solid fa-check-double ml-1 text-emerald-400"></i>القراءات: <span id="modal-reads-count" class="font-mono text-white">0</span></span>
+        </div>
+
         <div class="p-4 rounded-2xl bg-black/50 border border-accent-blue/30 text-accent-blue font-amiri text-lg leading-loose shadow-inner select-text">
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾
             <div class="pt-3 text-sm font-tajawal text-cream-100 font-bold border-t border-accent-blue/20 mt-3">
@@ -686,6 +707,13 @@ try {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 } catch (e) {}
+
+// معرّف الجهاز الخاص بالمتصفح/الجهاز الحالي لتقييد صلاحيات الحذف لمن أضافه فقط
+let myDeviceId = localStorage.getItem('adhkar_device_id');
+if (!myDeviceId) {
+    myDeviceId = 'dev_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+    localStorage.setItem('adhkar_device_id', myDeviceId);
+}
 
 let toastTimeout = null;
 function showToast(message) {
@@ -1101,7 +1129,7 @@ function toggleWheel(type) {
             cityBox.classList.remove('hidden');
             countryBox.classList.add('hidden');
             cityIcon.className = "fa-solid fa-chevron-up";
-            countryIcon.className = "fa-solid fa-chevron-down";
+            cityIcon.className = "fa-solid fa-chevron-down";
         } else {
             cityBox.classList.add('hidden');
             cityIcon.className = "fa-solid fa-chevron-down";
@@ -1878,8 +1906,9 @@ function toggleButtonSound() {
 }
 
 let deceasedList = [];
+let activeDeceasedPerson = null;
 
-// جلب الأسماء من جدول fanus السحابي في Supabase لترها جميع المستخدمين
+// جلب القائمة من Supabase مع التحقق من معرّف الجهاز (Device ID)، الجنس، وعدادات المشاهدات/القراءات
 async function loadFatihaLocalList() {
     const container = document.getElementById('fatiha-list-content');
     container.innerHTML = `<div class="text-center py-6 text-xs text-accent-blue"><i class="fa-solid fa-spinner fa-spin ml-2"></i>جاري جلب الأسماء من السحابة لجميع المستخدمين...</div>`;
@@ -1894,7 +1923,11 @@ async function loadFatihaLocalList() {
             if (!error && data) {
                 deceasedList = data.map(item => ({
                     id: item.id,
-                    name: item.deceased_name || "متوفى"
+                    name: item.deceased_name || item.name || "متوفى",
+                    gender: item.gender || "ذكر",
+                    views_count: item.views_count || 0,
+                    reads_count: item.reads_count || 0,
+                    created_by: item.created_by || ''
                 }));
             } else {
                 console.error("Supabase Fetch Error:", error);
@@ -1911,19 +1944,30 @@ async function loadFatihaLocalList() {
 
     let html = '';
     deceasedList.forEach(item => {
+        // تحديد اللقب الشرعي بناءً على الجنس المخزن
+        const prefix = item.gender === 'أنثى' ? 'المرحومة' : 'المرحوم';
+        
+        // التحقق من صلاحية الحذف: يظهر زر الحذف حصراً إذا كان معرّف الجهاز الحالي مطابقاً تماماً لمن أضافه
+        const isOwner = (item.created_by && item.created_by === myDeviceId);
+
         html += `
-            <div class="p-3 rounded-2xl glass-panel border border-accent-blue/30 flex items-center justify-between gap-3 bg-black/30">
-                <div class="text-right overflow-hidden">
-                    <h4 class="font-bold text-white text-xs truncate">${escapeHTML(item.name)}</h4>
-                    <span class="text-[10px] text-accent-blue font-medium">سجل سحابي لجميع المستخدمين</span>
+            <div class="p-3.5 rounded-2xl glass-panel border border-accent-blue/30 flex items-center justify-between gap-3 bg-black/30">
+                <div class="text-right overflow-hidden space-y-1">
+                    <h4 class="font-bold text-white text-xs truncate">${prefix} ${escapeHTML(item.name)}</h4>
+                    <div class="flex items-center gap-3 text-[10px] text-accent-blue font-medium">
+                        <span><i class="fa-solid fa-eye ml-1"></i>${toEasternArabicDigits(item.views_count)} مشاهدة</span>
+                        <span><i class="fa-solid fa-check-double ml-1 text-emerald-400"></i>${toEasternArabicDigits(item.reads_count)} قراءة</span>
+                    </div>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
                     <button onclick="playClickSound(); openReadingModal(${item.id})" class="px-3 py-1.5 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/80 transition-all shadow-md cursor-pointer">
                         <i class="fa-solid fa-book-open ml-1"></i> اقرأ الفاتحة
                     </button>
-                    <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-8 h-8 rounded-xl bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
+                    ${isOwner ? `
+                    <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-8 h-8 rounded-xl bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer" title="حذف السجل (خاص بجهازك)">
                         <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
+                    ` : ''}
                 </div>
             </div>
         `;
@@ -1931,10 +1975,12 @@ async function loadFatihaLocalList() {
     container.innerHTML = html;
 }
 
-// دالة الإضافة السحابية لكي يظهر الاسم فوراً لكل مستخدمي التطبيق
+// دالة الإضافة السحابية مع إرسال الجنس ومعرّف الجهاز الحالي لضمان الملكية وحقوق الحذف
 async function addDeceasedCloud() {
     const nameInput = document.getElementById('deceased-input');
     const name = nameInput.value.trim();
+    const genderEl = document.querySelector('input[name="deceased-gender"]:checked');
+    const gender = genderEl ? genderEl.value : 'ذكر';
 
     if (!name) { 
         showToast("يرجى كتابة اسم المتوفى أولاً"); 
@@ -1947,11 +1993,17 @@ async function addDeceasedCloud() {
         try {
             const { error } = await supabaseClient
                 .from('fanus')
-                .insert([{ deceased_name: name }]);
+                .insert([{ 
+                    deceased_name: name,
+                    gender: gender,
+                    views_count: 0,
+                    reads_count: 0,
+                    created_by: myDeviceId
+                }]);
 
             if (error) {
                 console.error("Supabase Insert Error:", error);
-                showToast("تعذر الحفظ، تأكد من تعطيل RLS في قاعدة البيانات");
+                showToast("تعذر الحفظ، تأكد من إعدادات جدول Supabase");
                 return;
             }
         } catch (e) {
@@ -1966,25 +2018,78 @@ async function addDeceasedCloud() {
     showToast("تمت إضافة الاسم بنجاح وسيظهر الآن لجميع المستخدمين!");
 }
 
+// دالة الحذف الآمن المرتبطة حصراً بمعرّف الجهاز (التحقق المزدوج برمجياً وسحابياً)
 async function deleteDeceasedCloud(id) {
+    const target = deceasedList.find(i => i.id === id);
+    if (!target || !target.created_by || target.created_by !== myDeviceId) {
+        showToast("عذراً، لا تمتلك صلاحية حذف هذا الاسم لأنه أضيف من جهاز آخر");
+        return;
+    }
+
+    if (!confirm("هل أنت متأكد من حذف هذا الاسم؟")) return;
+
     if (supabaseClient) {
         try {
-            await supabaseClient.from('fanus').delete().eq('id', id);
+            const { error } = await supabaseClient
+                .from('fanus')
+                .delete()
+                .eq('id', id)
+                .eq('created_by', myDeviceId);
+
+            if (error) {
+                showToast("تعذر الحذف من السحابة");
+                return;
+            }
         } catch (e) {}
     }
     await loadFatihaLocalList();
     showToast("تم حذف الاسم بنجاح من السحابة");
 }
 
-function openReadingModal(id) {
+// فتح نافذة القراءة وزيادة المشاهدات (+1) تلقائياً
+async function openReadingModal(id) {
     const person = deceasedList.find(item => item.id === id);
-    document.getElementById('reading-for-name').innerText = `إهداء ثواب الفاتحة إلى: ${person ? person.name : 'المرحوم'}`;
+    if (!person) return;
+    activeDeceasedPerson = person;
+
+    person.views_count = (person.views_count || 0) + 1;
+    document.getElementById('modal-views-count').innerText = person.views_count;
+    document.getElementById('modal-reads-count').innerText = person.reads_count || 0;
+
+    const prefix = person.gender === 'أنثى' ? 'المرحومة' : 'المرحوم';
+    document.getElementById('reading-for-name').innerText = `إهداء ثواب الفاتحة إلى: ${prefix} ${person.name}`;
+
     openModal('reading-fatiha-modal');
+
+    if (supabaseClient) {
+        try {
+            await supabaseClient
+                .from('fanus')
+                .update({ views_count: person.views_count })
+                .eq('id', id);
+        } catch (e) {}
+    }
 }
 
-function finishReadingFatiha() {
+// إتمام القراءة وزيادة القراءات (+1) عند النقر على زر الإنجاز
+async function finishReadingFatiha() {
+    if (activeDeceasedPerson) {
+        activeDeceasedPerson.reads_count = (activeDeceasedPerson.reads_count || 0) + 1;
+        
+        if (supabaseClient) {
+            try {
+                await supabaseClient
+                    .from('fanus')
+                    .update({ reads_count: activeDeceasedPerson.reads_count })
+                    .eq('id', activeDeceasedPerson.id);
+            } catch (e) {}
+        }
+
+        showToast(`تقبل الله، إجمالي القراءات للمتوفى: ${activeDeceasedPerson.reads_count}`);
+    }
+
     closeModal('reading-fatiha-modal');
-    showToast("تم إهداء ثواب سورة الفاتحة المباركة");
+    loadFatihaLocalList();
 }
 
 updateUI();
