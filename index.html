@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07070E" id="meta-theme-color">
+<meta name="theme-color" content="#00030E" id="meta-theme-color">
 <title>أذكار واستغفار والقرآن الكريم</title>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,10 +15,19 @@ tailwind.config = {
     theme: {
         extend: {
             colors: {
-                gold: { DEFAULT: '#E5C158', light: '#FFF1B0', dark: '#B89728', glow: 'rgba(229, 193, 88, 0.45)' },
-                velvet: { 900: '#07070E', 800: '#111122', 700: '#1C1C38' },
-                cream: { 50: '#FAF8F5', 100: '#F5F0E6', 200: '#E6DCCB', 800: '#3A2E2B', 900: '#2A1F1D' },
-                accent: { blue: '#38BDF8', emerald: '#34D399', purple: '#A78BFA', rose: '#FB7185', orange: '#FB923C' }
+                // الألوان المستخرجة من الصورة المرفقة
+                palette: {
+                    darkest: '#00030E', // خلفية أساسية معتمة
+                    dark: '#0B0E1A',    // خلفية بطاقات داكنة
+                    mid: '#2C1B2F',     // لون بنفسجي داكن عميق
+                    purple: '#5E3A5C',  // لون بنفسجي متوسط أساسي
+                    mauve: '#B47A9A',   // لون موف/وردي ترابي بارز
+                    light: '#F3E9EC'    // لون فاتح ناصع للنصوص والخلفيات الفاتحة
+                },
+                gold: { DEFAULT: '#B47A9A', light: '#F3E9EC', dark: '#5E3A5C', glow: 'rgba(180, 122, 154, 0.45)' },
+                velvet: { 900: '#00030E', 800: '#0B0E1A', 700: '#2C1B2F' },
+                cream: { 50: '#F3E9EC', 100: '#E6D4DC', 200: '#CDB2C2', 800: '#2C1B2F', 900: '#00030E' },
+                accent: { blue: '#7AA2F7', emerald: '#4ADE80', purple: '#B47A9A', rose: '#F7768E', orange: '#FF9E64' }
             },
             fontFamily: { amiri: ['Amiri', 'serif'], tajawal: ['Tajawal', 'sans-serif'] }
         }
@@ -33,48 +42,48 @@ html, body {
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 html.dark, body.dark {
-    background: radial-gradient(circle at center, #13132B 0%, #07070E 100%) !important;
-    color: #F8FAFC;
+    background: radial-gradient(circle at center, #2C1B2F 0%, #00030E 100%) !important;
+    color: #F3E9EC;
 }
 html.light, body.light {
-    background: radial-gradient(circle at center, #FAF6EE 0%, #EFE7D8 100%) !important;
-    color: #2A1F1D;
+    background: radial-gradient(circle at center, #F3E9EC 0%, #CDB2C2 100%) !important;
+    color: #00030E;
 }
 .dark .glass-panel {
-    background: rgba(18, 18, 38, 0.85);
+    background: rgba(11, 14, 26, 0.88);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(229, 193, 88, 0.3);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    color: #F8FAFC;
+    border: 1px solid rgba(180, 122, 154, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    color: #F3E9EC;
 }
 .light .glass-panel {
-    background: rgba(255, 252, 245, 0.92);
+    background: rgba(243, 233, 236, 0.94);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(184, 151, 40, 0.35);
-    box-shadow: 0 15px 35px rgba(184, 151, 40, 0.15);
-    color: #2A1F1D;
+    border: 1px solid rgba(94, 58, 92, 0.35);
+    box-shadow: 0 15px 35px rgba(94, 58, 92, 0.15);
+    color: #00030E;
 }
 .gold-gradient-text {
-    background: linear-gradient(135deg, #FFF6D1 0%, #E5C158 50%, #B89728 100%);
+    background: linear-gradient(135deg, #F3E9EC 0%, #B47A9A 50%, #5E3A5C 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-.gold-border-glow { box-shadow: 0 0 35px rgba(229, 193, 88, 0.35); }
+.gold-border-glow { box-shadow: 0 0 35px rgba(180, 122, 154, 0.4); }
 .ripple {
     position: absolute; border-radius: 50%; transform: scale(0);
     animation: ripple-effect 0.6s linear;
-    background-color: rgba(229, 193, 88, 0.5); pointer-events: none;
+    background-color: rgba(180, 122, 154, 0.5); pointer-events: none;
 }
 @keyframes ripple-effect { to { transform: scale(4.5); opacity: 0; } }
 #splash-screen {
     position: fixed; inset: 0;
-    background: radial-gradient(circle at center, #1B1B3A 0%, #07070E 100%);
+    background: radial-gradient(circle at center, #2C1B2F 0%, #00030E 100%);
     z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center;
     transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease, transform 0.8s ease;
 }
 .splash-fade-out { opacity: 0; visibility: hidden; transform: scale(1.1); }
 @keyframes gold-pulse-glow {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(229, 193, 88, 0.3); }
-    50% { transform: scale(1.03); box-shadow: 0 0 35px rgba(229, 193, 88, 0.6); }
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(180, 122, 154, 0.3); }
+    50% { transform: scale(1.03); box-shadow: 0 0 35px rgba(180, 122, 154, 0.6); }
 }
 .animate-splash-card { animation: gold-pulse-glow 3s infinite ease-in-out; }
 @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -82,57 +91,56 @@ html.light, body.light {
 @keyframes float-gentle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 .animate-float { animation: float-gentle 3.5s ease-in-out infinite; }
 @keyframes prayerClickAnim {
-    0% { transform: scale(1); box-shadow: 0 0 0 rgba(229, 193, 88, 0); }
-    30% { transform: scale(1.03); box-shadow: 0 0 25px rgba(229, 193, 88, 0.9); border-color: #E5C158; }
-    100% { transform: scale(1); box-shadow: 0 0 0 rgba(229, 193, 88, 0); }
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(180, 122, 154, 0); }
+    30% { transform: scale(1.03); box-shadow: 0 0 25px rgba(180, 122, 154, 0.9); border-color: #B47A9A; }
+    100% { transform: scale(1); box-shadow: 0 0 0 rgba(180, 122, 154, 0); }
 }
 .prayer-clicked { animation: prayerClickAnim 0.45s ease-in-out !important; }
 .next-prayer-highlight {
-    border-color: #E5C158 !important;
-    box-shadow: 0 0 20px rgba(229, 193, 88, 0.35), inset 0 0 10px rgba(229, 193, 88, 0.15) !important;
+    border-color: #B47A9A !important;
+    box-shadow: 0 0 20px rgba(180, 122, 154, 0.35), inset 0 0 10px rgba(180, 122, 154, 0.15) !important;
 }
-.hijri-dark-modal { background-color: #121212 !important; color: #F4F4F5 !important; }
+.hijri-dark-modal { background-color: #0B0E1A !important; color: #F3E9EC !important; }
 .hijri-dark-modal * { color: inherit; }
 .dua-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, opacity 0.3s ease; opacity: 0; }
 .dua-content.open { max-height: 1200px; opacity: 1; transition: max-height 0.6s ease-in, opacity 0.4s ease; }
 
-.rd-container { position: relative; width: 190px; height: 190px; margin: auto; border-radius: 50%; border: 2px solid rgba(52, 211, 153, 0.6); background: radial-gradient(circle, rgba(52,211,153,0.15), transparent 75%); overflow: hidden; }
-.rd-sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(52, 211, 153, 0.4), transparent 60deg); animation: radar-spin 3s linear infinite; transform-origin: center; }
+.rd-container { position: relative; width: 190px; height: 190px; margin: auto; border-radius: 50%; border: 2px solid rgba(74, 222, 128, 0.6); background: radial-gradient(circle, rgba(74,222,128,0.15), transparent 75%); overflow: hidden; }
+.rd-sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(74, 222, 128, 0.4), transparent 60deg); animation: radar-spin 3s linear infinite; transform-origin: center; }
 @keyframes radar-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-.rd-wave { position: absolute; inset: 10%; border: 1px dashed rgba(52, 211, 153, 0.4); border-radius: 50%; animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+.rd-wave { position: absolute; inset: 10%; border: 1px dashed rgba(74, 222, 128, 0.4); border-radius: 50%; animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
 @keyframes radar-ping { 75%, 100% { transform: scale(1.3); opacity: 0; } }
 </style>
 </head>
 <body class="dark min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 overflow-x-hidden text-xs sm:text-sm">
 
-<div id="toast-notification" class="fixed top-4 left-1/2 -translate-x-1/2 z-[10000] hidden items-center gap-2 px-4 py-2.5 rounded-xl glass-panel border-2 border-gold shadow-2xl text-[11px] font-bold transition-all duration-300">
-    <i class="fa-solid fa-circle-check text-gold text-sm"></i>
+<div id="toast-notification" class="fixed top-4 left-1/2 -translate-x-1/2 z-[10000] hidden items-center gap-2 px-4 py-2.5 rounded-xl glass-panel border-2 border-palette-mauve shadow-2xl text-[11px] font-bold transition-all duration-300">
+    <i class="fa-solid fa-circle-check text-palette-mauve text-sm"></i>
     <span id="toast-message">تم بنجاح</span>
 </div>
 
-<!-- شاشة تسجيل الدخول المصغرة والمتناسقة -->
 <div id="splash-screen">
     <div class="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden opacity-25">
-        <div class="w-[450px] h-[450px] rounded-full border border-dashed border-gold/40 animate-spin-bg"></div>
+        <div class="w-[450px] h-[450px] rounded-full border border-dashed border-palette-mauve/40 animate-spin-bg"></div>
     </div>
-    <div class="relative z-10 glass-panel p-5 sm:p-6 rounded-2xl border border-gold/60 text-center shadow-2xl animate-splash-card max-w-[310px] w-full mx-3 space-y-4 flex flex-col items-center">
+    <div class="relative z-10 glass-panel p-5 sm:p-6 rounded-2xl border border-palette-mauve/60 text-center shadow-2xl animate-splash-card max-w-[310px] w-full mx-3 space-y-4 flex flex-col items-center">
         <div class="relative flex items-center justify-center">
-            <div class="absolute w-20 h-20 rounded-full bg-gold/20 blur-xl animate-pulse"></div>
-            <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-gold/30 via-[#1C1C38] to-gold/20 border-2 border-gold text-gold flex items-center justify-center shadow-[0_0_25px_#E5C158] animate-float relative z-10 p-3">
-                <svg class="w-full h-full text-gold" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100 15 C115 40 140 40 160 55 C180 70 180 95 190 115 C175 135 175 160 155 175 C135 190 115 175 100 195 C85 175 65 190 45 175 C25 160 25 135 10 115 C20 95 20 70 40 55 C60 40 85 40 100 15 Z" stroke="#E5C158" stroke-width="6" fill="rgba(17,17,34,0.6)"/>
-                    <path d="M48 95 L95 125 L100 120 L53 90 Z" fill="#E5C158"/>
-                    <path d="M152 95 L105 125 L100 120 L147 90 Z" fill="#E5C158"/>
-                    <path d="M70 120 L130 155 M130 120 L70 155" stroke="#E5C158" stroke-width="5"/>
+            <div class="absolute w-20 h-20 rounded-full bg-palette-mauve/20 blur-xl animate-pulse"></div>
+            <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-palette-mauve/30 via-palette-mid to-palette-mauve/20 border-2 border-palette-mauve text-palette-light flex items-center justify-center shadow-[0_0_25px_#B47A9A] animate-float relative z-10 p-3">
+                <svg class="w-full h-full text-palette-light" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 15 C115 40 140 40 160 55 C180 70 180 95 190 115 C175 135 175 160 155 175 C135 190 115 175 100 195 C85 175 65 190 45 175 C25 160 25 135 10 115 C20 95 20 70 40 55 C60 40 85 40 100 15 Z" stroke="#B47A9A" stroke-width="6" fill="rgba(11,14,26,0.6)"/>
+                    <path d="M48 95 L95 125 L100 120 L53 90 Z" fill="#B47A9A"/>
+                    <path d="M152 95 L105 125 L100 120 L147 90 Z" fill="#B47A9A"/>
+                    <path d="M70 120 L130 155 M130 120 L70 155" stroke="#B47A9A" stroke-width="5"/>
                 </svg>
             </div>
         </div>
         <div class="space-y-0.5">
             <h2 class="text-lg font-black gold-gradient-text tracking-wide">أذكار واستغفار</h2>
-            <p class="text-[10px] text-gold/90 font-medium">القرآن الكريم، الأدعية ومواقيت الصلاة</p>
+            <p class="text-[10px] text-palette-mauve/90 font-medium">القرآن الكريم، الأدعية ومواقيت الصلاة</p>
         </div>
         <div class="w-full pt-1 space-y-2">
-            <button onclick="loginWithGooglePlay()" class="w-full py-2.5 px-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-[11px] flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
+            <button onclick="loginWithGooglePlay()" class="w-full py-2.5 px-3 rounded-xl bg-palette-light hover:bg-white text-palette-darkest font-bold text-[11px] flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -141,7 +149,7 @@ html.light, body.light {
                 </svg>
                 <span>Google Play الدخول</span>
             </button>
-            <button onclick="loginAsGuest()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold text-velvet-900 font-black text-[11px] shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5">
+            <button onclick="loginAsGuest()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-palette-mauve via-palette-light to-palette-mauve text-palette-darkest font-black text-[11px] shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5">
                 <i class="fa-solid fa-user-check"></i>
                 <span>الدخول كـ ضيف ومتابعة</span>
             </button>
@@ -149,14 +157,14 @@ html.light, body.light {
     </div>
 </div>
 
-<header class="w-full max-w-md glass-panel rounded-2xl p-3 flex justify-between items-center shadow-lg mt-1 border-l-4 border-l-gold">
+<header class="w-full max-w-md glass-panel rounded-2xl p-3 flex justify-between items-center shadow-lg mt-1 border-l-4 border-l-palette-mauve">
     <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center p-1 shadow-inner">
-            <svg class="w-full h-full text-gold" viewBox="0 0 200 200" fill="none">
-                <path d="M100 15 C115 40 140 40 160 55 C180 70 180 95 190 115 C175 135 175 160 155 175 C135 190 115 175 100 195 C85 175 65 190 45 175 C25 160 25 135 10 115 C20 95 20 70 40 55 C60 40 85 40 100 15 Z" stroke="#E5C158" stroke-width="8" fill="rgba(17,17,34,0.5)"/>
-                <path d="M48 95 L95 125 L100 120 L53 90 Z" fill="#E5C158"/>
-                <path d="M152 95 L105 125 L100 120 L147 90 Z" fill="#E5C158"/>
-                <path d="M70 120 L130 155 M130 120 L70 155" stroke="#E5C158" stroke-width="6"/>
+        <div class="w-8 h-8 rounded-xl bg-palette-mauve/15 border border-palette-mauve/40 flex items-center justify-center p-1 shadow-inner">
+            <svg class="w-full h-full text-palette-mauve" viewBox="0 0 200 200" fill="none">
+                <path d="M100 15 C115 40 140 40 160 55 C180 70 180 95 190 115 C175 135 175 160 155 175 C135 190 115 175 100 195 C85 175 65 190 45 175 C25 160 25 135 10 115 C20 95 20 70 40 55 C60 40 85 40 100 15 Z" stroke="#B47A9A" stroke-width="8" fill="rgba(11,14,26,0.5)"/>
+                <path d="M48 95 L95 125 L100 120 L53 90 Z" fill="#B47A9A"/>
+                <path d="M152 95 L105 125 L100 120 L147 90 Z" fill="#B47A9A"/>
+                <path d="M70 120 L130 155 M130 120 L70 155" stroke="#B47A9A" stroke-width="6"/>
             </svg>
         </div>
         <div>
@@ -172,37 +180,37 @@ html.light, body.light {
 <main class="w-full max-w-md flex-1 flex flex-col justify-center items-center my-2 gap-2">
 
 <div class="w-full grid grid-cols-6 gap-1">
-    <button onclick="playClickSound(); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="py-2 px-0.5 rounded-xl glass-panel border border-gold/40 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-gold transition-all bg-gradient-to-b from-amber-500/20 to-transparent">
+    <button onclick="playClickSound(); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/40 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-amber-500/20 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-amber-500/30 border border-amber-500/60 flex items-center justify-center text-amber-400 text-[10px]">
             <i class="fa-solid fa-mosque"></i>
         </div>
         <span class="font-bold text-[8px] text-amber-400 text-center truncate w-full">أوقات الصلاة</span>
     </button>
-    <button onclick="playClickSound(); openDailySupplicationsModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-gold/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-gold transition-all bg-gradient-to-b from-teal-500/20 to-transparent">
+    <button onclick="playClickSound(); openDailySupplicationsModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-teal-500/20 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-teal-500/30 border border-teal-500/60 flex items-center justify-center text-teal-400 text-[10px]">
             <i class="fa-solid fa-calendar-week"></i>
         </div>
         <span class="font-bold text-[8px] text-teal-300 text-center truncate w-full">دعاء اليوم</span>
     </button>
-    <button onclick="playClickSound(); openModal('supplications-modal'); loadSupplicationsList();" class="py-2 px-0.5 rounded-xl glass-panel border border-gold/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-gold transition-all bg-gradient-to-b from-gold/15 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-gold/25 border border-gold/50 flex items-center justify-center text-gold text-[10px]">
+    <button onclick="playClickSound(); openModal('supplications-modal'); loadSupplicationsList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-mauve/15 to-transparent">
+        <div class="w-6 h-6 rounded-lg bg-palette-mauve/25 border border-palette-mauve/50 flex items-center justify-center text-palette-mauve text-[10px]">
             <i class="fa-solid fa-book-quran"></i>
         </div>
         <span class="font-bold text-[8px] gold-gradient-text text-center truncate w-full">الأدعية</span>
     </button>
-    <button onclick="playClickSound(); openModal('quran-modal'); loadQuranRecitersList();" class="py-2 px-0.5 rounded-xl glass-panel border border-gold/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-gold transition-all bg-gradient-to-b from-yellow-500/20 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-yellow-500/30 border border-yellow-500/60 flex items-center justify-center text-yellow-500 text-[10px]">
+    <button onclick="playClickSound(); openModal('quran-modal'); loadQuranRecitersList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-purple/20 to-transparent">
+        <div class="w-6 h-6 rounded-lg bg-palette-purple/30 border border-palette-purple/60 flex items-center justify-center text-palette-light text-[10px]">
             <i class="fa-solid fa-headphones-simple"></i>
         </div>
-        <span class="font-bold text-[8px] text-yellow-500 text-center truncate w-full">تلاوات وقراء</span>
+        <span class="font-bold text-[8px] text-palette-light text-center truncate w-full">تلاوات وقراء</span>
     </button>
-    <button onclick="playClickSound(); openModal('calendar-modal'); initHijriCalendarModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-gold/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-gold transition-all bg-gradient-to-b from-accent-emerald/15 to-transparent">
+    <button onclick="playClickSound(); openModal('calendar-modal'); initHijriCalendarModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-emerald/15 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-accent-emerald/25 border border-accent-emerald/50 flex items-center justify-center text-accent-emerald text-[10px]">
             <i class="fa-solid fa-calendar-days"></i>
         </div>
         <span class="font-bold text-[8px] text-accent-emerald text-center truncate w-full">التقويم</span>
     </button>
-    <button onclick="playClickSound(); openModal('fatiha-modal'); loadFatihaLocalList();" class="py-2 px-0.5 rounded-xl glass-panel border border-gold/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-gold transition-all bg-gradient-to-b from-accent-blue/15 to-transparent">
+    <button onclick="playClickSound(); openModal('fatiha-modal'); loadFatihaLocalList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-blue/15 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-accent-blue/25 border border-accent-blue/50 flex items-center justify-center text-accent-blue text-[10px]">
             <i class="fa-solid fa-hands-praying"></i>
         </div>
@@ -210,15 +218,15 @@ html.light, body.light {
     </button>
 </div>
 
-<div class="w-full glass-panel rounded-2xl p-4 text-center shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[340px] border-t-2 border-t-gold/60">
+<div class="w-full glass-panel rounded-2xl p-4 text-center shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[340px] border-t-2 border-t-palette-mauve/60">
     <div class="flex justify-between items-center text-[11px] font-bold mb-1">
-        <span id="dhikr-category" class="bg-gold/20 text-gold px-2.5 py-0.5 rounded-full border border-gold/40 shadow-sm">الاستغفار</span>
+        <span id="dhikr-category" class="bg-palette-mauve/20 text-palette-light px-2.5 py-0.5 rounded-full border border-palette-mauve/40 shadow-sm">الاستغفار</span>
         <div class="flex items-center gap-1.5">
             <button onclick="playClickSound(); randomizeDhikr();" class="px-2 py-1 rounded-xl bg-accent-emerald/20 hover:bg-accent-emerald/30 border border-accent-emerald/40 text-accent-emerald text-[11px] flex items-center gap-1 transition-all shadow-sm cursor-pointer" title="تحديث بذكر جديد">
                 <i class="fa-solid fa-rotate"></i>
                 <span>ذكر جديد</span>
             </button>
-            <span id="dhikr-counter-text" dir="ltr" class="font-mono text-[11px] px-2 py-1 rounded-lg bg-black/40 text-gold border border-gold/30 flex items-center justify-center min-w-[55px] h-6 whitespace-nowrap leading-none inline-flex">1 / 8</span>
+            <span id="dhikr-counter-text" dir="ltr" class="font-mono text-[11px] px-2 py-1 rounded-lg bg-black/40 text-palette-light border border-palette-mauve/30 flex items-center justify-center min-w-[55px] h-6 whitespace-nowrap leading-none inline-flex">1 / 8</span>
         </div>
     </div>
     <div class="my-auto py-1">
@@ -227,12 +235,12 @@ html.light, body.light {
         </p>
     </div>
     <div class="relative flex justify-center items-center my-1.5">
-        <div id="counter-btn" onclick="handleMainTap(event)" class="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full glass-panel border-4 border-gold flex flex-col justify-center items-center cursor-pointer gold-border-glow active:scale-95 transition-all duration-150 overflow-hidden shadow-2xl bg-gradient-to-b from-gold/20 via-black/40 to-velvet-800/90">
+        <div id="counter-btn" onclick="handleMainTap(event)" class="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full glass-panel border-4 border-palette-mauve flex flex-col justify-center items-center cursor-pointer gold-border-glow active:scale-95 transition-all duration-150 overflow-hidden shadow-2xl bg-gradient-to-b from-palette-purple/30 via-palette-darkest/70 to-palette-mid/90">
             <span id="counter-value" class="text-3xl sm:text-4xl font-black gold-gradient-text pointer-events-none">0</span>
-            <span id="tap-hint" class="text-[9px] text-gold mt-0.5 uppercase tracking-widest font-bold pointer-events-none">اضغط هنا</span>
+            <span id="tap-hint" class="text-[9px] text-palette-mauve mt-0.5 uppercase tracking-widest font-bold pointer-events-none">اضغط هنا</span>
         </div>
     </div>
-    <div class="flex justify-between items-center gap-2 mt-1.5 pt-2 border-t border-gold/20">
+    <div class="flex justify-between items-center gap-2 mt-1.5 pt-2 border-t border-palette-mauve/20">
         <button onclick="playClickSound(); prevDhikr()" class="flex-1 py-1.5 px-2 rounded-xl bg-accent-blue/15 hover:bg-accent-blue/25 border border-accent-blue/40 font-bold text-[11px] flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm text-accent-blue cursor-pointer">
             <i class="fa-solid fa-chevron-right text-[10px]"></i>
             <span>السابق</span>
@@ -252,12 +260,11 @@ html.light, body.light {
     <p>تطبيق <span class="gold-gradient-text font-bold">أذكار واستغفار</span> • صدقة جارية</p>
 </footer>
 
-<!-- قسم الإعدادات المتناسق -->
 <div id="settings-modal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 z-50">
-    <div class="w-full max-w-md glass-panel rounded-2xl p-4 sm:p-5 border border-gold/40 shadow-2xl relative max-h-[90vh] overflow-y-auto space-y-2.5">
-        <div class="flex justify-between items-center pb-2.5 border-b border-gold/30">
+    <div class="w-full max-w-md glass-panel rounded-2xl p-4 sm:p-5 border border-palette-mauve/40 shadow-2xl relative max-h-[90vh] overflow-y-auto space-y-2.5">
+        <div class="flex justify-between items-center pb-2.5 border-b border-palette-mauve/30">
             <h2 class="text-base sm:text-lg font-bold gold-gradient-text flex items-center gap-2">
-                <i class="fa-solid fa-gear text-gold"></i>
+                <i class="fa-solid fa-gear text-palette-mauve"></i>
                 <span>الإعدادات والتحكم</span>
             </h2>
             <button onclick="playClickSound(); closeModal('settings-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 shadow-sm cursor-pointer">
@@ -265,65 +272,65 @@ html.light, body.light {
             </button>
         </div>
 
-        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-gold/30 shadow-sm">
+        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 shadow-sm">
             <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-gold/20 text-gold flex items-center justify-center text-xs shadow-inner border border-gold/30">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
                     <i class="fa-solid fa-sun" id="theme-icon"></i>
                 </div>
                 <span class="font-bold text-xs">مظهر التطبيق</span>
             </div>
-            <button onclick="playClickSound(); toggleTheme()" id="theme-btn" class="px-3 py-1.5 rounded-xl bg-gold/20 border border-gold/40 text-gold text-[11px] font-bold flex items-center gap-1.5 hover:bg-gold/30 transition-all cursor-pointer">
+            <button onclick="playClickSound(); toggleTheme()" id="theme-btn" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1.5 hover:bg-palette-mauve/30 transition-all cursor-pointer">
                 <span id="theme-text">الوضع المضيء</span>
             </button>
         </div>
 
-        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-gold/30 shadow-sm">
+        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 shadow-sm">
             <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-gold/20 text-gold flex items-center justify-center text-xs shadow-inner border border-gold/30">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
                     <i class="fa-solid fa-volume-high" id="sound-icon"></i>
                 </div>
                 <span class="font-bold text-xs">أصوات الأزرار</span>
             </div>
-            <button onclick="toggleButtonSound()" id="sound-btn" class="px-3 py-1.5 rounded-xl bg-gold/20 border border-gold/40 text-gold text-[11px] font-bold flex items-center gap-1.5 hover:bg-gold/30 transition-all cursor-pointer">
+            <button onclick="toggleButtonSound()" id="sound-btn" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1.5 hover:bg-palette-mauve/30 transition-all cursor-pointer">
                 <span id="sound-text">مفعل</span>
             </button>
         </div>
 
-        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-gold/30 shadow-sm">
+        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 shadow-sm">
             <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-gold/20 text-gold flex items-center justify-center text-xs shadow-inner border border-gold/30">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
                     <i class="fa-solid fa-wind"></i>
                 </div>
                 <div>
-                    <span class="font-bold text-xs text-gold block">أصوات الرياح والعصافير</span>
+                    <span class="font-bold text-xs text-palette-light block">أصوات الرياح والعصافير</span>
                     <span class="text-[9px] opacity-75">أجواء هادئة للتسبيح والاسترخاء</span>
                 </div>
             </div>
-            <button onclick="toggleSyntheticNatureSound()" id="nature-sound-btn" class="px-3 py-1.5 rounded-xl bg-gold/20 border border-gold/40 text-gold text-[11px] font-bold flex items-center gap-1 hover:bg-gold/30 transition-all cursor-pointer">
+            <button onclick="toggleSyntheticNatureSound()" id="nature-sound-btn" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1 hover:bg-palette-mauve/30 transition-all cursor-pointer">
                 <i class="fa-solid fa-play text-[10px]" id="nature-icon"></i>
                 <span id="nature-sound-text">تشغيل</span>
             </button>
         </div>
 
-        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-gold/30 shadow-sm">
+        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 shadow-sm">
             <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-gold/20 text-gold flex items-center justify-center text-xs shadow-inner border border-gold/30">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
                     <i class="fa-solid fa-mosque"></i>
                 </div>
                 <div>
-                    <span class="font-bold text-xs text-gold block">رادار المساجد القريبة</span>
+                    <span class="font-bold text-xs text-palette-light block">رادار المساجد القريبة</span>
                     <span class="text-[9px] opacity-75">أقرب المساجد ضمن 1 كم</span>
                 </div>
             </div>
-            <button onclick="playClickSound(); openModal('qibla-modal'); startMosqueSearchProcess();" class="px-3 py-1.5 rounded-xl bg-gold/20 border border-gold/40 text-gold text-[11px] font-bold flex items-center gap-1 hover:bg-gold/30 transition-all cursor-pointer">
+            <button onclick="playClickSound(); openModal('qibla-modal'); startMosqueSearchProcess();" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1 hover:bg-palette-mauve/30 transition-all cursor-pointer">
                 <i class="fa-solid fa-location-crosshairs"></i>
                 <span>فتح</span>
             </button>
         </div>
 
-        <button onclick="playClickSound(); openModal('developers-modal')" class="w-full flex justify-between items-center p-3 rounded-xl bg-black/40 border border-gold/30 hover:bg-gold/15 transition-all cursor-pointer shadow-sm group">
+        <button onclick="playClickSound(); openModal('developers-modal')" class="w-full flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 hover:bg-palette-mauve/15 transition-all cursor-pointer shadow-sm group">
             <div class="flex items-center gap-2.5 text-right">
-                <div class="w-8 h-8 rounded-lg bg-gold/20 text-gold flex items-center justify-center text-xs shadow-inner border border-gold/30 group-hover:scale-110 transition-transform">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30 group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-code"></i>
                 </div>
                 <div>
@@ -331,29 +338,29 @@ html.light, body.light {
                     <span class="text-[9px] opacity-75">اضغط لعرض التفاصيل</span>
                 </div>
             </div>
-            <div class="w-6 h-6 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-[10px] group-hover:bg-gold group-hover:text-velvet-900 transition-all">
+            <div class="w-6 h-6 rounded-full bg-palette-mauve/10 border border-palette-mauve/30 flex items-center justify-center text-palette-light text-[10px] group-hover:bg-palette-mauve group-hover:text-palette-darkest transition-all">
                 <i class="fa-solid fa-chevron-left"></i>
             </div>
         </button>
 
         <div class="pt-1.5 flex flex-col items-center justify-center text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gold/10 border border-gold/30 text-[11px] font-bold text-gold shadow-sm">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Flag_of_Iraq.svg" alt="علم العراق" class="w-6 h-4 object-cover rounded-[2px] shadow-sm border border-gold/40">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-palette-mauve/10 border border-palette-mauve/30 text-[11px] font-bold text-palette-light shadow-sm">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Flag_of_Iraq.svg" alt="علم العراق" class="w-6 h-4 object-cover rounded-[2px] shadow-sm border border-palette-mauve/40">
                 <span class="tracking-wide text-[10px]">تم التطوير والتدقيق الشرعي في العراق</span>
             </div>
         </div>
 
-        <button onclick="playClickSound(); closeModal('settings-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-gold text-velvet-900 font-bold text-xs hover:bg-gold-light transition-all shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('settings-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs hover:bg-palette-light transition-all shadow-lg cursor-pointer">
             حفظ وإغلاق
         </button>
     </div>
 </div>
 
 <div id="developers-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-3 z-50">
-    <div class="w-full max-w-sm glass-panel rounded-2xl p-5 border-2 border-gold/50 shadow-2xl relative space-y-3 text-center">
-        <div class="flex justify-between items-center pb-2.5 border-b border-gold/20">
+    <div class="w-full max-w-sm glass-panel rounded-2xl p-5 border-2 border-palette-mauve/50 shadow-2xl relative space-y-3 text-center">
+        <div class="flex justify-between items-center pb-2.5 border-b border-palette-mauve/20">
             <h3 class="text-sm sm:text-base font-bold gold-gradient-text flex items-center gap-1.5">
-                <i class="fa-solid fa-code text-gold"></i>
+                <i class="fa-solid fa-code text-palette-mauve"></i>
                 <span>المطورون والداعمون</span>
             </h3>
             <button onclick="playClickSound(); closeModal('developers-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
@@ -361,18 +368,18 @@ html.light, body.light {
             </button>
         </div>
         <div class="space-y-2 py-1">
-            <div class="p-3 rounded-xl bg-black/50 border border-gold/30 space-y-0.5 shadow-inner text-right">
-                <span class="text-[11px] text-amber-200 font-bold block"><i class="fa-solid fa-laptop-code ml-1 text-gold"></i>مطورة التطبيق</span>
+            <div class="p-3 rounded-xl bg-black/50 border border-palette-mauve/30 space-y-0.5 shadow-inner text-right">
+                <span class="text-[11px] text-palette-light font-bold block"><i class="fa-solid fa-laptop-code ml-1 text-palette-mauve"></i>مطورة التطبيق</span>
                 <h4 class="text-base font-black gold-gradient-text">Zainab Ali</h4>
                 <p class="text-[10px] opacity-80">التطوير البرمجي وهندسة واجهات المستخدم</p>
             </div>
-            <div class="p-3 rounded-xl bg-black/50 border border-gold/30 space-y-0.5 shadow-inner text-right">
-                <span class="text-[11px] text-amber-200 font-bold block"><i class="fa-solid fa-hand-holding-heart ml-1 text-gold"></i>الداعمون</span>
+            <div class="p-3 rounded-xl bg-black/50 border border-palette-mauve/30 space-y-0.5 shadow-inner text-right">
+                <span class="text-[11px] text-palette-light font-bold block"><i class="fa-solid fa-hand-holding-heart ml-1 text-palette-mauve"></i>الداعمون</span>
                 <h4 class="text-base font-black gold-gradient-text">احمد العامري</h4>
                 <p class="text-[10px] opacity-80">الدعم الفني والرعاية المستمرة للتطبيق</p>
             </div>
         </div>
-        <button onclick="playClickSound(); closeModal('developers-modal')" class="w-full py-2.5 rounded-xl bg-gold text-velvet-900 font-bold text-xs hover:bg-gold-light transition-all shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('developers-modal')" class="w-full py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs hover:bg-palette-light transition-all shadow-lg cursor-pointer">
             إغلاق النافذة
         </button>
     </div>
@@ -383,15 +390,15 @@ html.light, body.light {
 </div>
 
 <div id="prayer-times-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-2 z-50">
-    <div id="prayer-modal-container" class="w-full max-w-lg h-[92vh] rounded-2xl p-3 sm:p-4 shadow-2xl relative flex flex-col overflow-hidden text-white border-2 border-amber-400/50 bg-gradient-to-b from-[#1E1B4B] via-[#0F172A] to-[#020617]">
+    <div id="prayer-modal-container" class="w-full max-w-lg h-[92vh] rounded-2xl p-3 sm:p-4 shadow-2xl relative flex flex-col overflow-hidden text-white border-2 border-palette-mauve/50 bg-gradient-to-b from-[#2C1B2F] via-[#0B0E1A] to-[#00030E]">
         <div class="flex justify-between items-center mb-2 pb-2 border-b border-white/20">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-sm shadow-inner border border-amber-400/40">
+                <div class="w-8 h-8 rounded-xl bg-palette-mauve/20 text-palette-light flex items-center justify-center text-sm shadow-inner border border-palette-mauve/40">
                     <i class="fa-solid fa-mosque"></i>
                 </div>
                 <div>
-                    <h3 class="text-sm sm:text-base font-bold text-amber-200">مواقيت الصلاة الفلكية الدقيقة</h3>
-                    <p id="current-location-subtitle" class="text-[9px] text-amber-100/80">الموقع المعتمد: العراق - القادسية (الديوانية)</p>
+                    <h3 class="text-sm sm:text-base font-bold text-palette-light">مواقيت الصلاة الفلكية الدقيقة</h3>
+                    <p id="current-location-subtitle" class="text-[9px] text-palette-light/80">الموقع المعتمد: العراق - القادسية (الديوانية)</p>
                 </div>
             </div>
             <button onclick="playClickSound(); closeModal('prayer-times-modal')" class="w-7 h-7 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center hover:bg-red-500/30">
@@ -399,12 +406,12 @@ html.light, body.light {
             </button>
         </div>
 
-        <div class="p-2.5 rounded-xl bg-gradient-to-r from-amber-500/20 via-slate-900/90 to-amber-500/20 border border-amber-400/50 mb-2 flex items-center justify-between shadow-lg">
+        <div class="p-2.5 rounded-xl bg-gradient-to-r from-palette-purple/20 via-slate-900/90 to-palette-purple/20 border border-palette-mauve/50 mb-2 flex items-center justify-between shadow-lg">
             <div class="text-right space-y-0.5">
-                <span class="text-[9px] text-amber-300 font-bold block"><i class="fa-regular fa-clock ml-1"></i>التوقيت المحلي الفعلي</span>
+                <span class="text-[9px] text-palette-mauve font-bold block"><i class="fa-regular fa-clock ml-1"></i>التوقيت المحلي الفعلي</span>
                 <div id="live-current-clock" class="font-mono text-sm sm:text-base font-black text-white tracking-wider">--:--:--</div>
             </div>
-            <div class="h-6 w-[1px] bg-amber-400/30"></div>
+            <div class="h-6 w-[1px] bg-palette-mauve/30"></div>
             <div class="text-left space-y-0.5">
                 <span id="next-prayer-label" class="text-[9px] text-emerald-300 font-bold block">متبقي لصلاة ...</span>
                 <div id="next-prayer-countdown" class="font-mono text-sm sm:text-base font-black text-emerald-400 tracking-wider">--:--:--</div>
@@ -412,36 +419,36 @@ html.light, body.light {
         </div>
 
         <div class="grid grid-cols-2 gap-2 mb-2">
-            <button style="display:none" onclick="playClickSound(); toggleWheel('country')" class="py-1.5 px-2 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold flex items-center justify-between shadow-sm cursor-pointer">
+            <button style="display:none" onclick="playClickSound(); toggleWheel('country')" class="py-1.5 px-2 rounded-xl bg-palette-purple/20 border border-palette-mauve/40 text-palette-light text-xs font-bold flex items-center justify-between shadow-sm cursor-pointer">
                 <span><i class="fa-solid fa-globe ml-1"></i> الدولة</span>
                 <i id="country-toggle-icon" class="fa-solid fa-chevron-down"></i>
             </button>
-            <button onclick="playClickSound(); toggleWheel('city')" class="col-span-2 py-1.5 px-2 rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs font-bold flex items-center justify-between shadow-sm cursor-pointer">
+            <button onclick="playClickSound(); toggleWheel('city')" class="col-span-2 py-1.5 px-2 rounded-xl bg-palette-purple/20 border border-palette-mauve/40 text-palette-light text-xs font-bold flex items-center justify-between shadow-sm cursor-pointer">
                 <span><i class="fa-solid fa-location-dot ml-1"></i> تغيير المحافظة</span>
                 <i id="city-toggle-icon" class="fa-solid fa-chevron-down"></i>
             </button>
         </div>
 
-        <div class="bg-amber-500/10 border border-amber-400/30 rounded-xl p-1.5 text-center text-[10px] text-amber-300 font-bold mb-2 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-location-crosshairs text-amber-400"></i>
-            <span>الدولة: <span id="selected-display-country" class="text-amber-100 underline">العراق</span></span>
+        <div class="bg-palette-purple/10 border border-palette-mauve/30 rounded-xl p-1.5 text-center text-[10px] text-palette-light font-bold mb-2 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-location-crosshairs text-palette-mauve"></i>
+            <span>الدولة: <span id="selected-display-country" class="text-white underline">العراق</span></span>
             <span>•</span>
-            <span>المدينة: <span id="selected-display-city" class="text-amber-100 underline">القادسية (الديوانية)</span></span>
+            <span>المدينة: <span id="selected-display-city" class="text-white underline">القادسية (الديوانية)</span></span>
         </div>
 
-        <div id="country-wheel-box" class="hidden mb-2 bg-slate-950/95 p-2 rounded-xl border border-amber-400/40 shadow-inner">
-            <span class="block text-[10px] font-bold text-amber-300 mb-1 text-center">اختر الدولة:</span>
+        <div id="country-wheel-box" class="hidden mb-2 bg-slate-950/95 p-2 rounded-xl border border-palette-mauve/40 shadow-inner">
+            <span class="block text-[10px] font-bold text-palette-light mb-1 text-center">اختر الدولة:</span>
             <div id="country-wheel" class="h-32 overflow-y-auto space-y-1 pr-1 custom-wheel"></div>
         </div>
 
-        <div id="city-wheel-box" class="hidden mb-2 bg-slate-950/95 p-2 rounded-xl border border-amber-400/40 shadow-inner">
-            <span class="block text-[10px] font-bold text-amber-300 mb-1 text-center">اختر المحافظة:</span>
+        <div id="city-wheel-box" class="hidden mb-2 bg-slate-950/95 p-2 rounded-xl border border-palette-mauve/40 shadow-inner">
+            <span class="block text-[10px] font-bold text-palette-light mb-1 text-center">اختر المحافظة:</span>
             <div id="city-wheel" class="h-32 overflow-y-auto space-y-1 pr-1 custom-wheel"></div>
         </div>
 
         <div id="prayer-times-display" class="overflow-y-auto space-y-1.5 pr-1 flex-1 my-1"></div>
 
-        <button id="dynamic-save-btn" onclick="playClickSound(); savePrayerChanges()" class="hidden w-full mt-2 py-2.5 rounded-xl bg-amber-500 border border-amber-400 text-slate-950 font-extrabold text-xs shadow-lg hover:bg-amber-400 transition-all items-center justify-center gap-1.5 cursor-pointer">
+        <button id="dynamic-save-btn" onclick="playClickSound(); savePrayerChanges()" class="hidden w-full mt-2 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-extrabold text-xs shadow-lg hover:bg-palette-light transition-all items-center justify-center gap-1.5 cursor-pointer">
             <i class="fa-solid fa-check-double"></i>
             <span>حفظ التغييرات واعتماد الموقع</span>
         </button>
@@ -449,14 +456,14 @@ html.light, body.light {
 </div>
 
 <div id="quran-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-2 z-50">
-    <div class="w-full max-w-2xl h-[92vh] glass-panel rounded-2xl p-3 sm:p-5 border-2 border-yellow-500/50 shadow-2xl relative flex flex-col">
-        <div class="flex justify-between items-center mb-2 pb-2 border-b border-yellow-500/30">
-            <h3 class="text-base sm:text-lg font-bold text-yellow-500 flex items-center gap-1.5">
-                <i class="fa-solid fa-headphones-simple text-yellow-500 text-xl"></i>
+    <div class="w-full max-w-2xl h-[92vh] glass-panel rounded-2xl p-3 sm:p-5 border-2 border-palette-mauve/50 shadow-2xl relative flex flex-col">
+        <div class="flex justify-between items-center mb-2 pb-2 border-b border-palette-mauve/30">
+            <h3 class="text-base sm:text-lg font-bold text-palette-light flex items-center gap-1.5">
+                <i class="fa-solid fa-headphones-simple text-palette-mauve text-xl"></i>
                 <span>تلاوات القرآن الكريم</span>
             </h3>
             <div class="flex items-center gap-1.5">
-                <button onclick="playClickSound(); toggleQuranBackgroundPlay()" id="quran-bg-btn" class="px-2.5 py-1 rounded-xl bg-yellow-500/20 border border-yellow-500/40 text-yellow-400 text-[11px] font-bold flex items-center gap-1 cursor-pointer">
+                <button onclick="playClickSound(); toggleQuranBackgroundPlay()" id="quran-bg-btn" class="px-2.5 py-1 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1 cursor-pointer">
                     <i class="fa-solid fa-headphones"></i>
                     <span id="quran-bg-status-text">الخلفية: مفعلة</span>
                 </button>
@@ -466,31 +473,31 @@ html.light, body.light {
             </div>
         </div>
 
-        <div class="text-[11px] text-yellow-500 mb-2 font-medium text-center bg-yellow-500/10 p-1.5 rounded-xl border border-yellow-500/20">
+        <div class="text-[11px] text-palette-light mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
             أضف تلاواتك المفضلة واستمع إليها:
         </div>
 
-        <div class="p-2.5 rounded-xl bg-black/40 border border-yellow-500/40 space-y-2 mb-2">
-            <input id="rc-n" placeholder="اسم التلاوة" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-yellow-500/40 text-white outline-none">
-            <input id="rc-u" dir="ltr" placeholder="رابط مباشر للتلاوة (mp3)" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-yellow-500/40 text-white outline-none">
-            <button id="rc-s" onclick="addCustomRecitation()" class="w-full py-2 rounded-xl bg-yellow-500 text-velvet-900 font-bold text-xs"><i class="fa-solid fa-floppy-disk ml-1"></i>حفظ التلاوة</button>
+        <div class="p-2.5 rounded-xl bg-black/40 border border-palette-mauve/40 space-y-2 mb-2">
+            <input id="rc-n" placeholder="اسم التلاوة" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-palette-mauve/40 text-white outline-none">
+            <input id="rc-u" dir="ltr" placeholder="رابط مباشر للتلاوة (mp3)" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-palette-mauve/40 text-white outline-none">
+            <button id="rc-s" onclick="addCustomRecitation()" class="w-full py-2 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs"><i class="fa-solid fa-floppy-disk ml-1"></i>حفظ التلاوة</button>
         </div>
 
         <div id="quran-reciters-list" class="overflow-y-auto space-y-2 pr-1 flex-1 text-sm"></div>
 
-        <div id="quran-player-bar" class="hidden mt-2 p-3 rounded-xl bg-slate-950/95 border-2 border-yellow-500/60 flex-col gap-2 shadow-xl text-white">
+        <div id="quran-player-bar" class="hidden mt-2 p-3 rounded-xl bg-slate-950/95 border-2 border-palette-mauve/60 flex-col gap-2 shadow-xl text-white">
             <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2 overflow-hidden">
-                    <div class="w-8 h-8 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center shrink-0 border border-yellow-500/40 text-xs">
+                    <div class="w-8 h-8 rounded-xl bg-palette-mauve/20 text-palette-light flex items-center justify-center shrink-0 border border-palette-mauve/40 text-xs">
                         <i id="quran-disc-icon" class="fa-solid fa-compact-disc fa-spin"></i>
                     </div>
                     <div class="truncate text-right">
-                        <h5 id="now-playing-title" class="font-bold text-yellow-400 text-xs truncate">جاري التشغيل...</h5>
-                        <span id="now-playing-subtitle" class="text-[9px] text-amber-100/80 block">تلاوة مباركة</span>
+                        <h5 id="now-playing-title" class="font-bold text-palette-light text-xs truncate">جاري التشغيل...</h5>
+                        <span id="now-playing-subtitle" class="text-[9px] text-palette-light/80 block">تلاوة مباركة</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0">
-                    <button onclick="playClickSound(); togglePlayPauseQuran()" id="play-pause-btn" class="w-8 h-8 rounded-xl bg-yellow-500 text-slate-950 flex items-center justify-center font-bold shadow-md hover:bg-yellow-400 transition-all cursor-pointer">
+                    <button onclick="playClickSound(); togglePlayPauseQuran()" id="play-pause-btn" class="w-8 h-8 rounded-xl bg-palette-mauve text-palette-darkest flex items-center justify-center font-bold shadow-md hover:bg-palette-light transition-all cursor-pointer">
                         <i class="fa-solid fa-pause text-xs" id="play-pause-icon"></i>
                     </button>
                     <button onclick="playClickSound(); stopQuranAudio()" class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center font-bold shadow-md hover:bg-rose-500/30 transition-all cursor-pointer" title="إيقاف">
@@ -498,37 +505,37 @@ html.light, body.light {
                     </button>
                 </div>
             </div>
-            <div class="flex items-center gap-2 text-[10px] font-mono text-amber-200/90">
+            <div class="flex items-center gap-2 text-[10px] font-mono text-palette-light/90">
                 <span id="quran-current-time">00:00</span>
-                <input type="range" id="quran-progress-bar" value="0" min="0" max="100" step="0.1" oninput="seekQuranAudio(this.value)" class="flex-1 accent-yellow-400 h-1 bg-white/20 rounded-lg cursor-pointer">
+                <input type="range" id="quran-progress-bar" value="0" min="0" max="100" step="0.1" oninput="seekQuranAudio(this.value)" class="flex-1 accent-palette-mauve h-1 bg-white/20 rounded-lg cursor-pointer">
                 <span id="quran-total-time">00:00</span>
             </div>
         </div>
 
         <audio id="quran-audio-element" preload="metadata"></audio>
 
-        <button onclick="playClickSound(); closeModal('quran-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-yellow-500 border border-yellow-500 text-velvet-900 font-bold text-xs shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('quran-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">
             إغلاق نافذة التلاوات
         </button>
     </div>
 </div>
 
 <div id="supplications-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-2 z-50">
-    <div class="w-full max-w-2xl h-[92vh] glass-panel rounded-2xl p-3 sm:p-5 border-2 border-gold/50 shadow-2xl relative flex flex-col">
-        <div class="flex justify-between items-center mb-2 pb-2 border-b border-gold/30">
+    <div class="w-full max-w-2xl h-[92vh] glass-panel rounded-2xl p-3 sm:p-5 border-2 border-palette-mauve/50 shadow-2xl relative flex flex-col">
+        <div class="flex justify-between items-center mb-2 pb-2 border-b border-palette-mauve/30">
             <h3 class="text-base sm:text-lg font-bold gold-gradient-text flex items-center gap-1.5">
-                <i class="fa-solid fa-book-quran text-gold text-xl"></i>
+                <i class="fa-solid fa-book-quran text-palette-mauve text-xl"></i>
                 <span>أدعية وزيارات أهل البيت (ع) الكاملة</span>
             </h3>
             <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-sm">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-        <div class="text-[11px] text-gold/90 mb-2 font-medium text-center bg-gold/10 p-1.5 rounded-xl border border-gold/20">
+        <div class="text-[11px] text-palette-mauve/90 mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
             <i class="fa-solid fa-hand-pointer ml-1"></i> اضغط على اسم الدعاء لفتح وقراءة النص كاملاً:
         </div>
         <div id="supplications-content" class="overflow-y-auto space-y-2.5 pr-1 flex-1 text-sm"></div>
-        <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-gold border border-gold text-velvet-900 font-bold text-xs shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">
             إغلاق قائمة الأدعية
         </button>
     </div>
@@ -562,30 +569,30 @@ html.light, body.light {
 </div>
 
 <div id="calendar-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md hidden items-center justify-center p-0 sm:p-3 z-50">
-    <div class="hijri-dark-modal w-full max-w-md h-full sm:h-[92vh] sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-zinc-800">
-        <div class="flex justify-between items-center px-4 pt-4 pb-2.5 bg-[#121212]">
+    <div class="hijri-dark-modal w-full max-w-md h-full sm:h-[92vh] sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-palette-mauve/40">
+        <div class="flex justify-between items-center px-4 pt-4 pb-2.5 bg-[#0B0E1A]">
             <div class="flex items-center gap-2.5">
-                <button onclick="playClickSound(); closeModal('calendar-modal')" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-200 hover:bg-zinc-850 cursor-pointer">
+                <button onclick="playClickSound(); closeModal('calendar-modal')" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-200 hover:bg-zinc-855 cursor-pointer">
                     <i class="fa-solid fa-arrow-right text-base"></i>
                 </button>
-                <h3 class="text-base font-bold text-zinc-100">التقويم الهجري والمناسبات</h3>
+                <h3 class="text-base font-bold text-white">التقويم الهجري والمناسبات</h3>
             </div>
-            <button onclick="playClickSound(); resetHijriToToday()" class="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-[10px] text-emerald-400 font-bold flex items-center gap-1 cursor-pointer">
+            <button onclick="playClickSound(); resetHijriToToday()" class="px-2.5 py-1 rounded-lg bg-palette-purple/20 hover:bg-palette-purple/30 text-[10px] text-emerald-400 font-bold flex items-center gap-1 cursor-pointer border border-palette-mauve/30">
                 <i class="fa-solid fa-arrows-up-down text-[10px]"></i>
                 <span>اليوم</span>
             </button>
         </div>
         <div class="flex-1 overflow-y-auto px-3 pb-5 space-y-3">
             <div class="text-center space-y-0.5 pt-1">
-                <h2 id="hijri-header-title" class="text-lg font-bold text-white tracking-wide">20 جمادى الأولى 1448 هـ (اليوم)</h2>
-                <p id="gregorian-header-subtitle" class="text-[11px] text-zinc-400 font-medium">الأحد، ١ نوفمبر ٢٠٢٦</p>
+                <h2 id="hijri-header-title" class="text-lg font-bold text-white tracking-wide">-- جمادى الأولى 1448 هـ (اليوم)</h2>
+                <p id="gregorian-header-subtitle" class="text-[11px] text-zinc-400 font-medium">--</p>
             </div>
-            <div class="bg-[#1E1E1E] rounded-xl py-2 px-4 flex justify-between items-center shadow-inner">
-                <button onclick="playClickSound(); changeHijriMonth(-1)" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 cursor-pointer">
+            <div class="bg-[#2C1B2F] rounded-xl py-2 px-4 flex justify-between items-center shadow-inner border border-palette-mauve/30">
+                <button onclick="playClickSound(); changeHijriMonth(-1)" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-palette-purple/40 cursor-pointer">
                     <i class="fa-solid fa-chevron-right text-xs"></i>
                 </button>
                 <span id="hijri-month-bar-name" class="text-sm font-bold text-white">جمادى الأولى</span>
-                <button onclick="playClickSound(); changeHijriMonth(1)" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-zinc-800 cursor-pointer">
+                <button onclick="playClickSound(); changeHijriMonth(1)" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-palette-purple/40 cursor-pointer">
                     <i class="fa-solid fa-chevron-left text-xs"></i>
                 </button>
             </div>
@@ -593,36 +600,36 @@ html.light, body.light {
                 <div>أح</div><div>اث</div><div>ث</div><div>أر</div><div>خ</div><div>ج</div><div>س</div>
             </div>
             <div id="hijri-days-grid" class="grid grid-cols-7 gap-y-2 text-center items-center px-1"></div>
-            <div class="space-y-2 pt-1 border-t border-zinc-800/80">
+            <div class="space-y-2 pt-1 border-t border-palette-mauve/30">
                 <h4 id="selected-day-events-heading" class="text-xs font-bold text-zinc-300 text-right">مناسبات اليوم</h4>
                 <div id="hijri-today-events-box"></div>
             </div>
             <div class="space-y-2 pt-1">
                 <h4 id="month-events-heading" class="text-xs font-bold text-zinc-300 text-right">مناسبات الشهر كاملة</h4>
-                <div id="hijri-month-events-list" class="divide-y divide-zinc-800/70"></div>
+                <div id="hijri-month-events-list" class="divide-y divide-palette-mauve/20"></div>
             </div>
         </div>
     </div>
 </div>
 
 <div id="event-detail-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[80]">
-    <div class="w-full max-w-md glass-panel rounded-2xl p-5 border-2 border-accent-emerald text-right relative shadow-2xl space-y-3">
+    <div class="w-full max-w-md glass-panel rounded-2xl p-5 border-2 border-palette-mauve text-right relative shadow-2xl space-y-3">
         <button onclick="playClickSound(); closeModal('event-detail-modal')" class="absolute top-3 left-3 w-7 h-7 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70">
             <i class="fa-solid fa-xmark text-xs"></i>
         </button>
-        <div class="flex items-center gap-2.5 border-b border-accent-emerald/30 pb-2.5">
-            <div id="detail-icon-wrap" class="w-10 h-10 rounded-xl bg-accent-emerald/20 border border-accent-emerald/50 flex items-center justify-center text-xl text-accent-emerald shrink-0 shadow-inner">
+        <div class="flex items-center gap-2.5 border-b border-palette-mauve/30 pb-2.5">
+            <div id="detail-icon-wrap" class="w-10 h-10 rounded-xl bg-palette-mauve/20 border border-palette-mauve/50 flex items-center justify-center text-xl text-palette-light shrink-0 shadow-inner">
                 <i id="detail-icon" class="fa-solid fa-mosque"></i>
             </div>
             <div>
-                <span id="detail-date" class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-accent-emerald/20 text-accent-emerald font-bold inline-block mb-0.5">10 محرم</span>
+                <span id="detail-date" class="text-[9px] font-mono px-2 py-0.5 rounded-md bg-palette-mauve/20 text-palette-light font-bold inline-block mb-0.5">10 محرم</span>
                 <h4 id="detail-title" class="font-bold text-white text-xs sm:text-sm leading-snug">عنوان المناسبة</h4>
             </div>
         </div>
-        <div class="p-3 rounded-xl bg-black/60 border border-accent-emerald/30 text-xs leading-relaxed text-cream-100 font-medium max-h-60 overflow-y-auto select-text text-justify shadow-inner space-y-2">
+        <div class="p-3 rounded-xl bg-black/60 border border-palette-mauve/30 text-xs leading-relaxed text-cream-100 font-medium max-h-60 overflow-y-auto select-text text-justify shadow-inner space-y-2">
             <p id="detail-description">الشرح التفصيلي للحدث...</p>
         </div>
-        <button onclick="playClickSound(); closeModal('event-detail-modal')" class="w-full py-2.5 rounded-xl bg-accent-emerald text-slate-950 font-bold text-xs shadow-lg hover:bg-accent-emerald/85 transition-all cursor-pointer">
+        <button onclick="playClickSound(); closeModal('event-detail-modal')" class="w-full py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg hover:bg-palette-light transition-all cursor-pointer">
             العودة للتقويم
         </button>
     </div>
@@ -679,7 +686,7 @@ html.light, body.light {
 
 <div id="reading-fatiha-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[70]">
     <div class="w-full max-w-md glass-panel rounded-2xl p-5 border-2 border-accent-blue text-center relative shadow-2xl space-y-3">
-        <div class="w-14 h-14 rounded-full bg-accent-blue/20 border border-accent-blue text-accent-blue flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_#38BDF8]">
+        <div class="w-14 h-14 rounded-full bg-accent-blue/20 border border-accent-blue text-accent-blue flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_#7AA2F7]">
             <i class="fa-solid fa-book-open"></i>
         </div>
         <h3 class="text-sm sm:text-base font-bold text-accent-blue" id="reading-for-name">إهداء ثواب الفاتحة إلى: المرحوم</h3>
@@ -764,7 +771,7 @@ function loginWithGooglePlay() {
     playClickSound();
     const d = document.createElement('div');
     d.className = 'fixed inset-0 z-[10001] bg-black/80 flex items-center justify-center p-3';
-    d.innerHTML = '<div class="glass-panel rounded-2xl p-5 w-full max-w-xs space-y-3 text-center"><h3 class="font-bold gold-gradient-text text-sm">أدخل بريدك الإلكتروني</h3><input id="em-in" type="email" dir="ltr" placeholder="name@gmail.com" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-gold/40 text-white outline-none"><div class="flex gap-2"><button id="em-ok" class="flex-1 py-2 rounded-xl bg-gold text-velvet-900 font-bold text-xs">متابعة</button><button id="em-no" class="px-3 rounded-xl bg-white/10 text-xs">إلغاء</button></div></div>';
+    d.innerHTML = '<div class="glass-panel rounded-2xl p-5 w-full max-w-xs space-y-3 text-center"><h3 class="font-bold gold-gradient-text text-sm">أدخل بريدك الإلكتروني</h3><input id="em-in" type="email" dir="ltr" placeholder="name@gmail.com" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-palette-mauve/40 text-white outline-none"><div class="flex gap-2"><button id="em-ok" class="flex-1 py-2 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs">متابعة</button><button id="em-no" class="px-3 rounded-xl bg-white/10 text-xs">إلغاء</button></div></div>';
     document.body.appendChild(d);
     document.getElementById('em-no').onclick = () => d.remove();
     document.getElementById('em-ok').onclick = () => {
@@ -906,7 +913,6 @@ function toggleSyntheticNatureSound() {
     }
 }
 
-/* حل مشكلة رادار المساجد وإعطاء نتائج حقيقية مع Fallback ذكي */
 const rad = x => x * Math.PI / 180;
 function geo(a, b, c, d) {
     const p = rad(c - a), q = rad(d - b);
@@ -938,7 +944,7 @@ function startMosqueSearchProcess() {
             <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
         </div>
         <div class="py-5 space-y-3">
-            <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_#34D399] animate-pulse">
+            <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_#4ADE80] animate-pulse">
                 <i class="fa-solid fa-location-arrow"></i>
             </div>
             <p class="text-xs text-emerald-200 leading-relaxed font-bold">يتطلب الرادار تفعيل خيار تحديد الموقع (GPS) للبحث عن أقرب المساجد من حولك بدقة عالية.</p>
@@ -960,7 +966,7 @@ function requestLocationAndSearch() {
             <div class="rd-container">
                 <div class="rd-sweep"></div>
                 <div class="rd-wave"></div>
-                <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#38BDF8;box-shadow:0 0 10px #38BDF8;"></s>
+                <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#7AA2F7;box-shadow:0 0 10px #7AA2F7;"></s>
             </div>
             <p id="rd-status-text" class="mt-2.5 text-[11px] text-emerald-300 font-bold animate-pulse">جاري فحص الإحداثيات والبحث ضمن نطاق 2.5 كم...</p>
         </div>
@@ -975,8 +981,6 @@ function requestLocationAndSearch() {
         const la = p.coords.latitude, lo = p.coords.longitude;
         try {
             let rawMosques = await fetchMosques(la, lo);
-            
-            // نظام الـ Fallback الذكي: إذا لم تُرجع الشبكة أي مسجد، يولد نتائج تقريبية واقعية فورية لموقعك الحالي
             if (!rawMosques || rawMosques.length === 0) {
                 rawMosques = [
                     { tags: { name: "مسجد الحي الكبير" }, lat: la + 0.004, lon: lo + 0.003 },
@@ -1000,12 +1004,12 @@ function requestLocationAndSearch() {
                 </div>
                 <div class="rd-container my-1.5">
                     <div class="rd-sweep"></div>
-                    <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#38BDF8;box-shadow:0 0 10px #38BDF8;"></s>
-                    ${L.map(m => `<b style="position:absolute;width:8px;height:8px;margin:-4px;border-radius:50%;background:#34D399;box-shadow:0 0 6px #34D399;left:${50 + Math.sin(m.brg) * Math.min(m.dist, 900) / 22}%;top:${50 - Math.cos(m.brg) * Math.min(m.dist, 900) / 22}%"></b>`).join('')}
+                    <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#7AA2F7;box-shadow:0 0 10px #7AA2F7;"></s>
+                    ${L.map(m => `<b style="position:absolute;width:8px;height:8px;margin:-4px;border-radius:50%;background:#4ADE80;box-shadow:0 0 6px #4ADE80;left:${50 + Math.sin(m.brg) * Math.min(m.dist, 900) / 22}%;top:${50 - Math.cos(m.brg) * Math.min(m.dist, 900) / 22}%"></b>`).join('')}
                 </div>
                 <p class="text-[9px] text-emerald-300/80">الشمال للأعلى • المسافات والاتجاهات حقيقية دقيقة</p>
                 <div class="mt-1.5 space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                    ${L.map(m => `<a target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" class="flex justify-between items-center px-3 py-1.5 rounded-xl bg-black/50 border border-emerald-400/30 text-xs hover:border-emerald-400 transition-all"><span class="text-white font-bold truncate max-w-[160px] text-right">${escapeHTML(m.n)}</span><span class="font-mono text-gold font-bold">${toEasternArabicDigits(Math.round(m.dist))} م</span></a>`).join('')}
+                    ${L.map(m => `<a target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" class="flex justify-between items-center px-3 py-1.5 rounded-xl bg-black/50 border border-emerald-400/30 text-xs hover:border-emerald-400 transition-all"><span class="text-white font-bold truncate max-w-[160px] text-right">${escapeHTML(m.n)}</span><span class="font-mono text-palette-mauve font-bold">${toEasternArabicDigits(Math.round(m.dist))} م</span></a>`).join('')}
                 </div>
                 <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full mt-2 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">تحديث الرادار</button>
             `;
@@ -1226,7 +1230,7 @@ function renderCountryWheel() {
     for (const country in arabCountriesData) {
         const isSelected = (country === tempCountry);
         html += `
-            <div onclick="playClickSound(); selectTempCountry('${country}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-amber-100/80 hover:bg-white/10'}">
+            <div onclick="playClickSound(); selectTempCountry('${country}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-palette-mauve text-palette-darkest shadow-md' : 'text-palette-light/80 hover:bg-white/10'}">
                 <span>${country}</span>
                 <div class="w-3.5 h-3.5 rounded-full border border-current flex items-center justify-center text-[8px]">
                     ${isSelected ? '<i class="fa-solid fa-check"></i>' : ''}
@@ -1255,7 +1259,7 @@ function renderCityWheel() {
     for (const city in citiesObj) {
         const isSelected = (city === tempCity);
         html += `
-            <div onclick="playClickSound(); selectTempCity('${city}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-amber-100/80 hover:bg-white/10'}">
+            <div onclick="playClickSound(); selectTempCity('${city}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-palette-mauve text-palette-darkest shadow-md' : 'text-palette-light/80 hover:bg-white/10'}">
                 <span>${city}</span>
                 <div class="w-3.5 h-3.5 rounded-full border border-current flex items-center justify-center text-[8px]">
                     ${isSelected ? '<i class="fa-solid fa-check"></i>' : ''}
@@ -1314,13 +1318,13 @@ function renderPrayerCardsUI(timings) {
     const displayContainer = document.getElementById('prayer-times-display');
 
     const prayers = [
-        { name: "الفجر", time: format12Hour(timings.Fajr), desc: "وقت الإمساك وبداية الصلاة", icon: "fa-cloud-moon", bgGradient: "from-slate-900 via-indigo-950 to-blue-950", borderCol: "border-blue-500/40", textCol: "text-blue-300" },
-        { name: "الشروق", time: format12Hour(timings.Sunrise), desc: "طلوع الشمس ونهاية وقت الفجر", icon: "fa-sun", bgGradient: "from-sky-900 via-amber-950 to-slate-900", borderCol: "border-amber-400/40", textCol: "text-amber-300" },
-        { name: "الظهر", time: format12Hour(timings.Dhuhr), desc: "زوال الشمس والنداء الأكبر", icon: "fa-sun", bgGradient: "from-amber-950 via-slate-900 to-indigo-950", borderCol: "border-yellow-500/40", textCol: "text-yellow-300" },
-        { name: "العصر", time: format12Hour(timings.Asr), desc: "الصلاة الوسطى المباركة", icon: "fa-cloud-sun", bgGradient: "from-orange-950 via-slate-900 to-amber-950", borderCol: "border-orange-400/40", textCol: "text-orange-300" },
-        { name: "المغرب", time: format12Hour(timings.Maghrib), desc: "وقت الإفطار ومغيب الشفق الشرعي", icon: "fa-moon", bgGradient: "from-rose-950 via-purple-950 to-slate-900", borderCol: "border-rose-500/40", textCol: "text-rose-300" },
-        { name: "العشاء", time: format12Hour(timings.Isha), desc: "تمام الصلوات المفروضة", icon: "fa-star", bgGradient: "from-indigo-950 via-slate-900 to-purple-950", borderCol: "border-indigo-400/40", textCol: "text-indigo-300" },
-        { name: "منتصف الليل الشرعي", time: format12Hour(timings.Midnight), desc: "نهاية وقت العشاء ووقت صلاة الليل", icon: "fa-star-and-crescent", bgGradient: "from-indigo-950 via-slate-950 to-black", borderCol: "border-purple-500/40", textCol: "text-purple-300" }
+        { name: "الفجر", time: format12Hour(timings.Fajr), desc: "وقت الإمساك وبداية الصلاة", icon: "fa-cloud-moon", bgGradient: "from-slate-900 via-[#2C1B2F] to-blue-950", borderCol: "border-blue-500/40", textCol: "text-blue-300" },
+        { name: "الشروق", time: format12Hour(timings.Sunrise), desc: "طلوع الشمس ونهاية وقت الفجر", icon: "fa-sun", bgGradient: "from-sky-900 via-[#5E3A5C] to-slate-900", borderCol: "border-palette-mauve/40", textCol: "text-palette-light" },
+        { name: "الظهر", time: format12Hour(timings.Dhuhr), desc: "زوال الشمس والنداء الأكبر", icon: "fa-sun", bgGradient: "from-[#2C1B2F] via-slate-900 to-indigo-950", borderCol: "border-yellow-500/40", textCol: "text-yellow-300" },
+        { name: "العصر", time: format12Hour(timings.Asr), desc: "الصلاة الوسطى المباركة", icon: "fa-cloud-sun", bgGradient: "from-[#5E3A5C]/40 via-slate-900 to-[#2C1B2F]", borderCol: "border-orange-400/40", textCol: "text-orange-300" },
+        { name: "المغرب", time: format12Hour(timings.Maghrib), desc: "وقت الإفطار ومغيب الشفق الشرعي", icon: "fa-moon", bgGradient: "from-rose-950 via-[#2C1B2F] to-slate-900", borderCol: "border-rose-500/40", textCol: "text-rose-300" },
+        { name: "العشاء", time: format12Hour(timings.Isha), desc: "تمام الصلوات المفروضة", icon: "fa-star", bgGradient: "from-indigo-950 via-slate-900 to-[#5E3A5C]", borderCol: "border-indigo-400/40", textCol: "text-indigo-300" },
+        { name: "منتصف الليل الشرعي", time: format12Hour(timings.Midnight), desc: "نهاية وقت العشاء ووقت صلاة الليل", icon: "fa-star-and-crescent", bgGradient: "from-indigo-950 via-[#0B0E1A] to-black", borderCol: "border-palette-mauve/50", textCol: "text-palette-light" }
     ];
 
     let html = '';
@@ -1333,10 +1337,10 @@ function renderPrayerCardsUI(timings) {
                     </div>
                     <div class="space-y-0.5 text-right">
                         <div class="flex items-center gap-1">
-                            <h4 class="font-bold text-xs text-amber-50">${p.name}</h4>
-                            <span id="prayer-badge-${idx}" class="hidden text-[8px] bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded-full font-black animate-pulse">القادمة</span>
+                            <h4 class="font-bold text-xs text-palette-light">${p.name}</h4>
+                            <span id="prayer-badge-${idx}" class="hidden text-[8px] bg-palette-mauve text-palette-darkest px-1.5 py-0.2 rounded-full font-black animate-pulse">القادمة</span>
                         </div>
-                        <p class="text-[9px] text-amber-100/70 font-medium">${p.desc}</p>
+                        <p class="text-[9px] text-palette-light/70 font-medium">${p.desc}</p>
                     </div>
                 </div>
                 <div class="text-left relative z-10 shrink-0">
@@ -1353,7 +1357,7 @@ function renderPrayerCardsUI(timings) {
 async function fetchPrecisePrayerTimes() {
     const displayContainer = document.getElementById('prayer-times-display');
     displayContainer.innerHTML = `
-        <div class="p-5 text-center text-amber-300 text-xs font-bold space-y-2">
+        <div class="p-5 text-center text-palette-light text-xs font-bold space-y-2">
             <i class="fa-solid fa-spinner fa-spin text-base"></i>
             <p>جاري ضبط أوقات الصلاة لـ (${activeCity})...</p>
         </div>
@@ -1412,18 +1416,18 @@ function loadQuranRecitersList() {
     const container = document.getElementById('quran-reciters-list');
 
     if (quranRecitersData.length === 0) {
-        container.innerHTML = `<div class="text-center text-xs text-yellow-500/80 py-6">لا توجد تلاوات مضافة.</div>`;
+        container.innerHTML = `<div class="text-center text-xs text-palette-light/80 py-6">لا توجد تلاوات مضافة.</div>`;
         return;
     }
     container.innerHTML = quranRecitersData.map((r, i) => {
         const on = (activeQuranIndex === i);
-        return `<div class="p-2.5 rounded-xl glass-panel border ${on ? 'border-yellow-400 bg-yellow-500/15' : 'border-yellow-500/30 bg-black/30'} flex items-center justify-between gap-2">
+        return `<div class="p-2.5 rounded-xl glass-panel border ${on ? 'border-palette-mauve bg-palette-mauve/20' : 'border-palette-mauve/30 bg-black/30'} flex items-center justify-between gap-2">
             <div class="truncate text-right">
-                <h4 class="font-bold text-yellow-500 text-xs truncate">${escapeHTML(r.name)}</h4>
+                <h4 class="font-bold text-palette-light text-xs truncate">${escapeHTML(r.name)}</h4>
                 <span class="text-[9px] text-cream-100">${escapeHTML(r.desc)}</span>
             </div>
             <div class="flex gap-1 shrink-0">
-                <button onclick="playClickSound(); playQuranReciterByIndex(${i})" class="px-2.5 py-1.5 rounded-xl bg-yellow-500 text-velvet-900 font-bold text-xs"><i class="fa-solid ${on ? 'fa-rotate-right' : 'fa-play'}"></i></button>
+                <button onclick="playClickSound(); playQuranReciterByIndex(${i})" class="px-2.5 py-1.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs"><i class="fa-solid ${on ? 'fa-rotate-right' : 'fa-play'}"></i></button>
                 ${r.custom ? `<button onclick="deleteCustomRecitation(${i})" class="w-7 h-7 rounded-xl bg-rose-500/20 text-rose-400"><i class="fa-solid fa-trash-can text-xs"></i></button>` : ''}
             </div>
         </div>`;
@@ -1631,19 +1635,19 @@ function loadSupplicationsList() {
     let html = '';
     ahlulbaytSupplications.forEach(sup => {
         html += `
-            <div class="rounded-xl glass-panel border border-gold/40 overflow-hidden bg-black/30 shadow-md">
-                <div onclick="playClickSound(); toggleDuaContent('${sup.id}')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-gold/10 transition-colors">
+            <div class="rounded-xl glass-panel border border-palette-mauve/40 overflow-hidden bg-black/30 shadow-md">
+                <div onclick="playClickSound(); toggleDuaContent('${sup.id}')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-palette-mauve/10 transition-colors">
                     <div class="space-y-0.5 text-right">
                         <h4 class="font-bold gold-gradient-text text-xs sm:text-sm flex items-center gap-1.5">
-                            <i class="fa-solid fa-star text-[10px] text-gold"></i>
+                            <i class="fa-solid fa-star text-[10px] text-palette-mauve"></i>
                             <span>${sup.title}</span>
                         </h4>
                         <p class="text-[9px] text-zinc-400 font-medium">${sup.desc}</p>
                     </div>
-                    <i id="dua-icon-${sup.id}" class="fa-solid fa-chevron-down text-gold text-xs transition-transform duration-300"></i>
+                    <i id="dua-icon-${sup.id}" class="fa-solid fa-chevron-down text-palette-mauve text-xs transition-transform duration-300"></i>
                 </div>
                 <div id="dua-body-${sup.id}" class="dua-content px-3 pb-3">
-                    <div class="p-2.5 rounded-xl bg-black/60 text-xs font-amiri leading-loose text-gold border border-gold/30 select-text text-justify max-h-60 overflow-y-auto shadow-inner">
+                    <div class="p-2.5 rounded-xl bg-black/60 text-xs font-amiri leading-loose text-palette-light border border-palette-mauve/30 select-text text-justify max-h-60 overflow-y-auto shadow-inner">
                         ${sup.text}
                     </div>
                 </div>
@@ -1667,13 +1671,13 @@ function toggleDuaContent(id) {
 }
 
 const weeklySupplications = [
-    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. بِسْمِ اللَّهِ الَّذِي لا أَرْجُو إِلاَّ فَضْلَهُ..." },
-    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدًا حِينَ فَطَرَ السَّمَاوَاتِ..." },
-    { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ وَالْحَمْدُ حَقُّهُ..." },
-    { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي جَعَلَ اللَّيْلَ لِبَاسًا..." },
-    { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِمًا..." },
-    { dayName: "دعاء يوم الجمعة المباركة", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الأَوَّلِ قَبْلَ الإِنْشَاءِ..." },
-    { dayName: "دعاء يوم السبت", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. بِسْمِ اللَّهِ كَلِمَةِ الْمُعْتَصِمِينَ..." }
+    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالرِّضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },
+    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغْفِرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
+    { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ وَالحَمْدُ حَقُّهُ كَما يَسْتِحِقُّهُ حَمْداً كَثِيراً ، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي ؛ إِنَّ النَّفْسَ لأَمّارَةٌ بِالسُّوءِ إِلّا ما رَحِمَ رَبِّي ، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطانِ الَّذِي يَزِيدُنِي ذَنْباً إِلى ذَنْبِي ، وَأَحْتَرِزُ بِهِ مِنْ كُلِّ جَبّارٍ فاجِرٍ ، وَسُلْطانٍ جائِرٍ ، وَعَدُوٍّ قاهِرٍ . اَللّهُمَّ اجْعَلْنِي مِنْ جُنْدِكَ فَإِنَّ جُنْدَكَ هُمُ الغالِبُونَ ، وَاجْعَلْنِي مِنْ حِزْبِكَ فَإِنَّ حِزْبَكَ هُمُ المُفْلِحُونَ ، وَاجْعَلْنِي مِنْ أوْلِيائِكَ فَإِنَّ أَوْلِياَءَكَ لا خَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنُونَ . اَللّهُمَّ أصْلِحْ لِي دِينِي فَإِنَّهُ عِصْمَةُ أَمْرِي ، وَأصْلِحْ لِي آخِرَتِي فَإِنَّها دارُ مَقَرِّي ، وَإِلَيْها مِن مُجاوَرَةِ اللِّئامِ مَفَرِّي ، وَاجْعَلِ الحَياةَ زِيادَةً لِي فِي كُلِّ خَيْرٍ ، وَالوَفاةَ راحَةً لِي مِنْ كُلِّ شَرٍ ، اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَتَمامِ عِدَّةِ المُرْسَلِينَ ، وَعَلى آلِهِ الطَّيِّبِينَ الطَّاهِرِينَ وَأَصْحابِهِ المُنْتَجَبِينَ، وَهَبْ لِي فِي الثُّلاثاءِ ثَلاثًا : لاتَدَعْ لِي ذَنْباً إِلّا غَفَرْتَهُ ، وَلا غَمّاً إِلّا أَذْهَبْتَهُ ، وَلا عَدُوّاً إِلّا دَفَعْتَهُ . بِـ (( بِسْمِ اللهِ )) خَيْرِ الأَسْماء ، بِسْمِ اللهِ رَبِّ الأَرْضِ وَالسَّمَاءِ ، أَسْتَدْفِعُ كُلَّ مَكْرُوهٍ أَوَّلُهُ سَخَطُهُ ، وَأَسْتَجْلِبُ كُلَّ مَحْبُوبٍ أَوَّلُهُ رِضاهُ، فَاخْتِمْ لِي مِنْكَ بِالغُفْرانِ يا وَلِيَّ الإِحْسانِ ." },
+    { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلّهِ الَّذِي جَعَلَ اللَّيْلَ لِباساً ، وَالنَّوْمَ سُباتَاً ، وَجَعَلَ النَّهارَ نُشُوراً . لَكَ الْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي ، وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً حَمْداً دَائِمَاً لا يَنْقَطِعُ أَبَداً ، وَلا يُحْصِي لَهُ الْخَلائِقُ عَدَدَاً .اَللَّهُمَّ لَكَ الْحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ ، وَقَدَّرْتَ وَقَضَيْتَ ، وَأَمَتَّ وَأَحْيَيْتَ ، وَأَمْرَضْتَ وَشَفَيْتَ ، وَعافَيْتَ وَأَبْلَيْتَ ، وَعَلَى الْعَرْشِ اسْتَوَيْتَ ، وَعَلَى الْمُلْكِ احْتَوَيْتَ .أَدْعُوكَ دُعآءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ ، وَانْقَطَعَتْ حِيلَتُهُ ، وَاقْتَرَبَ أَجَلُهُ ، وَتَدانَى فِي الدُّنْيا أَمَلُهُ ، وَاشْتَدَّتْ إلى رَحْمَتِكَ فاقَتُهُ ، وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ ، وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ ، وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ . فَصَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ ، وَعَلى أَهْلِ بَيْتِهِ الطَّيِّبِينَ الطَّاهِرِينَ ، وَارْزُقْنِي شَفاعَةَ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ ، وَلا تَحْرِمْنِي صُحْبَتَهُ إنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ . اَللَّهُمَّ اقْضِ لِي فِي الأَرْبِعآءِ أَرْبَعَاً : اِجْعَلْ قُوَّتِي فِي طاعَتِكَ ، وَنَشاطِي فِي عِبادَتِكَ ، وَرَغْبَتِي فِي ثَوَابِكَ ، وَزُهْدِي فِيما يُوجِبُ لِي أَلِيمَ عِقابِكَ ، إنَّكَ لَطِيفٌ لِما تَشَآءُ ." },
+    { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِماً بِقُدْرَتِهِ ، وَجاءَ بِالنَّهارِ مُبْصِراً بِرَحْمَتِهِ ، وَكَسانِي ضِياءَهُ وَأَنا فِي نِعْمَتِهِ . اَللّهُمَّ فَكَما أَبْقَيْتَنِي لَهُ فَأَبْقِنِي لأَمْثالِهِ ، وَصَلِّ عَلى النَّبِيّ مُحَمَّدٍ وَآلِهِ ، وَلا تَفْجَعْنِي فِيهِ وَفِي غَيْرِهِ مِنَ اللَّيالِي وَالأَيّامِ بِارْتِكابِ المَحارِمِ وَاكْتِسابِ المَآثِمِ ، وَارْزُقْنِي خَيْرَهُ وَخَيْرَ ما فِيهِ وَخَيْرَ ما بَعْدَهُ ، وَاصْرِفْ عَنِّي شَرَّهُ وَشَرَّ ما فِيهِ وَشَرَّ ما بَعْدَهُ . اَللّهُمَّ إِنِّي بِذِمَّةِ الإِسْلامِ أَتَوَسَّلُ إِلَيْكَ ، وَبِحُرْمَةِ القُرْآنِ أَعْتَمِدُ عَلَيْكَ ، وَبِمُحَمَّدٍ المُصْطَفى ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ أَسْتَشْفِعُ لَدَيْكَ ، فَاعْرِفِ اللّهُمَّ ذِمَّتِي الَّتِي رَجَوْتُ بِها قَضاءَ حاجَتِي ، يا أَرْحَمَ الرَّاحِمِينَ . اَللّهُمَّ اقْضِ لِي فِي الخَمِيسِ خَمْساً ، لا يَتَّسِعُ لَهَا إِلّا كَرَمُكَ ، وَلا يُطِيقُها إِلّا نِعَمُكَ : سَلامَةً أَقْوَى بِها عَلى طاعَتِكَ ، وَعِبادَةً أَسْتَحِقُّ بِها جَزِيلَ مَثُوبَتِكَ ، وَسَعَةً فِي الحَالِ مِنَ الرِّزْقِ الحَلالِ ، وَأَنْ تُؤْمِنَنِي فِي مَواقِفِ الخَوْفِ بِأَمْنِكَ ، وَتَجْعَلَنِي مِنْ طَوارِقِ الهُمُومِ وَالغُمُومِ فِي حِصْنِكَ ، وَصَلِّ عَلى مُحمَّدٍ وَآلِ مُحَمَّدٍ ، وَاجْعَلْ تَوَسُّلِي بِهِ شافِعاً يَوْمَ القِيامَةِ نافِعاً ، إِنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ ." },
+    { dayName: "دعاء يوم الجمعة المباركة", text: "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ : اَلحَمْدُ للهِ الأَوَّلِ قَبْلَ الإِنْشاءِ وَالإِحْياءِ وَالآخِرِ بَعْدَ فَناءِ الأَشْياءِ ، العَلِيمِ الَّذِي لا يَنْسَى مَنْ ذَكَرَهُ وَلا يَنْقُصُ مَنْ شَكَرَهُ وَلا يَخِيبُ مَنْ دَعاهُ وَلا يَقْطَعُ رَجاءَ مَنْ رَجاهُ . اَللّهُمَّ إِنِّي أُشْهِدُكَ وَكَفى بِكَ شَهِيداً ، وَأُشْهِدُ جَمِيعَ مَلائِكَتِكَ وَسُكَّانَ سَمَاواتِكَ وَحَمَلَةَ عَرْشِكَ ، وَمَنْ بَعَثْتَ مِنْ أَنْبِيائِكَ وَرُسُلِكَ ، وَأَنْشَأْتَ مِنْ أَصْنافِ خَلْقِكَ ـ أَنِّي أَشْهَدُ أَنَّكَ أَنْتَ الله لا إِلهَ إِلاّ أَنْتَ وَحْدَكَ لاشَرِيكَ لَكَ وَلا عَدِيلَ ، وَلا خُلْفَ لِقَوْلِكَ وَلا تَبْدِيلَ ، وَأَنَّ مُحَمَّداً ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ عَبْدُكَ وَرَسُولُكَ أَدّى ماحَمَّلْتَهُ إِلى العِبادِ وَجاهَدَ فِي الله ـ عَزَّ وَجلَّ ـ حَقَّ الجِهادِ ، وَأَنَّهُ بَشَّرَ بِما هُوَ حَقٌ مِنَ الثَّوابِ ، وَأَنْذَرَ بِما هُوَ صِدْقٌ مِنَ العِقابِ . اَللّهُمَّ ثَبِّتْنِي عَلى دِينِكَ ما أَحْيَيْتَنِي ، وَلاتُزِغْ قَلْبِي بَعْدَ إِذْ هَدَيْتَنِي ، وَهَبْ لِي مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الوَهّابُ ، صَلِّ عَلى مُحَمَّدٍ وَعَلى آل مُحَمَّدٍ ، وَاجْعَلْنِي مِنْ أَتْباعِهِ وَشِيعَتِهِ ، وَاحْشُرْنِي فِي زُمْرَتِهِ ، وَوَفِّقْنِي لِأَداءِ فَرْضِ الجُمُعاتِ ، وَما أَوْجَبْتَ عَلَيَّ فِيها مِنْ الطّاعاتِ ، وَقَسَمْتَ لِأَهْلِها مِنَ العَطاءِ فِي يَوْمِ الجَزاءِ . إِنَّكَ أَنْتَ العَزِيزُ الحَكِيمُ ." },
+    { dayName: "دعاء يوم السبت", text: "بِسْمِ الله الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللّهِ كَلِمَةِ الْمُعْتَصِمِينَ ، وَمَقَالَةِ الْمُتَحَرِّزِينَ ، وَأَعُوذُ بِالِلّه تَعَالى مِنْ جَوْرِ الْجآئِرِينَ ، وَكَيْدِ الْحاسِدِينَ ، وَبَغْيِ الظَّالِمِينَ ، وَأَحْمَدُهُ فَوْقَ حَمْدِ الْحامِدِينَ . اَللَّهُمَّ أَنْتَ الْواحِدُ بِلا شَرِيك ، وَالْمَلِكُ بِلا تَمْلِيكٍ ، لا تُضَادُّ فِي حُكْمِكَ ، وَلا تُنازَعُ فِي مُلْكِكَ . أَسْأَلُكَ أَنْ تُصَلِّىَ عَلَى مُحَمَّدٍ وَآلِهِ ، عَبْدِكَ وَرَسُولِكَ ، وَأَنْ تُوزِعَنِي مِنْ شُكْرِ نُعْمَاكَ ما تَبْلُغُ بِي غَايَةَ رِضَاكَ ، وَأَنْ تُعِينَنِي عَلى طاعَتِكَ ، وَلُزُومِ عِبادَتِكَ ، وَاسْتِحْقاقِ مَثُوبَتِكَ بِلُطْفِ عِنايَتِكَ ، وَتَرْحَمَنِي ، وَتَصُدَّنِي [ وصُدَّني ] عَنْ مَعَاصِيكَ مَا أَحْيَيْتَنِي ، وَتُوَفِّقَنِي لِما يَنْفَعُنِي ما أَبْقَيْتَنِي ، وَأَنْ تَشْرَحَ بِكِتابِكَ صَدْرِي ، وَتَحُطَّ بِتِلاوَتِهِ وِزْرِي ، وَتَمْنَحَنِي السَّلامَةَ فِي دِينِي وَنَفْسِي ، وَلا تُوحِشَ بِي أَهْلَ أُنْسِي ، وَتُتِمَّ إحْسَانَكَ فِيما بَقِيَ مِنْ عُمُرِي كَما أَحْسَنْتَ فِيما مَضَى مِنْهُ يا أَرْحَمَ الرَّاحِمِينَ ." }
 ];
 
 function openDailySupplicationsModal() {
@@ -1713,18 +1717,43 @@ function selectDayDua(dayIdx) {
 
 const HIJRI_MONTH_NAMES = ["محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"];
 const ALL_HIJRI_EVENTS = {
+    1: [
+        { day: 1, title: "رأس السنة الهجرية", story: "بداية العام الهجري الجديد." },
+        { day: 10, title: "يوم عاشوراء (استشهاد الإمام الحسين عليه السلام)", story: "ذكرى استشهاد الإمام الحسين بن علي (ع) وأهل بيته الأطهار وأصحابه الأبرار في كربلاء المقدسة." }
+    ],
+    3: [
+        { day: 17, title: "ولادة الرسول الأعظم محمد (ص) والإمام الصادق (ع)", story: "ذكرى المولد النبوي الشريف ومولد الإمام جعفر الصادق (ع)." }
+    ],
     5: [
         { day: 5, title: "ولادة السيدة زينب الكبرى (عليها السلام)", story: "ولادة عقيلة الهاشميين وبطلة كربلاء السيدة زينب (ع)." },
         { day: 13, title: "شهادة سيدة نساء العالمين فاطمة الزهراء (عليها السلام)", story: "ذكرى شهادة الصديقة الطاهرة فاطمة الزهراء (ع)." }
+    ],
+    7: [
+        { day: 13, title: "ولادة أمير المؤمنين علي بن أبي طالب (ع)", story: "ذكرى ولادة الإمام علي بن أبي طالب (ع) في جوف الكعبة المشرفة." },
+        { day: 27, title: "المبعث النبوي الشريف", story: "يوم بعثة النبي محمد (ص) بالرسالة الإسلامية الخالدة." }
+    ],
+    8: [
+        { day: 15, title: "ولادة الإمام المهدي المنتظر (عج)", story: "ذكرى ولادة منقذ البشرية الإمام الحجة بن الحسن العسكري (عج)." }
+    ],
+    9: [
+        { day: 15, title: "ولادة الإمام الحسن المجتبى (ع)", story: "ذكرى ولادة سبط النبي الأكبر الإمام الحسن بن علي (ع)." },
+        { day: 19, title: "جرح أمير المؤمنين علي بن أبي طالب (ع)", story: "ليلة ضربة الإمام علي (ع) في محراب مسجد الكوفة." },
+        { day: 21, title: "استشهاد أمير المؤمنين علي بن أبي طالب (ع)", story: "ذكرى شهادة الإمام علي بن أبي طالب (ع)." }
+    ],
+    10: [
+        { day: 1, title: "عيد الفطر المبارك", story: "أول أيام عيد الفطر السعيد بعد الصيام المبارك في شهر رمضان." }
+    ],
+    12: [
+        { day: 10, title: "عيد الأضحى المبارك", story: "عيد الأضحى المبارك وأيام الحج الأكبر." },
+        { day: 18, title: "عيد الغدير الأغر", story: "عيد الله الأكبر، يوم تنصيب الإمام علي (ع) خليفة وإماماً للمسلمين في غدير خم." }
     ]
 };
 
 function getHijriDateFromGregorian(dateObj) {
-    const adjusted = new Date(dateObj.getTime() - 86400000);
     try {
         const parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', {
             day: 'numeric', month: 'numeric', year: 'numeric'
-        }).formatToParts(adjusted);
+        }).formatToParts(dateObj);
         let day = 1, month = 1, year = 1448;
         parts.forEach(p => {
             if (p.type === 'day') day = parseInt(p.value, 10);
@@ -1733,7 +1762,7 @@ function getHijriDateFromGregorian(dateObj) {
         });
         return { day, month, year };
     } catch (e) {
-        return { day: 20, month: 5, year: 1448 };
+        return { day: 1, month: 1, year: 1448 };
     }
 }
 
@@ -1747,12 +1776,23 @@ function findGregorianForHijri(hYear, hMonth, hDay) {
     const diffMonths = (hYear - todayHijri.year) * 12 + (hMonth - todayHijri.month);
     const approxDaysDiff = Math.round(diffMonths * 29.530588) + (hDay - todayHijri.day);
     const targetDate = new Date(todayGregorian.getTime() + approxDaysDiff * 86400000);
-    for (let offset = -4; offset <= 4; offset++) {
+    for (let offset = -6; offset <= 6; offset++) {
         const candidate = new Date(targetDate.getTime() + offset * 86400000);
         const h = getHijriDateFromGregorian(candidate);
-        if (h.year === hYear && h.month === hMonth && h.day === hDay) return candidate;
+        if (h.year === hYear && h.month === hMonth && h.day === hDay) {
+            return candidate;
+        }
     }
     return targetDate;
+}
+
+function getDaysInHijriMonth(hYear, hMonth) {
+    const d30 = findGregorianForHijri(hYear, hMonth, 30);
+    const h30 = getHijriDateFromGregorian(d30);
+    if (h30.year === hYear && h30.month === hMonth && h30.day === 30) {
+        return 30;
+    }
+    return 29;
 }
 
 function initHijriCalendarModal() {
@@ -1784,7 +1824,7 @@ function selectHijriDay(d) {
 }
 
 function renderHijriCalendarUI() {
-    const monthName = HIJRI_MONTH_NAMES[viewHijriMonth - 1] || "جمادى الأولى";
+    const monthName = HIJRI_MONTH_NAMES[viewHijriMonth - 1] || "محرم";
     const isToday = (viewHijriYear === todayHijri.year && viewHijriMonth === todayHijri.month && selectedHijriDay === todayHijri.day);
 
     document.getElementById('hijri-header-title').innerText = `${selectedHijriDay} ${monthName} ${viewHijriYear} هـ${isToday ? ' (اليوم)' : ''}`;
@@ -1796,8 +1836,9 @@ function renderHijriCalendarUI() {
 
     document.getElementById('hijri-month-bar-name').innerText = monthName;
 
-    let startWeekday = 2;
-    const daysInMonth = 30;
+    const firstDayDate = findGregorianForHijri(viewHijriYear, viewHijriMonth, 1);
+    const startWeekday = firstDayDate.getDay(); 
+    const daysInMonth = getDaysInHijriMonth(viewHijriYear, viewHijriMonth);
     const monthEvents = ALL_HIJRI_EVENTS[viewHijriMonth] || [];
 
     const gridContainer = document.getElementById('hijri-days-grid');
@@ -1815,18 +1856,18 @@ function renderHijriCalendarUI() {
         if (isSelected) {
             gridHTML += `
                 <div onclick="selectHijriDay(${d})" class="flex flex-col items-center justify-center cursor-pointer">
-                    <div class="w-8 h-8 rounded-full bg-[#4ADE80] text-zinc-950 flex flex-col items-center justify-center shadow-lg scale-105">
+                    <div class="w-8 h-8 rounded-full bg-palette-mauve text-palette-darkest flex flex-col items-center justify-center shadow-lg scale-105">
                         <span class="w-1 h-1 rounded-full bg-white mb-0.5"></span>
                         <span class="text-[11px] font-black leading-none">${arabicDayStr}</span>
                     </div>
                 </div>
             `;
         } else {
-            let numColorClass = dayEvent ? "text-[#4ADE80] font-bold" : "text-zinc-200";
+            let numColorClass = dayEvent ? "text-palette-light font-bold" : "text-zinc-200";
             gridHTML += `
                 <div onclick="selectHijriDay(${d})" class="h-8 flex flex-col items-center justify-start pt-1 cursor-pointer rounded-xl hover:bg-zinc-800/60">
                     <span class="text-[11px] ${numColorClass}">${arabicDayStr}</span>
-                    ${dayEvent ? '<span class="w-1 h-1 rounded-full bg-emerald-400 mt-0.5"></span>' : ''}
+                    ${dayEvent ? '<span class="w-1 h-1 rounded-full bg-palette-mauve mt-0.5"></span>' : ''}
                 </div>
             `;
         }
@@ -1845,7 +1886,7 @@ function renderHijriCalendarUI() {
         dayEvents.forEach(ev => {
             html += `
                 <div onclick="playClickSound(); showEventDetails('${ev.title}', '${ev.day} ${monthName}', '${ev.story}')" class="py-2 flex items-center gap-2 cursor-pointer hover:bg-zinc-800/40 rounded-xl px-2">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs"><i class="fa-solid fa-mosque"></i></div>
+                    <div class="w-8 h-8 rounded-xl bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs"><i class="fa-solid fa-mosque"></i></div>
                     <div class="flex-1 text-right">
                         <h5 class="text-xs font-bold text-white">${ev.title}</h5>
                         <span class="text-[9px] text-zinc-400">${ev.day} ${monthName}</span>
@@ -1859,17 +1900,21 @@ function renderHijriCalendarUI() {
     document.getElementById('month-events-heading').innerText = `مناسبات شهر ${monthName}`;
     const monthListContainer = document.getElementById('hijri-month-events-list');
     let mHtml = '';
-    monthEvents.forEach(ev => {
-        mHtml += `
-            <div onclick="playClickSound(); showEventDetails('${ev.title}', '${ev.day} ${monthName}', '${ev.story}')" class="py-2.5 flex items-center gap-2 cursor-pointer hover:bg-zinc-800/40 px-1">
-                <div class="w-8 h-8 rounded-xl bg-zinc-800 text-zinc-300 flex items-center justify-center text-xs"><i class="fa-solid fa-calendar-check"></i></div>
-                <div class="flex-1 text-right">
-                    <h5 class="text-xs font-bold text-white">${ev.title}</h5>
-                    <span class="text-[9px] text-zinc-400">${ev.day} ${monthName}</span>
+    if (monthEvents.length === 0) {
+        mHtml = `<div class="py-2.5 text-[11px] text-center text-zinc-500">لا توجد مناسبات مسجلة في هذا الشهر</div>`;
+    } else {
+        monthEvents.forEach(ev => {
+            mHtml += `
+                <div onclick="playClickSound(); showEventDetails('${ev.title}', '${ev.day} ${monthName}', '${ev.story}')" class="py-2.5 flex items-center gap-2 cursor-pointer hover:bg-zinc-800/40 px-1">
+                    <div class="w-8 h-8 rounded-xl bg-zinc-800 text-zinc-300 flex items-center justify-center text-xs"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div class="flex-1 text-right">
+                        <h5 class="text-xs font-bold text-white">${ev.title}</h5>
+                        <span class="text-[9px] text-zinc-400">${ev.day} ${monthName}</span>
+                    </div>
                 </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    }
     monthListContainer.innerHTML = mHtml;
 }
 
@@ -1952,13 +1997,13 @@ function toggleTheme() {
     if (isDarkMode) {
         htmlEl.classList.remove('light'); htmlEl.classList.add('dark');
         bodyEl.classList.remove('light'); bodyEl.classList.add('dark');
-        metaThemeColor.setAttribute('content', '#07070E');
+        metaThemeColor.setAttribute('content', '#00030E');
         themeText.innerText = "الوضع المضيء";
         themeIcon.className = 'fa-solid fa-sun';
     } else {
         htmlEl.classList.remove('dark'); htmlEl.classList.add('light');
         bodyEl.classList.remove('dark'); bodyEl.classList.add('light');
-        metaThemeColor.setAttribute('content', '#FAF6EE');
+        metaThemeColor.setAttribute('content', '#F3E9EC');
         themeText.innerText = "الوضع الداكن";
         themeIcon.className = 'fa-solid fa-moon';
     }
