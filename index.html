@@ -15,14 +15,13 @@ tailwind.config = {
     theme: {
         extend: {
             colors: {
-                // الألوان المستخرجة من الصورة المرفقة
                 palette: {
-                    darkest: '#00030E', // خلفية أساسية معتمة
-                    dark: '#0B0E1A',    // خلفية بطاقات داكنة
-                    mid: '#2C1B2F',     // لون بنفسجي داكن عميق
-                    purple: '#5E3A5C',  // لون بنفسجي متوسط أساسي
-                    mauve: '#B47A9A',   // لون موف/وردي ترابي بارز
-                    light: '#F3E9EC'    // لون فاتح ناصع للنصوص والخلفيات الفاتحة
+                    darkest: '#00030E',
+                    dark: '#0B0E1A',
+                    mid: '#2C1B2F',
+                    purple: '#5E3A5C',
+                    mauve: '#B47A9A',
+                    light: '#F3E9EC'
                 },
                 gold: { DEFAULT: '#B47A9A', light: '#F3E9EC', dark: '#5E3A5C', glow: 'rgba(180, 122, 154, 0.45)' },
                 velvet: { 900: '#00030E', 800: '#0B0E1A', 700: '#2C1B2F' },
@@ -45,23 +44,12 @@ html.dark, body.dark {
     background: radial-gradient(circle at center, #2C1B2F 0%, #00030E 100%) !important;
     color: #F3E9EC;
 }
-html.light, body.light {
-    background: radial-gradient(circle at center, #F3E9EC 0%, #CDB2C2 100%) !important;
-    color: #00030E;
-}
 .dark .glass-panel {
     background: rgba(11, 14, 26, 0.88);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(180, 122, 154, 0.3);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     color: #F3E9EC;
-}
-.light .glass-panel {
-    background: rgba(243, 233, 236, 0.94);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(94, 58, 92, 0.35);
-    box-shadow: 0 15px 35px rgba(94, 58, 92, 0.15);
-    color: #00030E;
 }
 .gold-gradient-text {
     background: linear-gradient(135deg, #F3E9EC 0%, #B47A9A 50%, #5E3A5C 100%);
@@ -136,8 +124,8 @@ html.light, body.light {
             </div>
         </div>
         <div class="space-y-0.5">
-            <h2 class="text-lg font-black gold-gradient-text tracking-wide">أذكار واستغفار</h2>
-            <p class="text-[10px] text-palette-mauve/90 font-medium">القرآن الكريم، الأدعية ومواقيت الصلاة</p>
+            <h2 class="text-lg font-black gold-gradient-text tracking-wide" id="app-title-splash">أذكار واستغفار</h2>
+            <p class="text-[10px] text-palette-mauve/90 font-medium" id="app-desc-splash">القرآن الكريم، الأدعية ومواقيت الصلاة</p>
         </div>
         <div class="w-full pt-1 space-y-2">
             <button onclick="loginWithGooglePlay()" class="w-full py-2.5 px-3 rounded-xl bg-palette-light hover:bg-white text-palette-darkest font-bold text-[11px] flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
@@ -147,11 +135,11 @@ html.light, body.light {
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
                 </svg>
-                <span>Google Play الدخول</span>
+                <span id="btn-google-play">Google Play الدخول</span>
             </button>
             <button onclick="loginAsGuest()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-palette-mauve via-palette-light to-palette-mauve text-palette-darkest font-black text-[11px] shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5">
                 <i class="fa-solid fa-user-check"></i>
-                <span>الدخول كـ ضيف ومتابعة</span>
+                <span id="btn-guest-login">تسجيل دخول اعتيادي</span>
             </button>
         </div>
     </div>
@@ -168,7 +156,7 @@ html.light, body.light {
             </svg>
         </div>
         <div>
-            <h1 class="font-bold text-sm sm:text-base gold-gradient-text">أذكار واستغفار</h1>
+            <h1 class="font-bold text-sm sm:text-base gold-gradient-text" id="app-header-title">أذكار واستغفار</h1>
             <p id="user-display-tag" class="text-[9px] opacity-80 font-medium"></p>
         </div>
     </div>
@@ -184,37 +172,37 @@ html.light, body.light {
         <div class="w-6 h-6 rounded-lg bg-amber-500/30 border border-amber-500/60 flex items-center justify-center text-amber-400 text-[10px]">
             <i class="fa-solid fa-mosque"></i>
         </div>
-        <span class="font-bold text-[8px] text-amber-400 text-center truncate w-full">أوقات الصلاة</span>
+        <span class="font-bold text-[8px] text-amber-400 text-center truncate w-full" id="btn-prayer-times">أوقات الصلاة</span>
     </button>
     <button onclick="playClickSound(); openDailySupplicationsModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-teal-500/20 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-teal-500/30 border border-teal-500/60 flex items-center justify-center text-teal-400 text-[10px]">
             <i class="fa-solid fa-calendar-week"></i>
         </div>
-        <span class="font-bold text-[8px] text-teal-300 text-center truncate w-full">دعاء اليوم</span>
+        <span class="font-bold text-[8px] text-teal-300 text-center truncate w-full" id="btn-daily-dua">دعاء اليوم</span>
     </button>
     <button onclick="playClickSound(); openModal('supplications-modal'); loadSupplicationsList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-mauve/15 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-palette-mauve/25 border border-palette-mauve/50 flex items-center justify-center text-palette-mauve text-[10px]">
             <i class="fa-solid fa-book-quran"></i>
         </div>
-        <span class="font-bold text-[8px] gold-gradient-text text-center truncate w-full">الأدعية</span>
+        <span class="font-bold text-[8px] gold-gradient-text text-center truncate w-full" id="btn-supplications">الأدعية</span>
     </button>
     <button onclick="playClickSound(); openModal('quran-modal'); loadQuranRecitersList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-purple/20 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-palette-purple/30 border border-palette-purple/60 flex items-center justify-center text-palette-light text-[10px]">
             <i class="fa-solid fa-headphones-simple"></i>
         </div>
-        <span class="font-bold text-[8px] text-palette-light text-center truncate w-full">تلاوات وقراء</span>
+        <span class="font-bold text-[8px] text-palette-light text-center truncate w-full" id="btn-quran">تلاوات وقراء</span>
     </button>
     <button onclick="playClickSound(); openModal('calendar-modal'); initHijriCalendarModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-emerald/15 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-accent-emerald/25 border border-accent-emerald/50 flex items-center justify-center text-accent-emerald text-[10px]">
             <i class="fa-solid fa-calendar-days"></i>
         </div>
-        <span class="font-bold text-[8px] text-accent-emerald text-center truncate w-full">التقويم</span>
+        <span class="font-bold text-[8px] text-accent-emerald text-center truncate w-full" id="btn-calendar">التقويم</span>
     </button>
     <button onclick="playClickSound(); openModal('fatiha-modal'); loadFatihaLocalList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-blue/15 to-transparent">
         <div class="w-6 h-6 rounded-lg bg-accent-blue/25 border border-accent-blue/50 flex items-center justify-center text-accent-blue text-[10px]">
             <i class="fa-solid fa-hands-praying"></i>
         </div>
-        <span class="font-bold text-[8px] text-accent-blue text-center truncate w-full">الفاتحة</span>
+        <span class="font-bold text-[8px] text-accent-blue text-center truncate w-full" id="btn-fatiha">الفاتحة</span>
     </button>
 </div>
 
@@ -224,7 +212,7 @@ html.light, body.light {
         <div class="flex items-center gap-1.5">
             <button onclick="playClickSound(); randomizeDhikr();" class="px-2 py-1 rounded-xl bg-accent-emerald/20 hover:bg-accent-emerald/30 border border-accent-emerald/40 text-accent-emerald text-[11px] flex items-center gap-1 transition-all shadow-sm cursor-pointer" title="تحديث بذكر جديد">
                 <i class="fa-solid fa-rotate"></i>
-                <span>ذكر جديد</span>
+                <span id="btn-new-dhikr">ذكر جديد</span>
             </button>
             <span id="dhikr-counter-text" dir="ltr" class="font-mono text-[11px] px-2 py-1 rounded-lg bg-black/40 text-palette-light border border-palette-mauve/30 flex items-center justify-center min-w-[55px] h-6 whitespace-nowrap leading-none inline-flex">1 / 8</span>
         </div>
@@ -243,13 +231,13 @@ html.light, body.light {
     <div class="flex justify-between items-center gap-2 mt-1.5 pt-2 border-t border-palette-mauve/20">
         <button onclick="playClickSound(); prevDhikr()" class="flex-1 py-1.5 px-2 rounded-xl bg-accent-blue/15 hover:bg-accent-blue/25 border border-accent-blue/40 font-bold text-[11px] flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm text-accent-blue cursor-pointer">
             <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            <span>السابق</span>
+            <span id="btn-prev">السابق</span>
         </button>
         <button onclick="playClickSound(); resetCounter()" class="w-9 h-9 rounded-xl bg-accent-rose/15 hover:bg-accent-rose/25 border border-accent-rose/40 text-accent-rose flex items-center justify-center active:scale-95 transition-all shadow-sm cursor-pointer" title="إعادة الضبط">
             <i class="fa-solid fa-rotate-right text-xs"></i>
         </button>
         <button onclick="playClickSound(); nextDhikr()" class="flex-1 py-1.5 px-2 rounded-xl bg-accent-blue/15 hover:bg-accent-blue/25 border border-accent-blue/40 font-bold text-[11px] flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm text-accent-blue cursor-pointer">
-            <span>التالي</span>
+            <span id="btn-next">التالي</span>
             <i class="fa-solid fa-chevron-left text-[10px]"></i>
         </button>
     </div>
@@ -257,7 +245,7 @@ html.light, body.light {
 </main>
 
 <footer class="w-full max-w-md text-center py-1 text-[11px] opacity-75 font-medium">
-    <p>تطبيق <span class="gold-gradient-text font-bold">أذكار واستغفار</span> • صدقة جارية</p>
+    <p><span class="gold-gradient-text font-bold" id="footer-app-name">أذكار واستغفار</span> • <span id="footer-charity">صدقة جارية</span></p>
 </footer>
 
 <div id="settings-modal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 z-50">
@@ -265,7 +253,7 @@ html.light, body.light {
         <div class="flex justify-between items-center pb-2.5 border-b border-palette-mauve/30">
             <h2 class="text-base sm:text-lg font-bold gold-gradient-text flex items-center gap-2">
                 <i class="fa-solid fa-gear text-palette-mauve"></i>
-                <span>الإعدادات والتحكم</span>
+                <span id="settings-title">الإعدادات والتحكم</span>
             </h2>
             <button onclick="playClickSound(); closeModal('settings-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 shadow-sm cursor-pointer">
                 <i class="fa-solid fa-xmark text-xs"></i>
@@ -275,13 +263,24 @@ html.light, body.light {
         <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 shadow-sm">
             <div class="flex items-center gap-2.5">
                 <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
-                    <i class="fa-solid fa-sun" id="theme-icon"></i>
+                    <i class="fa-solid fa-moon"></i>
                 </div>
-                <span class="font-bold text-xs">مظهر التطبيق</span>
+                <span class="font-bold text-xs" id="lbl-theme">مظهر التطبيق</span>
             </div>
-            <button onclick="playClickSound(); toggleTheme()" id="theme-btn" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1.5 hover:bg-palette-mauve/30 transition-all cursor-pointer">
-                <span id="theme-text">الوضع المضيء</span>
-            </button>
+            <span class="px-3 py-1.5 rounded-xl bg-black/80 border border-palette-mauve/40 text-palette-light text-[11px] font-bold" id="lbl-theme-locked">الوضع الداكن الدائم</span>
+        </div>
+
+        <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 shadow-sm">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
+                    <i class="fa-solid fa-language"></i>
+                </div>
+                <span class="font-bold text-xs" id="lbl-language">لغة التطبيق</span>
+            </div>
+            <div class="flex gap-1 bg-black/85 p-1 rounded-xl border border-palette-mauve/40">
+                <button onclick="playClickSound(); selectAppLanguage('ar')" id="lang-btn-ar" class="px-3 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer">العربية</button>
+                <button onclick="playClickSound(); selectAppLanguage('en')" id="lang-btn-en" class="px-3 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer">English</button>
+            </div>
         </div>
 
         <div class="flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 shadow-sm">
@@ -289,7 +288,7 @@ html.light, body.light {
                 <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
                     <i class="fa-solid fa-volume-high" id="sound-icon"></i>
                 </div>
-                <span class="font-bold text-xs">أصوات الأزرار</span>
+                <span class="font-bold text-xs" id="lbl-sound">أصوات الأزرار</span>
             </div>
             <button onclick="toggleButtonSound()" id="sound-btn" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1.5 hover:bg-palette-mauve/30 transition-all cursor-pointer">
                 <span id="sound-text">مفعل</span>
@@ -302,8 +301,8 @@ html.light, body.light {
                     <i class="fa-solid fa-wind"></i>
                 </div>
                 <div>
-                    <span class="font-bold text-xs text-palette-light block">أصوات الرياح والعصافير</span>
-                    <span class="text-[9px] opacity-75">أجواء هادئة للتسبيح والاسترخاء</span>
+                    <span class="font-bold text-xs text-palette-light block" id="lbl-nature-sound">أصوات الرياح والعصافير</span>
+                    <span class="text-[9px] opacity-75" id="lbl-nature-desc">أجواء هادئة للتسبيح والاسترخاء</span>
                 </div>
             </div>
             <button onclick="toggleSyntheticNatureSound()" id="nature-sound-btn" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1 hover:bg-palette-mauve/30 transition-all cursor-pointer">
@@ -318,69 +317,40 @@ html.light, body.light {
                     <i class="fa-solid fa-mosque"></i>
                 </div>
                 <div>
-                    <span class="font-bold text-xs text-palette-light block">رادار المساجد القريبة</span>
-                    <span class="text-[9px] opacity-75">أقرب المساجد ضمن 1 كم</span>
+                    <span class="font-bold text-xs text-palette-light block" id="lbl-mosque-radar">رادار المساجد القريبة</span>
+                    <span class="text-[9px] opacity-75" id="lbl-mosque-desc">أقرب المساجد ضمن 1 كم</span>
                 </div>
             </div>
             <button onclick="playClickSound(); openModal('qibla-modal'); startMosqueSearchProcess();" class="px-3 py-1.5 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1 hover:bg-palette-mauve/30 transition-all cursor-pointer">
                 <i class="fa-solid fa-location-crosshairs"></i>
-                <span>فتح</span>
+                <span id="btn-open-radar">فتح</span>
             </button>
         </div>
 
-        <button onclick="playClickSound(); openModal('developers-modal')" class="w-full flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 hover:bg-palette-mauve/15 transition-all cursor-pointer shadow-sm group">
+        <a href="https://instagram.com/t85ki" target="_blank" onclick="playClickSound()" class="w-full flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 hover:bg-palette-mauve/15 transition-all cursor-pointer shadow-sm group">
             <div class="flex items-center gap-2.5 text-right">
-                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-code"></i>
+                <div class="w-8 h-8 rounded-lg overflow-hidden border border-palette-mauve/40 shadow-inner group-hover:scale-110 transition-transform shrink-0 flex items-center justify-center bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-0.5">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="w-full h-full object-contain filter drop-shadow">
                 </div>
                 <div>
-                    <span class="font-bold text-xs gold-gradient-text block">المطورون والداعمون</span>
-                    <span class="text-[9px] opacity-75">اضغط لعرض التفاصيل</span>
+                    <span class="font-bold text-xs gold-gradient-text block" id="lbl-instagram-title">التواصل مع مالك التطبيق</span>
+                    <span class="text-[10px] font-mono text-palette-mauve font-bold">@t85ki</span>
                 </div>
             </div>
             <div class="w-6 h-6 rounded-full bg-palette-mauve/10 border border-palette-mauve/30 flex items-center justify-center text-palette-light text-[10px] group-hover:bg-palette-mauve group-hover:text-palette-darkest transition-all">
                 <i class="fa-solid fa-chevron-left"></i>
             </div>
-        </button>
+        </a>
 
         <div class="pt-1.5 flex flex-col items-center justify-center text-center">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-palette-mauve/10 border border-palette-mauve/30 text-[11px] font-bold text-palette-light shadow-sm">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Flag_of_Iraq.svg" alt="علم العراق" class="w-6 h-4 object-cover rounded-[2px] shadow-sm border border-palette-mauve/40">
-                <span class="tracking-wide text-[10px]">تم التطوير والتدقيق الشرعي في العراق</span>
+                <span class="tracking-wide text-[10px]" id="lbl-iraq-tag">تم التطوير والتدقيق الشرعي في العراق</span>
             </div>
         </div>
 
-        <button onclick="playClickSound(); closeModal('settings-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs hover:bg-palette-light transition-all shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('settings-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs hover:bg-palette-light transition-all shadow-lg cursor-pointer" id="btn-save-settings">
             حفظ وإغلاق
-        </button>
-    </div>
-</div>
-
-<div id="developers-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-3 z-50">
-    <div class="w-full max-w-sm glass-panel rounded-2xl p-5 border-2 border-palette-mauve/50 shadow-2xl relative space-y-3 text-center">
-        <div class="flex justify-between items-center pb-2.5 border-b border-palette-mauve/20">
-            <h3 class="text-sm sm:text-base font-bold gold-gradient-text flex items-center gap-1.5">
-                <i class="fa-solid fa-code text-palette-mauve"></i>
-                <span>المطورون والداعمون</span>
-            </h3>
-            <button onclick="playClickSound(); closeModal('developers-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
-                <i class="fa-solid fa-xmark text-xs"></i>
-            </button>
-        </div>
-        <div class="space-y-2 py-1">
-            <div class="p-3 rounded-xl bg-black/50 border border-palette-mauve/30 space-y-0.5 shadow-inner text-right">
-                <span class="text-[11px] text-palette-light font-bold block"><i class="fa-solid fa-laptop-code ml-1 text-palette-mauve"></i>مطورة التطبيق</span>
-                <h4 class="text-base font-black gold-gradient-text">Zainab Ali</h4>
-                <p class="text-[10px] opacity-80">التطوير البرمجي وهندسة واجهات المستخدم</p>
-            </div>
-            <div class="p-3 rounded-xl bg-black/50 border border-palette-mauve/30 space-y-0.5 shadow-inner text-right">
-                <span class="text-[11px] text-palette-light font-bold block"><i class="fa-solid fa-hand-holding-heart ml-1 text-palette-mauve"></i>الداعمون</span>
-                <h4 class="text-base font-black gold-gradient-text">احمد العامري</h4>
-                <p class="text-[10px] opacity-80">الدعم الفني والرعاية المستمرة للتطبيق</p>
-            </div>
-        </div>
-        <button onclick="playClickSound(); closeModal('developers-modal')" class="w-full py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs hover:bg-palette-light transition-all shadow-lg cursor-pointer">
-            إغلاق النافذة
         </button>
     </div>
 </div>
@@ -397,7 +367,7 @@ html.light, body.light {
                     <i class="fa-solid fa-mosque"></i>
                 </div>
                 <div>
-                    <h3 class="text-sm sm:text-base font-bold text-palette-light">مواقيت الصلاة الفلكية الدقيقة</h3>
+                    <h3 class="text-sm sm:text-base font-bold text-palette-light" id="prayer-modal-title">مواقيت الصلاة الفلكية الدقيقة</h3>
                     <p id="current-location-subtitle" class="text-[9px] text-palette-light/80">الموقع المعتمد: العراق - القادسية (الديوانية)</p>
                 </div>
             </div>
@@ -408,7 +378,7 @@ html.light, body.light {
 
         <div class="p-2.5 rounded-xl bg-gradient-to-r from-palette-purple/20 via-slate-900/90 to-palette-purple/20 border border-palette-mauve/50 mb-2 flex items-center justify-between shadow-lg">
             <div class="text-right space-y-0.5">
-                <span class="text-[9px] text-palette-mauve font-bold block"><i class="fa-regular fa-clock ml-1"></i>التوقيت المحلي الفعلي</span>
+                <span class="text-[9px] text-palette-mauve font-bold block" id="lbl-live-clock"><i class="fa-regular fa-clock ml-1"></i>التوقيت المحلي الفعلي</span>
                 <div id="live-current-clock" class="font-mono text-sm sm:text-base font-black text-white tracking-wider">--:--:--</div>
             </div>
             <div class="h-6 w-[1px] bg-palette-mauve/30"></div>
@@ -420,29 +390,29 @@ html.light, body.light {
 
         <div class="grid grid-cols-2 gap-2 mb-2">
             <button style="display:none" onclick="playClickSound(); toggleWheel('country')" class="py-1.5 px-2 rounded-xl bg-palette-purple/20 border border-palette-mauve/40 text-palette-light text-xs font-bold flex items-center justify-between shadow-sm cursor-pointer">
-                <span><i class="fa-solid fa-globe ml-1"></i> الدولة</span>
+                <span><i class="fa-solid fa-globe ml-1"></i> <span id="lbl-country">الدولة</span></span>
                 <i id="country-toggle-icon" class="fa-solid fa-chevron-down"></i>
             </button>
             <button onclick="playClickSound(); toggleWheel('city')" class="col-span-2 py-1.5 px-2 rounded-xl bg-palette-purple/20 border border-palette-mauve/40 text-palette-light text-xs font-bold flex items-center justify-between shadow-sm cursor-pointer">
-                <span><i class="fa-solid fa-location-dot ml-1"></i> تغيير المحافظة</span>
+                <span><i class="fa-solid fa-location-dot ml-1"></i> <span id="lbl-change-city">تغيير المحافظة</span></span>
                 <i id="city-toggle-icon" class="fa-solid fa-chevron-down"></i>
             </button>
         </div>
 
         <div class="bg-palette-purple/10 border border-palette-mauve/30 rounded-xl p-1.5 text-center text-[10px] text-palette-light font-bold mb-2 flex items-center justify-center gap-2">
             <i class="fa-solid fa-location-crosshairs text-palette-mauve"></i>
-            <span>الدولة: <span id="selected-display-country" class="text-white underline">العراق</span></span>
+            <span><span id="lbl-country-tag">الدولة</span>: <span id="selected-display-country" class="text-white underline">العراق</span></span>
             <span>•</span>
-            <span>المدينة: <span id="selected-display-city" class="text-white underline">القادسية (الديوانية)</span></span>
+            <span><span id="lbl-city-tag">المدينة</span>: <span id="selected-display-city" class="text-white underline">القادسية (الديوانية)</span></span>
         </div>
 
         <div id="country-wheel-box" class="hidden mb-2 bg-slate-950/95 p-2 rounded-xl border border-palette-mauve/40 shadow-inner">
-            <span class="block text-[10px] font-bold text-palette-light mb-1 text-center">اختر الدولة:</span>
+            <span class="block text-[10px] font-bold text-palette-light mb-1 text-center" id="lbl-select-country">اختر الدولة:</span>
             <div id="country-wheel" class="h-32 overflow-y-auto space-y-1 pr-1 custom-wheel"></div>
         </div>
 
         <div id="city-wheel-box" class="hidden mb-2 bg-slate-950/95 p-2 rounded-xl border border-palette-mauve/40 shadow-inner">
-            <span class="block text-[10px] font-bold text-palette-light mb-1 text-center">اختر المحافظة:</span>
+            <span class="block text-[10px] font-bold text-palette-light mb-1 text-center" id="lbl-select-city">اختر المحافظة:</span>
             <div id="city-wheel" class="h-32 overflow-y-auto space-y-1 pr-1 custom-wheel"></div>
         </div>
 
@@ -450,7 +420,7 @@ html.light, body.light {
 
         <button id="dynamic-save-btn" onclick="playClickSound(); savePrayerChanges()" class="hidden w-full mt-2 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-extrabold text-xs shadow-lg hover:bg-palette-light transition-all items-center justify-center gap-1.5 cursor-pointer">
             <i class="fa-solid fa-check-double"></i>
-            <span>حفظ التغييرات واعتماد الموقع</span>
+            <span id="btn-save-location">حفظ التغييرات واعتماد الموقع</span>
         </button>
     </div>
 </div>
@@ -460,7 +430,7 @@ html.light, body.light {
         <div class="flex justify-between items-center mb-2 pb-2 border-b border-palette-mauve/30">
             <h3 class="text-base sm:text-lg font-bold text-palette-light flex items-center gap-1.5">
                 <i class="fa-solid fa-headphones-simple text-palette-mauve text-xl"></i>
-                <span>تلاوات القرآن الكريم</span>
+                <span id="quran-modal-title">تلاوات القرآن الكريم</span>
             </h3>
             <div class="flex items-center gap-1.5">
                 <button onclick="playClickSound(); toggleQuranBackgroundPlay()" id="quran-bg-btn" class="px-2.5 py-1 rounded-xl bg-palette-mauve/20 border border-palette-mauve/40 text-palette-light text-[11px] font-bold flex items-center gap-1 cursor-pointer">
@@ -473,14 +443,14 @@ html.light, body.light {
             </div>
         </div>
 
-        <div class="text-[11px] text-palette-light mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
+        <div id="quran-modal-subtitle" class="text-[11px] text-palette-light mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
             أضف تلاواتك المفضلة واستمع إليها:
         </div>
 
         <div class="p-2.5 rounded-xl bg-black/40 border border-palette-mauve/40 space-y-2 mb-2">
             <input id="rc-n" placeholder="اسم التلاوة" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-palette-mauve/40 text-white outline-none">
             <input id="rc-u" dir="ltr" placeholder="رابط مباشر للتلاوة (mp3)" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-palette-mauve/40 text-white outline-none">
-            <button id="rc-s" onclick="addCustomRecitation()" class="w-full py-2 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs"><i class="fa-solid fa-floppy-disk ml-1"></i>حفظ التلاوة</button>
+            <button id="rc-s" onclick="addCustomRecitation()" class="w-full py-2 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs"><i class="fa-solid fa-floppy-disk ml-1"></i><span id="btn-save-rec">حفظ التلاوة</span></button>
         </div>
 
         <div id="quran-reciters-list" class="overflow-y-auto space-y-2 pr-1 flex-1 text-sm"></div>
@@ -514,7 +484,7 @@ html.light, body.light {
 
         <audio id="quran-audio-element" preload="metadata"></audio>
 
-        <button onclick="playClickSound(); closeModal('quran-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('quran-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-quran-modal">
             إغلاق نافذة التلاوات
         </button>
     </div>
@@ -525,17 +495,17 @@ html.light, body.light {
         <div class="flex justify-between items-center mb-2 pb-2 border-b border-palette-mauve/30">
             <h3 class="text-base sm:text-lg font-bold gold-gradient-text flex items-center gap-1.5">
                 <i class="fa-solid fa-book-quran text-palette-mauve text-xl"></i>
-                <span>أدعية وزيارات أهل البيت (ع) الكاملة</span>
+                <span id="supp-modal-title">أدعية وزيارات أهل البيت (ع) الكاملة</span>
             </h3>
             <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-sm">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-        <div class="text-[11px] text-palette-mauve/90 mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
+        <div id="supp-modal-subtitle" class="text-[11px] text-palette-mauve/90 mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
             <i class="fa-solid fa-hand-pointer ml-1"></i> اضغط على اسم الدعاء لفتح وقراءة النص كاملاً:
         </div>
         <div id="supplications-content" class="overflow-y-auto space-y-2.5 pr-1 flex-1 text-sm"></div>
-        <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-supp-modal">
             إغلاق قائمة الأدعية
         </button>
     </div>
@@ -546,23 +516,23 @@ html.light, body.light {
         <div class="flex justify-between items-center mb-2 pb-2 border-b border-teal-500/30">
             <h3 class="text-base sm:text-lg font-bold text-teal-400 flex items-center gap-1.5">
                 <i class="fa-solid fa-calendar-week text-teal-400 text-xl"></i>
-                <span>أدعية أيام الأسبوع للإمام زين العابدين (ع)</span>
+                <span id="daily-supp-modal-title">أدعية أيام الأسبوع للإمام زين العابدين (ع)</span>
             </h3>
             <button onclick="playClickSound(); closeModal('daily-supplications-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-sm">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
         <div class="grid grid-cols-7 gap-1 mb-2.5">
-            <button onclick="selectDayDua(0)" id="day-btn-0" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20">الأحد</button>
-            <button onclick="selectDayDua(1)" id="day-btn-1" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20">الإثنين</button>
-            <button onclick="selectDayDua(2)" id="day-btn-2" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20">الثلاثاء</button>
-            <button onclick="selectDayDua(3)" id="day-btn-3" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20">الأربعاء</button>
-            <button onclick="selectDayDua(4)" id="day-btn-4" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20">الخميس</button>
-            <button onclick="selectDayDua(5)" id="day-btn-5" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20">الجمعة</button>
-            <button onclick="selectDayDua(6)" id="day-btn-6" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20">السبت</button>
+            <button onclick="selectDayDua(0)" id="day-btn-0" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25">الأحد</button>
+            <button onclick="selectDayDua(1)" id="day-btn-1" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25">الإثنين</button>
+            <button onclick="selectDayDua(2)" id="day-btn-2" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25">الثلاثاء</button>
+            <button onclick="selectDayDua(3)" id="day-btn-3" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25">الأربعاء</button>
+            <button onclick="selectDayDua(4)" id="day-btn-4" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25">الخميس</button>
+            <button onclick="selectDayDua(5)" id="day-btn-5" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25">الجمعة</button>
+            <button onclick="selectDayDua(6)" id="day-btn-6" class="py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25">السبت</button>
         </div>
         <div id="daily-dua-container" class="overflow-y-auto space-y-2.5 pr-1 flex-1 text-sm bg-black/40 rounded-xl p-3 border border-teal-500/30"></div>
-        <button onclick="playClickSound(); closeModal('daily-supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-teal-500 border border-teal-500 text-slate-950 font-bold text-xs shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); closeModal('daily-supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-teal-500 border border-teal-500 text-slate-950 font-bold text-xs shadow-lg cursor-pointer" id="btn-return-home">
             العودة للشاشة الرئيسية
         </button>
     </div>
@@ -572,14 +542,14 @@ html.light, body.light {
     <div class="hijri-dark-modal w-full max-w-md h-full sm:h-[92vh] sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-palette-mauve/40">
         <div class="flex justify-between items-center px-4 pt-4 pb-2.5 bg-[#0B0E1A]">
             <div class="flex items-center gap-2.5">
-                <button onclick="playClickSound(); closeModal('calendar-modal')" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-200 hover:bg-zinc-855 cursor-pointer">
+                <button onclick="playClickSound(); closeModal('calendar-modal')" class="w-7 h-7 rounded-full flex items-center justify-center text-zinc-200 hover:bg-zinc-800 cursor-pointer">
                     <i class="fa-solid fa-arrow-right text-base"></i>
                 </button>
-                <h3 class="text-base font-bold text-white">التقويم الهجري والمناسبات</h3>
+                <h3 class="text-base font-bold text-white" id="calendar-modal-title">التقويم الهجري والمناسبات</h3>
             </div>
             <button onclick="playClickSound(); resetHijriToToday()" class="px-2.5 py-1 rounded-lg bg-palette-purple/20 hover:bg-palette-purple/30 text-[10px] text-emerald-400 font-bold flex items-center gap-1 cursor-pointer border border-palette-mauve/30">
                 <i class="fa-solid fa-arrows-up-down text-[10px]"></i>
-                <span>اليوم</span>
+                <span id="btn-hijri-today">اليوم</span>
             </button>
         </div>
         <div class="flex-1 overflow-y-auto px-3 pb-5 space-y-3">
@@ -596,7 +566,7 @@ html.light, body.light {
                     <i class="fa-solid fa-chevron-left text-xs"></i>
                 </button>
             </div>
-            <div class="grid grid-cols-7 text-center text-[11px] font-bold text-zinc-400 px-1">
+            <div id="calendar-weekdays-grid" class="grid grid-cols-7 text-center text-[11px] font-bold text-zinc-400 px-1">
                 <div>أح</div><div>اث</div><div>ث</div><div>أر</div><div>خ</div><div>ج</div><div>س</div>
             </div>
             <div id="hijri-days-grid" class="grid grid-cols-7 gap-y-2 text-center items-center px-1"></div>
@@ -629,7 +599,7 @@ html.light, body.light {
         <div class="p-3 rounded-xl bg-black/60 border border-palette-mauve/30 text-xs leading-relaxed text-cream-100 font-medium max-h-60 overflow-y-auto select-text text-justify shadow-inner space-y-2">
             <p id="detail-description">الشرح التفصيلي للحدث...</p>
         </div>
-        <button onclick="playClickSound(); closeModal('event-detail-modal')" class="w-full py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg hover:bg-palette-light transition-all cursor-pointer">
+        <button onclick="playClickSound(); closeModal('event-detail-modal')" class="w-full py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg hover:bg-palette-light transition-all cursor-pointer" id="btn-return-calendar">
             العودة للتقويم
         </button>
     </div>
@@ -643,8 +613,8 @@ html.light, body.light {
                     <i class="fa-solid fa-hands-praying"></i>
                 </div>
                 <div>
-                    <h3 class="text-sm sm:text-base font-bold text-accent-blue">روضة الفاتحة لأموات المؤمنين</h3>
-                    <p class="text-[9px] text-cream-100 opacity-80">سجل إهداء ثواب القرآن الكريم للأموات</p>
+                    <h3 class="text-sm sm:text-base font-bold text-accent-blue" id="fatiha-modal-title">روضة الفاتحة لأموات المؤمنين</h3>
+                    <p class="text-[9px] text-cream-100 opacity-80" id="fatiha-modal-sub">سجل إهداء ثواب القرآن الكريم للأموات</p>
                 </div>
             </div>
             <button onclick="playClickSound(); closeModal('fatiha-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30">
@@ -654,31 +624,31 @@ html.light, body.light {
         <div class="p-3 rounded-xl bg-gradient-to-br from-black/60 to-accent-blue/10 border border-accent-blue/30 mb-2.5 space-y-2 shadow-inner">
             <h4 class="font-bold text-accent-blue text-xs flex items-center gap-1.5">
                 <i class="fa-solid fa-user-plus text-xs"></i>
-                <span>إضافة اسم متوفى جديد (ليظهر للجميع):</span>
+                <span id="fatiha-add-label">إضافة اسم متوفى جديد (ليظهر للجميع):</span>
             </h4>
             <div class="space-y-2">
                 <input type="text" id="deceased-input" placeholder="اسم المتوفى (مثال: الحاج رشيد مجيد...)" class="w-full bg-black/60 border border-accent-blue/40 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-accent-blue shadow-sm">
                 
                 <div class="flex items-center gap-4 px-1 py-0.5 text-xs text-cream-100">
-                    <span class="font-bold text-accent-blue text-[11px]">الجنس:</span>
+                    <span class="font-bold text-accent-blue text-[11px]" id="fatiha-gender-lbl">الجنس:</span>
                     <label class="flex items-center gap-1 cursor-pointer text-[11px]">
                         <input type="radio" name="deceased-gender" value="ذكر" checked class="accent-accent-blue">
-                        <span>المرحوم (ذكر)</span>
+                        <span id="fatiha-male-lbl">المرحوم (ذكر)</span>
                     </label>
                     <label class="flex items-center gap-1 cursor-pointer text-[11px]">
                         <input type="radio" name="deceased-gender" value="أنثى" class="accent-accent-blue">
-                        <span>المرحومة (أنثى)</span>
+                        <span id="fatiha-female-lbl">المرحومة (أنثى)</span>
                     </label>
                 </div>
 
                 <button onclick="playClickSound(); addDeceasedCloud()" class="w-full py-2 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/80 transition-all shadow-md flex items-center justify-center gap-1 cursor-pointer">
                     <i class="fa-solid fa-plus text-[10px]"></i>
-                    <span>حفظ وإضافة للسحابة</span>
+                    <span id="fatiha-save-btn">حفظ وإضافة للسحابة</span>
                 </button>
             </div>
         </div>
         <div id="fatiha-list-content" class="overflow-y-auto space-y-2 pr-1 flex-1 text-sm"></div>
-        <button onclick="playClickSound(); closeModal('fatiha-modal')" class="w-full mt-2 py-2.5 rounded-xl bg-accent-blue border border-accent-blue text-white font-bold text-xs shadow-lg">
+        <button onclick="playClickSound(); closeModal('fatiha-modal')" class="w-full mt-2 py-2.5 rounded-xl bg-accent-blue border border-accent-blue text-white font-bold text-xs shadow-lg cursor-pointer" id="btn-close-fatiha-modal">
             إغلاق النافذة
         </button>
     </div>
@@ -686,23 +656,26 @@ html.light, body.light {
 
 <div id="reading-fatiha-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[70]">
     <div class="w-full max-w-md glass-panel rounded-2xl p-5 border-2 border-accent-blue text-center relative shadow-2xl space-y-3">
+        <button onclick="playClickSound(); closeModal('reading-fatiha-modal')" class="absolute top-3 left-3 w-7 h-7 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70">
+            <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
         <div class="w-14 h-14 rounded-full bg-accent-blue/20 border border-accent-blue text-accent-blue flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_#7AA2F7]">
             <i class="fa-solid fa-book-open"></i>
         </div>
         <h3 class="text-sm sm:text-base font-bold text-accent-blue" id="reading-for-name">إهداء ثواب الفاتحة إلى: المرحوم</h3>
         
         <div class="flex items-center justify-center gap-5 text-[11px] text-amber-300 font-bold bg-black/40 py-1.5 rounded-xl border border-accent-blue/20">
-            <span><i class="fa-solid fa-eye ml-1 text-accent-blue"></i>المشاهدات: <span id="modal-views-count" class="font-mono text-white">0</span></span>
-            <span><i class="fa-solid fa-check-double ml-1 text-emerald-400"></i>القراءات: <span id="modal-reads-count" class="font-mono text-white">0</span></span>
+            <span><i class="fa-solid fa-eye ml-1 text-accent-blue"></i><span id="lbl-views">المشاهدات</span>: <span id="modal-views-count" class="font-mono text-white">0</span></span>
+            <span><i class="fa-solid fa-check-double ml-1 text-emerald-400"></i><span id="lbl-reads">القراءات</span>: <span id="modal-reads-count" class="font-mono text-white">0</span></span>
         </div>
 
         <div class="p-3.5 rounded-xl bg-black/50 border border-accent-blue/30 text-accent-blue font-amiri text-base sm:text-lg leading-loose shadow-inner select-text">
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾
-            <div class="pt-2 text-xs font-tajawal text-cream-100 font-bold border-t border-accent-blue/20 mt-2">
+            <div id="fatiha-footer-note" class="pt-2 text-xs font-tajawal text-cream-100 font-bold border-t border-accent-blue/20 mt-2">
                 صدق الله العلي العظيم • تقبل الله هذا الدعاء
             </div>
         </div>
-        <button onclick="playClickSound(); finishReadingFatiha()" class="w-full py-2.5 rounded-xl bg-accent-blue text-white font-bold text-xs shadow-lg hover:bg-accent-blue/80 transition-all cursor-pointer">
+        <button onclick="playClickSound(); finishReadingFatiha()" class="w-full py-2.5 rounded-xl bg-accent-blue text-white font-bold text-xs shadow-lg hover:bg-accent-blue/80 transition-all cursor-pointer" id="btn-finish-fatiha">
             <i class="fa-solid fa-check ml-1"></i> تم قراءة الفاتحة والدعاء له (العودة)
         </button>
     </div>
@@ -748,6 +721,7 @@ function escapeHTML(str) {
 }
 
 function toEasternArabicDigits(num) {
+    if (currentLanguage === 'en') return String(num);
     const arabicNumbers = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
     return String(num).replace(/[0-9]/g, w => arabicNumbers[+w]);
 }
@@ -762,26 +736,14 @@ function dismissSplashScreen() {
 
 function loginAsGuest() {
     playClickSound();
-    localStorage.setItem('adhkar_user_auth', JSON.stringify({ type: 'guest', name: 'ضيف كريم' }));
+    localStorage.setItem('adhkar_user_auth', JSON.stringify({ type: 'guest', name: 'مستخدم اعتيادي' }));
     dismissSplashScreen();
-    showToast("أهلاً بك، تم تسجيل الدخول كـ ضيف");
+    showToast(currentLanguage === 'en' ? "Welcome, Logged in successfully" : "أهلاً بك، تم تسجيل الدخول بنجاح");
 }
 
 function loginWithGooglePlay() {
     playClickSound();
-    const d = document.createElement('div');
-    d.className = 'fixed inset-0 z-[10001] bg-black/80 flex items-center justify-center p-3';
-    d.innerHTML = '<div class="glass-panel rounded-2xl p-5 w-full max-w-xs space-y-3 text-center"><h3 class="font-bold gold-gradient-text text-sm">أدخل بريدك الإلكتروني</h3><input id="em-in" type="email" dir="ltr" placeholder="name@gmail.com" class="w-full rounded-xl px-3 py-2 text-xs bg-black/60 border border-palette-mauve/40 text-white outline-none"><div class="flex gap-2"><button id="em-ok" class="flex-1 py-2 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs">متابعة</button><button id="em-no" class="px-3 rounded-xl bg-white/10 text-xs">إلغاء</button></div></div>';
-    document.body.appendChild(d);
-    document.getElementById('em-no').onclick = () => d.remove();
-    document.getElementById('em-ok').onclick = () => {
-        const e = document.getElementById('em-in').value.trim().toLowerCase();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return showToast('البريد غير صحيح');
-        localStorage.setItem('adhkar_user_auth', JSON.stringify({ type: 'google', name: e, email: e }));
-        d.remove();
-        dismissSplashScreen();
-        showToast('تم تسجيل الدخول');
-    };
+    showToast(currentLanguage === 'en' ? "Not available right now" : "غير متوفر الان");
 }
 
 try {
@@ -795,21 +757,392 @@ try {
 let isButtonSoundOn = true;
 let isNatureSoundOn = false;
 let isQuranBackgroundPlayOn = true;
+let currentLanguage = localStorage.getItem('adhkar_app_lang') || 'ar';
 let webAudioCtx = null;
 let syntheticNatureNode = null;
 let syntheticNatureGain = null;
 let natureIntervalTimer = null;
 
+const i18n = {
+    ar: {
+        appName: "أذكار واستغفار",
+        appDesc: "القرآن الكريم، الأدعية ومواقيت الصلاة",
+        googlePlayLogin: "Google Play الدخول",
+        guestLogin: "تسجيل دخول اعتيادي",
+        prayerTimes: "أوقات الصلاة",
+        dailyDua: "دعاء اليوم",
+        supplications: "الأدعية",
+        quranRecitations: "تلاوات وقراء",
+        calendar: "التقويم",
+        fatiha: "الفاتحة",
+        newDhikr: "ذكر جديد",
+        prev: "السابق",
+        next: "التالي",
+        tapHere: "اضغط هنا",
+        footerCharity: "صدقة جارية",
+        settingsTitle: "الإعدادات والتحكم",
+        appTheme: "مظهر التطبيق",
+        themeLocked: "الوضع الداكن الدائم",
+        appLang: "لغة التطبيق",
+        buttonSounds: "أصوات الأزرار",
+        natureSound: "أصوات الرياح والعصافير",
+        natureDesc: "أجواء هادئة للتسبيح والاسترخاء",
+        mosqueRadar: "رادار المساجد القريبة",
+        mosqueDesc: "أقرب المساجد ضمن 1 كم",
+        instagramTitle: "التواصل مع مالك التطبيق",
+        iraqTag: "تم التطوير والتدقيق الشرعي في العراق",
+        saveClose: "حفظ وإغلاق",
+        enabled: "مفعل",
+        disabled: "معطل",
+        play: "تشغيل",
+        pause: "إيقاف",
+        open: "فتح",
+        closeWindow: "إغلاق النافذة",
+        today: "اليوم",
+        liveClock: "التوقيت المحلي الفعلي",
+        notAvailable: "غير متوفر الان",
+        prayerModalTitle: "مواقيت الصلاة الفلكية الدقيقة",
+        currentLocationSub: "الموقع المعتمد: العراق - القادسية (الديوانية)",
+        country: "الدولة",
+        changeCity: "تغيير المحافظة",
+        city: "المدينة",
+        selectCountry: "اختر الدولة:",
+        selectCity: "اختر المحافظة:",
+        saveLocation: "حفظ التغييرات واعتماد الموقع",
+        quranModalTitle: "تلاوات القرآن الكريم",
+        quranBgEnabled: "الخلفية: مفعلة",
+        quranBgDisabled: "الخلفية: معطلة",
+        quranModalSubtitle: "أضف تلاواتك المفضلة واستمع إليها:",
+        recitationNamePh: "اسم التلاوة",
+        recitationUrlPh: "رابط مباشر للتلاوة (mp3)",
+        saveRecitation: "حفظ التلاوة",
+        closeQuranModal: "إغلاق نافذة التلاوات",
+        nowPlaying: "جاري التشغيل...",
+        blessedRecitation: "تلاوة مباركة",
+        suppModalTitle: "أدعية وزيارات أهل البيت (ع) الكاملة",
+        suppModalSubtitle: "اضغط على اسم الدعاء لفتح وقراءة النص كاملاً:",
+        closeSuppModal: "إغلاق قائمة الأدعية",
+        dailySuppModalTitle: "أدعية أيام الأسبوع للإمام زين العابدين (ع)",
+        returnHome: "العودة للشاشة الرئيسية",
+        calendarModalTitle: "التقويم الهجري والمناسبات",
+        todayEventsHeading: "مناسبات اليوم",
+        monthEventsHeading: "مناسبات الشهر كاملة",
+        returnCalendar: "العودة للتقويم",
+        fatihaModalTitle: "روضة الفاتحة لأموات المؤمنين",
+        fatihaModalSub: "سجل إهداء ثواب القرآن الكريم للأموات",
+        fatihaAddLabel: "إضافة اسم متوفى جديد (ليظهر للجميع):",
+        deceasedInputPh: "اسم المتوفى (مثال: الحاج رشيد مجيد...)",
+        fatihaGenderLbl: "الجنس:",
+        fatihaMaleLbl: "المرحوم (ذكر)",
+        fatihaFemaleLbl: "المرحومة (أنثى)",
+        fatihaSaveBtn: "حفظ وإضافة للسحابة",
+        closeFatihaModal: "إغلاق النافذة",
+        lblViews: "المشاهدات",
+        lblReads: "القراءات",
+        fatihaFooterNote: "صدق الله العلي العظيم • تقبل الله هذا الدعاء",
+        btnFinishFatiha: "تم قراءة الفاتحة والدعاء له (العودة)"
+    },
+    en: {
+        appName: "Adhkar & Supplications",
+        appDesc: "Holy Quran, Supplications & Prayer Times",
+        googlePlayLogin: "Google Play Login",
+        guestLogin: "Standard Login",
+        prayerTimes: "Prayer Times",
+        dailyDua: "Daily Supplication",
+        supplications: "Supplications",
+        quranRecitations: "Quran Recitations",
+        calendar: "Calendar",
+        fatiha: "Al-Fatiha",
+        newDhikr: "New Dhikr",
+        prev: "Previous",
+        next: "Next",
+        tapHere: "Tap Here",
+        footerCharity: "Continuous Charity (Sadaqah Jariyah)",
+        settingsTitle: "Settings & Controls",
+        appTheme: "App Theme",
+        themeLocked: "Permanent Dark Mode",
+        appLang: "App Language",
+        buttonSounds: "Button Sounds",
+        natureSound: "Nature & Wind Sounds",
+        natureDesc: "Calm ambiance for relaxation",
+        mosqueRadar: "Nearby Mosque Radar",
+        mosqueDesc: "Closest mosques within 1 km",
+        instagramTitle: "Contact App Owner on Instagram",
+        iraqTag: "Developed & verified in Iraq",
+        saveClose: "Save & Close",
+        enabled: "Enabled",
+        disabled: "Disabled",
+        play: "Play",
+        pause: "Pause",
+        open: "Open",
+        closeWindow: "Close Window",
+        today: "Today",
+        liveClock: "Local Time",
+        notAvailable: "Not available right now",
+        prayerModalTitle: "Precise Astronomical Prayer Times",
+        currentLocationSub: "Verified Location: Iraq - Qadisiyah (Diwaniyah)",
+        country: "Country",
+        changeCity: "Change Governorate",
+        city: "City",
+        selectCountry: "Select Country:",
+        selectCity: "Select Governorate:",
+        saveLocation: "Save Changes & Set Location",
+        quranModalTitle: "Holy Quran Recitations",
+        quranBgEnabled: "Background: Enabled",
+        quranBgDisabled: "Background: Disabled",
+        quranModalSubtitle: "Add your favorite recitations and listen:",
+        recitationNamePh: "Recitation Name",
+        recitationUrlPh: "Direct audio link (mp3)",
+        saveRecitation: "Save Recitation",
+        closeQuranModal: "Close Recitations Window",
+        nowPlaying: "Now playing...",
+        blessedRecitation: "Blessed Recitation",
+        suppModalTitle: "Complete Supplications & Ziyararat of Ahlulbayt (AS)",
+        suppModalSubtitle: "Click on the supplication name to read full text:",
+        closeSuppModal: "Close Supplications List",
+        dailySuppModalTitle: "Weekly Supplications of Imam Zain Al-Abidin (AS)",
+        returnHome: "Return to Home Screen",
+        calendarModalTitle: "Hijri Calendar & Occasions",
+        todayEventsHeading: "Today's Occasions",
+        monthEventsHeading: "Month Occasions",
+        returnCalendar: "Return to Calendar",
+        fatihaModalTitle: "Al-Fatiha Garden for Deceased Believers",
+        fatihaModalSub: "Register dedicating Quran rewards to the deceased",
+        fatihaAddLabel: "Add new deceased name (to appear for everyone):",
+        deceasedInputPh: "Deceased name (e.g. Haj Rashid Majid...)",
+        fatihaGenderLbl: "Gender:",
+        fatihaMaleLbl: "Deceased (Male)",
+        fatihaFemaleLbl: "Deceased (Female)",
+        fatihaSaveBtn: "Save & Add to Cloud",
+        closeFatihaModal: "Close Window",
+        lblViews: "Views",
+        lblReads: "Reads",
+        fatihaFooterNote: "Truth be told God Almighty • May God accept this prayer",
+        btnFinishFatiha: "Finished reading Al-Fatiha & Prayer (Return)"
+    }
+};
+
+const weeklySupplicationsEn = [
+    { dayName: "Sunday Supplication", text: "In the name of Allah, the All-merciful, the Compassionate. O Allah, I beseech You, O One possessing pardon and contentment, from injustice and hostility, and from the changes of time and successive griefs..." },
+    { dayName: "Monday Supplication", text: "In the name of Allah, the All-merciful, the Compassionate. Praise be to Allah who did not make anyone witness when He created the heavens and the earth, nor took any helper when He created living souls..." },
+    { dayName: "Tuesday Supplication", text: "In the name of Allah, the All-merciful, the Compassionate. Praise be to Allah and praise is His due as He deserves, abundant praise. I seek refuge in Him from the evil of my soul..." },
+    { dayName: "Wednesday Supplication", text: "In the name of Allah, the All-merciful, the Compassionate. Praise be to Allah who made the night a garment, sleep a rest, and made the day for rising..." },
+    { dayName: "Thursday Supplication", text: "In the name of Allah, the All-merciful, the Compassionate. Praise be to Allah who removed the dark night by His power and brought the bright day by His mercy..." },
+    { dayName: "Friday Supplication", text: "In the name of Allah, the All-merciful, the Compassionate. Praise be to Allah the First before creation and revival, and the Last after the annihilation of things..." },
+    { dayName: "Saturday Supplication", text: "In the name of Allah, the All-merciful, the Compassionate. In the name of Allah, the word of those who hold fast, and the speech of those who guard themselves..." }
+];
+
+const ahlulbaytSupplicationsEn = [
+    {
+        id: "kumaill",
+        title: "Dua Kumail ibn Ziyad (Complete)",
+        desc: "Recommended to read on Thursday night for forgiveness of sins and sustenance.",
+        text: "O Allah, I ask You by Your mercy which encompasses all things, and by Your power with which You conquer all things..."
+    },
+    {
+        id: "tawasul",
+        title: "Dua Tawasul through the Pure Imams (AS)",
+        desc: "Narrated for fulfilling needs and relieving distress.",
+        text: "O Allah, I ask You and turn to You through Your Prophet, Prophet of Mercy Muhammad, may Allah bless him and his family..."
+    },
+    {
+        id: "sabah",
+        title: "Morning Supplication by Commander of the Faithful Ali (AS)",
+        desc: "Read every morning for blessing, light, and abundant sustenance.",
+        text: "O Allah, He who hung out the tongue of morning with the speech of its dawning, and scattered the dark night..."
+    },
+    {
+        id: "ahd",
+        title: "Supplication of Al-Ahd",
+        desc: "Renewing allegiance to the awaited Imam Al-Mahdi (AJ) every morning.",
+        text: "O Allah, Lord of the Great Light, and Lord of the Elevated Chair, and Lord of the Surging Sea..."
+    },
+    {
+        id: "nudba",
+        title: "Dua Nudba",
+        desc: "Read on Fridays and Eids to lament the Master of the Age (AJ).",
+        text: "Praise be to Allah, Lord of the Worlds, and blessings upon our master Muhammad, the Prophet and his family..."
+    },
+    {
+        id: "ashura",
+        title: "Famous Ziyarat Ashura",
+        desc: "Ziyarat of the Master of Martyrs Imam Al-Hussein (AS) and his righteous companions.",
+        text: "Peace be upon you, O Abu Abdullah! Peace be upon you, O son of the Messenger of Allah..."
+    },
+    {
+        id: "faraj",
+        title: "Dua Faraj (Illahi Azumal Bala)",
+        desc: "Supplication to remove grief, sorrow, and prompt relief.",
+        text: "O my God, great is the calamity, and manifest has become the hidden, and the covering has been removed..."
+    }
+];
+
+const HIJRI_MONTH_NAMES_EN = ["Muharram", "Safar", "Rabi' al-awwal", "Rabi' al-akhir", "Jumada al-ula", "Jumada al-akhira", "Rajab", "Sha'ban", "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"];
+const ALL_HIJRI_EVENTS_EN = {
+    1: [
+        { day: 1, title: "Islamic New Year", story: "Beginning of the new Hijri year." },
+        { day: 10, title: "Day of Ashura (Martyrdom of Imam Al-Hussein AS)", story: "Commemoration of the martyrdom of Imam Al-Hussein ibn Ali (AS), his pure family and righteous companions in Karbala." }
+    ],
+    3: [
+        { day: 17, title: "Birth of Prophet Muhammad (PBUH) & Imam Al-Sadiq (AS)", story: "Commemoration of the blessed Prophet's birthday and Imam Ja'far al-Sadiq (AS)." }
+    ],
+    5: [
+        { day: 5, title: "Birth of Lady Zainab Al-Kubra (AS)", story: "Birth of the heroine of Karbala and Hashemite Lady Zainab (AS)." },
+        { day: 13, title: "Martyrdom of Lady Fatimah Al-Zahra (AS)", story: "Commemoration of the martyrdom of the pure lady Fatimah al-Zahra (AS)." }
+    ],
+    7: [
+        { day: 13, title: "Birth of Imam Ali ibn Abi Talib (AS)", story: "Commemoration of the birth of Imam Ali (AS) inside the Holy Kaaba." },
+        { day: 27, title: "Al-Mab'ath Al-Sharif", story: "The day Prophet Muhammad (PBUH) was commissioned with the eternal Islamic message." }
+    ],
+    8: [
+        { day: 15, title: "Birth of Imam Al-Mahdi Al-Muntazar (AJ)", story: "Commemoration of the birth of the savior of humanity Imam Al-Hujjah ibn Al-Hasan Al-Askari (AJ)." }
+    ],
+    9: [
+        { day: 15, title: "Birth of Imam Al-Hasan Al-Mujtaba (AS)", story: "Birth of the grandson of the Holy Prophet, Imam Hasan ibn Ali (AS)." },
+        { day: 19, title: "Wounding of Imam Ali ibn Abi Talib (AS)", story: "The night of the strike on Imam Ali (AS) in the Mihrab of Kufa Mosque." },
+        { day: 21, title: "Martyrdom of Imam Ali ibn Abi Talib (AS)", story: "Commemoration of the martyrdom of Imam Ali ibn Abi Talib (AS)." }
+    ],
+    10: [
+        { day: 1, title: "Eid al-Fitr", story: "First day of the blessed Eid al-Fitr after fasting in Ramadan." }
+    ],
+    12: [
+        { day: 10, title: "Eid al-Adha", story: "Blessed Eid al-Adha and the days of the greater Hajj." },
+        { day: 18, title: "Eid al-Ghadir", story: "The greatest Eid of God, the day Imam Ali (AS) was appointed as Imam and successor." }
+    ]
+};
+
+function applyLanguageUI() {
+    const lang = currentLanguage;
+    const t = i18n[lang];
+    document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+    document.documentElement.lang = lang;
+
+    const btnAr = document.getElementById('lang-btn-ar');
+    const btnEn = document.getElementById('lang-btn-en');
+    if (btnAr && btnEn) {
+        if (lang === 'ar') {
+            btnAr.className = "px-3 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer bg-palette-mauve text-palette-darkest shadow-md";
+            btnEn.className = "px-3 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer text-palette-light/80 hover:bg-white/10";
+        } else {
+            btnEn.className = "px-3 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer bg-palette-mauve text-palette-darkest shadow-md";
+            btnAr.className = "px-3 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer text-palette-light/80 hover:bg-white/10";
+        }
+    }
+
+    const setTxt = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = text;
+    };
+
+    setTxt('app-title-splash', t.appName);
+    setTxt('app-desc-splash', t.appDesc);
+    setTxt('btn-google-play', t.googlePlayLogin);
+    setTxt('btn-guest-login', t.guestLogin);
+    setTxt('app-header-title', t.appName);
+    setTxt('btn-prayer-times', t.prayerTimes);
+    setTxt('btn-daily-dua', t.dailyDua);
+    setTxt('btn-supplications', t.supplications);
+    setTxt('btn-quran', t.quranRecitations);
+    setTxt('btn-calendar', t.calendar);
+    setTxt('btn-fatiha', t.fatiha);
+    setTxt('btn-new-dhikr', t.newDhikr);
+    setTxt('btn-prev', t.prev);
+    setTxt('btn-next', t.next);
+    setTxt('tap-hint', t.tapHere);
+    setTxt('footer-app-name', t.appName);
+    setTxt('footer-charity', t.footerCharity);
+
+    setTxt('settings-title', t.settingsTitle);
+    setTxt('lbl-theme', t.appTheme);
+    setTxt('lbl-theme-locked', t.themeLocked);
+    setTxt('lbl-language', t.appLang);
+    setTxt('lbl-sound', t.buttonSounds);
+    setTxt('lbl-nature-sound', t.natureSound);
+    setTxt('lbl-nature-desc', t.natureDesc);
+    setTxt('lbl-mosque-radar', t.mosqueRadar);
+    setTxt('lbl-mosque-desc', t.mosqueDesc);
+    setTxt('lbl-instagram-title', t.instagramTitle);
+    setTxt('lbl-iraq-tag', t.iraqTag);
+    setTxt('btn-save-settings', t.saveClose);
+    setTxt('btn-open-radar', t.open);
+
+    setTxt('prayer-modal-title', t.prayerModalTitle);
+    setTxt('current-location-subtitle', t.currentLocationSub);
+    setTxt('lbl-country', t.country);
+    setTxt('lbl-change-city', t.changeCity);
+    setTxt('lbl-country-tag', t.country);
+    setTxt('lbl-city-tag', t.city);
+    setTxt('lbl-select-country', t.selectCountry);
+    setTxt('lbl-select-city', t.selectCity);
+    setTxt('btn-save-location', t.saveLocation);
+
+    setTxt('quran-modal-title', t.quranModalTitle);
+    setTxt('quran-bg-status-text', isQuranBackgroundPlayOn ? t.quranBgEnabled : t.quranBgDisabled);
+    setTxt('quran-modal-subtitle', t.quranModalSubtitle);
+    const rcN = document.getElementById('rc-n');
+    const rcU = document.getElementById('rc-u');
+    if (rcN) rcN.placeholder = t.recitationNamePh;
+    if (rcU) rcU.placeholder = t.recitationUrlPh;
+    setTxt('btn-save-rec', t.saveRecitation);
+    setTxt('btn-close-quran-modal', t.closeQuranModal);
+
+    setTxt('supp-modal-title', t.suppModalTitle);
+    setTxt('supp-modal-subtitle', t.suppModalSubtitle);
+    setTxt('btn-close-supp-modal', t.closeSuppModal);
+
+    setTxt('daily-supp-modal-title', t.dailySuppModalTitle);
+    setTxt('btn-return-home', t.returnHome);
+
+    setTxt('calendar-modal-title', t.calendarModalTitle);
+    setTxt('btn-hijri-today', t.today);
+    setTxt('selected-day-events-heading', t.todayEventsHeading);
+    setTxt('month-events-heading', t.monthEventsHeading);
+    setTxt('btn-return-calendar', t.returnCalendar);
+
+    setTxt('fatiha-modal-title', t.fatihaModalTitle);
+    setTxt('fatiha-modal-sub', t.fatihaModalSub);
+    setTxt('fatiha-add-label', t.fatihaAddLabel);
+    const decIn = document.getElementById('deceased-input');
+    if (decIn) decIn.placeholder = t.deceasedInputPh;
+    setTxt('fatiha-gender-lbl', t.fatihaGenderLbl);
+    setTxt('fatiha-male-lbl', t.fatihaMaleLbl);
+    setTxt('fatiha-female-lbl', t.fatihaFemaleLbl);
+    setTxt('fatiha-save-btn', t.fatihaSaveBtn);
+    setTxt('btn-close-fatiha-modal', t.closeFatihaModal);
+    setTxt('lbl-views', t.lblViews);
+    setTxt('lbl-reads', t.lblReads);
+    setTxt('fatiha-footer-note', t.fatihaFooterNote);
+    setTxt('btn-finish-fatiha', t.btnFinishFatiha);
+
+    const weekdaysContainer = document.getElementById('calendar-weekdays-grid');
+    if (weekdaysContainer) {
+        if (lang === 'en') {
+            weekdaysContainer.innerHTML = '<div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>';
+        } else {
+            weekdaysContainer.innerHTML = '<div>أح</div><div>اث</div><div>ث</div><div>أر</div><div>خ</div><div>ج</div><div>س</div>';
+        }
+    }
+}
+
+function selectAppLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('adhkar_app_lang', lang);
+    applyLanguageUI();
+    updateUI();
+    showToast(lang === 'en' ? "Language changed successfully" : "تم تغيير اللغة بنجاح");
+}
+
 function toggleQuranBackgroundPlay() {
     playClickSound();
     isQuranBackgroundPlayOn = !isQuranBackgroundPlayOn;
+    const t = i18n[currentLanguage];
     const statusText = document.getElementById('quran-bg-status-text');
     if (isQuranBackgroundPlayOn) {
-        statusText.innerText = "الخلفية: مفعلة";
-        showToast("تم تفعيل عمل التلاوة في الخلفية");
+        statusText.innerText = t.quranBgEnabled;
+        showToast(currentLanguage === 'en' ? "Background playback enabled" : "تم تفعيل عمل التلاوة في الخلفية");
     } else {
-        statusText.innerText = "الخلفية: معطلة";
-        showToast("تم إيقاف عمل التلاوة في الخلفية");
+        statusText.innerText = t.quranBgDisabled;
+        showToast(currentLanguage === 'en' ? "Background playback disabled" : "تم إيقاف عمل التلاوة في الخلفية");
     }
 }
 
@@ -843,6 +1176,7 @@ function playClickSound() {
 function toggleSyntheticNatureSound() {
     playClickSound();
     initWebAudio();
+    const t = i18n[currentLanguage];
     const textEl = document.getElementById('nature-sound-text');
     const iconEl = document.getElementById('nature-icon');
 
@@ -861,9 +1195,9 @@ function toggleSyntheticNatureSound() {
         }, 400);
         if (natureIntervalTimer) { clearInterval(natureIntervalTimer); natureIntervalTimer = null; }
         isNatureSoundOn = false;
-        textEl.innerText = "تشغيل";
+        textEl.innerText = t.play;
         iconEl.className = "fa-solid fa-play";
-        showToast("تم إيقاف أصوات الطبيعة");
+        showToast(currentLanguage === 'en' ? "Nature sounds stopped" : "تم إيقاف أصوات الطبيعة");
     } else {
         const bufferSize = webAudioCtx.sampleRate * 2;
         const noiseBuffer = webAudioCtx.createBuffer(1, bufferSize, webAudioCtx.sampleRate);
@@ -907,9 +1241,9 @@ function toggleSyntheticNatureSound() {
         }, 3500);
 
         isNatureSoundOn = true;
-        textEl.innerText = "إيقاف";
+        textEl.innerText = t.pause;
         iconEl.className = "fa-solid fa-pause";
-        showToast("تم تشغيل أصوات الرياح والعصافير للاسترخاء");
+        showToast(currentLanguage === 'en' ? "Relaxing nature sounds started" : "تم تشغيل أصوات الرياح والعصافير للاسترخاء");
     }
 }
 
@@ -938,28 +1272,30 @@ async function fetchMosques(la, lo) {
 
 function startMosqueSearchProcess() {
     const box = document.querySelector('#qibla-modal>div');
+    const isEn = currentLanguage === 'en';
     box.innerHTML = `
         <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2.5">
-            <h3 class="text-sm sm:text-base font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-location-crosshairs"></i>رادار المساجد القريبة</h3>
+            <h3 class="text-sm sm:text-base font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-location-crosshairs"></i>${isEn ? "Nearby Mosque Radar" : "رادار المساجد القريبة"}</h3>
             <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
         </div>
         <div class="py-5 space-y-3">
             <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_#4ADE80] animate-pulse">
                 <i class="fa-solid fa-location-arrow"></i>
             </div>
-            <p class="text-xs text-emerald-200 leading-relaxed font-bold">يتطلب الرادار تفعيل خيار تحديد الموقع (GPS) للبحث عن أقرب المساجد من حولك بدقة عالية.</p>
+            <p class="text-xs text-emerald-200 leading-relaxed font-bold">${isEn ? "The radar requires enabling GPS location to search for nearby mosques with high accuracy." : "يتطلب الرادار تفعيل خيار تحديد الموقع (GPS) للبحث عن أقرب المساجد من حولك بدقة عالية."}</p>
             <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs shadow-lg hover:bg-emerald-400 transition-all cursor-pointer">
-                السماح بالبحث وتحديد الموقع
+                ${isEn ? "Allow Location & Search" : "السماح بالبحث وتحديد الموقع"}
             </button>
         </div>
     `;
 }
 
 function requestLocationAndSearch() {
+    const isEn = currentLanguage === 'en';
     const box = document.querySelector('#qibla-modal>div');
     box.innerHTML = `
         <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2">
-            <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>جاري المسح الفضائي بالرادار...</h3>
+            <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>${isEn ? "Scanning with radar..." : "جاري المسح الفضائي بالرادار..."}</h3>
             <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
         </div>
         <div class="py-3">
@@ -968,12 +1304,12 @@ function requestLocationAndSearch() {
                 <div class="rd-wave"></div>
                 <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#7AA2F7;box-shadow:0 0 10px #7AA2F7;"></s>
             </div>
-            <p id="rd-status-text" class="mt-2.5 text-[11px] text-emerald-300 font-bold animate-pulse">جاري فحص الإحداثيات والبحث ضمن نطاق 2.5 كم...</p>
+            <p id="rd-status-text" class="mt-2.5 text-[11px] text-emerald-300 font-bold animate-pulse">${isEn ? "Scanning coordinates within 2.5 km..." : "جاري فحص الإحداثيات والبحث ضمن نطاق 2.5 كم..."}</p>
         </div>
     `;
 
     if (!navigator.geolocation) { 
-        document.getElementById('rd-status-text').innerText = 'الجهاز لا يدعم خدمة GPS'; 
+        document.getElementById('rd-status-text').innerText = isEn ? 'Device does not support GPS' : 'الجهاز لا يدعم خدمة GPS'; 
         return; 
     }
 
@@ -983,10 +1319,10 @@ function requestLocationAndSearch() {
             let rawMosques = await fetchMosques(la, lo);
             if (!rawMosques || rawMosques.length === 0) {
                 rawMosques = [
-                    { tags: { name: "مسجد الحي الكبير" }, lat: la + 0.004, lon: lo + 0.003 },
-                    { tags: { name: "جامع الرحمن الرحيم" }, lat: la - 0.005, lon: lo + 0.002 },
-                    { tags: { name: "مسجد الإمام علي (ع)" }, lat: la + 0.002, lon: lo - 0.006 },
-                    { tags: { name: "جامع التقوى والهدى" }, lat: la - 0.003, lon: lo - 0.004 }
+                    { tags: { name: isEn ? "Grand District Mosque" : "مسجد الحي الكبير" }, lat: la + 0.004, lon: lo + 0.003 },
+                    { tags: { name: isEn ? "Al-Rahman Al-Rahim Mosque" : "جامع الرحمن الرحيم" }, lat: la - 0.005, lon: lo + 0.002 },
+                    { tags: { name: isEn ? "Imam Ali Mosque (AS)" : "مسجد الإمام علي (ع)" }, lat: la + 0.002, lon: lo - 0.006 },
+                    { tags: { name: isEn ? "Al-Taqwa Mosque" : "جامع التقوى والهدى" }, lat: la - 0.003, lon: lo - 0.004 }
                 ];
             }
 
@@ -994,12 +1330,12 @@ function requestLocationAndSearch() {
                 const y = e.lat != null ? e.lat : (e.center && e.center.lat);
                 const x = e.lon != null ? e.lon : (e.center && e.center.lon);
                 if (y == null) return null;
-                return Object.assign({ n: (e.tags && (e.tags['name:ar'] || e.tags.name)) || 'مسجد مبارك', y, x }, geo(la, lo, y, x));
+                return Object.assign({ n: (e.tags && (e.tags['name:ar'] || e.tags.name)) || (isEn ? 'Blessed Mosque' : 'مسجد مبارك'), y, x }, geo(la, lo, y, x));
             }).filter(m => m && m.dist <= 3000).sort((a, b) => a.dist - b.dist).slice(0, 15);
 
             box.innerHTML = `
                 <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2">
-                    <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>المساجد المكتشفة (${toEasternArabicDigits(L.length)})</h3>
+                    <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>${isEn ? `Discovered Mosques (${L.length})` : `المساجد المكتشفة (${toEasternArabicDigits(L.length)})`}</h3>
                     <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
                 </div>
                 <div class="rd-container my-1.5">
@@ -1007,17 +1343,17 @@ function requestLocationAndSearch() {
                     <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#7AA2F7;box-shadow:0 0 10px #7AA2F7;"></s>
                     ${L.map(m => `<b style="position:absolute;width:8px;height:8px;margin:-4px;border-radius:50%;background:#4ADE80;box-shadow:0 0 6px #4ADE80;left:${50 + Math.sin(m.brg) * Math.min(m.dist, 900) / 22}%;top:${50 - Math.cos(m.brg) * Math.min(m.dist, 900) / 22}%"></b>`).join('')}
                 </div>
-                <p class="text-[9px] text-emerald-300/80">الشمال للأعلى • المسافات والاتجاهات حقيقية دقيقة</p>
+                <p class="text-[9px] text-emerald-300/80">${isEn ? "North is up • Accurate distances & directions" : "الشمال للأعلى • المسافات والاتجاهات حقيقية دقيقة"}</p>
                 <div class="mt-1.5 space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                    ${L.map(m => `<a target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" class="flex justify-between items-center px-3 py-1.5 rounded-xl bg-black/50 border border-emerald-400/30 text-xs hover:border-emerald-400 transition-all"><span class="text-white font-bold truncate max-w-[160px] text-right">${escapeHTML(m.n)}</span><span class="font-mono text-palette-mauve font-bold">${toEasternArabicDigits(Math.round(m.dist))} م</span></a>`).join('')}
+                    ${L.map(m => `<a target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" class="flex justify-between items-center px-3 py-1.5 rounded-xl bg-black/50 border border-emerald-400/30 text-xs hover:border-emerald-400 transition-all"><span class="text-white font-bold truncate max-w-[160px] text-right">${escapeHTML(m.n)}</span><span class="font-mono text-palette-mauve font-bold">${toEasternArabicDigits(Math.round(m.dist))} ${isEn ? 'm' : 'م'}</span></a>`).join('')}
                 </div>
-                <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full mt-2 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">تحديث الرادار</button>
+                <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full mt-2 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">${isEn ? "Refresh Radar" : "تحديث الرادار"}</button>
             `;
         } catch (e) {
-            document.getElementById('rd-status-text').innerText = 'حدث خطأ بشبكة الاتصال، حاول مجدداً';
+            document.getElementById('rd-status-text').innerText = isEn ? 'Network error, please try again' : 'حدث خطأ بشبكة الاتصال، حاول مجدداً';
         }
     }, () => { 
-        document.getElementById('rd-status-text').innerText = 'تعذر الوصول للموقع، يرجى تفعيل الـ GPS في جهازك.'; 
+        document.getElementById('rd-status-text').innerText = isEn ? 'Could not access location, please enable GPS.' : 'تعذر الوصول للموقع، يرجى تفعيل الـ GPS في جهازك.'; 
     }, { enableHighAccuracy: true, timeout: 15000 });
 }
 
@@ -1066,7 +1402,8 @@ let prayerLiveInterval = null;
 function initPrayerTimesInterface() {
     tempCountry = activeCountry;
     tempCity = activeCity;
-    document.getElementById('current-location-subtitle').innerText = `الموقع المعتمد: ${activeCountry} - ${activeCity}`;
+    const isEn = currentLanguage === 'en';
+    document.getElementById('current-location-subtitle').innerText = isEn ? `Verified Location: ${activeCountry} - ${activeCity}` : `الموقع المعتمد: ${activeCountry} - ${activeCity}`;
     updateDisplayLabels();
     renderCountryWheel();
     renderCityWheel();
@@ -1113,8 +1450,9 @@ function updateLivePrayerClockAndCountdown() {
     const countdownEl = document.getElementById('next-prayer-countdown');
     if (!clockEl) return;
 
+    const isEn = currentLanguage === 'en';
     const { h, m, s } = getCityCurrentTimeParts();
-    const period = h >= 12 ? 'م' : 'ص';
+    const period = h >= 12 ? (isEn ? 'PM' : 'م') : (isEn ? 'AM' : 'ص');
     const h12 = h % 12 === 0 ? 12 : h % 12;
     clockEl.innerText = `${String(h12).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} ${period}`;
 
@@ -1122,13 +1460,13 @@ function updateLivePrayerClockAndCountdown() {
 
     const nowSeconds = h * 3600 + m * 60 + s;
     const schedule = [
-        { key: 'Fajr', name: 'الفجر', sec: parse24HourToSeconds(currentRawPrayerTimings.Fajr), idx: 0 },
-        { key: 'Sunrise', name: 'الشروق', sec: parse24HourToSeconds(currentRawPrayerTimings.Sunrise), idx: 1 },
-        { key: 'Dhuhr', name: 'الظهر', sec: parse24HourToSeconds(currentRawPrayerTimings.Dhuhr), idx: 2 },
-        { key: 'Asr', name: 'العصر', sec: parse24HourToSeconds(currentRawPrayerTimings.Asr), idx: 3 },
-        { key: 'Maghrib', name: 'المغرب', sec: parse24HourToSeconds(currentRawPrayerTimings.Maghrib), idx: 4 },
-        { key: 'Isha', name: 'العشاء', sec: parse24HourToSeconds(currentRawPrayerTimings.Isha), idx: 5 },
-        { key: 'Midnight', name: 'منتصف الليل', sec: parse24HourToSeconds(currentRawPrayerTimings.Midnight), idx: 6 }
+        { key: 'Fajr', name: isEn ? 'Fajr' : 'الفجر', sec: parse24HourToSeconds(currentRawPrayerTimings.Fajr), idx: 0 },
+        { key: 'Sunrise', name: isEn ? 'Sunrise' : 'الشروق', sec: parse24HourToSeconds(currentRawPrayerTimings.Sunrise), idx: 1 },
+        { key: 'Dhuhr', name: isEn ? 'Dhuhr' : 'الظهر', sec: parse24HourToSeconds(currentRawPrayerTimings.Dhuhr), idx: 2 },
+        { key: 'Asr', name: isEn ? 'Asr' : 'العصر', sec: parse24HourToSeconds(currentRawPrayerTimings.Asr), idx: 3 },
+        { key: 'Maghrib', name: isEn ? 'Maghrib' : 'المغرب', sec: parse24HourToSeconds(currentRawPrayerTimings.Maghrib), idx: 4 },
+        { key: 'Isha', name: isEn ? 'Isha' : 'العشاء', sec: parse24HourToSeconds(currentRawPrayerTimings.Isha), idx: 5 },
+        { key: 'Midnight', name: isEn ? 'Midnight' : 'منتصف الليل', sec: parse24HourToSeconds(currentRawPrayerTimings.Midnight), idx: 6 }
     ];
 
     schedule.forEach(item => {
@@ -1150,7 +1488,7 @@ function updateLivePrayerClockAndCountdown() {
     const remM = Math.floor((diffSeconds % 3600) / 60);
     const remS = diffSeconds % 60;
 
-    labelEl.innerText = `متبقي لصلاة ${nextPrayer.name}`;
+    labelEl.innerText = isEn ? `Time until ${nextPrayer.name}` : `متبقي لصلاة ${nextPrayer.name}`;
     countdownEl.innerText = `${String(remH).padStart(2, '0')}:${String(remM).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
 
     for (let i = 0; i < 7; i++) {
@@ -1284,10 +1622,11 @@ function savePrayerChanges() {
     try {
         localStorage.setItem('adhkar_location', JSON.stringify({ country: activeCountry, city: activeCity }));
     } catch (e) {}
-    document.getElementById('current-location-subtitle').innerText = `الموقع المعتمد: ${activeCountry} - ${activeCity}`;
+    const isEn = currentLanguage === 'en';
+    document.getElementById('current-location-subtitle').innerText = isEn ? `Verified Location: ${activeCountry} - ${activeCity}` : `الموقع المعتمد: ${activeCountry} - ${activeCity}`;
     fetchPrecisePrayerTimes();
     hideSaveButton();
-    showToast(`تم تحديث واعتماد مواقيت (${activeCity} - ${activeCountry})`);
+    showToast(isEn ? `Updated location to (${activeCity} - ${activeCountry})` : `تم تحديث واعتماد مواقيت (${activeCity} - ${activeCountry})`);
 }
 
 function handlePrayerCardClick(cardElement) {
@@ -1303,9 +1642,9 @@ function format12Hour(time24) {
     let parts = cleanTime.split(':');
     let h = parseInt(parts[0], 10);
     let m = parts[1] ? parts[1].substring(0, 2) : "00";
-    let period = "ص";
+    let period = currentLanguage === 'en' ? "AM" : "ص";
     if (h >= 12) {
-        period = "م";
+        period = currentLanguage === 'en' ? "PM" : "م";
         if (h > 12) h -= 12;
     }
     if (h === 0) h = 12;
@@ -1316,15 +1655,16 @@ function format12Hour(time24) {
 function renderPrayerCardsUI(timings) {
     currentRawPrayerTimings = timings;
     const displayContainer = document.getElementById('prayer-times-display');
+    const isEn = currentLanguage === 'en';
 
     const prayers = [
-        { name: "الفجر", time: format12Hour(timings.Fajr), desc: "وقت الإمساك وبداية الصلاة", icon: "fa-cloud-moon", bgGradient: "from-slate-900 via-[#2C1B2F] to-blue-950", borderCol: "border-blue-500/40", textCol: "text-blue-300" },
-        { name: "الشروق", time: format12Hour(timings.Sunrise), desc: "طلوع الشمس ونهاية وقت الفجر", icon: "fa-sun", bgGradient: "from-sky-900 via-[#5E3A5C] to-slate-900", borderCol: "border-palette-mauve/40", textCol: "text-palette-light" },
-        { name: "الظهر", time: format12Hour(timings.Dhuhr), desc: "زوال الشمس والنداء الأكبر", icon: "fa-sun", bgGradient: "from-[#2C1B2F] via-slate-900 to-indigo-950", borderCol: "border-yellow-500/40", textCol: "text-yellow-300" },
-        { name: "العصر", time: format12Hour(timings.Asr), desc: "الصلاة الوسطى المباركة", icon: "fa-cloud-sun", bgGradient: "from-[#5E3A5C]/40 via-slate-900 to-[#2C1B2F]", borderCol: "border-orange-400/40", textCol: "text-orange-300" },
-        { name: "المغرب", time: format12Hour(timings.Maghrib), desc: "وقت الإفطار ومغيب الشفق الشرعي", icon: "fa-moon", bgGradient: "from-rose-950 via-[#2C1B2F] to-slate-900", borderCol: "border-rose-500/40", textCol: "text-rose-300" },
-        { name: "العشاء", time: format12Hour(timings.Isha), desc: "تمام الصلوات المفروضة", icon: "fa-star", bgGradient: "from-indigo-950 via-slate-900 to-[#5E3A5C]", borderCol: "border-indigo-400/40", textCol: "text-indigo-300" },
-        { name: "منتصف الليل الشرعي", time: format12Hour(timings.Midnight), desc: "نهاية وقت العشاء ووقت صلاة الليل", icon: "fa-star-and-crescent", bgGradient: "from-indigo-950 via-[#0B0E1A] to-black", borderCol: "border-palette-mauve/50", textCol: "text-palette-light" }
+        { name: isEn ? "Fajr" : "الفجر", time: format12Hour(timings.Fajr), desc: isEn ? "Imsak & Prayer Start" : "وقت الإمساك وبداية الصلاة", icon: "fa-cloud-moon", bgGradient: "from-slate-900 via-[#2C1B2F] to-blue-950", borderCol: "border-blue-500/40", textCol: "text-blue-300" },
+        { name: isEn ? "Sunrise" : "الشروق", time: format12Hour(timings.Sunrise), desc: isEn ? "Sunrise & Fajr End" : "طلوع الشمس ونهاية وقت الفجر", icon: "fa-sun", bgGradient: "from-sky-900 via-[#5E3A5C] to-slate-900", borderCol: "border-palette-mauve/40", textCol: "text-palette-light" },
+        { name: isEn ? "Dhuhr" : "الظهر", time: format12Hour(timings.Dhuhr), desc: isEn ? "Zawal & Call to Prayer" : "زوال الشمس والنداء الأكبر", icon: "fa-sun", bgGradient: "from-[#2C1B2F] via-slate-900 to-indigo-950", borderCol: "border-yellow-500/40", textCol: "text-yellow-300" },
+        { name: isEn ? "Asr" : "العصر", time: format12Hour(timings.Asr), desc: isEn ? "Blessed Middle Prayer" : "الصلاة الوسطى المباركة", icon: "fa-cloud-sun", bgGradient: "from-[#5E3A5C]/40 via-slate-900 to-[#2C1B2F]", borderCol: "border-orange-400/40", textCol: "text-orange-300" },
+        { name: isEn ? "Maghrib" : "المغرب", time: format12Hour(timings.Maghrib), desc: isEn ? "Sunset & Iftar Time" : "وقت الإفطار ومغيب الشفق الشرعي", icon: "fa-moon", bgGradient: "from-rose-950 via-[#2C1B2F] to-slate-900", borderCol: "border-rose-500/40", textCol: "text-rose-300" },
+        { name: isEn ? "Isha" : "العشاء", time: format12Hour(timings.Isha), desc: isEn ? "Night Obligatory Prayer" : "تمام الصلوات المفروضة", icon: "fa-star", bgGradient: "from-indigo-950 via-slate-900 to-[#5E3A5C]", borderCol: "border-indigo-400/40", textCol: "text-indigo-300" },
+        { name: isEn ? "Islamic Midnight" : "منتصف الليل الشرعي", time: format12Hour(timings.Midnight), desc: isEn ? "End of Isha & Night Prayer time" : "نهاية وقت العشاء ووقت صلاة الليل", icon: "fa-star-and-crescent", bgGradient: "from-indigo-950 via-[#0B0E1A] to-black", borderCol: "border-palette-mauve/50", textCol: "text-palette-light" }
     ];
 
     let html = '';
@@ -1338,7 +1678,7 @@ function renderPrayerCardsUI(timings) {
                     <div class="space-y-0.5 text-right">
                         <div class="flex items-center gap-1">
                             <h4 class="font-bold text-xs text-palette-light">${p.name}</h4>
-                            <span id="prayer-badge-${idx}" class="hidden text-[8px] bg-palette-mauve text-palette-darkest px-1.5 py-0.2 rounded-full font-black animate-pulse">القادمة</span>
+                            <span id="prayer-badge-${idx}" class="hidden text-[8px] bg-palette-mauve text-palette-darkest px-1.5 py-0.2 rounded-full font-black animate-pulse">${currentLanguage === 'en' ? 'Next' : 'القادمة'}</span>
                         </div>
                         <p class="text-[9px] text-palette-light/70 font-medium">${p.desc}</p>
                     </div>
@@ -1356,10 +1696,11 @@ function renderPrayerCardsUI(timings) {
 
 async function fetchPrecisePrayerTimes() {
     const displayContainer = document.getElementById('prayer-times-display');
+    const isEn = currentLanguage === 'en';
     displayContainer.innerHTML = `
         <div class="p-5 text-center text-palette-light text-xs font-bold space-y-2">
             <i class="fa-solid fa-spinner fa-spin text-base"></i>
-            <p>جاري ضبط أوقات الصلاة لـ (${activeCity})...</p>
+            <p>${isEn ? `Fetching prayer times for (${activeCity})...` : `جاري ضبط أوقات الصلاة لـ (${activeCity})...`}</p>
         </div>
     `;
 
@@ -1414,9 +1755,10 @@ let activeQuranIndex = -1;
 
 function loadQuranRecitersList() {
     const container = document.getElementById('quran-reciters-list');
+    const isEn = currentLanguage === 'en';
 
     if (quranRecitersData.length === 0) {
-        container.innerHTML = `<div class="text-center text-xs text-palette-light/80 py-6">لا توجد تلاوات مضافة.</div>`;
+        container.innerHTML = `<div class="text-center text-xs text-palette-light/80 py-6">${isEn ? 'No recitations added.' : 'لا توجد تلاوات مضافة.'}</div>`;
         return;
     }
     container.innerHTML = quranRecitersData.map((r, i) => {
@@ -1436,28 +1778,29 @@ function loadQuranRecitersList() {
 
 function addCustomRecitation() {
     playClickSound();
+    const isEn = currentLanguage === 'en';
     const nameEl = document.getElementById('rc-n');
     const urlEl = document.getElementById('rc-u');
     const btn = document.getElementById('rc-s');
     const n = nameEl.value.trim(), u = urlEl.value.trim();
-    if (!n) return showToast('اكتب اسم التلاوة');
-    if (!/^https?:\/\/\S+$/i.test(u)) return showToast('الرابط غير صحيح');
+    if (!n) return showToast(isEn ? 'Enter recitation name' : 'اكتب اسم التلاوة');
+    if (!/^https?:\/\/\S+$/i.test(u)) return showToast(isEn ? 'Invalid URL' : 'الرابط غير صحيح');
     const a = new Audio();
     let done = false;
     btn.disabled = true;
-    showToast('جاري فحص الرابط...');
+    showToast(isEn ? 'Checking link...' : 'جاري فحص الرابط...');
     const fin = ok => {
         if (done) return;
         done = true;
         btn.disabled = false;
         a.removeAttribute('src');
-        if (!ok) return showToast('الرابط لا يعمل كملف صوتي');
-        quranRecitersData.push({ name: n, audioUrl: u, desc: 'تلاوة مضافة', custom: true });
+        if (!ok) return showToast(isEn ? 'Link does not work as audio' : 'الرابط لا يعمل كملف صوتي');
+        quranRecitersData.push({ name: n, audioUrl: u, desc: isEn ? 'Custom Recitation' : 'تلاوة مضافة', custom: true });
         saveCustomRecitation();
         nameEl.value = '';
         urlEl.value = '';
         loadQuranRecitersList();
-        showToast('تم حفظ التلاوة');
+        showToast(isEn ? 'Recitation saved' : 'تم حفظ التلاوة');
     };
     a.onloadedmetadata = () => fin(true);
     a.onerror = () => fin(false);
@@ -1467,14 +1810,15 @@ function addCustomRecitation() {
 function saveCustomRecitation() { saveCustomRecitations(); }
 
 function deleteCustomRecitation(i) {
-    if (!confirm('حذف هذه التلاوة؟')) return;
+    const isEn = currentLanguage === 'en';
+    if (!confirm(isEn ? 'Delete this recitation?' : 'حذف هذه التلاوة؟')) return;
     playClickSound();
     if (activeQuranIndex === i) stopQuranAudio();
     else if (activeQuranIndex > i) activeQuranIndex--;
     quranRecitersData.splice(i, 1);
     saveCustomRecitations();
     loadQuranRecitersList();
-    showToast('تم الحذف');
+    showToast(isEn ? 'Deleted' : 'تم الحذف');
 }
 
 function formatAudioSeconds(sec) {
@@ -1488,6 +1832,7 @@ function playQuranReciterByIndex(index) {
     const reciter = quranRecitersData[index];
     if (!reciter) return;
     activeQuranIndex = index;
+    const isEn = currentLanguage === 'en';
 
     const audioEl = document.getElementById('quran-audio-element');
     const playerBar = document.getElementById('quran-player-bar');
@@ -1499,7 +1844,7 @@ function playQuranReciterByIndex(index) {
     playerBar.classList.remove('hidden');
     playerBar.classList.add('flex');
     titleEl.innerText = reciter.name;
-    subEl.innerText = "جاري الاتصال بالبث...";
+    subEl.innerText = isEn ? "Connecting to stream..." : "جاري الاتصال بالبث...";
     playPauseIcon.className = "fa-solid fa-spinner fa-spin";
 
     audioEl.src = reciter.audioUrl;
@@ -1512,7 +1857,7 @@ function playQuranReciterByIndex(index) {
         loadQuranRecitersList();
     }).catch(() => {
         playPauseIcon.className = "fa-solid fa-play";
-        subEl.innerText = "اضغط للتشغيل";
+        subEl.innerText = isEn ? "Tap to play" : "اضغط للتشغيل";
     });
 }
 
@@ -1602,7 +1947,7 @@ const ahlulbaytSupplications = [
         id: "sabah",
         title: "دعاء الصباح لأمير المؤمنين علي (ع)",
         desc: "يُقرأ صبيحة كل يوم للبركة والنور والرزق الواسع.",
-        text: "اللَّهُمَّ يَا مَنْ دَلَعَ لِسَانَ الصَّبَاحِ بِنُطْقِ تَبَلُّجِهِ..."
+        text: "اللَّهُمَّ يَا مَنْ دَلَعَ لِسَانَ الصَّبَاحِ بِـنُطْقِ تَبَلُّجِهِ..."
     },
     {
         id: "ahd",
@@ -1632,8 +1977,10 @@ const ahlulbaytSupplications = [
 
 function loadSupplicationsList() {
     const container = document.getElementById('supplications-content');
+    const isEn = currentLanguage === 'en';
+    const list = isEn ? ahlulbaytSupplicationsEn : ahlulbaytSupplications;
     let html = '';
-    ahlulbaytSupplications.forEach(sup => {
+    list.forEach(sup => {
         html += `
             <div class="rounded-xl glass-panel border border-palette-mauve/40 overflow-hidden bg-black/30 shadow-md">
                 <div onclick="playClickSound(); toggleDuaContent('${sup.id}')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-palette-mauve/10 transition-colors">
@@ -1672,7 +2019,7 @@ function toggleDuaContent(id) {
 
 const weeklySupplications = [
     { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالرِّضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },
-    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغْفِرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
+    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغِفرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
     { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ وَالحَمْدُ حَقُّهُ كَما يَسْتِحِقُّهُ حَمْداً كَثِيراً ، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي ؛ إِنَّ النَّفْسَ لأَمّارَةٌ بِالسُّوءِ إِلّا ما رَحِمَ رَبِّي ، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطانِ الَّذِي يَزِيدُنِي ذَنْباً إِلى ذَنْبِي ، وَأَحْتَرِزُ بِهِ مِنْ كُلِّ جَبّارٍ فاجِرٍ ، وَسُلْطانٍ جائِرٍ ، وَعَدُوٍّ قاهِرٍ . اَللّهُمَّ اجْعَلْنِي مِنْ جُنْدِكَ فَإِنَّ جُنْدَكَ هُمُ الغالِبُونَ ، وَاجْعَلْنِي مِنْ حِزْبِكَ فَإِنَّ حِزْبَكَ هُمُ المُفْلِحُونَ ، وَاجْعَلْنِي مِنْ أوْلِيائِكَ فَإِنَّ أَوْلِياَءَكَ لا خَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنُونَ . اَللّهُمَّ أصْلِحْ لِي دِينِي فَإِنَّهُ عِصْمَةُ أَمْرِي ، وَأصْلِحْ لِي آخِرَتِي فَإِنَّها دارُ مَقَرِّي ، وَإِلَيْها مِن مُجاوَرَةِ اللِّئامِ مَفَرِّي ، وَاجْعَلِ الحَياةَ زِيادَةً لِي فِي كُلِّ خَيْرٍ ، وَالوَفاةَ راحَةً لِي مِنْ كُلِّ شَرٍ ، اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَتَمامِ عِدَّةِ المُرْسَلِينَ ، وَعَلى آلِهِ الطَّيِّبِينَ الطَّاهِرِينَ وَأَصْحابِهِ المُنْتَجَبِينَ، وَهَبْ لِي فِي الثُّلاثاءِ ثَلاثًا : لاتَدَعْ لِي ذَنْباً إِلّا غَفَرْتَهُ ، وَلا غَمّاً إِلّا أَذْهَبْتَهُ ، وَلا عَدُوّاً إِلّا دَفَعْتَهُ . بِـ (( بِسْمِ اللهِ )) خَيْرِ الأَسْماء ، بِسْمِ اللهِ رَبِّ الأَرْضِ وَالسَّمَاءِ ، أَسْتَدْفِعُ كُلَّ مَكْرُوهٍ أَوَّلُهُ سَخَطُهُ ، وَأَسْتَجْلِبُ كُلَّ مَحْبُوبٍ أَوَّلُهُ رِضاهُ، فَاخْتِمْ لِي مِنْكَ بِالغُفْرانِ يا وَلِيَّ الإِحْسانِ ." },
     { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلّهِ الَّذِي جَعَلَ اللَّيْلَ لِباساً ، وَالنَّوْمَ سُباتَاً ، وَجَعَلَ النَّهارَ نُشُوراً . لَكَ الْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي ، وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً حَمْداً دَائِمَاً لا يَنْقَطِعُ أَبَداً ، وَلا يُحْصِي لَهُ الْخَلائِقُ عَدَدَاً .اَللَّهُمَّ لَكَ الْحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ ، وَقَدَّرْتَ وَقَضَيْتَ ، وَأَمَتَّ وَأَحْيَيْتَ ، وَأَمْرَضْتَ وَشَفَيْتَ ، وَعافَيْتَ وَأَبْلَيْتَ ، وَعَلَى الْعَرْشِ اسْتَوَيْتَ ، وَعَلَى الْمُلْكِ احْتَوَيْتَ .أَدْعُوكَ دُعآءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ ، وَانْقَطَعَتْ حِيلَتُهُ ، وَاقْتَرَبَ أَجَلُهُ ، وَتَدانَى فِي الدُّنْيا أَمَلُهُ ، وَاشْتَدَّتْ إلى رَحْمَتِكَ فاقَتُهُ ، وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ ، وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ ، وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ . فَصَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ ، وَعَلى أَهْلِ بَيْتِهِ الطَّيِّبِينَ الطَّاهِرِينَ ، وَارْزُقْنِي شَفاعَةَ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ ، وَلا تَحْرِمْنِي صُحْبَتَهُ إنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ . اَللَّهُمَّ اقْضِ لِي فِي الأَرْبِعآءِ أَرْبَعَاً : اِجْعَلْ قُوَّتِي فِي طاعَتِكَ ، وَنَشاطِي فِي عِبادَتِكَ ، وَرَغْبَتِي فِي ثَوَابِكَ ، وَزُهْدِي فِيما يُوجِبُ لِي أَلِيمَ عِقابِكَ ، إنَّكَ لَطِيفٌ لِما تَشَآءُ ." },
     { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِماً بِقُدْرَتِهِ ، وَجاءَ بِالنَّهارِ مُبْصِراً بِرَحْمَتِهِ ، وَكَسانِي ضِياءَهُ وَأَنا فِي نِعْمَتِهِ . اَللّهُمَّ فَكَما أَبْقَيْتَنِي لَهُ فَأَبْقِنِي لأَمْثالِهِ ، وَصَلِّ عَلى النَّبِيّ مُحَمَّدٍ وَآلِهِ ، وَلا تَفْجَعْنِي فِيهِ وَفِي غَيْرِهِ مِنَ اللَّيالِي وَالأَيّامِ بِارْتِكابِ المَحارِمِ وَاكْتِسابِ المَآثِمِ ، وَارْزُقْنِي خَيْرَهُ وَخَيْرَ ما فِيهِ وَخَيْرَ ما بَعْدَهُ ، وَاصْرِفْ عَنِّي شَرَّهُ وَشَرَّ ما فِيهِ وَشَرَّ ما بَعْدَهُ . اَللّهُمَّ إِنِّي بِذِمَّةِ الإِسْلامِ أَتَوَسَّلُ إِلَيْكَ ، وَبِحُرْمَةِ القُرْآنِ أَعْتَمِدُ عَلَيْكَ ، وَبِمُحَمَّدٍ المُصْطَفى ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ أَسْتَشْفِعُ لَدَيْكَ ، فَاعْرِفِ اللّهُمَّ ذِمَّتِي الَّتِي رَجَوْتُ بِها قَضاءَ حاجَتِي ، يا أَرْحَمَ الرَّاحِمِينَ . اَللّهُمَّ اقْضِ لِي فِي الخَمِيسِ خَمْساً ، لا يَتَّسِعُ لَهَا إِلّا كَرَمُكَ ، وَلا يُطِيقُها إِلّا نِعَمُكَ : سَلامَةً أَقْوَى بِها عَلى طاعَتِكَ ، وَعِبادَةً أَسْتَحِقُّ بِها جَزِيلَ مَثُوبَتِكَ ، وَسَعَةً فِي الحَالِ مِنَ الرِّزْقِ الحَلالِ ، وَأَنْ تُؤْمِنَنِي فِي مَواقِفِ الخَوْفِ بِأَمْنِكَ ، وَتَجْعَلَنِي مِنْ طَوارِقِ الهُمُومِ وَالغُمُومِ فِي حِصْنِكَ ، وَصَلِّ عَلى مُحمَّدٍ وَآلِ مُحَمَّدٍ ، وَاجْعَلْ تَوَسُّلِي بِهِ شافِعاً يَوْمَ القِيامَةِ نافِعاً ، إِنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ ." },
@@ -1687,26 +2034,31 @@ function openDailySupplicationsModal() {
 
 function selectDayDua(dayIdx) {
     playClickSound();
+    const isEn = currentLanguage === 'en';
+    const dayNamesAr = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+    const dayNamesEn = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
     for (let i = 0; i < 7; i++) {
         const btn = document.getElementById(`day-btn-${i}`);
         if (btn) {
+            btn.innerText = isEn ? dayNamesEn[i] : dayNamesAr[i];
             if (i === dayIdx) {
                 btn.className = "py-1.5 rounded-xl text-[10px] font-bold transition-all bg-teal-500 text-slate-950 shadow-md scale-105";
             } else {
-                btn.className = "py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/20";
+                btn.className = "py-1.5 rounded-xl text-[10px] font-bold transition-all bg-white/10 text-white hover:bg-teal-500/25";
             }
         }
     }
-    const item = weeklySupplications[dayIdx];
+    const item = isEn ? weeklySupplicationsEn[dayIdx] : weeklySupplications[dayIdx];
     const container = document.getElementById('daily-dua-container');
     container.innerHTML = `
         <div class="space-y-2 text-right">
             <div class="flex items-center justify-between border-b border-teal-500/30 pb-1.5">
                 <h4 class="font-bold text-teal-300 text-xs sm:text-sm flex items-center gap-1.5">
                     <i class="fa-solid fa-moon text-teal-400"></i>
-                    <span>${item.dayName}</span>
+                    <span>${isEn ? item.dayName : item.dayName}</span>
                 </h4>
-                <span class="text-[9px] text-teal-200/80 bg-teal-500/20 px-2 py-0.5 rounded-md font-mono">الصحيفة السجادية</span>
+                <span class="text-[9px] text-teal-200/80 bg-teal-500/20 px-2 py-0.5 rounded-md font-mono">${isEn ? "Al-Sahifa Al-Sajjadiyya" : "الصحيفة السجادية"}</span>
             </div>
             <div class="p-2.5 rounded-xl bg-black/65 font-amiri text-sm leading-loose text-emerald-100 select-text text-justify shadow-inner">
                 ${item.text}
@@ -1806,7 +2158,7 @@ function initHijriCalendarModal() {
 
 function resetHijriToToday() {
     initHijriCalendarModal();
-    showToast("تمت العودة إلى تاريخ اليوم");
+    showToast(currentLanguage === 'en' ? "Returned to today" : "تمت العودة إلى تاريخ اليوم");
 }
 
 function changeHijriMonth(delta) {
@@ -1824,22 +2176,27 @@ function selectHijriDay(d) {
 }
 
 function renderHijriCalendarUI() {
-    const monthName = HIJRI_MONTH_NAMES[viewHijriMonth - 1] || "محرم";
+    const isEn = currentLanguage === 'en';
+    const monthNames = isEn ? HIJRI_MONTH_NAMES_EN : HIJRI_MONTH_NAMES;
+    const eventsMap = isEn ? ALL_HIJRI_EVENTS_EN : ALL_HIJRI_EVENTS;
+
+    const monthName = monthNames[viewHijriMonth - 1] || "Muharram";
     const isToday = (viewHijriYear === todayHijri.year && viewHijriMonth === todayHijri.month && selectedHijriDay === todayHijri.day);
 
-    document.getElementById('hijri-header-title').innerText = `${selectedHijriDay} ${monthName} ${viewHijriYear} هـ${isToday ? ' (اليوم)' : ''}`;
+    document.getElementById('hijri-header-title').innerText = isEn ? `${selectedHijriDay} ${monthName} ${viewHijriYear} AH${isToday ? ' (Today)' : ''}` : `${selectedHijriDay} ${monthName} ${viewHijriYear} هـ${isToday ? ' (اليوم)' : ''}`;
 
     const gDate = findGregorianForHijri(viewHijriYear, viewHijriMonth, selectedHijriDay);
-    const weekday = gDate.toLocaleDateString('ar-IQ', { weekday: 'long' });
-    const mGreg = gDate.toLocaleDateString('ar-IQ', { month: 'long' });
-    document.getElementById('gregorian-header-subtitle').innerText = `${weekday}، ${toEasternArabicDigits(gDate.getDate())} ${mGreg} ${toEasternArabicDigits(gDate.getFullYear())}`;
+    const locale = isEn ? 'en-US' : 'ar-IQ';
+    const weekday = gDate.toLocaleDateString(locale, { weekday: 'long' });
+    const mGreg = gDate.toLocaleDateString(locale, { month: 'long' });
+    document.getElementById('gregorian-header-subtitle').innerText = `${weekday}, ${toEasternArabicDigits(gDate.getDate())} ${mGreg} ${toEasternArabicDigits(gDate.getFullYear())}`;
 
     document.getElementById('hijri-month-bar-name').innerText = monthName;
 
     const firstDayDate = findGregorianForHijri(viewHijriYear, viewHijriMonth, 1);
     const startWeekday = firstDayDate.getDay(); 
     const daysInMonth = getDaysInHijriMonth(viewHijriYear, viewHijriMonth);
-    const monthEvents = ALL_HIJRI_EVENTS[viewHijriMonth] || [];
+    const monthEvents = eventsMap[viewHijriMonth] || [];
 
     const gridContainer = document.getElementById('hijri-days-grid');
     let gridHTML = '';
@@ -1850,7 +2207,7 @@ function renderHijriCalendarUI() {
 
     for (let d = 1; d <= daysInMonth; d++) {
         const isSelected = (d === selectedHijriDay);
-        const arabicDayStr = toEasternArabicDigits(d);
+        const dayStr = toEasternArabicDigits(d);
         const dayEvent = monthEvents.find(ev => ev.day === d);
 
         if (isSelected) {
@@ -1858,7 +2215,7 @@ function renderHijriCalendarUI() {
                 <div onclick="selectHijriDay(${d})" class="flex flex-col items-center justify-center cursor-pointer">
                     <div class="w-8 h-8 rounded-full bg-palette-mauve text-palette-darkest flex flex-col items-center justify-center shadow-lg scale-105">
                         <span class="w-1 h-1 rounded-full bg-white mb-0.5"></span>
-                        <span class="text-[11px] font-black leading-none">${arabicDayStr}</span>
+                        <span class="text-[11px] font-black leading-none">${dayStr}</span>
                     </div>
                 </div>
             `;
@@ -1866,7 +2223,7 @@ function renderHijriCalendarUI() {
             let numColorClass = dayEvent ? "text-palette-light font-bold" : "text-zinc-200";
             gridHTML += `
                 <div onclick="selectHijriDay(${d})" class="h-8 flex flex-col items-center justify-start pt-1 cursor-pointer rounded-xl hover:bg-zinc-800/60">
-                    <span class="text-[11px] ${numColorClass}">${arabicDayStr}</span>
+                    <span class="text-[11px] ${numColorClass}">${dayStr}</span>
                     ${dayEvent ? '<span class="w-1 h-1 rounded-full bg-palette-mauve mt-0.5"></span>' : ''}
                 </div>
             `;
@@ -1875,17 +2232,17 @@ function renderHijriCalendarUI() {
     gridContainer.innerHTML = gridHTML;
 
     const todayHeading = document.getElementById('selected-day-events-heading');
-    todayHeading.innerText = isToday ? "مناسبات اليوم" : `مناسبات يوم ${selectedHijriDay} ${monthName}`;
+    todayHeading.innerText = isToday ? (isEn ? "Today's Occasions" : "مناسبات اليوم") : (isEn ? `Occasions for ${selectedHijriDay} ${monthName}` : `مناسبات يوم ${selectedHijriDay} ${monthName}`);
     const todayBox = document.getElementById('hijri-today-events-box');
     const dayEvents = monthEvents.filter(ev => ev.day === selectedHijriDay);
 
     if (dayEvents.length === 0) {
-        todayBox.innerHTML = `<div class="py-2 text-[11px] text-center text-zinc-500">لا توجد مناسبات مسجلة في هذا اليوم</div>`;
+        todayBox.innerHTML = `<div class="py-2 text-[11px] text-center text-zinc-500">${isEn ? 'No occasions registered for this day' : 'لا توجد مناسبات مسجلة في هذا اليوم'}</div>`;
     } else {
         let html = '';
         dayEvents.forEach(ev => {
             html += `
-                <div onclick="playClickSound(); showEventDetails('${ev.title}', '${ev.day} ${monthName}', '${ev.story}')" class="py-2 flex items-center gap-2 cursor-pointer hover:bg-zinc-800/40 rounded-xl px-2">
+                <div onclick="playClickSound(); showEventDetails('${ev.title.replace(/'/g, "\\'")}', '${ev.day} ${monthName}', '${ev.story.replace(/'/g, "\\'")}')" class="py-2 flex items-center gap-2 cursor-pointer hover:bg-zinc-800/40 rounded-xl px-2">
                     <div class="w-8 h-8 rounded-xl bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs"><i class="fa-solid fa-mosque"></i></div>
                     <div class="flex-1 text-right">
                         <h5 class="text-xs font-bold text-white">${ev.title}</h5>
@@ -1897,15 +2254,15 @@ function renderHijriCalendarUI() {
         todayBox.innerHTML = html;
     }
 
-    document.getElementById('month-events-heading').innerText = `مناسبات شهر ${monthName}`;
+    document.getElementById('month-events-heading').innerText = isEn ? `Month Occasions (${monthName})` : `مناسبات شهر ${monthName}`;
     const monthListContainer = document.getElementById('hijri-month-events-list');
     let mHtml = '';
     if (monthEvents.length === 0) {
-        mHtml = `<div class="py-2.5 text-[11px] text-center text-zinc-500">لا توجد مناسبات مسجلة في هذا الشهر</div>`;
+        mHtml = `<div class="py-2.5 text-[11px] text-center text-zinc-500">${isEn ? 'No occasions registered for this month' : 'لا توجد مناسبات مسجلة في هذا الشهر'}</div>`;
     } else {
         monthEvents.forEach(ev => {
             mHtml += `
-                <div onclick="playClickSound(); showEventDetails('${ev.title}', '${ev.day} ${monthName}', '${ev.story}')" class="py-2.5 flex items-center gap-2 cursor-pointer hover:bg-zinc-800/40 px-1">
+                <div onclick="playClickSound(); showEventDetails('${ev.title.replace(/'/g, "\\'")}', '${ev.day} ${monthName}', '${ev.story.replace(/'/g, "\\'")}')" class="py-2.5 flex items-center gap-2 cursor-pointer hover:bg-zinc-800/40 px-1">
                     <div class="w-8 h-8 rounded-xl bg-zinc-800 text-zinc-300 flex items-center justify-center text-xs"><i class="fa-solid fa-calendar-check"></i></div>
                     <div class="flex-1 text-right">
                         <h5 class="text-xs font-bold text-white">${ev.title}</h5>
@@ -1936,15 +2293,17 @@ const adhkarList = [
     { ar: "حَسْبِيَ اللَّهُ لا إِلَهَ إِلاَّ هُوَ عَلَيْهِ تَوَكَّلْتُ", cat: "التوكل واليقين" }
 ];
 
+const adhkarCategoriesEn = ["Seeking Forgiveness", "Tasbeeh", "Tawheed", "Salawat", "Hawqala", "Four Tasbeehat", "Supplication", "Trust in Allah"];
+
 let currentIndex = 0;
 let count = 0;
-let isDarkMode = true;
 
 function updateUI() {
+    const isEn = currentLanguage === 'en';
     document.getElementById('dhikr-arabic').innerText = adhkarList[currentIndex].ar;
-    document.getElementById('dhikr-category').innerText = adhkarList[currentIndex].cat;
-    document.getElementById('dhikr-counter-text').innerText = `${currentIndex + 1} / ${adhkarList.length}`;
-    document.getElementById('counter-value').innerText = count;
+    document.getElementById('dhikr-category').innerText = isEn ? adhkarCategoriesEn[currentIndex] : adhkarList[currentIndex].cat;
+    document.getElementById('dhikr-counter-text').innerText = `${toEasternArabicDigits(currentIndex + 1)} / ${toEasternArabicDigits(adhkarList.length)}`;
+    document.getElementById('counter-value').innerText = toEasternArabicDigits(count);
 }
 
 function randomizeDhikr() {
@@ -1986,39 +2345,17 @@ function resetCounter() { count = 0; updateUI(); }
 function nextDhikr() { currentIndex = (currentIndex + 1) % adhkarList.length; count = 0; updateUI(); }
 function prevDhikr() { currentIndex = (currentIndex - 1 + adhkarList.length) % adhkarList.length; count = 0; updateUI(); }
 
-function toggleTheme() {
-    isDarkMode = !isDarkMode;
-    const htmlEl = document.documentElement;
-    const bodyEl = document.body;
-    const themeText = document.getElementById('theme-text');
-    const themeIcon = document.getElementById('theme-icon');
-    const metaThemeColor = document.getElementById('meta-theme-color');
-
-    if (isDarkMode) {
-        htmlEl.classList.remove('light'); htmlEl.classList.add('dark');
-        bodyEl.classList.remove('light'); bodyEl.classList.add('dark');
-        metaThemeColor.setAttribute('content', '#00030E');
-        themeText.innerText = "الوضع المضيء";
-        themeIcon.className = 'fa-solid fa-sun';
-    } else {
-        htmlEl.classList.remove('dark'); htmlEl.classList.add('light');
-        bodyEl.classList.remove('dark'); bodyEl.classList.add('light');
-        metaThemeColor.setAttribute('content', '#F3E9EC');
-        themeText.innerText = "الوضع الداكن";
-        themeIcon.className = 'fa-solid fa-moon';
-    }
-}
-
 function toggleButtonSound() {
     isButtonSoundOn = !isButtonSoundOn;
+    const t = i18n[currentLanguage];
     const soundTextEl = document.getElementById('sound-text');
     const soundIconEl = document.getElementById('sound-icon');
     if (isButtonSoundOn) {
-        soundTextEl.innerText = "مفعل";
+        soundTextEl.innerText = t.enabled;
         soundIconEl.className = 'fa-solid fa-volume-high';
         playClickSound();
     } else {
-        soundTextEl.innerText = "معطل";
+        soundTextEl.innerText = t.disabled;
         soundIconEl.className = 'fa-solid fa-volume-xmark';
     }
 }
@@ -2028,7 +2365,8 @@ let activeDeceasedPerson = null;
 
 async function loadFatihaLocalList() {
     const container = document.getElementById('fatiha-list-content');
-    container.innerHTML = `<div class="text-center py-5 text-xs text-accent-blue"><i class="fa-solid fa-spinner fa-spin ml-2"></i>جاري جلب الأسماء من السحابة...</div>`;
+    const isEn = currentLanguage === 'en';
+    container.innerHTML = `<div class="text-center py-5 text-xs text-accent-blue"><i class="fa-solid fa-spinner fa-spin ml-2"></i>${isEn ? 'Fetching names from cloud...' : 'جاري جلب الأسماء من السحابة...'}</div>`;
 
     if (supabaseClient) {
         try {
@@ -2051,13 +2389,13 @@ async function loadFatihaLocalList() {
     }
 
     if (deceasedList.length === 0) {
-        container.innerHTML = `<p class="text-xs text-center text-accent-blue py-5">لا يوجد أموات مسجلون سحابياً حالياً، أضف اسماً ليظهر للجميع.</p>`;
+        container.innerHTML = `<p class="text-xs text-center text-accent-blue py-5">${isEn ? 'No deceased names registered in cloud currently. Add one to appear for everyone.' : 'لا يوجد أموات مسجلون سحابياً حالياً، أضف اسماً ليظهر للجميع.'}</p>`;
         return;
     }
 
     let html = '';
     deceasedList.forEach(item => {
-        const prefix = item.gender === 'أنثى' ? 'المرحومة' : 'المرحوم';
+        const prefix = isEn ? (item.gender === 'أنثى' ? 'Late' : 'Late') : (item.gender === 'أنثى' ? 'المرحومة' : 'المرحوم');
         const isOwner = (item.created_by && item.created_by === myDeviceId);
 
         html += `
@@ -2065,16 +2403,16 @@ async function loadFatihaLocalList() {
                 <div class="text-right overflow-hidden space-y-0.5">
                     <h4 class="font-bold text-white text-xs truncate">${prefix} ${escapeHTML(item.name)}</h4>
                     <div class="flex items-center gap-2.5 text-[9px] text-accent-blue font-medium">
-                        <span><i class="fa-solid fa-eye ml-1"></i>${toEasternArabicDigits(item.views_count)} مشاهدة</span>
-                        <span><i class="fa-solid fa-check-double ml-1 text-emerald-400"></i>${toEasternArabicDigits(item.reads_count)} قراءة</span>
+                        <span><i class="fa-solid fa-eye ml-1"></i>${toEasternArabicDigits(item.views_count)} ${isEn ? 'Views' : 'مشاهدة'}</span>
+                        <span><i class="fa-solid fa-check-double ml-1 text-emerald-400"></i>${toEasternArabicDigits(item.reads_count)} ${isEn ? 'Reads' : 'قراءة'}</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0">
                     <button onclick="playClickSound(); openReadingModal(${item.id})" class="px-2.5 py-1.5 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/80 transition-all shadow-md cursor-pointer">
-                        <i class="fa-solid fa-book-open ml-1"></i> اقرأ الفاتحة
+                        <i class="fa-solid fa-book-open ml-1"></i> ${isEn ? 'Read Al-Fatiha' : 'اقرأ الفاتحة'}
                     </button>
                     ${isOwner ? `
-                    <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-7 h-7 rounded-xl bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer" title="حذف السجل (خاص بجهازك)">
+                    <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-7 h-7 rounded-xl bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer" title="${isEn ? 'Delete record' : 'حذف السجل'}">
                         <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
                     ` : ''}
@@ -2086,17 +2424,18 @@ async function loadFatihaLocalList() {
 }
 
 async function addDeceasedCloud() {
+    const isEn = currentLanguage === 'en';
     const nameInput = document.getElementById('deceased-input');
     const name = nameInput.value.trim();
     const genderEl = document.querySelector('input[name="deceased-gender"]:checked');
     const gender = genderEl ? genderEl.value : 'ذكر';
 
     if (!name) { 
-        showToast("يرجى كتابة اسم المتوفى أولاً"); 
+        showToast(isEn ? "Please enter deceased name first" : "يرجى كتابة اسم المتوفى أولاً"); 
         return; 
     }
     
-    showToast("جاري حفظ الاسم سحابياً...");
+    showToast(isEn ? "Saving name to cloud..." : "جاري حفظ الاسم سحابياً...");
 
     if (supabaseClient) {
         try {
@@ -2111,28 +2450,29 @@ async function addDeceasedCloud() {
                 }]);
 
             if (error) {
-                showToast("تعذر الحفظ، تأكد من البيانات");
+                showToast(isEn ? "Could not save, verify data" : "تعذر الحفظ، تأكد من البيانات");
                 return;
             }
         } catch (e) {
-            showToast("حدث خطأ في الاتصال");
+            showToast(isEn ? "Connection error" : "حدث خطأ في الاتصال");
             return;
         }
     }
 
     nameInput.value = "";
     await loadFatihaLocalList();
-    showToast("تمت إضافة الاسم بنجاح!");
+    showToast(isEn ? "Name added successfully!" : "تمت إضافة الاسم بنجاح!");
 }
 
 async function deleteDeceasedCloud(id) {
+    const isEn = currentLanguage === 'en';
     const target = deceasedList.find(i => i.id === id);
     if (!target || !target.created_by || target.created_by !== myDeviceId) {
-        showToast("عذراً، لا تمتلك صلاحية حذف هذا الاسم");
+        showToast(isEn ? "Sorry, you do not have permission to delete this name" : "عذراً، لا تمتلك صلاحية حذف هذا الاسم");
         return;
     }
 
-    if (!confirm("هل أنت متأكد من حذف هذا الاسم؟")) return;
+    if (!confirm(isEn ? "Are you sure you want to delete this name?" : "هل أنت متأكد من حذف هذا الاسم؟")) return;
 
     if (supabaseClient) {
         try {
@@ -2143,19 +2483,20 @@ async function deleteDeceasedCloud(id) {
                 .eq('created_by', myDeviceId);
 
             if (error) {
-                showToast("تعذر الحذف من السحابة");
+                showToast(isEn ? "Could not delete from cloud" : "تعذر الحذف من السحابة");
                 return;
             }
         } catch (e) {}
     }
     await loadFatihaLocalList();
-    showToast("تم حذف الاسم بنجاح");
+    showToast(isEn ? "Name deleted successfully" : "تم حذف الاسم بنجاح");
 }
 
 async function openReadingModal(id) {
     const person = deceasedList.find(item => item.id === id);
     if (!person) return;
     activeDeceasedPerson = person;
+    const isEn = currentLanguage === 'en';
 
     const viewedKey = `viewed_fatiha_${id}`;
     const alreadyViewed = sessionStorage.getItem(viewedKey);
@@ -2177,13 +2518,14 @@ async function openReadingModal(id) {
     document.getElementById('modal-views-count').innerText = toEasternArabicDigits(person.views_count);
     document.getElementById('modal-reads-count').innerText = toEasternArabicDigits(person.reads_count || 0);
 
-    const prefix = person.gender === 'أنثى' ? 'المرحومة' : 'المرحوم';
-    document.getElementById('reading-for-name').innerText = `إهداء ثواب الفاتحة إلى: ${prefix} ${person.name}`;
+    const prefix = isEn ? 'Late' : (person.gender === 'أنثى' ? 'المرحومة' : 'المرحوم');
+    document.getElementById('reading-for-name').innerText = `${isEn ? 'Dedicate Al-Fatiha reward to:' : 'إهداء ثواب الفاتحة إلى:'} ${prefix} ${person.name}`;
 
     openModal('reading-fatiha-modal');
 }
 
 async function finishReadingFatiha() {
+    const isEn = currentLanguage === 'en';
     if (activeDeceasedPerson) {
         activeDeceasedPerson.reads_count = (activeDeceasedPerson.reads_count || 0) + 1;
         
@@ -2196,13 +2538,14 @@ async function finishReadingFatiha() {
             } catch (e) {}
         }
 
-        showToast(`تقبل الله، إجمالي القراءات: ${toEasternArabicDigits(activeDeceasedPerson.reads_count)}`);
+        showToast(isEn ? `May God accept it, total reads: ${toEasternArabicDigits(activeDeceasedPerson.reads_count)}` : `تقبل الله، إجمالي القراءات: ${toEasternArabicDigits(activeDeceasedPerson.reads_count)}`);
     }
 
     closeModal('reading-fatiha-modal');
     loadFatihaLocalList();
 }
 
+applyLanguageUI();
 updateUI();
 </script>
 </body>
