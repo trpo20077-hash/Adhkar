@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
+<!-- مكتبة Supabase JS للاتصال بقاعدة البيانات السحابية -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 tailwind.config = {
     darkMode: 'class',
@@ -53,17 +55,8 @@ html.light, body.light {
     box-shadow: 0 15px 35px rgba(184, 151, 40, 0.15);
     color: #2A1F1D;
 }
-.light .bg-black\/30, .light .bg-black\/40, .light .bg-black\/50, .light .bg-black\/60 {
-    background-color: rgba(42, 31, 29, 0.08) !important;
-    color: #2A1F1D !important;
-}
-.light .text-cream-100, .light .text-white { color: #2A1F1D !important; }
 .gold-gradient-text {
     background: linear-gradient(135deg, #FFF6D1 0%, #E5C158 50%, #B89728 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.light .gold-gradient-text {
-    background: linear-gradient(135deg, #8A6B15 0%, #523D00 100%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .gold-border-glow { box-shadow: 0 0 35px rgba(229, 193, 88, 0.35); }
@@ -323,31 +316,20 @@ html.light, body.light {
             </button>
         </div>
 
-        <div class="flex justify-between items-center p-3 rounded-2xl bg-black/40 border border-gold/20">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl bg-accent-purple/20 text-accent-purple flex items-center justify-center text-xs shadow-inner border border-accent-purple/30">
+        <button onclick="playClickSound(); openModal('developers-modal')" class="w-full flex justify-between items-center p-3.5 rounded-2xl bg-black/40 border border-gold/20 hover:bg-gold/15 transition-all cursor-pointer shadow-sm group">
+            <div class="flex items-center gap-3 text-right">
+                <div class="w-9 h-9 rounded-xl bg-gold/20 text-gold flex items-center justify-center text-xs shadow-inner border border-gold/30 group-hover:scale-110 transition-transform">
                     <i class="fa-solid fa-code"></i>
                 </div>
-                <span class="font-bold text-xs text-accent-purple">اسم المطور وفريق العمل</span>
-            </div>
-            <button onclick="playClickSound(); openModal('developers-modal')" class="px-4 py-2 rounded-xl bg-accent-purple/20 border border-accent-purple/40 text-accent-purple text-xs font-bold flex items-center gap-1 hover:bg-accent-purple/30 transition-all cursor-pointer">
-                <i class="fa-solid fa-user-shield"></i>
-                <span>عرض</span>
-            </button>
-        </div>
-
-        <div class="flex justify-between items-center p-3 rounded-2xl bg-black/40 border border-gold/20">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs shadow-inner border border-teal-500/30">
-                    <i class="fa-solid fa-headset"></i>
+                <div>
+                    <span class="font-bold text-xs gold-gradient-text block">المطورون والداعمون</span>
+                    <span class="text-[9.5px] opacity-75">اضغط لعرض تفاصيل المطورة والداعم</span>
                 </div>
-                <span class="font-bold text-xs text-teal-300">الدعم الفني والمراسلة</span>
             </div>
-            <button onclick="playClickSound(); openModal('contact-modal')" class="px-4 py-2 rounded-xl bg-teal-500/20 border border-teal-400/40 text-teal-300 text-xs font-bold flex items-center gap-1 hover:bg-teal-500/30 transition-all cursor-pointer">
-                <i class="fa-solid fa-envelope"></i>
-                <span>تواصل</span>
-            </button>
-        </div>
+            <div class="w-7 h-7 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xs group-hover:bg-gold group-hover:text-velvet-900 transition-all">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+        </button>
 
         <div class="pt-2 flex flex-col items-center justify-center text-center">
             <div class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-gold/10 border border-gold/30 text-xs font-bold text-gold shadow-sm">
@@ -362,43 +344,39 @@ html.light, body.light {
     </div>
 </div>
 
+<div id="developers-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-4 z-50">
+    <div class="w-full max-w-md glass-panel rounded-3xl p-6 border-2 border-gold/50 shadow-2xl relative space-y-4 text-center">
+        <div class="flex justify-between items-center pb-3 border-b border-gold/20">
+            <h3 class="text-base sm:text-lg font-bold gold-gradient-text flex items-center gap-2">
+                <i class="fa-solid fa-code text-gold"></i>
+                <span>المطورون والداعمون</span>
+            </h3>
+            <button onclick="playClickSound(); closeModal('developers-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="space-y-3 py-2">
+            <div class="p-4 rounded-2xl bg-black/50 border border-gold/30 space-y-1 shadow-inner text-right">
+                <span class="text-xs text-amber-200 font-bold block"><i class="fa-solid fa-laptop-code ml-1.5 text-gold"></i>مطورة التطبيق</span>
+                <h4 class="text-lg font-black gold-gradient-text">Zainab Ali</h4>
+                <p class="text-[11px] opacity-80">التطوير البرمجي وهندسة واجهات المستخدم</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-black/50 border border-gold/30 space-y-1 shadow-inner text-right">
+                <span class="text-xs text-amber-200 font-bold block"><i class="fa-solid fa-hand-holding-heart ml-1.5 text-gold"></i>الداعمون</span>
+                <h4 class="text-lg font-black gold-gradient-text">احمد العامري</h4>
+                <p class="text-[11px] opacity-80">الدعم الفني والرعاية المستمرة للتطبيق</p>
+            </div>
+        </div>
+        <button onclick="playClickSound(); closeModal('developers-modal')" class="w-full py-3 rounded-xl bg-gold text-velvet-900 font-bold text-xs hover:bg-gold-light transition-all shadow-lg cursor-pointer">
+            إغلاق النافذة
+        </button>
+    </div>
+</div>
+
 <div id="qibla-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-4 z-50">
     <div class="w-full max-w-sm glass-panel rounded-3xl p-6 border-2 border-emerald-400/50 text-center relative shadow-2xl space-y-4"></div>
 </div>
 
-<div id="developers-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-4 z-50">
-    <div class="w-full max-w-sm glass-panel rounded-3xl p-6 border-2 border-accent-purple text-center relative shadow-2xl space-y-4">
-        <div class="w-16 h-16 rounded-full bg-accent-purple/20 border-2 border-accent-purple text-accent-purple flex items-center justify-center mx-auto text-2xl shadow-[0_0_25px_#A78BFA]">
-            <i class="fa-solid fa-code"></i>
-        </div>
-        <div class="space-y-1">
-            <h3 class="text-lg font-black text-accent-purple">الهندسة البرمجية والتطوير</h3>
-            <p class="text-xs text-zinc-300">مطور ومصمم التطبيق: <span class="font-bold text-gold">مهندس مجهول الهوية (صدقة جارية)</span></p>
-        </div>
-        <div class="p-3 rounded-2xl bg-black/50 border border-accent-purple/30 text-[11px] text-zinc-300">
-            تمت كتابة الكود وتدقيقه وفق أعلى معايير الأداء والسرعة، لوجه الله تعالى ولخدمة القرآن الكريم وأهل البيت (عليهم السلام).
-        </div>
-        <button onclick="playClickSound(); closeModal('developers-modal')" class="w-full py-2.5 rounded-xl bg-accent-purple text-white font-bold text-xs shadow-lg">
-            إغلاق
-        </button>
-    </div>
-</div>
-
-<div id="contact-modal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-4 z-50">
-    <div class="w-full max-w-sm glass-panel rounded-3xl p-6 border border-teal-500/40 text-center relative shadow-2xl space-y-3">
-        <div class="w-14 h-14 rounded-full bg-teal-500/20 text-teal-400 flex items-center justify-center mx-auto text-2xl">
-            <i class="fa-solid fa-envelope"></i>
-        </div>
-        <h3 class="text-base font-bold text-teal-300">الدعم الفني والمقترحات</h3>
-        <p class="text-xs text-zinc-300">يسعدنا استقبال الملاحظات وتطوير التطبيق عبر البريد الإلكتروني المباشر:</p>
-        <div class="p-3 rounded-xl bg-black/50 border border-teal-500/30 font-mono text-xs text-teal-300 select-all font-bold">
-            zanb68950@gmail.com
-        </div>
-        <button onclick="playClickSound(); closeModal('contact-modal')" class="w-full py-2.5 rounded-xl bg-teal-500 text-slate-950 font-bold text-xs shadow-md cursor-pointer">
-            إغلاق
-        </button>
-    </div>
-</div>
 <div id="prayer-times-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-2 sm:p-4 z-50">
     <div id="prayer-modal-container" class="w-full max-w-lg h-[95vh] rounded-3xl p-4 sm:p-5 shadow-2xl relative flex flex-col overflow-hidden text-white border-2 border-amber-400/50 bg-gradient-to-b from-[#1E1B4B] via-[#0F172A] to-[#020617]">
         <div class="flex justify-between items-center mb-2.5 pb-2.5 border-b border-white/20">
@@ -470,15 +448,21 @@ html.light, body.light {
         <div class="flex justify-between items-center mb-3 pb-3 border-b border-yellow-500/30">
             <h3 class="text-lg sm:text-xl font-bold text-yellow-500 flex items-center gap-2">
                 <i class="fa-solid fa-headphones-simple text-yellow-500 text-2xl"></i>
-                <span>تلاوات كبار القراء العراقيين والعالم الإسلامي</span>
+                <span>تلاوات القرآن الكريم</span>
             </h3>
-            <button onclick="playClickSound(); closeModal('quran-modal'); stopQuranAudio();" class="w-9 h-9 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+            <div class="flex items-center gap-2">
+                <button onclick="playClickSound(); toggleQuranBackgroundPlay()" id="quran-bg-btn" class="px-3 py-1.5 rounded-xl bg-yellow-500/20 border border-yellow-500/40 text-yellow-400 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-headphones"></i>
+                    <span id="quran-bg-status-text">الخلفية: مفعلة</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('quran-modal')" class="w-9 h-9 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-lg cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
         </div>
 
         <div class="text-xs text-yellow-500 mb-2.5 font-medium text-center bg-yellow-500/10 p-2 rounded-xl border border-yellow-500/20">
-            استمع لأعذب التلاوات العراقية بصوت القارئ ميثم التمار وباقي القراء:
+            أضف تلاواتك المفضلة واستمع إليها:
         </div>
 
         <div class="p-3 rounded-2xl bg-black/40 border border-yellow-500/40 space-y-2 mb-2">
@@ -518,8 +502,8 @@ html.light, body.light {
 
         <audio id="quran-audio-element" preload="metadata"></audio>
 
-        <button onclick="playClickSound(); closeModal('quran-modal'); stopQuranAudio();" class="w-full mt-3 py-3 rounded-xl bg-yellow-500 border border-yellow-500 text-velvet-900 font-bold text-sm shadow-lg cursor-pointer">
-            إغلاق المكتبة الصوتية
+        <button onclick="playClickSound(); closeModal('quran-modal')" class="w-full mt-3 py-3 rounded-xl bg-yellow-500 border border-yellow-500 text-velvet-900 font-bold text-sm shadow-lg cursor-pointer">
+            إغلاق نافذة التلاوات
         </button>
     </div>
 </div>
@@ -657,17 +641,14 @@ html.light, body.light {
         <div class="p-3.5 rounded-2xl bg-gradient-to-br from-black/60 to-accent-blue/10 border border-accent-blue/30 mb-3 space-y-2.5 shadow-inner">
             <h4 class="font-bold text-accent-blue text-xs flex items-center gap-1.5">
                 <i class="fa-solid fa-user-plus text-sm"></i>
-                <span>إضافة اسم متوفى جديد:</span>
+                <span>إضافة اسم متوفى جديد (ليظهر لجميع المستخدمين):</span>
             </h4>
             <div class="space-y-2">
                 <input type="text" id="deceased-input" placeholder="اسم المتوفى (مثال: المرحوم الحاج أحمد...)" class="w-full bg-black/60 border border-accent-blue/40 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-accent-blue shadow-sm">
-                <div class="flex gap-2">
-                    <input type="text" id="deceased-relation" placeholder="صلة القرابة (اختياري: والدي / والدتي)" class="flex-1 bg-black/60 border border-accent-blue/40 rounded-xl px-3 py-2 text-[11px] text-white focus:outline-none focus:border-accent-blue shadow-sm">
-                    <button onclick="playClickSound(); addDeceasedLocal()" class="px-5 py-2 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/80 transition-all shadow-md flex items-center gap-1.5 shrink-0 cursor-pointer">
-                        <i class="fa-solid fa-plus"></i>
-                        <span>حفظ وإضافة</span>
-                    </button>
-                </div>
+                <button onclick="playClickSound(); addDeceasedCloud()" class="w-full py-2.5 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/80 transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>حفظ وإضافة للسحابة</span>
+                </button>
             </div>
         </div>
         <div id="fatiha-list-content" class="overflow-y-auto space-y-2.5 pr-1 flex-1 text-sm"></div>
@@ -684,7 +665,7 @@ html.light, body.light {
         </div>
         <h3 class="text-lg font-bold text-accent-blue" id="reading-for-name">إهداء ثواب الفاتحة إلى: المرحوم</h3>
         <div class="p-4 rounded-2xl bg-black/50 border border-accent-blue/30 text-accent-blue font-amiri text-lg leading-loose shadow-inner select-text">
-            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾
             <div class="pt-3 text-sm font-tajawal text-cream-100 font-bold border-t border-accent-blue/20 mt-3">
                 صدق الله العلي العظيم • تقبل الله هذا الدعاء
             </div>
@@ -696,6 +677,16 @@ html.light, body.light {
 </div>
 
 <script>
+const SUPABASE_URL = 'https://ezjsfdphadbktnhtymbs.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6anNmZHBoYWRia3RuaHR5bWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTU4OTcsImV4cCI6MjEwOTE5MTg5N30.AdKuNO3jReYqv5AcQU2YrtZWAGXQCJ6q395-SE__sWM';
+
+let supabaseClient = null;
+try {
+    if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+} catch (e) {}
+
 let toastTimeout = null;
 function showToast(message) {
     const toast = document.getElementById('toast-notification');
@@ -765,10 +756,24 @@ try {
 
 let isButtonSoundOn = true;
 let isNatureSoundOn = false;
+let isQuranBackgroundPlayOn = true;
 let webAudioCtx = null;
 let syntheticNatureNode = null;
 let syntheticNatureGain = null;
 let natureIntervalTimer = null;
+
+function toggleQuranBackgroundPlay() {
+    playClickSound();
+    isQuranBackgroundPlayOn = !isQuranBackgroundPlayOn;
+    const statusText = document.getElementById('quran-bg-status-text');
+    if (isQuranBackgroundPlayOn) {
+        statusText.innerText = "الخلفية: مفعلة";
+        showToast("تم تفعيل عمل التلاوة في الخلفية");
+    } else {
+        statusText.innerText = "الخلفية: معطلة";
+        showToast("تم إيقاف عمل التلاوة في الخلفية");
+    }
+}
 
 function initWebAudio() {
     if (!webAudioCtx) {
@@ -905,11 +910,12 @@ function initQiblaRadar() {
                 if (y == null) return null;
                 return Object.assign({ n: (e.tags && (e.tags['name:ar'] || e.tags.name)) || 'مسجد', y, x }, geo(la, lo, y, x));
             }).filter(m => m && m.dist <= 1000).sort((a, b) => a.dist - b.dist).slice(0, 15);
-            if (!L.length) { body.textContent = 'لا توجد مساجد مسجلة ضمن 1 كم (بيانات الخريطة قد تكون ناقصة)'; return; }
+            if (!L.length) { body.textContent = 'لا توجد مساجد مسجلة ضمن 1 كم'; return; }
             body.innerHTML = '<div class="rd"><i class="ring"></i><s></s>' + L.map(m => `<b style="left:${50 + Math.sin(m.brg) * m.dist / 20}%;top:${50 - Math.cos(m.brg) * m.dist / 20}%"></b>`).join('') + '</div><p class="mt-2 text-[10px] opacity-70">الشمال للأعلى • الدائرة الخارجية = 1 كم</p><div class="mt-2 space-y-1.5 max-h-44 overflow-y-auto">' + L.map(m => `<a target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" class="flex justify-between px-3 py-2 rounded-xl bg-black/40 border border-emerald-400/30"><span class="text-white">${escapeHTML(m.n)}</span><span class="font-mono text-gold">${Math.round(m.dist)} م</span></a>`).join('') + '</div>';
         } catch (e) { body.textContent = 'تعذر جلب البيانات، تحقق من الإنترنت'; }
-    }, () => { body.textContent = 'اسمح للتطبيق بالوصول إلى الموقع (GPS) ثم اضغط تحديث'; }, { enableHighAccuracy: true, timeout: 15000 });
+    }, () => { body.textContent = 'اسمح للتطبيق بالوصول إلى الموقع (GPS)'; }, { enableHighAccuracy: true, timeout: 15000 });
 }
+
 const arabCountriesData = {
     "العراق": {
         timezone: "Asia/Baghdad",
@@ -1282,34 +1288,9 @@ async function fetchPrecisePrayerTimes() {
 
 const quranRecitersData = [
     {
-        name: "القارئ ميثم التمار - سورة يس (تلاوة حقيقية خاشعة)",
-        audioUrl: "https://server11.mp3quran.net/shur/036.mp3",
-        desc: "تلاوة حقيقية ومميزة للقارئ والمنشد العراقي ميثم التمار"
-    },
-    {
-        name: "القارئ ميثم التمار - سورة الفاتحة المباركة",
-        audioUrl: "https://everyayah.com/data/AbdulSamad_64kbps_QuranExplorer.Com/001001.mp3",
-        desc: "تلاوة خاشعة بصوت ميثم التمار من محراب الكوفة"
-    },
-    {
-        name: "القارئ عامر الكاظمي - سورة الرحمن",
-        audioUrl: "https://server8.mp3quran.net/afs/055.mp3",
-        desc: "تلاوة بالطريقة البغدادية الأصيلة"
-    },
-    {
-        name: "الشيخ عبد الباسط عبد الصمد - سورة البقرة",
-        audioUrl: "https://server7.mp3quran.net/basit/002.mp3",
-        desc: "تلاوة مجودة مرتلة لسورة البقرة كاملة"
-    },
-    {
-        name: "الشيخ محمد صديق المنشاوي - سورة الملك",
-        audioUrl: "https://server10.mp3quran.net/minsh/067.mp3",
-        desc: "الصوت الباكي الخاشع للشيخ المنشاوي"
-    },
-    {
-        name: "القارئ مشاري راشد العفاسي - سورة الكهف",
-        audioUrl: "https://server8.mp3quran.net/afs/018.mp3",
-        desc: "تلاوة مباركة كاملة لسورة الكهف"
+        name: "القارئ ميثم التمار",
+        audioUrl: "https://mp3tourl.com/audio/1793615501221-6ec86f03-fe7a-40e3-aa75-4ea2c7be072b.mp3",
+        desc: "تلاوة مباركة بصوت القارئ ميثم التمار"
     }
 ];
 
@@ -1328,6 +1309,11 @@ let activeQuranIndex = -1;
 
 function loadQuranRecitersList() {
     const container = document.getElementById('quran-reciters-list');
+
+    if (quranRecitersData.length === 0) {
+        container.innerHTML = `<div class="text-center text-xs text-yellow-500/80 py-8">لا توجد تلاوات مضافة.</div>`;
+        return;
+    }
     container.innerHTML = quranRecitersData.map((r, i) => {
         const on = (activeQuranIndex === i);
         return `<div class="p-3 rounded-2xl glass-panel border ${on ? 'border-yellow-400 bg-yellow-500/15' : 'border-yellow-500/30 bg-black/30'} flex items-center justify-between gap-2">
@@ -1480,48 +1466,62 @@ function stopQuranAudio() {
     }
     loadQuranRecitersList();
 }
+
+function closeModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    if (id === 'quran-modal' && !isQuranBackgroundPlayOn) stopQuranAudio();
+    m.classList.add('hidden');
+    m.classList.remove('flex');
+}
+
+function openModal(id) {
+    const m = document.getElementById(id);
+    if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+}
+
 const ahlulbaytSupplications = [
     {
         id: "kumaill",
         title: "دعاء كميل بن زياد (كاملاً)",
         desc: "يُستحب قراءته ليلة الجمعة لمغفرة الذنوب وكفاية شر الأعداء وتوسعة الرزق.",
-        text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِرَحْمَتِكَ الَّتِي وَسِعَتْ كُلَّ شَيْءٍ، وَبِقُوَّتِكَ الَّتِي قَهَرْتَ بِهَا كُلَّ شَيْءٍ، وَخَضَعَ لَهَا كُلُّ شَيْءٍ، وَذَلَّ لَهَا كُلُّ شَيْءٍ، وَبِجَبَرُوتِكَ الَّتِي غَلَبْتَ بِهَا كُلَّ شَيْءٍ، وَبِعِزَّتِكَ الَّتِي لا يَقُومُ لَهَا شَيْءٌ، وَبِعَظَمَتِكَ الَّتِي مَلَأَتْ كُلَّ شَيْءٍ، وَبِسُلْطَانِكَ الَّذِي عَلا كُلَّ شَيْءٍ، وَبِوَجْهِكَ الْبَاقِي بَعْدَ فَنَاءِ كُلِّ شَيْءٍ، وَبِأَسْمَائِكَ الَّتِي مَلَأَتْ أَرْكَانَ كُلِّ شَيْءٍ، وَبِعِلْمِكَ الَّذِي أَحَاطَ بِكُلِّ شَيْءٍ، وَبِنُورِ وَجْهِكَ الَّذِي أَضَاءَ لَهُ كُلُّ شَيْءٍ، يَا نُورُ يَا قُدُّوسُ، يَا أَوَّلَ الأَوَّلِينَ، وَيَا آخِرَ الآخِرِينَ، اللَّهُمَّ اغْفِرْ لِيَ الذُّنُوبَ الَّتِي تَهْتِكُ الْعِصَمَ، اللَّهُمَّ اغْفِرْ لِيَ الذُّنُوبَ الَّتِي تُنْزِلُ النِّقَمَ، اللَّهُمَّ اغْفِرْ لِيَ الذُّنُوبَ الَّتِي تُغَيِّرُ النِّعَمَ، اللَّهُمَّ اغْفِرْ لِيَ الذُّنُوبَ الَّتِي تَحْبِسُ الدُّعَاءَ، اللَّهُمَّ اغْفِرْ لِيَ الذُّنُوبَ الَّتِي تُنْزِلُ الْبَلاءَ..."
+        text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِرَحْمَتِكَ الَّتِي وَسِعَتْ كُلَّ شَيْءٍ..."
     },
     {
         id: "tawasul",
         title: "دعاء التوسل بالأئمة الأطهار (ع)",
         desc: "مروي لقضاء الحوائج وتفريج الكربات.",
-        text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ وَأَتَوَجَّهُ إِلَيْكَ بِنَبِيِّكَ نَبِيِّ الرَّحْمَةِ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ، يَا أَبَا الْقَاسِمِ، يَا رَسُولَ اللَّهِ، يَا إِمَامَ الرَّحْمَةِ، يَا سَيِّدَنَا وَمَوْلانَا، إِنَّا تَوَجَّهْنَا وَاسْتَشْفَعْنَا وَتَوَسَّلْنَا بِكَ إِلَى اللَّهِ، وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا، يَا وَجِيهًا عِنْدَ اللَّهِ، اشْفَعْ لَنَا عِنْدَ اللَّهِ. يَا أَبَا الْحَسَنِ، يَا أَمِيرَ الْمُؤْمِنِينَ، يَا عَلِيَّ بْنَ أَبِي طَالِبٍ، يَا حُجَّةَ اللَّهِ عَلَى خَلْقِهِ، يَا سَيِّدَنَا وَمَوْلانَا، إِنَّا تَوَجَّهْنَا وَاسْتَشْفَعْنَا وَتَوَسَّلْنَا بِكَ إِلَى اللَّهِ، وَقَدَّمْنَاكَ بَيْنَ يَدَيْ حَاجَاتِنَا، يَا وَجِيهًا عِنْدَ اللَّهِ، اشْفَعْ لَنَا عِنْدَ اللَّهِ..."
+        text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ وَأَتَوَجَّهُ إِلَيْكَ بِنَبِيِّكَ نَبِيِّ الرَّحْمَةِ مُحَمَّدٍ..."
     },
     {
         id: "sabah",
         title: "دعاء الصباح لأمير المؤمنين علي (ع)",
         desc: "يُقرأ صبيحة كل يوم للبركة والنور والرزق الواسع.",
-        text: "اللَّهُمَّ يَا مَنْ دَلَعَ لِسَانَ الصَّبَاحِ بِنُطْقِ تَبَلُّجِهِ، وَسَرَّحَ قِطَعَ اللَّيْلِ الْمُظْلِمِ بِغَياهِبِ تَلَجْلُجِهِ، وَأَتْقَنَ صُنْعَ الْفَلَكِ الدَّوَّارِ فِي مَقَادِيرِ تَبَرُّجِهِ، وَشَعْشَعَ ضِيَاءَ الشَّمْسِ بِنُورِ تَأَجُّجِهِ، يَا مَنْ دَلَّ عَلَى ذَاتِهِ بِذَاتِهِ، وَتَنَزَّهَ عَنْ مُجَانَسَةِ مَخْلُوقَاتِهِ، وَجَلَّ عَنْ مُلاءَمَةِ كَيْفِيَّاتِهِ..."
+        text: "اللَّهُمَّ يَا مَنْ دَلَعَ لِسَانَ الصَّبَاحِ بِنُطْقِ تَبَلُّجِهِ..."
     },
     {
         id: "ahd",
         title: "دعاء العهد الشريف",
         desc: "تجديد البيعة للإمام المهدي المنتظر (عج) كل صباح.",
-        text: "اللَّهُمَّ رَبَّ النُّورِ الْعَظِيمِ، وَرَبَّ الْكُرْسِيِّ الرَّفِيعِ، وَرَبَّ الْبَحْرِ الْمَسْجُورِ، وَمُنْزِلَ التَّوْرَاةِ وَالإِنْجِيلِ وَالزَّبُورِ، وَرَبَّ الظِّلِّ وَالْحَرُورِ، وَمُنْزِلَ الْقُرْآنِ الْعَظِيمِ، وَرَبَّ الْمَلائِكَةِ الْمُقَرَّبِينَ وَالأَنْبِيَاءِ وَالْمُرْسَلِينَ. اللَّهُمَّ إِنِّي أَسْأَلُكَ بِوَجْهِكَ الْكَرِيمِ، وَبِنُورِ وَجْهِكَ الْمُنِيرِ وَمُلْكِكَ الْقَدِيمِ، يَا حَيُّ يَا قَيُّومُ..."
+        text: "اللَّهُمَّ رَبَّ النُّورِ الْعَظِيمِ، وَرَبَّ الْكُرْسِيِّ الرَّفِيعِ..."
     },
     {
         id: "nudba",
         title: "دعاء الندبة",
         desc: "يُقرأ في الجمع والأعياد لندبة صاحب الزمان (عج).",
-        text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ، وَصَلَّى اللَّهُ عَلَى سَيِّدِنَا مُحَمَّدٍ نَبِيِّهِ وَآلِهِ وَسَلَّمَ تَسْلِيمًا. اللَّهُمَّ لَكَ الْحَمْدُ عَلَى مَا جَرَى بِهِ قَضَاؤُكَ فِي أَوْلِيَائِكَ الَّذِينَ اسْتَخْلَصْتَهُمْ لِنَفْسِكَ وَدِينِكَ، إِذِ اخْتَرْتَ لَهُمْ جَزِيلَ مَا عِنْدَكَ مِنَ النَّعِيمِ الْمُقِيمِ..."
+        text: "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ، وَصَلَّى اللَّهُ عَلَى سَيِّدِنَا مُحَمَّدٍ..."
     },
     {
         id: "ashura",
         title: "زيارة عاشوراء المشهورة",
         desc: "زيارة سيد الشهداء الإمام الحسين (ع) وأصحابه الأبرار.",
-        text: "السَّلامُ عَلَيْكَ يَا أَبَا عَبْدِ اللَّهِ، السَّلامُ عَلَيْكَ يَا ابْنَ رَسُولِ اللَّهِ، السَّلامُ عَلَيْكَ يَا ابْنَ أَمِيرِ الْمُؤْمِنِينَ وَابْنَ سَيِّدِ الْوَصِيِّينَ، السَّلامُ عَلَيْكَ يَا ابْنَ فَاطِمَةَ سَيِّدَةِ نِسَاءِ الْعَالَمِينَ، السَّلامُ عَلَيْكَ يَا ثَارَ اللَّهِ وَابْنَ ثَارِهِ وَالْوِتْرَ الْمَوْتُورَ..."
+        text: "السَّلامُ عَلَيْكَ يَا أَبَا عَبْدِ اللَّهِ، السَّلامُ عَلَيْكَ يَا ابْنَ رَسُولِ اللَّهِ..."
     },
     {
         id: "faraj",
         title: "دعاء الفرج (إلهي عظم البلاء)",
         desc: "دعاء كشف الهم والغم والفرج العاجل.",
-        text: "إِلَهِي عَظُمَ الْبَلاءُ، وَبَرِحَ الْخَفَاءُ، وَانْكَشَفَ الْغِطَاءُ، وَانْقَطَعَ الرَّجَاءُ، وَضَاقَتِ الأَرْضُ وَمُنِعَتِ السَّمَاءُ، وَأَنْتَ الْمُسْتَعَانُ وَإِلَيْكَ الْمُشْتَكَى، وَعَلَيْكَ الْمُعَوَّلُ فِي الشِّدَّةِ وَالرَّخَاءِ، اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ..."
+        text: "إِلَهِي عَظُمَ الْبَلاءُ، وَبَرِحَ الْخَفَاءُ..."
     }
 ];
 
@@ -1566,13 +1566,13 @@ function toggleDuaContent(id) {
 }
 
 const weeklySupplications = [
-    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. بِسْمِ اللَّهِ الَّذِي لا أَرْجُو إِلاَّ فَضْلَهُ، وَلا أَخْشَى إِلاَّ عَدْلَهُ، وَلا أَعْتَمِدُ إِلاَّ قَوْلَهُ، وَلا أُمْسِكُ إِلاَّ بِحَبْلِهِ، بِكَ أَسْتَجِيرُ يَا ذَا الْعَفْوِ وَالرِّضْوَانِ مِنَ الظُّلْمِ وَالْعُدْوَانِ، وَمِنْ غِيَرِ الزَّمَانِ، وَتَوَاتُرِ الأَحْزَانِ، وَطَوَارِقِ الْحَدَثَانِ..." },
-    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدًا حِينَ فَطَرَ السَّمَاوَاتِ وَالأَرْضَ، وَلا اتَّخَذَ مُعِينًا حِينَ بَرَأَ النَّسَمَاتِ، لَمْ يُشَارَكْ فِي الإِلَهِيَّةِ، وَلَمْ يُظَاهَرْ فِي الْوَحْدَانِيَّةِ، كَلَّتِ الأَلْسُنُ عَنْ غَايَةِ صِفَتِهِ..." },
-    { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ وَالْحَمْدُ حَقُّهُ كَمَا يَسْتَحِقُّهُ حَمْدًا كَثِيرًا، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي إِنَّ النَّفْسَ لأَمَّارَةٌ بِالسُّوءِ إِلاَّ مَا رَحِمَ رَبِّي، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطَانِ الَّذِي يَزِيدُنِي ذَنْبًا إِلَى ذَنْبِي..." },
-    { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي جَعَلَ اللَّيْلَ لِبَاسًا، وَالنَّوْمَ سُبَاتًا، وَجَعَلَ النَّهَارَ نُشُورًا، لَكَ الْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي، وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَدًا، حَمْدًا دَائِمًا لا يَنْقَطِعُ أَبَدًا..." },
-    { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِمًا بِقُدْرَتِهِ، وَجَاءَ بِالنَّهَارِ مُبْصِرًا بِرَحْمَتِهِ، وَكَسَانِي ضِيَاءَهُ وَأَنَا فِي نِعْمَتِهِ. اللَّهُمَّ فَكَمَا أَبْقَيْتَنِي لَهُ فَأَبْقِنِي لأَمْثَالِهِ..." },
-    { dayName: "دعاء يوم الجمعة المباركة", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الأَوَّلِ قَبْلَ الإِنْشَاءِ وَالإِحْيَاءِ، وَالآخِرِ بَعْدَ فَنَاءِ الأَشْيَاءِ، الْعَلِيمِ الَّذِي لا يَنْسَى مَنْ ذَكَرَهُ، وَلا يَنْقُصُ مَنْ شَكَرَهُ، وَلا يَخِيبُ مَنْ دَعَاهُ..." },
-    { dayName: "دعاء يوم السبت", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. بِسْمِ اللَّهِ كَلِمَةِ الْمُعْتَصِمِينَ، وَمَقَالَةِ الْمُتَحَرِّزِينَ، وَأَعُوذُ بِاللَّهِ تَعَالَى مِنْ جَوْرِ الْجَائِرِينَ، وَكَيْدِ الْحَاسِدِينَ، وَبَغْيِ الظَّالِمِينَ..." }
+    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. بِسْمِ اللَّهِ الَّذِي لا أَرْجُو إِلاَّ فَضْلَهُ..." },
+    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدًا حِينَ فَطَرَ السَّمَاوَاتِ..." },
+    { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ وَالْحَمْدُ حَقُّهُ..." },
+    { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي جَعَلَ اللَّيْلَ لِبَاسًا..." },
+    { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِمًا..." },
+    { dayName: "دعاء يوم الجمعة المباركة", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ الأَوَّلِ قَبْلَ الإِنْشَاءِ..." },
+    { dayName: "دعاء يوم السبت", text: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ. بِسْمِ اللَّهِ كَلِمَةِ الْمُعْتَصِمِينَ..." }
 ];
 
 function openDailySupplicationsModal() {
@@ -1613,13 +1613,8 @@ function selectDayDua(dayIdx) {
 const HIJRI_MONTH_NAMES = ["محرم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"];
 const ALL_HIJRI_EVENTS = {
     5: [
-        { day: 5, title: "ولادة السيدة زينب الكبرى (عليها السلام) سنة ٥هـ", story: "ولادة عقيلة الهاشميين وبطلة كربلاء السيدة زينب (ع)." },
-        { day: 6, title: "حرب مؤته واستشهاد جعفر بن أبي طالب سنة ٨هـ", story: "استشهاد الطيار جعفر بن أبي طالب (ع) في غزوة مؤتة." },
-        { day: 10, title: "واقعة الجمل سنة ٣٦هـ", story: "انتصار أمير المؤمنين علي (ع) في واقعة الجمل بالبصرة." },
-        { day: 13, title: "شهادة سيدة نساء العالمين فاطمة الزهراء (عليها السلام) سنة ١١هـ", story: "ذكرى شهادة الصديقة الطاهرة فاطمة الزهراء (ع)." },
-        { day: 15, title: "فتح البصرة على يد أمير المؤمنين سنة ٣٦هـ", story: "دخول أمير المؤمنين (ع) البصرة وإرساء العدل والأمان." },
-        { day: 19, title: "شهادة زيد بن صوحان في حرب الجمل", story: "استشهاد الصحابي المخلص زيد بن صوحان العبدي رضوان الله عليه." },
-        { day: 22, title: "وفاة القاسم بن الإمام موسى الكاظم (عليهما السلام)", story: "ذكرى رحيل السيد الجليل القاسم بن الإمام الكاظم (ع) في بابل." }
+        { day: 5, title: "ولادة السيدة زينب الكبرى (عليها السلام)", story: "ولادة عقيلة الهاشميين وبطلة كربلاء السيدة زينب (ع)." },
+        { day: 13, title: "شهادة سيدة نساء العالمين فاطمة الزهراء (عليها السلام)", story: "ذكرى شهادة الصديقة الطاهرة فاطمة الزهراء (ع)." }
     ]
 };
 
@@ -1743,7 +1738,7 @@ function renderHijriCalendarUI() {
     const dayEvents = monthEvents.filter(ev => ev.day === selectedHijriDay);
 
     if (dayEvents.length === 0) {
-        todayBox.innerHTML = `<div class="py-3 text-center text-xs text-zinc-500">لا توجد مناسبات مسجلة في هذا اليوم</div>`;
+        todayBox.innerHTML = `<div class="py-3 text-xs text-center text-zinc-500">لا توجد مناسبات مسجلة في هذا اليوم</div>`;
     } else {
         let html = '';
         dayEvents.forEach(ev => {
@@ -1783,6 +1778,7 @@ function showEventDetails(title, date, story) {
     document.getElementById('detail-description').innerText = story;
     openModal('event-detail-modal');
 }
+
 const adhkarList = [
     { ar: "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ", cat: "الاستغفار" },
     { ar: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ", cat: "التسبيح" },
@@ -1881,30 +1877,51 @@ function toggleButtonSound() {
     }
 }
 
-let deceasedList = [
-    { id: 1, name: "المرحوم الحاج محمد علي", relation: "والدي الكريم" },
-    { id: 2, name: "المرحومة الحاجة فاطمة حسن", relation: "والدتي الكريمة" }
-];
+let deceasedList = [];
 
-function loadFatihaLocalList() {
+// جلب الأسماء من جدول fanus السحابي في Supabase لترها جميع المستخدمين
+async function loadFatihaLocalList() {
     const container = document.getElementById('fatiha-list-content');
+    container.innerHTML = `<div class="text-center py-6 text-xs text-accent-blue"><i class="fa-solid fa-spinner fa-spin ml-2"></i>جاري جلب الأسماء من السحابة لجميع المستخدمين...</div>`;
+
+    if (supabaseClient) {
+        try {
+            const { data, error } = await supabaseClient
+                .from('fanus')
+                .select('*')
+                .order('id', { ascending: false });
+
+            if (!error && data) {
+                deceasedList = data.map(item => ({
+                    id: item.id,
+                    name: item.deceased_name || "متوفى"
+                }));
+            } else {
+                console.error("Supabase Fetch Error:", error);
+            }
+        } catch (e) {
+            console.error("Network or Client Error:", e);
+        }
+    }
+
     if (deceasedList.length === 0) {
-        container.innerHTML = `<p class="text-xs text-center text-accent-blue py-6">لا يوجد أموات مسجلون حالياً، أضف اسماً للبدء.</p>`;
+        container.innerHTML = `<p class="text-xs text-center text-accent-blue py-6">لا يوجد أموات مسجلون سحابياً حالياً، أضف اسماً ليظهر للجميع.</p>`;
         return;
     }
+
     let html = '';
     deceasedList.forEach(item => {
         html += `
             <div class="p-3 rounded-2xl glass-panel border border-accent-blue/30 flex items-center justify-between gap-3 bg-black/30">
                 <div class="text-right overflow-hidden">
                     <h4 class="font-bold text-white text-xs truncate">${escapeHTML(item.name)}</h4>
-                    <span class="text-[10px] text-accent-blue font-medium">${escapeHTML(item.relation || 'من أموات المؤمنين')}</span>
+                    <span class="text-[10px] text-accent-blue font-medium">سجل سحابي لجميع المستخدمين</span>
                 </div>
                 <div class="flex items-center gap-2 shrink-0">
                     <button onclick="playClickSound(); openReadingModal(${item.id})" class="px-3 py-1.5 rounded-xl bg-accent-blue text-white font-bold text-xs hover:bg-accent-blue/80 transition-all shadow-md cursor-pointer">
                         <i class="fa-solid fa-book-open ml-1"></i> اقرأ الفاتحة
                     </button>
-                    <button onclick="playClickSound(); deleteDeceased(${item.id})" class="w-8 h-8 rounded-xl bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
+                    <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-8 h-8 rounded-xl bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
                         <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
                 </div>
@@ -1914,22 +1931,49 @@ function loadFatihaLocalList() {
     container.innerHTML = html;
 }
 
-function addDeceasedLocal() {
+// دالة الإضافة السحابية لكي يظهر الاسم فوراً لكل مستخدمي التطبيق
+async function addDeceasedCloud() {
     const nameInput = document.getElementById('deceased-input');
-    const relationInput = document.getElementById('deceased-relation');
     const name = nameInput.value.trim();
-    const relation = relationInput.value.trim();
-    if (!name) { showToast("يرجى كتابة اسم المتوفى أولاً"); return; }
-    deceasedList.push({ id: Date.now(), name, relation });
+
+    if (!name) { 
+        showToast("يرجى كتابة اسم المتوفى أولاً"); 
+        return; 
+    }
+    
+    showToast("جاري حفظ الاسم سحابياً ليظهر للجميع...");
+
+    if (supabaseClient) {
+        try {
+            const { error } = await supabaseClient
+                .from('fanus')
+                .insert([{ deceased_name: name }]);
+
+            if (error) {
+                console.error("Supabase Insert Error:", error);
+                showToast("تعذر الحفظ، تأكد من تعطيل RLS في قاعدة البيانات");
+                return;
+            }
+        } catch (e) {
+            console.error(e);
+            showToast("حدث خطأ في الاتصال بالسحابة");
+            return;
+        }
+    }
+
     nameInput.value = "";
-    relationInput.value = "";
-    loadFatihaLocalList();
-    showToast("تمت الإضافة بنجاح");
+    await loadFatihaLocalList();
+    showToast("تمت إضافة الاسم بنجاح وسيظهر الآن لجميع المستخدمين!");
 }
 
-function deleteDeceased(id) {
-    deceasedList = deceasedList.filter(item => item.id !== id);
-    loadFatihaLocalList();
+async function deleteDeceasedCloud(id) {
+    if (supabaseClient) {
+        try {
+            await supabaseClient.from('fanus').delete().eq('id', id);
+        } catch (e) {}
+    }
+    await loadFatihaLocalList();
+    showToast("تم حذف الاسم بنجاح من السحابة");
 }
 
 function openReadingModal(id) {
@@ -1943,81 +1987,11 @@ function finishReadingFatiha() {
     showToast("تم إهداء ثواب سورة الفاتحة المباركة");
 }
 
-function openModal(id) {
-    const m = document.getElementById(id);
-    if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
-}
-
-function closeModal(id) {
-    const m = document.getElementById(id);
-    if (m) { m.classList.add('hidden'); m.classList.remove('flex'); }
-}
-
-/* لوحة تحكم المالك: اضغط على عنوان التطبيق 7 مرات */
-const ADMIN_HASH = ''; // ضع هنا الهاش الذي سيظهر لك أول مرة
-const hashSecret = s => {
-    let a = 0xdeadbeef, b = 0x41c6ce57;
-    for (let i = 0, c; i < s.length; i++) {
-        c = s.charCodeAt(i);
-        a = Math.imul(a ^ c, 2654435761);
-        b = Math.imul(b ^ c, 1597334677);
-    }
-    a = Math.imul(a ^ (a >>> 16), 2246822507) ^ Math.imul(b ^ (b >>> 13), 3266489909);
-    b = Math.imul(b ^ (b >>> 16), 2246822507) ^ Math.imul(a ^ (a >>> 13), 3266489909);
-    return (4294967296 * (2097151 & b) + (a >>> 0)).toString(36);
-};
-
-const ADMIN_TOOLS = [
-    { t: 'عرض البريد المسجل', f: () => { let a = {}; try { a = JSON.parse(localStorage.getItem('adhkar_user_auth')) || {}; } catch (e) {} alert(a.email || 'لا يوجد'); } },
-    { t: 'حذف كل التلاوات المضافة', f: () => { if (confirm('متأكد؟')) { localStorage.removeItem(CUSTOM_REC_KEY); location.reload(); } } },
-    { t: 'مسح كل بيانات التطبيق', f: () => { if (confirm('متأكد؟')) { localStorage.clear(); location.reload(); } } }
-    // لإضافة ميزة جديدة: ADMIN_TOOLS.push({ t: 'الاسم', f: () => { ... } });
-];
-
-function openAdminPanel() {
-    let m = document.getElementById('adm');
-    if (!m) {
-        m = document.createElement('div');
-        m.id = 'adm';
-        m.className = 'fixed inset-0 z-[10002] bg-black/85 items-center justify-center p-4';
-        document.body.appendChild(m);
-    }
-    m.innerHTML = '<div class="glass-panel rounded-3xl p-5 w-full max-w-sm space-y-2"><h3 class="font-bold gold-gradient-text text-center mb-2"><i class="fa-solid fa-user-shield ml-1"></i>لوحة التحكم</h3>'
-        + ADMIN_TOOLS.map((x, i) => `<button data-i="${i}" class="adm-b w-full py-2.5 rounded-xl bg-gold/15 border border-gold/40 text-gold text-xs font-bold">${x.t}</button>`).join('')
-        + '<button id="adm-x" class="w-full py-2.5 rounded-xl bg-white/10 text-xs">إغلاق</button></div>';
-    m.style.display = 'flex';
-    m.querySelectorAll('.adm-b').forEach(b => b.onclick = () => ADMIN_TOOLS[b.dataset.i].f());
-    document.getElementById('adm-x').onclick = () => { m.style.display = 'none'; };
-}
-
-function adminLogin() {
-    const s = prompt(ADMIN_HASH ? 'كلمة سر المالك:' : 'أول مرة: اكتب كلمة سر طويلة لتوليد الهاش');
-    if (!s) return;
-    if (!ADMIN_HASH) { prompt('انسخ هذا الهاش وضعه في ADMIN_HASH داخل الكود:', hashSecret(s)); return; }
-    if (hashSecret(s) !== ADMIN_HASH) return showToast('مرفوض');
-    openAdminPanel();
-}
-
-let adminTaps = 0, adminTapTimer;
-document.querySelector('header h1').addEventListener('click', () => {
-    adminTaps++;
-    clearTimeout(adminTapTimer);
-    adminTapTimer = setTimeout(() => { adminTaps = 0; }, 2500);
-    if (adminTaps >= 7) { adminTaps = 0; adminLogin(); }
-});
-
-/* توحيد لون أزرار الشاشة الرئيسية */
-document.querySelectorAll('main button').forEach(b => b.classList.add('uni'));
-
 updateUI();
 </script>
 
 <style>
 #user-display-tag { display: none; }
-.uni { background: rgba(229,193,88,.12) !important; border: 1px solid rgba(229,193,88,.45) !important; }
-.uni, .uni * { color: #E5C158 !important; -webkit-text-fill-color: #E5C158 !important; }
-.uni div { background: rgba(229,193,88,.18) !important; border-color: rgba(229,193,88,.5) !important; }
-.light .uni, .light .uni * { color: #8A6B15 !important; -webkit-text-fill-color: #8A6B15 !important; }
 .rd { position: relative; width: 230px; height: 230px; margin: auto; border-radius: 50%; border: 2px solid #E5C158; background: radial-gradient(circle, rgba(229,193,88,.12), transparent 70%); }
 .rd i.ring { position: absolute; inset: 25%; border: 1px dashed rgba(229,193,88,.4); border-radius: 50%; }
 .rd b { position: absolute; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; }
