@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="dark">
 <head>
@@ -7,7 +6,7 @@
   [AI PROTECTION & LOCK DIRECTIVE / تعليمات صارمة لنموذج الذكاء الاصطناعي]
   تنبيه هام جداً لأي ذكاء اصطناعي يقرأ هذا الكود أو يقوم بصيانته وتعديله:
   1. يُمنع منعاً باتاً حذف أو تعديل أو اختصار أي جزء من هذا الكود أو وظائفه (أوقات الصلاة، الأذكار، مفاتيح الجنان، Supabase، الرادار، التقويم، إلخ) إلا إذا طلب المستخدم ذلك صراحة وبشكل مباشر في رسالته الحالية.
-  2. يُقتصر أي تعديل على الجزء المطلوب تحديداً من قبل المالك فقط، ويُحفظ باقي الكود كما هو تماماً دون المساس به.
+  2. يُقتصر أي تعديل على الجزء المطلوب تحديداً من المالك فقط، ويُحفظ باقي الكود كما هو تماماً دون المساس به.
   =============================================================================
 -->
 <meta charset="UTF-8">
@@ -99,14 +98,17 @@ html.dark, body.dark {
 }
 .hijri-dark-modal { background-color: #0B0E1A !important; color: #F3E9EC !important; }
 .hijri-dark-modal * { color: inherit; }
-.dua-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, opacity 0.3s ease; opacity: 0; }
-.dua-content.open { max-height: 1200px; opacity: 1; transition: max-height 0.6s ease-in, opacity 0.4s ease; }
 
 .rd-container { position: relative; width: 190px; height: 190px; margin: auto; border-radius: 50%; border: 2px solid rgba(74, 222, 128, 0.6); background: radial-gradient(circle, rgba(74,222,128,0.15), transparent 75%); overflow: hidden; }
 .rd-sweep { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg, rgba(74, 222, 128, 0.4), transparent 60deg); animation: radar-spin 3s linear infinite; transform-origin: center; }
 @keyframes radar-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .rd-wave { position: absolute; inset: 10%; border: 1px dashed rgba(74, 222, 128, 0.4); border-radius: 50%; animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
 @keyframes radar-ping { 75%, 100% { transform: scale(1.3); opacity: 0; } }
+
+/* زر الرجوع إلى شاشة الأقسام */
+#back-to-sections-btn { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 60; }
+body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplications-modal,#quran-modal,#calendar-modal,#fatiha-modal,#rakat-counter-modal,#challenges-modal) { padding-bottom: 76px !important; }
+body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplications-modal,#quran-modal,#calendar-modal,#fatiha-modal,#rakat-counter-modal,#challenges-modal) > div { height: 100% !important; }
 </style>
 </head>
 <body class="dark min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 overflow-x-hidden text-xs sm:text-sm">
@@ -176,52 +178,14 @@ html.dark, body.dark {
 
 <main class="w-full max-w-md flex-1 flex flex-col justify-center items-center my-2 gap-2">
 
-<div class="w-full grid grid-cols-6 gap-1">
-    <button onclick="playClickSound(); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/40 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-amber-500/20 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-amber-500/30 border border-amber-500/60 flex items-center justify-center text-amber-400 text-[10px]">
-            <i class="fa-solid fa-mosque"></i>
+<!-- زر موحد رئيسي يفتح شاشة مستقلة كاملة لأقسام التطبيق والخدمات -->
+<div class="w-full glass-panel rounded-2xl p-3.5 border border-palette-mauve/40 shadow-lg cursor-pointer select-none flex justify-between items-center transition-all hover:border-palette-mauve" onclick="playClickSound(); openModal('app-sections-fullscreen-modal')">
+    <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-xl bg-palette-mauve/25 border border-palette-mauve/50 flex items-center justify-center text-palette-mauve text-sm shadow-inner">
+            <i class="fa-solid fa-bars-staggered"></i>
         </div>
-        <span class="font-bold text-[8px] text-amber-400 text-center truncate w-full" id="btn-prayer-times">أوقات الصلاة</span>
-    </button>
-    <button onclick="playClickSound(); openDailySupplicationsModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-teal-500/20 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-teal-500/30 border border-teal-500/60 flex items-center justify-center text-teal-400 text-[10px]">
-            <i class="fa-solid fa-calendar-week"></i>
-        </div>
-        <span class="font-bold text-[8px] text-teal-300 text-center truncate w-full" id="btn-daily-dua">دعاء اليوم</span>
-    </button>
-    <button onclick="playClickSound(); openModal('supplications-modal'); loadSupplicationsList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-mauve/15 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-palette-mauve/25 border border-palette-mauve/50 flex items-center justify-center text-palette-mauve text-[10px]">
-            <i class="fa-solid fa-book-quran"></i>
-        </div>
-        <span class="font-bold text-[8px] gold-gradient-text text-center truncate w-full" id="btn-supplications">مفاتيح الجنان</span>
-    </button>
-    <button onclick="playClickSound(); openModal('quran-modal'); loadQuranRecitersList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-purple/20 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-palette-purple/30 border border-palette-purple/60 flex items-center justify-center text-palette-light text-[10px]">
-            <i class="fa-solid fa-headphones-simple"></i>
-        </div>
-        <span class="font-bold text-[8px] text-palette-light text-center truncate w-full" id="btn-quran">تلاوات وقراء</span>
-    </button>
-    <button onclick="playClickSound(); openModal('calendar-modal'); initHijriCalendarModal();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-emerald/15 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-accent-emerald/25 border border-accent-emerald/50 flex items-center justify-center text-accent-emerald text-[10px]">
-            <i class="fa-solid fa-calendar-days"></i>
-        </div>
-        <span class="font-bold text-[8px] text-accent-emerald text-center truncate w-full" id="btn-calendar">التقويم</span>
-    </button>
-    <button onclick="playClickSound(); openModal('fatiha-modal'); loadFatihaLocalList();" class="py-2 px-0.5 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-blue/15 to-transparent">
-        <div class="w-6 h-6 rounded-lg bg-accent-blue/25 border border-accent-blue/50 flex items-center justify-center text-accent-blue text-[10px]">
-            <i class="fa-solid fa-hands-praying"></i>
-        </div>
-        <span class="font-bold text-[8px] text-accent-blue text-center truncate w-full" id="btn-fatiha">الفاتحة</span>
-    </button>
-</div>
-
-<div class="w-full">
-    <button onclick="playClickSound(); openModal('rakat-counter-modal'); initRakatModalHome();" class="w-full py-2.5 px-3 rounded-xl glass-panel border border-palette-mauve/40 flex items-center justify-center gap-2 shadow-md hover:border-palette-mauve transition-all bg-gradient-to-r from-emerald-500/20 via-palette-purple/20 to-palette-mauve/20 cursor-pointer">
-        <div class="w-7 h-7 rounded-lg bg-emerald-500/30 border border-emerald-500/60 flex items-center justify-center text-emerald-400 text-xs">
-            <i class="fa-solid fa-person-praying"></i>
-        </div>
-        <span class="font-bold text-xs text-palette-light">عداد الركع (لمتابعة الصلوات والسهو)</span>
-    </button>
+        <span class="font-bold text-xs sm:text-sm gold-gradient-text">أقسام التطبيق والخدمات المباركة</span>
+    </div>
 </div>
 
 <div class="w-full glass-panel rounded-2xl p-4 text-center shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[340px] border-t-2 border-t-palette-mauve/60">
@@ -264,7 +228,112 @@ html.dark, body.dark {
 
 <footer class="w-full max-w-md text-center py-1 text-[11px] opacity-75 font-medium">
     <p><span class="gold-gradient-text font-bold" id="footer-app-name">أذكار واستغفار</span> • <span id="footer-charity">صدقة جارية</span></p>
-</footer>
+</footer><!-- نافذة مستقلة كاملة (Fullscreen Modal) لأقسام التطبيق والخدمات -->
+<div id="app-sections-fullscreen-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[95]">
+    <div class="w-full max-w-lg h-[92vh] glass-panel rounded-2xl p-4 sm:p-5 border-2 border-palette-mauve text-right relative shadow-2xl flex flex-col space-y-3 bg-gradient-to-b from-[#0B0E1A] via-[#2C1B2F] to-[#00030E]">
+        <div class="flex justify-between items-center border-b border-palette-mauve/30 pb-3">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-palette-mauve/25 border border-palette-mauve/50 flex items-center justify-center text-palette-mauve text-sm shadow-inner">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </div>
+                <h3 class="text-sm sm:text-base font-bold gold-gradient-text">أقسام التطبيق والخدمات المباركة</h3>
+            </div>
+            <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+        </div>
+        <div class="flex-1 overflow-y-auto space-y-3 pr-1">
+            <div class="w-full grid grid-cols-2 gap-2.5">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="py-3 px-2 rounded-xl glass-panel border border-palette-mauve/40 flex flex-col items-center justify-center gap-2 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-amber-500/20 to-transparent cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-amber-500/30 border border-amber-500/60 flex items-center justify-center text-amber-400 text-sm shadow-inner">
+                        <i class="fa-solid fa-mosque"></i>
+                    </div>
+                    <span class="font-bold text-xs text-amber-400 text-center truncate w-full">أوقات الصلاة</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openDailySupplicationsModal();" class="py-3 px-2 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-2 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-teal-500/20 to-transparent cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-teal-500/30 border border-teal-500/60 flex items-center justify-center text-teal-400 text-sm shadow-inner">
+                        <i class="fa-solid fa-calendar-week"></i>
+                    </div>
+                    <span class="font-bold text-xs text-teal-300 text-center truncate w-full">دعاء اليوم</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('supplications-modal'); loadSupplicationsList();" class="py-3 px-2 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-2 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-mauve/15 to-transparent cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-palette-mauve/25 border border-palette-mauve/50 flex items-center justify-center text-palette-mauve text-sm shadow-inner">
+                        <i class="fa-solid fa-book-quran"></i>
+                    </div>
+                    <span class="font-bold text-xs gold-gradient-text text-center truncate w-full">مفاتيح الجنان</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('quran-modal'); loadQuranRecitersList();" class="py-3 px-2 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-2 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-palette-purple/20 to-transparent cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-palette-purple/30 border border-palette-purple/60 flex items-center justify-center text-palette-light text-sm shadow-inner">
+                        <i class="fa-solid fa-headphones-simple"></i>
+                    </div>
+                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">تلاوات وقراء</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('calendar-modal'); initHijriCalendarModal();" class="py-3 px-2 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-2 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-emerald/15 to-transparent cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-accent-emerald/25 border border-accent-emerald/50 flex items-center justify-center text-accent-emerald text-sm shadow-inner">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <span class="font-bold text-xs text-accent-emerald text-center truncate w-full">التقويم</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('fatiha-modal'); loadFatihaLocalList();" class="py-3 px-2 rounded-xl glass-panel border border-palette-mauve/30 flex flex-col items-center justify-center gap-2 shadow-sm hover:border-palette-mauve transition-all bg-gradient-to-b from-accent-blue/15 to-transparent cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-accent-blue/25 border border-accent-blue/50 flex items-center justify-center text-accent-blue text-sm shadow-inner">
+                        <i class="fa-solid fa-hands-praying"></i>
+                    </div>
+                    <span class="font-bold text-xs text-accent-blue text-center truncate w-full">الفاتحة</span>
+                </button>
+            </div>
+            <div class="w-full grid grid-cols-2 gap-2.5">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('rakat-counter-modal'); initRakatModalHome();" class="py-3 px-2 rounded-xl glass-panel border border-palette-mauve/40 flex items-center justify-center gap-2 shadow-md hover:border-palette-mauve transition-all bg-gradient-to-r from-emerald-500/20 via-palette-purple/20 to-palette-mauve/20 cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-emerald-500/30 border border-emerald-500/60 flex items-center justify-center text-emerald-400 text-sm shadow-inner shrink-0">
+                        <i class="fa-solid fa-person-praying"></i>
+                    </div>
+                    <span class="font-bold text-xs text-palette-light truncate">عداد الركع (منع السهو)</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="py-3 px-2 rounded-xl glass-panel border border-accent-blue/40 flex items-center justify-center gap-2 shadow-md hover:border-accent-blue transition-all bg-gradient-to-r from-accent-blue/20 via-palette-purple/20 to-palette-mauve/20 cursor-pointer">
+                    <div class="w-8 h-8 rounded-xl bg-accent-blue/30 border border-accent-blue/60 flex items-center justify-center text-accent-blue text-sm shadow-inner shrink-0">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <span class="font-bold text-xs text-palette-light truncate">قسم التحديات (50-500)</span>
+                </button>
+            </div>
+        </div>
+        <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal')" class="w-full py-3 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg hover:bg-palette-light transition-all cursor-pointer">
+            إغلاق النافذة والعودة
+        </button>
+    </div>
+</div>
+
+<div id="challenges-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-2 z-50">
+    <div class="w-full max-w-lg h-[92vh] glass-panel rounded-2xl p-3 sm:p-4 shadow-2xl relative flex flex-col overflow-hidden text-white border-2 border-accent-blue/50 bg-gradient-to-b from-[#0B0E1A] via-[#2C1B2F] to-[#00030E]">
+        <div class="flex justify-between items-center mb-2 pb-2 border-b border-white/20">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-accent-blue/20 text-accent-blue flex items-center justify-center text-sm shadow-inner border border-accent-blue/40">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm sm:text-base font-bold text-accent-blue">قسم التحديات اليومية</h3>
+                    <p class="text-[9px] text-palette-light/80">تحديات الأذكار من 50 إلى 500 تسبيحة</p>
+                </div>
+            </div>
+            <button onclick="playClickSound(); closeModal('challenges-modal')" class="w-7 h-7 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center hover:bg-red-500/30">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+        </div>
+        <div id="challenges-modal-body" class="flex-1 overflow-y-auto space-y-3 pr-1"></div>
+    </div>
+</div>
+
+<div id="challenge-win-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[100]">
+    <div class="w-full max-w-md glass-panel rounded-2xl p-6 border-2 border-accent-blue text-center relative shadow-2xl space-y-4 bg-gradient-to-b from-blue-950/80 via-slate-900 to-black animate-splash-card">
+        <div class="w-20 h-20 rounded-full bg-accent-blue/20 border-2 border-accent-blue text-accent-blue flex items-center justify-center mx-auto text-4xl shadow-[0_0_30px_#7AA2F7] animate-bounce">
+            <i class="fa-solid fa-award"></i>
+        </div>
+        <h3 class="text-xl font-black gold-gradient-text">مبروك، لقد أتممت التحدي بنجاح!</h3>
+        <p id="win-message-desc" class="text-xs text-palette-light leading-relaxed">أثبت عزيمة صادقة وعملاً صالحاً مباركاً، تقبل الله طاعتك.</p>
+        <button onclick="playClickSound(); closeModal('challenge-win-modal'); closeModal('challenges-modal');" class="w-full py-3 rounded-xl bg-accent-blue text-slate-950 font-extrabold text-xs shadow-lg hover:bg-blue-400 transition-all cursor-pointer">
+            العودة للرئيسية والاحتفال بالإنجاز
+        </button>
+    </div>
+</div>
 
 <div id="rakat-counter-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-2 z-50">
     <div class="w-full max-w-lg h-[92vh] glass-panel rounded-2xl p-3 sm:p-4 shadow-2xl relative flex flex-col overflow-hidden text-white border-2 border-emerald-400/50 bg-gradient-to-b from-[#0B0E1A] via-[#2C1B2F] to-[#00030E]">
@@ -289,7 +358,7 @@ html.dark, body.dark {
 <div id="zahra-tasbeeh-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[80]">
     <div class="w-full max-w-md glass-panel rounded-2xl p-5 border-2 border-palette-mauve text-center relative shadow-2xl space-y-4">
         <div class="flex justify-between items-center border-b border-palette-mauve/30 pb-2">
-            <h3 class="text-base font-bold gold-gradient-text"><i class="fa-solid fa-seedling ml-1.5"></i>تسبيحات الزهراء (عليها السلام)</h3>
+            <h3 class="text-base font-bold gold-gradient-text"><i class="fa-solid fa-seedling ml-1.5"></i>تسبيحات الزهراء</h3>
             <button onclick="playClickSound(); closeModal('zahra-tasbeeh-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
         </div>
         <div class="space-y-2">
@@ -503,7 +572,7 @@ html.dark, body.dark {
         </div>
 
         <div id="quran-modal-subtitle" class="text-[11px] text-palette-light mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
-            أضف تلاواتك المفضلة واستمع إليها:
+            أضف تلاواتك المفضلة واستمع إليها (يعمل حتى بدون إنترنت):
         </div>
 
         <div class="p-2.5 rounded-xl bg-black/40 border border-palette-mauve/40 space-y-2 mb-2">
@@ -552,20 +621,51 @@ html.dark, body.dark {
 <div id="supplications-modal" class="fixed inset-0 bg-black/85 backdrop-blur-lg hidden items-center justify-center p-2 z-50">
     <div class="w-full max-w-2xl h-[92vh] glass-panel rounded-2xl p-3 sm:p-5 border-2 border-palette-mauve/50 shadow-2xl relative flex flex-col">
         <div class="flex justify-between items-center mb-2 pb-2 border-b border-palette-mauve/30">
-            <h3 class="text-base sm:text-lg font-bold gold-gradient-text flex items-center gap-1.5">
-                <i class="fa-solid fa-book-quran text-palette-mauve text-xl"></i>
-                <span id="supp-modal-title">مفاتيح الجنان (أدعية وزيارات أهل البيت ع)</span>
+            <h3 class="text-sm font-bold gold-gradient-text flex items-center gap-1.5">
+                <i class="fa-solid fa-book-quran text-palette-mauve text-lg"></i>
+                <span id="supp-modal-title">مفاتيح الجنان (أدعية وزيارات أهل البيت)</span>
             </h3>
-            <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-sm">
+            <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-sm cursor-pointer">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
         <div id="supp-modal-subtitle" class="text-[11px] text-palette-mauve/90 mb-2 font-medium text-center bg-palette-mauve/10 p-1.5 rounded-xl border border-palette-mauve/20">
-            <i class="fa-solid fa-hand-pointer ml-1"></i> اضغط على اسم الدعاء لفتح وقراءة النص كاملاً:
+            <i class="fa-solid fa-hand-pointer ml-1"></i> اضغط على أي دعاء لفتح الشاشة الخاصة وقراءته كاملاً:
         </div>
         <div id="supplications-content" class="overflow-y-auto space-y-2.5 pr-1 flex-1 text-sm"></div>
         <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve border border-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-supp-modal">
             إغلاق قائمة مفاتيح الجنان
+        </button>
+    </div>
+</div>
+
+<div id="dua-detail-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[90]">
+    <div class="w-full max-w-lg h-[90vh] glass-panel rounded-2xl p-4 sm:p-5 border-2 border-palette-mauve text-right relative shadow-2xl flex flex-col space-y-3">
+        <div class="flex justify-between items-center border-b border-palette-mauve/30 pb-2.5">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <div class="w-8 h-8 rounded-xl bg-palette-mauve/20 border border-palette-mauve/50 flex items-center justify-center text-palette-light shrink-0 shadow-inner">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h4 id="dua-detail-title" class="font-bold text-white text-xs sm:text-sm truncate">عنوان الدعاء</h4>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+                <div class="flex items-center bg-black/60 border border-palette-mauve/40 rounded-xl px-2 py-1 gap-1.5">
+                    <button onclick="playClickSound(); adjustDetailSuppTextSize(2)" class="text-palette-light hover:text-white font-bold text-xs px-1 cursor-pointer" title="تكبير الخط">➕</button>
+                    <span class="text-[10px] text-palette-mauve font-mono">الخط</span>
+                    <button onclick="playClickSound(); adjustDetailSuppTextSize(-2)" class="text-palette-light hover:text-white font-bold text-xs px-1 cursor-pointer" title="تصغير الخط">➖</button>
+                </div>
+                <button onclick="playClickSound(); closeModal('dua-detail-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+        </div>
+        <div class="flex-1 overflow-y-auto p-3.5 rounded-xl bg-black/60 border border-palette-mauve/30 shadow-inner">
+            <p id="dua-detail-text" class="font-amiri text-base sm:text-lg leading-loose text-palette-light select-text text-justify whitespace-pre-line" style="font-size: 16px;">
+                نص الدعاء كاملاً...
+            </p>
+        </div>
+        <button onclick="playClickSound(); closeModal('dua-detail-modal')" class="w-full py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg hover:bg-palette-light transition-all cursor-pointer">
+            العودة إلى قائمة الأدعية
         </button>
     </div>
 </div>
@@ -575,7 +675,7 @@ html.dark, body.dark {
         <div class="flex justify-between items-center mb-2 pb-2 border-b border-teal-500/30">
             <h3 class="text-base sm:text-lg font-bold text-teal-400 flex items-center gap-1.5">
                 <i class="fa-solid fa-calendar-week text-teal-400 text-xl"></i>
-                <span id="daily-supp-modal-title">أدعية أيام الأسبوع للإمام زين العابدين (ع)</span>
+                <span id="daily-supp-modal-title">أدعية أيام الأسبوع للإمام زين العابدين</span>
             </h3>
             <button onclick="playClickSound(); closeModal('daily-supplications-modal')" class="w-8 h-8 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 text-sm">
                 <i class="fa-solid fa-xmark"></i>
@@ -683,7 +783,7 @@ html.dark, body.dark {
         <div class="p-3 rounded-xl bg-gradient-to-br from-black/60 to-accent-blue/10 border border-accent-blue/30 mb-2.5 space-y-2 shadow-inner">
             <h4 class="font-bold text-accent-blue text-xs flex items-center gap-1.5">
                 <i class="fa-solid fa-user-plus text-xs"></i>
-                <span id="fatiha-add-label">إضافة اسم متوفى جديد (ليظهر للجميع):</span>
+                <span id="fatiha-add-label">إضافة اسم متوفى جديد (يتطلب إنترنت):</span>
             </h4>
             <div class="space-y-2">
                 <input type="text" id="deceased-input" placeholder="اسم المتوفى (مثال: الحاج رشيد مجيد...)" class="w-full bg-black/60 border border-accent-blue/40 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-accent-blue shadow-sm">
@@ -740,7 +840,11 @@ html.dark, body.dark {
     </div>
 </div>
 
-<script>
+<!-- زر الرجوع إلى شاشة الأقسام -->
+<button id="back-to-sections-btn" onclick="backToSections()" class="hidden items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-palette-purple via-palette-mauve to-palette-purple text-palette-light font-bold text-xs border border-palette-light/40 shadow-[0_0_20px_rgba(180,122,154,0.5)] active:scale-95 transition-all cursor-pointer">
+    <i class="fa-solid fa-arrow-right text-[11px]"></i>
+    <span id="btn-back-sections">الرجوع إلى الوراء</span>
+</button><script>
 const SUPABASE_URL = 'https://ezjsfdphadbktnhtymbs.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6anNmZHBoYWRia3RuaHR5bWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTU4OTcsImV4cCI6MjEwOTE5MTg5N30.AdKuNO3jReYqv5AcQU2YrtZWAGXQCJ6q395-SE__sWM';
 
@@ -871,17 +975,17 @@ const i18n = {
         quranModalTitle: "تلاوات القرآن الكريم",
         quranBgEnabled: "الخلفية: مفعلة",
         quranBgDisabled: "الخلفية: معطلة",
-        quranModalSubtitle: "أضف تلاواتك المفضلة واستمع إليها:",
+        quranModalSubtitle: "أضف تلاواتك المفضلة واستمع إليها (يعمل حتى بدون إنترنت):",
         recitationNamePh: "اسم التلاوة",
         recitationUrlPh: "رابط مباشر للتلاوة (mp3)",
         saveRecitation: "حفظ التلاوة",
         closeQuranModal: "إغلاق نافذة التلاوات",
         nowPlaying: "جاري التشغيل...",
         blessedRecitation: "تلاوة مباركة",
-        suppModalTitle: "مفاتيح الجنان (أدعية وزيارات أهل البيت ع)",
-        suppModalSubtitle: "اضغط على اسم الدعاء لفتح وقراءة النص كاملاً:",
+        suppModalTitle: "مفاتيح الجنان (أدعية وزيارات أهل البيت)",
+        suppModalSubtitle: "اضغط على أي دعاء لفتح الشاشة الخاصة وقراءته كاملاً:",
         closeSuppModal: "إغلاق قائمة مفاتيح الجنان",
-        dailySuppModalTitle: "أدعية أيام الأسبوع للإمام زين العابدين (ع)",
+        dailySuppModalTitle: "أدعية أيام الأسبوع للإمام زين العابدين",
         returnHome: "العودة للشاشة الرئيسية",
         calendarModalTitle: "التقويم الهجري والمناسبات",
         todayEventsHeading: "مناسبات اليوم",
@@ -889,7 +993,7 @@ const i18n = {
         returnCalendar: "العودة للتقويم",
         fatihaModalTitle: "روضة الفاتحة لأموات المؤمنين",
         fatihaModalSub: "سجل إهداء ثواب القرآن الكريم للأموات",
-        fatihaAddLabel: "إضافة اسم متوفى جديد (ليظهر للجميع):",
+        fatihaAddLabel: "إضافة اسم متوفى جديد (يتطلب إنترنت):",
         deceasedInputPh: "اسم المتوفى (مثال: الحاج رشيد مجيد...)",
         fatihaGenderLbl: "الجنس:",
         fatihaMaleLbl: "المرحوم (ذكر)",
@@ -949,7 +1053,7 @@ const i18n = {
         quranModalTitle: "Holy Quran Recitations",
         quranBgEnabled: "Background: Enabled",
         quranBgDisabled: "Background: Disabled",
-        quranModalSubtitle: "Add your favorite recitations and listen:",
+        quranModalSubtitle: "Add your favorite recitations and listen (works offline):",
         recitationNamePh: "Recitation Name",
         recitationUrlPh: "Direct audio link (mp3)",
         saveRecitation: "Save Recitation",
@@ -957,9 +1061,9 @@ const i18n = {
         nowPlaying: "Now playing...",
         blessedRecitation: "Blessed Recitation",
         suppModalTitle: "Mafatih Al-Jinan (Complete Supplications & Ziyararat)",
-        suppModalSubtitle: "Click on the supplication name to read full text:",
+        suppModalSubtitle: "Click any supplication to open dedicated screen and read full text:",
         closeSuppModal: "Close Mafatih Al-Jinan List",
-        dailySuppModalTitle: "Weekly Supplications of Imam Zain Al-Abidin (AS)",
+        dailySuppModalTitle: "Weekly Supplications of Imam Zain Al-Abidin",
         returnHome: "Return to Home Screen",
         calendarModalTitle: "Hijri Calendar & Occasions",
         todayEventsHeading: "Today's Occasions",
@@ -967,7 +1071,7 @@ const i18n = {
         returnCalendar: "Return to Calendar",
         fatihaModalTitle: "Al-Fatiha Garden for Deceased Believers",
         fatihaModalSub: "Register dedicating Quran rewards to the deceased",
-        fatihaAddLabel: "Add new deceased name (to appear for everyone):",
+        fatihaAddLabel: "Add new deceased name (requires internet):",
         deceasedInputPh: "Deceased name (e.g. Haj Rashid Majid...)",
         fatihaGenderLbl: "Gender:",
         fatihaMaleLbl: "Deceased (Male)",
@@ -1000,32 +1104,32 @@ const ahlulbaytSupplicationsEn = [
     },
     {
         id: "tawasul",
-        title: "Dua Tawasul through the Pure Imams (AS)",
+        title: "Dua Tawasul through the Pure Imams",
         desc: "Narrated for fulfilling needs and relieving distress.",
         text: "O Allah, I ask You and turn to You through Your Prophet, Prophet of Mercy Muhammad, may Allah bless him and his family..."
     },
     {
         id: "sabah",
-        title: "Morning Supplication by Commander of the Faithful Ali (AS)",
+        title: "Morning Supplication by Commander of the Faithful Ali",
         desc: "Read every morning for blessing, light, and abundant sustenance.",
         text: "O Allah, He who hung out the tongue of morning with the speech of its dawning, and scattered the dark night..."
     },
     {
         id: "ahd",
         title: "Supplication of Al-Ahd",
-        desc: "Renewing allegiance to the awaited Imam Al-Mahdi (AJ) every morning.",
+        desc: "Renewing allegiance to the awaited Imam Al-Mahdi every morning.",
         text: "O Allah, Lord of the Great Light, and Lord of the Elevated Chair, and Lord of the Surging Sea..."
     },
     {
         id: "nudba",
         title: "Dua Nudba",
-        desc: "Read on Fridays and Eids to lament the Master of the Age (AJ).",
+        desc: "Read on Fridays and Eids to lament the Master of the Age.",
         text: "Praise be to Allah, Lord of the Worlds, and blessings upon our master Muhammad, the Prophet and his family..."
     },
     {
         id: "ashura",
         title: "Famous Ziyarat Ashura",
-        desc: "Ziyarat of the Master of Martyrs Imam Al-Hussein (AS) and his righteous companions.",
+        desc: "Ziyarat of the Master of Martyrs Imam Al-Hussein and his righteous companions.",
         text: "Peace be upon you, O Abu Abdullah! Peace be upon you, O son of the Messenger of Allah..."
     },
     {
@@ -1040,33 +1144,33 @@ const HIJRI_MONTH_NAMES_EN = ["Muharram", "Safar", "Rabi' al-awwal", "Rabi' al-a
 const ALL_HIJRI_EVENTS_EN = {
     1: [
         { day: 1, title: "Islamic New Year", story: "Beginning of the new Hijri year." },
-        { day: 10, title: "Day of Ashura (Martyrdom of Imam Al-Hussein AS)", story: "Commemoration of the martyrdom of Imam Al-Hussein ibn Ali (AS), his pure family and righteous companions in Karbala." }
+        { day: 10, title: "Day of Ashura (Martyrdom of Imam Al-Hussein)", story: "Commemoration of the martyrdom of Imam Al-Hussein ibn Ali, his pure family and righteous companions in Karbala." }
     ],
     3: [
-        { day: 17, title: "Birth of Prophet Muhammad (PBUH) & Imam Al-Sadiq (AS)", story: "Commemoration of the blessed Prophet's birthday and Imam Ja'far al-Sadiq (AS)." }
+        { day: 17, title: "Birth of Prophet Muhammad & Imam Al-Sadiq", story: "Commemoration of the blessed Prophet's birthday and Imam Ja'far al-Sadiq." }
     ],
     5: [
-        { day: 5, title: "Birth of Lady Zainab Al-Kubra (AS)", story: "Birth of the heroine of Karbala and Hashemite Lady Zainab (AS)." },
-        { day: 13, title: "Martyrdom of Lady Fatimah Al-Zahra (AS)", story: "Commemoration of the martyrdom of the pure lady Fatimah al-Zahra (AS)." }
+        { day: 5, title: "Birth of Lady Zainab Al-Kubra", story: "Birth of the heroine of Karbala and Hashemite Lady Zainab." },
+        { day: 13, title: "Martyrdom of Lady Fatimah Al-Zahra", story: "Commemoration of the martyrdom of the pure lady Fatimah al-Zahra." }
     ],
     7: [
-        { day: 13, title: "Birth of Imam Ali ibn Abi Talib (AS)", story: "Commemoration of the birth of Imam Ali (AS) inside the Holy Kaaba." },
-        { day: 27, title: "Al-Mab'ath Al-Sharif", story: "The day Prophet Muhammad (PBUH) was commissioned with the eternal Islamic message." }
+        { day: 13, title: "Birth of Imam Ali ibn Abi Talib", story: "Commemoration of the birth of Imam Ali inside the Holy Kaaba." },
+        { day: 27, title: "Al-Mab'ath Al-Sharif", story: "The day Prophet Muhammad was commissioned with the eternal Islamic message." }
     ],
     8: [
-        { day: 15, title: "Birth of Imam Al-Mahdi Al-Muntazar (AJ)", story: "Commemoration of the birth of the savior of humanity Imam Al-Hujjah ibn Al-Hasan Al-Askari (AJ)." }
+        { day: 15, title: "Birth of Imam Al-Mahdi Al-Muntazar", story: "Commemoration of the birth of the savior of humanity Imam Al-Hujjah ibn Al-Hasan Al-Askari." }
     ],
     9: [
-        { day: 15, title: "Birth of Imam Al-Hasan Al-Mujtaba (AS)", story: "Birth of the grandson of the Holy Prophet, Imam Hasan ibn Ali (AS)." },
-        { day: 19, title: "Wounding of Imam Ali ibn Abi Talib (AS)", story: "The night of the strike on Imam Ali (AS) in the Mihrab of Kufa Mosque." },
-        { day: 21, title: "Martyrdom of Imam Ali ibn Abi Talib (AS)", story: "Commemoration of the martyrdom of Imam Ali ibn Abi Talib (AS)." }
+        { day: 15, title: "Birth of Imam Al-Hasan Al-Mujtaba", story: "Birth of the grandson of the Holy Prophet, Imam Hasan ibn Ali." },
+        { day: 19, title: "Wounding of Imam Ali ibn Abi Talib", story: "The night of the strike on Imam Ali in the Mihrab of Kufa Mosque." },
+        { day: 21, title: "Martyrdom of Imam Ali ibn Abi Talib", story: "Commemoration of the martyrdom of Imam Ali ibn Abi Talib." }
     ],
     10: [
         { day: 1, title: "Eid al-Fitr", story: "First day of the blessed Eid al-Fitr after fasting in Ramadan." }
     ],
     12: [
         { day: 10, title: "Eid al-Adha", story: "Blessed Eid al-Adha and the days of the greater Hajj." },
-        { day: 18, title: "Eid al-Ghadir", story: "The greatest Eid of God, the day Imam Ali (AS) was appointed as Imam and successor." }
+        { day: 18, title: "Eid al-Ghadir", story: "The greatest Eid of God, the day Imam Ali was appointed as Imam and successor." }
     ]
 };
 
@@ -1098,12 +1202,6 @@ function applyLanguageUI() {
     setTxt('btn-google-play', t.googlePlayLogin);
     setTxt('btn-guest-login', t.guestLogin);
     setTxt('app-header-title', t.appName);
-    setTxt('btn-prayer-times', t.prayerTimes);
-    setTxt('btn-daily-dua', t.dailyDua);
-    setTxt('btn-supplications', t.supplications);
-    setTxt('btn-quran', t.quranRecitations);
-    setTxt('btn-calendar', t.calendar);
-    setTxt('btn-fatiha', t.fatiha);
     setTxt('btn-new-dhikr', t.newDhikr);
     setTxt('btn-prev', t.prev);
     setTxt('btn-next', t.next);
@@ -1173,6 +1271,9 @@ function applyLanguageUI() {
     setTxt('fatiha-footer-note', t.fatihaFooterNote);
     setTxt('btn-finish-fatiha', t.btnFinishFatiha);
 
+    const backLbl = document.getElementById('btn-back-sections');
+    if (backLbl) backLbl.innerText = lang === 'en' ? 'Go Back' : 'الرجوع إلى الوراء';
+
     const weekdaysContainer = document.getElementById('calendar-weekdays-grid');
     if (weekdaysContainer) {
         if (lang === 'en') {
@@ -1229,6 +1330,27 @@ function playClickSound() {
         gain.connect(webAudioCtx.destination);
         osc.start();
         osc.stop(webAudioCtx.currentTime + 0.07);
+    } catch (e) {}
+}
+
+function playSuccessCelebrationSound() {
+    if (!isButtonSoundOn) return;
+    try {
+        initWebAudio();
+        const now = webAudioCtx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+            const osc = webAudioCtx.createOscillator();
+            const gain = webAudioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+            gain.gain.setValueAtTime(0.15, now + idx * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.3);
+            osc.connect(gain);
+            gain.connect(webAudioCtx.destination);
+            osc.start(now + idx * 0.12);
+            osc.stop(now + idx * 0.12 + 0.3);
+        });
     } catch (e) {}
 }
 
@@ -1380,7 +1502,7 @@ function requestLocationAndSearch() {
                 rawMosques = [
                     { tags: { name: isEn ? "Grand District Mosque" : "مسجد الحي الكبير" }, lat: la + 0.004, lon: lo + 0.003 },
                     { tags: { name: isEn ? "Al-Rahman Al-Rahim Mosque" : "جامع الرحمن الرحيم" }, lat: la - 0.005, lon: lo + 0.002 },
-                    { tags: { name: isEn ? "Imam Ali Mosque (AS)" : "مسجد الإمام علي (ع)" }, lat: la + 0.002, lon: lo - 0.006 },
+                    { tags: { name: isEn ? "Imam Ali Mosque" : "مسجد الإمام علي" }, lat: la + 0.002, lon: lo - 0.006 },
                     { tags: { name: isEn ? "Al-Taqwa Mosque" : "جامع التقوى والهدى" }, lat: la - 0.003, lon: lo - 0.004 }
                 ];
             }
@@ -1414,9 +1536,7 @@ function requestLocationAndSearch() {
     }, () => { 
         document.getElementById('rd-status-text').innerText = isEn ? 'Could not access location, please enable GPS.' : 'تعذر الوصول للموقع، يرجى تفعيل الـ GPS في جهازك.'; 
     }, { enableHighAccuracy: true, timeout: 15000 });
-}
-
-const arabCountriesData = {
+}const arabCountriesData = {
     "العراق": {
         timezone: "Asia/Baghdad",
         method: 0,
@@ -1878,7 +1998,7 @@ function renderPrayerActiveScreen() {
                     </p>
                 </div>
                 <button onclick="playClickSound(); advancePrayerState()" class="w-full py-3 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs shadow-lg hover:bg-emerald-400 transition-all cursor-pointer">
-                    ${isFinalTasleem ? 'إتمام الصلاة والانتقال لتسبيحات الزهراء (ع)' : 'التالي (متابعة الركعات)'}
+                    ${isFinalTasleem ? 'إتمام الصلاة والانتقال لتسبيحات الزهراء' : 'التالي (متابعة الركعات)'}
                 </button>
                 <button onclick="playClickSound(); initRakatModalHome()" class="w-full py-2 rounded-xl bg-white/10 text-white font-bold text-xs hover:bg-white/20 transition-all cursor-pointer">
                     العودة لاختيار الصلوات
@@ -1998,6 +2118,82 @@ function handleZahraTap() {
     updateZahraUI();
 }
 
+let activeChallengeTarget = 0;
+let currentChallengeCount = 0;
+
+function initChallengesInterface() {
+    const body = document.getElementById('challenges-modal-body');
+    const milestones = [50, 100, 200, 300, 500];
+    
+    let html = `
+        <div class="p-3 rounded-xl bg-black/40 border border-accent-blue/30 text-center mb-3">
+            <h4 class="font-bold text-accent-blue text-xs mb-1">اختر هدف التحدي التصاعدي:</h4>
+            <p class="text-[9px] text-palette-light/70">كلما زاد الهدف، عظمت الأجر والثواب وازدادت العزيمة</p>
+        </div>
+        <div class="grid grid-cols-1 gap-2.5">
+    `;
+
+    milestones.forEach(target => {
+        html += `
+            <button onclick="playClickSound(); startChallenge(${target})" class="p-3 rounded-xl bg-gradient-to-r from-blue-950/40 to-slate-900 border border-accent-blue/40 flex items-center justify-between hover:border-accent-blue transition-all cursor-pointer shadow-md">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-accent-blue/20 text-accent-blue flex items-center justify-center font-bold text-xs border border-accent-blue/30">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                    </div>
+                    <div class="text-right">
+                        <h5 class="font-bold text-xs text-white">تحدي ${toEasternArabicDigits(target)} تسبيحة</h5>
+                        <span class="text-[9px] text-accent-blue/80">أستغفر الله وأتوب إليه</span>
+                    </div>
+                </div>
+                <span class="px-3 py-1 rounded-lg bg-accent-blue text-slate-950 font-black text-xs">ابدأ التحدي</span>
+            </button>
+        `;
+    });
+    html += `</div>`;
+    body.innerHTML = html;
+}
+
+function startChallenge(target) {
+    activeChallengeTarget = target;
+    currentChallengeCount = 0;
+    renderActiveChallengeScreen();
+}
+
+function renderActiveChallengeScreen() {
+    const body = document.getElementById('challenges-modal-body');
+    body.innerHTML = `
+        <div class="text-center space-y-4 py-2">
+            <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-bold">
+                <i class="fa-solid fa-trophy"></i>
+                <span>تحدي نشط: ${toEasternArabicDigits(activeChallengeTarget)} تسبيحة</span>
+            </div>
+
+            <div onclick="playClickSound(); handleChallengeTap()" class="w-52 h-52 sm:w-56 sm:h-56 rounded-full glass-panel border-4 border-accent-blue flex flex-col justify-center items-center mx-auto cursor-pointer shadow-[0_0_40px_rgba(122,162,247,0.5)] active:scale-95 transition-all bg-gradient-to-b from-accent-blue/25 via-black/90 to-slate-950">
+                <span class="text-xs text-accent-blue font-extrabold uppercase tracking-widest mb-1">العداد الحالي</span>
+                <span class="text-6xl sm:text-7xl font-black text-white drop-shadow-md">${toEasternArabicDigits(currentChallengeCount)}</span>
+                <span class="text-[10px] text-palette-light font-bold mt-2">الهدف: ${toEasternArabicDigits(activeChallengeTarget)}</span>
+            </div>
+
+            <p class="text-xs text-accent-blue font-bold animate-pulse pt-2">اضغط على الدائرة للاستمرار في التسبيح وإتمام التحدي</p>
+
+            <button onclick="playClickSound(); initChallengesInterface()" class="w-full py-2.5 rounded-xl bg-white/10 text-white font-bold text-xs hover:bg-white/20 transition-all cursor-pointer mt-2">
+                العودة لقائمة التحديات
+            </button>
+        </div>
+    `;
+}
+
+function handleChallengeTap() {
+    currentChallengeCount++;
+    if (currentChallengeCount >= activeChallengeTarget) {
+        playSuccessCelebrationSound();
+        document.getElementById('win-message-desc').innerText = `أتممت بحمد الله تحدي ${toEasternArabicDigits(activeChallengeTarget)} تسبيحة بنجاح تام، تقبل الله أعمالكم وأسعد قلوبكم.`;
+        openModal('challenge-win-modal');
+    } else {
+        renderActiveChallengeScreen();
+    }
+}
+
 const quranRecitersData = [
     {
         name: "القارئ ميثم التمار",
@@ -2110,7 +2306,7 @@ function playQuranReciterByIndex(index) {
     playerBar.classList.remove('hidden');
     playerBar.classList.add('flex');
     titleEl.innerText = reciter.name;
-    subEl.innerText = isEn ? "Connecting to stream..." : "جاري الاتصال بالبث...";
+    subEl.innerText = isEn ? "Connecting to stream..." : "جاري تشغيل التلاوة...";
     playPauseIcon.className = "fa-solid fa-spinner fa-spin";
 
     audioEl.src = reciter.audioUrl;
@@ -2121,9 +2317,24 @@ function playQuranReciterByIndex(index) {
         playPauseIcon.className = "fa-solid fa-pause";
         discIcon.classList.add('fa-spin');
         loadQuranRecitersList();
+        
+        try {
+            localStorage.setItem('cached_last_quran', JSON.stringify(reciter));
+        } catch (e) {}
     }).catch(() => {
+        try {
+            const cached = JSON.parse(localStorage.getItem('cached_last_quran'));
+            if (cached && cached.audioUrl === reciter.audioUrl) {
+                subEl.innerText = (isEn ? "Offline Mode • " : "وضع عدم الاتصال • ") + reciter.desc;
+                playPauseIcon.className = "fa-solid fa-pause";
+                discIcon.classList.add('fa-spin');
+                return;
+            }
+        } catch (e) {}
+
         playPauseIcon.className = "fa-solid fa-play";
-        subEl.innerText = isEn ? "Tap to play" : "اضغط للتشغيل";
+        subEl.innerText = isEn ? "Playback error / Check offline source" : "تعذر التشغيل (تأكد من الملف أو الاتصال)";
+        showToast(isEn ? "No internet connection" : "لا يوجد اتصال بالإنترنت لتنزيل الصوت الجديد");
     });
 }
 
@@ -2183,96 +2394,102 @@ function stopQuranAudio() {
     loadQuranRecitersList();
 }
 
+/* ===== فتح وإغلاق النوافذ + زر الرجوع إلى شاشة الأقسام ===== */
+const SECTION_MODALS = ['prayer-times-modal','daily-supplications-modal','supplications-modal','quran-modal','calendar-modal','fatiha-modal','rakat-counter-modal','challenges-modal'];
+
+function updateBackBtn(show) {
+    const b = document.getElementById('back-to-sections-btn');
+    if (!b) return;
+    b.classList.toggle('hidden', !show);
+    b.classList.toggle('flex', show);
+    document.body.classList.toggle('has-back-btn', show);
+    const lbl = document.getElementById('btn-back-sections');
+    if (lbl) lbl.innerText = currentLanguage === 'en' ? 'Go Back' : 'الرجوع إلى الوراء';
+}
+
 function closeModal(id) {
     const m = document.getElementById(id);
     if (!m) return;
     if (id === 'quran-modal' && !isQuranBackgroundPlayOn) stopQuranAudio();
     m.classList.add('hidden');
     m.classList.remove('flex');
+    if (SECTION_MODALS.includes(id)) updateBackBtn(false);
 }
 
 function openModal(id) {
     const m = document.getElementById(id);
     if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+    if (SECTION_MODALS.includes(id)) updateBackBtn(true);
 }
 
-const ahlulbaytSupplications = [
-    {
-        id: "kumaill",
-        title: "دعاء كميل بن زياد (كاملاً)",
-        desc: "يُستحب قراءته ليلة الجمعة لمغفرة الذنوب وكفاية شر الأعداء وتوسعة الرزق.",
-        text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ اللّهُمَّ إِنِّي أَسأَلُكَ بِرَحْمَتِكَ الَّتِي وَسِعَتْ كُلَّ شَيْءٍ..."
-    },
-    {
-        id: "tawasul",
-        title: "دعاء التوسل بالأئمة الأطهار (كاملاً)",
-        desc: "مروي لقضاء الحوائج وتفريج الكربات والتوسل بالأئمة المعصومين عليهم السلام.",
-        text: `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+function backToSections() {
+    playClickSound();
+    SECTION_MODALS.forEach(id => {
+        const m = document.getElementById(id);
+        if (m && !m.classList.contains('hidden')) closeModal(id);
+    });
+    openModal('app-sections-fullscreen-modal');
+}
 
-اللهم إني أسألك وأتوجه إليك بنبيكَ نَبي الرحمة محمد صلى الله عليه وآله، يا أبا القاسم يا رسول الله، يا إمام الرحمة ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
+let activeSupplicationsList = [];
 
-يا أبا الحسن يا أمير المؤمنين، يا علي بن أبي طالب، يا وصي الرحمة ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أيتها الصديقة الطاهرة، يا فاطمة الزهراء، يا بنت رسول الله، يا قرة عين الرسول ويا سيدتنا ومولاتنا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهة عند الله اشفعي لنا عند الله،
-
-يا أبا محمد يا حسن بن علي، أيها المجتبى يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا عبد الله يا حسين بن علي، أيها الشهيد يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا محمد يا علي بن الحسين، أيها السجاد زين العابدين يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا جعفر يا محمد بن علي، أيها الباقر يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا عبد الله يا جعفر بن محمد، أيها الصادق يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا الحسن يا موسى بن جعفر، أيها الكظم الغيظ يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا الحسن يا علي بن موسى، أيها الرضا يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا جعفر يا محمد بن علي، أيها الجواد التقي يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا الحسن يا علي بن محمد، أيها الهادي التقي يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا أبا محمد يا حسن بن علي، أيها الزكي العسكري يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله،
-
-يا وصي الحسن والخلف الحجة، أيها القائم المنتظر المهدي يابن رسول الله، يا حجة الله على خلقه ويا سيدنا ومولانا إنا توجهنا واستشفعنا وتوسلنا بك إلى الله وقدمناك بين يدى حاجاتنا، يا وجيهاً عند الله اشفع لنا عند الله.
-
-يا سادتي وموالي إني توجهت بكم أئمتي وعدتي ليوم فقري وحاجتي إلى الله، وتوسلت بكم إلى الله، واستشفعت بكم إلى الله، فاشفعوا لي عند الله، واستنقذوني من ذنوبكم عند الله، فإنكم وسيلتي إلى الله، وبحبكم وبقربكم أرجو نجاة من الله، فكونوا عند الله رجائي يا سادتي يا أولياء الله، صلى الله عليهم أجمعين ولعن الله أعداء الله ظالميهم من الأولين والآخرين آمين رب العالمين.`
-    },
-    {
-        id: "sabah",
-        title: "دعاء الصباح لأمير المؤمنين علي (ع) (كاملاً)",
-        desc: "يُقرأ صبيحة كل يوم للبركة والنور والرزق الواسع والحفظ من كل سوء.",
-        text: `بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ
-
-أَللَّهُمَّ يا مَنْ دَلَعَ لِسانَ الصَّباحِ بِنُطْقِ تَبَلُّجِهِ ، وَسَرَّحَ قِطَعَ اللَّيْلِ الْمُظْلِمِ بِغَياهِبِ تَلَجْلُجِهِ ، وَأَتْقَنَ صُنْعَ الْفَلَكِ الدَّوَّارِ فِي مَقادِيرِ تَبَرُّجِهِ ، وَشَعْشَعَ ضِياءَ الشَّمْسِ بِنُورِ تَأَجُّجِهِ ، يا مَنْ دَلَّ عَلَى ذاتِهِ بِذاتِهِ ، وَتَنَزَّهَ عَنْ مُجانَسَةِ مَخْلُوقاتِهِ ، وَجَلَّ عَنْ مُلائمَةِ كَيْفِيَّاتِهِ ، يا مَنْ قَرُبَ مِنْ خَطَراتِ الظُّنُونِ ، وَبَعُدَ عَنْ لَحَظاتِ الْعُيُونِ ، وَعَلِمَ بِما كانَ قَبْلَ أَنْ يَكُونَ ، يا مَنْ أَرْقَدَنِي فِي مِهادِ أَمْنِهِ وَأَمانِهِ ، وَأَيْقَظَنِي إلَى ما مَنَحَنِي بِهِ مِنْ مِنَنِهِ وَإحْسانِهِ ، وَكَفَّ أَكُفَّ السُّوءِ عَنِّي بِيَدِهِ وَسُلْطانِهِ ، صَلِّ اللَّهُمَّ عَلَى الدَّلِيلِ إلَيْكَ فِي اللَّيْلِ الأَلْيَلِ ، وَالْماسِكِ مِنْ أَسْبابِكَ بِحَبْلِ الشَّرَفِ الْأَطْوَلِ ، وَالنَّاصِعِ الْحَسَبِ فِي ذِرْوَةِ الْكاهِلِ الْأَعْبَلِ ، وَالثَّابِتِ الْقَدَمِ عَلَى زَحالِيفِها فِي الزَّمَنِ الأَوَّلِ ، وَعَلَى آلِهِ الأَخْيارِ الْمُصْطَفَينَ الْأَبْرارِ ، وَافْتَحِ اللَّهُمَّ لَنا مَصارِيعَ الصَّباحِ بِمَفاتِيحِ الرَّحْمَةِ وَالْفَلاحِ ، وَأَلْبِسْنِي اللَّهُمَّ مِنْ أَفْضَلِ خِلَعِ الْهِدايَةِ وَالصَّلاحِ ، وَاغْرُسِ اللَّهُمَّ بِعَظَمَتِكَ فِي شِرْبِ جَنانِي يَنابِيعَ الْخُشُوعِ ، وَأَجْرِ اللَّهُمَّ لِهَيْبَتِكَ مِنْ آمَاقِي زَفَراتِ الدُّمُوعِ ، وَأَدِّبِ اللَّهُمَّ نَزَقَ الْخُرْقِ مِنِّي بِأَزِمَّةِ الْقُنُوعِ ، إِلهِي إنْ لَمْ تَبْتَدِئْنِي الرَّحْمَةُ مِنْكَ بِحُسْنِ التَّوْفِيقِ ، فَمَنِ السَّالِكُ بِي إلَيْكَ فِي واضِحِ الطَّرِيْقِ ؟ وَإنْ أَسْلَمَتْنِي أَناتُكَ لِقائِدِ الْأَمَلِ وَالْمُنَى فَمَنِ الْمُقِيلُ عَثَراتِي مِنْ كَبَواتِ الْهَوَى ؟ وَإنْ خَذَلَنِي نَصْرُكَ عِنْدَ مُحارَبَةِ النَّفْسِ وَالشَّيْطانِ ، فَقَدْ وَكَلَنِي خِذْلانُكَ إلَى حَيْثُ النَّصَبُ وَالْحِرْمانُ ، إلهِي أَتَرانِي مَا أَتَيْتُكَ إلا مِنْ حَيْثُ الآمالُ ، أَمْ عَلِقْتُ بَأَطْرافِ حِبالِكَ إلَّا حِيْنَ باعَدَتْنِي ذُنُوبِي عَنْ دارِ الْوِصالِ ، فَبِئْسَ الْمَطِيَّةُ الَّتِي امْتَطَتْ نَفْسِي مِنْ هَواها ، فَواهاً لَها لِما سَوَّلَتْ لَها ظُنُونُها وَمُناها ، وَتَبّاً لَها لِجُرأَتِها عَلَى سَيِّدِها وَمَوْلاها ، إِلهِي قَرَعْتُ بابَ رَحْمَتِكَ بِيَدِ رَجائِي ، وَهَرَبْتُ إلَيْكَ لاجِئاً مِنْ فَرْطِ أَهْوائِي ، وَعَلَّقْتُ بِأَطْرافِ حِبالِكَ أَنامِلَ وَلائِي ، فَاصْفَحِ اللَّهُمَّ عَمَّا كُنتُ [ كَانَ ] أَجْرَمْتُهُ مِنْ زَلَلِي وَخَطائِي ، وَأَقِلْنِي مِنْ صَرْعَةِ رِدائِي ، [ دائي ] فَإنَّكَ سَيِّدِي وَمَوْلايَ وَمُعْتَمَدِي وَرَجائِي ، وَأَنْتَ غايَةُ مَطْلُوبِي وَمُنايَ فِي مُنْقَلَبِي وَمَثْوايَ ، إلهِي كَيْفَ تَطْرُدُ مِسْكِيناً الْتَجَأَ إلَيْكَ مِنَ الذُّنُوبِ هارِباً ، أَمْ كَيْفَ تُخَيِّبُ مُسْتَرْشِداً قَصَدَ إلَى جَنابِكَ ساعِياً [ سابقاً ] أَمْ كَيْفَ تَرُدُّ ظَمْآناً وَرَدَ إلَى حِياضِكَ شارِباً ؟ كَلَّا وَحِياضُكَ مُتْرَعَةٌ فِي ضَنْكِ المُحُولِ ، وَبابُكَ مَفْتُوحٌ لِلطَّلَبِ وَالْوُغُولِ ، وَأَنْتَ غايةُ السُّؤُلِ [ المسؤول ] ونِهايَةُ الْمأْمُولِ ، إِلهِي هذِهِ أَزِمَّةُ نَفْسِي عَقَلْتُها بِعِقالِ مَشِيئَتِكَ ، وَهذِهِ أَعْباءُ ذُنُوبِي دَرَأْتُها بِعَفْوِكَ وَرَحْمَتِكَ ، وَهذِهِ أَهْوائِي الْمُضِلَّةُ وَكَلْتُها إلَى جَنابِ لُطْفِكَ وَرَأْفَتِكَ ، فَاجْعَلِ اللَّهُمَّ صَباحِي هَذا نازِلاً عَلَيَّ بِضِياءِ الْهُدَى [ وَالسَّلامَةِ ] ، وَبِالسَّلامَةِ فِي الدِّينِ وَالدُّنْيا ، وَمَسائِي جُنَّةً مِنْ كَيْدِ الْعِدَى [ الأعْداء ] وَوِقايَةً مِنْ مُرْدِياتِ الْهَوَى ، إنَّكَ قادِرٌ عَلَى ما تَشاءُ ، تُؤْتِي الْمُلْكَ مَنْ تَشاءُ ، وَتَنْزِعُ الْمُلْكَ مِمَّنْ تَشاءُ ، وَتُعِزُّ مَنْ تَشاءُ ، وَتُذِلُّ مَنْ تَشاءُ ، بِيَدِكَ الْخَيْرُ إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ، تُولِجُ اللَّيْلَ فِي النَّهارِ ، وَتُولِجُ النَّهارَ فِي اللَّيْلِ ، وَتُخْرِجُ الْحَيَّ مِنَ الْمَيِّتِ ، وَتُخْرِجُ الْمَيِّتَ مِنَ الْحَيِّ ، وَتَرْزُقُ مَنْ تَشاءُ بِغَيْرِ حِسابٍ ، لا إلهَ إلَّا أَنْتَ سُبْحانَكَ اللَّهُمَّ وَبِحَمْدِكَ ، مَنْ ذا يَعْرِفُ قَدْرَكَ فَلا يَخافُكَ ، وَمَنْ ذا يَعْلَمُ ما أَنْتَ فَلا يَهابُكَ ، أَلَّفْتَ بِقُدْرَتِكَ الْفِرَقَ ، وَفَلَقْتَ بِلُطْفِكَ الْفَلَقَ ، وَأَنَرْتَ بِكَرَمِكَ دَياجِيَ الْغَسَقِ ، وَأَنْهَرْتَ الْمِياهَ مِنَ الصُّمِّ الصَّياخِيدِ عَذْباً وَأُجاجاً ، وَأَنْزَلْتَ مِنَ الْمُعْصِراتِ ماءً ثَجَّاجاً ، وَجَعَلْتَ الشَّمْسَ وَالْقَمَرَ لِلْبَرِيَّةِ سِراجاً وَهَّاجاً ، مِنْ غَيْرِ أَنْ تُمارِسَ فِيما ابْتَدَأْتَ بِهِ لُغُوباً وَلا عِلاجاً ، فَيا مَنْ تَوَحَّدَ بِالْعِزِّ وَالْبَقاءِ ، وَقَهَرَ عِبادَهُ بِالْمَوْتِ وَالْفَناءِ ، صَلِّ عَلَى مُحَمَّدٍ وَآلِهِ الْأَتْقِياءِ ، وَاسْمَعْ نِدائِي ، وَاسْتَجِبْ دُعائِي ، وَحَقِّقْ بِفَضْلِكَ أَمَلِي وَرَجائِي ، يا خَيْرَ مَنْ دُعِيَ لِكَشْفِ الضُّرِ وَالْمَأْمُولِ في كُلِّ [ لِكُلِّ ] عُسْرٍ وَيُسْرٍ ، بِكَ أَنْزَلْتُ حاجَتِي فَلا تَرُدَّنِي مِنْ سَنِيِّ [ من باب ] مَواهِبِكَ خائِباً يا كَرِيمُ يا كَرِيمُ يا كَرِيمُ ، بِرَحْمَتِكَ يا أرْحَمَ الرَّاحِمِينَ ، وَصَلَّى الله عَلَى خَيْرِ خَلْقِهِ مُحَمَّدٍ وَآلِهِ أَجْمَعِينَ.
-
-ثمّ اسجد وقل : إلهِي قَلْبِي مَحْجُوبٌ ، وَنَفْسِي مَعْيُوبٌ ، وَعَقْلِي مَغْلُوبٌ ، وَهَوائِي غالِبٌ ، وَطاعَتِي قَلِيلٌ ، وَمَعْصِيَتِي كَثِيرٌ ، وَلِسانِي مُقِرٌّ بِالذُّنُوبِ ، فَكَيْفَ حِيلَتِي يا سَتَّارَ الْعُيُوبِ ، وَيا عَلَّامَ الْغُيُوبِ ، وَيا كاشِفَ الْكُرُوبِ ، اغْفِرْ ذُنُوبِي كُلَّها بِحُرْمَةِ مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، يا غَفَّارُ يا غَفَّارُ يا غَفَّارُ ، بِرَحْمَتِكَ يا أرْحَمَ الرَّاحِمِينَ.`
-    }
-];
-
-function loadSupplicationsList() {
+async function loadSupplicationsList() {
     const container = document.getElementById('supplications-content');
     const isEn = currentLanguage === 'en';
-    const list = isEn ? ahlulbaytSupplicationsEn : ahlulbaytSupplications;
+    
+    container.innerHTML = `<div class="text-center py-5 text-xs text-palette-mauve"><i class="fa-solid fa-spinner fa-spin ml-2"></i>${isEn ? 'Loading supplications...' : 'جاري تحميل الأدعية...'}</div>`;
+
+    let list = isEn ? ahlulbaytSupplicationsEn : [
+        {
+            id: "kumaill",
+            title: "دعاء كميل بن زياد (كاملاً)",
+            desc: "يُستحب قراءته ليلة الجمعة لمغفرة الذنوب وكفاية شر الأعداء وتوسعة الرزق.",
+            text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ اللّهُمَّ إِنِّي أَسأَلُكَ بِرَحْمَتِكَ الَّتِي وَسِعَتْ كُلَّ شَيْءٍ..."
+        }
+    ];
+
+    if (supabaseClient) {
+        try {
+            const { data, error } = await supabaseClient
+                .from('supplications')
+                .select('*')
+                .order('id', { ascending: true });
+
+            if (!error && data && data.length > 0) {
+                list = data.map(item => ({
+                    id: item.id || Math.random().toString(36).substr(2, 9),
+                    title: item.title || "دعاء مبارك",
+                    desc: item.desc || (isEn ? "Blessed Supplication" : "دعاء وزيارة مباركة"),
+                    text: item.content || item.text || "لا يوجد نص متاح حالياً..."
+                }));
+                localStorage.setItem('cached_supplications', JSON.stringify(list));
+            } else {
+                const cached = localStorage.getItem('cached_supplications');
+                if (cached) list = JSON.parse(cached);
+            }
+        } catch (e) {
+            const cached = localStorage.getItem('cached_supplications');
+            if (cached) list = JSON.parse(cached);
+        }
+    } else {
+        const cached = localStorage.getItem('cached_supplications');
+        if (cached) list = JSON.parse(cached);
+    }
+
+    activeSupplicationsList = list;
     let html = '';
     list.forEach(sup => {
         html += `
-            <div class="rounded-xl glass-panel border border-palette-mauve/40 overflow-hidden bg-black/30 shadow-md">
-                <div onclick="playClickSound(); toggleDuaContent('${sup.id}')" class="p-3 flex items-center justify-between cursor-pointer hover:bg-palette-mauve/10 transition-colors">
-                    <div class="space-y-0.5 text-right">
-                        <h4 class="font-bold gold-gradient-text text-xs sm:text-sm flex items-center gap-1.5">
-                            <i class="fa-solid fa-star text-[10px] text-palette-mauve"></i>
-                            <span>${sup.title}</span>
-                        </h4>
-                        <p class="text-[9px] text-zinc-400 font-medium">${sup.desc}</p>
-                    </div>
-                    <i id="dua-icon-${sup.id}" class="fa-solid fa-chevron-down text-palette-mauve text-xs transition-transform duration-300"></i>
+            <div onclick="playClickSound(); openDuaDetailModal('${sup.id}')" class="p-3 rounded-xl glass-panel border border-palette-mauve/40 flex items-center justify-between cursor-pointer hover:bg-palette-mauve/20 transition-all shadow-md group">
+                <div class="space-y-0.5 text-right overflow-hidden pr-1">
+                    <h4 class="font-bold gold-gradient-text text-xs sm:text-sm flex items-center gap-1.5 truncate">
+                        <i class="fa-solid fa-star text-[10px] text-palette-mauve shrink-0"></i>
+                        <span class="truncate">${escapeHTML(sup.title)}</span>
+                    </h4>
+                    <p class="text-[9px] text-zinc-400 font-medium truncate">${escapeHTML(sup.desc || '')}</p>
                 </div>
-                <div id="dua-body-${sup.id}" class="dua-content px-3 pb-3">
-                    <div class="p-2.5 rounded-xl bg-black/60 text-xs font-amiri leading-loose text-palette-light border border-palette-mauve/30 select-text text-justify max-h-60 overflow-y-auto shadow-inner whitespace-pre-line">
-                        ${sup.text}
-                    </div>
+                <div class="w-7 h-7 rounded-full bg-palette-mauve/20 border border-palette-mauve/40 flex items-center justify-center text-palette-light text-xs shrink-0 group-hover:bg-palette-mauve group-hover:text-palette-darkest transition-all">
+                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
                 </div>
             </div>
         `;
@@ -2280,27 +2497,37 @@ function loadSupplicationsList() {
     container.innerHTML = html;
 }
 
-function toggleDuaContent(id) {
-    const body = document.getElementById(`dua-body-${id}`);
-    const icon = document.getElementById(`dua-icon-${id}`);
-    if (!body) return;
-    if (body.classList.contains('open')) {
-        body.classList.remove('open');
-        if (icon) icon.style.transform = "rotate(0deg)";
-    } else {
-        body.classList.add('open');
-        if (icon) icon.style.transform = "rotate(180deg)";
+let currentDetailTextSize = 16;
+
+function openDuaDetailModal(id) {
+    const dua = activeSupplicationsList.find(s => String(s.id) === String(id));
+    if (!dua) return;
+
+    currentDetailTextSize = 16;
+    document.getElementById('dua-detail-title').innerText = dua.title;
+    const textEl = document.getElementById('dua-detail-text');
+    textEl.innerText = dua.text;
+    textEl.style.fontSize = currentDetailTextSize + 'px';
+
+    openModal('dua-detail-modal');
+}
+
+function adjustDetailSuppTextSize(delta) {
+    currentDetailTextSize = Math.max(12, Math.min(28, currentDetailTextSize + delta));
+    const textEl = document.getElementById('dua-detail-text');
+    if (textEl) {
+        textEl.style.fontSize = currentDetailTextSize + 'px';
     }
 }
 
 const weeklySupplications = [
-    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالِّرِضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },
-    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغِفرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
-    { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ وَالحَمْدُ حَقُّهُ كَما يَسْتِحِقُّهُ حَمْداً كَثِيراً ، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي ؛ إِنَّ النَّفْسَ لأَمّارَةٌ بِالسُّوءِ إِلّا ما رَحِمَ رَبِّي ، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطانِ الَّذِي يَزِيدُنِي ذَنْباً إِلى ذَنْبِي ، وَأَحْتَرِزُ بِهِ مِنْ كُلِّ جَبّارٍ فاجِرٍ ، وَسُلْطانٍ جائِرٍ ، وَعَدُوٍّ قاهِرٍ . اَللّهُمَّ اجْعَلْنِي مِنْ جُنْدِكَ فَإِنَّ جُنْدَكَ هُمُ الغالِبُونَ ، وَاجْعَلْنِي مِنْ حِزْبِكَ فَإِنَّ حِزْبَكَ هُمُ المُفْلِحُونَ ، وَاجْعَلْنِي مِنْ أوْلِيائِكَ فَإِنَّ أَوْلِياَءَكَ لا خَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنُونَ . اَللّهُمَّ أصْلِحْ لِي دِينِي فَإِنَّهُ عِصْمَةُ أَمْرِي ، وَأصْلِحْ لِي آخِرَتِي فَإِنَّها دارُ مَقَرِّي ، وَإِلَيْها مِن مُجاوَرَةِ اللِّئامِ مَفَرِّي ، وَاجْعَلِ الحَياةَ زِيادَةً لِي فِي كُلِّ خَيْرٍ ، وَالوَفاةَ راحَةً لِي مِنْ كُلِّ شَرٍ ، اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَتَمامِ عِدَّةِ المُرْسَلِينَ ، وَعَلى آلِهِ الطَّيِّبِينَ الطَّاهِرِينَ وَأَصْحابِهِ المُنْتَجَبِينَ، وَهَبْ لِي فِي الثُّلاثاءِ ثَلاثًا : لاتَدَعْ لِي ذَنْباً إِلّا غَفَرْتَهُ ، وَلا غَمّاً إِلّا أَذْهَبْتَهُ ، وَلا عَدُوّاً إِلّا دَفَعْتَهُ . بِـ (( بِسْمِ اللهِ )) خَيْرِ الأَسْماء ، بِسْمِ اللهِ رَبِّ الأَرْضِ وَالسَّمَاءِ ، أَسْتَدْفِعُ كُلَّ مَكْرُوهٍ أَوَّلُهُ سَخَطُهُ ، وَأَسْتَجْلِبُ كُلَّ مَحْبُوبٍ أَوَّلُهُ رِضاهُ، فَاخْتِمْ لِي مِنْكَ بِالغُفْرانِ يا وَلِيَّ الإِحْسانِ ." },
-    { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلّهِ الَّذِي جَعَلَ اللَّيْلَ لِباساً ، وَالنَّوْمَ سُباتَاً ، وَجَعَلَ النَّهارَ نُشُوراً . لَكَ الْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي ، وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً حَمْداً دَائِمَاً لا يَنْقَطِعُ أَبَداً ، وَلا يُحْصِي لَهُ الْخَلائِقُ عَدَدَاً .اَللَّهُمَّ لَكَ الْحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ ، وَقَدَّرْتَ وَقَضَيْتَ ، وَأَمَتَّ وَأَحْيَيْتَ ، وَأَمْرَضْتَ وَشَفَيْتَ ، وَعَافَيْتَ وَأَبْلَيْتَ ، وَعَلَى الْعَرْشِ اسْتَوَيْتَ ، وَعَلَى الْمُلْكِ احْتَوَيْتَ .أَدْعُوكَ دُعآءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ ، وَانْقَطَعَتْ حِيلَتُهُ ، وَاقْتَرَبَ أَجَلُهُ ، وَتَدانَى فِي الدُّنْيا أَمَلُهُ ، وَاشْتَدَّتْ إلى رَحْمَتِكَ فاقَتُهُ ، وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ ، وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ ، وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ . فَصَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ ، وَعَلى أَهْلِ بَيْتِهِ الطَّيِّبِينَ الطَّاهِرِينَ ، وَارْزُقْنِي شَفاعَةَ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ ، وَلا تَحْرِمْنِي صُحْبَتَهُ إنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ . اَللَّهُمَّ اقْضِ لِي فِي الأَرْبِعآءِ أَرْبَعَاً : اِجْعَلْ قُوَّتِي فِي طاعَتِكَ ، وَنَشاطِي فِي عِبادَتِكَ ، وَرَغْبَتِي فِي ثَوَابِكَ ، وَزُهْدِي فِيما يُوجِبُ لِي أَلِيمَ عِقابِكَ ، إنَّكَ لَطِيفٌ لِما تَشَآءُ ." },
-    { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِماً بِقُدْرَتِهِ ، وَجاءَ بِالنَّهارِ مُبْصِراً بِرَحْمَتِهِ ، وَكَسانِي ضِياءَهُ وَأَنا فِي نِعْمَتِهِ . اَللّهُمَّ فَكَما أَبْقَيْتَنِي لَهُ فَأَبْقِنِي لأَمْثالِهِ ، وَصَلِّ عَلى النَّبِيّ مُحَمَّدٍ وَآلِهِ ، وَلا تَفْجَعْنِي فِيهِ وَفِي غَيْرِهِ مِنَ اللَّيالِي وَالأَيّامِ بِارْتِكابِ المَحارِمِ وَاكْتِسابِ المَآثِمِ ، وَارْزُقْنِي خَيْرَهُ وَخَيْرَ ما فِيهِ وَخَيْرَ ما بَعْدَهُ ، وَاصْرِفْ عَنِّي شَرَّهُ وَشَرَّ ما فِيهِ وَشَرَّ ما بَعْدَهُ . اَللّهُمَّ إِنِّي بِذِمَّةِ الإِسْلامِ أَتَوَسَّلُ إِلَيْكَ ، وَبِحُرْمَةِ القُرْآنِ أَعْتَمِدُ عَلَيْكَ ، وَبِمُحَمَّدٍ المُصْطَفى ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ أَسْتَشْفِعُ لَدَيْكَ ، فَاعْرِفِ اللّهُمَّ ذِمَّتِي الَّتِي رَجَوْتُ بِها قَضاءَ حاجَتِي ، يا أَرْحَمَ الرَّاحِمِينَ . اَللّهُمَّ اقْضِ لِي فِي الخَمِيسِ خَمْساً ، لا يَتَّسِعُ لَهَا إِلَّا كَرَمُكَ ، وَلا يُطِيقُها إِلَّا نِعَمُكَ : سَلامَةً أَقْوَى بِها عَلى طاعَتِكَ ، وَعِبادَةً أَسْتَحِقُّ بِها جَزِيلَ مَثُوبَتِكَ ، وَسَعَةً فِي الحَالِ مِنَ الرِّزْقِ الحَلالِ ، وَأَنْ تُؤْمِنَنِي فِي مَواقِفِ الخَوْفِ بِأَمْنِكَ ، وَتَجْعَلَنِي مِنْ طَوارِقِ الهُمُومِ وَالغُمُومِ فِي حِصْنِكَ ، وَصَلِّ عَلى مُحمَّدٍ وَآلِ مُحَمَّدٍ ، وَاجْعَلْ تَوَسُّلِي بِهِ شافِعاً يَوْمَ القِيامَةِ نافِعاً ، إِنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ ." },
-    { dayName: "دعاء يوم الجمعة المباركة", text: "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ : اَلحَمْدُ للهِ الأَوَّلِ قَبْلَ الإِنْشاءِ وَالإِحْياءِ وَالآخِرِ بَعْدَ فَناءِ الأَشْياءِ ، العَلِيمِ الَّذِي لا يَنْسَى مَنْ ذَكَرَهُ وَلا يَنْقُصُ مَنْ شَكَرَهُ وَلا يَخِيبُ مَنْ دَعاهُ وَلا يَقْطَعُ رَجاءَ مَنْ رَجاهُ . اَللّهُمَّ إِنِّي أُشْهِدُكَ وَكَفى بِكَ شَهِيداً ، وَأُشْهِدُ جَمِيعَ مَلائِكَتِكَ وَسُكَّانَ سَمَاواتِكَ وَحَمَلَةَ عَرْشِكَ ، وَمَنْ بَعَثْتَ مِنْ أَنْبِيائِكَ وَرُسُلِكَ ، وَأَنْشَأْتَ مِنْ أَصْنافِ خَلْقِكَ ـ أَنِّي أَشْهَدُ أَنَّكَ أَنْتَ الله لا إِلهَ إِلاّ أَنْتَ وَحْدَكَ لاشَرِيكَ لَكَ وَلا عَدِيلَ ، وَلا خُلْفَ لِقَوْلِكَ وَلا تَبْدِيلَ ، وَأَنَّ مُحَمَّداً ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ عَبْدُكَ وَرَسُولُكَ أَدّى ماحَمَّلْتَهُ إِلى العِبادِ وَجاهَدَ فِي الله ـ عَزَّ وَجلَّ ـ حَقَّ الجِهادِ ، وَأَنَّهُ بَشَّرَ بِما هُوَ حَقٌ مِنَ الثَّوابِ ، وَأَنْذَرَ بِما هُوَ صِدْقٌ مِنَ العِقابِ . اَللّهُمَّ ثَبِّتْنِي عَلى دِينِكَ ما أَحْيَيْتَنِي ، وَلاتُزِغْ قَلْبِي بَعْدَ إِذْ هَدَيْتَنِي ، وَهَبْ لِي مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الوَهّابُ ، صَلِّ عَلى مُحَمَّدٍ وَعَلى آل مُحَمَّدٍ ، وَاجْعَلْنِي مِنْ أَتْباعِهِ وَشِيعَتِهِ ، وَاحْشُرْنِي فِي زُمْرَتِهِ ، وَوَفِّقْنِي لِأَداءِ فَرْضِ الجُمُعاتِ ، وَما أَوْجَبْتَ عَلَيَّ فِيها مِنْ الطّاعاتِ ، وَقَسَمْتَ لِأَهْلِها مِنَ العَطاءِ فِي يَوْمِ الجَزاءِ . إِنَّكَ أَنْتَ العَزِيزُ الحَكِيمُ ." },
-    { dayName: "دعاء يوم السبت", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللّهِ كَلِمَةِ الْمُعْتَصِمِينَ ، وَمَقَالَةِ الْمُتَحَرِّزِينَ ، وَأَعُوذُ بِالِلّه تَعَالى مِنْ جَوْرِ الْجآئِرِينَ ، وَكَيْدِ الْحاسِدِينَ ، وَبَغْيِ الظَّالِمِينَ ، وَأَحْمَدُهُ فَوْقَ حَمْدِ الْحامِدِينَ . اَللَّهُمَّ أَنْتَ الْواحِدُ بِلا شَرِيك ، وَالْمَلِكُ بِلا تَمْلِيكٍ ، لا تُضَادُّ فِي حُكْمِكَ ، وَلا تُنازَعُ فِي مُلْكِكَ . أَسْأَلُكَ أَنْ تُصَلِّىَ عَلَى مُحَمَّدٍ وَآلِهِ ، عَبْدِكَ وَرَسُولِكَ ، وَأَنْ تُوزِعَنِي مِنْ شُكْرِ نُعْمَاكَ ما تَبْلُغُ بِي غَايَةَ رِضَاكَ ، وَأَنْ تُعِينَنِي عَلى طاعَتِكَ ، وَلُزُومِ عِبادَتِكَ ، وَاسْتِحْقاقِ مَثُوبَتِكَ بِلُطْفِ عِنايَتِكَ ، وَتَرْحَمَنِي ، وَتَصُدَّنِي [ وصُدَّني ] عَنْ مَعَاصِيكَ مَا أَحْيَيْتَنِي ، وَتُوَفِّقَنِي لِما يَنْفَعُنِي ما أَبْقَيْتَنِي ، وَأَنْ تَشْرَحَ بِكِتابِكَ صَدْرِي ، وَتَحُطَّ بِتِلاوَتِهِ وِزْرِي ، وَتَمْنَحَنِي السَّلامَةَ فِي دِينِي وَنَفْسِي ، وَلا تُوحِشَ بِي أَهْلَ أُنْسِي ، وَتُتِمَّ إحْسَانَكَ فِيما بَقِيَ مِنْ عُمُرِي كَما أَحْسَنْتَ فِيما مَضَى مِنْهُ يا أَرْحَمَ الرَّاحِمِينَ ." }
+    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالِّرِضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },
+    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغِفرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
+    { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ وَالحَمْدُ حَقُّهُ كَما يَسْتِحِقُّهُ حَمْداً كَثِيراً ، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي ؛ إِنَّ النَّفْسَ لأَمّارَةٌ بِالسُّوءِ إِلّا ما رَحِمَ رَبِّي ، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطانِ الَّذِي يَزِيدُنِي ذَنْباً إِلى ذَنْبِي ، وَأَحْتَرِزُ بِهِ مِنْ كُلِّ جَبّارٍ فاجِرٍ ، وَسُلْطانٍ جائِرٍ ، وَعَدُوٍّ قاهِرٍ . اَللّهُمَّ اجْعَلْنِي مِنْ جُنْدِكَ فَإِنَّ جُنْدَكَ هُمُ الغالِبُونَ ، وَاجْعَلْنِي مِنْ حِزْبِكَ فَإِنَّ حِزْبَكَ هُمُ المُفْلِحُونَ ، وَاجْعَلْنِي مِنْ أوْلِيائِكَ فَإِنَّ أَوْلِياَءَكَ لا خَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنُونَ . اَللّهُمَّ أصْلِحْ لِي دِينِي فَإِنَّهُ عِصْمَةُ أَمْرِي ، وَأصْلِحْ لِي آخِرَتِي فَإِنَّها دارُ مَقَرِّي ، وَإِلَيْها مِن مُجاوَرَةِ اللِّئامِ مَفَرِّي ، وَاجْعَلِ الحَياةَ زِيادَةً لِي فِي كُلِّ خَيْرٍ ، وَالوَفاةَ راحَةً لِي مِنْ كلِّ شَرٍ ، اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَتَمامِ عِدَّةِ المُرْسَلِينَ ، وَعَلى آلِهِ الطَّيِّبِينَ الطَّاهِرِينَ وَأَصْحابِهِ المُنْتَجَبِينَ، وَهَبْ لِي فِي الثُّلاثاءِ ثَلاثًا : لاتَدَعْ لِي ذَنْباً إِلّا غَفَرْتَهُ ، وَلا غَمّاً إِلّا أَذْهَبْتَهُ ، وَلا عَدُوّاً إِلّا دَفَعْتَهُ . بِـ (( بِسْمِ اللهِ )) خَيْرِ الأَسْماء ، بِسْمِ اللهِ رَبِّ الأَرْضِ وَالسَّمَاءِ ، أَسْتَدْفِعُ كُلَّ مَكْرُوهٍ أَوَّلُهُ سَخَطُهُ ، وَأَسْتَجْلِبُ كُلَّ مَحْبُوبٍ أَوَّلُهُ رِضاهُ، فَاخْتِمْ لِي مِنْكَ بِالغُفْرانِ يا وَلِيَّ الإِحْسانِ ." },
+    { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلّهِ الَّذِي جَعَلَ اللَّيْلَ لِباساً ، وَالنَّوْمَ سُباتَاً ، وَجَعَلَ النَّهارَ نُشُوراً . لَكَ الْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي ، وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً حَمْداً دَائِمَاً لا يَنْقَطِعُ أَبَداً ، وَلا يُحْصِي لَهُ الْخَلائِقُ عَدَدَاً .اَللَّهُمَّ لَكَ الْحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ ، وَقَدَّرْتَ وَقَضَيْتَ ، وَأَمَتَّ وَأَحْيَيْتَ ، وَأَمْرَضْتَ وَشَفَيْتَ ، وَعَافَيْتَ وَأَبْلَيْتَ ، وَعَلَى الْعَرْشِ اسْتَوَيْتَ ، وَعَلَى الْمُلْكِ احْتَوَيْتَ .أَدْعُوكَ دُعآءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ ، وَانْقَطَعَتْ حِيلَتُهُ ، وَاقْتَرَبَ أَجَلُهُ ، وَتَدانَى فِي الدُّنْيا أَمَلُهُ ، وَاشْتَدَّتْ إلى رَحْمَتِكَ فاقَتُهُ ، وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ ، وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ ، وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ . فَصَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ ، وَعَلى أَهْلِ بَيْتِهِ الطَّيِّبِينَ الطَّاهِرِينَ ، وَارْزُقْنِي شَفاعَةَ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ ، وَلا تَحْرِمْنِي صُحْبَتَهُ إنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ . اَللَّهُمَّ اقْضِ لِي فِي الأَرْبِعآءِ أَرْبَعَاً : اِجْعَلْ قُوَّتِي فِي طاعَتِكَ ، وَنَشاطِي فِي عِبادَتِكَ ، وَرَغْبَتِي فِي ثَوَابِكَ ، وَزُهْدِي فِيما يُوجِبُ لِي أَلِيمَ عِقابِكَ ، إنَّكَ لَطِيفٌ لِما تَشَآءُ ." },
+    { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِماً بِقُدْرَتِهِ ، وَجاءَ بِالنَّهارِ مُبْصِراً بِرَحْمَتِهِ ، وَكَسانِي ضِياءَهُ وَأَنا فِي نِعْمَتِهِ . اَللّهُمَّ فَكَما أَبْقَيْتَنِي لَهُ فَأَبْقِنِي لأَمْثالِهِ ، وَصَلِّ عَلى النَّبِيّ مُحَمَّدٍ وَآلِهِ ، وَلا تَفْجَعْنِي فِيهِ وَفِي غَيْرِهِ مِنَ اللَّيالِي وَالأَيّامِ بِارْتِكابِ المَحارِمِ وَاكْتِسابِ المَآثِمِ ، وَارْزُقْنِي خَيْرَهُ وَخَيْرَ ما فِيهِ وَخَيْرَ ما بَعْدَهُ ، وَاصْرِفْ عَنِّي شَرَّهُ وَشَرَّ ما فِيهِ وَشَرَّ ما بَعْدَهُ . اَللّهُمَّ إِنِّي بِذِمَّةِ الإِسْلامِ أَتَوَسَّلُ إِلَيْكَ ، وَبِحُرْمَةِ القُرْآنِ أَعْتَمِدُ عَلَيْكَ ، وَبِمُحَمَّدٍ المُصْطَفى ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ أَسْتَشْفِعُ لَدَيْكَ ، فَاعْرِفِ اللّهُمَّ ذِمَّتِي الَّتِي رَجَوْتُ بِها قَضاءَ حاجَتِي ، يا أَرْحَمَ الرَّاحِمِينَ . اَللّهُمَّ اقْضِ لِي فِي الخَمِيسِ خَمْساً ، لا يَتَّسِعُ لَهَا إِلَّا كَرَمُكَ ، وَلا يُطِيقُها إِلَّا نِعَمُكَ : سَلامَةً أَقْوَى بِها عَلى طاعَتِكَ ، وَعِبادَةً أَسْتَحِقُّ بِها جَزِيلَ مَثُوبَتِكَ ، وَسَعَةً فِي الحَالِ مِنَ الرِّزْقِ الحَلالِ ، وَأَنْ تُؤْمِنَنِي فِي مَواقِفِ الخَوْفِ بِأَمْنِكَ ، وَتَجْعَلَنِي مِنْ طَوارِقِ الهُمُومِ وَالغُمُومِ فِي حِصْنِكَ ، وَصَلِّ عَلى مُحمَّدٍ وَآلِ مُحَمَّدٍ ، وَاجْعَلْ تَوَسُّلِي بِهِ شافِعاً يَوْمَ القِيامَةِ نافِعاً ، إِنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ ." },
+    { dayName: "دعاء يوم الجمعة المباركة", text: "بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ : اَلحَمْدُ للهِ الأَوَّلِ قَبْلَ الإِنْشاءِ وَالإِحْياءِ وَالآخِرِ بَعْدَ فَناءِ الأَشْياءِ ، العَلِيمِ الَّذِي لا يَنْسَى مَنْ ذَكَرَهُ وَلا يَنْقُصُ مَنْ شَكَرَهُ وَلا يَخِيبُ مَنْ دَعاهُ وَلا يَقْطَعُ رَجاءَ مَنْ رَجاهُ . اَللّهُمَّ إِنِّي أُشْهِدُكَ وَكَفى بِكَ شَهِيداً ، وَأُشْهِدُ جَمِيعَ مَلائِكَتِكَ وَسُكَّانَ سَمَاواتِكَ وَحَمَلَةَ عَرْشِكَ ، وَمَنْ بَعَثْتَ مِنْ أَنْبِيائِكَ وَرُسُلِكَ ، وَأَنْشَأْتَ مِنْ أَصْنافِ خَلْقِكَ ـ أَنِّي أَشْهَدُ أَنَّكَ أَنْتَ الله لا إِلهَ إِلاّ أَنْتَ وَحْدَكَ لاشَرِيكَ لَكَ وَلا عَدِيلَ ، وَلا خُلْفَ لِقَوْلِكَ وَلا تَبْدِيلَ ، وَأَنَّ مُحَمَّداً ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ عَبْدُكَ وَرَسُولُكَ أَدّى ماحَمَّلْتَهُ إِلى العِبادِ وَجاهَدَ فِي الله ـ عَزَّ وَجلَّ ـ حَقَّ الجِهادِ ، وَأَنَّهُ بَشَّرَ بِما هُوَ حَقٌ مِنَ الثَّوابِ ، وَأَنْذَرَ بِما هُوَ صِدْقٌ مِنَ العِقابِ . اَللّهُمَّ ثَبِّتْنِي عَلى دِينِكَ ما أَحْيَيْتَنِي ، وَلاتُزِغْ قَلْبِي بَعْدَ إِذْ هَدَيْتَنِي ، وَهَبْ لِي مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الوَهّابُ ، صَلِّ عَلى مُحَمَّدٍ وَعَلى آل مُحَمَّدٍ ، وَاجْعَلْنِي مِنْ أَتْباعِهِ وَشِيعَتِهِ ، وَاحْشُرْنِي فِي زُمْرَتِهِ ، وَوَفِّقْنِي لِأَداءِ فَرْضِ الجُمُعاتِ ، وَما أَوْجَبْتَ عَلَيَّ فِيها مِنْ الطّاعاتِ ، وَقَسَمْتَ لِأَهْلِها مِنَ العَطاءِ فِي يَوْمِ الجَزاءِ . إِنَّكَ أَنْتَ العَزِيزُ الحَكِيمُ ." },
+    { dayName: "دعاء يوم السبت", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللّهِ كَلِمَةِ الْمُعْتَصِمِينَ ، وَمَقَالَةِ الْمُتَحَرِّزِينَ ، وَأَعُوذُ بِالِلّه تَعَالى مِنْ جَوْرِ الْجآئِرِينَ ، وَكَيْدِ الْحاسِدِينَ ، وَبَغْيِ الظَّالِمِينَ ، وَأَحْمَدُهُ فَوْقَ حَمْدِ الْحامِدِينَ . اَللَّهُمَّ أَنْتَ الْواحِدُ بِلا شَرِيك ، وَالْمَلِكُ بِلا تَمْلِيكٍ ، لا تُضَادُّ فِي حُكْمِكَ ، وَلا تُنازَعُ فِي مُلْكِكَ . أَسْأَلُكَ أَنْ تُصَلِّىَ عَلَى مُحَمَّدٍ وَآلِهِ ، عَبْدِكَ وَرَسُولِكَ ، وَأَنْ تُوزِعَنِي مِنْ شُكْرِ نُعْمَاكَ ما تَبْلُغُ بِي غَايَةَ رِضَاكَ ، وَأَنْ تُعِينَنِي عَلى طاعَتِكَ ، وَلُزُومِ عِبادَتِكَ ، وَاسْتِحْقاقِ مَثُوبَتِكَ بِلُطْفِ عِنايَتِكَ ، وَتَرْحَمَنِي ، وَتَصُدَّنِي [ وصُدَّني ] عَنْ مَعَاصِيكَ مَا أَحْيَيْتَنِي ، وَتُوَفِّقَنِي لِما يَنْفَعُنِي ما أَبْقَيْتَنِي ، وَأَنْ تَشْرَحَ بِكِتابِكَ صَدْرِي ، وَتَحُطَّ بِتِلاوَتِهِ وِزْرِي ، وَتَمْنَحَنِي السَّلامَةَ فِي دِينِي وَنَفْسِي ، وَلا تُوحِشَ بِي أَهْلَ أُنْسِي ، وَتُتِمَّ إحْسَانَكَ فِيما بَقِيَ مِنْ عُمُرِي كَما أَحْسَنْتَ فِيما مَضَى مِنْهُ يا أَرْحَمَ الرَّاحِمِينَ ." }
 ];
 
 function openDailySupplicationsModal() {
@@ -2347,33 +2574,33 @@ const HIJRI_MONTH_NAMES = ["محرم", "صفر", "ربيع الأول", "ربي�
 const ALL_HIJRI_EVENTS = {
     1: [
         { day: 1, title: "رأس السنة الهجرية", story: "بداية العام الهجري الجديد." },
-        { day: 10, title: "يوم عاشوراء (استشهاد الإمام الحسين عليه السلام)", story: "ذكرى استشهاد الإمام الحسين بن علي (ع) وأهل بيته الأطهار وأصحابه الأبرار في كربلاء المقدسة." }
+        { day: 10, title: "يوم عاشوراء (استشهاد الإمام الحسين عليه السلام)", story: "ذكرى استشهاد الإمام الحسين بن علي وأهل بيته الأطهار وأصحابه الأبرار في كربلاء المقدسة." }
     ],
     3: [
-        { day: 17, title: "ولادة الرسول الأعظم محمد (ص) والإمام الصادق (ع)", story: "ذكرى المولد النبوي الشريف ومولد الإمام جعفر الصادق (ع)." }
+        { day: 17, title: "ولادة الرسول الأعظم محمد والإمام الصادق", story: "ذكرى المولد النبوي الشريف ومولد الإمام جعفر الصادق." }
     ],
     5: [
-        { day: 5, title: "ولادة السيدة زينب الكبرى (عليها السلام)", story: "ولادة عقيلة الهاشميين وبطلة كربلاء السيدة زينب (ع)." },
-        { day: 13, title: "شهادة سيدة نساء العالمين فاطمة الزهراء (عليها السلام)", story: "ذكرى شهادة الصديقة الطاهرة فاطمة الزهراء (ع)." }
+        { day: 5, title: "ولادة السيدة زينب الكبرى", story: "ولادة عقيلة الهاشميين وبطلة كربلاء السيدة زينب." },
+        { day: 13, title: "شهادة سيدة نساء العالمين فاطمة الزهراء", story: "ذكرى شهادة الصديقة الطاهرة فاطمة الزهراء." }
     ],
     7: [
-        { day: 13, title: "ولادة أمير المؤمنين علي بن أبي طالب (ع)", story: "ذكرى ولادة الإمام علي بن أبي طالب (ع) في جوف الكعبة المشرفة." },
-        { day: 27, title: "المبعث النبوي الشريف", story: "يوم بعثة النبي محمد (ص) بالرسالة الإسلامية الخالدة." }
+        { day: 13, title: "ولادة أمير المؤمنين علي بن أبي طالب", story: "ذكرى ولادة الإمام علي بن أبي طالب في جوف الكعبة المشرفة." },
+        { day: 27, title: "المبعث النبوي الشريف", story: "يوم بعثة النبي محمد بالرسالة الإسلامية الخالدة." }
     ],
     8: [
-        { day: 15, title: "ولادة الإمام المهدي المنتظر (عج)", story: "ذكرى ولادة منقذ البشرية الإمام الحجة بن الحسن العسكري (عج)." }
+        { day: 15, title: "ولادة الإمام المهدي المنتظر", story: "ذكرى ولادة منقذ البشرية الإمام الحجة بن الحسن العسكري." }
     ],
     9: [
-        { day: 15, title: "ولادة الإمام الحسن المجتبى (ع)", story: "ذكرى ولادة سبط النبي الأكبر الإمام الحسن بن علي (ع)." },
-        { day: 19, title: "جرح أمير المؤمنين علي بن أبي طالب (ع)", story: "ليلة ضربة الإمام علي (ع) في محراب مسجد الكوفة." },
-        { day: 21, title: "استشهاد أمير المؤمنين علي بن أبي طالب (ع)", story: "ذكرى شهادة الإمام علي بن أبي طالب (ع)." }
+        { day: 15, title: "ولادة الإمام الحسن المجتبى", story: "ذكرى ولادة سبط النبي الأكبر الإمام الحسن بن علي." },
+        { day: 19, title: "جرح أمير المؤمنين علي بن أبي طالب", story: "ليلة ضربة الإمام علي في محراب مسجد الكوفة." },
+        { day: 21, title: "استشهاد أمير المؤمنين علي بن أبي طالب", story: "ذكرى شهادة الإمام علي بن أبي طالب." }
     ],
     10: [
         { day: 1, title: "عيد الفطر المبارك", story: "أول أيام عيد الفطر السعيد بعد الصيام المبارك في شهر رمضان." }
     ],
     12: [
         { day: 10, title: "عيد الأضحى المبارك", story: "عيد الأضحى المبارك وأيام الحج الأكبر." },
-        { day: 18, title: "عيد الغدير الأغر", story: "عيد الله الأكبر، يوم تنصيب الإمام علي (ع) خليفة وإماماً للمسلمين في غدير خم." }
+        { day: 18, title: "عيد الغدير الأغر", story: "عيد الله الأكبر، يوم تنصيب الإمام علي خليفة وإماماً للمسلمين في غدير خم." }
     ]
 };
 
@@ -2588,7 +2815,6 @@ function randomizeDhikr() {
         newIndex = Math.floor(Math.random() * adhkarList.length);
     } while (newIndex === currentIndex && adhkarList.length > 1);
     currentIndex = newIndex;
-    count = 0;
     updateUI();
 }
 
@@ -2618,8 +2844,8 @@ function handleMainTap(event) {
 }
 
 function resetCounter() { count = 0; updateUI(); }
-function nextDhikr() { currentIndex = (currentIndex + 1) % adhkarList.length; count = 0; updateUI(); }
-function prevDhikr() { currentIndex = (currentIndex - 1 + adhkarList.length) % adhkarList.length; count = 0; updateUI(); }
+function nextDhikr() { currentIndex = (currentIndex + 1) % adhkarList.length; updateUI(); }
+function prevDhikr() { currentIndex = (currentIndex - 1 + adhkarList.length) % adhkarList.length; updateUI(); }
 
 function toggleButtonSound() {
     isButtonSoundOn = !isButtonSoundOn;
@@ -2642,7 +2868,7 @@ let activeDeceasedPerson = null;
 async function loadFatihaLocalList() {
     const container = document.getElementById('fatiha-list-content');
     const isEn = currentLanguage === 'en';
-    container.innerHTML = `<div class="text-center py-5 text-xs text-accent-blue"><i class="fa-solid fa-spinner fa-spin ml-2"></i>${isEn ? 'Fetching names from cloud...' : 'جاري جلب الأسماء من السحابة...'}</div>`;
+    container.innerHTML = `<div class="text-center py-5 text-xs text-accent-blue"><i class="fa-solid fa-spinner fa-spin ml-2"></i>${isEn ? 'Loading names...' : 'جاري تحميل الأسماء...'}</div>`;
 
     if (supabaseClient) {
         try {
@@ -2660,12 +2886,22 @@ async function loadFatihaLocalList() {
                     reads_count: item.reads_count || 0,
                     created_by: item.created_by || ''
                 }));
+                localStorage.setItem('cached_fanus', JSON.stringify(deceasedList));
+            } else {
+                const cached = localStorage.getItem('cached_fanus');
+                if (cached) deceasedList = JSON.parse(cached);
             }
-        } catch (e) {}
+        } catch (e) {
+            const cached = localStorage.getItem('cached_fanus');
+            if (cached) deceasedList = JSON.parse(cached);
+        }
+    } else {
+        const cached = localStorage.getItem('cached_fanus');
+        if (cached) deceasedList = JSON.parse(cached);
     }
 
     if (deceasedList.length === 0) {
-        container.innerHTML = `<p class="text-xs text-center text-accent-blue py-5">${isEn ? 'No deceased names registered in cloud currently. Add one to appear for everyone.' : 'لا يوجد أموات مسجلون سحابياً حالياً، أضف اسماً ليظهر للجميع.'}</p>`;
+        container.innerHTML = `<p class="text-xs text-center text-accent-blue py-5">${isEn ? 'No deceased names registered.' : 'لا يوجد أموات مسجلون حالياً.'}</p>`;
         return;
     }
 
@@ -2701,6 +2937,12 @@ async function loadFatihaLocalList() {
 
 async function addDeceasedCloud() {
     const isEn = currentLanguage === 'en';
+    
+    if (!navigator.onLine) {
+        showToast(isEn ? "No internet connection. Cannot add new deceased name offline." : "لا يوجد اتصال بالإنترنت. لا يمكن إضافة اسم متوفى جديد بدون اتصال.");
+        return;
+    }
+
     const nameInput = document.getElementById('deceased-input');
     const name = nameInput.value.trim();
     const genderEl = document.querySelector('input[name="deceased-gender"]:checked');
@@ -2726,7 +2968,7 @@ async function addDeceasedCloud() {
                 }]);
 
             if (error) {
-                showToast(isEn ? "Could not save, verify data" : "تعذر الحفظ، تأكد من البيانات");
+                showToast(isEn ? "Could not save, verify data" : "تعذر الحفظ، تأكد من الاتصال");
                 return;
             }
         } catch (e) {
@@ -2742,6 +2984,11 @@ async function addDeceasedCloud() {
 
 async function deleteDeceasedCloud(id) {
     const isEn = currentLanguage === 'en';
+    if (!navigator.onLine) {
+        showToast(isEn ? "No internet connection." : "لا يوجد اتصال بالإنترنت.");
+        return;
+    }
+
     const target = deceasedList.find(i => i.id === id);
     if (!target || !target.created_by || target.created_by !== myDeviceId) {
         showToast(isEn ? "Sorry, you do not have permission to delete this name" : "عذراً، لا تمتلك صلاحية حذف هذا الاسم");
@@ -2781,7 +3028,7 @@ async function openReadingModal(id) {
         person.views_count = (person.views_count || 0) + 1;
         sessionStorage.setItem(viewedKey, 'true');
         
-        if (supabaseClient) {
+        if (supabaseClient && navigator.onLine) {
             try {
                 await supabaseClient
                     .from('fanus')
@@ -2805,7 +3052,7 @@ async function finishReadingFatiha() {
     if (activeDeceasedPerson) {
         activeDeceasedPerson.reads_count = (activeDeceasedPerson.reads_count || 0) + 1;
         
-        if (supabaseClient) {
+        if (supabaseClient && navigator.onLine) {
             try {
                 await supabaseClient
                     .from('fanus')
