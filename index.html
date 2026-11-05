@@ -139,15 +139,6 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
             <p class="text-[10px] text-palette-mauve/90 font-medium" id="app-desc-splash">القرآن الكريم، الأدعية ومواقيت الصلاة</p>
         </div>
         <div class="w-full pt-1 space-y-2">
-            <button onclick="loginWithGooglePlay()" class="w-full py-2.5 px-3 rounded-xl bg-palette-light hover:bg-white text-palette-darkest font-bold text-[11px] flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                </svg>
-                <span id="btn-google-play">Google Play الدخول</span>
-            </button>
             <button onclick="loginAsGuest()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-palette-mauve via-palette-light to-palette-mauve text-palette-darkest font-black text-[11px] shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5">
                 <i class="fa-solid fa-user-check"></i>
                 <span id="btn-guest-login">تسجيل دخول اعتيادي</span>
@@ -374,9 +365,7 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
             إغلاق شاشة التسبيح
         </button>
     </div>
-</div>
-
-<div id="settings-modal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 z-50">
+</div><div id="settings-modal" class="fixed inset-0 bg-black/75 backdrop-blur-md hidden items-center justify-center p-3 z-50">
     <div class="w-full max-w-md glass-panel rounded-2xl p-4 sm:p-5 border border-palette-mauve/40 shadow-2xl relative max-h-[90vh] overflow-y-auto space-y-2.5">
         <div class="flex justify-between items-center pb-2.5 border-b border-palette-mauve/30">
             <h2 class="text-base sm:text-lg font-bold gold-gradient-text flex items-center gap-2">
@@ -455,26 +444,29 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
             </button>
         </div>
 
-        <a href="https://instagram.com/t85ki" target="_blank" onclick="playClickSound()" class="w-full flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 hover:bg-palette-mauve/15 transition-all cursor-pointer shadow-sm group">
+        <a href="mailto:zanb68950@gmail.com" onclick="playClickSound()" class="w-full flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 hover:bg-palette-mauve/15 transition-all cursor-pointer shadow-sm group">
             <div class="flex items-center gap-2.5 text-right">
-                <div class="w-8 h-8 rounded-lg overflow-hidden border border-palette-mauve/40 shadow-inner group-hover:scale-110 transition-transform shrink-0 flex items-center justify-center bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-0.5">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" class="w-full h-full object-contain filter drop-shadow">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30 shrink-0">
+                    <i class="fa-solid fa-headset"></i>
                 </div>
                 <div>
-                    <span class="font-bold text-xs gold-gradient-text block" id="lbl-instagram-title">التواصل مع مالك التطبيق</span>
-                    <span class="text-[10px] font-mono text-palette-mauve font-bold">@t85ki</span>
+                    <span class="font-bold text-xs gold-gradient-text block" id="lbl-instagram-title">الدعم الفني</span>
+                    <span class="text-[10px] font-mono text-palette-mauve font-bold" dir="ltr">zanb68950@gmail.com</span>
                 </div>
             </div>
-            <div class="w-6 h-6 rounded-full bg-palette-mauve/10 border border-palette-mauve/30 flex items-center justify-center text-palette-light text-[10px] group-hover:bg-palette-mauve group-hover:text-palette-darkest transition-all">
-                <i class="fa-solid fa-chevron-left"></i>
+            <div class="w-6 h-6 rounded-full bg-palette-mauve/10 border border-palette-mauve/30 flex items-center justify-center text-palette-light text-[10px]">
+                <i class="fa-solid fa-envelope"></i>
             </div>
         </a>
 
-        <div class="pt-1.5 flex flex-col items-center justify-center text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-palette-mauve/10 border border-palette-mauve/30 text-[11px] font-bold text-palette-light shadow-sm">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Flag_of_Iraq.svg" alt="علم العراق" class="w-6 h-4 object-cover rounded-[2px] shadow-sm border border-palette-mauve/40">
-                <span class="tracking-wide text-[10px]" id="lbl-iraq-tag">تم التطوير والتدقيق الشرعي في العراق</span>
+        <div onclick="playClickSound(); openPrivacyPolicy()" class="w-full flex justify-between items-center p-3 rounded-xl bg-black/40 border border-palette-mauve/30 hover:bg-palette-mauve/15 transition-all cursor-pointer shadow-sm">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-palette-mauve/20 text-palette-light flex items-center justify-center text-xs shadow-inner border border-palette-mauve/30">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <span class="font-bold text-xs" id="lbl-privacy-btn">سياسة الخصوصية</span>
             </div>
+            <i class="fa-solid fa-chevron-left text-[10px] text-palette-light"></i>
         </div>
 
         <button onclick="playClickSound(); closeModal('settings-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs hover:bg-palette-light transition-all shadow-lg cursor-pointer" id="btn-save-settings">
@@ -786,7 +778,7 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
                 <span id="fatiha-add-label">إضافة اسم متوفى جديد (يتطلب إنترنت):</span>
             </h4>
             <div class="space-y-2">
-                <input type="text" id="deceased-input" placeholder="اسم المتوفى (مثال: الحاج رشيد مجيد...)" class="w-full bg-black/60 border border-accent-blue/40 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-accent-blue shadow-sm">
+                <input type="text" id="deceased-input" maxlength="60" placeholder="اسم المتوفى (مثال: الحاج رشيد مجيد...)" class="w-full bg-black/60 border border-accent-blue/40 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-accent-blue shadow-sm">
                 
                 <div class="flex items-center gap-4 px-1 py-0.5 text-xs text-cream-100">
                     <span class="font-bold text-accent-blue text-[11px]" id="fatiha-gender-lbl">الجنس:</span>
@@ -837,6 +829,22 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
         <button onclick="playClickSound(); finishReadingFatiha()" class="w-full py-2.5 rounded-xl bg-accent-blue text-white font-bold text-xs shadow-lg hover:bg-accent-blue/80 transition-all cursor-pointer" id="btn-finish-fatiha">
             <i class="fa-solid fa-check ml-1"></i> تم قراءة الفاتحة والدعاء له (العودة)
         </button>
+    </div>
+</div>
+
+<div id="privacy-modal" class="fixed inset-0 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-3 z-[100]">
+    <div class="w-full max-w-lg h-[90vh] glass-panel rounded-2xl p-4 border-2 border-palette-mauve relative shadow-2xl flex flex-col space-y-3 bg-gradient-to-b from-[#0B0E1A] via-[#2C1B2F] to-[#00030E]">
+        <div class="flex justify-between items-center border-b border-palette-mauve/30 pb-2.5">
+            <h4 id="privacy-title" class="font-bold text-sm gold-gradient-text flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-palette-mauve"></i>
+                <span>سياسة الخصوصية</span>
+            </h4>
+            <button onclick="playClickSound(); closeModal('privacy-modal')" class="w-7 h-7 rounded-full bg-accent-rose/20 text-accent-rose flex items-center justify-center cursor-pointer">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+        </div>
+        <div id="privacy-body" class="flex-1 overflow-y-auto p-3 rounded-xl bg-black/60 border border-palette-mauve/30 text-xs leading-loose text-palette-light select-text space-y-3"></div>
+        <button onclick="playClickSound(); closeModal('privacy-modal')" id="privacy-close-btn" class="w-full py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">إغلاق</button>
     </div>
 </div>
 
@@ -904,11 +912,6 @@ function loginAsGuest() {
     showToast(currentLanguage === 'en' ? "Welcome, Logged in successfully" : "أهلاً بك، تم تسجيل الدخول بنجاح");
 }
 
-function loginWithGooglePlay() {
-    playClickSound();
-    showToast(currentLanguage === 'en' ? "Not available right now" : "غير متوفر الان");
-}
-
 try {
     const savedAuth = JSON.parse(localStorage.getItem('adhkar_user_auth'));
     if (savedAuth && savedAuth.name) {
@@ -930,7 +933,6 @@ const i18n = {
     ar: {
         appName: "أذكار واستغفار",
         appDesc: "القرآن الكريم، الأدعية ومواقيت الصلاة",
-        googlePlayLogin: "Google Play الدخول",
         guestLogin: "تسجيل دخول اعتيادي",
         prayerTimes: "أوقات الصلاة",
         dailyDua: "دعاء اليوم",
@@ -952,8 +954,7 @@ const i18n = {
         natureDesc: "أجواء هادئة للتسبيح والاسترخاء",
         mosqueRadar: "رادار المساجد القريبة",
         mosqueDesc: "أقرب المساجد ضمن 1 كم",
-        instagramTitle: "التواصل مع مالك التطبيق",
-        iraqTag: "تم التطوير والتدقيق الشرعي في العراق",
+        instagramTitle: "الدعم الفني",
         saveClose: "حفظ وإغلاق",
         enabled: "مفعل",
         disabled: "معطل",
@@ -1008,7 +1009,6 @@ const i18n = {
     en: {
         appName: "Adhkar & Supplications",
         appDesc: "Holy Quran, Supplications & Prayer Times",
-        googlePlayLogin: "Google Play Login",
         guestLogin: "Standard Login",
         prayerTimes: "Prayer Times",
         dailyDua: "Daily Supplication",
@@ -1030,8 +1030,7 @@ const i18n = {
         natureDesc: "Calm ambiance for relaxation",
         mosqueRadar: "Nearby Mosque Radar",
         mosqueDesc: "Closest mosques within 1 km",
-        instagramTitle: "Contact App Owner on Instagram",
-        iraqTag: "Developed & verified in Iraq",
+        instagramTitle: "Technical Support",
         saveClose: "Save & Close",
         enabled: "Enabled",
         disabled: "Disabled",
@@ -1172,9 +1171,7 @@ const ALL_HIJRI_EVENTS_EN = {
         { day: 10, title: "Eid al-Adha", story: "Blessed Eid al-Adha and the days of the greater Hajj." },
         { day: 18, title: "Eid al-Ghadir", story: "The greatest Eid of God, the day Imam Ali was appointed as Imam and successor." }
     ]
-};
-
-function applyLanguageUI() {
+};function applyLanguageUI() {
     const lang = currentLanguage;
     const t = i18n[lang];
     document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
@@ -1199,7 +1196,6 @@ function applyLanguageUI() {
 
     setTxt('app-title-splash', t.appName);
     setTxt('app-desc-splash', t.appDesc);
-    setTxt('btn-google-play', t.googlePlayLogin);
     setTxt('btn-guest-login', t.guestLogin);
     setTxt('app-header-title', t.appName);
     setTxt('btn-new-dhikr', t.newDhikr);
@@ -1219,7 +1215,7 @@ function applyLanguageUI() {
     setTxt('lbl-mosque-radar', t.mosqueRadar);
     setTxt('lbl-mosque-desc', t.mosqueDesc);
     setTxt('lbl-instagram-title', t.instagramTitle);
-    setTxt('lbl-iraq-tag', t.iraqTag);
+    setTxt('lbl-privacy-btn', lang === 'en' ? 'Privacy Policy' : 'سياسة الخصوصية');
     setTxt('btn-save-settings', t.saveClose);
     setTxt('btn-open-radar', t.open);
 
@@ -1463,7 +1459,7 @@ function startMosqueSearchProcess() {
             <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_#4ADE80] animate-pulse">
                 <i class="fa-solid fa-location-arrow"></i>
             </div>
-            <p class="text-xs text-emerald-200 leading-relaxed font-bold">${isEn ? "The radar requires enabling GPS location to search for nearby mosques with high accuracy." : "يتطلب الرادار تفعيل خيار تحديد الموقع (GPS) للبحث عن أقرب المساجد من حولك بدقة عالية."}</p>
+            <p class="text-xs text-emerald-200 leading-relaxed font-bold">${isEn ? "The radar requires enabling GPS location to search for nearby mosques with high accuracy. Your location is used only for this search and is not stored." : "يتطلب الرادار تفعيل خيار تحديد الموقع (GPS) للبحث عن أقرب المساجد من حولك بدقة عالية. يُستخدم موقعك لهذا البحث فقط ولا يتم تخزينه."}</p>
             <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs shadow-lg hover:bg-emerald-400 transition-all cursor-pointer">
                 ${isEn ? "Allow Location & Search" : "السماح بالبحث وتحديد الموقع"}
             </button>
@@ -1497,22 +1493,29 @@ function requestLocationAndSearch() {
     navigator.geolocation.getCurrentPosition(async p => {
         const la = p.coords.latitude, lo = p.coords.longitude;
         try {
-            let rawMosques = await fetchMosques(la, lo);
-            if (!rawMosques || rawMosques.length === 0) {
-                rawMosques = [
-                    { tags: { name: isEn ? "Grand District Mosque" : "مسجد الحي الكبير" }, lat: la + 0.004, lon: lo + 0.003 },
-                    { tags: { name: isEn ? "Al-Rahman Al-Rahim Mosque" : "جامع الرحمن الرحيم" }, lat: la - 0.005, lon: lo + 0.002 },
-                    { tags: { name: isEn ? "Imam Ali Mosque" : "مسجد الإمام علي" }, lat: la + 0.002, lon: lo - 0.006 },
-                    { tags: { name: isEn ? "Al-Taqwa Mosque" : "جامع التقوى والهدى" }, lat: la - 0.003, lon: lo - 0.004 }
-                ];
-            }
+            const rawMosques = await fetchMosques(la, lo);
 
-            let L = rawMosques.map(e => {
+            let L = (rawMosques || []).map(e => {
                 const y = e.lat != null ? e.lat : (e.center && e.center.lat);
                 const x = e.lon != null ? e.lon : (e.center && e.center.lon);
                 if (y == null) return null;
                 return Object.assign({ n: (e.tags && (e.tags['name:ar'] || e.tags.name)) || (isEn ? 'Blessed Mosque' : 'مسجد مبارك'), y, x }, geo(la, lo, y, x));
             }).filter(m => m && m.dist <= 3000).sort((a, b) => a.dist - b.dist).slice(0, 15);
+
+            if (L.length === 0) {
+                box.innerHTML = `
+                    <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2">
+                        <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>${isEn ? "Nearby Mosque Radar" : "رادار المساجد القريبة"}</h3>
+                        <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-red-500/20 text-red-300 flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+                    </div>
+                    <div class="py-6 space-y-3">
+                        <div class="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-300 flex items-center justify-center mx-auto text-2xl"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                        <p class="text-xs text-emerald-200 leading-relaxed font-bold">${isEn ? "No mosques were found within the search range." : "لا توجد مساجد ضمن النطاق."}</p>
+                        <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">${isEn ? "Refresh Radar" : "تحديث الرادار"}</button>
+                    </div>
+                `;
+                return;
+            }
 
             box.innerHTML = `
                 <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2">
@@ -1536,7 +1539,9 @@ function requestLocationAndSearch() {
     }, () => { 
         document.getElementById('rd-status-text').innerText = isEn ? 'Could not access location, please enable GPS.' : 'تعذر الوصول للموقع، يرجى تفعيل الـ GPS في جهازك.'; 
     }, { enableHighAccuracy: true, timeout: 15000 });
-}const arabCountriesData = {
+}
+
+const arabCountriesData = {
     "العراق": {
         timezone: "Asia/Baghdad",
         method: 0,
@@ -1723,7 +1728,7 @@ function toggleWheel(type) {
             cityBox.classList.remove('hidden');
             countryBox.classList.add('hidden');
             cityIcon.className = "fa-solid fa-chevron-up";
-            cityIcon.className = "fa-solid fa-chevron-down";
+            countryIcon.className = "fa-solid fa-chevron-down";
         } else {
             cityBox.classList.add('hidden');
             cityIcon.className = "fa-solid fa-chevron-down";
@@ -1909,9 +1914,7 @@ async function fetchPrecisePrayerTimes() {
         };
         renderPrayerCardsUI(fallbackTimings);
     }
-}
-
-const prayersRakatConfig = {
+}const prayersRakatConfig = {
     fajr: { name: "صلاة الفجر", totalRakat: 2, totalSajdat: 2, icon: "fa-cloud-moon", gradient: "from-blue-900/40 to-slate-900" },
     dhuhr: { name: "صلاة الظهر", totalRakat: 4, totalSajdat: 2, icon: "fa-sun", gradient: "from-amber-900/40 to-slate-900" },
     asr: { name: "صلاة العصر", totalRakat: 4, totalSajdat: 2, icon: "fa-cloud-sun", gradient: "from-orange-900/40 to-slate-900" },
@@ -2865,6 +2868,26 @@ function toggleButtonSound() {
 let deceasedList = [];
 let activeDeceasedPerson = null;
 
+/* ===== الإبلاغ عن المحتوى (قسم الفاتحة) ===== */
+const REPORTED_KEY = 'adhkar_reported_ids';
+function getReportedIds() {
+    try { return JSON.parse(localStorage.getItem(REPORTED_KEY)) || []; } catch (e) { return []; }
+}
+function reportDeceasedName(id) {
+    const isEn = currentLanguage === 'en';
+    const target = deceasedList.find(i => i.id === id);
+    if (!target) return;
+    if (!confirm(isEn ? 'Report this name as inappropriate content?' : 'هل تريد الإبلاغ عن هذا الاسم كمحتوى غير لائق؟')) return;
+    const ids = getReportedIds();
+    if (!ids.includes(id)) ids.push(id);
+    try { localStorage.setItem(REPORTED_KEY, JSON.stringify(ids)); } catch (e) {}
+    const subject = encodeURIComponent((isEn ? 'Content report - record #' : 'بلاغ عن محتوى - سجل رقم ') + id);
+    const body = encodeURIComponent((isEn ? 'Reported name: ' : 'الاسم المبلّغ عنه: ') + target.name + '\n' + (isEn ? 'Record ID: ' : 'رقم السجل: ') + id + '\n' + (isEn ? 'Reason: ' : 'سبب البلاغ: '));
+    showToast(isEn ? 'Reported and hidden from your list' : 'تم الإبلاغ وإخفاء الاسم من قائمتك');
+    loadFatihaLocalList();
+    window.location.href = 'mailto:zanb68950@gmail.com?subject=' + subject + '&body=' + body;
+}
+
 async function loadFatihaLocalList() {
     const container = document.getElementById('fatiha-list-content');
     const isEn = currentLanguage === 'en';
@@ -2900,13 +2923,16 @@ async function loadFatihaLocalList() {
         if (cached) deceasedList = JSON.parse(cached);
     }
 
-    if (deceasedList.length === 0) {
+    const reportedIds = getReportedIds();
+    const visibleList = deceasedList.filter(item => !reportedIds.includes(item.id));
+
+    if (visibleList.length === 0) {
         container.innerHTML = `<p class="text-xs text-center text-accent-blue py-5">${isEn ? 'No deceased names registered.' : 'لا يوجد أموات مسجلون حالياً.'}</p>`;
         return;
     }
 
     let html = '';
-    deceasedList.forEach(item => {
+    visibleList.forEach(item => {
         const prefix = isEn ? (item.gender === 'أنثى' ? 'Late' : 'Late') : (item.gender === 'أنثى' ? 'المرحومة' : 'المرحوم');
         const isOwner = (item.created_by && item.created_by === myDeviceId);
 
@@ -2927,7 +2953,11 @@ async function loadFatihaLocalList() {
                     <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-7 h-7 rounded-xl bg-accent-rose/20 text-accent-rose flex items-center justify-center hover:bg-accent-rose/30 cursor-pointer" title="${isEn ? 'Delete record' : 'حذف السجل'}">
                         <i class="fa-solid fa-trash-can text-xs"></i>
                     </button>
-                    ` : ''}
+                    ` : `
+                    <button onclick="playClickSound(); reportDeceasedName(${item.id})" class="w-7 h-7 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center hover:bg-amber-500/30 cursor-pointer" title="${isEn ? 'Report content' : 'إبلاغ عن محتوى'}">
+                        <i class="fa-solid fa-flag text-xs"></i>
+                    </button>
+                    `}
                 </div>
             </div>
         `;
@@ -3066,6 +3096,58 @@ async function finishReadingFatiha() {
 
     closeModal('reading-fatiha-modal');
     loadFatihaLocalList();
+}
+
+/* ===== سياسة الخصوصية ===== */
+const PRIVACY_CONTENT = {
+    ar: {
+        title: "سياسة الخصوصية",
+        close: "إغلاق",
+        updated: "آخر تحديث: 2026",
+        sections: [
+            ["1. مقدمة", "نلتزم بحماية خصوصيتك. توضح هذه السياسة المعلومات التي يتعامل معها تطبيق «أذكار واستغفار» وكيفية استخدامها. باستخدامك للتطبيق فإنك توافق على هذه السياسة."],
+            ["2. ما لا نجمعه", "لا نطلب منك إنشاء حساب، ولا نجمع اسمك أو بريدك الإلكتروني أو رقم هاتفك أو أي معلومات تعريفية شخصية. ولا نبيع بياناتك ولا نشاركها مع جهات إعلانية، ولا يحتوي التطبيق على إعلانات."],
+            ["3. بيانات الموقع (رادار المساجد)", "ميزة «رادار المساجد القريبة» اختيارية، ولا تُطلب صلاحية الموقع إلا عند ضغطك على زر السماح بالبحث. يُستخدم موقعك لحظياً فقط للبحث عن المساجد القريبة، فتُرسل الإحداثيات إلى خدمة OpenStreetMap Overpass للحصول على نتائج البحث. لا نخزّن موقعك على خوادمنا ولا نحتفظ به بعد إغلاق الرادار. يمكنك سحب الصلاحية في أي وقت من إعدادات جهازك."],
+            ["4. أوقات الصلاة", "تُحسب أوقات الصلاة بإرسال إحداثيات المدينة التي تختارها يدوياً (وليس موقعك الفعلي) إلى خدمة Aladhan API."],
+            ["5. قسم الفاتحة (المحتوى السحابي)", "عند إضافة اسم متوفى يُحفظ الاسم والجنس وعدد المشاهدات والقراءات على خادم Supabase، مع معرّف عشوائي مجهول للجهاز يتيح لك وحدك حذف ما أضفته. الأسماء المضافة تظهر لمستخدمي التطبيق الآخرين، لذا لا تُدخل معلومات حساسة أو بيانات اتصال. يمكنك الإبلاغ عن أي اسم غير لائق عبر زر الإبلاغ (العلم) المجاور له، وسنراجع البلاغ ونحذف المخالف. لطلب حذف اسم أضفته راسلنا على بريد الدعم."],
+            ["6. التخزين على جهازك", "تُحفظ على جهازك محلياً فقط: إعدادات اللغة والموقع المختار، والتلاوات التي تضيفها، وقائمة الأسماء التي أبلغت عنها، ونسخة مخبأة من الأدعية والأسماء للعمل دون إنترنت. يمكنك حذفها بمسح بيانات التطبيق."],
+            ["7. التلاوات المضافة", "الروابط الصوتية التي تضيفها تُحفظ على جهازك فقط. أنت المسؤول عن امتلاكك حق استخدامها."],
+            ["8. خدمات الأطراف الثالثة", "يعتمد التطبيق على: Supabase، وAladhan API، وOpenStreetMap Overpass، وخرائط Google (تُفتح عند اختيارك مسجداً للتوجّه إليه)، وخطوط Google. لكل منها سياسة خصوصية خاصة بها."],
+            ["9. الأطفال", "التطبيق مناسب لجميع الأعمار ولا نجمع عمداً أي بيانات من الأطفال."],
+            ["10. حقوقك", "يمكنك في أي وقت طلب حذف أي بيانات أضفتها، أو الاستفسار عن هذه السياسة، عبر التواصل معنا."],
+            ["11. التعديلات", "قد نحدّث هذه السياسة من وقت لآخر، وسيظهر تاريخ آخر تحديث أعلاه."],
+            ["12. التواصل والدعم الفني", "للاستفسارات أو الدعم الفني: zanb68950@gmail.com"]
+        ]
+    },
+    en: {
+        title: "Privacy Policy",
+        close: "Close",
+        updated: "Last updated: 2026",
+        sections: [
+            ["1. Introduction", "We are committed to protecting your privacy. This policy explains what information the \"Adhkar & Supplications\" app handles and how it is used. By using the app you agree to this policy."],
+            ["2. What We Do Not Collect", "No account is required. We do not collect your name, email, phone number, or any personally identifiable information. We do not sell your data or share it with advertisers, and the app contains no ads."],
+            ["3. Location Data (Mosque Radar)", "The Nearby Mosque Radar is optional. Location permission is requested only when you tap the allow-and-search button. Your location is used only momentarily to find nearby mosques: coordinates are sent to the OpenStreetMap Overpass service to retrieve results. We do not store your location on our servers or keep it after you close the radar. You can revoke the permission anytime in your device settings."],
+            ["4. Prayer Times", "Prayer times are calculated by sending the coordinates of the city you manually select (not your actual location) to the Aladhan API."],
+            ["5. Al-Fatiha Section (Cloud Content)", "When you add a deceased person's name, the name, gender, and view/read counts are stored on a Supabase server, with a random anonymous device identifier that allows only you to delete what you added. Added names are visible to other app users, so do not enter sensitive information or contact details. You can report any inappropriate name using the report (flag) button next to it; we review reports and remove violating content. To request removal of a name you added, email our support address."],
+            ["6. Local Device Storage", "Stored locally on your device only: language and selected location, recitations you add, the list of names you reported, and cached copies of supplications and names for offline use. You can delete them by clearing the app data."],
+            ["7. Added Recitations", "Audio links you add are saved on your device only. You are responsible for having the right to use them."],
+            ["8. Third-Party Services", "The app relies on Supabase, Aladhan API, OpenStreetMap Overpass, Google Maps (opened when you choose a mosque for directions), and Google Fonts. Each has its own privacy policy."],
+            ["9. Children", "The app is suitable for all ages and we do not knowingly collect data from children."],
+            ["10. Your Rights", "You may request deletion of any data you added, or ask about this policy, by contacting us at any time."],
+            ["11. Changes", "We may update this policy from time to time; the last updated date will appear above."],
+            ["12. Contact & Technical Support", "For inquiries or technical support: zanb68950@gmail.com"]
+        ]
+    }
+};
+
+function openPrivacyPolicy() {
+    const c = PRIVACY_CONTENT[currentLanguage] || PRIVACY_CONTENT.ar;
+    document.querySelector('#privacy-title span').innerText = c.title;
+    document.getElementById('privacy-close-btn').innerText = c.close;
+    document.getElementById('privacy-body').innerHTML =
+        `<p class="text-[10px] text-palette-mauve font-bold">${c.updated}</p>` +
+        c.sections.map(s => `<div><h5 class="font-bold text-palette-mauve text-xs mb-0.5">${s[0]}</h5><p>${s[1]}</p></div>`).join('');
+    openModal('privacy-modal');
 }
 
 applyLanguageUI();
