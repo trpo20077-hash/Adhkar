@@ -9,7 +9,7 @@
   2. يُقتصر أي تعديل على الجزء المطلوب تحديداً من المالك فقط، ويُحفظ باقي الكود كما هو تماماً دون المساس به.
   =============================================================================
   ألوان حقيبتي (كحلي + ذهبي): darkest #0A151C | dark #0F202B | mid #22333F | purple #1A2B37 | muted #8497A5 | mauve(ذهبي) #D4A84F | light #F3EBDD
-  الشعار: ضع ملف logo.png بجانب هذا الملف
+  الشعار: مضمّن داخل الكود (لا حاجة لملف خارجي)
   قسم أوقات الصلاة: تصميم أخضر (ليموني #a3e635)
 -->
 <meta charset="UTF-8">
@@ -197,8 +197,92 @@ html[dir="ltr"] .swipe-handle i { transform: scaleX(-1); }
 
 /* زر الرجوع إلى شاشة الأقسام */
 #back-to-sections-btn { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 60; }
-body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplications-modal,#quran-modal,#calendar-modal,#fatiha-modal,#rakat-counter-modal,#challenges-modal) { padding-bottom: 76px !important; }
-body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplications-modal,#quran-modal,#calendar-modal,#fatiha-modal,#rakat-counter-modal,#challenges-modal) > div { height: 100% !important; }
+body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplications-modal,#quran-modal,#calendar-modal,#fatiha-modal,#rakat-counter-modal,#challenges-modal,#short-duas-modal) { padding-bottom: 76px !important; }
+body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplications-modal,#quran-modal,#calendar-modal,#fatiha-modal,#rakat-counter-modal,#challenges-modal,#short-duas-modal) > div { height: 100% !important; }
+
+/* ===== نافذة معلومات الصلاة التفاعلية ===== */
+#prayer-info-sheet { position: absolute; inset: 0; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end;
+    background: rgba(2, 14, 8, 0.72); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+#prayer-info-sheet.open { opacity: 1; pointer-events: auto; }
+#prayer-info-card { background: #0a2a16; border-top: 1px solid #1f5a35; border-radius: 26px 26px 0 0; max-height: 88%; overflow-y: auto;
+    transform: translateY(100%); transition: transform .38s cubic-bezier(.2,.9,.25,1); }
+#prayer-info-sheet.open #prayer-info-card { transform: translateY(0); }
+.pi-scene { position: relative; height: 130px; overflow: hidden; border-radius: 26px 26px 0 0; }
+.pi-scene.fajr { background: linear-gradient(180deg, #14233f 0%, #5b4a7a 55%, #e9a46b 100%); }
+.pi-scene.sunrise { background: linear-gradient(180deg, #3a5a8a 0%, #f0b27a 60%, #ffd99a 100%); }
+.pi-scene.dhuhr { background: linear-gradient(180deg, #2a78b8 0%, #6fb3e0 100%); }
+.pi-scene.asr { background: linear-gradient(180deg, #3b7fb0 0%, #e7b768 100%); }
+.pi-scene.maghrib { background: linear-gradient(180deg, #3a2a5a 0%, #c4573a 60%, #f08a3c 100%); }
+.pi-scene.isha { background: linear-gradient(180deg, #050d24 0%, #14264f 100%); }
+.pi-scene.midnight { background: linear-gradient(180deg, #02050f 0%, #0a1233 100%); }
+.pi-orb { position: absolute; left: 50%; width: 54px; height: 54px; margin-left: -27px; border-radius: 50%; animation: pi-orb-rise 1.1s cubic-bezier(.2,.9,.25,1) both, pi-orb-float 4s ease-in-out 1.1s infinite; }
+.pi-orb.sun { background: #ffe08a; bottom: 40px; }
+.pi-orb.moon { background: #f3f6d8; bottom: 52px; box-shadow: inset -14px -6px 0 0 rgba(10, 22, 52, .55); }
+.pi-orb.sun::before { content: ''; position: absolute; inset: -16px; border-radius: 50%; border: 2px dashed rgba(255, 224, 138, .7); animation: pi-spin 14s linear infinite; }
+@keyframes pi-orb-rise { from { transform: translateY(90px) scale(.5); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes pi-orb-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes pi-spin { to { transform: rotate(360deg); } }
+.pi-hills { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; }
+.pi-star { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #fff; animation: star-twinkle 3s ease-in-out infinite; }
+.pi-dot { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #1f5a35; background: #0e2a1b; color: #a3e635; display: flex; align-items: center;
+    justify-content: center; font-weight: 900; font-size: 13px; cursor: pointer; transition: transform .18s ease, background .18s ease, color .18s ease; }
+.pi-dot:active { transform: scale(.88); }
+.pi-dot.done { background: #a3e635; color: #0b2a14; border-color: #a3e635; transform: scale(1.08); }
+@keyframes pi-pop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+.pi-pop { animation: pi-pop .45s ease both; }
+.pi-bar { height: 8px; border-radius: 999px; background: #071a10; overflow: hidden; }
+.pi-bar > div { height: 100%; width: 0; background: #a3e635; border-radius: 999px; transition: width .8s ease; }
+
+/* ===== رادار المساجد الفاخر ===== */
+.rdx-shell { background: linear-gradient(180deg, #0b2438 0%, #06182a 100%); border: 1px solid rgba(212,168,79,.45); border-radius: 30px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.06); max-height: 92vh; overflow-y: auto; position: relative; padding: 18px 16px 16px; text-align: center; }
+.rdx-shell::before { content: ''; position: absolute; top: 0; left: 12%; right: 12%; height: 1px; background: linear-gradient(90deg, transparent, #D4A84F, transparent); }
+.rdx-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.rdx-head-l { display: flex; align-items: center; gap: 10px; text-align: right; }
+.rdx-ico { width: 40px; height: 40px; border-radius: 13px; border: 1px solid rgba(212,168,79,.5); background: rgba(212,168,79,.08); color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.rdx-ttl { font-weight: 900; font-size: 14px; color: #fff; line-height: 1.3; }
+.rdx-sub { font-size: 10px; color: #8497A5; font-weight: 700; margin-top: 2px; }
+.rdx-x { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); color: #F3EBDD; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.rdx { position: relative; width: 272px; height: 272px; max-width: 100%; margin: 0 auto; border-radius: 50%; overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #103a57 0%, #082338 62%, #061726 100%); border: 1px solid rgba(212,168,79,.6);
+    box-shadow: 0 0 0 6px rgba(212,168,79,.05), 0 0 0 7px rgba(212,168,79,.2), inset 0 0 40px rgba(0,0,0,.5); }
+.rdx-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(143,179,204,.28); }
+.rdx-ring.r1 { inset: 33.33%; } .rdx-ring.r2 { inset: 16.66%; border-style: dashed; }
+.rdx-cross::before, .rdx-cross::after { content: ''; position: absolute; background: rgba(143,179,204,.18); }
+.rdx-cross::before { left: 50%; top: 0; bottom: 0; width: 1px; } .rdx-cross::after { top: 50%; left: 0; right: 0; height: 1px; }
+.rdx-cross { position: absolute; inset: 0; }
+.rdx-card { position: absolute; font-size: 9px; font-weight: 900; color: #D4A84F; }
+.rdx-rl { position: absolute; left: 50%; transform: translateX(3px); font-size: 8px; color: rgba(143,179,204,.8); font-weight: 700; direction: ltr; }
+.rdx-sweep { position: absolute; inset: 0; border-radius: 50%; animation: rdx-spin 4s linear infinite;
+    background: conic-gradient(from 0deg, rgba(212,168,79,0) 0deg, rgba(212,168,79,0) 280deg, rgba(212,168,79,.28) 350deg, rgba(255,232,160,.85) 360deg); }
+.rdx.idle .rdx-sweep { animation-duration: 9s; opacity: .55; }
+@keyframes rdx-spin { to { transform: rotate(360deg); } }
+.rdx-me { position: absolute; left: 50%; top: 50%; width: 14px; height: 14px; margin: -7px; border-radius: 50%; background: #D4A84F; border: 2px solid #fff; z-index: 4; }
+.rdx-me::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 1px solid rgba(212,168,79,.8); animation: rdx-ping 2.2s ease-out infinite; }
+@keyframes rdx-ping { from { transform: scale(.5); opacity: .9; } to { transform: scale(2.4); opacity: 0; } }
+.rdx-blip { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: #5CE0A8; border: 1.5px solid #eafff6; z-index: 3; padding: 0;
+    animation: rdx-flash 4s linear infinite; transition: transform .2s ease, background .2s ease; cursor: pointer; }
+.rdx-blip::before { content: ''; position: absolute; inset: -9px; }
+.rdx-blip.sel { background: #D4A84F; border-color: #fff; transform: scale(1.55); z-index: 5; animation: none; }
+@keyframes rdx-flash { 0%, 14% { box-shadow: 0 0 0 0 rgba(92,224,168,.9); filter: brightness(1.5); } 40% { box-shadow: 0 0 0 9px rgba(92,224,168,0); filter: brightness(1); } 100% { box-shadow: 0 0 0 0 rgba(92,224,168,0); filter: brightness(1); } }
+.rdx-info { margin: 14px 0 10px; padding: 10px 12px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(212,168,79,.28); min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 11px; color: #C7D3DC; font-weight: 700; }
+.rdx-info b { color: #fff; font-weight: 900; }
+.rdx-list { display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto; padding-inline-end: 2px; text-align: right; }
+.rdx-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(143,179,204,.18); transition: border-color .2s, background .2s; cursor: pointer; }
+.rdx-item.sel { border-color: #D4A84F; background: rgba(212,168,79,.1); }
+.rdx-num { width: 28px; height: 28px; border-radius: 10px; background: rgba(212,168,79,.12); border: 1px solid rgba(212,168,79,.4); color: #D4A84F; font-weight: 900; font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.rdx-nm { color: #fff; font-weight: 800; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rdx-dr { color: #8497A5; font-size: 9px; font-weight: 700; margin-top: 1px; display: flex; align-items: center; gap: 4px; }
+.rdx-dist { margin-inline-start: auto; background: rgba(212,168,79,.14); border: 1px solid rgba(212,168,79,.4); color: #F3D99A; font-family: monospace; font-weight: 900; font-size: 11px; padding: 3px 9px; border-radius: 999px; white-space: nowrap; flex-shrink: 0; }
+.rdx-go { width: 32px; height: 32px; border-radius: 50%; background: #D4A84F; color: #0a1c2c; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; }
+.rdx-cta { width: 100%; padding: 12px; border-radius: 16px; background: #D4A84F; color: #0a1c2c; font-weight: 900; font-size: 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,.35); cursor: pointer; }
+.rdx-ghost { width: 100%; padding: 11px; border-radius: 16px; background: transparent; color: #F3D99A; border: 1px solid rgba(212,168,79,.5); font-weight: 800; font-size: 12px; cursor: pointer; }
+.rdx-note { font-size: 11px; line-height: 1.8; color: #C7D3DC; font-weight: 700; margin: 14px 4px; }
+.rdx-steps { display: flex; justify-content: center; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+.rdx-step { font-size: 9px; font-weight: 800; padding: 4px 9px; border-radius: 999px; border: 1px solid rgba(143,179,204,.25); color: #8497A5; transition: all .3s; }
+.rdx-step.on { color: #0a1c2c; background: #D4A84F; border-color: #D4A84F; }
+.rdx-step.done { color: #F3D99A; border-color: rgba(212,168,79,.5); }
+.rdx-empty { width: 64px; height: 64px; border-radius: 50%; border: 1px dashed rgba(212,168,79,.6); color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 18px auto 6px; }
 </style>
 </head>
 <body class="dark min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 overflow-x-hidden text-xs sm:text-sm">
@@ -222,8 +306,8 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
     </div>
     <div class="relative z-10 w-full max-w-[340px] px-5 flex flex-col items-center text-center gap-4">
         <div id="splash-logo-tilt" class="splash-logo-tilt splash-rise" style="animation-delay:.05s">
-            <div class="w-32 h-32 rounded-[30px] overflow-hidden border border-palette-mauve/30 shadow-2xl bg-palette-dark flex items-center justify-center">
-                <img id="splash-logo" src="logo.png" alt="حقيبتي" class="w-full h-full object-cover scale-110" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+            <div class="w-36 h-36 flex items-center justify-center" style="filter:drop-shadow(0 12px 22px rgba(0,0,0,.45))">
+                <img id="splash-logo" data-app-logo="1" alt="حقيبتي" class="w-full h-full object-contain" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
                 <svg class="hidden w-full h-full p-6 text-palette-light" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M62 80 C62 40 138 40 138 80" stroke="#F3EBDD" stroke-width="14" stroke-linecap="round"/>
                     <path d="M45 82 H155 L168 168 Q169 178 158 178 H42 Q31 178 32 168 Z" fill="#F3EBDD"/>
@@ -232,7 +316,6 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
         </div>
 
         <div class="splash-rise" style="animation-delay:.2s">
-            <p id="splash-greeting" class="text-[12px] text-palette-mauve font-medium mb-1">أهلاً بك</p>
             <h2 class="text-3xl font-black text-palette-light tracking-wide" id="app-title-splash">حقيبتي</h2>
             <p class="text-[11px] text-palette-muted font-medium mt-1" id="app-desc-splash">القرآن الكريم، الأدعية ومواقيت الصلاة</p>
         </div>
@@ -255,8 +338,8 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
 
 <header class="w-full max-w-md bg-palette-dark border border-palette-purple rounded-2xl p-3 flex justify-between items-center shadow-lg mt-1">
     <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 rounded-xl border border-palette-purple flex items-center justify-center overflow-hidden bg-palette-darkest">
-            <img src="logo.png" alt="حقيبتي" class="w-full h-full object-cover scale-110" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
+        <div class="w-11 h-11 flex items-center justify-center">
+            <img data-app-logo="1" alt="حقيبتي" class="w-full h-full object-contain" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
             <svg class="hidden w-full h-full p-1.5 text-palette-light" viewBox="0 0 200 200" fill="none">
                 <path d="M62 80 C62 40 138 40 138 80" stroke="#F3EBDD" stroke-width="14" stroke-linecap="round"/>
                 <path d="M45 82 H155 L168 168 Q169 178 158 178 H42 Q31 178 32 168 Z" fill="#F3EBDD"/>
@@ -324,7 +407,7 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
 </main>
 
 <footer class="w-full max-w-md text-center py-1 text-[11px] opacity-90 font-medium">
-    <p><span class="text-palette-light font-bold" id="footer-app-name">حقيبتي</span> • <span id="footer-charity" class="text-palette-mauve">صدقة جارية</span></p>
+    <p><span class="text-palette-light font-bold" id="footer-app-name">حقيبتي</span></p>
 </footer><!-- نافذة مستقلة كاملة (Fullscreen Modal) لأقسام التطبيق والخدمات -->
 <div id="app-sections-fullscreen-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[95]">
     <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] p-4 sm:p-5 text-right relative shadow-2xl flex flex-col space-y-3">
@@ -372,6 +455,10 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
                 <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
                     <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-trophy"></i></div>
                     <span class="font-bold text-xs text-palette-light text-center truncate w-full">قسم التحديات</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openShortDuasModal();" class="col-span-2 py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-hands-holding"></i></div>
+                    <span class="font-bold text-xs text-palette-light text-center truncate w-full" id="lbl-short-duas-card">الأدعية القصيرة</span>
                 </button>
             </div>
         </div>
@@ -583,7 +670,7 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
 </div>
 
 <div id="qibla-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-3 z-[65]">
-    <div class="w-full max-w-sm bg-palette-dark border border-emerald-400/40 rounded-[28px] p-5 text-center relative shadow-2xl space-y-3"></div>
+    <div class="rdx-shell w-full max-w-sm"></div>
 </div>
 
 <!-- قسم أوقات الصلاة: التصميم الأخضر -->
@@ -677,6 +764,55 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
                 <span id="btn-save-location">حفظ التغييرات واعتماد الموقع</span>
             </button>
         </div>
+
+        <!-- نافذة معلومات الصلاة التفاعلية -->
+        <div id="prayer-info-sheet" onclick="if(event.target===this) closePrayerInfo()">
+            <div id="prayer-info-card">
+                <div id="pi-scene" class="pi-scene fajr">
+                    <div id="pi-sky-stars"></div>
+                    <div id="pi-orb" class="pi-orb sun"></div>
+                    <svg class="pi-hills" viewBox="0 0 400 44" preserveAspectRatio="none"><path d="M0 24 Q90 0 200 20 T400 14 V44 H0 Z" fill="#0b4222" opacity=".9"/><path d="M0 34 Q110 14 220 30 T400 26 V44 H0 Z" fill="#06210f"/></svg>
+                    <button onclick="playClickSound(); closePrayerInfo()" class="absolute top-3 left-3 w-8 h-8 rounded-full bg-black/35 text-white flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+                </div>
+                <div class="p-4 space-y-3 text-right">
+                    <div class="flex items-center justify-between gap-2">
+                        <div>
+                            <h4 id="pi-name" class="text-xl font-black text-white">الفجر</h4>
+                            <p id="pi-sub" class="text-[10px] text-[#bbf7d0]/70">وقت الإمساك وبداية الصلاة</p>
+                        </div>
+                        <span id="pi-time" class="font-mono text-base font-black bg-[#071a10] text-[#d9f99d] px-3 py-1.5 rounded-xl">--:--</span>
+                    </div>
+
+                    <div class="rounded-2xl bg-[#0e2a1b] border border-[#1a4a2e] p-3 space-y-2">
+                        <div class="flex justify-between items-center text-[10px] font-bold">
+                            <span id="pi-status" class="text-[#a3e635]">--</span>
+                            <span id="pi-remaining" class="font-mono text-[#d9f99d]" dir="ltr">--:--:--</span>
+                        </div>
+                        <div class="pi-bar"><div id="pi-progress"></div></div>
+                        <div class="flex justify-between text-[9px] text-[#bbf7d0]/70 font-bold">
+                            <span><span id="pi-lbl-start">يبدأ</span> <span id="pi-start" class="font-mono text-white">--</span></span>
+                            <span><span id="pi-lbl-end">ينتهي</span> <span id="pi-end" class="font-mono text-white">--</span></span>
+                        </div>
+                    </div>
+
+                    <div id="pi-rakat-box" class="rounded-2xl bg-[#0e2a1b] border border-[#1a4a2e] p-3">
+                        <div class="flex justify-between items-center mb-2">
+                            <span id="pi-rakat-title" class="text-[11px] font-black text-white">عدد الركعات</span>
+                            <span id="pi-rakat-hint" class="text-[9px] text-[#bbf7d0]/60">اضغط لتعدّ ركعاتك</span>
+                        </div>
+                        <div id="pi-dots" class="flex flex-wrap gap-2 justify-center"></div>
+                        <p id="pi-done" class="hidden text-center text-xs font-black text-[#a3e635] mt-2 pi-pop">تقبّل الله صلاتك</p>
+                    </div>
+
+                    <div class="rounded-2xl bg-[#0e2a1b] border border-[#1a4a2e] p-3 space-y-2">
+                        <p id="pi-note" class="text-[11px] leading-relaxed text-white/90"></p>
+                        <p id="pi-nafila" class="text-[10px] leading-relaxed text-[#d9f99d]"></p>
+                    </div>
+                    <p id="pi-disclaimer" class="text-[9px] text-center text-[#bbf7d0]/50 leading-relaxed"></p>
+                    <button onclick="playClickSound(); closePrayerInfo()" id="pi-close" class="w-full py-2.5 rounded-xl bg-[#a3e635] text-[#0b2a14] font-extrabold text-xs">إغلاق</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div><div id="quran-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
     <div class="w-full max-w-2xl h-[92vh] bg-palette-dark border border-palette-purple rounded-2xl p-3 sm:p-5 shadow-2xl relative flex flex-col">
@@ -761,6 +897,24 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
         <button onclick="playClickSound(); closeModal('supplications-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-supp-modal">
             إغلاق قائمة مفاتيح الجنان
         </button>
+    </div>
+</div>
+
+<div id="short-duas-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
+    <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] p-3 sm:p-4 shadow-2xl relative flex flex-col overflow-hidden">
+        <div class="flex justify-between items-center mb-2 pb-2 border-b border-palette-purple">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-xl bg-palette-mid text-palette-mauve flex items-center justify-center text-sm"><i class="fa-solid fa-hands-holding"></i></div>
+                <div>
+                    <h3 class="text-sm sm:text-base font-bold text-palette-light" id="short-duas-title">الأدعية القصيرة</h3>
+                    <p class="text-[9px] text-palette-muted" id="short-duas-sub">أدعية قصيرة يسهل حفظها وترديدها</p>
+                </div>
+            </div>
+            <button onclick="playClickSound(); closeModal('short-duas-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center cursor-pointer">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+        </div>
+        <div id="short-duas-body" class="flex-1 overflow-y-auto space-y-2.5 pr-1"></div>
     </div>
 </div>
 
@@ -999,7 +1153,6 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
             </div>
         </div>
 
-        <p id="founders-note" class="text-center text-[11px] text-palette-light/70 leading-relaxed">جزاهم الله خيراً على جهودهم ودعمهم</p>
 
         <button onclick="playClickSound(); closeModal('founders-modal')" class="w-full py-2.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-founders">
             إغلاق
@@ -1037,6 +1190,9 @@ try {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 } catch (e) {}
+
+const APP_LOGO_DATA = 'data:image/webp;base64,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';
+document.querySelectorAll('[data-app-logo]').forEach(i => { i.src = APP_LOGO_DATA; });
 
 let myDeviceId = localStorage.getItem('adhkar_device_id');
 if (!myDeviceId) {
@@ -1116,18 +1272,6 @@ const splashDhikrs = [
     "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
     "حَسْبِيَ اللَّهُ لا إِلَهَ إِلاَّ هُوَ"
 ];
-
-function setSplashGreeting() {
-    const el = document.getElementById('splash-greeting');
-    if (!el) return;
-    const h = new Date().getHours();
-    const en = currentLanguage === 'en';
-    let g;
-    if (h >= 4 && h < 12) g = en ? 'Good morning' : 'صباح الخير';
-    else if (h >= 12 && h < 17) g = en ? 'Good afternoon' : 'طاب يومك';
-    else g = en ? 'Good evening' : 'مساء الخير';
-    el.innerText = g;
-}
 
 function startSplashRotation() {
     const el = document.getElementById('splash-dhikr');
@@ -1318,7 +1462,6 @@ const i18n = {
         foundersSupport: "الداعم",
         supportName: "أحمد العامري",
         supportInitial: "أ",
-        foundersNote: "جزاهم الله خيراً على جهودهم ودعمهم",
         closeFounders: "إغلاق"
     },
     en: {
@@ -1404,7 +1547,6 @@ const i18n = {
         foundersSupport: "Supporter",
         supportName: "Ahmed Al-Amiri",
         supportInitial: "A",
-        foundersNote: "May God reward them for their efforts and support",
         closeFounders: "Close"
     }
 };
@@ -1550,6 +1692,9 @@ function applyLanguageUI() {
     setTxt('lbl-privacy-btn', lang === 'en' ? 'Privacy Policy' : 'سياسة الخصوصية');
     setTxt('btn-save-settings', t.saveClose);
     setTxt('btn-open-radar', t.open);
+    setTxt('lbl-short-duas-card', lang === 'en' ? 'Short Duas' : 'الأدعية القصيرة');
+    setTxt('short-duas-title', lang === 'en' ? 'Short Duas' : 'الأدعية القصيرة');
+    setTxt('short-duas-sub', lang === 'en' ? 'Short duas that are easy to memorize' : 'أدعية قصيرة يسهل حفظها وترديدها');
 
     setTxt('prayer-modal-title', t.prayerModalTitle);
     setTxt('current-location-subtitle', t.currentLocationSub);
@@ -1605,7 +1750,6 @@ function applyLanguageUI() {
     setTxt('founders-support-label', t.foundersSupport);
     setTxt('founders-support-name', t.supportName);
     setTxt('founders-support-initial', t.supportInitial);
-    setTxt('founders-note', t.foundersNote);
     setTxt('btn-close-founders', t.closeFounders);
 
     const backLbl = document.getElementById('btn-back-sections');
@@ -1774,113 +1918,201 @@ function geo(a, b, c, d) {
     const w = Math.cos(rad(a)) * Math.sin(rad(c)) - Math.sin(rad(a)) * Math.cos(rad(c)) * Math.cos(q);
     return { dist: 2 * 6371000 * Math.asin(Math.sqrt(x)), brg: Math.atan2(y, w) };
 }
-const OVERPASS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
+const OVERPASS = [
+    'https://overpass-api.de/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.private.coffee/api/interpreter',
+    'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
+];
+
+// يرجع أول خادم ينجح (بالتوازي) مع مهلة لكل طلب، ويرمي خطأ إذا فشلت كل الخوادم
+function overpassRequest(url, query) {
+    return new Promise((resolve, reject) => {
+        const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+        const timer = setTimeout(() => { if (ctrl) ctrl.abort(); reject(new Error('timeout')); }, 16000);
+        fetch(url, { method: 'POST', body: 'data=' + encodeURIComponent(query), signal: ctrl ? ctrl.signal : undefined })
+            .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+            .then(j => { clearTimeout(timer); if (!j || !Array.isArray(j.elements)) throw new Error('bad'); resolve(j.elements); })
+            .catch(e => { clearTimeout(timer); reject(e); });
+    });
+}
+
 async function fetchMosques(la, lo) {
-    const q = `[out:json][timeout:25];nwr["amenity"="place_of_worship"]["religion"="muslim"](around:2500,${la},${lo});out center 60;`;
-    for (const u of OVERPASS) {
-        try {
-            const r = await fetch(u, { method: 'POST', body: 'data=' + encodeURIComponent(q) });
-            if (r.ok) {
-                const j = await r.json();
-                if (j && j.elements && j.elements.length > 0) return j.elements;
-            }
-        } catch (e) {}
-    }
-    return [];
+    const around = `(around:3000,${la},${lo})`;
+    const q = `[out:json][timeout:25];(` +
+        `nwr["amenity"="place_of_worship"]["religion"="muslim"]${around};` +
+        `nwr["building"="mosque"]${around};` +
+        `nwr["amenity"="place_of_worship"]["name"~"مسجد|جامع|حسينية|مرقد|مقام|Mosque|Masjid",i]${around};` +
+        `);out center 80;`;
+    const results = await new Promise((resolve, reject) => {
+        let failed = 0, done = false;
+        OVERPASS.forEach(u => {
+            overpassRequest(u, q).then(els => { if (!done) { done = true; resolve(els); } })
+                .catch(() => { failed++; if (failed === OVERPASS.length && !done) reject(new Error('all failed')); });
+        });
+    });
+    const seen = new Set();
+    return results.filter(e => { const k = e.type + e.id; if (seen.has(k)) return false; seen.add(k); return true; });
+}
+
+// تحديد الموقع: محاولة سريعة بدقة عادية ثم دقة عالية
+function getPositionSmart() {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) { reject({ code: 0 }); return; }
+        navigator.geolocation.getCurrentPosition(resolve, err => {
+            if (err && err.code === 1) { reject(err); return; }
+            navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, timeout: 25000, maximumAge: 0 });
+        }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 });
+    });
+}
+
+const RDX_DIRS = {
+    ar: ['الشمال', 'الشمال الشرقي', 'الشرق', 'الجنوب الشرقي', 'الجنوب', 'الجنوب الغربي', 'الغرب', 'الشمال الغربي'],
+    en: ['North', 'North-East', 'East', 'South-East', 'South', 'South-West', 'West', 'North-West']
+};
+let rdxResults = [];
+let rdxRange = 1000;
+
+function rdxFmtDist(m) {
+    const en = currentLanguage === 'en';
+    if (m >= 1000) { const k = (m / 1000); return toEasternArabicDigits(k % 1 === 0 ? k : k.toFixed(1)) + (en ? ' km' : ' كم'); }
+    return toEasternArabicDigits(Math.round(m)) + (en ? ' m' : ' م');
+}
+function rdxDeg(brg) { return (brg * 180 / Math.PI + 360) % 360; }
+function rdxDirName(brg) { const i = Math.round(rdxDeg(brg) / 45) % 8; return RDX_DIRS[currentLanguage === 'en' ? 'en' : 'ar'][i]; }
+
+function rdxHead(title, sub) {
+    return `<div class="rdx-head">
+        <div class="rdx-head-l"><div class="rdx-ico"><i class="fa-solid fa-mosque"></i></div><div><div class="rdx-ttl">${title}</div><div class="rdx-sub">${sub}</div></div></div>
+        <button class="rdx-x" onclick="playClickSound(); closeModal('qibla-modal')"><i class="fa-solid fa-xmark text-xs"></i></button>
+    </div>`;
+}
+
+function rdxDial(inner, idle, range) {
+    const en = currentLanguage === 'en';
+    const N = en ? 'N' : 'شمال', E = en ? 'E' : 'شرق', S = en ? 'S' : 'جنوب', W = en ? 'W' : 'غرب';
+    const labels = range ? [1 / 3, 2 / 3, 1].map((f, i) => `<span class="rdx-rl" style="top:${50 - f * 46}%">${rdxFmtDist(range * f)}</span>`).join('') : '';
+    return `<div class="rdx ${idle ? 'idle' : ''}">
+        <div class="rdx-ring r1"></div><div class="rdx-ring r2"></div><div class="rdx-cross"></div>
+        <span class="rdx-card" style="top:5px;left:50%;transform:translateX(-50%)">${N}</span>
+        <span class="rdx-card" style="bottom:5px;left:50%;transform:translateX(-50%)">${S}</span>
+        <span class="rdx-card" style="right:7px;top:50%;transform:translateY(-50%)">${E}</span>
+        <span class="rdx-card" style="left:7px;top:50%;transform:translateY(-50%)">${W}</span>
+        ${labels}
+        <div class="rdx-sweep"></div>
+        ${inner}
+        <div class="rdx-me"></div>
+    </div>`;
 }
 
 function startMosqueSearchProcess() {
     const box = document.querySelector('#qibla-modal>div');
-    const isEn = currentLanguage === 'en';
-    box.innerHTML = `
-        <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2.5">
-            <h3 class="text-sm sm:text-base font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-location-crosshairs"></i>${isEn ? "Nearby Mosque Radar" : "رادار المساجد القريبة"}</h3>
-            <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-palette-purple text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
-        </div>
-        <div class="py-5 space-y-3">
-            <div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-2xl">
-                <i class="fa-solid fa-location-arrow"></i>
-            </div>
-            <p class="text-xs text-emerald-200 leading-relaxed font-bold">${isEn ? "The radar requires enabling GPS location to search for nearby mosques with high accuracy. Your location is used only for this search and is not stored." : "يتطلب الرادار تفعيل خيار تحديد الموقع (GPS) للبحث عن أقرب المساجد من حولك بدقة عالية. يُستخدم موقعك لهذا البحث فقط ولا يتم تخزينه."}</p>
-            <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-black text-xs shadow-lg hover:bg-emerald-400 transition-all cursor-pointer">
-                ${isEn ? "Allow Location & Search" : "السماح بالبحث وتحديد الموقع"}
-            </button>
-        </div>
-    `;
+    const en = currentLanguage === 'en';
+    box.innerHTML = rdxHead(en ? 'Nearby Mosque Radar' : 'رادار المساجد القريبة', en ? 'Search range up to 3 km' : 'نطاق البحث حتى ٣ كم') + rdxDial('', true, 0) + `
+        <p class="rdx-note">${en ? 'The radar needs your GPS location to find nearby mosques accurately. Your location is used only for this search and is never stored.' : 'يحتاج الرادار إلى تحديد موقعك (GPS) ليجد أقرب المساجد إليك بدقة. يُستخدم موقعك لهذا البحث فقط ولا يُخزَّن.'}</p>
+        <button class="rdx-cta" onclick="playClickSound(); requestLocationAndSearch();"><i class="fa-solid fa-location-crosshairs ml-1.5"></i>${en ? 'Allow location & search' : 'السماح بالموقع وبدء البحث'}</button>`;
+}
+
+function rdxSetStep(n) {
+    document.querySelectorAll('.rdx-step').forEach((el, i) => {
+        el.classList.toggle('done', i + 1 < n);
+        el.classList.toggle('on', i + 1 === n);
+    });
+}
+
+function rdxError(msg) {
+    const en = currentLanguage === 'en';
+    const box = document.querySelector('#qibla-modal>div');
+    box.innerHTML = rdxHead(en ? 'Nearby Mosque Radar' : 'رادار المساجد القريبة', en ? 'Something went wrong' : 'تعذّر إكمال البحث') + `
+        <div class="rdx-empty"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <p id="rd-status-text" class="rdx-note">${msg}</p>
+        <button class="rdx-cta" onclick="playClickSound(); requestLocationAndSearch();">${en ? 'Try again' : 'إعادة المحاولة'}</button>`;
+}
+
+function rdxSelect(i, scroll) {
+    document.querySelectorAll('.rdx-blip').forEach(b => b.classList.toggle('sel', +b.dataset.i === i));
+    document.querySelectorAll('.rdx-item').forEach(el => el.classList.toggle('sel', +el.dataset.i === i));
+    const m = rdxResults[i]; if (!m) return;
+    const en = currentLanguage === 'en';
+    const info = document.getElementById('rdx-info');
+    if (info) info.innerHTML = `<i class="fa-solid fa-mosque" style="color:#D4A84F"></i><span><b>${escapeHTML(m.n)}</b><br>${rdxFmtDist(m.dist)} • ${en ? 'direction' : 'الاتجاه'}: ${rdxDirName(m.brg)}</span>`;
+    if (scroll) { const el = document.querySelector(`.rdx-item[data-i="${i}"]`); if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
 }
 
 function requestLocationAndSearch() {
-    const isEn = currentLanguage === 'en';
+    const en = currentLanguage === 'en';
     const box = document.querySelector('#qibla-modal>div');
-    box.innerHTML = `
-        <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2">
-            <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>${isEn ? "Scanning with radar..." : "جاري المسح الفضائي بالرادار..."}</h3>
-            <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-palette-purple text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+    box.innerHTML = rdxHead(en ? 'Scanning…' : 'جاري المسح بالرادار…', en ? 'Searching within 3 km' : 'البحث ضمن نطاق ٣ كم') + rdxDial('', false, 0) + `
+        <div class="rdx-steps">
+            <span class="rdx-step on">${en ? '1 · Locating you' : '١ · تحديد موقعك'}</span>
+            <span class="rdx-step">${en ? '2 · Finding mosques' : '٢ · البحث عن المساجد'}</span>
+            <span class="rdx-step">${en ? '3 · Sorting' : '٣ · ترتيب النتائج'}</span>
         </div>
-        <div class="py-3">
-            <div class="rd-container">
-                <div class="rd-sweep"></div>
-                <div class="rd-wave"></div>
-                <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#F5EDE6;box-shadow:0 0 10px #F5EDE6;"></s>
-            </div>
-            <p id="rd-status-text" class="mt-2.5 text-[11px] text-emerald-300 font-bold">${isEn ? "Scanning coordinates within 2.5 km..." : "جاري فحص الإحداثيات والبحث ضمن نطاق 2.5 كم..."}</p>
-        </div>
-    `;
+        <p id="rd-status-text" class="rdx-note">${en ? 'Scanning coordinates…' : 'جاري فحص الإحداثيات…'}</p>`;
 
-    if (!navigator.geolocation) { 
-        document.getElementById('rd-status-text').innerText = isEn ? 'Device does not support GPS' : 'الجهاز لا يدعم خدمة GPS'; 
-        return; 
+    if (!window.isSecureContext && location.protocol !== 'file:' && location.hostname !== 'localhost') {
+        rdxError(en ? 'Location needs a secure (https) page. Please open the app over https.' : 'خدمة الموقع تتطلب صفحة آمنة (https). افتح التطبيق عبر رابط https.');
+        return;
     }
+    if (!navigator.geolocation) { rdxError(en ? 'Your device does not support GPS' : 'الجهاز لا يدعم خدمة GPS'); return; }
 
-    navigator.geolocation.getCurrentPosition(async p => {
+    getPositionSmart().then(async p => {
         const la = p.coords.latitude, lo = p.coords.longitude;
+        rdxSetStep(2);
         try {
-            const rawMosques = await fetchMosques(la, lo);
-
-            let L = (rawMosques || []).map(e => {
+            const raw = await fetchMosques(la, lo);
+            rdxSetStep(3);
+            const L = (raw || []).map(e => {
                 const y = e.lat != null ? e.lat : (e.center && e.center.lat);
                 const x = e.lon != null ? e.lon : (e.center && e.center.lon);
                 if (y == null) return null;
-                return Object.assign({ n: (e.tags && (e.tags['name:ar'] || e.tags.name)) || (isEn ? 'Blessed Mosque' : 'مسجد مبارك'), y, x }, geo(la, lo, y, x));
+                return Object.assign({ n: (e.tags && (e.tags['name:ar'] || e.tags.name)) || (en ? 'Blessed Mosque' : 'مسجد مبارك'), y, x }, geo(la, lo, y, x));
             }).filter(m => m && m.dist <= 3000).sort((a, b) => a.dist - b.dist).slice(0, 15);
 
             if (L.length === 0) {
-                box.innerHTML = `
-                    <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2">
-                        <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>${isEn ? "Nearby Mosque Radar" : "رادار المساجد القريبة"}</h3>
-                        <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-palette-purple text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
-                    </div>
-                    <div class="py-6 space-y-3">
-                        <div class="w-14 h-14 rounded-full bg-emerald-500/10 text-emerald-300 flex items-center justify-center mx-auto text-2xl"><i class="fa-solid fa-magnifying-glass-location"></i></div>
-                        <p class="text-xs text-emerald-200 leading-relaxed font-bold">${isEn ? "No mosques were found within the search range." : "لا توجد مساجد ضمن النطاق."}</p>
-                        <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">${isEn ? "Refresh Radar" : "تحديث الرادار"}</button>
-                    </div>
-                `;
+                box.innerHTML = rdxHead(en ? 'Nearby Mosque Radar' : 'رادار المساجد القريبة', en ? 'No results' : 'لا توجد نتائج') + `
+                    <div class="rdx-empty"><i class="fa-solid fa-magnifying-glass-location"></i></div>
+                    <p class="rdx-note">${en ? 'No mosques were found within the search range.' : 'لا توجد مساجد ضمن النطاق.'}</p>
+                    <button class="rdx-cta" onclick="playClickSound(); requestLocationAndSearch();">${en ? 'Refresh radar' : 'تحديث الرادار'}</button>`;
                 return;
             }
 
-            box.innerHTML = `
-                <div class="flex justify-between items-center border-b border-emerald-500/30 pb-2">
-                    <h3 class="text-sm font-bold text-emerald-400"><i class="fa-solid fa-mosque ml-1"></i>${isEn ? `Discovered Mosques (${L.length})` : `المساجد المكتشفة (${toEasternArabicDigits(L.length)})`}</h3>
-                    <button onclick="playClickSound();closeModal('qibla-modal')" class="w-7 h-7 rounded-full bg-palette-purple text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
-                </div>
-                <div class="rd-container my-1.5">
-                    <div class="rd-sweep"></div>
-                    <s style="position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:#F5EDE6;box-shadow:0 0 10px #F5EDE6;"></s>
-                    ${L.map(m => `<b style="position:absolute;width:8px;height:8px;margin:-4px;border-radius:50%;background:#4ADE80;box-shadow:0 0 6px #4ADE80;left:${50 + Math.sin(m.brg) * Math.min(m.dist, 900) / 22}%;top:${50 - Math.cos(m.brg) * Math.min(m.dist, 900) / 22}%"></b>`).join('')}
-                </div>
-                <p class="text-[9px] text-emerald-300/80">${isEn ? "North is up • Accurate distances & directions" : "الشمال للأعلى • المسافات والاتجاهات حقيقية دقيقة"}</p>
-                <div class="mt-1.5 space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                    ${L.map(m => `<a target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" class="flex justify-between items-center px-3 py-1.5 rounded-xl bg-palette-darkest border border-emerald-400/30 text-xs hover:border-emerald-400 transition-all"><span class="text-white font-bold truncate max-w-[160px] text-right">${escapeHTML(m.n)}</span><span class="font-mono text-palette-mauve font-bold">${toEasternArabicDigits(Math.round(m.dist))} ${isEn ? 'm' : 'م'}</span></a>`).join('')}
-                </div>
-                <button onclick="playClickSound(); requestLocationAndSearch();" class="w-full mt-2 py-2 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs shadow-md">${isEn ? "Refresh Radar" : "تحديث الرادار"}</button>
-            `;
+            rdxResults = L;
+            const maxD = Math.max(...L.map(m => m.dist));
+            rdxRange = [500, 1000, 1500, 2000, 2500, 3000].find(v => v >= maxD) || 3000;
+            const blips = L.map((m, i) => {
+                const r = Math.min(m.dist / rdxRange, 1) * 46;
+                const left = 50 + Math.sin(m.brg) * r, top = 50 - Math.cos(m.brg) * r;
+                const delay = (rdxDeg(m.brg) / 360 * 4).toFixed(2);
+                return `<button class="rdx-blip" data-i="${i}" style="left:${left}%;top:${top}%;animation-delay:${delay}s" onclick="playClickSound(); rdxSelect(${i}, true)"></button>`;
+            }).join('');
+            const items = L.map((m, i) => `
+                <div class="rdx-item" data-i="${i}" onclick="playClickSound(); rdxSelect(${i}, false)">
+                    <div class="rdx-num">${toEasternArabicDigits(i + 1)}</div>
+                    <div style="min-width:0"><div class="rdx-nm">${escapeHTML(m.n)}</div>
+                        <div class="rdx-dr"><i class="fa-solid fa-location-arrow" style="transform:rotate(${(rdxDeg(m.brg) - 45).toFixed(0)}deg);color:#D4A84F"></i>${rdxDirName(m.brg)}</div></div>
+                    <span class="rdx-dist">${rdxFmtDist(m.dist)}</span>
+                    <a class="rdx-go" target="_blank" onclick="event.stopPropagation(); playClickSound()" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" aria-label="${en ? 'Walking directions' : 'اتجاهات المشي'}"><i class="fa-solid fa-person-walking"></i></a>
+                </div>`).join('');
+
+            box.innerHTML = rdxHead(en ? `Discovered mosques (${L.length})` : `المساجد المكتشفة (${toEasternArabicDigits(L.length)})`, en ? 'North is up • real distances' : 'الشمال للأعلى • مسافات حقيقية') +
+                rdxDial(blips, false, rdxRange) + `
+                <div id="rdx-info" class="rdx-info">${en ? 'Tap a dot to see the mosque' : 'اضغط على أي نقطة لعرض المسجد'}</div>
+                <div class="rdx-list">${items}</div>
+                <button class="rdx-ghost" style="margin-top:12px" onclick="playClickSound(); requestLocationAndSearch();"><i class="fa-solid fa-rotate ml-1.5"></i>${en ? 'Refresh radar' : 'تحديث الرادار'}</button>`;
+            rdxSelect(0, false);
         } catch (e) {
-            document.getElementById('rd-status-text').innerText = isEn ? 'Network error, please try again' : 'حدث خطأ بشبكة الاتصال، حاول مجدداً';
+            rdxError(en ? 'Network error, please try again' : 'حدث خطأ بشبكة الاتصال، حاول مجدداً');
         }
-    }, () => { 
-        document.getElementById('rd-status-text').innerText = isEn ? 'Could not access location, please enable GPS.' : 'تعذر الوصول للموقع، يرجى تفعيل الـ GPS في جهازك.'; 
-    }, { enableHighAccuracy: true, timeout: 15000 });
+    }).catch(err => {
+        const c = err && err.code;
+        let msg;
+        if (c === 1) msg = en ? 'Location permission was denied. Allow location for the app in your device settings, then try again.' : 'تم رفض إذن الموقع. اسمح للتطبيق بالوصول إلى الموقع من إعدادات الجهاز ثم أعد المحاولة.';
+        else if (c === 3) msg = en ? 'Locating you took too long. Go near a window or outdoors, make sure GPS is on, and try again.' : 'استغرق تحديد موقعك وقتاً طويلاً. اقترب من نافذة أو اخرج للمكان المفتوح وتأكد من تشغيل GPS ثم أعد المحاولة.';
+        else if (c === 2) msg = en ? 'Your position is unavailable. Turn on location services (GPS) and try again.' : 'تعذر تحديد موقعك. شغّل خدمة الموقع (GPS) في الجهاز ثم أعد المحاولة.';
+        else msg = en ? 'Could not access your location. Please enable GPS.' : 'تعذر الوصول للموقع، يرجى تفعيل الـ GPS في جهازك.';
+        rdxError(msg);
+    });
 }
 
 const arabCountriesData = {
@@ -2155,11 +2387,165 @@ function savePrayerChanges() {
     showToast(isEn ? `Updated location to (${activeCity} - ${activeCountry})` : `تم تحديث واعتماد مواقيت (${activeCity} - ${activeCountry})`);
 }
 
+// ===== معلومات الصلاة التفاعلية =====
+const PRAYER_INFO = [
+    { key: 'Fajr', end: 'Sunrise', scene: 'fajr', orb: 'moon', rakat: 2,
+      ar: { sub: 'صلاة الصبح', note: 'صلاة الفجر ركعتان، يبدأ وقتها بطلوع الفجر الصادق وينتهي بطلوع الشمس.', nafila: 'يُستحب أداء نافلة الفجر (ركعتان) قبل الفريضة.' },
+      en: { sub: 'Morning prayer', note: 'Fajr is two rakats. Its time starts at true dawn and ends at sunrise.', nafila: 'The two-rakat Fajr nafila is recommended before the obligatory prayer.' } },
+    { key: 'Sunrise', end: 'Dhuhr', scene: 'sunrise', orb: 'sun', rakat: 0,
+      ar: { sub: 'طلوع الشمس', note: 'ليس وقت صلاة فريضة، وبطلوع الشمس ينتهي وقت صلاة الفجر.', nafila: 'وقت مناسب للذكر وتعقيبات الصلاة والدعاء.' },
+      en: { sub: 'Sunrise', note: 'This is not an obligatory prayer time. Fajr time ends when the sun rises.', nafila: 'A good time for dhikr, post-prayer supplications and dua.' } },
+    { key: 'Dhuhr', end: 'Asr', scene: 'dhuhr', orb: 'sun', rakat: 4,
+      ar: { sub: 'زوال الشمس', note: 'صلاة الظهر أربع ركعات، ويدخل وقتها بزوال الشمس.', nafila: 'نافلة الظهر ثماني ركعات تُصلّى قبل الفريضة.' },
+      en: { sub: 'Midday prayer', note: 'Dhuhr is four rakats. Its time enters when the sun passes its zenith.', nafila: 'The Dhuhr nafila is eight rakats, prayed before the obligatory prayer.' } },
+    { key: 'Asr', end: 'Maghrib', scene: 'asr', orb: 'sun', rakat: 4,
+      ar: { sub: 'الصلاة الوسطى', note: 'صلاة العصر أربع ركعات، وهي الصلاة الوسطى التي حثّ القرآن على المحافظة عليها.', nafila: 'نافلة العصر ثماني ركعات تُصلّى قبل الفريضة.' },
+      en: { sub: 'The middle prayer', note: 'Asr is four rakats, the middle prayer the Quran urges us to guard.', nafila: 'The Asr nafila is eight rakats, prayed before the obligatory prayer.' } },
+    { key: 'Maghrib', end: 'Isha', scene: 'maghrib', orb: 'sun', rakat: 3,
+      ar: { sub: 'غروب الشمس', note: 'صلاة المغرب ثلاث ركعات، ويدخل وقتها بغروب الشمس وذهاب الحمرة المشرقية.', nafila: 'نافلة المغرب أربع ركعات تُصلّى بعد الفريضة.' },
+      en: { sub: 'Sunset prayer', note: 'Maghrib is three rakats. Its time enters at sunset.', nafila: 'The Maghrib nafila is four rakats, prayed after the obligatory prayer.' } },
+    { key: 'Isha', end: 'Midnight', scene: 'isha', orb: 'moon', rakat: 4,
+      ar: { sub: 'صلاة العشاء', note: 'صلاة العشاء أربع ركعات، ويمتد وقتها إلى منتصف الليل الشرعي.', nafila: 'بعدها نافلة الوتيرة: ركعتان من جلوس.' },
+      en: { sub: 'Night prayer', note: 'Isha is four rakats. Its time extends to the Islamic midnight.', nafila: 'It is followed by the Witira nafila: two rakats prayed sitting.' } },
+    { key: 'Midnight', end: 'Fajr', scene: 'midnight', orb: 'moon', rakat: 0,
+      ar: { sub: 'منتصف الليل الشرعي', note: 'بمنتصف الليل الشرعي ينتهي وقت العشاء، ويبدأ وقت نافلة الليل حتى طلوع الفجر.', nafila: 'نافلة الليل إحدى عشرة ركعة: ثمان للّيل، وركعتا الشفع، وركعة الوتر.' },
+      en: { sub: 'Islamic midnight', note: 'At the Islamic midnight Isha time ends and the time for the night prayer begins until dawn.', nafila: 'The night prayer is eleven rakats: eight, then two of Shaf\'a, then one of Witr.' } }
+];
+let activePrayerIdx = null, prayerInfoTimer = null, prayerRakatDone = 0;
+
+function _secOf(timeStr) { return timeStr ? parse24HourToSeconds(timeStr) : 0; }
+function _fmtHMS(s) {
+    s = Math.max(0, Math.floor(s));
+    return `${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor((s % 3600) / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+}
+
+function openPrayerInfo(idx) {
+    const info = PRAYER_INFO[idx];
+    if (!info || !currentRawPrayerTimings) return;
+    activePrayerIdx = idx;
+    prayerRakatDone = 0;
+    const isEn = currentLanguage === 'en';
+    const L = isEn ? info.en : info.ar;
+    const names = isEn ? ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha', 'Islamic Midnight'] : ['الفجر', 'الشروق', 'الظهر', 'العصر', 'المغرب', 'العشاء', 'منتصف الليل الشرعي'];
+
+    const sheet = document.getElementById('prayer-info-sheet');
+    const scene = document.getElementById('pi-scene');
+    scene.className = 'pi-scene ' + info.scene;
+    const oldOrb = document.getElementById('pi-orb');
+    const orb = oldOrb.cloneNode(false);
+    orb.className = 'pi-orb ' + info.orb;
+    oldOrb.replaceWith(orb);
+    const starsBox = document.getElementById('pi-sky-stars');
+    starsBox.innerHTML = '';
+    if (info.orb === 'moon' || info.scene === 'fajr') {
+        for (let i = 0; i < 14; i++) {
+            const s = document.createElement('span');
+            s.className = 'pi-star';
+            s.style.left = (Math.random() * 96 + 2) + '%';
+            s.style.top = (Math.random() * 62 + 4) + '%';
+            s.style.animationDelay = (Math.random() * 3) + 's';
+            starsBox.appendChild(s);
+        }
+    }
+
+    document.getElementById('pi-name').innerText = names[idx];
+    document.getElementById('pi-sub').innerText = L.sub;
+    document.getElementById('pi-time').innerText = format12Hour(currentRawPrayerTimings[info.key]);
+    document.getElementById('pi-start').innerText = format12Hour(currentRawPrayerTimings[info.key]);
+    document.getElementById('pi-end').innerText = format12Hour(currentRawPrayerTimings[info.end]);
+    document.getElementById('pi-lbl-start').innerText = isEn ? 'Starts' : 'يبدأ';
+    document.getElementById('pi-lbl-end').innerText = isEn ? 'Ends' : 'ينتهي';
+    document.getElementById('pi-note').innerText = L.note;
+    document.getElementById('pi-nafila').innerText = L.nafila;
+    document.getElementById('pi-disclaimer').innerText = isEn
+        ? 'Rulings follow the commonly held view among Imami jurists; refer to your marja\' for details.'
+        : 'الأحكام بحسب المشهور عند فقهاء الإمامية، ولتفاصيل أدق راجع مرجعك الديني.';
+    document.getElementById('pi-close').innerText = isEn ? 'Close' : 'إغلاق';
+    document.getElementById('pi-rakat-title').innerText = isEn ? 'Number of rakats' : 'عدد الركعات';
+    document.getElementById('pi-rakat-hint').innerText = isEn ? 'Tap to count your rakats' : 'اضغط لتعدّ ركعاتك';
+    document.getElementById('pi-done').innerText = isEn ? 'May Allah accept your prayer' : 'تقبّل الله صلاتك';
+    document.getElementById('pi-done').classList.add('hidden');
+
+    const box = document.getElementById('pi-rakat-box');
+    const dots = document.getElementById('pi-dots');
+    if (info.rakat > 0) {
+        box.classList.remove('hidden');
+        dots.innerHTML = '';
+        for (let i = 1; i <= info.rakat; i++) {
+            const d = document.createElement('button');
+            d.className = 'pi-dot pi-pop';
+            d.style.animationDelay = (i * 0.07) + 's';
+            d.innerText = toEasternArabicDigits(i);
+            d.onclick = () => tapPrayerRakat(i, d);
+            dots.appendChild(d);
+        }
+    } else {
+        box.classList.add('hidden');
+    }
+
+    sheet.classList.add('open');
+    updatePrayerInfoLive();
+    if (prayerInfoTimer) clearInterval(prayerInfoTimer);
+    prayerInfoTimer = setInterval(updatePrayerInfoLive, 1000);
+}
+
+function tapPrayerRakat(n, el) {
+    playClickSound();
+    const info = PRAYER_INFO[activePrayerIdx];
+    // الضغط على الركعة التالية فقط يعدّها
+    if (n === prayerRakatDone + 1) {
+        prayerRakatDone = n;
+        el.classList.add('done');
+    } else if (n === prayerRakatDone) {
+        prayerRakatDone = n - 1;
+        el.classList.remove('done');
+    }
+    document.getElementById('pi-done').classList.toggle('hidden', prayerRakatDone < info.rakat);
+}
+
+function updatePrayerInfoLive() {
+    if (activePrayerIdx === null || !currentRawPrayerTimings) return;
+    const info = PRAYER_INFO[activePrayerIdx];
+    const isEn = currentLanguage === 'en';
+    const st = _secOf(currentRawPrayerTimings[info.key]);
+    let en = _secOf(currentRawPrayerTimings[info.end]);
+    if (en <= st) en += 86400;
+    const d = new Date();
+    let now = d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+    if (now < st && now + 86400 < en) now += 86400;
+
+    const statusEl = document.getElementById('pi-status');
+    const remEl = document.getElementById('pi-remaining');
+    const bar = document.getElementById('pi-progress');
+    if (now >= st && now < en) {
+        statusEl.innerText = isEn ? 'Time is now — remaining' : 'وقتها الآن — المتبقي';
+        remEl.innerText = _fmtHMS(en - now);
+        bar.style.width = Math.min(100, ((now - st) / (en - st)) * 100) + '%';
+    } else if (now < st) {
+        statusEl.innerText = isEn ? 'Starts in' : 'يبدأ وقتها بعد';
+        remEl.innerText = _fmtHMS(st - now);
+        bar.style.width = '0%';
+    } else {
+        statusEl.innerText = isEn ? 'Time has ended for today' : 'انتهى وقتها اليوم';
+        remEl.innerText = '--:--:--';
+        bar.style.width = '100%';
+    }
+}
+
+function closePrayerInfo() {
+    const sheet = document.getElementById('prayer-info-sheet');
+    if (sheet) sheet.classList.remove('open');
+    if (prayerInfoTimer) { clearInterval(prayerInfoTimer); prayerInfoTimer = null; }
+    activePrayerIdx = null;
+}
+
 function handlePrayerCardClick(cardElement) {
     playClickSound();
     cardElement.classList.remove('prayer-clicked');
     void cardElement.offsetWidth;
     cardElement.classList.add('prayer-clicked');
+    const idx = parseInt(String(cardElement.id).replace('prayer-card-', ''), 10);
+    if (!isNaN(idx)) setTimeout(() => openPrayerInfo(idx), 180);
 }
 
 function format12Hour(time24) {
@@ -2741,7 +3127,48 @@ function stopQuranAudio() {
 }
 
 /* ===== فتح وإغلاق النوافذ + زر الرجوع إلى شاشة الأقسام ===== */
-const SECTION_MODALS = ['prayer-times-modal','daily-supplications-modal','supplications-modal','quran-modal','calendar-modal','fatiha-modal','rakat-counter-modal','challenges-modal'];
+// ===== الأدعية القصيرة =====
+// أضف أدعيتك هنا بهذا الشكل، مثال:
+// { title: "دعاء الصباح", text: "نص الدعاء هنا" },
+const SHORT_DUAS = [
+];
+
+function openShortDuasModal() {
+    openModal('short-duas-modal');
+    renderShortDuas();
+}
+
+function renderShortDuas() {
+    const en = currentLanguage === 'en';
+    const box = document.getElementById('short-duas-body');
+    if (!box) return;
+    if (!SHORT_DUAS.length) {
+        box.innerHTML = `<div class="h-full flex flex-col items-center justify-center text-center gap-3 py-16">
+            <div class="w-16 h-16 rounded-full border border-dashed border-palette-muted/60 text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-hands-holding"></i></div>
+            <p class="text-sm font-bold text-palette-light">${en ? 'No short duas yet' : 'لا توجد أدعية بعد'}</p>
+            <p class="text-[11px] text-palette-muted leading-relaxed max-w-[240px]">${en ? 'Short duas will appear here once they are added.' : 'ستظهر الأدعية القصيرة هنا عند إضافتها.'}</p>
+        </div>`;
+        return;
+    }
+    box.innerHTML = SHORT_DUAS.map((d, i) => `
+        <div class="rounded-2xl bg-palette-mid border border-palette-purple p-3.5 space-y-2">
+            <div class="flex items-center justify-between gap-2">
+                <h4 class="font-bold text-xs text-palette-light">${escapeHTML(d.title || '')}</h4>
+                <button onclick="copyShortDua(${i})" class="w-8 h-8 rounded-lg bg-palette-dark text-palette-mauve flex items-center justify-center shrink-0 cursor-pointer" aria-label="${en ? 'Copy' : 'نسخ'}"><i class="fa-regular fa-copy text-xs"></i></button>
+            </div>
+            <p class="font-amiri text-lg leading-loose text-palette-light select-text">${escapeHTML(d.text || '')}</p>
+        </div>`).join('');
+}
+
+function copyShortDua(i) {
+    playClickSound();
+    const d = SHORT_DUAS[i]; if (!d) return;
+    const done = () => showToast(currentLanguage === 'en' ? 'Copied' : 'تم النسخ');
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(d.text || '').then(done).catch(() => {});
+    else done();
+}
+
+const SECTION_MODALS = ['prayer-times-modal','daily-supplications-modal','supplications-modal','quran-modal','calendar-modal','fatiha-modal','rakat-counter-modal','challenges-modal','short-duas-modal'];
 
 function updateBackBtn(show) {
     const b = document.getElementById('back-to-sections-btn');
@@ -2757,6 +3184,7 @@ function closeModal(id) {
     const m = document.getElementById(id);
     if (!m) return;
     if (id === 'quran-modal' && !isQuranBackgroundPlayOn) stopQuranAudio();
+    if (id === 'prayer-times-modal') closePrayerInfo();
     m.classList.add('hidden');
     m.classList.remove('flex');
     if (SECTION_MODALS.includes(id)) updateBackBtn(false);
@@ -3518,7 +3946,6 @@ function openPrivacyPolicy() {
 
 applyLanguageUI();
 updateUI();
-setSplashGreeting();
 initSwipeLogin();
 startSplashRotation();
 </script>
