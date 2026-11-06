@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="dark">
 <head>
-<!-- 
-  =============================================================================
-  [AI PROTECTION & LOCK DIRECTIVE / تعليمات صارمة لنموذج الذكاء الاصطناعي]
-  تنبيه هام جداً لأي ذكاء اصطناعي يقرأ هذا الكود أو يقوم بصيانته وتعديله:
-  1. يُمنع منعاً باتاً حذف أو تعديل أو اختصار أي جزء من هذا الكود أو وظائفه (أوقات الصلاة، الأذكار، مفاتيح الجنان، Supabase، الرادار، التقويم، المصحف الشريف، الأذان، سجل الصلوات، الإمساكية، محوّل التاريخ، الاستخارة، إلخ) إلا إذا طلب المستخدم ذلك صراحة وبشكل مباشر في رسالته الحالية.
-  2. يُقتصر أي تعديل على الجزء المطلوب تحديداً من المالك فقط، ويُحفظ باقي الكود كما هو تماماً دون المساس به.
-  =============================================================================
-  ألوان حقيبتي (كحلي + ذهبي): darkest #0A151C | dark #0F202B | mid #22333F | purple #1A2B37 | muted #8497A5 | mauve(ذهبي) #D4A84F | light #F3EBDD
-  الشعار: مضمّن داخل الكود (لا حاجة لملف خارجي)
-  قسم أوقات الصلاة: تصميم أخضر (ليموني #a3e635)
--->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0F202B" id="meta-theme-color">
@@ -21,6 +10,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+window.tailwind = window.tailwind || {};
 tailwind.config = {
     darkMode: 'class',
     theme: {
@@ -148,29 +138,29 @@ html[dir="ltr"] .swipe-handle i { transform: scaleX(-1); }
 @keyframes swipe-hint { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(var(--hint, -8px)); } }
 .swipe-hint { animation: swipe-hint 1.6s ease-in-out infinite; }
 
-/* ===== قسم أوقات الصلاة: التصميم الأخضر ===== */
-.prayer-theme { background: linear-gradient(180deg, #06210f 0%, #0a2a16 38%, #05140b 100%); }
+/* ===== قسم أوقات الصلاة: بهوية التطبيق ===== */
+.prayer-theme { background: linear-gradient(180deg, #16293A 0%, #0F202B 38%, #0A151C 100%); }
 .prayer-sky { position: absolute; top: 0; left: 0; right: 0; height: 200px; overflow: hidden; pointer-events: none; }
 .prayer-sky .stars {
     position: absolute; inset: 0; opacity: 0.85; background-size: 200px 140px;
     background-image:
-        radial-gradient(1.5px 1.5px at 18px 24px, #d9f99d, transparent),
-        radial-gradient(1px 1px at 64px 70px, #ecfccb, transparent),
-        radial-gradient(1.5px 1.5px at 110px 38px, #bef264, transparent),
-        radial-gradient(1px 1px at 150px 92px, #ecfccb, transparent),
-        radial-gradient(1.5px 1.5px at 186px 18px, #d9f99d, transparent),
-        radial-gradient(1px 1px at 40px 118px, #bef264, transparent);
+        radial-gradient(1.5px 1.5px at 18px 24px, #F3EBDD, transparent),
+        radial-gradient(1px 1px at 64px 70px, #F3EBDD, transparent),
+        radial-gradient(1.5px 1.5px at 110px 38px, #E8C77A, transparent),
+        radial-gradient(1px 1px at 150px 92px, #F3EBDD, transparent),
+        radial-gradient(1.5px 1.5px at 186px 18px, #F3EBDD, transparent),
+        radial-gradient(1px 1px at 40px 118px, #E8C77A, transparent);
 }
 .prayer-sky svg { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; }
 .prayer-sky::after {
     content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 70px;
-    background: linear-gradient(180deg, transparent, #0a2a16);
+    background: linear-gradient(180deg, transparent, #0F202B);
 }
-.prayer-row { background: #0e2a1b; border: 1px solid #1a4a2e; }
-.prayer-row .p-icon { background: #123a24; color: #a3e635; }
-.prayer-row .p-name { color: #f0fdf4; }
-.prayer-row .p-desc { color: rgba(187, 247, 208, 0.6); }
-.prayer-row .p-time { background: #071a10; color: #d9f99d; }
+.prayer-row { background: #0F202B; border: 1px solid #22333F; }
+.prayer-row .p-icon { background: #1A2B37; color: #D4A84F; }
+.prayer-row .p-name { color: #F3EBDD; }
+.prayer-row .p-desc { color: rgba(243, 235, 221, 0.6); }
+.prayer-row .p-time { background: #0A151C; color: #F3EBDD; }
 @keyframes prayerClickAnim {
     0% { transform: scale(1); }
     40% { transform: scale(1.02); }
@@ -178,14 +168,14 @@ html[dir="ltr"] .swipe-handle i { transform: scaleX(-1); }
 }
 .prayer-clicked { animation: prayerClickAnim 0.35s ease-in-out !important; }
 .next-prayer-highlight {
-    background: #a3e635 !important;
-    border-color: #a3e635 !important;
-    box-shadow: 0 0 0 1px #a3e635 !important;
+    background: #D4A84F !important;
+    border-color: #D4A84F !important;
+    box-shadow: 0 0 0 1px #D4A84F !important;
 }
-.next-prayer-highlight .p-name { color: #0b2a14 !important; }
-.next-prayer-highlight .p-desc { color: rgba(11, 42, 20, 0.75) !important; }
-.next-prayer-highlight .p-time { background: #0b2a14 !important; color: #a3e635 !important; }
-.next-prayer-highlight .p-icon { background: #0b2a14 !important; color: #a3e635 !important; }
+.next-prayer-highlight .p-name { color: #0A151C !important; }
+.next-prayer-highlight .p-desc { color: rgba(10, 21, 28, 0.75) !important; }
+.next-prayer-highlight .p-time { background: #0A151C !important; color: #D4A84F !important; }
+.next-prayer-highlight .p-icon { background: #0A151C !important; color: #D4A84F !important; }
 
 .hijri-dark-modal { background-color: #0F202B !important; color: #F3EBDD !important; }
 
@@ -202,9 +192,9 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
 
 /* ===== نافذة معلومات الصلاة التفاعلية ===== */
 #prayer-info-sheet { position: absolute; inset: 0; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end;
-    background: rgba(2, 14, 8, 0.72); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    background: rgba(5, 12, 18, 0.72); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
 #prayer-info-sheet.open { opacity: 1; pointer-events: auto; }
-#prayer-info-card { background: #0a2a16; border-top: 1px solid #1f5a35; border-radius: 26px 26px 0 0; max-height: 88%; overflow-y: auto;
+#prayer-info-card { background: #0F202B; border-top: 1px solid #2E4352; border-radius: 26px 26px 0 0; max-height: 88%; overflow-y: auto;
     transform: translateY(100%); transition: transform .38s cubic-bezier(.2,.9,.25,1); }
 #prayer-info-sheet.open #prayer-info-card { transform: translateY(0); }
 .pi-scene { position: relative; height: 130px; overflow: hidden; border-radius: 26px 26px 0 0; }
@@ -224,14 +214,14 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
 @keyframes pi-spin { to { transform: rotate(360deg); } }
 .pi-hills { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; }
 .pi-star { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #fff; animation: star-twinkle 3s ease-in-out infinite; }
-.pi-dot { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #1f5a35; background: #0e2a1b; color: #a3e635; display: flex; align-items: center;
+.pi-dot { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #2E4352; background: #0F202B; color: #D4A84F; display: flex; align-items: center;
     justify-content: center; font-weight: 900; font-size: 13px; cursor: pointer; transition: transform .18s ease, background .18s ease, color .18s ease; }
 .pi-dot:active { transform: scale(.88); }
-.pi-dot.done { background: #a3e635; color: #0b2a14; border-color: #a3e635; transform: scale(1.08); }
+.pi-dot.done { background: #D4A84F; color: #0A151C; border-color: #D4A84F; transform: scale(1.08); }
 @keyframes pi-pop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
 .pi-pop { animation: pi-pop .45s ease both; }
-.pi-bar { height: 8px; border-radius: 999px; background: #071a10; overflow: hidden; }
-.pi-bar > div { height: 100%; width: 0; background: #a3e635; border-radius: 999px; transition: width .8s ease; }
+.pi-bar { height: 8px; border-radius: 999px; background: #0A151C; overflow: hidden; }
+.pi-bar > div { height: 100%; width: 0; background: #D4A84F; border-radius: 999px; transition: width .8s ease; }
 
 /* ===== رادار المساجد الفاخر ===== */
 .rdx-shell { background: linear-gradient(180deg, #0b2438 0%, #06182a 100%); border: 1px solid rgba(212,168,79,.45); border-radius: 30px;
@@ -264,7 +254,7 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
     animation: rdx-flash 4s linear infinite; transition: transform .2s ease, background .2s ease; cursor: pointer; }
 .rdx-blip::before { content: ''; position: absolute; inset: -9px; }
 .rdx-blip.sel { background: #D4A84F; border-color: #fff; transform: scale(1.55); z-index: 5; animation: none; }
-@keyframes rdx-flash { 0%, 14% { box-shadow: 0 0 0 0 rgba(92,224,168,.9); filter: brightness(1.5); } 40% { box-shadow: 0 0 0 9px rgba(92,224,168,0); filter: brightness(1); } 100% { box-shadow: 0 0 0 0 rgba(92,224,168,0); filter: brightness(1); } }
+@keyframes rdx-flash { 0%, 14% { box-shadow: 0 0 0 0 rgba(92,224,168,.9); } 40% { box-shadow: 0 0 0 9px rgba(92,224,168,0); } 100% { box-shadow: 0 0 0 0 rgba(92,224,168,0); } }
 .rdx-info { margin: 14px 0 10px; padding: 10px 12px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(212,168,79,.28); min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 11px; color: #C7D3DC; font-weight: 700; }
 .rdx-info b { color: #fff; font-weight: 900; }
 .rdx-list { display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto; padding-inline-end: 2px; text-align: right; }
@@ -326,11 +316,74 @@ html[dir="ltr"] .imsak-table tr td:last-child { border-radius: 0 12px 12px 0; }
 .imsak-table tr.today td { background: #D4A84F; color: #0A151C; }
 @keyframes adhanPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(212,168,79,.55); } 50% { box-shadow: 0 0 0 14px rgba(212,168,79,0); } }
 .adhan-pulse { animation: adhanPulse 1.6s infinite; }
-.loc-res { padding: 8px 10px; border-radius: 10px; color: #d9f99d; font-size: 11px; font-weight: 700; cursor: pointer; }
-.loc-res:hover, .loc-res:active { background: rgba(163,230,53,.15); }
+.loc-res { padding: 8px 10px; border-radius: 10px; color: #F3EBDD; font-size: 11px; font-weight: 700; cursor: pointer; }
+.loc-res:hover, .loc-res:active { background: rgba(212,168,79,.15); }
 .ist-bead { width: 12px; height: 12px; border-radius: 50%; background: #D4A84F; display: inline-block; margin: 2px; opacity: .25; transition: opacity .15s; }
 .ist-bead.lit { opacity: 1; }
 html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
+
+/* نوافذ الأدعية والزيارات مع زر الرجوع */
+body.has-back-btn :is(#duas-hub-modal,#ziyarat-modal) { padding-bottom: 76px !important; }
+
+/* ===== إصلاح التمرير داخل النوافذ والأقسام ===== */
+body.has-back-btn :is(#duas-hub-modal,#ziyarat-modal) > div { height: 100% !important; }
+div.fixed.inset-0[id$="-modal"] { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+div.fixed.inset-0[id$="-modal"] > div { max-height: 100%; }
+.overflow-y-auto { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.flex-1.overflow-y-auto { min-height: 0; }
+.app-stars { z-index: 1 !important; }
+
+/* ===== الرادار: بطاقة المسجد المختار تبقى ظاهرة ===== */
+.rdx-info { position: sticky; top: -18px; z-index: 6; background: #0b2438; box-shadow: 0 8px 18px rgba(0,0,0,.45); }
+.rdx-info .rdx-go { margin-inline-start: auto; }
+.rdx-pulse { animation: rdx-pulse .45s ease; }
+@keyframes rdx-pulse { 0% { transform: scale(.96); border-color: #fff; } 100% { transform: scale(1); } }
+.rdx-item.sel { border: 2px solid #D4A84F !important; background: rgba(212,168,79,.18) !important; }
+.rdx-item:active { transform: scale(.98); }
+
+/* ===== المصحف: صفحات كاملة بخلفية بيضاء وقلب الصفحة ===== */
+#mushaf-read-body.mp-mode { overflow: hidden !important; padding: 0 !important; position: relative; perspective: 1800px; }
+.mp-page { position: absolute; inset: 2px 2px 2px 8px; background: #FFFDF7; border-radius: 12px; overflow-y: auto; overflow-x: hidden;
+    padding: 18px 16px 30px; transform-origin: right center; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    box-shadow: inset 0 0 0 1px #E9DCC0, inset 0 0 0 6px #FFFDF7, inset 0 0 0 7.5px rgba(212,168,79,.55), 0 8px 22px rgba(0,0,0,.4); }
+.mp-page::before { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 18px; pointer-events: none;
+    background: linear-gradient(to left, rgba(120,90,30,.14), rgba(120,90,30,0)); }
+.mp-text { font-family: 'Amiri Quran', 'Amiri', serif; color: #141414; line-height: 2.15; direction: rtl; text-align: justify; text-align-last: center; word-spacing: 1px; }
+.mp-head { margin: 0 auto 6px; padding: 5px 10px; border: 1.5px solid #C9A04A; border-radius: 12px; text-align: center; background: linear-gradient(180deg, #FBF3DE, #F4E6C2); }
+.mp-head span { font-family: 'Amiri', serif; font-weight: 700; font-size: 18px; color: #6B4E12; }
+.mp-bism { text-align: center; color: #141414; font-size: 1.05em; margin-bottom: 2px; }
+.mp-ayah { border-radius: 6px; cursor: pointer; transition: background .2s; -webkit-tap-highlight-color: transparent; }
+.mp-ayah.sel { background: rgba(212,168,79,.30); }
+.mp-ayah.playing { background: rgba(212,168,79,.45); }
+.mp-ayah.flash { background: rgba(212,168,79,.35); }
+.mp-num { display: inline-flex; align-items: center; justify-content: center; min-width: 1.45em; height: 1.45em; margin: 0 .2em; padding: 0 .15em;
+    border: 1.5px solid #C9A04A; border-radius: 50%; font-family: 'Amiri', serif; font-size: .58em; line-height: 1; color: #8A6417; vertical-align: middle; background: #FBF3DE; }
+.mp-foot { position: absolute; bottom: 7px; left: 0; right: 0; text-align: center; font-size: 11px; font-weight: 700; color: #9A7425; font-family: 'Tajawal', sans-serif; }
+.mp-flip-out { z-index: 3; animation: mpFlipOut .6s cubic-bezier(.45,.05,.3,1) forwards; }
+.mp-flip-in { z-index: 3; animation: mpFlipIn .6s cubic-bezier(.45,.05,.3,1) forwards; }
+.mp-flip-out::after, .mp-flip-in::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to right, rgba(0,0,0,.28), rgba(0,0,0,0) 70%); animation: mpShade .6s ease forwards; }
+@keyframes mpFlipOut { 0% { transform: rotateY(0); } 100% { transform: rotateY(120deg); } }
+@keyframes mpFlipIn { 0% { transform: rotateY(120deg); } 100% { transform: rotateY(0); } }
+@keyframes mpShade { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+.mp-bar { position: absolute; left: 12px; right: 12px; bottom: 60px; z-index: 30; background: #0F202B; border: 1px solid rgba(212,168,79,.5); border-radius: 18px;
+    padding: 10px 12px; box-shadow: 0 -6px 24px rgba(0,0,0,.5); transform: translateY(20px); opacity: 0; pointer-events: none; transition: transform .25s ease, opacity .25s ease; }
+.mp-bar.open { transform: none; opacity: 1; pointer-events: auto; }
+.mp-sheet { position: absolute; inset: 0; z-index: 40; background: rgba(0,0,0,.55); display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity .25s ease; border-radius: 28px; overflow: hidden; }
+.mp-sheet.open { opacity: 1; pointer-events: auto; }
+.mp-sheet-panel { width: 100%; max-height: 75%; overflow-y: auto; background: #0F202B; border-top: 1px solid rgba(212,168,79,.5); border-radius: 24px 24px 0 0; padding: 14px; transform: translateY(100%); transition: transform .3s cubic-bezier(.2,.9,.25,1); }
+.mp-sheet.open .mp-sheet-panel { transform: none; }
+.mp-rec-grp { font-size: 10px; font-weight: 900; color: #D4A84F; margin: 10px 4px 6px; }
+.mp-rec-row { width: 100%; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: #22333F; border: 1px solid #1A2B37; text-align: right; }
+.mp-rec-row.on { border-color: #D4A84F; background: rgba(212,168,79,.14); }
+.mp-rec-av { width: 36px; height: 36px; border-radius: 12px; background: #0A151C; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; flex-shrink: 0; }
+.mp-rec-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.mp-rec-tx b { font-size: 12px; color: #F3EBDD; }
+.mp-rec-tx small { font-size: 9.5px; color: #8497A5; font-weight: 700; margin-top: 2px; }
+.mp-rec-ck { color: #D4A84F; font-size: 16px; }
+#mushaf-read-body.mp-mode::before { content: ''; position: absolute; inset: 5px 4px 5px 1px; border-radius: 12px; z-index: 0;
+    background: repeating-linear-gradient(to right, #E9DCBC 0 1px, #FBF5E6 1px 3px); box-shadow: 0 8px 22px rgba(0,0,0,.4); }
+.mp-page { z-index: 1; }
+.mp-flip-out, .mp-flip-in { z-index: 3; }
 </style>
 </head>
 <body class="dark min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 overflow-x-hidden text-xs sm:text-sm">
@@ -416,6 +469,8 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
     <i class="fa-solid fa-chevron-left text-xs"></i>
 </div>
 
+<div id="hqb-today" class="w-full"></div>
+
 <div class="w-full bg-palette-mid border border-palette-purple rounded-2xl p-4 text-center shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[340px]">
     <div class="flex justify-between items-center text-[11px] font-bold mb-1">
         <span id="dhikr-category" class="bg-palette-mauve text-palette-darkest px-2.5 py-0.5 rounded-full shadow-sm">الاستغفار</span>
@@ -455,7 +510,7 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
 </main>
 
 <footer class="w-full max-w-md text-center py-1 text-[11px] opacity-90 font-medium">
-    <p><span class="text-palette-light font-bold" id="footer-app-name">حقيبتي</span></p>
+    <p class="text-[13px] font-black tracking-wide"><span id="footer-app-pre" style="color:#D4A84F">تطبيق</span> <span id="footer-app-name" style="color:#FFFFFF">حقيبتي</span></p>
 </footer><!-- نافذة مستقلة كاملة (Fullscreen Modal) لأقسام التطبيق والخدمات -->
 <div id="app-sections-fullscreen-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[95]">
     <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] p-4 sm:p-5 text-right relative shadow-2xl flex flex-col space-y-3">
@@ -477,61 +532,59 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
                     <div class="text-right"><span class="block font-black text-sm" id="lbl-sec-mushaf">المصحف الشريف</span><span class="block text-[10px] font-bold opacity-75" id="lbl-sec-mushaf-sub">قراءة • بحث • تلاوة • ترجمة</span></div></div>
                     <i class="fa-solid fa-chevron-left text-sm mushaf-dir-icon"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="col-span-2 py-4 px-3 rounded-3xl bg-palette-mid border border-palette-mauve/40 flex flex-col items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer shadow-md">
                     <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-mosque"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">أوقات الصلاة</span>
+                    <span class="block font-black text-xs text-palette-light text-center" id="lbl-sec-prayer">أوقات الصلاة</span>
+                    <span class="block text-[9px] font-bold text-palette-muted text-center leading-tight" id="lbl-sec-prayer-sub">المواقيت • القبلة • المساجد القريبة</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openDailySupplicationsModal();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-calendar-check"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">دعاء اليوم</span>
-                </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('supplications-modal'); loadSupplicationsList();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openDuasHub();" class=" py-4 px-3 rounded-3xl bg-palette-mid border border-palette-mauve/40 flex flex-col items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer shadow-md">
                     <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-book-open"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">مفاتيح الجنان</span>
+                    <span class="block font-black text-xs text-palette-light text-center" id="lbl-sec-duas">الأدعية والزيارات</span>
+                    <span class="block text-[9px] font-bold text-palette-muted text-center leading-tight" id="lbl-sec-duas-sub">المفاتيح • الزيارات • دعاء اليوم</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('quran-modal'); loadQuranRecitersList();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-headphones"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">تلاوات وقراء</span>
-                </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('calendar-modal'); initHijriCalendarModal();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-calendar-days"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">التقويم</span>
-                </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('fatiha-modal'); loadFatihaLocalList();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('fatiha-modal'); loadFatihaLocalList();" class=" py-4 px-3 rounded-3xl bg-palette-mid border border-palette-mauve/40 flex flex-col items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer shadow-md">
                     <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-moon"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">الفاتحة</span>
+                    <span class="block font-black text-xs text-palette-light text-center" id="lbl-sec-fatiha">الفاتحة</span>
+                    <span class="block text-[9px] font-bold text-palette-muted text-center leading-tight" id="lbl-sec-fatiha-sub">اقرأ لأرواح المؤمنين</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('rakat-counter-modal'); initRakatModalHome();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-hand-pointer"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">عداد الركع</span>
+            </div>
+            <p class="text-[11px] font-black text-palette-muted mt-4 mb-2 px-1" id="lbl-more-sections">المزيد</p>
+            <div class="w-full grid grid-cols-3 gap-2.5">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('quran-modal'); loadQuranRecitersList();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-headphones"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-rec">تلاوات وقراء</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-trophy"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full">قسم التحديات</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openTracker();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-tracker">سجل صلواتي</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAdhanSettings();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-bullhorn"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full" id="lbl-sec-adhan">الأذان والتنبيهات</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAdhanSettings();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-bullhorn"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-adhan">الأذان والتنبيهات</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openTracker();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-list-check"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full" id="lbl-sec-tracker">سجل صلواتي</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('calendar-modal'); initHijriCalendarModal();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-calendar-days"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-cal">التقويم</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openImsakiya();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-utensils"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full" id="lbl-sec-imsak">إمساكية رمضان</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('rakat-counter-modal'); initRakatModalHome();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-hand-pointer"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-rakat">عداد الركع</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openConverter();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-right-left"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full" id="lbl-sec-conv">محوّل التاريخ</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-trophy"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-chal">التحديات</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openIstikhara();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full" id="lbl-sec-ist">الاستخارة</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openImsakiya();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-utensils"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-imsak">إمساكية رمضان</span>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openShortDuasModal();" class="py-5 px-2 rounded-3xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-3 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-hands-holding"></i></div>
-                    <span class="font-bold text-xs text-palette-light text-center truncate w-full" id="lbl-short-duas-card">الأدعية القصيرة</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openConverter();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-right-left"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-conv">محوّل التاريخ</span>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openIstikhara();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-ist">الاستخارة</span>
                 </button>
             </div>
         </div>
@@ -665,22 +718,6 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
         <div class="flex justify-between items-center p-3 rounded-2xl bg-palette-mid border border-palette-purple">
             <div class="flex items-center gap-2.5">
                 <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-sm">
-                    <i class="fa-solid fa-wind"></i>
-                </div>
-                <div>
-                    <span class="font-bold text-xs text-palette-light block" id="lbl-nature-sound">أصوات الرياح والعصافير</span>
-                    <span class="text-[9px] text-palette-muted" id="lbl-nature-desc">أجواء هادئة للتسبيح والاسترخاء</span>
-                </div>
-            </div>
-            <button onclick="toggleSyntheticNatureSound()" id="nature-sound-btn" class="px-3.5 py-1.5 rounded-full bg-palette-mauve text-palette-darkest text-[11px] font-bold flex items-center gap-1 transition-all cursor-pointer">
-                <i class="fa-solid fa-play text-[10px]" id="nature-icon"></i>
-                <span id="nature-sound-text">تشغيل</span>
-            </button>
-        </div>
-
-        <div class="flex justify-between items-center p-3 rounded-2xl bg-palette-mid border border-palette-purple">
-            <div class="flex items-center gap-2.5">
-                <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-sm">
                     <i class="fa-solid fa-mosque"></i>
                 </div>
                 <div>
@@ -748,14 +785,14 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
 
 <!-- قسم أوقات الصلاة: التصميم الأخضر -->
 <div id="prayer-times-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
-    <div id="prayer-modal-container" class="prayer-theme w-full max-w-lg h-[92vh] rounded-2xl shadow-2xl relative overflow-hidden text-white border border-[#1f5a35]">
+    <div id="prayer-modal-container" class="prayer-theme w-full max-w-lg h-[92vh] rounded-2xl shadow-2xl relative overflow-hidden text-white border border-[#2E4352]">
 
         <div class="prayer-sky" aria-hidden="true">
             <div class="stars"></div>
             <svg viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 150 Q90 105 200 140 T400 120 L400 200 L0 200 Z" fill="#0f5a2c" opacity=".55"/>
-                <path d="M0 175 Q110 140 220 165 T400 150 L400 200 L0 200 Z" fill="#0b4222" opacity=".85"/>
-                <g fill="#04140a">
+                <path d="M0 150 Q90 105 200 140 T400 120 L400 200 L0 200 Z" fill="#2E4352" opacity=".55"/>
+                <path d="M0 175 Q110 140 220 165 T400 150 L400 200 L0 200 Z" fill="#22333F" opacity=".85"/>
+                <g fill="#081218">
                     <rect x="135" y="140" width="130" height="60"/>
                     <path d="M150 140 Q200 70 250 140 Z"/>
                     <rect x="198.5" y="62" width="3" height="14"/>
@@ -768,71 +805,71 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
                     <path d="M292 95 L301 66 L310 95 Z"/>
                     <rect x="290" y="112" width="22" height="4"/>
                 </g>
-                <path d="M207 44 A11 11 0 1 0 207 64 A8.5 8.5 0 1 1 207 44 Z" fill="#d9f99d"/>
+                <path d="M207 44 A11 11 0 1 0 207 64 A8.5 8.5 0 1 1 207 44 Z" fill="#F3EBDD"/>
             </svg>
         </div>
 
         <div class="relative z-10 flex flex-col h-full p-3 sm:p-4">
             <div class="flex justify-between items-center mb-2">
                 <div class="flex items-center gap-2">
-                    <div class="w-9 h-9 rounded-xl bg-[#a3e635] text-[#0b2a14] flex items-center justify-center text-sm">
+                    <div class="w-9 h-9 rounded-xl bg-[#D4A84F] text-[#0A151C] flex items-center justify-center text-sm">
                         <i class="fa-solid fa-mosque"></i>
                     </div>
                     <div>
                         <h3 class="text-sm sm:text-base font-bold text-white" id="prayer-modal-title">مواقيت الصلاة الفلكية الدقيقة</h3>
-                        <p id="current-location-subtitle" class="text-[9px] text-[#bbf7d0]/80">الموقع المعتمد: العراق - القادسية (الديوانية)</p>
+                        <p id="current-location-subtitle" class="text-[9px] text-[#E6DBD1]/80">الموقع المعتمد: العراق - القادسية (الديوانية)</p>
                     </div>
                 </div>
-                <button onclick="playClickSound(); closeModal('prayer-times-modal')" class="w-8 h-8 rounded-full bg-[#0b2a14]/80 border border-[#1f5a35] text-[#d9f99d] flex items-center justify-center">
+                <button onclick="playClickSound(); closeModal('prayer-times-modal')" class="w-8 h-8 rounded-full bg-[#0A151C]/80 border border-[#2E4352] text-[#F3EBDD] flex items-center justify-center">
                     <i class="fa-solid fa-xmark text-xs"></i>
                 </button>
             </div>
 
             <div class="h-12 shrink-0"></div>
 
-            <div class="p-2.5 rounded-xl bg-[#071a10]/90 border border-[#1f5a35] mb-2 flex items-center justify-between shadow-lg">
+            <div class="p-2.5 rounded-xl bg-[#0A151C]/90 border border-[#2E4352] mb-2 flex items-center justify-between shadow-lg">
                 <div class="text-right space-y-0.5">
-                    <span class="text-[9px] text-[#a3e635] font-bold block" id="lbl-live-clock"><i class="fa-regular fa-clock ml-1"></i>التوقيت المحلي الفعلي</span>
+                    <span class="text-[9px] text-[#D4A84F] font-bold block" id="lbl-live-clock"><i class="fa-regular fa-clock ml-1"></i>التوقيت المحلي الفعلي</span>
                     <div id="live-current-clock" class="font-mono text-sm sm:text-base font-black text-white tracking-wider">--:--:--</div>
                 </div>
-                <div class="h-6 w-[1px] bg-[#1f5a35]"></div>
+                <div class="h-6 w-[1px] bg-[#2E4352]"></div>
                 <div class="text-left space-y-0.5">
-                    <span id="next-prayer-label" class="text-[9px] text-[#a3e635] font-bold block">متبقي لصلاة ...</span>
-                    <div id="next-prayer-countdown" class="font-mono text-sm sm:text-base font-black text-[#d9f99d] tracking-wider">--:--:--</div>
+                    <span id="next-prayer-label" class="text-[9px] text-[#D4A84F] font-bold block">متبقي لصلاة ...</span>
+                    <div id="next-prayer-countdown" class="font-mono text-sm sm:text-base font-black text-[#F3EBDD] tracking-wider">--:--:--</div>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 gap-2 mb-2">
-                <button style="display:none" onclick="playClickSound(); toggleWheel('country')" class="py-1.5 px-2 rounded-xl bg-[#0e2a1b] text-[#d9f99d] text-xs font-bold flex items-center justify-between cursor-pointer">
+                <button style="display:none" onclick="playClickSound(); toggleWheel('country')" class="py-1.5 px-2 rounded-xl bg-[#0F202B] text-[#F3EBDD] text-xs font-bold flex items-center justify-between cursor-pointer">
                     <span><i class="fa-solid fa-globe ml-1"></i> <span id="lbl-country">الدولة</span></span>
                     <i id="country-toggle-icon" class="fa-solid fa-chevron-down"></i>
                 </button>
-                <button onclick="playClickSound(); toggleWheel('city')" class="col-span-2 py-2 px-3 rounded-xl bg-[#a3e635] text-[#0b2a14] text-xs font-extrabold flex items-center justify-between shadow-sm cursor-pointer">
+                <button onclick="playClickSound(); toggleWheel('city')" class="col-span-2 py-2 px-3 rounded-xl bg-[#D4A84F] text-[#0A151C] text-xs font-extrabold flex items-center justify-between shadow-sm cursor-pointer">
                     <span><i class="fa-solid fa-location-dot ml-1"></i> <span id="lbl-change-city">تغيير المحافظة</span></span>
                     <i id="city-toggle-icon" class="fa-solid fa-chevron-down"></i>
                 </button>
             </div>
 
-            <div class="bg-[#071a10]/70 border border-[#1f5a35] rounded-xl p-1.5 text-center text-[10px] text-[#d9f99d] font-bold mb-2 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-location-crosshairs text-[#a3e635]"></i>
+            <div class="bg-[#0A151C]/70 border border-[#2E4352] rounded-xl p-1.5 text-center text-[10px] text-[#F3EBDD] font-bold mb-2 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-location-crosshairs text-[#D4A84F]"></i>
                 <span><span id="lbl-country-tag">الدولة</span>: <span id="selected-display-country" class="text-white underline">العراق</span></span>
                 <span>•</span>
                 <span><span id="lbl-city-tag">المدينة</span>: <span id="selected-display-city" class="text-white underline">القادسية (الديوانية)</span></span>
             </div>
 
-            <div id="country-wheel-box" class="hidden mb-2 bg-[#061a0f] p-2 rounded-xl border border-[#1f5a35]">
-                <span class="block text-[10px] font-bold text-[#d9f99d] mb-1 text-center" id="lbl-select-country">اختر الدولة:</span>
+            <div id="country-wheel-box" class="hidden mb-2 bg-[#0C1B24] p-2 rounded-xl border border-[#2E4352]">
+                <span class="block text-[10px] font-bold text-[#F3EBDD] mb-1 text-center" id="lbl-select-country">اختر الدولة:</span>
                 <div id="country-wheel" class="h-32 overflow-y-auto space-y-1 pr-1 custom-wheel"></div>
             </div>
 
-            <div id="city-wheel-box" class="hidden mb-2 bg-[#061a0f] p-2 rounded-xl border border-[#1f5a35]">
-                <span class="block text-[10px] font-bold text-[#d9f99d] mb-1 text-center" id="lbl-select-city">اختر المحافظة:</span>
+            <div id="city-wheel-box" class="hidden mb-2 bg-[#0C1B24] p-2 rounded-xl border border-[#2E4352]">
+                <span class="block text-[10px] font-bold text-[#F3EBDD] mb-1 text-center" id="lbl-select-city">اختر المحافظة:</span>
                 <div id="city-wheel" class="h-32 overflow-y-auto space-y-1 pr-1 custom-wheel"></div>
             </div>
 
             <div id="prayer-times-display" class="overflow-y-auto space-y-1.5 pr-1 flex-1 my-1"></div>
 
-            <button id="dynamic-save-btn" onclick="playClickSound(); savePrayerChanges()" class="hidden w-full mt-2 py-2.5 rounded-xl bg-[#a3e635] text-[#0b2a14] font-extrabold text-xs shadow-lg items-center justify-center gap-1.5 cursor-pointer">
+            <button id="dynamic-save-btn" onclick="playClickSound(); savePrayerChanges()" class="hidden w-full mt-2 py-2.5 rounded-xl bg-[#D4A84F] text-[#0A151C] font-extrabold text-xs shadow-lg items-center justify-center gap-1.5 cursor-pointer">
                 <i class="fa-solid fa-check-double"></i>
                 <span id="btn-save-location">حفظ التغييرات واعتماد الموقع</span>
             </button>
@@ -844,45 +881,45 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
                 <div id="pi-scene" class="pi-scene fajr">
                     <div id="pi-sky-stars"></div>
                     <div id="pi-orb" class="pi-orb sun"></div>
-                    <svg class="pi-hills" viewBox="0 0 400 44" preserveAspectRatio="none"><path d="M0 24 Q90 0 200 20 T400 14 V44 H0 Z" fill="#0b4222" opacity=".9"/><path d="M0 34 Q110 14 220 30 T400 26 V44 H0 Z" fill="#06210f"/></svg>
+                    <svg class="pi-hills" viewBox="0 0 400 44" preserveAspectRatio="none"><path d="M0 24 Q90 0 200 20 T400 14 V44 H0 Z" fill="#22333F" opacity=".9"/><path d="M0 34 Q110 14 220 30 T400 26 V44 H0 Z" fill="#16293A"/></svg>
                     <button onclick="playClickSound(); closePrayerInfo()" class="absolute top-3 left-3 w-8 h-8 rounded-full bg-black/35 text-white flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
                 </div>
                 <div class="p-4 space-y-3 text-right">
                     <div class="flex items-center justify-between gap-2">
                         <div>
                             <h4 id="pi-name" class="text-xl font-black text-white">الفجر</h4>
-                            <p id="pi-sub" class="text-[10px] text-[#bbf7d0]/70">وقت الإمساك وبداية الصلاة</p>
+                            <p id="pi-sub" class="text-[10px] text-[#E6DBD1]/70">وقت الإمساك وبداية الصلاة</p>
                         </div>
-                        <span id="pi-time" class="font-mono text-base font-black bg-[#071a10] text-[#d9f99d] px-3 py-1.5 rounded-xl">--:--</span>
+                        <span id="pi-time" class="font-mono text-base font-black bg-[#0A151C] text-[#F3EBDD] px-3 py-1.5 rounded-xl">--:--</span>
                     </div>
 
-                    <div class="rounded-2xl bg-[#0e2a1b] border border-[#1a4a2e] p-3 space-y-2">
+                    <div class="rounded-2xl bg-[#0F202B] border border-[#22333F] p-3 space-y-2">
                         <div class="flex justify-between items-center text-[10px] font-bold">
-                            <span id="pi-status" class="text-[#a3e635]">--</span>
-                            <span id="pi-remaining" class="font-mono text-[#d9f99d]" dir="ltr">--:--:--</span>
+                            <span id="pi-status" class="text-[#D4A84F]">--</span>
+                            <span id="pi-remaining" class="font-mono text-[#F3EBDD]" dir="ltr">--:--:--</span>
                         </div>
                         <div class="pi-bar"><div id="pi-progress"></div></div>
-                        <div class="flex justify-between text-[9px] text-[#bbf7d0]/70 font-bold">
+                        <div class="flex justify-between text-[9px] text-[#E6DBD1]/70 font-bold">
                             <span><span id="pi-lbl-start">يبدأ</span> <span id="pi-start" class="font-mono text-white">--</span></span>
                             <span><span id="pi-lbl-end">ينتهي</span> <span id="pi-end" class="font-mono text-white">--</span></span>
                         </div>
                     </div>
 
-                    <div id="pi-rakat-box" class="rounded-2xl bg-[#0e2a1b] border border-[#1a4a2e] p-3">
+                    <div id="pi-rakat-box" class="rounded-2xl bg-[#0F202B] border border-[#22333F] p-3">
                         <div class="flex justify-between items-center mb-2">
                             <span id="pi-rakat-title" class="text-[11px] font-black text-white">عدد الركعات</span>
-                            <span id="pi-rakat-hint" class="text-[9px] text-[#bbf7d0]/60">اضغط لتعدّ ركعاتك</span>
+                            <span id="pi-rakat-hint" class="text-[9px] text-[#E6DBD1]/60">اضغط لتعدّ ركعاتك</span>
                         </div>
                         <div id="pi-dots" class="flex flex-wrap gap-2 justify-center"></div>
-                        <p id="pi-done" class="hidden text-center text-xs font-black text-[#a3e635] mt-2 pi-pop">تقبّل الله صلاتك</p>
+                        <p id="pi-done" class="hidden text-center text-xs font-black text-[#D4A84F] mt-2 pi-pop">تقبّل الله صلاتك</p>
                     </div>
 
-                    <div class="rounded-2xl bg-[#0e2a1b] border border-[#1a4a2e] p-3 space-y-2">
+                    <div class="rounded-2xl bg-[#0F202B] border border-[#22333F] p-3 space-y-2">
                         <p id="pi-note" class="text-[11px] leading-relaxed text-white/90"></p>
-                        <p id="pi-nafila" class="text-[10px] leading-relaxed text-[#d9f99d]"></p>
+                        <p id="pi-nafila" class="text-[10px] leading-relaxed text-[#F3EBDD]"></p>
                     </div>
-                    <p id="pi-disclaimer" class="text-[9px] text-center text-[#bbf7d0]/50 leading-relaxed"></p>
-                    <button onclick="playClickSound(); closePrayerInfo()" id="pi-close" class="w-full py-2.5 rounded-xl bg-[#a3e635] text-[#0b2a14] font-extrabold text-xs">إغلاق</button>
+                    <p id="pi-disclaimer" class="text-[9px] text-center text-[#E6DBD1]/50 leading-relaxed"></p>
+                    <button onclick="playClickSound(); closePrayerInfo()" id="pi-close" class="w-full py-2.5 rounded-xl bg-[#D4A84F] text-[#0A151C] font-extrabold text-xs">إغلاق</button>
                 </div>
             </div>
         </div>
@@ -1011,9 +1048,10 @@ html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
                 نص الدعاء كاملاً...
             </p>
         </div>
-        <button onclick="playClickSound(); closeModal('dua-detail-modal')" class="w-full py-2.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">
-            العودة إلى قائمة الأدعية
-        </button>
+        <div class="flex gap-2">
+            <button onclick="playClickSound(); hqbShareCurrentDetail()" class="flex-1 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg cursor-pointer"><i class="fa-regular fa-image ml-1"></i>مشاركة كصورة</button>
+            <button onclick="playClickSound(); closeModal('dua-detail-modal')" class="flex-1 py-2.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">رجوع</button>
+        </div>
     </div>
 </div>
 
@@ -1603,14 +1641,10 @@ function initSwipeLogin() {
     }
 }
 
-let isButtonSoundOn = true;
-let isNatureSoundOn = false;
+let isButtonSoundOn = false;
 let isQuranBackgroundPlayOn = true;
 let currentLanguage = localStorage.getItem('adhkar_app_lang') || 'ar';
 let webAudioCtx = null;
-let syntheticNatureNode = null;
-let syntheticNatureGain = null;
-let natureIntervalTimer = null;
 
 const i18n = {
     ar: {
@@ -1634,8 +1668,6 @@ const i18n = {
         themeLocked: "الوضع الداكن الدائم",
         appLang: "لغة التطبيق",
         buttonSounds: "أصوات الأزرار",
-        natureSound: "أصوات الرياح والعصافير",
-        natureDesc: "أجواء هادئة للتسبيح والاسترخاء",
         mosqueRadar: "رادار المساجد القريبة",
         mosqueDesc: "أقرب المساجد ضمن 1 كم",
         instagramTitle: "الدعم الفني",
@@ -1719,8 +1751,6 @@ const i18n = {
         themeLocked: "Permanent Dark Mode",
         appLang: "App Language",
         buttonSounds: "Button Sounds",
-        natureSound: "Nature & Wind Sounds",
-        natureDesc: "Calm ambiance for relaxation",
         mosqueRadar: "Nearby Mosque Radar",
         mosqueDesc: "Closest mosques within 1 km",
         instagramTitle: "Technical Support",
@@ -1915,8 +1945,6 @@ function applyLanguageUI() {
     setTxt('lbl-theme-locked', t.themeLocked);
     setTxt('lbl-language', t.appLang);
     setTxt('lbl-sound', t.buttonSounds);
-    setTxt('lbl-nature-sound', t.natureSound);
-    setTxt('lbl-nature-desc', t.natureDesc);
     setTxt('lbl-mosque-radar', t.mosqueRadar);
     setTxt('lbl-mosque-desc', t.mosqueDesc);
     setTxt('lbl-founders', t.foundersTitle);
@@ -2050,7 +2078,6 @@ function playClickSound() {
 }
 
 function playSuccessCelebrationSound() {
-    if (!isButtonSoundOn) return;
     try {
         initWebAudio();
         const now = webAudioCtx.currentTime;
@@ -2068,80 +2095,6 @@ function playSuccessCelebrationSound() {
             osc.stop(now + idx * 0.12 + 0.3);
         });
     } catch (e) {}
-}
-
-function toggleSyntheticNatureSound() {
-    playClickSound();
-    initWebAudio();
-    const t = i18n[currentLanguage];
-    const textEl = document.getElementById('nature-sound-text');
-    const iconEl = document.getElementById('nature-icon');
-
-    if (isNatureSoundOn) {
-        if (syntheticNatureGain) {
-            try {
-                syntheticNatureGain.gain.setValueAtTime(syntheticNatureGain.gain.value || 0.08, webAudioCtx.currentTime);
-                syntheticNatureGain.gain.exponentialRampToValueAtTime(0.0001, webAudioCtx.currentTime + 0.4);
-            } catch (e) {}
-        }
-        setTimeout(() => {
-            if (syntheticNatureNode) {
-                try { syntheticNatureNode.stop(); syntheticNatureNode.disconnect(); } catch (e) {}
-                syntheticNatureNode = null;
-            }
-        }, 400);
-        if (natureIntervalTimer) { clearInterval(natureIntervalTimer); natureIntervalTimer = null; }
-        isNatureSoundOn = false;
-        textEl.innerText = t.play;
-        iconEl.className = "fa-solid fa-play";
-        showToast(currentLanguage === 'en' ? "Nature sounds stopped" : "تم إيقاف أصوات الطبيعة");
-    } else {
-        const bufferSize = webAudioCtx.sampleRate * 2;
-        const noiseBuffer = webAudioCtx.createBuffer(1, bufferSize, webAudioCtx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
-
-        const newNode = webAudioCtx.createBufferSource();
-        newNode.buffer = noiseBuffer;
-        newNode.loop = true;
-        const filter = webAudioCtx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.value = 400;
-        filter.Q.value = 1.2;
-        const newGain = webAudioCtx.createGain();
-        newGain.gain.setValueAtTime(0.08, webAudioCtx.currentTime);
-        newNode.connect(filter);
-        filter.connect(newGain);
-        newGain.connect(webAudioCtx.destination);
-        newNode.start();
-        syntheticNatureNode = newNode;
-        syntheticNatureGain = newGain;
-
-        if (natureIntervalTimer) clearInterval(natureIntervalTimer);
-        natureIntervalTimer = setInterval(() => {
-            if (!isNatureSoundOn) return;
-            try {
-                const birdOsc = webAudioCtx.createOscillator();
-                const birdGain = webAudioCtx.createGain();
-                birdOsc.type = 'sine';
-                let now = webAudioCtx.currentTime;
-                birdOsc.frequency.setValueAtTime(2200, now);
-                birdOsc.frequency.exponentialRampToValueAtTime(3400, now + 0.08);
-                birdOsc.frequency.exponentialRampToValueAtTime(2600, now + 0.15);
-                birdGain.gain.setValueAtTime(0.03, now);
-                birdGain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
-                birdOsc.connect(birdGain);
-                birdGain.connect(webAudioCtx.destination);
-                birdOsc.start(now);
-                birdOsc.stop(now + 0.18);
-            } catch (err) {}
-        }, 3500);
-
-        isNatureSoundOn = true;
-        textEl.innerText = t.pause;
-        iconEl.className = "fa-solid fa-pause";
-        showToast(currentLanguage === 'en' ? "Relaxing nature sounds started" : "تم تشغيل أصوات الرياح والعصافير للاسترخاء");
-    }
 }
 
 const rad = x => x * Math.PI / 180;
@@ -2264,13 +2217,18 @@ function rdxError(msg) {
 }
 
 function rdxSelect(i, scroll) {
+    i = +i;
+    const m = rdxResults[i]; if (!m) return;
     document.querySelectorAll('.rdx-blip').forEach(b => b.classList.toggle('sel', +b.dataset.i === i));
     document.querySelectorAll('.rdx-item').forEach(el => el.classList.toggle('sel', +el.dataset.i === i));
-    const m = rdxResults[i]; if (!m) return;
     const en = currentLanguage === 'en';
     const info = document.getElementById('rdx-info');
-    if (info) info.innerHTML = `<i class="fa-solid fa-mosque" style="color:#D4A84F"></i><span><b>${escapeHTML(m.n)}</b><br>${rdxFmtDist(m.dist)} • ${en ? 'direction' : 'الاتجاه'}: ${rdxDirName(m.brg)}</span>`;
-    if (scroll) { const el = document.querySelector(`.rdx-item[data-i="${i}"]`); if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+    if (info) {
+        info.innerHTML = `<i class="fa-solid fa-mosque" style="color:#D4A84F"></i><span><b>${escapeHTML(m.n)}</b><br>${rdxFmtDist(m.dist)} • ${en ? 'direction' : 'الاتجاه'}: ${rdxDirName(m.brg)}</span>
+            <a class="rdx-go" target="_blank" rel="noopener" onclick="event.stopPropagation(); playClickSound()" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" aria-label="${en ? 'Walking directions' : 'اتجاهات المشي'}"><i class="fa-solid fa-person-walking"></i></a>`;
+        info.classList.remove('rdx-pulse'); void info.offsetWidth; info.classList.add('rdx-pulse');
+    }
+    if (scroll) { const el = document.querySelector(`.rdx-item[data-i="${i}"]`); if (el) el.scrollIntoView({ block: 'nearest' }); }
 }
 
 function requestLocationAndSearch() {
@@ -2568,7 +2526,7 @@ function renderCountryWheel() {
     for (const country in arabCountriesData) {
         const isSelected = (country === tempCountry);
         html += `
-            <div onclick="playClickSound(); selectTempCountry('${country}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-[#a3e635] text-[#0b2a14]' : 'text-[#d9f99d]/80 hover:bg-white/10'}">
+            <div onclick="playClickSound(); selectTempCountry('${country}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-[#D4A84F] text-[#0A151C]' : 'text-[#F3EBDD]/80 hover:bg-white/10'}">
                 <span>${country}</span>
                 <div class="w-3.5 h-3.5 rounded-full border border-current flex items-center justify-center text-[8px]">
                     ${isSelected ? '<i class="fa-solid fa-check"></i>' : ''}
@@ -2597,7 +2555,7 @@ function renderCityWheel() {
     for (const city in citiesObj) {
         const isSelected = (city === tempCity);
         html += `
-            <div onclick="playClickSound(); selectTempCity('${city}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-[#a3e635] text-[#0b2a14]' : 'text-[#d9f99d]/80 hover:bg-white/10'}">
+            <div onclick="playClickSound(); selectTempCity('${city}')" class="px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition-all flex items-center justify-between ${isSelected ? 'bg-[#D4A84F] text-[#0A151C]' : 'text-[#F3EBDD]/80 hover:bg-white/10'}">
                 <span>${city}</span>
                 <div class="w-3.5 h-3.5 rounded-full border border-current flex items-center justify-center text-[8px]">
                     ${isSelected ? '<i class="fa-solid fa-check"></i>' : ''}
@@ -2833,7 +2791,7 @@ function renderPrayerCardsUI(timings) {
                     <div class="space-y-0.5 text-right">
                         <div class="flex items-center gap-1">
                             <h4 class="p-name font-bold text-xs">${p.name}</h4>
-                            <span id="prayer-badge-${idx}" class="hidden text-[8px] bg-[#0b2a14] text-[#a3e635] px-1.5 py-0.5 rounded-full font-black">${currentLanguage === 'en' ? 'Next' : 'القادمة'}</span>
+                            <span id="prayer-badge-${idx}" class="hidden text-[8px] bg-[#0A151C] text-[#D4A84F] px-1.5 py-0.5 rounded-full font-black">${currentLanguage === 'en' ? 'Next' : 'القادمة'}</span>
                         </div>
                         <p class="p-desc text-[9px] font-medium">${p.desc}</p>
                     </div>
@@ -2851,7 +2809,7 @@ async function fetchPrecisePrayerTimes() {
     const displayContainer = document.getElementById('prayer-times-display');
     const isEn = currentLanguage === 'en';
     displayContainer.innerHTML = `
-        <div class="p-5 text-center text-[#bbf7d0] text-xs font-bold space-y-2">
+        <div class="p-5 text-center text-[#E6DBD1] text-xs font-bold space-y-2">
             <i class="fa-solid fa-spinner fa-spin text-base"></i>
             <p>${isEn ? `Fetching prayer times for (${activeCity})...` : `جاري ضبط أوقات الصلاة لـ (${activeCity})...`}</p>
         </div>
@@ -3464,7 +3422,12 @@ async function loadSupplicationsList() {
         }
     ];
 
-    if (supabaseClient) {
+    try {
+        const _hqbCached = JSON.parse(localStorage.getItem('cached_supplications') || 'null');
+        if (Array.isArray(_hqbCached) && _hqbCached.length) { list = _hqbCached; hqbRenderSupList(list, container); }
+    } catch (e) {}
+
+    if (supabaseClient && navigator.onLine) {
         try {
             const { data, error } = await supabaseClient
                 .from('supplications')
@@ -3492,6 +3455,10 @@ async function loadSupplicationsList() {
         if (cached) list = JSON.parse(cached);
     }
 
+    hqbRenderSupList(list, container);
+}
+
+function hqbRenderSupList(list, container) {
     activeSupplicationsList = list;
     let html = '';
     list.forEach((sup, i) => {
@@ -3963,6 +3930,9 @@ async function loadFatihaLocalList() {
                 <div class="flex items-center gap-1.5 shrink-0">
                     <button onclick="playClickSound(); openReadingModal(${item.id})" class="px-2.5 py-1.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-md cursor-pointer">
                         <i class="fa-solid fa-book-open ml-1"></i> ${isEn ? 'Read Al-Fatiha' : 'اقرأ الفاتحة'}
+                    </button>
+                    <button onclick="playClickSound(); hqbShareFatiha(${item.id})" class="w-7 h-7 rounded-xl bg-palette-mauve text-palette-darkest flex items-center justify-center cursor-pointer" title="${isEn ? 'Send to family' : 'أرسل لأهله'}">
+                        <i class="fa-solid fa-share-nodes text-xs"></i>
                     </button>
                     ${isOwner ? `
                     <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-7 h-7 rounded-xl bg-palette-muted text-palette-darkest flex items-center justify-center cursor-pointer" title="${isEn ? 'Delete record' : 'حذف السجل'}">
@@ -4437,7 +4407,7 @@ async function mushafOpenSurah(s, ayah) {
         const target = ayah || 1;
         if (target > 1) setTimeout(() => {
             const el = document.getElementById('ayah-' + target);
-            if (el) { el.scrollIntoView({ block: 'start' }); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1800); }
+            if (el) { el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1800); }
         }, 60);
         else body.scrollTop = 0;
         mushafSaveLast(s, target);
@@ -4462,6 +4432,7 @@ function mushafRenderAyahs() {
                 <button class="ayah-act" onclick="playClickSound(); mushafPlayFrom(${i})"><i class="fa-solid fa-play"></i>${en ? 'Play' : 'استماع'}</button>
                 <button class="ayah-act ${marked ? 'on' : ''}" id="mark-btn-${a.a}" onclick="playClickSound(); mushafToggleMark(${a.a})"><i class="fa-solid fa-bookmark"></i>${en ? 'Bookmark' : 'علامة'}</button>
                 <button class="ayah-act" onclick="playClickSound(); mushafShare(${a.a})"><i class="fa-solid fa-share-nodes"></i>${en ? 'Share' : 'مشاركة'}</button>
+                <button class="ayah-act" onclick="playClickSound(); hqbShareAyahImage(${a.a})"><i class="fa-regular fa-image"></i>${en ? 'Image' : 'صورة'}</button>
                 <button class="ayah-act" onclick="playClickSound(); mushafCopy(${a.a})"><i class="fa-regular fa-copy"></i>${en ? 'Copy' : 'نسخ'}</button>
             </div>
         </div>`;
@@ -4581,9 +4552,9 @@ function mushafPlayFrom(idx) {
     el.play().catch(() => {});
     const nx = data.ayahs[idx + 1];
     if (nx) mushafNext = { idx: idx + 1, rec: mushafReciter, s: mushafState.surah, el: mushafMakeAudio(nx.g) };
-    document.querySelectorAll('.ayah-card.playing').forEach(x => x.classList.remove('playing'));
+    document.querySelectorAll('#mushaf-read-body .playing').forEach(x => x.classList.remove('playing'));
     const card = document.getElementById('ayah-' + ay.a);
-    if (card) { card.classList.add('playing'); card.scrollIntoView({ block: 'center' }); }
+    if (card) card.classList.add('playing');
     mushafSaveLast(mushafState.surah, ay.a);
     mushafUpdatePlayBtn();
 }
@@ -4601,7 +4572,7 @@ function mushafStopAudio() {
     mushafState.playIdx = -1;
     if (mushafAudio) { mushafAudio._play = false; mushafAudio.onended = null; try { mushafAudio.pause(); } catch (e) {} }
     if (mushafNext) { try { mushafNext.el.pause(); mushafNext.el.removeAttribute('src'); } catch (e) {} mushafNext = null; }
-    document.querySelectorAll('.ayah-card.playing').forEach(x => x.classList.remove('playing'));
+    document.querySelectorAll('#mushaf-read-body .playing').forEach(x => x.classList.remove('playing'));
     mushafUpdatePlayBtn();
 }
 
@@ -4736,7 +4707,7 @@ function hqbDecoratePrayerModal() {
         cityBtn.parentElement.insertAdjacentElement('afterend', bar);
     }
     if (!bar) return;
-    bar.innerHTML = `<button onclick="playClickSound(); hqbUseGps()" class="w-full py-2 px-2 rounded-xl bg-[#0e2a1b] border border-[#1f5a35] text-[#d9f99d] text-[11px] font-bold flex items-center justify-center gap-1.5"><i class="fa-solid fa-location-crosshairs"></i>${en ? 'Detect my location automatically (GPS)' : 'تحديد موقعي تلقائياً (GPS)'}</button>`;
+    bar.innerHTML = `<button onclick="playClickSound(); hqbUseGps()" class="w-full py-2 px-2 rounded-xl bg-[#0F202B] border border-[#2E4352] text-[#F3EBDD] text-[11px] font-bold flex items-center justify-center gap-1.5"><i class="fa-solid fa-location-crosshairs"></i>${en ? 'Detect my location automatically (GPS)' : 'تحديد موقعي تلقائياً (GPS)'}</button>`;
 }
 
 function hqbUseGps() {
@@ -5449,5 +5420,949 @@ window.addEventListener('online', () => { if (!hqbAdhanLocalUrl) hqbCacheAdhan()
 setTimeout(hqbCacheAdhan, 1500);
 
 </script>
+
+<!-- قسم الأدعية والزيارات الموحد -->
+<div id="duas-hub-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
+    <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] p-4 shadow-2xl relative flex flex-col overflow-hidden">
+        <div class="flex justify-between items-center mb-3 pb-2 border-b border-palette-purple">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-xl bg-palette-mid text-palette-mauve flex items-center justify-center text-sm"><i class="fa-solid fa-book-open"></i></div>
+                <h3 class="text-sm sm:text-base font-bold text-palette-light" id="lbl-hub-title">الأدعية والزيارات</h3>
+            </div>
+            <button onclick="playClickSound(); closeModal('duas-hub-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+        </div>
+        <div class="flex-1 overflow-y-auto space-y-2.5 pr-1">
+            <button onclick="hqbHubGo('mafatih')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
+                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-book-open"></i></div>
+                <div class="flex-1"><p class="font-black text-xs text-palette-light">مفاتيح الجنان</p><p class="text-[10px] text-palette-muted font-bold">كميل • التوسل • الندبة • الصباح وغيرها</p></div>
+                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
+            </button>
+            <button onclick="hqbHubGo('ziyarat')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
+                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-kaaba"></i></div>
+                <div class="flex-1"><p class="font-black text-xs text-palette-light">الزيارات</p><p class="text-[10px] text-palette-muted font-bold">عاشوراء • وارث • أمين الله</p></div>
+                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
+            </button>
+            <button onclick="hqbHubGo('day')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
+                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="flex-1"><p class="font-black text-xs text-palette-light">دعاء اليوم</p><p class="text-[10px] text-palette-muted font-bold">أدعية أيام الأسبوع من الصحيفة السجادية</p></div>
+                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
+            </button>
+            <button onclick="hqbHubGo('short')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
+                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-hands-holding"></i></div>
+                <div class="flex-1"><p class="font-black text-xs text-palette-light">الأدعية القصيرة</p><p class="text-[10px] text-palette-muted font-bold">أدعية يسهل حفظها وترديدها</p></div>
+                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- الزيارات -->
+<div id="ziyarat-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
+    <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] p-4 shadow-2xl relative flex flex-col overflow-hidden">
+        <div class="flex justify-between items-center mb-3 pb-2 border-b border-palette-purple">
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-xl bg-palette-mid text-palette-mauve flex items-center justify-center text-sm"><i class="fa-solid fa-kaaba"></i></div>
+                <div>
+                    <h3 class="text-sm sm:text-base font-bold text-palette-light" id="lbl-ziyarat-title">الزيارات</h3>
+                    <p class="text-[9px] text-palette-muted">تعمل بدون إنترنت</p>
+                </div>
+            </div>
+            <button onclick="playClickSound(); closeModal('ziyarat-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+        </div>
+        <div id="ziyarat-list" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
+    </div>
+</div>
+
+<!-- معاينة صورة المشاركة -->
+<div id="share-img-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[120]">
+    <div class="w-full max-w-sm bg-palette-dark border border-palette-purple rounded-[24px] p-4 space-y-3 text-center">
+        <img id="share-img-preview" alt="صورة المشاركة" class="w-full rounded-xl border border-palette-purple">
+        <p class="text-[10px] text-palette-muted">يمكنك أيضاً الضغط مطولاً على الصورة لحفظها</p>
+        <div class="flex gap-2">
+            <button onclick="hqbShareImgSend()" class="flex-1 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-black text-xs"><i class="fa-solid fa-share-nodes ml-1"></i>مشاركة</button>
+            <button onclick="playClickSound(); hqbShareImgSave()" class="flex-1 py-2.5 rounded-xl bg-palette-mid text-palette-light font-bold text-xs"><i class="fa-solid fa-download ml-1"></i>حفظ</button>
+            <button onclick="playClickSound(); closeModal('share-img-modal')" class="w-11 py-2.5 rounded-xl bg-palette-purple text-palette-light text-xs"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+</div>
+<script>
+/* =============================================================================
+   حقيبتي: الزيارات • الأدعية والزيارات • يومي • المشاركة كصورة • مشاركة الفاتحة
+   ============================================================================= */
+
+/* رابط التطبيق في Google Play: ضعي هنا الرابط المباشر لتطبيقك (details?id=...) */
+const HQB_PLAY_URL = 'https://play.google.com/store/search?q=%D8%AD%D9%82%D9%8A%D8%A8%D8%AA%D9%8A&c=apps';
+
+/* ---------- الزيارات (محفوظة داخل التطبيق وتعمل بدون إنترنت) ---------- */
+const HQB_ZIYARAT = [
+{
+    id: 'z-ashura',
+    title: 'زيارة عاشوراء',
+    desc: 'زيارة الإمام الحسين عليه السلام يوم عاشوراء وفي كل يوم',
+    text: `السَّلامُ عَلَيْكَ يا أَبا عَبْدِ اللهِ، السَّلامُ عَلَيْكَ يَا ابْنَ رَسُولِ اللهِ، السَّلامُ عَلَيْكَ يَا ابْنَ أَمِيرِ الْمُؤْمِنِينَ وَابْنَ سَيِّدِ الْوَصِيِّينَ، السَّلامُ عَلَيْكَ يَا ابْنَ فاطِمَةَ سَيِّدَةِ نِساءِ الْعالَمِينَ، السَّلامُ عَلَيْكَ يا ثارَ اللهِ وَابْنَ ثارِهِ وَالْوِتْرَ الْمَوْتُورَ، السَّلامُ عَلَيْكَ وَعَلَى الْأَرْواحِ الَّتِي حَلَّتْ بِفِنائِكَ، عَلَيْكُمْ مِنِّي جَمِيعاً سَلامُ اللهِ أَبَداً ما بَقِيتُ وَبَقِيَ اللَّيْلُ وَالنَّهارُ.
+
+يا أَبا عَبْدِ اللهِ، لَقَدْ عَظُمَتِ الرَّزِيَّةُ، وَجَلَّتْ وَعَظُمَتِ الْمُصِيبَةُ بِكَ عَلَيْنا وَعَلى جَمِيعِ أَهْلِ الْإِسْلامِ، وَجَلَّتْ وَعَظُمَتْ مُصِيبَتُكَ فِي السَّماواتِ عَلى جَمِيعِ أَهْلِ السَّماواتِ، فَلَعَنَ اللهُ أُمَّةً أَسَّسَتْ أَساسَ الظُّلْمِ وَالْجَوْرِ عَلَيْكُمْ أَهْلَ الْبَيْتِ، وَلَعَنَ اللهُ أُمَّةً دَفَعَتْكُمْ عَنْ مَقامِكُمْ، وَأَزالَتْكُمْ عَنْ مَراتِبِكُمُ الَّتِي رَتَّبَكُمُ اللهُ فِيها، وَلَعَنَ اللهُ أُمَّةً قَتَلَتْكُمْ، وَلَعَنَ اللهُ الْمُمَهِّدِينَ لَهُمْ بِالتَّمْكِينِ مِنْ قِتالِكُمْ، بَرِئْتُ إِلَى اللهِ وَإِلَيْكُمْ مِنْهُمْ وَمِنْ أَشْياعِهِمْ وَأَتْباعِهِمْ وَأَوْلِيائِهِمْ.
+
+يا أَبا عَبْدِ اللهِ، إِنِّي سِلْمٌ لِمَنْ سالَمَكُمْ، وَحَرْبٌ لِمَنْ حارَبَكُمْ إِلى يَوْمِ الْقِيامَةِ، وَلَعَنَ اللهُ آلَ زِيادٍ وَآلَ مَرْوانَ، وَلَعَنَ اللهُ بَنِي أُمَيَّةَ قاطِبَةً، وَلَعَنَ اللهُ ابْنَ مَرْجانَةَ، وَلَعَنَ اللهُ عُمَرَ بْنَ سَعْدٍ، وَلَعَنَ اللهُ شِمْراً، وَلَعَنَ اللهُ أُمَّةً أَسْرَجَتْ وَأَلْجَمَتْ وَتَنَقَّبَتْ لِقِتالِكَ.
+
+بِأَبِي أَنْتَ وَأُمِّي، لَقَدْ عَظُمَ مُصابِي بِكَ، فَأَسْأَلُ اللهَ الَّذِي أَكْرَمَ مَقامَكَ، وَأَكْرَمَنِي بِكَ، أَنْ يَرْزُقَنِي طَلَبَ ثارِكَ مَعَ إِمامٍ مَنْصُورٍ مِنْ أَهْلِ بَيْتِ مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَآلِهِ. اللّهُمَّ اجْعَلْنِي عِنْدَكَ وَجِيهاً بِالْحُسَيْنِ عَلَيْهِ السَّلامُ فِي الدُّنْيا وَالْآخِرَةِ.
+
+يا أَبا عَبْدِ اللهِ، إِنِّي أَتَقَرَّبُ إِلَى اللهِ، وَإِلى رَسُولِهِ، وَإِلى أَمِيرِ الْمُؤْمِنِينَ، وَإِلى فاطِمَةَ، وَإِلَى الْحَسَنِ، وَإِلَيْكَ بِمُوالاتِكَ، وَبِالْبَراءَةِ مِمَّنْ قاتَلَكَ وَنَصَبَ لَكَ الْحَرْبَ، وَبِالْبَراءَةِ مِمَّنْ أَسَّسَ أَساسَ الظُّلْمِ وَالْجَوْرِ عَلَيْكُمْ، وَأَبْرَأُ إِلَى اللهِ وَإِلى رَسُولِهِ مِمَّنْ أَسَّسَ أَساسَ ذلِكَ، وَبَنى عَلَيْهِ بُنْيانَهُ، وَجَرى فِي ظُلْمِهِ وَجَوْرِهِ عَلَيْكُمْ وَعَلى أَشْياعِكُمْ، بَرِئْتُ إِلَى اللهِ وَإِلَيْكُمْ مِنْهُمْ، وَأَتَقَرَّبُ إِلَى اللهِ ثُمَّ إِلَيْكُمْ بِمُوالاتِكُمْ وَمُوالاةِ وَلِيِّكُمْ، وَبِالْبَراءَةِ مِنْ أَعْدائِكُمْ وَالنّاصِبِينَ لَكُمُ الْحَرْبَ، وَبِالْبَراءَةِ مِنْ أَشْياعِهِمْ وَأَتْباعِهِمْ.
+
+إِنِّي سِلْمٌ لِمَنْ سالَمَكُمْ، وَحَرْبٌ لِمَنْ حارَبَكُمْ، وَوَلِيٌّ لِمَنْ والاكُمْ، وَعَدُوٌّ لِمَنْ عاداكُمْ، فَأَسْأَلُ اللهَ الَّذِي أَكْرَمَنِي بِمَعْرِفَتِكُمْ وَمَعْرِفَةِ أَوْلِيائِكُمْ، وَرَزَقَنِي الْبَراءَةَ مِنْ أَعْدائِكُمْ، أَنْ يَجْعَلَنِي مَعَكُمْ فِي الدُّنْيا وَالْآخِرَةِ، وَأَنْ يُثَبِّتَ لِي عِنْدَكُمْ قَدَمَ صِدْقٍ فِي الدُّنْيا وَالْآخِرَةِ، وَأَسْأَلُهُ أَنْ يُبَلِّغَنِيَ الْمَقامَ الْمَحْمُودَ لَكُمْ عِنْدَ اللهِ، وَأَنْ يَرْزُقَنِي طَلَبَ ثارِي مَعَ إِمامٍ هُدىً ظاهِرٍ ناطِقٍ بِالْحَقِّ مِنْكُمْ، وَأَسْأَلُ اللهَ بِحَقِّكُمْ وَبِالشَّأْنِ الَّذِي لَكُمْ عِنْدَهُ أَنْ يُعْطِيَنِي بِمُصابِي بِكُمْ أَفْضَلَ ما يُعْطِي مُصاباً بِمُصِيبَتِهِ، مُصِيبَةً ما أَعْظَمَها وَأَعْظَمَ رَزِيَّتَها فِي الْإِسْلامِ وَفِي جَمِيعِ السَّماواتِ وَالْأَرْضِ.
+
+اللّهُمَّ اجْعَلْنِي فِي مَقامِي هذا مِمَّنْ تَنالُهُ مِنْكَ صَلَواتٌ وَرَحْمَةٌ وَمَغْفِرَةٌ. اللّهُمَّ اجْعَلْ مَحْيايَ مَحْيا مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَمَماتِي مَماتَ مُحَمَّدٍ وَآلِ مُحَمَّدٍ.
+
+اللّهُمَّ إِنَّ هذا يَوْمٌ تَبَرَّكَتْ بِهِ بَنُو أُمَيَّةَ وَابْنُ آكِلَةِ الْأَكْبادِ، اللَّعِينُ ابْنُ اللَّعِينِ عَلى لِسانِكَ وَلِسانِ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ فِي كُلِّ مَوْطِنٍ وَمَوْقِفٍ وَقَفَ فِيهِ نَبِيُّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ. اللّهُمَّ الْعَنْ أَبا سُفْيانَ وَمُعاوِيَةَ وَيَزِيدَ بْنَ مُعاوِيَةَ عَلَيْهِمْ مِنْكَ اللَّعْنَةُ أَبَدَ الْآبِدِينَ، وَهذا يَوْمٌ فَرِحَتْ بِهِ آلُ زِيادٍ وَآلُ مَرْوانَ بِقَتْلِهِمُ الْحُسَيْنَ صَلَواتُ اللهِ عَلَيْهِ، اللّهُمَّ فَضاعِفْ عَلَيْهِمُ اللَّعْنَ مِنْكَ وَالْعَذابَ الْأَلِيمَ.
+
+اللّهُمَّ إِنِّي أَتَقَرَّبُ إِلَيْكَ فِي هذَا الْيَوْمِ، وَفِي مَوْقِفِي هذا، وَأَيّامِ حَياتِي، بِالْبَراءَةِ مِنْهُمْ، وَاللَّعْنَةِ عَلَيْهِمْ، وَبِالْمُوالاةِ لِنَبِيِّكَ وَآلِ نَبِيِّكَ عَلَيْهِ وَعَلَيْهِمُ السَّلامُ.
+
+ثُمَّ تَقُولُ مِائَةَ مَرَّةٍ:
+اللّهُمَّ الْعَنْ أَوَّلَ ظالِمٍ ظَلَمَ حَقَّ مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَآخِرَ تابِعٍ لَهُ عَلى ذلِكَ، اللّهُمَّ الْعَنِ الْعِصابَةَ الَّتِي جاهَدَتِ الْحُسَيْنَ، وَشايَعَتْ وَبايَعَتْ وَتابَعَتْ عَلى قَتْلِهِ، اللّهُمَّ الْعَنْهُمْ جَمِيعاً.
+
+ثُمَّ تَقُولُ مِائَةَ مَرَّةٍ:
+السَّلامُ عَلَيْكَ يا أَبا عَبْدِ اللهِ، وَعَلَى الْأَرْواحِ الَّتِي حَلَّتْ بِفِنائِكَ، عَلَيْكَ مِنِّي سَلامُ اللهِ أَبَداً ما بَقِيتُ وَبَقِيَ اللَّيْلُ وَالنَّهارُ، وَلا جَعَلَهُ اللهُ آخِرَ الْعَهْدِ مِنِّي لِزِيارَتِكُمْ، السَّلامُ عَلَى الْحُسَيْنِ، وَعَلى عَلِيِّ بْنِ الْحُسَيْنِ، وَعَلى أَوْلادِ الْحُسَيْنِ، وَعَلى أَصْحابِ الْحُسَيْنِ.
+
+ثُمَّ تَقُولُ:
+اللّهُمَّ خُصَّ أَنْتَ أَوَّلَ ظالِمٍ بِاللَّعْنِ مِنِّي، وَابْدَأْ بِهِ أَوَّلاً، ثُمَّ الثّانِيَ، وَالثّالِثَ، وَالرّابِعَ، اللّهُمَّ الْعَنْ يَزِيدَ خامِساً، وَالْعَنْ عُبَيْدَ اللهِ بْنَ زِيادٍ وَابْنَ مَرْجانَةَ وَعُمَرَ بْنَ سَعْدٍ وَشِمْراً وَآلَ أَبِي سُفْيانَ وَآلَ زِيادٍ وَآلَ مَرْوانَ إِلى يَوْمِ الْقِيامَةِ.
+
+ثُمَّ تَسْجُدُ وَتَقُولُ:
+اللّهُمَّ لَكَ الْحَمْدُ حَمْدَ الشّاكِرِينَ لَكَ عَلى مُصابِهِمْ، الْحَمْدُ لِلّهِ عَلى عَظِيمِ رَزِيَّتِي، اللّهُمَّ ارْزُقْنِي شَفاعَةَ الْحُسَيْنِ يَوْمَ الْوُرُودِ، وَثَبِّتْ لِي قَدَمَ صِدْقٍ عِنْدَكَ مَعَ الْحُسَيْنِ وَأَصْحابِ الْحُسَيْنِ الَّذِينَ بَذَلُوا مُهَجَهُمْ دُونَ الْحُسَيْنِ عَلَيْهِ السَّلامُ.`
+},
+{
+    id: 'z-warith',
+    title: 'زيارة وارث',
+    desc: 'من زيارات الإمام الحسين عليه السلام، تُقرأ ليلة الجمعة وفي كل وقت',
+    text: `السَّلامُ عَلَيْكَ يا وارِثَ آدَمَ صِفْوَةِ اللهِ، السَّلامُ عَلَيْكَ يا وارِثَ نُوحٍ نَبِيِّ اللهِ، السَّلامُ عَلَيْكَ يا وارِثَ إِبْراهِيمَ خَلِيلِ اللهِ، السَّلامُ عَلَيْكَ يا وارِثَ مُوسى كَلِيمِ اللهِ، السَّلامُ عَلَيْكَ يا وارِثَ عِيسى رُوحِ اللهِ، السَّلامُ عَلَيْكَ يا وارِثَ مُحَمَّدٍ حَبِيبِ اللهِ، السَّلامُ عَلَيْكَ يا وارِثَ أَمِيرِ الْمُؤْمِنِينَ وَلِيِّ اللهِ، السَّلامُ عَلَيْكَ يَا ابْنَ مُحَمَّدٍ الْمُصْطَفى، السَّلامُ عَلَيْكَ يَا ابْنَ عَلِيٍّ الْمُرْتَضى، السَّلامُ عَلَيْكَ يَا ابْنَ فاطِمَةَ الزَّهْراءِ، السَّلامُ عَلَيْكَ يَا ابْنَ خَدِيجَةَ الْكُبْرى، السَّلامُ عَلَيْكَ يا ثارَ اللهِ وَابْنَ ثارِهِ وَالْوِتْرَ الْمَوْتُورَ.
+
+أَشْهَدُ أَنَّكَ قَدْ أَقَمْتَ الصَّلاةَ، وَآتَيْتَ الزَّكاةَ، وَأَمَرْتَ بِالْمَعْرُوفِ، وَنَهَيْتَ عَنِ الْمُنْكَرِ، وَأَطَعْتَ اللهَ وَرَسُولَهُ حَتّى أَتاكَ الْيَقِينُ، فَلَعَنَ اللهُ أُمَّةً قَتَلَتْكَ، وَلَعَنَ اللهُ أُمَّةً ظَلَمَتْكَ، وَلَعَنَ اللهُ أُمَّةً سَمِعَتْ بِذلِكَ فَرَضِيَتْ بِهِ.
+
+يا مَوْلايَ يا أَبا عَبْدِ اللهِ، أَشْهَدُ أَنَّكَ كُنْتَ نُوراً فِي الْأَصْلابِ الشّامِخَةِ وَالْأَرْحامِ الْمُطَهَّرَةِ، لَمْ تُنَجِّسْكَ الْجاهِلِيَّةُ بِأَنْجاسِها، وَلَمْ تُلْبِسْكَ مِنْ مُدْلَهِمّاتِ ثِيابِها، وَأَشْهَدُ أَنَّكَ مِنْ دَعائِمِ الدِّينِ وَأَرْكانِ الْمُؤْمِنِينَ، وَأَشْهَدُ أَنَّكَ الْإِمامُ الْبَرُّ التَّقِيُّ الرَّضِيُّ الزَّكِيُّ الْهادِي الْمَهْدِيُّ، وَأَشْهَدُ أَنَّ الْأَئِمَّةَ مِنْ وُلْدِكَ كَلِمَةُ التَّقْوى، وَأَعْلامُ الْهُدى، وَالْعُرْوَةُ الْوُثْقى، وَالْحُجَّةُ عَلى أَهْلِ الدُّنْيا.
+
+وَأُشْهِدُ اللهَ وَمَلائِكَتَهُ وَأَنْبِياءَهُ وَرُسُلَهُ أَنِّي بِكُمْ مُؤْمِنٌ وَبِإِيابِكُمْ مُوقِنٌ، بِشَرائِعِ دِينِي وَخَواتِيمِ عَمَلِي، وَقَلْبِي لِقَلْبِكُمْ سِلْمٌ، وَأَمْرِي لِأَمْرِكُمْ مُتَّبِعٌ، صَلَواتُ اللهِ عَلَيْكُمْ، وَعَلى أَرْواحِكُمْ، وَعَلى أَجْسادِكُمْ، وَعَلى أَجْسامِكُمْ، وَعَلى شاهِدِكُمْ، وَعَلى غائِبِكُمْ، وَعَلى ظاهِرِكُمْ، وَعَلى باطِنِكُمْ.`
+},
+{
+    id: 'z-amin',
+    title: 'زيارة أمين الله',
+    desc: 'زيارة أمير المؤمنين عليه السلام، وتُزار بها سائر الأئمة',
+    text: `السَّلامُ عَلَيْكَ يا أَمِينَ اللهِ فِي أَرْضِهِ وَحُجَّتَهُ عَلى عِبادِهِ، السَّلامُ عَلَيْكَ يا أَمِيرَ الْمُؤْمِنِينَ، أَشْهَدُ أَنَّكَ جاهَدْتَ فِي اللهِ حَقَّ جِهادِهِ، وَعَمِلْتَ بِكِتابِهِ، وَاتَّبَعْتَ سُنَنَ نَبِيِّهِ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، حَتّى دَعاكَ اللهُ إِلى جِوارِهِ، فَقَبَضَكَ إِلَيْهِ بِاخْتِيارِهِ، وَأَلْزَمَ أَعْداءَكَ الْحُجَّةَ مَعَ ما لَكَ مِنَ الْحُجَجِ الْبالِغَةِ عَلى جَمِيعِ خَلْقِهِ.
+
+اللّهُمَّ فَاجْعَلْ نَفْسِي مُطْمَئِنَّةً بِقَدَرِكَ، راضِيَةً بِقَضائِكَ، مُولَعَةً بِذِكْرِكَ وَدُعائِكَ، مُحِبَّةً لِصَفْوَةِ أَوْلِيائِكَ، مَحْبُوبَةً فِي أَرْضِكَ وَسَمائِكَ، صابِرَةً عَلى نُزُولِ بَلائِكَ، شاكِرَةً لِفَواضِلِ نَعْمائِكَ، ذاكِرَةً لِسَوابِغِ آلائِكَ، مُشْتاقَةً إِلى فَرْحَةِ لِقائِكَ، مُتَزَوِّدَةً التَّقْوى لِيَوْمِ جَزائِكَ، مُسْتَنَّةً بِسُنَنِ أَوْلِيائِكَ، مُفارِقَةً لِأَخْلاقِ أَعْدائِكَ، مَشْغُولَةً عَنِ الدُّنْيا بِحَمْدِكَ وَثَنائِكَ.
+
+اللّهُمَّ إِنَّ قُلُوبَ الْمُخْبِتِينَ إِلَيْكَ والِهَةٌ، وَسُبُلَ الرّاغِبِينَ إِلَيْكَ شارِعَةٌ، وَأَعْلامَ الْقاصِدِينَ إِلَيْكَ واضِحَةٌ، وَأَفْئِدَةَ الْعارِفِينَ مِنْكَ فازِعَةٌ، وَأَصْواتَ الدّاعِينَ إِلَيْكَ صاعِدَةٌ، وَأَبْوابَ الْإِجابَةِ لَهُمْ مُفَتَّحَةٌ، وَدَعْوَةَ مَنْ ناجاكَ مُسْتَجابَةٌ، وَتَوْبَةَ مَنْ أَنابَ إِلَيْكَ مَقْبُولَةٌ، وَعَبْرَةَ مَنْ بَكى مِنْ خَوْفِكَ مَرْحُومَةٌ، وَالْإِغاثَةَ لِمَنِ اسْتَغاثَ بِكَ مَوْجُودَةٌ، وَالْإِعانَةَ لِمَنِ اسْتَعانَ بِكَ مَبْذُولَةٌ، وَعِداتِكَ لِعِبادِكَ مُنْجَزَةٌ، وَزَلَلَ مَنِ اسْتَقالَكَ مُقالَةٌ، وَأَعْمالَ الْعامِلِينَ لَدَيْكَ مَحْفُوظَةٌ، وَأَرْزاقَكَ إِلَى الْخَلائِقِ مِنْ لَدُنْكَ نازِلَةٌ، وَعَوائِدَ الْمَزِيدِ إِلَيْهِمْ واصِلَةٌ، وَذُنُوبَ الْمُسْتَغْفِرِينَ مَغْفُورَةٌ، وَحَوائِجَ خَلْقِكَ عِنْدَكَ مَقْضِيَّةٌ، وَجَوائِزَ السّائِلِينَ عِنْدَكَ مُوَفَّرَةٌ، وَعَوائِدَ الْمَزِيدِ مُتَواتِرَةٌ، وَمَوائِدَ الْمُسْتَطْعِمِينَ مُعَدَّةٌ، وَمَناهِلَ الظِّماءِ مُتْرَعَةٌ.
+
+اللّهُمَّ فَاسْتَجِبْ دُعائِي، وَاقْبَلْ ثَنائِي، وَاجْمَعْ بَيْنِي وَبَيْنَ أَوْلِيائِي، بِحَقِّ مُحَمَّدٍ وَعَلِيٍّ وَفاطِمَةَ وَالْحَسَنِ وَالْحُسَيْنِ، إِنَّكَ وَلِيُّ نَعْمائِي، وَمُنْتَهى مُنايَ، وَغايَةُ رَجائِي فِي مُنْقَلَبِي وَمَثْوايَ.`
+},
+{
+    id: 'z-short',
+    title: 'السلام على الحسين (زيارة مختصرة)',
+    desc: 'سلام قصير يُقرأ في كل يوم من أي مكان',
+    text: `السَّلامُ عَلَيْكَ يا أَبا عَبْدِ اللهِ، وَعَلَى الْأَرْواحِ الَّتِي حَلَّتْ بِفِنائِكَ، عَلَيْكَ مِنِّي سَلامُ اللهِ أَبَداً ما بَقِيتُ وَبَقِيَ اللَّيْلُ وَالنَّهارُ، وَلا جَعَلَهُ اللهُ آخِرَ الْعَهْدِ مِنِّي لِزِيارَتِكُمْ.
+
+السَّلامُ عَلَى الْحُسَيْنِ، وَعَلى عَلِيِّ بْنِ الْحُسَيْنِ، وَعَلى أَوْلادِ الْحُسَيْنِ، وَعَلى أَصْحابِ الْحُسَيْنِ.`
+}
+];
+
+/* زيارات إضافية من Supabase: جدول ziyarat (title, desc, content) - اختياري، تُحفظ للعمل بدون إنترنت */
+let hqbZiyaratList = HQB_ZIYARAT.slice();
+function hqbMergeZiyarat(rows) {
+    (rows || []).forEach(r => {
+        if (!r || !r.text || hqbZiyaratList.some(x => x.title === r.title)) return;
+        hqbZiyaratList.push(r);
+    });
+}
+hqbMergeZiyarat(hqbLS('hqb_ziyarat_cache', []));
+async function hqbLoadRemoteZiyarat() {
+    if (!supabaseClient || !navigator.onLine) return;
+    try {
+        const { data, error } = await supabaseClient.from('ziyarat').select('*').order('id', { ascending: true });
+        if (error || !Array.isArray(data)) return;
+        const rows = data.map(r => ({
+            id: 'zr-' + r.id,
+            title: String(r.title || 'زيارة').trim(),
+            desc: String(r.desc || r.description || '').trim(),
+            text: String(r.content || r.text || '').trim()
+        })).filter(r => r.text);
+        hqbSaveLS('hqb_ziyarat_cache', rows);
+        hqbMergeZiyarat(rows);
+    } catch (e) {}
+}
+
+function openZiyarat() {
+    openModal('ziyarat-modal');
+    hqbRenderZiyarat();
+    hqbLoadRemoteZiyarat().then(hqbRenderZiyarat);
+}
+function hqbRenderZiyarat() {
+    const box = document.getElementById('ziyarat-list');
+    if (!box) return;
+    box.innerHTML = hqbZiyaratList.map((z, i) => `
+        <div onclick="playClickSound(); hqbOpenZiyara('${z.id}')" class="p-3 rounded-xl ${i % 2 ? 'bg-palette-purple' : 'bg-palette-dark'} flex items-center justify-between gap-2 cursor-pointer active:scale-[.98] transition-all">
+            <div class="text-right overflow-hidden space-y-0.5">
+                <h4 class="font-bold text-palette-light text-xs sm:text-sm truncate"><i class="fa-solid fa-star text-[10px] text-palette-mauve ml-1"></i>${escapeHTML(z.title)}</h4>
+                <p class="text-[9px] text-palette-mauve font-medium truncate">${escapeHTML(z.desc || '')}</p>
+            </div>
+            <div class="w-7 h-7 rounded-full bg-palette-light text-palette-darkest flex items-center justify-center shrink-0"><i class="fa-solid fa-chevron-left text-[10px]"></i></div>
+        </div>`).join('');
+}
+function hqbOpenZiyara(id) {
+    const z = hqbZiyaratList.find(x => x.id === id);
+    if (z) hqbOpenTextDetail(z.title, z.text);
+}
+function hqbOpenTextDetail(title, text) {
+    currentDetailTextSize = 16;
+    document.getElementById('dua-detail-title').innerText = title;
+    const el = document.getElementById('dua-detail-text');
+    el.innerText = text;
+    el.style.fontSize = '16px';
+    openModal('dua-detail-modal');
+    if (el.parentElement) el.parentElement.scrollTop = 0;
+}
+
+/* ---------- قسم «الأدعية والزيارات» الموحد ---------- */
+let hqbFromHub = false;
+SECTION_MODALS.push('duas-hub-modal', 'ziyarat-modal');
+function openDuasHub() { hqbFromHub = false; openModal('duas-hub-modal'); }
+function hqbHubGo(k) {
+    playClickSound();
+    closeModal('duas-hub-modal');
+    hqbFromHub = true;
+    if (k === 'mafatih') { openModal('supplications-modal'); loadSupplicationsList(); }
+    else if (k === 'ziyarat') openZiyarat();
+    else if (k === 'day') openDailySupplicationsModal();
+    else if (k === 'short') openShortDuasModal();
+}
+(function () {
+    const _back = backToSections;
+    backToSections = function () {
+        if (hqbFromHub) {
+            hqbFromHub = false;
+            playClickSound();
+            SECTION_MODALS.forEach(id => {
+                const m = document.getElementById(id);
+                if (m && !m.classList.contains('hidden')) closeModal(id);
+            });
+            openModal('duas-hub-modal');
+            return;
+        }
+        return _back.apply(this, arguments);
+    };
+    const _open = openModal;
+    openModal = function (id) {
+        if (id === 'app-sections-fullscreen-modal') hqbFromHub = false;
+        return _open.apply(this, arguments);
+    };
+})();
+
+/* ---------- المشاركة كصورة ---------- */
+function hqbWrapLines(ctx, text, maxW) {
+    const out = [];
+    String(text).split('\n').forEach(par => {
+        const words = par.replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
+        let line = '';
+        words.forEach(w => {
+            const t = line ? line + ' ' + w : w;
+            if (ctx.measureText(t).width > maxW && line) { out.push(line); line = w; }
+            else line = t;
+        });
+        if (line) out.push(line);
+    });
+    return out;
+}
+function hqbLoadImg(src) {
+    return new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
+}
+async function hqbMakeShareImage(title, text, foot) {
+    try {
+        if (document.fonts && document.fonts.load) {
+            await Promise.race([
+                Promise.all([document.fonts.load('48px Amiri'), document.fonts.load('bold 40px Tajawal')]),
+                new Promise(r => setTimeout(r, 1500))
+            ]);
+        }
+    } catch (e) {}
+    const W = 1080, H = 1350;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const x = c.getContext('2d');
+    const g = x.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, '#18303F'); g.addColorStop(0.55, '#0F202B'); g.addColorStop(1, '#0A151C');
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+    const glow = x.createRadialGradient(W / 2, 170, 10, W / 2, 170, 520);
+    glow.addColorStop(0, 'rgba(212,168,79,0.20)'); glow.addColorStop(1, 'rgba(212,168,79,0)');
+    x.fillStyle = glow; x.fillRect(0, 0, W, H);
+    x.strokeStyle = 'rgba(212,168,79,0.85)'; x.lineWidth = 3; x.strokeRect(40, 40, W - 80, H - 80);
+    x.strokeStyle = 'rgba(212,168,79,0.30)'; x.lineWidth = 1.5; x.strokeRect(56, 56, W - 112, H - 112);
+
+    const logo = await hqbLoadImg(APP_LOGO_DATA);
+    if (logo) x.drawImage(logo, W / 2 - 70, 90, 140, 140);
+
+    x.direction = 'rtl';
+    x.textAlign = 'center';
+    x.textBaseline = 'middle';
+    x.fillStyle = '#D4A84F';
+    x.font = 'bold 46px Tajawal, sans-serif';
+    x.fillText(title || '', W / 2, 290);
+    x.fillStyle = 'rgba(212,168,79,0.6)';
+    x.fillRect(W / 2 - 90, 335, 180, 3);
+
+    const top = 380, bottom = H - 190, maxW = W - 220;
+    let size = 54, lines = [], lh = 0;
+    for (; size >= 30; size -= 2) {
+        x.font = size + 'px Amiri, serif';
+        lines = hqbWrapLines(x, text, maxW);
+        lh = size * 1.75;
+        if (lines.length * lh <= bottom - top) break;
+    }
+    const maxLines = Math.floor((bottom - top) / lh);
+    if (lines.length > maxLines) { lines = lines.slice(0, maxLines); lines[maxLines - 1] = lines[maxLines - 1] + ' …'; }
+    x.fillStyle = '#F3EBDD';
+    const startY = top + ((bottom - top) - lines.length * lh) / 2 + lh / 2;
+    lines.forEach((l, i) => x.fillText(l, W / 2, startY + i * lh));
+
+    if (foot) { x.fillStyle = '#D4A84F'; x.font = 'bold 30px Tajawal, sans-serif'; x.fillText(foot, W / 2, H - 150); }
+    x.fillStyle = '#8497A5';
+    x.font = 'bold 28px Tajawal, sans-serif';
+    x.fillText('تطبيق حقيبتي • Google Play', W / 2, H - 95);
+    return c;
+}
+let hqbShareBlob = null, hqbShareUrl = '';
+async function hqbShareImage(title, text, foot) {
+    showToast(HQB_EN() ? 'Preparing image...' : 'جاري تجهيز الصورة...');
+    const c = await hqbMakeShareImage(title, text, foot);
+    hqbShareUrl = c.toDataURL('image/png');
+    hqbShareBlob = null;
+    try { c.toBlob(b => { hqbShareBlob = b; }, 'image/png'); } catch (e) {}
+    document.getElementById('share-img-preview').src = hqbShareUrl;
+    openModal('share-img-modal');
+}
+async function hqbShareImgSend() {
+    playClickSound();
+    try {
+        if (hqbShareBlob && navigator.canShare) {
+            const f = new File([hqbShareBlob], 'haqibati.png', { type: 'image/png' });
+            if (navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); return; }
+        }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    hqbShareImgSave();
+}
+function hqbShareImgSave() {
+    const a = document.createElement('a');
+    a.href = hqbShareUrl; a.download = 'haqibati.png';
+    document.body.appendChild(a); a.click(); a.remove();
+    showToast(HQB_EN() ? 'If it did not save, long-press the image' : 'إذا لم تُحفظ الصورة، اضغط عليها مطولاً واختر حفظ');
+}
+function hqbShareCurrentDetail() {
+    const t = document.getElementById('dua-detail-title').innerText;
+    const body = document.getElementById('dua-detail-text').innerText;
+    hqbShareImage(t, body, '');
+}
+function hqbShareAyahImage(a) {
+    const s = mushafState.surah;
+    hqbShareImage((HQB_EN() ? 'Surah ' : 'سورة ') + SURAH_NAMES[s - 1], '﴿' + mushafAyahText(a) + '﴾', (HQB_EN() ? 'Ayah ' : 'الآية ') + toEasternArabicDigits(a));
+}
+
+/* ---------- مشاركة اسم المتوفى (قسم الفاتحة) ---------- */
+async function hqbShareFatiha(id) {
+    const p = (deceasedList || []).find(x => String(x.id) === String(id));
+    if (!p) return;
+    const f = p.gender === 'أنثى';
+    const txt = `اقرأ سورة الفاتحة لروح ${f ? 'المرحومة' : 'المرحوم'} ${p.name}\n${f ? 'رحمها الله وأسكنها' : 'رحمه الله وأسكنه'} فسيح جناته\n\nالاسم موجود في قسم «الفاتحة» في تطبيق حقيبتي:\n${HQB_PLAY_URL}`;
+    if (navigator.share) {
+        try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    try { await navigator.clipboard.writeText(txt); }
+    catch (e) { const t = document.createElement('textarea'); t.value = txt; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (er) {} t.remove(); }
+    showToast('تم نسخ الرسالة، الصقها في واتساب أو أي تطبيق');
+}
+
+/* ---------- يومي: البطاقة اليومية في الشاشة الرئيسية ---------- */
+const HQB_OCCASIONS = {
+    '1-1': { t: 'رأس السنة الهجرية', acts: [['زيارة عاشوراء', 'z:z-ashura']] },
+    '1-10': { t: 'يوم عاشوراء • استشهاد الإمام الحسين عليه السلام', acts: [['زيارة عاشوراء', 'z:z-ashura'], ['زيارة وارث', 'z:z-warith']] },
+    '2-20': { t: 'زيارة الأربعين', acts: [['زيارة وارث', 'z:z-warith'], ['زيارة عاشوراء', 'z:z-ashura']] },
+    '2-28': { t: 'وفاة الرسول الأعظم ﷺ واستشهاد الإمام الحسن عليه السلام', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '3-8': { t: 'استشهاد الإمام الحسن العسكري عليه السلام', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '3-17': { t: 'المولد النبوي الشريف ومولد الإمام الصادق عليه السلام', acts: [['مفاتيح الجنان', 'mafatih']] },
+    '5-5': { t: 'ولادة السيدة زينب عليها السلام', acts: [] },
+    '6-3': { t: 'استشهاد السيدة فاطمة الزهراء عليها السلام', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '6-20': { t: 'ولادة السيدة فاطمة الزهراء عليها السلام', acts: [] },
+    '7-1': { t: 'ولادة الإمام محمد الباقر عليه السلام', acts: [] },
+    '7-13': { t: 'ولادة أمير المؤمنين علي عليه السلام', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '7-25': { t: 'استشهاد الإمام موسى الكاظم عليه السلام', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '7-27': { t: 'المبعث النبوي الشريف', acts: [['مفاتيح الجنان', 'mafatih']] },
+    '8-3': { t: 'ولادة الإمام الحسين عليه السلام', acts: [['زيارة وارث', 'z:z-warith']] },
+    '8-4': { t: 'ولادة أبي الفضل العباس عليه السلام', acts: [] },
+    '8-5': { t: 'ولادة الإمام زين العابدين عليه السلام', acts: [] },
+    '8-15': { t: 'ولادة الإمام المهدي عجل الله فرجه', acts: [['زيارة وارث', 'z:z-warith'], ['دعاء كميل', 'mafatih']] },
+    '9-1': { t: 'أول شهر رمضان المبارك', acts: [['أكمل الختمة', 'khatma']] },
+    '9-15': { t: 'ولادة الإمام الحسن المجتبى عليه السلام', acts: [] },
+    '9-19': { t: 'ليلة القدر الأولى • ضربة أمير المؤمنين عليه السلام', acts: [['مفاتيح الجنان', 'mafatih'], ['زيارة وارث', 'z:z-warith']] },
+    '9-21': { t: 'ليلة القدر • استشهاد أمير المؤمنين عليه السلام', acts: [['مفاتيح الجنان', 'mafatih'], ['زيارة أمين الله', 'z:z-amin']] },
+    '9-23': { t: 'ليلة القدر الكبرى', acts: [['مفاتيح الجنان', 'mafatih'], ['زيارة وارث', 'z:z-warith']] },
+    '10-1': { t: 'عيد الفطر المبارك', acts: [['زيارة وارث', 'z:z-warith']] },
+    '10-25': { t: 'استشهاد الإمام جعفر الصادق عليه السلام', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '11-11': { t: 'ولادة الإمام علي الرضا عليه السلام', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '12-9': { t: 'يوم عرفة', acts: [['زيارة وارث', 'z:z-warith'], ['مفاتيح الجنان', 'mafatih']] },
+    '12-10': { t: 'عيد الأضحى المبارك', acts: [] },
+    '12-18': { t: 'عيد الغدير الأغر', acts: [['زيارة أمين الله', 'z:z-amin']] },
+    '12-24': { t: 'يوم المباهلة', acts: [['مفاتيح الجنان', 'mafatih']] }
+};
+const HQB_WEEK_ACTS = {
+    2: { t: 'الليلة ليلة الأربعاء', acts: [['دعاء التوسل', 'mafatih']] },
+    4: { t: 'الليلة ليلة الجمعة', acts: [['دعاء كميل', 'mafatih'], ['زيارة وارث', 'z:z-warith']] },
+    5: { t: 'يوم الجمعة المبارك', acts: [['سورة الكهف', 'kahf'], ['دعاء الندبة', 'mafatih']] }
+};
+
+function hqbRunAct(a) {
+    playClickSound();
+    hqbFromHub = false;
+    if (a.indexOf('z:') === 0) hqbOpenZiyara(a.slice(2));
+    else if (a === 'mafatih') { openModal('supplications-modal'); loadSupplicationsList(); }
+    else if (a === 'kahf') { openMushaf(); mushafOpenSurah(18, 1); }
+    else if (a === 'dailydua') openDailySupplicationsModal();
+    else if (a === 'khatma') { const l = hqbLS('hqb_mushaf_last', null); openMushaf(); if (l) mushafOpenSurah(l.s, l.a); }
+    else if (a === 'prayer') { openModal('prayer-times-modal'); initPrayerTimesInterface(); }
+    else if (a === 'ziyarat') openZiyarat();
+    else if (a === 'hub') openDuasHub();
+}
+
+function hqbNextPrayer() {
+    const t = hqbTodayTimings;
+    if (!t) return null;
+    let p; try { p = getCityCurrentTimeParts(); } catch (e) { return null; }
+    const now = p.h * 3600 + p.m * 60 + p.s;
+    for (const x of ADHAN_PRAYERS) {
+        if (!t[x.k]) continue;
+        const s = parse24HourToSeconds(t[x.k]);
+        if (s > now) return { name: HQB_EN() ? x.en : x.ar, time: t[x.k], left: s - now };
+    }
+    if (t.Fajr) return { name: HQB_EN() ? 'Fajr' : 'الفجر', time: t.Fajr, left: 86400 - now + parse24HourToSeconds(t.Fajr) };
+    return null;
+}
+function hqbLeftText(sec) {
+    const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
+    if (HQB_EN()) return 'in ' + (h ? h + 'h ' : '') + m + 'm';
+    if (!h && !m) return 'الآن';
+    return 'بعد ' + (h ? hqbNum(h) + ' س ' : '') + hqbNum(m) + ' د';
+}
+function hqbUserName() {
+    try { const a = JSON.parse(localStorage.getItem('adhkar_user_auth')); return (a && a.custom && a.name) ? a.name : ''; } catch (e) { return ''; }
+}
+
+function hqbRenderToday() {
+    const box = document.getElementById('hqb-today');
+    if (!box) return;
+    const en = HQB_EN();
+    const hr = new Date().getHours();
+    const name = hqbUserName();
+    const greet = (en ? (hr < 12 ? 'Good morning' : 'Good evening') : (hr < 12 ? 'صباح الخير' : 'مساء الخير')) + (name ? (en ? ', ' : ' يا ') + escapeHTML(name) : '');
+    const h = getHijriDateFromGregorian(new Date());
+    const hijri = `${hqbNum(h.day)} ${HIJRI_MONTH_NAMES[h.month - 1] || ''} ${hqbNum(h.year)} هـ`;
+    const np = hqbNextPrayer();
+    const occ = HQB_OCCASIONS[h.month + '-' + h.day] || HQB_WEEK_ACTS[new Date().getDay()] || null;
+    const last = hqbLS('hqb_mushaf_last', null);
+    const pct = last ? Math.min(100, Math.round((surahStartGlobal(last.s) + last.a) / 6236 * 100)) : 0;
+
+    const chip = ([label, act]) => `<button onclick="hqbRunAct('${act}')" class="px-2.5 py-1 rounded-full bg-palette-darkest border border-palette-mauve/40 text-palette-light text-[10px] font-bold active:scale-95 transition-all">${escapeHTML(label)}</button>`;
+    const btn = (icon, label, act) => `<button onclick="hqbRunAct('${act}')" class="py-2 rounded-xl bg-palette-mid border border-palette-purple text-palette-light flex flex-col items-center gap-1 active:scale-95 transition-all"><i class="fa-solid ${icon} text-palette-mauve text-sm"></i><span class="text-[10px] font-bold">${label}</span></button>`;
+
+    box.innerHTML = `
+    <div class="w-full rounded-2xl bg-palette-dark border border-palette-purple p-3 shadow-lg space-y-2.5">
+        <div class="flex items-center justify-between gap-2">
+            <div class="min-w-0">
+                <p class="text-[13px] font-black text-palette-light truncate">${greet}</p>
+                <p class="text-[10px] text-palette-muted font-bold">${en ? '' : hijri}</p>
+            </div>
+            <button onclick="hqbRunAct('prayer')" class="shrink-0 rounded-xl bg-palette-mauve text-palette-darkest px-3 py-1.5 text-center active:scale-95 transition-all">
+                ${np ? `<p class="text-[9px] font-bold opacity-80">${en ? 'Next prayer' : 'الصلاة القادمة'}</p>
+                <p class="text-xs font-black">${np.name} ${format12Hour(np.time)}</p>
+                <p class="text-[9px] font-bold">${hqbLeftText(np.left)}</p>`
+                : `<p class="text-[11px] font-black py-1"><i class="fa-solid fa-mosque ml-1"></i>${en ? 'Prayer times' : 'أوقات الصلاة'}</p>`}
+            </button>
+        </div>
+        ${occ ? `
+        <div class="rounded-xl bg-palette-mid/70 border border-palette-mauve/25 p-2.5 space-y-2">
+            <p class="text-[11px] font-black text-palette-mauve"><i class="fa-solid fa-star-and-crescent ml-1"></i>${escapeHTML(occ.t)}</p>
+            ${occ.acts.length ? `<div class="flex flex-wrap gap-1.5">${occ.acts.map(chip).join('')}</div>` : ''}
+        </div>` : ''}
+        <div class="grid grid-cols-3 gap-2">
+            ${btn('fa-calendar-check', en ? "Today's dua" : 'دعاء اليوم', 'dailydua')}
+            ${btn('fa-book-quran', last ? (en ? `Khatma ${pct}%` : `الختمة ${hqbNum(pct)}٪`) : (en ? 'Quran' : 'المصحف'), 'khatma')}
+            ${btn('fa-kaaba', en ? 'Ziyarat' : 'الزيارات', 'ziyarat')}
+        </div>
+    </div>`;
+}
+
+/* ---------- تسميات الأقسام الجديدة بالعربية والإنجليزية ---------- */
+function hqbApplyNewLabels() {
+    const en = HQB_EN();
+    const map = {
+        'lbl-sec-prayer': ['أوقات الصلاة', 'Prayer Times'],
+        'lbl-sec-prayer-sub': ['المواقيت • القبلة • المساجد القريبة', 'Times • Qibla • Nearby mosques'],
+        'lbl-sec-duas': ['الأدعية والزيارات', 'Duas & Ziyarat'],
+        'lbl-sec-duas-sub': ['المفاتيح • الزيارات • دعاء اليوم', 'Mafatih • Ziyarat • Daily dua'],
+        'lbl-sec-fatiha': ['الفاتحة', 'Al-Fatiha'],
+        'lbl-sec-fatiha-sub': ['اقرأ لأرواح المؤمنين', 'Read for the deceased'],
+        'lbl-more-sections': ['المزيد', 'More'],
+        'lbl-sec-rec': ['تلاوات وقراء', 'Recitations'],
+        'lbl-sec-cal': ['التقويم', 'Calendar'],
+        'lbl-sec-rakat': ['عداد الركع', 'Rakat Counter'],
+        'lbl-sec-chal': ['التحديات', 'Challenges'],
+        'lbl-hub-title': ['الأدعية والزيارات', 'Duas & Ziyarat'],
+        'lbl-ziyarat-title': ['الزيارات', 'Ziyarat'],
+        'footer-app-pre': ['تطبيق', 'App']
+    };
+    Object.keys(map).forEach(id => { const el = document.getElementById(id); if (el) el.innerText = map[id][en ? 1 : 0]; });
+    hqbRenderToday();
+}
+(function () {
+    const _lang = selectAppLanguage;
+    selectAppLanguage = function () { const r = _lang.apply(this, arguments); hqbApplyNewLabels(); return r; };
+})();
+
+/* ---------- صوت الأزرار: مطفأ افتراضياً ويُحفظ اختيار المستخدم ---------- */
+(function () {
+    isButtonSoundOn = localStorage.getItem('hqb_btn_sound') === '1';
+    const t = document.getElementById('sound-text'), i = document.getElementById('sound-icon');
+    if (t) t.innerText = isButtonSoundOn ? i18n[currentLanguage].enabled : i18n[currentLanguage].disabled;
+    if (i) i.className = isButtonSoundOn ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+    const _tb = toggleButtonSound;
+    toggleButtonSound = function () {
+        const r = _tb.apply(this, arguments);
+        try { localStorage.setItem('hqb_btn_sound', isButtonSoundOn ? '1' : '0'); } catch (e) {}
+        return r;
+    };
+})();
+
+/* ---------- تحميل مفاتيح الجنان مسبقاً وحفظها لتعمل بدون إنترنت ---------- */
+async function hqbPrefetchSupplications() {
+    if (!supabaseClient || !navigator.onLine) return;
+    try {
+        const { data, error } = await supabaseClient.from('supplications').select('*').order('id', { ascending: true });
+        if (error || !Array.isArray(data) || !data.length) return;
+        const list = data.map(item => ({
+            id: item.id || Math.random().toString(36).substr(2, 9),
+            title: item.title || 'دعاء مبارك',
+            desc: item.desc || 'دعاء وزيارة مباركة',
+            text: item.content || item.text || 'لا يوجد نص متاح حالياً...'
+        }));
+        localStorage.setItem('cached_supplications', JSON.stringify(list));
+    } catch (e) {}
+}
+
+hqbApplyNewLabels();
+hqbRefreshTodayTimings(false).then(hqbRenderToday);
+setInterval(hqbRenderToday, 30000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) hqbRenderToday(); });
+setTimeout(() => { hqbPrefetchSupplications(); hqbLoadRemoteZiyarat(); }, 4000);
+</script>
+
+<script>
+/* =============================================================================
+   المصحف: صفحات كاملة مع قلب الصفحة • قائمة قراء داخل التطبيق • قراء شيعة
+   ============================================================================= */
+
+/* ---------- القراء ---------- */
+MUSHAF_RECITERS.forEach(r => { if (!r.type) r.type = 'ayah'; });
+/* قراء إضافيون من Supabase: جدول mushaf_reciters (name, url) والرابط فيه {sss} مكان رقم السورة، مثل .../{sss}.mp3 */
+function hqbAddRemoteReciters(rows) {
+    (rows || []).forEach(r => {
+        if (!r || !r.url || MUSHAF_RECITERS.some(x => x.id === r.id)) return;
+        MUSHAF_RECITERS.unshift({ id: r.id, ar: r.name, en: r.name, type: 'surah', shia: true, note: r.note || 'تلاوة السورة كاملة', urls: [r.url] });
+    });
+}
+hqbAddRemoteReciters(hqbLS('hqb_mushaf_rec_remote', []));
+async function hqbLoadRemoteMushafReciters() {
+    if (!supabaseClient || !navigator.onLine) return;
+    try {
+        const { data, error } = await supabaseClient.from('mushaf_reciters').select('*').order('id', { ascending: true });
+        if (error || !Array.isArray(data)) return;
+        const rows = data.filter(r => r && r.name && r.url && /^https?:\/\//i.test(String(r.url).trim()))
+            .map(r => ({ id: 'surah.db' + r.id, name: String(r.name).trim(), url: String(r.url).trim(), note: String(r.note || '').trim() }));
+        hqbSaveLS('hqb_mushaf_rec_remote', rows);
+        hqbAddRemoteReciters(rows);
+    } catch (e) {}
+}
+if (!MUSHAF_RECITERS.some(r => r.id === mushafReciter)) { mushafReciter = 'ar.alafasy'; hqbSaveLS('hqb_mushaf_reciter', mushafReciter); }
+function mpRec() { return MUSHAF_RECITERS.find(r => r.id === mushafReciter) || MUSHAF_RECITERS[0]; }
+
+function mpRecLabel() {
+    const btn = document.getElementById('mp-rec-name');
+    if (btn) { const r = mpRec(); btn.innerText = HQB_EN() ? r.en : r.ar; }
+}
+function mpOpenReciters() {
+    const en = HQB_EN();
+    const row = r => {
+        const on = r.id === mushafReciter;
+        return `<button onclick="mpPickRec('${r.id}')" class="mp-rec-row ${on ? 'on' : ''}">
+            <span class="mp-rec-av">${escapeHTML((en ? r.en : r.ar).trim().charAt(0))}</span>
+            <span class="mp-rec-tx"><b>${escapeHTML(en ? r.en : r.ar)}</b><small>${r.type === 'surah' ? (en ? 'Full surah' : (r.note || 'تلاوة السورة كاملة')) : (en ? 'Ayah by ayah, highlighted' : 'آية بآية مع تظليل الآية')}</small></span>
+            ${on ? '<i class="fa-solid fa-circle-check mp-rec-ck"></i>' : ''}
+        </button>`;
+    };
+    const shia = MUSHAF_RECITERS.filter(r => r.shia), other = MUSHAF_RECITERS.filter(r => !r.shia);
+    document.getElementById('mp-rec-list').innerHTML =
+        (shia.length ? `<p class="mp-rec-grp">${en ? 'Iraq & Shia reciters' : 'قرّاء العراق وأتباع أهل البيت'}</p>${shia.map(row).join('')}<p class="mp-rec-grp">${en ? 'Other reciters' : 'قرّاء آخرون'}</p>` : '') + other.map(row).join('');
+    document.getElementById('mp-rec-sheet').classList.add('open');
+    hqbLoadRemoteMushafReciters();
+}
+function mpCloseReciters() { document.getElementById('mp-rec-sheet').classList.remove('open'); }
+function mpPickRec(id) {
+    playClickSound();
+    const wasPlaying = mushafState.playing;
+    if (wasPlaying) mushafStopAudio();
+    mushafReciter = id;
+    hqbSaveLS('hqb_mushaf_reciter', id);
+    const sel = document.getElementById('mushaf-reciter');
+    if (sel) sel.value = id;
+    mpRecLabel();
+    mpCloseReciters();
+    const r = mpRec();
+    showToast((HQB_EN() ? 'Reciter: ' : 'القارئ: ') + (HQB_EN() ? r.en : r.ar));
+    if (wasPlaying) mushafPlaySurah();
+}
+
+/* تشغيل قارئ يتلو السورة كاملة */
+function mpPlaySurahFile() {
+    const r = mpRec(), s = mushafState.surah, en = HQB_EN();
+    try { const qa = document.getElementById('quran-audio-element'); if (qa && !qa.paused) stopQuranAudio(); } catch (e) {}
+    mushafStopAudio();
+    const urls = r.urls.map(u => u.replace('{sss}', String(s).padStart(3, '0')).replace('{s}', String(s)));
+    let i = 0;
+    const el = new Audio();
+    el.onerror = () => {
+        i++;
+        if (i < urls.length) { el.src = urls[i]; el.play().catch(() => {}); }
+        else if (mushafAudio === el) { showToast(en ? 'Recitation unavailable, check your internet' : 'تعذر تشغيل التلاوة، تأكد من الإنترنت'); mushafStopAudio(); }
+    };
+    el.onended = () => { if (mushafAudio === el) mushafStopAudio(); };
+    el.src = urls[0];
+    mushafAudio = el;
+    el._play = true;
+    mushafState.playing = true;
+    mushafState.playIdx = -1;
+    el.play().catch(() => {});
+    mushafUpdatePlayBtn();
+    showToast((en ? r.en : r.ar) + (en ? ' • full surah' : ' • تلاوة السورة كاملة'));
+}
+
+/* ---------- عرض الصفحات ---------- */
+let mpPages = [], mpCur = 0, mpBusy = false, mpPendingAyah = null, mpSelAyah = null;
+
+function mpBody() { return document.getElementById('mushaf-read-body'); }
+function mpHeadHTML() {
+    const s = mushafState.surah, en = HQB_EN();
+    return `<div class="mp-head"><span>${en ? 'Surah ' : 'سُورَةُ '}${SURAH_NAMES[s - 1]}</span></div>` +
+        ((s !== 1 && s !== 9) ? `<div class="mp-bism">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>` : '');
+}
+function mpSegText(sg) {
+    const a = mushafState.data.ayahs[sg.i], w = a.t.split(' ');
+    return (sg.from === 0 && sg.to >= w.length) ? a.t : w.slice(sg.from, sg.to).join(' ');
+}
+function mpAyahHTML(sg) {
+    const i = sg.i, a = mushafState.data.ayahs[i], end = sg.to >= a.t.split(' ').length;
+    const cls = ['mp-ayah'];
+    if (mushafState.playing && mushafState.playIdx === i) cls.push('playing');
+    if (mpSelAyah === a.a) cls.push('sel');
+    return `<span id="ayah-${a.a}" class="${cls.join(' ')}" onclick="event.stopPropagation(); mushafTapAyah(${a.a})">${escapeHTML(mpSegText(sg))}${end ? `<span class="mp-num">${toEasternArabicDigits(a.a)}</span>` : ''}</span> `;
+}
+function mpPageHTML(k) {
+    const p = mpPages[k];
+    if (!p) return '';
+    return `<div class="mp-text" style="font-size:${mushafFontSize}px">${p.head ? mpHeadHTML() : ''}${p.segs.map(mpAyahHTML).join('')}</div>
+        <div class="mp-foot">${hqbNum(k + 1)}</div>`;
+}
+function mpPaginate() {
+    const body = mpBody(), data = mushafState.data;
+    mpPages = [];
+    if (!data || !body) return;
+    const meas = document.createElement('div');
+    meas.className = 'mp-page';
+    meas.style.visibility = 'hidden';
+    meas.style.overflow = 'hidden';
+    body.appendChild(meas);
+    let page = { head: true, segs: [] };
+    const fill = () => {
+        meas.innerHTML = `<div class="mp-text" style="font-size:${mushafFontSize}px">${page.head ? mpHeadHTML() : ''}${page.segs.map(sg => {
+            const end = sg.to >= data.ayahs[sg.i].t.split(' ').length;
+            return `<span class="mp-ayah">${escapeHTML(mpSegText(sg))}${end ? `<span class="mp-num">${toEasternArabicDigits(data.ayahs[sg.i].a)}</span>` : ''}</span> `;
+        }).join('')}</div><div class="mp-foot">0</div>`;
+        return meas.scrollHeight <= meas.clientHeight + 1;
+    };
+    for (let i = 0; i < data.ayahs.length; i++) {
+        const n = data.ayahs[i].t.split(' ').length;
+        let from = 0;
+        while (from < n) {
+            page.segs.push({ i, from, to: n });
+            if (fill()) { from = n; break; }
+            page.segs.pop();
+            let lo = from + 1, hi = n - 1, best = -1;
+            while (lo <= hi) {
+                const mid = (lo + hi) >> 1;
+                page.segs.push({ i, from, to: mid });
+                const ok = fill();
+                page.segs.pop();
+                if (ok) { best = mid; lo = mid + 1; } else hi = mid - 1;
+            }
+            if (best >= from + 3 || (best > from && !page.segs.length)) { page.segs.push({ i, from, to: best }); from = best; }
+            else if (!page.segs.length) { page.segs.push({ i, from, to: n }); from = n; }
+            mpPages.push(page);
+            page = { head: false, segs: [] };
+        }
+    }
+    if (page.segs.length) mpPages.push(page);
+    meas.remove();
+}
+function mpPageOf(a) {
+    const data = mushafState.data;
+    const idx = data ? data.ayahs.findIndex(x => x.a === a) : -1;
+    const k = mpPages.findIndex(p => p.segs.some(sg => sg.i === idx));
+    return k < 0 ? 0 : k;
+}
+function mpUpdateNav() {
+    const n = mpPages.length, en = HQB_EN();
+    const ind = document.getElementById('mp-ind');
+    if (ind) ind.innerText = en ? `Page ${mpCur + 1} / ${n}` : `صفحة ${hqbNum(mpCur + 1)} من ${hqbNum(n)}`;
+}
+/* صوت قلب الصفحة (مولّد داخل التطبيق، لا يحتاج إنترنت) */
+function mpFlipSound() {
+    try {
+        initWebAudio();
+        const ctx = webAudioCtx, now = ctx.currentTime, sr = ctx.sampleRate;
+        const noise = (dur, shape) => {
+            const n = Math.floor(sr * dur), buf = ctx.createBuffer(1, n, sr), d = buf.getChannelData(0);
+            for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * shape(i / n);
+            const src = ctx.createBufferSource(); src.buffer = buf; return src;
+        };
+        // حفيف الورق أثناء القلب
+        const swish = noise(0.42, t => Math.pow(Math.sin(Math.PI * Math.min(1, t * 1.1)), 1.8) * (0.55 + 0.45 * Math.random()));
+        const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 500;
+        const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 0.8;
+        bp.frequency.setValueAtTime(1400, now);
+        bp.frequency.linearRampToValueAtTime(4200, now + 0.25);
+        bp.frequency.linearRampToValueAtTime(2200, now + 0.42);
+        const g1 = ctx.createGain(); g1.gain.value = 0.32;
+        swish.connect(hp); hp.connect(bp); bp.connect(g1); g1.connect(ctx.destination);
+        swish.start(now);
+        // نقرة نزول الصفحة في النهاية
+        const flap = noise(0.07, t => Math.pow(1 - t, 3));
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1600;
+        const g2 = ctx.createGain(); g2.gain.value = 0.45;
+        flap.connect(lp); lp.connect(g2); g2.connect(ctx.destination);
+        flap.start(now + 0.36);
+    } catch (e) {}
+}
+
+let mpFlipToken = 0;
+function mpShow(k, dir) {
+    const body = mpBody();
+    if (!body || !mpPages.length) return;
+    k = Math.max(0, Math.min(mpPages.length - 1, k));
+    const token = ++mpFlipToken;
+    // إنهاء أي قلب سابق فوراً حتى لا تختفي الصفحات
+    body.querySelectorAll('.mp-page').forEach(x => {
+        if (x.classList.contains('cur') && !x.classList.contains('mp-flip-in')) return;
+        if (x.classList.contains('mp-flip-in')) { x.classList.remove('mp-flip-in'); x.classList.add('cur'); return; }
+        x.remove();
+    });
+    const pages = body.querySelectorAll('.mp-page.cur');
+    pages.forEach((x, i) => { if (i < pages.length - 1) x.remove(); });
+    const old = body.querySelector('.mp-page.cur');
+    const neu = document.createElement('div');
+    neu.className = 'mp-page cur';
+    neu.innerHTML = mpPageHTML(k);
+    let done = false;
+    const finish = () => {
+        if (done || token !== mpFlipToken) return;
+        done = true;
+        body.querySelectorAll('.mp-page').forEach(x => { if (x !== neu) x.remove(); });
+        neu.classList.remove('mp-flip-in');
+        mpBusy = false;
+    };
+    if (!old || !dir) {
+        body.querySelectorAll('.mp-page').forEach(x => x.remove());
+        body.appendChild(neu);
+        mpBusy = false;
+    } else {
+        mpBusy = true;
+        mpFlipSound();
+        if (dir > 0) {
+            body.insertBefore(neu, old);
+            old.classList.remove('cur');
+            old.classList.add('mp-flip-out');
+            old.addEventListener('animationend', finish, { once: true });
+        } else {
+            old.classList.remove('cur');
+            body.appendChild(neu);
+            neu.classList.add('mp-flip-in');
+            neu.addEventListener('animationend', finish, { once: true });
+        }
+        setTimeout(finish, 750);
+    }
+    mpCur = k;
+    mpUpdateNav();
+    const p = mpPages[k];
+    if (p && p.segs.length && mushafState.data) mushafSaveLast(mushafState.surah, mushafState.data.ayahs[p.segs[0].i].a);
+}
+function mpNext() {
+    playClickSound();
+    if (mpCur < mpPages.length - 1) mpShow(mpCur + 1, 1);
+    else if (mushafState.surah < 114) mushafOpenSurah(mushafState.surah + 1);
+}
+function mpPrev() {
+    playClickSound();
+    if (mpCur > 0) mpShow(mpCur - 1, -1);
+    else if (mushafState.surah > 1) mushafOpenSurah(mushafState.surah - 1, SURAH_AYAHS[mushafState.surah - 2]);
+}
+function mpBuild(targetAyah) {
+    const body = mpBody();
+    if (!body || !mushafState.data) return;
+    body.classList.add('mp-mode');
+    body.innerHTML = '';
+    mpPaginate();
+    mpShow(targetAyah ? mpPageOf(targetAyah) : 0, 0);
+}
+
+/* شريط أوامر الآية المختارة */
+function mpCloseBar() {
+    mpSelAyah = null;
+    document.querySelectorAll('#mushaf-read-body .mp-ayah.sel').forEach(x => x.classList.remove('sel'));
+    const bar = document.getElementById('mp-bar');
+    if (bar) bar.classList.remove('open');
+}
+
+/* ---------- ربط المصحف بالعرض الجديد ---------- */
+mushafRenderAyahs = function () {
+    if (!mushafState.data) return;
+    let target = mpPendingAyah;
+    mpPendingAyah = null;
+    if (!target && mpPages.length && mpPages[mpCur] && mpPages[mpCur].segs.length && mpBody().classList.contains('mp-mode')) {
+        const it = mushafState.data.ayahs[mpPages[mpCur].segs[0].i];
+        if (it) target = it.a;
+    }
+    mpCloseBar();
+    mpBuild(target);
+};
+(function () {
+    const _open = mushafOpenSurah;
+    mushafOpenSurah = function (s, ayah) {
+        mpPendingAyah = ayah || null;
+        mpPages = []; mpCur = 0;
+        mpCloseBar();
+        const b = mpBody(); if (b) b.classList.remove('mp-mode');
+        return _open.apply(this, arguments);
+    };
+    const _play = mushafPlayFrom;
+    mushafPlayFrom = function (idx) {
+        if (mpRec().type === 'surah') { mpPlaySurahFile(); return; }
+        const r = _play.apply(this, arguments);
+        const ay = mushafState.data && mushafState.data.ayahs[idx];
+        if (ay && mpPages.length) {
+            const k = mpPageOf(ay.a);
+            if (k !== mpCur) mpShow(k, k > mpCur ? 1 : -1);
+            else { const el = document.getElementById('ayah-' + ay.a); if (el) el.classList.add('playing'); }
+        }
+        return r;
+    };
+    const _apply = mushafApplyLang;
+    mushafApplyLang = function () { const r = _apply.apply(this, arguments); mpRecLabel(); return r; };
+})();
+mushafTapAyah = function (a) {
+    const data = mushafState.data;
+    if (!data) return;
+    const en = HQB_EN();
+    if (mpSelAyah === a) { mpCloseBar(); return; }
+    mpSelAyah = a;
+    document.querySelectorAll('#mushaf-read-body .mp-ayah.sel').forEach(x => x.classList.remove('sel'));
+    const el = document.getElementById('ayah-' + a);
+    if (el) el.classList.add('sel');
+    const i = data.ayahs.findIndex(x => x.a === a);
+    const ay = data.ayahs[i];
+    const marked = hqbLS('hqb_mushaf_marks', []).some(m => m.s === mushafState.surah && m.a === a);
+    const bar = document.getElementById('mp-bar');
+    bar.innerHTML = `
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-black text-palette-mauve">${en ? 'Ayah' : 'الآية'} ${toEasternArabicDigits(a)}</span>
+            <button onclick="mpCloseBar()" class="w-7 h-7 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+        </div>
+        ${mushafShowTr && ay && ay.e ? `<p class="ayah-tr" style="margin:0 0 8px;border:0;padding:0">${escapeHTML(ay.e)}</p>` : ''}
+        <div class="flex flex-wrap gap-1.5">
+            <button class="ayah-act" onclick="playClickSound(); mushafPlayFrom(${i})"><i class="fa-solid fa-play"></i>${en ? 'Play' : 'استماع'}</button>
+            <button class="ayah-act ${marked ? 'on' : ''}" id="mark-btn-${a}" onclick="playClickSound(); mushafToggleMark(${a})"><i class="fa-solid fa-bookmark"></i>${en ? 'Bookmark' : 'علامة'}</button>
+            <button class="ayah-act" onclick="playClickSound(); mushafShare(${a})"><i class="fa-solid fa-share-nodes"></i>${en ? 'Share' : 'مشاركة'}</button>
+            <button class="ayah-act" onclick="playClickSound(); hqbShareAyahImage(${a})"><i class="fa-regular fa-image"></i>${en ? 'Image' : 'صورة'}</button>
+            <button class="ayah-act" onclick="playClickSound(); mushafCopy(${a})"><i class="fa-regular fa-copy"></i>${en ? 'Copy' : 'نسخ'}</button>
+        </div>`;
+    bar.classList.add('open');
+    mushafSaveLast(mushafState.surah, a);
+};
+mushafPlaySurah = function () {
+    if (mushafState.playing) { mushafStopAudio(); return; }
+    const data = mushafState.data;
+    if (!data) return;
+    if (mpRec().type === 'surah') { mpPlaySurahFile(); return; }
+    let start = 0;
+    if (mpSelAyah) start = Math.max(0, data.ayahs.findIndex(x => x.a === mpSelAyah));
+    else if (mpPages[mpCur] && mpPages[mpCur].segs.length) start = mpPages[mpCur].segs[0].i;
+    mushafPlayFrom(start);
+};
+mushafFont = function (d) {
+    mushafFontSize = Math.max(16, Math.min(44, mushafFontSize + d));
+    hqbSaveLS('hqb_mushaf_font', mushafFontSize);
+    mushafRenderAyahs();
+};
+
+/* ---------- واجهة: زر القارئ، شريط التنقل، السحب لقلب الصفحة ---------- */
+(function mpInitUI() {
+    const sel = document.getElementById('mushaf-reciter');
+    if (sel) {
+        sel.classList.add('hidden');
+        sel.insertAdjacentHTML('afterend', `<button onclick="playClickSound(); mpOpenReciters()" class="h-8 px-2.5 rounded-xl bg-palette-mid text-palette-light text-[10px] font-bold border border-palette-purple flex items-center gap-1.5 max-w-[150px]"><i class="fa-solid fa-microphone-lines text-palette-mauve"></i><span id="mp-rec-name" class="truncate"></span><i class="fa-solid fa-chevron-down text-[8px] opacity-70"></i></button>`);
+    }
+    const body = mpBody();
+    if (body) {
+        body.insertAdjacentHTML('afterend', `
+            <div id="mp-nav" class="flex items-center justify-between gap-2 pt-2">
+                <button onclick="mpPrev()" class="h-8 px-3 rounded-xl bg-palette-mid text-palette-light text-[10px] font-bold"><i class="fa-solid fa-chevron-right ml-1"></i><span id="mp-prev-lbl">السابقة</span></button>
+                <span id="mp-ind" class="text-[10px] font-bold text-palette-muted"></span>
+                <button onclick="mpNext()" class="h-8 px-3 rounded-xl bg-palette-mauve text-palette-darkest text-[10px] font-black"><span id="mp-next-lbl">التالية</span><i class="fa-solid fa-chevron-left mr-1"></i></button>
+            </div>`);
+        let sx = 0, sy = 0, st = 0;
+        body.addEventListener('touchstart', e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; st = Date.now(); }, { passive: true });
+        body.addEventListener('touchend', e => {
+            if (!body.classList.contains('mp-mode')) return;
+            const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3 && Date.now() - st < 800) { dx > 0 ? mpNext() : mpPrev(); }
+        }, { passive: true });
+    }
+    const box = document.querySelector('#mushaf-modal > div');
+    if (box) {
+        box.insertAdjacentHTML('beforeend', `
+            <div id="mp-bar" class="mp-bar"></div>
+            <div id="mp-rec-sheet" class="mp-sheet" onclick="if (event.target === this) mpCloseReciters()">
+                <div class="mp-sheet-panel">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-sm font-black text-palette-light"><i class="fa-solid fa-microphone-lines text-palette-mauve ml-1.5"></i><span id="mp-rec-title">اختر القارئ</span></h4>
+                        <button onclick="playClickSound(); mpCloseReciters()" class="w-8 h-8 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+                    </div>
+                    <div id="mp-rec-list" class="space-y-1.5"></div>
+                </div>
+            </div>`);
+    }
+    mpRecLabel();
+    let rt = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(rt);
+        rt = setTimeout(() => { const b = mpBody(); if (b && b.classList.contains('mp-mode') && b.offsetParent) mushafRenderAyahs(); }, 250);
+    });
+    setTimeout(hqbLoadRemoteMushafReciters, 5000);
+})();
+(function () {
+    const _close = closeModal;
+    closeModal = function (id) { if (id === 'mushaf-modal') { mpCloseBar(); mpCloseReciters(); } return _close.apply(this, arguments); };
+})();
+</script>
+
 </body>
 </html>
