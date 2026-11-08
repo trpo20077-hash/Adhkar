@@ -586,9 +586,98 @@ html[lang="ckb"] input, html[lang="ckb"] select, html[lang="ckb"] button { font-
 html[lang="ckb"] .ku-t { overflow-wrap: anywhere; word-break: normal; line-height: 1.6; }
 html[lang="ckb"] .ku-t.truncate, html[lang="ckb"] .truncate > .ku-t { white-space: normal; overflow: visible; text-overflow: clip; }
 html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
+
+/* شبكة الخلفيات: مسافة ثابتة بين البطاقات ولا تداخل */
+.hqb-wp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; padding-bottom: 12px; }
+.hqb-wp-card { position: relative; display: block; width: 100%; height: 0; padding: 0 0 177.78% 0; overflow: hidden; margin: 0; }
+.hqb-wp-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.hqb-wp-title { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px; font-size: 10px; font-weight: 700; color: #fff; text-align: center; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
+
+/* صورة المشاركة/الخلفية: الصورة تصغر لتبقى أزرار الحفظ والإغلاق ظاهرة دائماً */
+.share-img-box { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; }
+.share-img-box > * { flex-shrink: 0; }
+#share-img-preview { flex-shrink: 1; min-height: 0; width: auto; max-width: 100%; max-height: calc(100vh - 170px); max-height: calc(100dvh - 170px); object-fit: contain; margin-left: auto; margin-right: auto; display: block; }
+/* شريط الأذان الصغير بعد إغلاق النافذة */
+.adhan-mini { position: fixed; left: 12px; right: 12px; top: calc(env(safe-area-inset-top, 0px) + 10px); z-index: 125; display: none; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 999px; background: #0F202B; border: 1px solid #D4A84F; box-shadow: 0 8px 24px rgba(0,0,0,.45); color: #F3EBDD; }
+.adhan-mini-ic { width: 30px; height: 30px; border-radius: 999px; background: #D4A84F; color: #0A151C; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.adhan-mini-txt { flex: 1; font-size: 12px; font-weight: 800; }
+.adhan-mini-btn { padding: 6px 14px; border-radius: 999px; background: #D4A84F; color: #0A151C; font-size: 11px; font-weight: 900; flex-shrink: 0; }
+
+/* ===== التخصيص السريع بعد الدخول ===== */
+.hqb-ob { position: fixed; inset: 0; z-index: 140; display: flex; flex-direction: column; background: #0A151C; color: #F3EBDD; animation: hqbObIn .35s ease; }
+.hqb-ob.out { opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s; }
+@keyframes hqbObIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.hqb-ob-top { display: flex; align-items: center; justify-content: space-between; padding: calc(env(safe-area-inset-top, 0px) + 14px) 18px 10px; }
+.hqb-ob-back { width: 36px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #F3EBDD; font-size: 15px; }
+.hqb-ob-title { font-size: 16px; font-weight: 800; }
+.hqb-ob-count { width: 36px; text-align: center; font-size: 12px; color: #A3B3BF; font-weight: 700; }
+.hqb-ob-bar { display: flex; gap: 6px; padding: 0 18px 6px; direction: rtl; }
+.hqb-ob-bar i { flex: 1; height: 4px; border-radius: 99px; background: #1A2B37; transition: background .3s; }
+.hqb-ob-bar i.on { background: #D4A84F; }
+.hqb-ob-body { flex: 1; overflow-y: auto; padding: 18px 18px 12px; -webkit-overflow-scrolling: touch; }
+.hqb-ob-step { max-width: 460px; margin: 0 auto; text-align: center; animation: hqbObIn .3s ease; }
+.hqb-ob-logo { width: 96px; height: 96px; border-radius: 26px; margin: 6px auto 14px; display: block; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.hqb-ob-ic { width: 76px; height: 76px; border-radius: 24px; margin: 4px auto 14px; display: flex; align-items: center; justify-content: center; background: #22333F; color: #D4A84F; font-size: 30px; }
+.hqb-ob-h { font-size: 21px; font-weight: 900; line-height: 1.5; margin-bottom: 6px; }
+.hqb-ob-p { font-size: 13px; color: #A3B3BF; line-height: 1.8; margin-bottom: 18px; }
+.hqb-ob-note { font-size: 11px; color: #A3B3BF; margin-top: 12px; }
+.hqb-ob-list { background: #0F202B; border: 1px solid #1A2B37; border-radius: 22px; overflow: hidden; text-align: right; margin-bottom: 12px; transition: opacity .2s; }
+.hqb-ob-list.dim { opacity: .45; }
+.hqb-ob-row { display: flex; align-items: center; gap: 12px; padding: 13px 14px; cursor: pointer; }
+.hqb-ob-row + .hqb-ob-row { border-top: 1px solid #1A2B37; }
+.hqb-ob-rowic { width: 40px; height: 40px; border-radius: 13px; background: #22333F; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.hqb-ob-rowtx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.hqb-ob-rowtx b { font-size: 14px; font-weight: 800; }
+.hqb-ob-rowtx small { font-size: 11px; color: #A3B3BF; line-height: 1.5; }
+.hqb-ob-check { width: 38px; height: 38px; border-radius: 999px; background: #22333F; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.hqb-ob-check.on { background: #D4A84F; color: #0A151C; }
+.hqb-ob-radio { width: 26px; height: 26px; border-radius: 999px; border: 2px solid #33475A; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.hqb-ob-radio.on { background: #D4A84F; border-color: #D4A84F; color: #0A151C; }
+.hqb-ob-themes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.hqb-ob-theme { border-radius: 22px; padding: 14px; border: 2px solid #1A2B37; background: #0F202B; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #F3EBDD; }
+.hqb-ob-theme.on { border-color: #D4A84F; }
+.hqb-ob-theme .pv { width: 100%; height: 120px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 34px; }
+.hqb-ob-theme.day .pv { background: linear-gradient(180deg, #8FBFE3, #DCEBF6); color: #F2B33D; }
+.hqb-ob-theme.night .pv { background: linear-gradient(180deg, #0A151C, #22333F); color: #F3EBDD; }
+.hqb-ob-theme b { font-size: 14px; font-weight: 800; }
+.hqb-ob-demo { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 22px; background: #0F202B; border: 1px solid #1A2B37; text-align: right; margin-bottom: 12px; box-shadow: 0 10px 0 -5px #0F202B, 0 10px 0 -4px #1A2B37; }
+.hqb-ob-now { font-size: 11px; color: #A3B3BF; flex-shrink: 0; }
+.hqb-ob-gps { width: 100%; padding: 14px; border-radius: 18px; background: #22333F; border: 1px solid #D4A84F; color: #D4A84F; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.hqb-ob-cur { font-size: 12px; color: #A3B3BF; margin: 12px 0; }
+.hqb-ob-cur b { color: #F3EBDD; }
+.hqb-ob-cities { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center; }
+.hqb-ob-cities button { padding: 11px 6px; border-radius: 14px; background: #0F202B; border: 1px solid #1A2B37; color: #F3EBDD; font-size: 12px; font-weight: 700; line-height: 1.4; }
+.hqb-ob-cities button.on { background: #D4A84F; border-color: #D4A84F; color: #0A151C; }
+.hqb-ob-val { font-size: 12px; color: #A3B3BF; font-weight: 700; flex-shrink: 0; max-width: 45%; text-align: left; }
+.hqb-ob-foot { display: flex; align-items: center; gap: 12px; padding: 12px 18px calc(env(safe-area-inset-bottom, 0px) + 16px); }
+.hqb-ob-next { flex: 1; padding: 16px; border-radius: 20px; background: #D4A84F; color: #0A151C; font-size: 16px; font-weight: 900; }
+.hqb-ob-skip { padding: 16px 18px; color: #D4A84F; font-size: 15px; font-weight: 800; }
+html.theme-day .hqb-ob { background: linear-gradient(180deg, #8FBFE3 0%, #CFE3F2 55%, #EAF2F8 100%); color: #0A151C; }
+html.theme-day .hqb-ob-back, html.theme-day .hqb-ob-theme { color: #0A151C; }
+html.theme-day .hqb-ob-count, html.theme-day .hqb-ob-p, html.theme-day .hqb-ob-note, html.theme-day .hqb-ob-rowtx small, html.theme-day .hqb-ob-now, html.theme-day .hqb-ob-cur, html.theme-day .hqb-ob-val { color: #3E5A70; }
+html.theme-day .hqb-ob-cur b { color: #0A151C; }
+html.theme-day .hqb-ob-bar i { background: rgba(255,255,255,.6); }
+html.theme-day .hqb-ob-bar i.on { background: #D4A84F; }
+html.theme-day .hqb-ob-list, html.theme-day .hqb-ob-demo, html.theme-day .hqb-ob-theme, html.theme-day .hqb-ob-cities button { background: rgba(255,255,255,.62); border-color: rgba(255,255,255,.9); color: #0A151C; }
+html.theme-day .hqb-ob-demo { box-shadow: none; }
+html.theme-day .hqb-ob-row + .hqb-ob-row { border-top-color: rgba(10,21,28,.08); }
+html.theme-day .hqb-ob-ic, html.theme-day .hqb-ob-rowic, html.theme-day .hqb-ob-check { background: #0F202B; color: #D4A84F; }
+html.theme-day .hqb-ob-check.on, html.theme-day .hqb-ob-cities button.on { background: #D4A84F; color: #0A151C; border-color: #D4A84F; }
+html.theme-day .hqb-ob-theme.on { border-color: #D4A84F; }
+html.theme-day .hqb-ob-radio { border-color: #8AA3B5; }
+html.theme-day .hqb-ob-gps { background: rgba(255,255,255,.62); color: #8A6417; }
+html.theme-day .hqb-ob-skip { color: #8A6417; }
+
+.hqb-ob-step.still { animation: none !important; }
+.hqb-ob .hqb-switch, .hqb-ob .hqb-switch::after, .hqb-ob-radio, .hqb-ob-check, .hqb-ob-theme, .hqb-ob-cities button { transition: background .2s, border-color .2s, color .2s, right .2s; }
+/* نافذة الصلاة: اسم الصلاة ووقتها فقط */
+#pi-sub, #pi-rakat-box, #pi-note, #pi-disclaimer, #pi-status, #pi-remaining, #pi-progress, #prayer-info-card .pi-bar { display: none !important; }
+#prayer-info-card #pi-note, #prayer-info-card #pi-nafila { display: none !important; }
+#prayer-info-card #pi-nafila { display: none !important; }
+#prayer-info-card .p-4 > div:nth-of-type(2), #prayer-info-card .p-4 > div:nth-of-type(4) { display: none !important; }
 </style>
 </head>
-<script>try{if(localStorage.getItem("hqb_theme")==="day")document.documentElement.classList.add("theme-day")}catch(e){}</script>
+<script>try{if(localStorage.getItem("hqb_theme")!=="night")document.documentElement.classList.add("theme-day")}catch(e){document.documentElement.classList.add("theme-day")}</script>
 <script>try{if(localStorage.getItem("hqb_lang")==="ku")document.documentElement.setAttribute("lang","ckb")}catch(e){}</script>
 <body class="dark min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 overflow-x-hidden text-xs sm:text-sm">
 
@@ -1555,6 +1644,7 @@ html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
         <p id="adhan-alert-status" class="text-[11px] font-bold text-palette-mauve min-h-[16px]"></p>
         <button onclick="hqbPlayAdhan()" id="adhan-alert-play" class="hidden w-full py-3 rounded-2xl bg-palette-light text-palette-darkest font-black text-xs items-center justify-center gap-2"><i class="fa-solid fa-play"></i><span id="adhan-alert-play-lbl">تشغيل الأذان</span></button>
         <button onclick="hqbStopAdhan()" id="adhan-alert-stop" class="w-full py-3 rounded-2xl bg-palette-mauve text-palette-darkest font-black text-xs">إيقاف الأذان</button>
+        <button onclick="hqbCloseAdhanAlert()" id="adhan-alert-close" class="w-full py-3 rounded-2xl bg-palette-mid border border-palette-purple text-palette-light font-bold text-xs"><i class="fa-solid fa-xmark ml-1"></i>إغلاق النافذة (يستمر الأذان)</button>
         <audio id="adhan-audio-element" preload="auto" src="https://mp3tourl.com/audio/1793982880209-6bbe7028-68ec-4de3-8116-42470f2db999.mp3"></audio>
     </div>
 </div>
@@ -5044,6 +5134,26 @@ function hqbStopAdhan() {
     hqbAdhanStatus('', false);
     const a = document.getElementById('adhan-alert');
     a.classList.add('hidden'); a.classList.remove('flex');
+    hqbAdhanMini(false);
+}
+/* إغلاق نافذة الأذان فقط والصوت يستمر، مع شريط صغير لإيقافه لاحقاً */
+function hqbCloseAdhanAlert() {
+    if (typeof playClickSound === 'function') playClickSound();
+    const a = document.getElementById('adhan-alert');
+    a.classList.add('hidden'); a.classList.remove('flex');
+    hqbAdhanMini(hqbAdhanPlaying);
+}
+function hqbAdhanMini(show) {
+    let b = document.getElementById('adhan-mini');
+    if (!b && show) {
+        document.body.insertAdjacentHTML('beforeend', `<div id="adhan-mini" class="adhan-mini">
+            <span class="adhan-mini-ic"><i class="fa-solid fa-mosque"></i></span>
+            <span class="adhan-mini-txt">الأذان يعمل الآن</span>
+            <button onclick="hqbStopAdhan()" class="adhan-mini-btn"><i class="fa-solid fa-stop ml-1"></i>إيقاف</button>
+        </div>`);
+        b = document.getElementById('adhan-mini');
+    }
+    if (b) b.style.display = show ? 'flex' : 'none';
 }
 
 function hqbFireAdhan(key, isTest) {
@@ -5057,6 +5167,7 @@ function hqbFireAdhan(key, isTest) {
     document.getElementById('adhan-alert-stop').innerText = en ? 'Stop adhan' : 'إيقاف الأذان';
     const a = document.getElementById('adhan-alert');
     a.classList.remove('hidden'); a.classList.add('flex');
+    hqbAdhanMini(false);
     hqbPlayAdhan();
     if (!isTest) hqbNotify(title, sub);
 }
@@ -5570,7 +5681,7 @@ setTimeout(hqbCacheAdhan, 1500);
 
 <!-- معاينة صورة المشاركة -->
 <div id="share-img-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[120]">
-    <div class="w-full max-w-sm bg-palette-dark border border-palette-purple rounded-[24px] p-4 space-y-3 text-center">
+    <div class="share-img-box w-full max-w-sm bg-palette-dark border border-palette-purple rounded-[24px] p-4 space-y-3 text-center">
         <img id="share-img-preview" alt="صورة المشاركة" class="w-full rounded-xl border border-palette-purple">
         <p class="text-[10px] text-palette-muted" id="lbl-share-hint">يمكنك أيضاً الضغط مطولاً على الصورة لحفظها</p>
         <div class="flex gap-2">
@@ -7284,12 +7395,13 @@ function hqbRenderWallpapers() {
         </div>`;
         return;
     }
-    box.className = 'flex-1 overflow-y-auto grid grid-cols-2 gap-2.5 content-start';
-    box.innerHTML = HQB_WALLPAPERS.map((w, i) => (hqbWpCat && w.category !== hqbWpCat) ? '' : `
-        <button onclick="hqbOpenWallpaper(${i})" class="relative rounded-2xl overflow-hidden border border-palette-purple bg-palette-mid" style="aspect-ratio:9/16">
-            <img src="${escapeHTML(w.url)}" alt="${escapeHTML(w.title || '')}" loading="lazy" class="w-full h-full object-cover">
-            ${w.title ? `<span class="absolute bottom-0 inset-x-0 p-1.5 text-[10px] font-bold text-white text-center" style="background:linear-gradient(transparent,rgba(0,0,0,.7))">${escapeHTML(w.title)}</span>` : ''}
-        </button>`).join('');
+    // الشبكة داخل حاوية التمرير، وكل بطاقة لها ارتفاع ثابت النسبة (9:16) حتى لا تتداخل مهما كثرت الخلفيات
+    box.className = 'flex-1 overflow-y-auto';
+    box.innerHTML = `<div class="hqb-wp-grid">` + HQB_WALLPAPERS.map((w, i) => (hqbWpCat && w.category !== hqbWpCat) ? '' : `
+        <button onclick="hqbOpenWallpaper(${i})" class="hqb-wp-card rounded-2xl border border-palette-purple bg-palette-mid">
+            <img src="${escapeHTML(w.url)}" alt="${escapeHTML(w.title || '')}" loading="lazy" decoding="async">
+            ${w.title ? `<span class="hqb-wp-title">${escapeHTML(w.title)}</span>` : ''}
+        </button>`).join('') + `</div>`;
 }
 function hqbOpenWallpaper(i) {
     playClickSound();
@@ -7522,7 +7634,7 @@ startMosqueSearchProcess = function () { mqOpen(); };
 requestLocationAndSearch = function () { mqOpen().then(() => mqSearchMe()); };
 
 /* ---------- وضع الليل والصباح ---------- */
-function hqbTheme() { return localStorage.getItem('hqb_theme') === 'day' ? 'day' : 'night'; }
+function hqbTheme() { try { return localStorage.getItem('hqb_theme') === 'night' ? 'night' : 'day'; } catch (e) { return 'day'; } }
 function hqbApplyTheme(t) {
     const day = t === 'day';
     document.documentElement.classList.toggle('theme-day', day);
@@ -7592,6 +7704,36 @@ document.body.insertAdjacentHTML('beforeend', `
    ============================================================================= */
 const HQB_KU = {"حرم": "حەرەم",
 "الكل": "هەموو",
+"الموقع الحالي:": "شوێنی ئێستا:",
+"إعداد التطبيق": "ڕێکخستنی بەرنامە",
+"تخطي": "تێپەڕاندن",
+"ابدأ استخدام التطبيق": "دەست بە بەکارهێنانی بەرنامە بکە",
+"السلام عليكم، شكراً لاستخدامك حرم": "سڵاو، سوپاس بۆ بەکارهێنانی حەرەم",
+"فعّل الصلاحيات اللازمة لمواقيت دقيقة وتنبيهات تصل في وقتها. يمكنك التحكم بها دائماً.": "مۆڵەتە پێویستەکان چالاک بکە بۆ کاتی ورد و ئاگادارکردنەوەی بەکات. هەمیشە دەتوانیت کۆنترۆڵیان بکەیت.",
+"لاستلام التذكيرات وتنبيهات الأذان": "بۆ وەرگرتنی بیرخستنەوە و ئاگاداری بانگ",
+"الموقع الجغرافي": "شوێنی جوگرافی",
+"لتحديد مدينتك وحساب المواقيت المحلية": "بۆ دیاریکردنی شارەکەت و ژماردنی کاتە ناوخۆییەکان",
+"يمكنك تعديل هذه الصلاحيات لاحقاً من إعدادات الجهاز.": "دەتوانیت دواتر ئەم مۆڵەتانە لە ڕێکخستنەکانی ئامێرەوە بگۆڕیت.",
+"اختر لغة التطبيق": "زمانی بەرنامە هەڵبژێرە",
+"سيتحدث التطبيق بلغتك فوراً ويحفظ اختيارك.": "بەرنامەکە یەکسەر بە زمانەکەت دەدوێت و هەڵبژاردنەکەت پاشەکەوت دەکات.",
+"لغة التطبيق العربية": "زمانی عەرەبی بۆ بەرنامە",
+"اختر مظهر التطبيق": "ڕووکاری بەرنامە هەڵبژێرە",
+"يمكنك تغييره في أي وقت من الإعدادات.": "هەر کاتێک دەتوانیت لە ڕێکخستنەکانەوە بیگۆڕیت.",
+"ابقَ على اطلاع": "ئاگادار بە",
+"اختر إن كنت ترغب باستلام دعاء اليوم مع بداية كل يوم.": "هەڵبژێرە ئەگەر دەتەوێت دوعای ئەمڕۆ لە سەرەتای هەموو ڕۆژێکدا وەربگریت.",
+"الآن": "ئێستا",
+"يُرفع الأذان تلقائياً عند دخول وقت كل صلاة حسب موقعك.": "بانگ بە شێوەی خۆکار لە کاتی هاتنی هەر نوێژێک بەپێی شوێنەکەت دەدرێت.",
+"حدّد موقعك": "شوێنەکەت دیاری بکە",
+"اختر محافظتك أو دع الـ GPS يحددها تلقائياً.": "پارێزگاکەت هەڵبژێرە یان با GPS بە شێوەی خۆکار دیاری بکات.",
+"كل شيء جاهز": "هەموو شتێک ئامادەیە",
+"اكتملت الإعدادات الأساسية. يمكنك تعديلها لاحقاً من الإعدادات.": "ڕێکخستنە سەرەکییەکان تەواو بوون. دەتوانیت دواتر لە ڕێکخستنەکانەوە بیانگۆڕیت.",
+"المظهر": "ڕووکار",
+"الأذان": "بانگ",
+"الموقع": "شوێن",
+"مفعّل": "چالاکە",
+"إغلاق النافذة (يستمر الأذان)": "داخستنی پەنجەرە (بانگ بەردەوام دەبێت)",
+"الأذان يعمل الآن": "ئێستا بانگ لێدەدرێت",
+"إيقاف": "وەستاندن",
 "يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap وCARTO (المدن وخريطة المساجد)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام. لكل خدمة سياسة خصوصية خاصة بها.": "بەرنامەکە پشت بەمانە دەبەستێت: Supabase (بەشی فاتیحە و دوعا و تیلاوەتەکان)، AlQuran Cloud و Islamic Network (دەقی قورئان و تیلاوەتەکان)، Aladhan (کاتەکانی نوێژ)، OpenStreetMap و CARTO (شارەکان و نەخشەی مزگەوتەکان)، Google Maps (کاتێک ڕێنمایی بۆ مزگەوتێک داوا دەکەیت)، فۆنتەکانی Google، و بەستەری هەژمارەکانی عەتەبە پیرۆزەکان لە ئینستاگرام. هەر خزمەتگوزارییەک سیاسەتی تایبەتمەندی خۆی هەیە.",
 "ليل": "شەو",
 "نهار": "ڕۆژ",
@@ -8036,6 +8178,8 @@ const HQB_KU_RULES = [
     [/^(.+) • تلاوة السورة كاملة$/, m => m[1] + ' • تیلاوەتی تەواوی سورەت'],
     [/^إهداء ثواب الفاتحة إلى: (?:المرحوم|المرحومة) (.+)$/, m => 'پێشکەشکردنی سەوابی فاتیحە بۆ: خوالێخۆشبوو ' + m[1]],
     [/^أتممت بحمد الله تحدي (.+) تسبيحة بنجاح تام، تقبل الله أعمالكم وأسعد قلوبكم\.$/, m => 'بە سوپاسی خودا ئاڵنگاری ' + m[1] + ' تەسبیحت بە تەواوی ئەنجامدا، خودا کردەوەکانتان قبووڵ بکات و دڵتان شاد بکات.'],
+    [/^الموقع الحالي: (.+)$/, m => 'شوێنی ئێستا: ' + hqbKuParts(m[1])],
+    [/^(.+) من (.+) مفعّلة$/, m => m[1] + ' لە ' + m[2] + ' چالاکە'],
     [/^دعاء يوم (.+)$/, m => 'دوعای ڕۆژی ' + (HQB_KU_MONTHS[m[1]] || m[1])],
 ];
 
@@ -8166,6 +8310,181 @@ function hqbSetLang(l) {
     </div>`);
     hqbApplyLang(hqbLang());
 })();
+
+</script>
+<script>
+/* =============================================================================
+   التخصيص السريع بعد تسجيل الدخول لأول مرة (يظهر مرة واحدة فقط)
+   ============================================================================= */
+const HQB_OB_STEPS = 7;
+let hqbObStep = 0;
+function hqbObDone() { return localStorage.getItem('hqb_onboard_done') === '1'; }
+function hqbObPerm() { return ('Notification' in window) ? Notification.permission : 'unsupported'; }
+function hqbObLocSet() { try { return !!localStorage.getItem('adhkar_location'); } catch (e) { return false; } }
+
+function hqbObOpen() {
+    if (document.getElementById('hqb-ob')) return;
+    hqbObStep = 0; hqbObLast = -1;
+    document.body.insertAdjacentHTML('beforeend', `<div id="hqb-ob" class="hqb-ob" role="dialog" aria-modal="true">
+        <div class="hqb-ob-top">
+            <button id="hqb-ob-back" class="hqb-ob-back" onclick="hqbObGo(-1)" aria-label="رجوع"><i class="fa-solid fa-chevron-right"></i></button>
+            <span class="hqb-ob-title">إعداد التطبيق</span>
+            <span id="hqb-ob-count" class="hqb-ob-count"></span>
+        </div>
+        <div id="hqb-ob-bar" class="hqb-ob-bar">${'<i></i>'.repeat(HQB_OB_STEPS)}</div>
+        <div id="hqb-ob-body" class="hqb-ob-body"></div>
+        <div class="hqb-ob-foot">
+            <button id="hqb-ob-next" class="hqb-ob-next" onclick="hqbObGo(1)">التالي</button>
+            <button id="hqb-ob-skip" class="hqb-ob-skip" onclick="hqbObGo(1)">تخطي</button>
+        </div>
+    </div>`);
+    document.body.classList.add('hqb-modal-open');
+    hqbObRender();
+}
+function hqbObGo(d) {
+    playClickSound();
+    if (d > 0 && hqbObStep === HQB_OB_STEPS - 1) { hqbObFinish(); return; }
+    hqbObStep = Math.max(0, Math.min(HQB_OB_STEPS - 1, hqbObStep + d));
+    hqbObRender();
+}
+function hqbObFinish() {
+    try { localStorage.setItem('hqb_onboard_done', '1'); } catch (e) {}
+    const o = document.getElementById('hqb-ob');
+    if (o) { o.classList.add('out'); setTimeout(() => o.remove(), 350); }
+    document.body.classList.remove('hqb-modal-open');
+    try { hqbScheduleNextAdhan(); } catch (e) {}
+}
+
+function hqbObHead(icon, title, sub) {
+    return `<div class="hqb-ob-ic"><i class="fa-solid ${icon}"></i></div>
+        <h2 class="hqb-ob-h">${title}</h2>
+        <p class="hqb-ob-p">${sub}</p>`;
+}
+function hqbObRow(icon, title, sub, right, onclick) {
+    return `<div class="hqb-ob-row" ${onclick ? `onclick="${onclick}"` : ''}>
+        <span class="hqb-ob-rowic"><i class="fa-solid ${icon}"></i></span>
+        <span class="hqb-ob-rowtx"><b>${title}</b>${sub ? `<small>${sub}</small>` : ''}</span>
+        ${right}
+    </div>`;
+}
+function hqbObCheck(on) { return `<span class="hqb-ob-check ${on ? 'on' : ''}"><i class="fa-solid ${on ? 'fa-check' : 'fa-arrow-left'}"></i></span>`; }
+function hqbObRadio(on) { return `<span class="hqb-ob-radio ${on ? 'on' : ''}">${on ? '<i class="fa-solid fa-check"></i>' : ''}</span>`; }
+function hqbObSw(on, fn) { return `<button class="hqb-switch ${on ? 'on' : ''}" onclick="event.stopPropagation(); ${fn}"></button>`; }
+
+function hqbObRender() {
+    const body = document.getElementById('hqb-ob-body');
+    if (!body) return;
+    const s = hqbObStep;
+    document.getElementById('hqb-ob-count').innerText = hqbNum(s + 1) + '/' + hqbNum(HQB_OB_STEPS);
+    document.querySelectorAll('#hqb-ob-bar i').forEach((b, i) => b.classList.toggle('on', i <= s));
+    document.getElementById('hqb-ob-back').style.visibility = s === 0 ? 'hidden' : 'visible';
+    document.getElementById('hqb-ob-skip').style.display = s === HQB_OB_STEPS - 1 ? 'none' : '';
+    document.getElementById('hqb-ob-next').innerText = s === HQB_OB_STEPS - 1 ? 'ابدأ استخدام التطبيق' : 'التالي';
+    let h = '';
+    if (s === 0) {
+        const perm = hqbObPerm();
+        h = `<img src="${APP_LOGO_DATA}" alt="" class="hqb-ob-logo">
+            <h2 class="hqb-ob-h">السلام عليكم، شكراً لاستخدامك حرم</h2>
+            <p class="hqb-ob-p">فعّل الصلاحيات اللازمة لمواقيت دقيقة وتنبيهات تصل في وقتها. يمكنك التحكم بها دائماً.</p>
+            <div class="hqb-ob-list">
+                ${hqbObRow('fa-bell', 'الإشعارات', 'لاستلام التذكيرات وتنبيهات الأذان', hqbObCheck(perm === 'granted'), perm === 'default' ? 'hqbObAskNotify()' : '')}
+                ${hqbObRow('fa-location-dot', 'الموقع الجغرافي', 'لتحديد مدينتك وحساب المواقيت المحلية', hqbObCheck(hqbObLocSet()), 'hqbObGps()')}
+            </div>
+            <p class="hqb-ob-note">يمكنك تعديل هذه الصلاحيات لاحقاً من إعدادات الجهاز.</p>`;
+    } else if (s === 1) {
+        const ku = hqbLang() === 'ku';
+        h = hqbObHead('fa-globe', 'اختر لغة التطبيق', 'سيتحدث التطبيق بلغتك فوراً ويحفظ اختيارك.') + `<div class="hqb-ob-list sep">
+            ${hqbObRow('fa-language', 'العربية', 'لغة التطبيق العربية', hqbObRadio(!ku), "hqbObLang('ar')")}
+            <div class="hqb-ob-row lang-switch" onclick="hqbObLang('ku')"><span class="hqb-ob-rowic"><i class="fa-solid fa-language"></i></span><span class="hqb-ob-rowtx" lang="ckb" style="font-family:'Noto Sans Arabic','Tajawal',sans-serif"><b>کوردی</b><small>بەرنامەکە بە کوردی بەکاربهێنە</small></span>${hqbObRadio(ku)}</div>
+        </div>`;
+    } else if (s === 2) {
+        const day = hqbTheme() === 'day';
+        h = hqbObHead('fa-circle-half-stroke', 'اختر مظهر التطبيق', 'يمكنك تغييره في أي وقت من الإعدادات.') + `<div class="hqb-ob-themes">
+            <button class="hqb-ob-theme day ${day ? 'on' : ''}" onclick="hqbObTheme('day')"><span class="pv"><i class="fa-solid fa-sun"></i></span><b>نهار</b>${hqbObRadio(day)}</button>
+            <button class="hqb-ob-theme night ${!day ? 'on' : ''}" onclick="hqbObTheme('night')"><span class="pv"><i class="fa-solid fa-moon"></i></span><b>ليل</b>${hqbObRadio(!day)}</button>
+        </div>`;
+    } else if (s === 3) {
+        const on = hqbDailyDuaOn();
+        h = hqbObHead('fa-bell', 'ابقَ على اطلاع', 'اختر إن كنت ترغب باستلام دعاء اليوم مع بداية كل يوم.') + `
+            <div class="hqb-ob-demo"><span class="hqb-ob-rowic"><i class="fa-solid fa-hands-praying"></i></span><span class="hqb-ob-rowtx"><b>${escapeHTML((weeklySupplications[new Date().getDay()] || {}).dayName || 'دعاء اليوم')}</b><small>يصلك دعاء اليوم مع بداية كل يوم</small></span><span class="hqb-ob-now">الآن</span></div>
+            <div class="hqb-ob-list">${hqbObRow('fa-hands-praying', 'إشعار دعاء اليوم', 'أدعية أيام الأسبوع من الصحيفة السجادية', hqbObSw(on, 'hqbObDailyDua()'), 'hqbObDailyDua()')}</div>`;
+    } else if (s === 4) {
+        const c = hqbAdhanCfg();
+        const t = typeof hqbTodayTimings !== 'undefined' ? hqbTodayTimings : null;
+        h = hqbObHead('fa-mosque', 'الأذان والتنبيهات', 'يُرفع الأذان تلقائياً عند دخول وقت كل صلاة حسب موقعك.') + `
+            <div class="hqb-ob-list">${hqbObRow('fa-volume-high', 'تفعيل الأذان', 'أذان تلقائي عند دخول وقت كل صلاة', hqbObSw(c.on, "hqbObAdhan('on')"), "hqbObAdhan('on')")}</div>
+            <div class="hqb-ob-list sep ${c.on ? '' : 'dim'}">${ADHAN_PRAYERS.map(p => hqbObRow('fa-clock', p.ar, t && t[p.k] ? format12Hour(t[p.k]) : '', hqbObSw(c.prayers[p.k], `hqbObAdhan('${p.k}')`), `hqbObAdhan('${p.k}')`)).join('')}</div>`;
+    } else if (s === 5) {
+        const iraq = (arabCountriesData['العراق'] || { cities: {} }).cities;
+        h = hqbObHead('fa-location-dot', 'حدّد موقعك', 'اختر محافظتك أو دع الـ GPS يحددها تلقائياً.') + `
+            <button class="hqb-ob-gps" onclick="hqbObGps()"><i class="fa-solid fa-location-crosshairs"></i>تحديد موقعي تلقائياً (GPS)</button>
+            <p class="hqb-ob-cur">الموقع الحالي: <b>${escapeHTML(activeCity)}</b></p>
+            <div class="hqb-ob-cities">${Object.keys(iraq).map((c, i) => `<button class="${activeCountry === 'العراق' && activeCity === c ? 'on' : ''}" onclick="hqbObCity(${i})">${escapeHTML(c)}</button>`).join('')}</div>`;
+    } else {
+        const c = hqbAdhanCfg();
+        const n = ADHAN_PRAYERS.filter(p => c.prayers[p.k]).length;
+        const ku = hqbLang() === 'ku';
+        h = hqbObHead('fa-circle-check', 'كل شيء جاهز', 'اكتملت الإعدادات الأساسية. يمكنك تعديلها لاحقاً من الإعدادات.') + `<div class="hqb-ob-list sep">
+            ${hqbObRow('fa-globe', 'اللغة', '', `<span class="hqb-ob-val">${ku ? 'کوردی' : 'العربية'}</span>`, 'hqbObJump(1)')}
+            ${hqbObRow('fa-circle-half-stroke', 'المظهر', '', `<span class="hqb-ob-val">${hqbTheme() === 'day' ? 'نهار' : 'ليل'}</span>`, 'hqbObJump(2)')}
+            ${hqbObRow('fa-bell', 'إشعار دعاء اليوم', '', `<span class="hqb-ob-val">${hqbDailyDuaOn() ? 'مفعّل' : 'متوقف'}</span>`, 'hqbObJump(3)')}
+            ${hqbObRow('fa-mosque', 'الأذان', '', `<span class="hqb-ob-val">${c.on ? hqbNum(n) + ' من ' + hqbNum(ADHAN_PRAYERS.length) + ' مفعّلة' : 'متوقف'}</span>`, 'hqbObJump(4)')}
+            ${hqbObRow('fa-location-dot', 'الموقع', '', `<span class="hqb-ob-val">${escapeHTML(activeCity)}</span>`, 'hqbObJump(5)')}
+        </div>`;
+    }
+    // نفس الخطوة: نحدّث المحتوى في مكانه بدون حركة دخول ولا رجوع لأعلى الصفحة
+    const same = hqbObLast === s;
+    const keep = body.scrollTop;
+    body.innerHTML = `<div class="hqb-ob-step${same ? ' still' : ''}">${h}</div>`;
+    body.scrollTop = same ? keep : 0;
+    hqbObLast = s;
+}
+let hqbObLast = -1;
+function hqbObJump(i) { playClickSound(); hqbObStep = i; hqbObRender(); }
+
+async function hqbObAskNotify() {
+    playClickSound();
+    if (!('Notification' in window)) { showToast('الإشعارات غير مدعومة على هذا الجهاز'); return; }
+    try { await Notification.requestPermission(); } catch (e) {}
+    hqbObRender();
+}
+function hqbObLang(l) { hqbSetLang(l); hqbObRender(); }
+function hqbObTheme(t) { hqbSetTheme(t); hqbObRender(); }
+async function hqbObDailyDua() { await hqbToggleDailyDua(); hqbObRender(); }
+function hqbObAdhan(k) {
+    playClickSound();
+    const c = hqbAdhanCfg();
+    if (k === 'on') c.on = !c.on; else c.prayers[k] = !c.prayers[k];
+    hqbSaveAdhanCfg(c);
+    if (c.on && hqbObPerm() === 'default') { try { Notification.requestPermission().then(() => {}); } catch (e) {} }
+    hqbObRender();
+}
+function hqbObCity(i) {
+    playClickSound();
+    const city = Object.keys(arabCountriesData['العراق'].cities)[i];
+    if (!city) return;
+    tempCountry = 'العراق'; tempCity = city;
+    activeCountry = 'العراق'; activeCity = city;
+    try { localStorage.setItem('adhkar_location', JSON.stringify({ country: activeCountry, city: activeCity })); } catch (e) {}
+    try { localStorage.removeItem('hqb_today_timings'); } catch (e) {}
+    try { fetchPrecisePrayerTimes(); } catch (e) {}
+    try { hqbRefreshTodayTimings(true).then(() => { if (hqbObStep === 4) hqbObRender(); }); } catch (e) {}
+    hqbObRender();
+}
+function hqbObGps() {
+    playClickSound();
+    const _set = hqbSetCustomLocation;
+    hqbSetCustomLocation = function (loc) { _set(loc); hqbSetCustomLocation = _set; if (document.getElementById('hqb-ob')) hqbObRender(); };
+    hqbUseGps();
+}
+
+/* يظهر بعد تسجيل الدخول لأول مرة فقط */
+const _hqbObLogin = loginAsGuest;
+loginAsGuest = function () {
+    const r = _hqbObLogin.apply(this, arguments);
+    if (!hqbObDone()) setTimeout(hqbObOpen, 650);
+    return r;
+};
 
 </script>
 </body>
