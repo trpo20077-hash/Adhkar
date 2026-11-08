@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0F202B" id="meta-theme-color">
 <title>حرم - أذكار واستغفار والقرآن الكريم</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Amiri+Quran&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Amiri+Quran&family=Tajawal:wght@300;400;500;700;900&family=Noto+Sans+Arabic:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -452,8 +452,144 @@ body.hqb-modal-open .app-stars { visibility: hidden; }
 .kh-ring { --p: 0; width: 58px; height: 58px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
     background: conic-gradient(#0A151C calc(var(--p) * 1%), rgba(0,0,0,.14) 0); }
 .kh-ring span { width: 46px; height: 46px; border-radius: 50%; background: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #0A151C; }
+
+
+/* =============================================================================
+   وضع النهار: نفس روح الليل (طبقات شفافة فوق سماء) لكن بسماء صباحية وغيوم بدل النجوم
+   ============================================================================= */
+html.theme-day.dark { background: linear-gradient(180deg, #8FBFE3 0%, #B9D8EE 30%, #E3ECEF 62%, #F4E7CF 100%) fixed, #E3ECEF !important; color: #15314A; }
+html.theme-day body.dark { color: #15314A; }
+html.theme-day .app-stars { display: none !important; }
+
+/* الغيوم بدل النجوم: منتشرة في الشاشة، تظهر وتخفت وتطفو مثل نجوم الليل */
+.day-sky { display: none; }
+html.theme-day .day-sky { display: block; position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; contain: strict; }
+.day-sky .cl { position: absolute; height: calc(var(--w) * .34); width: var(--w); border-radius: 999px; background: rgba(255,255,255,.9);
+    box-shadow: 0 4px 14px rgba(255,255,255,.35); will-change: transform, opacity;
+    animation: cloud-twinkle var(--t1) ease-in-out infinite var(--d), cloud-drift var(--t2) ease-in-out infinite var(--d); }
+.day-sky .cl::before, .day-sky .cl::after { content: ''; position: absolute; background: inherit; border-radius: 50%; }
+.day-sky .cl::before { width: 48%; height: 170%; left: 16%; bottom: 18%; }
+.day-sky .cl::after { width: 34%; height: 130%; right: 16%; bottom: 22%; }
+@keyframes cloud-twinkle { 0%, 100% { opacity: .35; } 50% { opacity: .95; } }
+@keyframes cloud-drift { 0%, 100% { transform: translate(-18px, 0); } 50% { transform: translate(22px, -14px); } }
+html.theme-day body.hqb-modal-open .day-sky .cl { animation-play-state: paused; }
+
+/* الطبقات الشفافة: نفس فكرة الليل لكن زجاج أبيض */
+html.theme-day .bg-palette-dark { background-color: rgba(255,255,255,.58) !important; }
+html.theme-day .bg-palette-mid { background-color: rgba(255,255,255,.5) !important; }
+html.theme-day .bg-palette-mid\/70 { background-color: rgba(255,255,255,.42) !important; }
+html.theme-day .bg-palette-purple { background-color: rgba(255,255,255,.4) !important; }
+html.theme-day .bg-palette-darkest { background-color: rgba(255,255,255,.78) !important; }
+html.theme-day .bg-palette-darkest\/40, html.theme-day .bg-palette-darkest\/50, html.theme-day .bg-palette-darkest\/60 { background-color: rgba(255,255,255,.55) !important; }
+html.theme-day .bg-palette-muted { background-color: rgba(21,49,74,.25) !important; }
+html.theme-day .border-palette-purple { border-color: rgba(255,255,255,.75) !important; }
+html.theme-day .border-palette-muted, html.theme-day .border-palette-muted\/40, html.theme-day .border-palette-muted\/50, html.theme-day .border-palette-muted\/60 { border-color: rgba(21,49,74,.25) !important; }
+html.theme-day .text-palette-light { color: #15314A !important; }
+html.theme-day .text-palette-light\/70 { color: rgba(21,49,74,.7) !important; }
+html.theme-day .text-palette-light\/80 { color: rgba(21,49,74,.8) !important; }
+html.theme-day .text-palette-light\/90 { color: rgba(21,49,74,.9) !important; }
+html.theme-day .text-palette-muted { color: #4A6680 !important; }
+html.theme-day .text-palette-mauve { color: #946512 !important; }
+html.theme-day .text-palette-purple { color: #15314A !important; }
+html.theme-day .bg-palette-mauve .text-palette-mauve, html.theme-day .bg-palette-light .text-palette-mauve { color: #0A151C !important; }
+/* النوافذ: طبقة سماوية شفافة خلفها، والنافذة زجاج فاتح أكثر ثباتاً */
+html.theme-day .bg-black\/85, html.theme-day .bg-black\/90 { background-color: rgba(21,49,74,.35) !important; }
+html.theme-day div.fixed.inset-0[id$="-modal"] > div.bg-palette-dark,
+html.theme-day #hqb-confirm .hqb-confirm-card { background-color: rgba(240,247,252,.94) !important; }
+html.theme-day .dark .glass-panel, html.theme-day .glass-panel { background: rgba(255,255,255,.58) !important; color: #15314A !important; border-color: rgba(255,255,255,.75) !important; box-shadow: 0 6px 18px rgba(21,49,74,.12) !important; }
+html.theme-day input, html.theme-day textarea, html.theme-day select { color: #15314A; }
+html.theme-day input::placeholder, html.theme-day textarea::placeholder { color: rgba(21,49,74,.45); }
+html.theme-day .shadow-lg, html.theme-day .shadow-xl, html.theme-day .shadow-2xl, html.theme-day .shadow-md { box-shadow: 0 8px 22px rgba(21,49,74,.14) !important; }
+
+/* المكوّنات ذات الألوان الثابتة */
+html.theme-day .ayah-card, html.theme-day .surah-row, html.theme-day .hqb-card, html.theme-day .imsak-table td { background: rgba(255,255,255,.55); border-color: rgba(255,255,255,.8); color: #15314A; }
+html.theme-day .surah-idx, html.theme-day .hqb-switch, html.theme-day .hqb-input, html.theme-day .hqb-btn.ghost, html.theme-day .trk-btn, html.theme-day .imsak-table th, html.theme-day .ayah-act, html.theme-day .pi-dot, html.theme-day .pi-bar { background: rgba(255,255,255,.8); border-color: rgba(255,255,255,.9); color: #15314A; }
+html.theme-day .ayah-act.on, html.theme-day .trk-btn.done, html.theme-day .imsak-table tr.today td, html.theme-day .pi-dot.done { background: #D4A84F; color: #0A151C; }
+html.theme-day .evt-bar { background: rgba(255,255,255,.58); border-color: rgba(255,255,255,.8); box-shadow: 0 6px 16px rgba(21,49,74,.12); }
+html.theme-day .evt-ring img { border-color: #F4F8FB; }
+html.theme-day .evt-name { color: #15314A; }
+html.theme-day .evt-item.seen .evt-ring::before { background: rgba(21,49,74,.25); }
+html.theme-day .evt-label { border-right-color: rgba(21,49,74,.15); }
+html.theme-day .evt-label i, html.theme-day .evt-label span { color: #946512; }
+html.theme-day .mp-bar, html.theme-day .mp-sheet-panel, html.theme-day .hqb-dl-prompt { background: rgba(240,247,252,.96); color: #15314A; border-color: rgba(212,168,79,.5); }
+html.theme-day .mp-rec-row { background: rgba(255,255,255,.6); border-color: rgba(255,255,255,.9); }
+html.theme-day .mp-rec-row.on { background: rgba(212,168,79,.22); border-color: #D4A84F; }
+html.theme-day .mp-rec-tx b { color: #15314A; }
+html.theme-day .mp-rec-av { background: #FFFFFF; color: #946512; }
+html.theme-day .mp-rec-grp { color: #946512; }
+html.theme-day .mq-item { background: rgba(255,255,255,.6); }
+html.theme-day .mq-item.sel { background: rgba(212,168,79,.25); }
+html.theme-day .mq-tx b { color: #15314A; }
+html.theme-day .mq-tx small { color: #4A6680; }
+html.theme-day .mq-go { background: #FFFFFF; color: #946512; }
+html.theme-day .mq-area { background: rgba(255,255,255,.95); color: #15314A; }
+html.theme-day .mq-map { background: #E9EEF0; }
+html.theme-day .theme-switch { background: rgba(255,255,255,.7); border-color: rgba(255,255,255,.9); }
+html.theme-day .theme-switch button { color: #4A6680; }
+html.theme-day .theme-switch button.on { color: #0A151C; }
+
+/* خريطة المساجد */
+.mq-wrap { position: relative; flex: 1 1 auto; min-height: 220px; margin: 0 12px; border-radius: 18px; overflow: hidden; border: 1px solid rgba(212,168,79,.35); }
+.mq-map { position: absolute; inset: 0; background: #0A151C; }
+.mq-list { flex: 0 0 auto; max-height: 38%; overflow-y: auto; padding: 10px 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.mq-cta { width: 100%; padding: 11px; border-radius: 14px; background: #D4A84F; color: #0A151C; font-weight: 900; font-size: 12px; }
+.mq-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: #22333F; border: 1.5px solid transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.mq-item:active { transform: scale(.98); }
+.mq-item.sel { border-color: #D4A84F; background: rgba(212,168,79,.16); }
+.mq-num { width: 26px; height: 26px; border-radius: 9px; background: #D4A84F; color: #0A151C; font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mq-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.mq-tx b { font-size: 12px; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mq-tx small { font-size: 11px; color: #A3B3BF; font-weight: 700; }
+.mq-go { width: 34px; height: 34px; border-radius: 11px; background: #0F202B; color: #D4A84F; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mq-me { position: absolute; right: 10px; bottom: 10px; z-index: 500; width: 42px; height: 42px; border-radius: 14px; background: #D4A84F; color: #0A151C; font-size: 17px; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
+.mq-area { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 500; padding: 8px 14px; border-radius: 999px; background: #0F202B; color: #F3EBDD; font-size: 11px; font-weight: 800; border: 1px solid #D4A84F; box-shadow: 0 4px 14px rgba(0,0,0,.35); white-space: nowrap; }
+.mq-pin span { width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #D4A84F; border: 2px solid #0A151C; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 8px rgba(0,0,0,.4); }
+.mq-pin i { transform: rotate(45deg); color: #0A151C; font-size: 12px; }
+.mq-me-pin span { display: block; width: 18px; height: 18px; border-radius: 50%; background: #3B82F6; border: 3px solid #fff; box-shadow: 0 0 0 0 rgba(59,130,246,.6); animation: mqPulse 2s infinite; }
+@keyframes mqPulse { 0% { box-shadow: 0 0 0 0 rgba(59,130,246,.55); } 100% { box-shadow: 0 0 0 16px rgba(59,130,246,0); } }
+.mq-pop { display: flex; flex-direction: column; gap: 3px; font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; min-width: 150px; }
+.mq-pop b { font-size: 13px; color: #0A151C; }
+.mq-pop span { font-size: 11px; color: #555; }
+.mq-pop a { margin-top: 4px; text-align: center; padding: 6px; border-radius: 10px; background: #D4A84F; color: #0A151C !important; font-weight: 800; font-size: 12px; text-decoration: none; }
+.leaflet-container { font-family: 'Tajawal', sans-serif; }
+/* زر الليل والصباح */
+.theme-switch { display: flex; gap: 3px; padding: 3px; border-radius: 999px; background: #0F202B; border: 1px solid #1A2B37; }
+.theme-switch button { padding: 5px 11px; border-radius: 999px; font-size: 11px; font-weight: 800; color: #A3B3BF; display: flex; align-items: center; gap: 5px; transition: background .2s, color .2s; }
+.theme-switch button.on { background: #D4A84F; color: #0A151C; }
+
+/* دعاء ختم القرآن */
+.khatm-text { font-family: 'Amiri', serif; font-size: 18px; line-height: 2.1; white-space: pre-line; color: inherit; }
+.khatm-pop { animation: khatmPop .7s cubic-bezier(.2,1.6,.4,1) both; }
+@keyframes khatmPop { from { transform: scale(.3); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* شاشة البداية والدخول: تبقى بألوانها الأصلية في وضع النهار */
+html.theme-day #splash-screen { color: #F3EBDD; }
+html.theme-day #splash-screen .text-palette-light { color: #F3EBDD !important; }
+html.theme-day #splash-screen .text-palette-light\/70 { color: rgba(243,235,221,.7) !important; }
+html.theme-day #splash-screen .text-palette-light\/80 { color: rgba(243,235,221,.8) !important; }
+html.theme-day #splash-screen .text-palette-light\/90 { color: rgba(243,235,221,.9) !important; }
+#splash-screen .text-palette-muted, html.theme-day #splash-screen .text-palette-muted { color: #8497A5 !important; }
+html.theme-day #splash-screen .text-palette-mauve { color: #D4A84F !important; }
+html.theme-day #splash-screen .bg-palette-dark { background-color: #0F202B !important; }
+html.theme-day #splash-screen .bg-palette-mid { background-color: #22333F !important; }
+html.theme-day #splash-screen .bg-palette-purple { background-color: #1A2B37 !important; }
+html.theme-day #splash-screen .bg-palette-darkest { background-color: #0A151C !important; }
+html.theme-day #splash-screen .border-palette-purple { border-color: #1A2B37 !important; }
+html.theme-day #splash-screen input { color: #F3EBDD; }
+html.theme-day #splash-screen input::placeholder { color: rgba(243,235,221,.45); }
+html.theme-day #splash-screen .shadow-lg, html.theme-day #splash-screen .shadow-xl, html.theme-day #splash-screen .shadow-2xl, html.theme-day #splash-screen .shadow-md { box-shadow: 0 10px 25px rgba(0,0,0,.35) !important; }
+
+/* ===== الكوردية: خط يدعم كل الحروف (ڕ ڵ ێ ۆ ە ڤ پ چ گ ژ) ===== */
+html[lang="ckb"] body { font-family: 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Tajawal', sans-serif; }
+html[lang="ckb"] input, html[lang="ckb"] select, html[lang="ckb"] button { font-family: inherit; }
+.ku-t, [lang="ckb"] .lang-switch button[lang="ckb"], #lang-btn-ku { font-family: 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Tajawal', sans-serif !important; letter-spacing: 0 !important; }
+html[lang="ckb"] .ku-t { overflow-wrap: anywhere; word-break: normal; line-height: 1.6; }
+html[lang="ckb"] .ku-t.truncate, html[lang="ckb"] .truncate > .ku-t { white-space: normal; overflow: visible; text-overflow: clip; }
+html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 </style>
 </head>
+<script>try{if(localStorage.getItem("hqb_theme")==="day")document.documentElement.classList.add("theme-day")}catch(e){}</script>
+<script>try{if(localStorage.getItem("hqb_lang")==="ku")document.documentElement.setAttribute("lang","ckb")}catch(e){}</script>
 <body class="dark min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 overflow-x-hidden text-xs sm:text-sm">
 
 <!-- نجوم عائمة على كل التطبيق -->
@@ -767,7 +903,7 @@ body.hqb-modal-open .app-stars { visibility: hidden; }
                     <i class="fa-solid fa-mosque"></i>
                 </div>
                 <div>
-                    <span class="font-bold text-xs text-palette-light block" id="lbl-mosque-radar">رادار المساجد القريبة</span>
+                    <span class="font-bold text-xs text-palette-light block" id="lbl-mosque-radar">خريطة المساجد القريبة</span>
                     <span class="text-[9px] text-palette-muted" id="lbl-mosque-desc">أقرب المساجد ضمن 1 كم</span>
                 </div>
             </div>
@@ -1289,20 +1425,20 @@ body.hqb-modal-open .app-stars { visibility: hidden; }
             </button>
         </div>
 
-        <a href="https://www.instagram.com/t85ki" target="_blank" rel="noopener" onclick="playClickSound()" class="p-4 rounded-2xl bg-palette-light text-palette-darkest flex items-center gap-3.5 shadow-md active:scale-[.98] transition-all" style="text-decoration:none">
-            <div class="w-14 h-14 rounded-full bg-palette-darkest text-palette-light flex items-center justify-center text-2xl font-black shrink-0"><i class="fa-solid fa-user-secret"></i></div>
+        <a href="https://www.instagram.com/t85ki" target="_blank" rel="noopener" onclick="playClickSound()" class="p-3 rounded-2xl bg-palette-light text-palette-darkest flex items-center gap-3 shadow-md active:scale-[.98] transition-all" style="text-decoration:none">
+            <div class="w-11 h-11 rounded-full bg-palette-darkest text-palette-light flex items-center justify-center text-lg font-black shrink-0"><i class="fa-solid fa-user-secret"></i></div>
             <div class="text-right min-w-0">
                 <span id="founders-founder-label" class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-palette-darkest text-palette-light mb-1">المؤسسة</span>
-                <h4 id="founders-founder-name" class="text-lg font-black truncate text-right">مجهول</h4>
+                <h4 id="founders-founder-name" class="text-sm font-black truncate text-right">مجهول</h4>
             </div>
             <i class="fa-brands fa-instagram text-xl mr-auto"></i>
         </a>
 
-        <div class="p-4 rounded-2xl bg-palette-mauve text-palette-darkest flex items-center gap-3.5 shadow-md">
-            <div id="founders-support-initial" class="w-14 h-14 rounded-full bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl font-black shrink-0">أ</div>
+        <div class="p-3 rounded-2xl bg-palette-mauve text-palette-darkest flex items-center gap-3 shadow-md">
+            <div id="founders-support-initial" class="w-11 h-11 rounded-full bg-palette-dark text-palette-mauve flex items-center justify-center text-lg font-black shrink-0">أ</div>
             <div class="text-right min-w-0">
                 <span id="founders-support-label" class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-palette-dark text-palette-light mb-1">الداعم</span>
-                <h4 id="founders-support-name" class="text-lg font-black truncate">أحمد العامري</h4>
+                <h4 id="founders-support-name" class="text-sm font-black truncate">أحمد العامري</h4>
             </div>
         </div>
 
@@ -1742,7 +1878,7 @@ const i18n = {
         themeLocked: "الوضع الداكن",
         appLang: "لغة التطبيق",
         buttonSounds: "أصوات الأزرار",
-        mosqueRadar: "رادار المساجد القريبة",
+        mosqueRadar: "خريطة المساجد القريبة",
         mosqueDesc: "أقرب المساجد ضمن 1 كم",
         instagramTitle: "الدعم الفني",
         saveClose: "حفظ وإغلاق",
@@ -3273,9 +3409,36 @@ function stopQuranAudio() {
 // { title: "دعاء الصباح", text: "نص الدعاء هنا" },
 const SHORT_DUAS = [];
 
+/* جلب جدول من Supabase مع حفظ نسخة على الجهاز للعمل بدون إنترنت */
+async function hqbFetchTable(table, cacheKey) {
+    if (!supabaseClient || !navigator.onLine) return null;
+    try {
+        const { data, error } = await supabaseClient.from(table).select('*').order('id', { ascending: true });
+        if (error || !Array.isArray(data)) return null;
+        try { localStorage.setItem(cacheKey, JSON.stringify(data)); } catch (e) {}
+        return data;
+    } catch (e) { return null; }
+}
+function hqbFill(arr, rows) { arr.splice(0, arr.length, ...rows); }
+
+/* الأدعية القصيرة: جدول short_supplications (title, supplications, category) */
+function hqbMapShort(rows) {
+    return (rows || []).map(r => ({
+        title: String(r.title || '').trim(),
+        text: String(r.supplications || r.text || '').trim(),
+        category: String(r.category || '').trim()
+    })).filter(d => d.text);
+}
+try { hqbFill(SHORT_DUAS, hqbMapShort(JSON.parse(localStorage.getItem('hqb_short_cache')) || [])); } catch (e) {}
+async function hqbLoadShortDuas() {
+    const rows = await hqbFetchTable('short_supplications', 'hqb_short_cache');
+    if (rows) hqbFill(SHORT_DUAS, hqbMapShort(rows));
+}
+
 function openShortDuasModal() {
     openModal('short-duas-modal');
     renderShortDuas();
+    hqbLoadShortDuas().then(renderShortDuas);
 }
 
 function renderShortDuas() {
@@ -3293,10 +3456,13 @@ function renderShortDuas() {
     box.innerHTML = SHORT_DUAS.map((d, i) => `
         <div class="rounded-2xl bg-palette-mid border border-palette-purple p-3.5 space-y-2">
             <div class="flex items-center justify-between gap-2">
-                <h4 class="font-bold text-xs text-palette-light">${escapeHTML(d.title || '')}</h4>
+                <div class="min-w-0">
+                    <h4 class="font-bold text-xs text-palette-light">${escapeHTML(d.title || '')}</h4>
+                    ${d.category ? `<span class="inline-block mt-1 px-2 py-0.5 rounded-full bg-palette-dark text-palette-mauve text-[9px] font-bold">${escapeHTML(d.category)}</span>` : ''}
+                </div>
                 <button onclick="copyShortDua(${i})" class="w-8 h-8 rounded-lg bg-palette-dark text-palette-mauve flex items-center justify-center shrink-0 cursor-pointer" aria-label="${en ? 'Copy' : 'نسخ'}"><i class="fa-regular fa-copy text-xs"></i></button>
             </div>
-            <p class="font-amiri text-lg leading-loose text-palette-light select-text">${escapeHTML(d.text || '')}</p>
+            <p class="font-amiri text-lg leading-loose text-palette-light select-text whitespace-pre-line">${escapeHTML(d.text || '')}</p>
         </div>`).join('');
 }
 
@@ -4058,11 +4224,11 @@ const PRIVACY_CONTENT = {
         sections: [
             ["1. مقدمة", "نلتزم بحماية خصوصيتك. توضح هذه السياسة المعلومات التي يتعامل معها تطبيق «حرم» وكيف تُستخدم. التطبيق مجاني، ولا يحتوي على إعلانات، ولا نبيع بياناتك ولا نشاركها مع أي جهة إعلانية."],
             ["2. الاسم", "الاسم الذي تكتبه عند الدخول اختياري، ويُحفظ على جهازك فقط ليظهر في الترحيب. يمكنك تغييره من الإعدادات في أي وقت. لا نطلب بريداً إلكترونياً ولا رقم هاتف ولا إنشاء حساب."],
-            ["3. الموقع الجغرافي", "يُطلب الموقع فقط عند استخدامك لأوقات الصلاة التلقائية أو رادار المساجد، وبعد عرض توضيح وموافقتك. تُرسل الإحداثيات لحظياً إلى خدمة Aladhan لحساب أوقات الصلاة، وإلى خدمات OpenStreetMap (Nominatim وOverpass) لمعرفة اسم المدينة والمساجد القريبة. لا نحفظ موقعك على خوادمنا، ولا يُستخدم الموقع في الخلفية."],
+            ["3. الموقع الجغرافي", "يُطلب الموقع فقط عند استخدامك لأوقات الصلاة التلقائية أو خريطة المساجد، وبعد عرض توضيح وموافقتك. تُرسل الإحداثيات لحظياً إلى خدمة Aladhan لحساب أوقات الصلاة، وإلى خدمات OpenStreetMap (Nominatim وOverpass) لمعرفة اسم المدينة والمساجد القريبة، وتُعرض الخريطة من خدمة CARTO. لا نحفظ موقعك على خوادمنا، ولا يُستخدم الموقع في الخلفية."],
             ["4. قسم الفاتحة (محتوى يضيفه المستخدمون)", "عند إضافة اسم متوفى يُحفظ الاسم والجنس وعدد القراءات والمشاهدات على خادم Supabase، مع معرّف عشوائي مجهول لجهازك يتيح لك وحدك حذف ما أضفته. الأسماء تظهر لجميع المستخدمين، فلا تكتب معلومات شخصية أو أرقام تواصل. يمكن لأي مستخدم الإبلاغ عن اسم غير لائق، ونراجع البلاغات ونحذف المخالف."],
             ["5. التخزين على جهازك", "تُحفظ على جهازك فقط: اسمك والإعدادات واللغة، وسجل الصلوات والتحديات، والعلامات وآخر موضع قراءة في المصحف، ونسخة من القرآن والأدعية للعمل دون إنترنت."],
             ["6. الإشعارات", "إذا فعّلت الأذان أو التنبيهات يطلب التطبيق إذن الإشعارات لعرضها فقط، ويمكنك إيقافها من الإعدادات."],
-            ["7. خدمات الأطراف الثالثة", "يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap (المدن والمساجد)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام. لكل خدمة سياسة خصوصية خاصة بها."],
+            ["7. خدمات الأطراف الثالثة", "يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap وCARTO (المدن وخريطة المساجد)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام. لكل خدمة سياسة خصوصية خاصة بها."],
             ["8. الأطفال", "التطبيق مناسب لجميع الأعمار، ولا نجمع عمداً أي بيانات شخصية من الأطفال."],
             ["9. حذف بياناتك", "يمكنك حذف كل بياناتك في أي وقت من: الإعدادات ← «حذف بياناتي»، فتُحذف الأسماء التي أضفتها من خادمنا وتُمسح بيانات التطبيق من جهازك. ويمكنك أيضاً طلب الحذف بمراسلتنا على البريد أدناه."],
             ["10. التعديلات", "قد نحدّث هذه السياسة، ويظهر تاريخ آخر تحديث أعلاه."],
@@ -5425,7 +5591,7 @@ const HQB_PLAY_URL = 'https://play.google.com/store/search?q=%D8%AD%D8%B1%D9%85&
 /* ---------- الزيارات (محفوظة داخل التطبيق وتعمل بدون إنترنت) ---------- */
 const HQB_ZIYARAT = [];
 
-/* زيارات إضافية من Supabase: جدول ziyarat (title, desc, content) - اختياري، تُحفظ للعمل بدون إنترنت */
+/* الزيارات من Supabase: جدول visitors (title, visit_text) وتُحفظ للعمل بدون إنترنت */
 let hqbZiyaratList = HQB_ZIYARAT.slice();
 function hqbMergeZiyarat(rows) {
     (rows || []).forEach(r => {
@@ -5437,15 +5603,17 @@ hqbMergeZiyarat(hqbLS('hqb_ziyarat_cache', []));
 async function hqbLoadRemoteZiyarat() {
     if (!supabaseClient || !navigator.onLine) return;
     try {
-        const { data, error } = await supabaseClient.from('ziyarat').select('*').order('id', { ascending: true });
+        const { data, error } = await supabaseClient.from('visitors').select('*').order('id', { ascending: true });
         if (error || !Array.isArray(data)) return;
         const rows = data.map(r => ({
             id: 'zr-' + r.id,
             title: String(r.title || 'زيارة').trim(),
-            desc: String(r.desc || r.description || '').trim(),
-            text: String(r.content || r.text || '').trim()
+            desc: String(r.desc || r.description || r.category || '').trim(),
+            text: String(r.visit_text || r.content || r.text || '').trim()
         })).filter(r => r.text);
         hqbSaveLS('hqb_ziyarat_cache', rows);
+        // القائمة تطابق الجدول تماماً: ما يُحذف من Supabase يُحذف من التطبيق
+        hqbZiyaratList = HQB_ZIYARAT.slice();
         hqbMergeZiyarat(rows);
     } catch (e) {}
 }
@@ -6747,7 +6915,7 @@ function hqbConfirm(o) {
             title: en ? 'Location access' : 'استخدام موقعك',
             body: en
                 ? '<p>Haqibati uses your location only to:</p><p>• Calculate prayer times for your city.</p><p>• Find nearby mosques in the radar.</p><p>Your location is used only while you use these features and is not stored on our servers.</p>'
-                : '<p>يستخدم «حرم» موقعك فقط من أجل:</p><p>• حساب أوقات الصلاة لمدينتك.</p><p>• إيجاد المساجد القريبة في الرادار.</p><p>يُستخدم الموقع أثناء استخدامك لهذه الميزات فقط، ولا يُحفظ على خوادمنا.</p>',
+                : '<p>يستخدم «حرم» موقعك فقط من أجل:</p><p>• حساب أوقات الصلاة لمدينتك.</p><p>• إيجاد المساجد القريبة على الخريطة.</p><p>يُستخدم الموقع أثناء استخدامك لهذه الميزات فقط، ولا يُحفظ على خوادمنا.</p>',
             ok: en ? 'Continue' : 'متابعة',
             cancel: en ? 'Not now' : 'ليس الآن'
         }).then(ok => {
@@ -6979,7 +7147,7 @@ function hqbKhInfo() {
             hqbKhSave({ s: 1, a: 1, done: (k.done || 0) + 1 });
             hqbKhSession = false;
             try { playSuccessCelebrationSound(); } catch (e) {}
-            hqbConfirm({ icon: 'fa-award', title: 'مبارك! أتممت ختمة القرآن الكريم', body: `<p class="text-center">تقبّل الله منك. هذه ختمتك رقم ${hqbNum((k.done || 0) + 1)}.</p>`, ok: 'الحمد لله', cancel: 'إغلاق' });
+            hqbShowKhatmDua((k.done || 0) + 1);
             mushafRenderContinue();
             return;
         }
@@ -7079,9 +7247,34 @@ function hqbRenderDailyDuaRow() {
 /* ---------- الخلفيات الدينية ----------
    أضيفي الخلفيات هنا: { title: 'اسم الخلفية', url: 'رابط الصورة' } */
 const HQB_WALLPAPERS = [];
+let hqbWpCat = '';
+function hqbMapWp(rows) {
+    return (rows || []).map(r => ({
+        title: String(r.title || '').trim(),
+        url: String(r.image_url || r.url || '').trim(),
+        category: String(r.category || '').trim()
+    })).filter(w => /^https?:\/\//i.test(w.url));
+}
+hqbFill(HQB_WALLPAPERS, hqbMapWp(hqbLS('hqb_wp_cache', [])));
 function openWallpapers() {
     openModal('wallpapers-modal');
+    hqbRenderWallpapers();
+    hqbFetchTable('religious_wallpapers', 'hqb_wp_cache').then(rows => {
+        if (rows) { hqbFill(HQB_WALLPAPERS, hqbMapWp(rows)); hqbRenderWallpapers(); }
+    });
+}
+let hqbWpCats = [''];
+function hqbWpPick(i) { playClickSound(); hqbWpCat = hqbWpCats[i] || ''; hqbRenderWallpapers(); }
+function hqbRenderWallpapers() {
     const box = document.getElementById('wallpapers-grid');
+    const chips = document.getElementById('wallpapers-cats');
+    const cats = [...new Set(HQB_WALLPAPERS.map(w => w.category).filter(Boolean))];
+    if (hqbWpCat && !cats.includes(hqbWpCat)) hqbWpCat = '';
+    if (chips) {
+        chips.classList.toggle('hidden', cats.length < 2);
+        hqbWpCats = ['', ...cats];
+        chips.innerHTML = hqbWpCats.map((c, i) => `<button onclick="hqbWpPick(${i})" class="px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap shrink-0 ${c === hqbWpCat ? 'bg-palette-mauve text-palette-darkest' : 'bg-palette-mid text-palette-light border border-palette-purple'}">${c ? escapeHTML(c) : 'الكل'}</button>`).join('');
+    }
     if (!HQB_WALLPAPERS.length) {
         box.className = 'flex-1 overflow-y-auto';
         box.innerHTML = `<div class="flex flex-col items-center justify-center text-center gap-3 py-16">
@@ -7092,9 +7285,9 @@ function openWallpapers() {
         return;
     }
     box.className = 'flex-1 overflow-y-auto grid grid-cols-2 gap-2.5 content-start';
-    box.innerHTML = HQB_WALLPAPERS.map((w, i) => `
+    box.innerHTML = HQB_WALLPAPERS.map((w, i) => (hqbWpCat && w.category !== hqbWpCat) ? '' : `
         <button onclick="hqbOpenWallpaper(${i})" class="relative rounded-2xl overflow-hidden border border-palette-purple bg-palette-mid" style="aspect-ratio:9/16">
-            <img src="${w.url}" alt="${escapeHTML(w.title || '')}" loading="lazy" class="w-full h-full object-cover">
+            <img src="${escapeHTML(w.url)}" alt="${escapeHTML(w.title || '')}" loading="lazy" class="w-full h-full object-cover">
             ${w.title ? `<span class="absolute bottom-0 inset-x-0 p-1.5 text-[10px] font-bold text-white text-center" style="background:linear-gradient(transparent,rgba(0,0,0,.7))">${escapeHTML(w.title)}</span>` : ''}
         </button>`).join('');
 }
@@ -7120,6 +7313,7 @@ function hqbOpenWallpaper(i) {
                 </div>
                 <button onclick="playClickSound(); closeModal('wallpapers-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
             </div>
+            <div id="wallpapers-cats" class="hidden flex gap-1.5 overflow-x-auto pb-2 mb-1 shrink-0"></div>
             <div id="wallpapers-grid" class="flex-1 overflow-y-auto"></div>
         </div>
     </div>`);
@@ -7151,6 +7345,828 @@ function hqbOpenWallpaper(i) {
     hqbScheduleMidnight();
     document.addEventListener('visibilitychange', () => { if (!document.hidden) hqbSendDailyDua(); });
 })();
+</script>
+<script>
+/* =============================================================================
+   حرم: خريطة المساجد القريبة (بدل الرادار) • وضع الليل والصباح
+   ============================================================================= */
+
+/* ---------- خريطة العراق والمساجد القريبة ---------- */
+const MQ_IRAQ = [[29.0, 38.7], [37.4, 48.8]];
+let mqMap = null, mqLayer = null, mqUser = null, mqTiles = null, mqResults = [], mqMarkers = [], mqLeafletP = null, mqBusy = false;
+
+function mqLoadLeaflet() {
+    if (window.L && window.L.map) return Promise.resolve();
+    if (mqLeafletP) return mqLeafletP;
+    mqLeafletP = new Promise((res, rej) => {
+        const css = document.createElement('link');
+        css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(css);
+        const js = document.createElement('script');
+        js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        js.onload = () => res();
+        js.onerror = () => { mqLeafletP = null; rej(new Error('leaflet')); };
+        document.head.appendChild(js);
+    });
+    return mqLeafletP;
+}
+function mqTileUrl() {
+    return document.documentElement.classList.contains('theme-day')
+        ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+}
+function mqStatus(t) { const el = document.getElementById('mq-status'); if (el) el.innerText = t; }
+function mqFmt(d) { return d < 1000 ? `${hqbNum(Math.round(d))} م` : `${hqbNum((d / 1000).toFixed(1))} كم`; }
+
+function mqShell() {
+    const modal = document.getElementById('qibla-modal');
+    modal.innerHTML = `
+    <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] shadow-2xl flex flex-col overflow-hidden relative">
+        <div class="flex justify-between items-center px-4 pt-4 pb-2.5">
+            <div class="flex items-center gap-2 min-w-0">
+                <div class="w-9 h-9 rounded-xl bg-palette-mid text-palette-mauve flex items-center justify-center text-sm shrink-0"><i class="fa-solid fa-mosque"></i></div>
+                <div class="min-w-0"><h3 class="text-sm font-black text-palette-light">المساجد القريبة</h3><p id="mq-status" class="text-[11px] text-palette-muted font-bold truncate">خريطة العراق</p></div>
+            </div>
+            <button onclick="playClickSound(); closeModal('qibla-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+        </div>
+        <div class="mq-wrap">
+            <div id="mq-map" class="mq-map"></div>
+            <button id="mq-area-btn" class="mq-area hidden" onclick="mqSearchArea()"><i class="fa-solid fa-magnifying-glass-location ml-1"></i>ابحث في هذه المنطقة</button>
+            <button class="mq-me" onclick="mqSearchMe()" aria-label="موقعي"><i class="fa-solid fa-location-crosshairs"></i></button>
+        </div>
+        <div id="mq-list" class="mq-list">
+            <button class="mq-cta" onclick="mqSearchMe()"><i class="fa-solid fa-location-crosshairs ml-1.5"></i>المساجد القريبة مني</button>
+            <p class="text-[11px] text-palette-muted text-center mt-2 leading-relaxed">أو حرّك الخريطة إلى أي منطقة في العراق واضغط «ابحث في هذه المنطقة».</p>
+        </div>
+    </div>`;
+    document.getElementById('mq-list').addEventListener('click', e => {
+        const it = e.target.closest('[data-mq]');
+        if (!it || e.target.closest('a')) return;
+        mqSelect(+it.dataset.mq, true);
+    });
+}
+async function mqOpen() {
+    openModal('qibla-modal');
+    mqShell();
+    mqMap = null;
+    try { await mqLoadLeaflet(); }
+    catch (e) {
+        mqStatus('تعذّر تحميل الخريطة');
+        document.getElementById('mq-list').innerHTML = `<p class="text-xs text-palette-light text-center py-3">تعذّر تحميل الخريطة. تأكد من اتصالك بالإنترنت.</p>${mqGmapsBtn()}<button class="mq-cta" style="margin-top:6px;background:transparent;border:1px solid #D4A84F;color:inherit" onclick="mqOpen()">إعادة المحاولة</button>`;
+        return;
+    }
+    const L = window.L;
+    mqMap = L.map('mq-map', { zoomControl: false, attributionControl: true, minZoom: 5, maxBounds: L.latLngBounds(MQ_IRAQ).pad(0.25), maxBoundsViscosity: 0.8 });
+    mqTiles = L.tileLayer(mqTileUrl(), { maxZoom: 19, subdomains: 'abcd', attribution: '© OpenStreetMap © CARTO' }).addTo(mqMap);
+    L.control.zoom({ position: 'bottomleft' }).addTo(mqMap);
+    mqMap.fitBounds(MQ_IRAQ);
+    mqLayer = L.layerGroup().addTo(mqMap);
+    mqMap.on('moveend', () => { const b = document.getElementById('mq-area-btn'); if (b && mqMap.getZoom() >= 12) b.classList.remove('hidden'); });
+    setTimeout(() => mqMap && mqMap.invalidateSize(), 250);
+    setTimeout(() => { if (mqMap && !mqResults.length) mqSearchMe(true); }, 450);
+}
+function mqGmapsBtn(la, lo) {
+    const u = la != null ? `https://www.google.com/maps/search/%D9%85%D8%B3%D8%AC%D8%AF/@${la},${lo},15z` : 'https://www.google.com/maps/search/%D9%85%D8%B3%D8%A7%D8%AC%D8%AF+%D9%82%D8%B1%D9%8A%D8%A8%D8%A9';
+    return `<a class="mq-cta" style="display:block;text-align:center;text-decoration:none" target="_blank" rel="noopener" href="${u}"><i class="fa-solid fa-map-location-dot ml-1.5"></i>افتح المساجد في خرائط Google</a>`;
+}
+async function mqFetch(la, lo, r) {
+    const around = `(around:${r},${la},${lo})`;
+    const q = `[out:json][timeout:25];(nwr["amenity"="place_of_worship"]["religion"="muslim"]${around};nwr["building"="mosque"]${around};nwr["amenity"="place_of_worship"]["name"~"مسجد|جامع|حسينية|مرقد|مقام|Mosque|Masjid",i]${around};);out center 120;`;
+    const els = await new Promise((resolve, reject) => {
+        let failed = 0, done = false;
+        OVERPASS.forEach(u => overpassRequest(u, q).then(x => { if (!done) { done = true; resolve(x); } }).catch(() => { failed++; if (failed === OVERPASS.length && !done) reject(new Error('fail')); }));
+    });
+    const seen = new Set();
+    return els.filter(e => { const k = e.type + e.id; if (seen.has(k)) return false; seen.add(k); return true; }).map(e => {
+        const y = e.lat != null ? e.lat : (e.center && e.center.lat), x = e.lon != null ? e.lon : (e.center && e.center.lon);
+        if (y == null) return null;
+        return Object.assign({ n: (e.tags && (e.tags['name:ar'] || e.tags.name)) || 'مسجد', y, x }, geo(la, lo, y, x));
+    }).filter(Boolean).sort((a, b) => a.dist - b.dist).slice(0, 40);
+}
+async function mqSearchAt(la, lo, r, label) {
+    if (!mqMap || mqBusy) return;
+    mqBusy = true;
+    const L = window.L;
+    mqStatus('جاري البحث عن المساجد...');
+    document.getElementById('mq-list').innerHTML = `<div class="text-center py-6 text-palette-muted text-xs"><i class="fa-solid fa-spinner fa-spin text-palette-mauve text-lg block mb-2"></i>جاري البحث...</div>`;
+    try {
+        mqResults = await mqFetch(la, lo, r);
+    } catch (e) {
+        mqBusy = false;
+        mqStatus('تعذّر البحث');
+        document.getElementById('mq-list').innerHTML = `<p class="text-xs text-palette-light text-center py-3">تعذّر الوصول لبيانات المساجد الآن. يمكنك المحاولة مرة أخرى أو فتحها في خرائط Google.</p>${mqGmapsBtn(la, lo)}<button class="mq-cta" style="margin-top:6px;background:transparent;border:1px solid #D4A84F;color:inherit" onclick="mqSearchMe()">إعادة المحاولة</button>`;
+        return;
+    }
+    mqBusy = false;
+    mqLayer.clearLayers(); mqMarkers = [];
+    const icon = L.divIcon({ className: 'mq-pin', html: '<span><i class="fa-solid fa-mosque"></i></span>', iconSize: [30, 30], iconAnchor: [15, 28], popupAnchor: [0, -26] });
+    mqResults.forEach((m, i) => {
+        const mk = L.marker([m.y, m.x], { icon }).addTo(mqLayer);
+        mk.bindPopup(`<div class="mq-pop"><b>${escapeHTML(m.n)}</b><span>${mqFmt(m.dist)}</span><a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}">الاتجاهات</a></div>`);
+        mk.on('click', () => mqSelect(i, false));
+        mqMarkers.push(mk);
+    });
+    const box = document.getElementById('mq-list');
+    if (!mqResults.length) {
+        mqStatus('لا توجد نتائج');
+        box.innerHTML = `<p class="text-xs text-palette-light text-center py-3">لم نجد مساجد مسجّلة ضمن ${mqFmt(r)} من ${label}.</p>${mqGmapsBtn(la, lo)}`;
+        return;
+    }
+    const _n = mqResults.length;
+    mqStatus(`${_n === 1 ? 'مسجد واحد' : _n === 2 ? 'مسجدان' : hqbNum(_n) + (_n <= 10 ? ' مساجد' : ' مسجداً')} ضمن ${mqFmt(r)} من ${label}`);
+    box.innerHTML = mqResults.map((m, i) => `
+        <div data-mq="${i}" class="mq-item">
+            <span class="mq-num">${hqbNum(i + 1)}</span>
+            <span class="mq-tx"><b>${escapeHTML(m.n)}</b><small>${mqFmt(m.dist)}</small></span>
+            <a class="mq-go" target="_blank" rel="noopener" onclick="playClickSound()" href="https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=${m.y},${m.x}" aria-label="الاتجاهات"><i class="fa-solid fa-person-walking"></i></a>
+        </div>`).join('');
+    const pts = mqResults.map(m => [m.y, m.x]); if (mqUser) pts.push(mqUser.getLatLng());
+    mqMap.fitBounds(pts, { padding: [30, 30], maxZoom: 16 });
+    document.getElementById('mq-area-btn').classList.add('hidden');
+}
+function mqSearchMe(auto) {
+    if (!auto) playClickSound();
+    if (!mqMap || mqBusy) return;
+    mqStatus('جاري تحديد موقعك...');
+    getPositionSmart().then(p => {
+        const la = p.coords.latitude, lo = p.coords.longitude, L = window.L;
+        if (mqUser) mqUser.remove();
+        mqUser = L.marker([la, lo], { icon: L.divIcon({ className: 'mq-me-pin', html: '<span></span>', iconSize: [18, 18], iconAnchor: [9, 9] }), zIndexOffset: 1000 }).addTo(mqMap);
+        mqMap.setView([la, lo], 15);
+        mqSearchAt(la, lo, 3000, 'موقعك');
+    }).catch(err => {
+        mqStatus(err && err.code === 1 ? 'لم يُسمح بالوصول للموقع' : 'تعذّر تحديد موقعك');
+        const box = document.getElementById('mq-list');
+        if (box) box.innerHTML = `<p class="text-xs text-palette-light text-center py-2 leading-relaxed">${err && err.code === 1 ? 'اسمح للتطبيق باستخدام الموقع، أو حرّك الخريطة إلى منطقتك واضغط «ابحث في هذه المنطقة».' : 'تأكد من تشغيل GPS، أو حرّك الخريطة إلى منطقتك واضغط «ابحث في هذه المنطقة».'}</p><button class="mq-cta" onclick="mqSearchMe()"><i class="fa-solid fa-location-crosshairs ml-1.5"></i>المحاولة مرة أخرى</button>`;
+        const ab = document.getElementById('mq-area-btn'); if (ab) ab.classList.remove('hidden');
+    });
+}
+function mqSearchArea() {
+    playClickSound();
+    if (!mqMap) return;
+    const c = mqMap.getCenter(), b = mqMap.getBounds();
+    const r = Math.min(5000, Math.max(800, Math.round(c.distanceTo(b.getNorthEast()) * 0.8)));
+    mqSearchAt(c.lat, c.lng, r, 'وسط الخريطة');
+}
+function mqSelect(i, fly) {
+    const m = mqResults[i]; if (!m) return;
+    playClickSound();
+    document.querySelectorAll('.mq-item').forEach(el => el.classList.toggle('sel', +el.dataset.mq === i));
+    const el = document.querySelector(`.mq-item[data-mq="${i}"]`);
+    if (el) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    if (fly && mqMap) mqMap.flyTo([m.y, m.x], Math.max(mqMap.getZoom(), 17), { duration: 0.6 });
+    if (mqMarkers[i]) setTimeout(() => mqMarkers[i].openPopup(), fly ? 650 : 0);
+}
+/* استبدال الرادار بالخريطة */
+startMosqueSearchProcess = function () { mqOpen(); };
+requestLocationAndSearch = function () { mqOpen().then(() => mqSearchMe()); };
+
+/* ---------- وضع الليل والصباح ---------- */
+function hqbTheme() { return localStorage.getItem('hqb_theme') === 'day' ? 'day' : 'night'; }
+function hqbApplyTheme(t) {
+    const day = t === 'day';
+    document.documentElement.classList.toggle('theme-day', day);
+    const meta = document.getElementById('meta-theme-color');
+    if (meta) meta.setAttribute('content', day ? '#8FBFE3' : '#0F202B');
+    const n = document.getElementById('theme-btn-night'), d = document.getElementById('theme-btn-day');
+    if (n && d) {
+        n.className = day ? "" : "on";
+        d.className = day ? "on" : "";
+    }
+    if (mqMap && mqTiles) mqTiles.setUrl(mqTileUrl());
+}
+function hqbSetTheme(t) {
+    playClickSound();
+    try { localStorage.setItem('hqb_theme', t); } catch (e) {}
+    hqbApplyTheme(t);
+    showToast(t === 'day' ? 'وضع النهار ☀️' : 'وضع الليل 🌙');
+}
+(function () {
+    document.body.insertAdjacentHTML('afterbegin', '<div class="day-sky" aria-hidden="true"><div class="cl" style="left:8vw;top:10vh;--w:54px;--t1:3s;--t2:7.7s;--d:-0.0s"></div><div class="cl" style="left:30vw;top:24vh;--w:38px;--t1:4.2s;--t2:9.35s;--d:-1.3s"></div><div class="cl" style="left:62vw;top:7vh;--w:46px;--t1:5.4s;--t2:11s;--d:-2.6s"></div><div class="cl" style="left:84vw;top:30vh;--w:34px;--t1:3s;--t2:12.65s;--d:-3.9s"></div><div class="cl" style="left:14vw;top:46vh;--w:40px;--t1:4.2s;--t2:7.7s;--d:-5.2s"></div><div class="cl" style="left:46vw;top:40vh;--w:30px;--t1:5.4s;--t2:9.35s;--d:-6.5s"></div><div class="cl" style="left:74vw;top:56vh;--w:48px;--t1:3s;--t2:11s;--d:-7.8s"></div><div class="cl" style="left:22vw;top:72vh;--w:36px;--t1:4.2s;--t2:12.65s;--d:-9.1s"></div><div class="cl" style="left:56vw;top:80vh;--w:42px;--t1:5.4s;--t2:7.7s;--d:-10.4s"></div><div class="cl" style="left:88vw;top:84vh;--w:30px;--t1:3s;--t2:9.35s;--d:-11.7s"></div><div class="cl" style="left:4vw;top:90vh;--w:28px;--t1:4.2s;--t2:11s;--d:-13.0s"></div><div class="cl" style="left:38vw;top:62vh;--w:26px;--t1:5.4s;--t2:12.65s;--d:-14.3s"></div></div>');
+    const lock = document.getElementById('lbl-theme-locked');
+    if (lock) lock.outerHTML = `<div class="theme-switch">
+        <button id="theme-btn-night" onclick="hqbSetTheme('night')"><i class="fa-solid fa-moon"></i>ليل</button>
+        <button id="theme-btn-day" onclick="hqbSetTheme('day')"><i class="fa-solid fa-sun"></i>نهار</button>
+    </div>`;
+    hqbApplyTheme(hqbTheme());
+})();
+</script>
+<script>
+/* =============================================================================
+   دعاء ختم القرآن: يظهر عند إتمام الختمة
+   ============================================================================= */
+const HQB_KHATM_DUA = `اللّهُمَّ ارْحَمْنِي بِالْقُرْآنِ، وَاجْعَلْهُ لِي إِماماً وَنُوراً وَهُدىً وَرَحْمَةً.
+
+اللّهُمَّ ذَكِّرْنِي مِنْهُ ما نَسِيتُ، وَعَلِّمْنِي مِنْهُ ما جَهِلْتُ، وَارْزُقْنِي تِلاوَتَهُ آناءَ اللَّيْلِ وَأَطْرافَ النَّهارِ، وَاجْعَلْهُ لِي حُجَّةً يا رَبَّ الْعالَمِينَ.
+
+اللّهُمَّ اشْرَحْ بِالْقُرْآنِ صَدْرِي، وَاسْتَعْمِلْ بِالْقُرْآنِ بَدَنِي، وَنَوِّرْ بِالْقُرْآنِ بَصَرِي، وَأَطْلِقْ بِالْقُرْآنِ لِسانِي، وَأَعِنِّي عَلَيْهِ ما أَبْقَيْتَنِي، فَإِنَّهُ لا حَوْلَ وَلا قُوَّةَ إِلّا بِكَ.
+
+اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَاجْعَلْ ثَوابَ هذِهِ الْخَتْمَةِ هَدِيَّةً مِنِّي إِلى رُوحِ نَبِيِّكَ وَأَهْلِ بَيْتِهِ الطّاهِرِينَ، وَإِلى أَرْواحِ والِدَيَّ وَجَمِيعِ الْمُؤْمِنِينَ وَالْمُؤْمِناتِ، بِرَحْمَتِكَ يا أَرْحَمَ الرّاحِمِينَ.`;
+function hqbShowKhatmDua(n) {
+    document.getElementById('khatm-count').innerText = `هذه ختمتك رقم ${hqbNum(n)} • تقبّل الله منك`;
+    document.getElementById('khatm-text').innerText = HQB_KHATM_DUA;
+    openModal('khatm-modal');
+    const sc = document.getElementById('khatm-text'); if (sc && sc.parentElement) sc.parentElement.scrollTop = 0;
+}
+document.body.insertAdjacentHTML('beforeend', `
+<div id="khatm-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-3 z-[100]">
+    <div class="w-full max-w-md max-h-[90vh] bg-palette-dark border border-palette-mauve/40 rounded-[28px] p-5 shadow-2xl flex flex-col overflow-hidden text-center">
+        <div class="w-16 h-16 mx-auto rounded-full bg-palette-mauve text-palette-darkest flex items-center justify-center text-3xl mb-2 khatm-pop"><i class="fa-solid fa-award"></i></div>
+        <h3 class="text-base font-black text-palette-light">مبارك! أتممت ختمة القرآن الكريم</h3>
+        <p id="khatm-count" class="text-[11px] font-bold text-palette-mauve mt-1 mb-3"></p>
+        <div class="flex-1 overflow-y-auto rounded-2xl bg-palette-mid border border-palette-purple p-4 text-right">
+            <p class="text-[11px] font-black text-palette-mauve mb-2"><i class="fa-solid fa-book-quran ml-1"></i>دعاء ختم القرآن</p>
+            <p id="khatm-text" class="khatm-text"></p>
+        </div>
+        <div class="flex gap-2 pt-3">
+            <button onclick="playClickSound(); hqbShareImage('دعاء ختم القرآن', HQB_KHATM_DUA, '')" class="flex-1 py-2.5 rounded-xl bg-palette-mid text-palette-light text-xs font-bold"><i class="fa-regular fa-image ml-1"></i>مشاركة</button>
+            <button onclick="playClickSound(); closeModal('khatm-modal'); mushafRenderContinue();" class="flex-1 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest text-xs font-black">الحمد لله</button>
+        </div>
+    </div>
+</div>`);
+</script>
+<script>
+/* =============================================================================
+   اللغة: العربية / کوردی (سۆرانی)
+   النصوص الدينية (القرآن، الأدعية، الأذكار) تبقى بالعربية كما هي
+   ============================================================================= */
+const HQB_KU = {"حرم": "حەرەم",
+"الكل": "هەموو",
+"يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap وCARTO (المدن وخريطة المساجد)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام. لكل خدمة سياسة خصوصية خاصة بها.": "بەرنامەکە پشت بەمانە دەبەستێت: Supabase (بەشی فاتیحە و دوعا و تیلاوەتەکان)، AlQuran Cloud و Islamic Network (دەقی قورئان و تیلاوەتەکان)، Aladhan (کاتەکانی نوێژ)، OpenStreetMap و CARTO (شارەکان و نەخشەی مزگەوتەکان)، Google Maps (کاتێک ڕێنمایی بۆ مزگەوتێک داوا دەکەیت)، فۆنتەکانی Google، و بەستەری هەژمارەکانی عەتەبە پیرۆزەکان لە ئینستاگرام. هەر خزمەتگوزارییەک سیاسەتی تایبەتمەندی خۆی هەیە.",
+"ليل": "شەو",
+"نهار": "ڕۆژ",
+"فتح": "کردنەوە",
+"عرض": "پیشاندان",
+"بحث": "گەڕان",
+"حفظ": "پاشەکەوت",
+"اسمك": "ناوت",
+"معطل": "ناچالاک",
+"يبدأ": "دەست پێدەکات",
+"الخط": "فۆنت",
+"رجوع": "گەڕانەوە",
+"بدون": "بەبێ",
+"تطبيق": "بەرنامەی",
+"تغيير": "گۆڕین",
+"متوقف": "وەستاوە",
+"ينتهي": "کۆتایی دێت",
+"إغلاق": "داخستن",
+"اليوم": "ئەمڕۆ",
+"مجهول": "نەزانراو",
+"السور": "سورەتەکان",
+"تشغيل": "لێدان",
+"إيقاف": "وەستاندن",
+"بغداد": "بەغدا",
+"أربيل": "هەولێر",
+"كركوك": "کەرکووک",
+"دهوك": "دهۆک",
+"السليمانية": "سلێمانی",
+"البصرة": "بەسرە",
+"إلغاء": "هەڵوەشاندنەوە",
+"موقعي": "شوێنەکەم",
+"التالي": "دواتر",
+"السابق": "پێشوو",
+"المزيد": "زیاتر",
+"الدولة": "وڵات",
+"العراق": "عێراق",
+"الجنس:": "ڕەگەز:",
+"الداعم": "پشتگیر",
+"مشاركة": "هاوبەشکردن",
+"ركعتان": "دوو ڕکات",
+"لاحقاً": "دواتر",
+"ابدأ": "دەست پێبکە",
+"الرضوية": "ڕەزەوی",
+"الأحداث": "ڕووداوەکان",
+"الفاتحة": "فاتیحە",
+"التقويم": "ساڵنامە",
+"المدينة": "شار",
+"المؤسسة": "دامەزراوە",
+"الأجزاء": "جوزئەکان",
+"الترجمة": "وەرگێڕان",
+"السابقة": "پێشوو",
+"التالية": "دواتر",
+"القادمة": "داهاتوو",
+"تم بنجاح": "بە سەرکەوتوویی ئەنجامدرا",
+"الحسينية": "حوسەینی",
+"العباسية": "عەبباسی",
+"الكاظمية": "کازمی",
+"العسكرية": "عەسکەری",
+"الزيارات": "زیارەتەکان",
+"ذكر جديد": "زیکری نوێ",
+"اضغط هنا": "لێرە دابگرە",
+"التحديات": "ئاڵنگارییەکان",
+"المؤسسون": "دامەزرێنەران",
+"القراءات": "خوێندنەوەکان",
+"العلامات": "نیشانەکان",
+"افتح آية": "ئایەتێک بکەرەوە",
+"1. مقدمة": "1. پێشەکی",
+"2. الاسم": "2. ناو",
+"الاستغفار": "ئیستیغفار",
+"الاستخارة": "ئیستیخارە",
+"المشاهدات": "بینینەکان",
+"الإشعارات": "ئاگادارکردنەوەکان",
+"دعاء اليوم": "دوعای ئەمڕۆ",
+"أقسام أخرى": "بەشەکانی تر",
+"سجل صلواتي": "تۆماری نوێژەکانم",
+"عداد الركع": "ژمێرەری ڕکات",
+"حفظ وإغلاق": "پاشەکەوت و داخستن",
+"تكبير الخط": "گەورەکردنی فۆنت",
+"تصغير الخط": "بچووککردنی فۆنت",
+"دعاء كميل": "دوعای کومەیل",
+"دعاء العهد": "دوعای عەهد",
+"دعاء التوسل": "دوعای تەوەسسول",
+"صلاة الفجر": "نوێژی بەیانی",
+"صلاة الظهر": "نوێژی نیوەڕۆ",
+"صلاة العصر": "نوێژی عەسر",
+"صلاة المغرب": "نوێژی ئێوارە",
+"صلاة العشاء": "نوێژی خەوتنان",
+"أربع ركعات": "چوار ڕکات",
+"ثلاث ركعات": "سێ ڕکات",
+"آخر ٧ أيام": "دوایین ٧ ڕۆژ",
+"قضيت واحدة": "یەکێکم قەزا کردەوە",
+"صوت الأذان": "دەنگی بانگ",
+"تحميل الآن": "ئێستا دابەزاندن",
+"ابدأ ختمتك": "خەتمەکەت دەست پێبکە",
+"ابدأ الختمة": "خەتمە دەست پێبکە",
+"8. الأطفال": "8. منداڵان",
+"الدعم الفني": "پشتگیری تەکنیکی",
+"حذف بياناتي": "سڕینەوەی زانیارییەکانم",
+"عدد الركعات": "ژمارەی ڕکاتەکان",
+"اختر القارئ": "قورئانخوێن هەڵبژێرە",
+"إعادة الضبط": "ڕێکخستنەوە",
+"ابدأ التحدي": "ئاڵنگاری دەست پێبکە",
+"صلوات اليوم": "نوێژەکانی ئەمڕۆ",
+"استخِر الآن": "ئێستا ئیستیخارە بکە",
+"11. التواصل": "11. پەیوەندی",
+"تغيير الاسم": "گۆڕینی ناو",
+"أوقات الصلاة": "کاتەکانی نوێژ",
+"تلاوات وقراء": "تیلاوەت و قورئانخوێنان",
+"خلفيات دينية": "باکگراوندی ئایینی",
+"مظهر التطبيق": "ڕووکاری بەرنامە",
+"اختر الدولة:": "وڵات هەڵبژێرە:",
+"تلاوة مباركة": "تیلاوەتی پیرۆز",
+"عنوان الدعاء": "ناونیشانی دوعا",
+"مشاركة كصورة": "هاوبەشکردن وەک وێنە",
+"أحمد العامري": "ئەحمەد عامری",
+"تشغيل الأذان": "لێدانی بانگ",
+"إيقاف الأذان": "وەستاندنی بانگ",
+"الشهر الحالي": "مانگی ئێستا",
+"تفعيل الأذان": "چالاککردنی بانگ",
+"6. الإشعارات": "6. ئاگادارکردنەوەکان",
+"بابل (الحلة)": "بابل (حیللە)",
+"النجف الأشرف": "نەجەفی ئەشرەف",
+"واسط (الكوت)": "واست (کووت)",
+"المصحف الشريف": "قورئانی پیرۆز",
+"إمساكية رمضان": "خشتەی ڕەمەزان",
+"محوّل التاريخ": "گۆڕەری مێژوو",
+"أصوات الأزرار": "دەنگی دوگمەکان",
+"مناسبات اليوم": "بۆنەکانی ئەمڕۆ",
+"المرحوم (ذكر)": "خوالێخۆشبوو (نێر)",
+"المرحومة (أنثى)": "خوالێخۆشبوو (مێ)",
+"إغلاق النافذة": "داخستنی پەنجەرە",
+"مشاري العفاسي": "میشاری عەفاسی",
+"هجري ⇄ ميلادي": "کۆچی ⇄ زایینی",
+"مفاتيح الجنان": "مەفاتیحولجینان",
+"الأذان الشيعي": "بانگی شیعی",
+"قل ثلاث مرات:": "سێ جار بڵێ:",
+"ماهر المعيقلي": "ماهیر موعەیقلی",
+"10. التعديلات": "10. گۆڕانکارییەکان",
+"سياسة الخصوصية": "سیاسەتی تایبەتمەندی",
+"تغيير المحافظة": "گۆڕینی پارێزگا",
+"اختر المحافظة:": "پارێزگا هەڵبژێرە:",
+"الخلفية: مفعلة": "پاشبنەما: چالاکە",
+"عنوان المناسبة": "ناونیشانی بۆنە",
+"العودة للتقويم": "گەڕانەوە بۆ ساڵنامە",
+"السورة التالية": "سورەتی دواتر",
+"السورة السابقة": "سورەتی پێشوو",
+"دعاء يوم الأحد": "دوعای ڕۆژی یەکشەممە",
+"تحدي ٥٠ تسبيحة": "ئاڵنگاری ٥٠ تەسبیح",
+"تحدي ١٠٠ تسبيحة": "ئاڵنگاری ١٠٠ تەسبیح",
+"تحدي ٢٠٠ تسبيحة": "ئاڵنگاری ٢٠٠ تەسبیح",
+"تحدي ٣٠٠ تسبيحة": "ئاڵنگاری ٣٠٠ تەسبیح",
+"تحدي ٥٠٠ تسبيحة": "ئاڵنگاری ٥٠٠ تەسبیح",
+"إعادة المحاولة": "دووبارە هەوڵبدەرەوە",
+"9. حذف بياناتك": "9. سڕینەوەی زانیارییەکانت",
+"نينوى (الموصل)": "نەینەوا (مووسڵ)",
+"ديالى (بعقوبة)": "دیالە (بەعقووبە)",
+"كربلاء المقدسة": "کەربەلای پیرۆز",
+"تسبيحات الزهراء": "تەسبیحاتی زەهرا",
+"جاري التشغيل...": "لێدەدرێت...",
+"الأدعية القصيرة": "دوعا کورتەکان",
+"دعاء ختم القرآن": "دوعای خەتمی قورئان",
+"تحديث بذكر جديد": "نوێکردنەوە بە زیکرێکی نوێ",
+"ميسان (العمارة)": "میسان (عەمارە)",
+"المساجد القريبة": "مزگەوتە نزیکەکان",
+"إشعار دعاء اليوم": "ئاگادارکردنەوەی دوعای ئەمڕۆ",
+"تقبّل الله صلاتك": "خودا نوێژەکەت قبووڵ بکات",
+"تعمل بدون إنترنت": "بەبێ ئینتەرنێت کار دەکات",
+"الصحيفة السجادية": "سەحیفەی سەججادیە",
+"تذكير قبل الأذان": "بیرخستنەوە پێش بانگ",
+"ثلاث خطوات بسيطة": "سێ هەنگاوی سادە",
+"المثنى (السماوة)": "موسەننا (سەماوە)",
+"الأدعية والزيارات": "دوعا و زیارەتەکان",
+"الأذان والتنبيهات": "بانگ و ئاگادارکردنەوەکان",
+"الإعدادات والتحكم": "ڕێکخستن و کۆنترۆڵ",
+"اضغط لتعدّ ركعاتك": "دابگرە بۆ ژماردنی ڕکاتەکانت",
+"الرجوع إلى الوراء": "گەڕانەوە بۆ دواوە",
+"لا توجد أدعية بعد": "هێشتا هیچ دوعایەک نییە",
+"صلوات قضاء متبقية": "نوێژی قەزای ماوە",
+"السماح بالإشعارات": "ڕێگەدان بە ئاگادارکردنەوە",
+"تجربة الأذان الآن": "ئێستا بانگ تاقی بکەرەوە",
+"عبد الباسط (مرتل)": "عەبدولباسیت (مورەتتەل)",
+"محمود خليل الحصري": "مەحموود خەلیل حوسەری",
+"الأنبار (الرمادي)": "ئەنبار (ڕەمادی)",
+"ذي قار (الناصرية)": "زیقار (ناسریە)",
+"إغلاق شاشة التسبيح": "داخستنی شاشەی تەسبیح",
+"حفظ وإضافة للسحابة": "پاشەکەوت و زیادکردن بۆ هەور",
+"لا توجد زيارات بعد": "هێشتا هیچ زیارەتێک نییە",
+"لا توجد خلفيات بعد": "هێشتا هیچ باکگراوندێک نییە",
+"عدّاد صلوات القضاء": "ژمێرەری نوێژی قەزا",
+"من ميلادي إلى هجري": "لە زایینییەوە بۆ کۆچی",
+"من هجري إلى ميلادي": "لە کۆچییەوە بۆ زایینی",
+"محمد صديق المنشاوي": "محەممەد سدیق مینشاوی",
+"3. الموقع الجغرافي": "3. شوێنی جوگرافی",
+"صلاح الدين (تكريت)": "سەڵاحەدین (تکریت)",
+"منتصف الليل الشرعي": "نیوەشەوی شەرعی",
+"نص الدعاء كاملاً...": "دەقی تەواوی دوعا...",
+"مناسبات الشهر كاملة": "هەموو بۆنەکانی مانگ",
+"تعذّر تحميل الخريطة": "نەخشە بار نەبوو",
+"ابحث في هذه المنطقة": "لەم ناوچەیەدا بگەڕێ",
+"اقرأ لأرواح المؤمنين": "بۆ ڕۆحی ئیمانداران بخوێنە",
+"قسم التحديات اليومية": "بەشی ئاڵنگارییە ڕۆژانەکان",
+"القادسية (الديوانية)": "قادسیە (دیوانیە)",
+"تلاوات القرآن الكريم": "تیلاوەتەکانی قورئانی پیرۆز",
+"إغلاق نافذة التلاوات": "داخستنی پەنجەرەی تیلاوەتەکان",
+"حان الآن موعد الأذان": "ئێستا کاتی بانگە",
+"5. التخزين على جهازك": "5. هەڵگرتن لەسەر ئامێرەکەت",
+"إغلاق النافذة والعودة": "داخستنی پەنجەرە و گەڕانەوە",
+"خريطة المساجد القريبة": "نەخشەی مزگەوتە نزیکەکان",
+"أقرب المساجد ضمن 1 كم": "نزیکترین مزگەوتەکان لە ناو 1 کم",
+"التوقيت المحلي الفعلي": "کاتی ناوخۆیی ڕاستەقینە",
+"احفظ المصحف على هاتفك": "قورئان لەسەر مۆبایلەکەت پاشەکەوت بکە",
+"تمام الصلوات المفروضة": "تەواوی نوێژە فەرزەکان",
+"القائمون على هذا العمل": "ئەوانەی ئەم کارەیان ئەنجامداوە",
+"العودة للشاشة الرئيسية": "گەڕانەوە بۆ شاشەی سەرەکی",
+"أيام متتالية بلا تقصير": "ڕۆژی بەردەوام بێ کەمتەرخەمی",
+"اضغط على الزر بالأسفل.": "دوگمەی خوارەوە دابگرە.",
+"آخر تحديث: نوفمبر 2026": "دوایین نوێکردنەوە: تشرینی دووەمی 2026",
+"الصلاة الوسطى المباركة": "نوێژی ناوەڕاستی پیرۆز",
+"الشرح التفصيلي للحدث...": "ڕوونکردنەوەی وردی ڕووداوەکە...",
+"الإمساك والإفطار لموقعك": "ئیمساک و بەربانگ بۆ شوێنەکەت",
+"آية بآية مع تظليل الآية": "ئایەت بە ئایەت لەگەڵ دیارکردنی ئایەت",
+"ولادة السيدة زينب الكبرى": "لەدایکبوونی خاتوو زەینەبی کوبرا",
+"7. خدمات الأطراف الثالثة": "7. خزمەتگوزارییەکانی لایەنی سێیەم",
+"وقت الإمساك وبداية الصلاة": "کاتی ئیمساک و دەستپێکی نوێژ",
+"إغلاق قائمة مفاتيح الجنان": "داخستنی لیستی مەفاتیحولجینان",
+"التقويم الهجري والمناسبات": "ساڵنامەی کۆچی و بۆنەکان",
+"أدعية يسهل حفظها وترديدها": "دوعای ئاسان بۆ لەبەرکردن و دووبارەکردنەوە",
+"أدعية قصيرة يسهل حفظها وترديدها": "دوعای کورتی ئاسان بۆ لەبەرکردن و دووبارەکردنەوە",
+"اختر هدف التحدي التصاعدي:": "ئامانجی ئاڵنگاری هەڵبژێرە:",
+"زوال الشمس والنداء الأكبر": "لادانی خۆر و بانگی گەورە",
+"تحديد موقعي تلقائياً (GPS)": "دیاریکردنی شوێنم بە شێوەی خۆکار (GPS)",
+"قراءة • بحث • تلاوة • ترجمة": "خوێندنەوە • گەڕان • تیلاوەت • وەرگێڕان",
+"طلوع الشمس ونهاية وقت الفجر": "هەڵاتنی خۆر و کۆتایی کاتی بەیانی",
+"حفظ التغييرات واعتماد الموقع": "پاشەکەوتکردنی گۆڕانکاری و پەسەندکردنی شوێن",
+"استمع إلى التلاوات المباركة:": "گوێ لە تیلاوەتە پیرۆزەکان بگرە:",
+"روضة الفاتحة لأموات المؤمنين": "فاتیحە بۆ مردووانی ئیمانداران",
+"دعاء الفرج (إلهي عظم البلاء)": "دوعای فەرەج (إلهي عظم البلاء)",
+"دعاء الفرج": "دوعای فەرەج",
+"لا يوجد أموات مسجلون حالياً.": "ئێستا هیچ مردوویەک تۆمار نەکراوە.",
+"افتح المساجد في خرائط Google": "مزگەوتەکان لە Google Maps بکەرەوە",
+"مواقيت الصلاة الفلكية الدقيقة": "کاتەکانی نوێژی وردی ئەستێرەناسی",
+"زيارات المعصومين عليهم السلام": "زیارەتەکانی مەعسوومان (سەلامیان لێبێت)",
+"الصلوات التي يُرفع لها الأذان": "ئەو نوێژانەی بانگیان بۆ دەدرێت",
+"تأمّل آية من القرآن (اختياري)": "ڕامان لە ئایەتێکی قورئان (ئارەزوومەندانە)",
+"مبروك، لقد أتممت التحدي بنجاح!": "پیرۆزە، ئاڵنگارییەکەت بە سەرکەوتوویی تەواو کرد!",
+"وقت الإفطار ومغيب الشفق الشرعي": "کاتی بەربانگ و ئاوابوونی شەفەقی شەرعی",
+"يصلك دعاء اليوم مع بداية كل يوم": "دوعای ئەمڕۆ لە سەرەتای هەموو ڕۆژێکدا دەگاتە لات",
+"إهداء ثواب الفاتحة إلى: المرحوم": "پێشکەشکردنی سەوابی فاتیحە بۆ: خوالێخۆشبوو",
+"مبارك! أتممت ختمة القرآن الكريم": "پیرۆزە! خەتمی قورئانی پیرۆزت تەواو کرد",
+"ستظهر الزيارات هنا عند إضافتها.": "زیارەتەکان لێرە دەردەکەون کاتێک زیاد دەکرێن.",
+"اختر الصلاة لبدء المتابعة بدقة:": "نوێژەکە هەڵبژێرە بۆ دەستپێکردنی بەدواداچوون:",
+"المفاتيح • الزيارات • دعاء اليوم": "مەفاتیح • زیارەتەکان • دوعای ئەمڕۆ",
+"أذان تلقائي عند دخول وقت كل صلاة": "بانگی خۆکار لە کاتی هاتنی هەر نوێژێک",
+"نهاية وقت العشاء ووقت صلاة الليل": "کۆتایی کاتی خەوتنان و کاتی نوێژی شەو",
+"تابع صلواتك اليومية وصلوات القضاء": "بەدواداچوون بۆ نوێژە ڕۆژانەکان و نوێژی قەزا بکە",
+"العودة للرئيسية والاحتفال بالإنجاز": "گەڕانەوە بۆ سەرەکی و ئاهەنگگێڕان بە دەستکەوت",
+"لا توجد مناسبات مسجلة في هذا اليوم": "هیچ بۆنەیەک لەم ڕۆژەدا تۆمار نەکراوە",
+"فكّر في الأمر الذي أنت متحيّر فيه.": "بیر لەو کارە بکەرەوە کە سەرت لێی سووڕماوە.",
+"المواقيت • القبلة • المساجد القريبة": "کاتەکان • قیبلە • مزگەوتە نزیکەکان",
+"تحديات الأذكار من 50 إلى 500 تسبيحة": "ئاڵنگاری زیکر لە 50 تا 500 تەسبیح",
+"اسمح بالإشعارات ليصلك تنبيه الأذان.": "ڕێگە بە ئاگادارکردنەوە بدە بۆ ئەوەی ئاگاداری بانگت بۆ بێت.",
+"نحفظ مكانك تلقائياً ونريك كم بقي لك": "شوێنەکەت خۆکارانە پاشەکەوت دەکەین و پیشانت دەدەین چەندت ماوە",
+"سجل إهداء ثواب القرآن الكريم للأموات": "تۆماری پێشکەشکردنی سەوابی قورئان بۆ مردووان",
+"إضافة اسم متوفى جديد (يتطلب إنترنت):": "زیادکردنی ناوی مردوویەکی نوێ (پێویستی بە ئینتەرنێتە):",
+"تم قراءة الفاتحة والدعاء له (العودة)": "فاتیحە و دوعا بۆی خوێنرا (گەڕانەوە)",
+"استخارة بالسبحة وتأمّل آية من القرآن": "ئیستیخارە بە تەزبیح و ڕامان لە ئایەتێکی قورئان",
+"كميل • التوسل • العهد • الفرج وغيرها": "کومەیل • تەوەسسول • عەهد • فەرەج و هیتر",
+"أدعية أيام الأسبوع للإمام زين العابدين": "دوعای ڕۆژەکانی هەفتە بۆ ئیمام زەینولعابیدین",
+"أدعية أيام الأسبوع من الصحيفة السجادية": "دوعای ڕۆژەکانی هەفتە لە سەحیفەی سەججادیە",
+"اسم المتوفى (مثال: الحاج رشيد مجيد...)": "ناوی مردوو (نموونە: حاجی ڕەشید مەجید...)",
+"يُقرأ ليلة الجمعة وليلة النصف من شعبان": "لە شەوی هەینی و شەوی نیوەی شەعبان دەخوێنرێت",
+"ستظهر الأدعية القصيرة هنا عند إضافتها.": "دوعا کورتەکان لێرە دەردەکەون کاتێک زیاد دەکرێن.",
+"شهادة سيدة نساء العالمين فاطمة الزهراء": "شەهادەتی گەورەی ئافرەتانی جیهان فاتیمەی زەهرا",
+"مفاتيح الجنان (أدعية وزيارات أهل البيت)": "مەفاتیحولجینان (دوعا و زیارەتەکانی ئەهلی بەیت)",
+"١١٤ سورة • بحث • علامات • ترجمة • تلاوة": "١١٤ سورەت • گەڕان • نیشانە • وەرگێڕان • تیلاوەت",
+"تحميل المصحف كاملاً للقراءة بدون إنترنت": "دابەزاندنی تەواوی قورئان بۆ خوێندنەوە بەبێ ئینتەرنێت",
+"ابحث عن سورة أو كلمة في القرآن أو 2:255": "بەدوای سورەت یان وشەیەک لە قورئاندا بگەڕێ یان 2:255",
+"ستظهر الخلفيات الدينية هنا عند إضافتها.": "باکگراوندە ئایینییەکان لێرە دەردەکەون کاتێک زیاد دەکرێن.",
+"4. قسم الفاتحة (محتوى يضيفه المستخدمون)": "4. بەشی فاتیحە (ناوەڕۆکێک کە بەکارهێنەران زیادی دەکەن)",
+"حذف الأسماء التي أضفتها وكل بيانات التطبيق": "سڕینەوەی ئەو ناوانەی زیادت کردوون و هەموو زانیارییەکانی بەرنامە",
+"يمكنك أيضاً الضغط مطولاً على الصورة لحفظها": "دەتوانیت وێنەکە بۆ ماوەیەک دابگریت بۆ پاشەکەوتکردنی",
+"الحل الأمثل لمشكلة السهو في الصلوات اليومية": "باشترین چارەسەر بۆ لەبیرچوونەوە لە نوێژە ڕۆژانەکاندا",
+"دعاء الإمام المهدي عجل الله فرجه لكشف الكرب": "دوعای ئیمام مەهدی (عج) بۆ لابردنی ناڕەحەتی",
+"صدق الله العلي العظيم • تقبل الله هذا الدعاء": "صدق الله العلي العظيم • خودا ئەم دوعایە قبووڵ بکات",
+"يُقرأ ليلة الأربعاء وفي كل وقت لقضاء الحوائج": "لە شەوی چوارشەممە و هەموو کاتێک بۆ بەدیهاتنی پێداویستییەکان دەخوێنرێت",
+"أضف عدد ما عليك بزر +، واضغط − كلما قضيت صلاة.": "ژمارەی نوێژەکانی سەرت بە دوگمەی + زیاد بکە، و هەر جارێک نوێژێکت قەزا کردەوە − دابگرە.",
+"تعذّر تحميل الخريطة. تأكد من اتصالك بالإنترنت.": "نەخشە بار نەبوو. دڵنیابە لە پەیوەندی ئینتەرنێتەکەت.",
+"للاستفسارات أو الدعم الفني: zanb68950@gmail.com": "بۆ پرسیار یان پشتگیری تەکنیکی: zanb68950@gmail.com",
+"تتبع السجدات والركعات والتشهد بدقة تامة لمنع السهو": "بەدواداچوونی وردی سوجدە و ڕکات و تەشەهود بۆ ڕێگری لە لەبیرچوونەوە",
+"كلما زاد الهدف، عظمت الأجر والثواب وازدادت العزيمة": "هەتا ئامانج گەورەتر بێت، پاداشت و سەواب گەورەتر و ئیرادە بەهێزتر دەبێت",
+"قد نحدّث هذه السياسة، ويظهر تاريخ آخر تحديث أعلاه.": "لەوانەیە ئەم سیاسەتە نوێ بکەینەوە، و مێژووی دوایین نوێکردنەوە لە سەرەوە دەردەکەوێت.",
+"اضغط على أي دعاء لفتح الشاشة الخاصة وقراءته كاملاً:": "هەر دوعایەک دابگرە بۆ کردنەوەی شاشەکەی و خوێندنەوەی بە تەواوی:",
+"يُقرأ كل صباح، عهداً مع الإمام المهدي عجل الله فرجه": "هەموو بەیانییەک دەخوێنرێت، وەک پەیمانێک لەگەڵ ئیمام مەهدی (عج)",
+"ملاحظة: اترك التطبيق مفتوحاً أو في الخلفية ليُرفع الأذان في وقته.": "تێبینی: بەرنامەکە کراوە یان لە پاشبنەمادا بهێڵەوە بۆ ئەوەی بانگ لە کاتی خۆیدا بدرێت.",
+"حمّله مرة واحدة فقط (بضعة ميغابايت) واقرأه في أي وقت بدون إنترنت.": "تەنها یەک جار دایبەزێنە (چەند مێگابایتێک) و هەر کاتێک بەبێ ئینتەرنێت بیخوێنەوە.",
+"لا توجد علامات بعد. اضغط على أي آية أثناء القراءة ثم اختر \"علامة\".": "هێشتا هیچ نیشانەیەک نییە. لە کاتی خوێندنەوەدا ئایەتێک دابگرە و پاشان \"نیشانە\" هەڵبژێرە.",
+"يحتاج اتصالاً بالإنترنت أول مرة، ثم يُحفظ الجدول للعمل بدون إنترنت.": "جاری یەکەم پێویستی بە ئینتەرنێتە، پاشان خشتەکە پاشەکەوت دەکرێت بۆ کارکردن بەبێ ئینتەرنێت.",
+"حسب تقويم أم القرى، وقد يختلف يوماً واحداً حسب رؤية الهلال في بلدك.": "بەپێی ساڵنامەی ئوم ئەلقورا، و لەوانەیە ڕۆژێک جیاواز بێت بەپێی بینینی مانگ لە وڵاتەکەت.",
+"التطبيق مناسب لجميع الأعمار، ولا نجمع عمداً أي بيانات شخصية من الأطفال.": "بەرنامەکە بۆ هەموو تەمەنێک گونجاوە، و بە ئەنقەست هیچ زانیارییەکی کەسی لە منداڵان کۆناکەینەوە.",
+"الاستخارة تكون عند الحيرة بعد التفكير والمشورة، وفي الأمور الكبيرة يُرجع إلى المرجع وأهل العلم.": "ئیستیخارە لە کاتی سەرلێشێواندا دەکرێت دوای بیرکردنەوە و ڕاوێژ، و لە کارە گەورەکاندا دەگەڕێیتەوە بۆ مەرجەع و زانایان.",
+"إذا فعّلت الأذان أو التنبيهات يطلب التطبيق إذن الإشعارات لعرضها فقط، ويمكنك إيقافها من الإعدادات.": "ئەگەر بانگ یان ئاگادارکردنەوەکانت چالاک کرد، بەرنامەکە تەنها بۆ پیشاندانیان مۆڵەتی ئاگادارکردنەوە داوا دەکات، و دەتوانیت لە ڕێکخستنەکانەوە بیوەستێنیت.",
+"تُحفظ على جهازك فقط: اسمك والإعدادات واللغة، وسجل الصلوات والتحديات، والعلامات وآخر موضع قراءة في المصحف، ونسخة من القرآن والأدعية للعمل دون إنترنت.": "تەنها لەسەر ئامێرەکەت پاشەکەوت دەکرێن: ناوت و ڕێکخستنەکان و زمان، تۆماری نوێژ و ئاڵنگارییەکان، نیشانەکان و دوایین شوێنی خوێندنەوە لە قورئان، و کۆپییەک لە قورئان و دوعاکان بۆ کارکردن بەبێ ئینتەرنێت.",
+"اكتب اسمك": "ناوت بنووسە",
+"شهر رمضان": "مانگی ڕەمەزان",
+"الفجر": "بەیانی",
+"الشروق": "خۆرهەڵاتن",
+"الظهر": "نیوەڕۆ",
+"العصر": "عەسر",
+"المغرب": "ئێوارە",
+"العشاء": "خەوتنان",
+"الأحد": "یەکشەممە",
+"الإثنين": "دووشەممە",
+"الثلاثاء": "سێشەممە",
+"الأربعاء": "چوارشەممە",
+"الخميس": "پێنجشەممە",
+"الجمعة": "هەینی",
+"السبت": "شەممە",
+"محرم": "موحەڕەم",
+"صفر": "سەفەر",
+"ربيع الأول": "ڕەبیعولئەووەڵ",
+"ربيع الآخر": "ڕەبیعولئاخیر",
+"جمادى الأولى": "جەمادیولئوولا",
+"جمادى الآخرة": "جەمادیولئاخیرە",
+"رجب": "ڕەجەب",
+"شعبان": "شەعبان",
+"رمضان": "ڕەمەزان",
+"شوال": "شەووال",
+"ذو القعدة": "زولقەعدە",
+"ذو الحجة": "زولحیججە",
+"أهلاً بك، تم تسجيل الدخول بنجاح": "بەخێربێیت، بە سەرکەوتوویی چوویتە ژوورەوە",
+"تم تغيير اللغة بنجاح": "زمان بە سەرکەوتوویی گۆڕدرا",
+"تم تفعيل عمل التلاوة في الخلفية": "لێدانی تیلاوەت لە پاشبنەمادا چالاک کرا",
+"تم إيقاف عمل التلاوة في الخلفية": "لێدانی تیلاوەت لە پاشبنەمادا وەستێنرا",
+"اكتب اسم التلاوة": "ناوی تیلاوەت بنووسە",
+"الرابط غير صحيح": "بەستەرەکە هەڵەیە",
+"جاري فحص الرابط...": "بەستەرەکە دەپشکنرێت...",
+"الرابط لا يعمل كملف صوتي": "بەستەرەکە وەک فایلی دەنگی کار ناکات",
+"تم حفظ التلاوة": "تیلاوەتەکە پاشەکەوت کرا",
+"تم الحذف": "سڕایەوە",
+"لا يوجد اتصال بالإنترنت لتنزيل الصوت الجديد": "پەیوەندی ئینتەرنێت نییە بۆ دابەزاندنی دەنگی نوێ",
+"تم النسخ": "کۆپی کرا",
+"تمت العودة إلى تاريخ اليوم": "گەڕایتەوە بۆ مێژووی ئەمڕۆ",
+"تم الإبلاغ وإخفاء الاسم من قائمتك": "ڕاپۆرت درا و ناوەکە لە لیستەکەت شاردرایەوە",
+"لا يوجد اتصال بالإنترنت. لا يمكن إضافة اسم متوفى جديد بدون اتصال.": "پەیوەندی ئینتەرنێت نییە. ناتوانرێت ناوی مردوویەکی نوێ بەبێ پەیوەندی زیاد بکرێت.",
+"يرجى كتابة اسم المتوفى أولاً": "تکایە سەرەتا ناوی مردووەکە بنووسە",
+"جاري حفظ الاسم سحابياً...": "ناوەکە لە هەوردا پاشەکەوت دەکرێت...",
+"تعذر الحفظ، تأكد من الاتصال": "پاشەکەوت نەکرا، دڵنیابە لە پەیوەندی",
+"حدث خطأ في الاتصال": "هەڵەیەک لە پەیوەندیدا ڕوویدا",
+"تمت إضافة الاسم بنجاح!": "ناوەکە بە سەرکەوتوویی زیاد کرا!",
+"لا يوجد اتصال بالإنترنت.": "پەیوەندی ئینتەرنێت نییە.",
+"عذراً، لا تمتلك صلاحية حذف هذا الاسم": "ببورە، مۆڵەتی سڕینەوەی ئەم ناوەت نییە",
+"تعذر الحذف من السحابة": "لە هەورەوە نەسڕایەوە",
+"تم حذف الاسم بنجاح": "ناوەکە بە سەرکەوتوویی سڕایەوە",
+"تعذر تحديث عداد المشاهدات": "ژمێرەری بینین نوێ نەکرایەوە",
+"تم حذف العلامة": "نیشانەکە سڕایەوە",
+"تم حفظ العلامة": "نیشانەکە پاشەکەوت کرا",
+"تم نسخ الآية": "ئایەتەکە کۆپی کرا",
+"جاري تحميل الترجمة...": "وەرگێڕان بار دەکرێت...",
+"تعذر تشغيل الصوت، تأكد من الإنترنت": "دەنگەکە لێنەدرا، دڵنیابە لە ئینتەرنێت",
+"المصحف محفوظ مسبقاً على جهازك": "قورئان پێشتر لەسەر ئامێرەکەت پاشەکەوت کراوە",
+"اتصل بالإنترنت للتحميل": "بۆ دابەزاندن پەیوەندی بە ئینتەرنێتەوە بکە",
+"تم حفظ المصحف كاملاً ويعمل الآن بدون إنترنت": "تەواوی قورئان پاشەکەوت کرا و ئێستا بەبێ ئینتەرنێت کار دەکات",
+"فشل التحميل، حاول مرة أخرى": "دابەزاندن سەرکەوتوو نەبوو، دووبارە هەوڵبدەرەوە",
+"جاري تحديد موقعك...": "شوێنەکەت دیاری دەکرێت...",
+"تم رفض إذن الموقع، فعّله من إعدادات الجهاز": "مۆڵەتی شوێن ڕەتکرایەوە، لە ڕێکخستنەکانی ئامێرەوە چالاکی بکە",
+"بدون إنترنت: تُعرض آخر مواقيت محفوظة": "بەبێ ئینتەرنێت: دوایین کاتە پاشەکەوتکراوەکان پیشان دەدرێن",
+"جاري تجهيز الصورة...": "وێنەکە ئامادە دەکرێت...",
+"إذا لم تُحفظ الصورة، اضغط عليها مطولاً واختر حفظ": "ئەگەر وێنەکە پاشەکەوت نەبوو، بۆ ماوەیەک دایبگرە و پاشەکەوت هەڵبژێرە",
+"تم نسخ الرسالة، الصقها في واتساب أو أي تطبيق": "نامەکە کۆپی کرا، لە واتساپ یان هەر بەرنامەیەکی تر بیلکێنە",
+"تعذر تشغيل التلاوة، تأكد من الإنترنت": "تیلاوەتەکە لێنەدرا، دڵنیابە لە ئینتەرنێت",
+"اكتب الاسم فقط، بدون أرقام أو روابط أو معلومات تواصل": "تەنها ناوەکە بنووسە، بەبێ ژمارە یان بەستەر یان زانیاری پەیوەندی",
+"جاري الحذف...": "دەسڕدرێتەوە...",
+"تم حفظ الاسم": "ناوەکە پاشەکەوت کرا",
+"تم إيقاف إشعار دعاء اليوم": "ئاگادارکردنەوەی دوعای ئەمڕۆ وەستێنرا",
+"الإشعارات غير مدعومة على هذا الجهاز": "ئاگادارکردنەوە لەسەر ئەم ئامێرە پشتگیری ناکرێت",
+"يرجى السماح بالإشعارات من إعدادات الهاتف": "تکایە لە ڕێکخستنەکانی مۆبایلەوە ڕێگە بە ئاگادارکردنەوە بدە",
+"سيصلك دعاء اليوم مع بداية كل يوم": "دوعای ئەمڕۆ لە سەرەتای هەموو ڕۆژێکدا دەگاتە لات",
+"وضع النهار ☀️": "دۆخی ڕۆژ ☀️",
+"وضع الليل 🌙": "دۆخی شەو 🌙",
+"اللغة": "زمان"};
+const HQB_KU_SKIP = '.quran-text,.mp-text,.mp-page,.bismillah,.ayah-tr,#dua-detail-text,#khatm-text,#zahra-dhikr-text,script,style,textarea,[contenteditable],[data-noku],.lang-switch';
+const HQB_KU_MONTHS = {
+    'جمادى الأولى':'جەمادیولئوولا','جمادى الآخرة':'جەمادیولئاخیرە','ربيع الأول':'ڕەبیعولئەووەڵ','ربيع الآخر':'ڕەبیعولئاخیر',
+    'ذو القعدة':'زولقەعدە','ذو الحجة':'زولحیججە','محرم':'موحەڕەم','صفر':'سەفەر','رجب':'ڕەجەب','شعبان':'شەعبان','رمضان':'ڕەمەزان','شوال':'شەووال',
+    'كانون الثاني':'کانوونی دووەم','كانون الأول':'کانوونی یەکەم','تشرين الأول':'تشرینی یەکەم','تشرين الثاني':'تشرینی دووەم',
+    'شباط':'شوبات','آذار':'ئازار','نيسان':'نیسان','أيار':'ئایار','حزيران':'حوزەیران','تموز':'تەممووز','آب':'ئاب','أيلول':'ئەیلوول',
+    'الإثنين':'دووشەممە','الاثنين':'دووشەممە','الثلاثاء':'سێشەممە','الأربعاء':'چوارشەممە','الخميس':'پێنجشەممە','الجمعة':'هەینی','السبت':'شەممە','الأحد':'یەکشەممە',
+    '(اليوم)':'(ئەمڕۆ)','هـ':'ک','،':'،'
+};
+const HQB_KU_MKEYS = Object.keys(HQB_KU_MONTHS).sort((a, b) => b.length - a.length);
+const HQB_KU_WEEK = { 'أح':'ی', 'اث':'د', 'ث':'س', 'أر':'چ', 'خ':'پ', 'ج':'هـ', 'س':'ش' };
+
+function hqbLang() { try { return localStorage.getItem('hqb_lang') === 'ku' ? 'ku' : 'ar'; } catch (e) { return 'ar'; } }
+
+function hqbKuDate(s) {
+    let rest = s;
+    HQB_KU_MKEYS.forEach(k => { rest = rest.split(k).join(' '); });
+    if (/[ء-ي]/.test(rest.replace(/[\d٠-٩\s,،:\-\/().]/g, ''))) return null;
+    let out = s;
+    HQB_KU_MKEYS.forEach(k => { out = out.split(k).join('\u0000' + HQB_KU_MKEYS.indexOf(k) + '\u0001'); });
+    return out.replace(/\u0000(\d+)\u0001/g, (m, i) => HQB_KU_MONTHS[HQB_KU_MKEYS[+i]]);
+}
+function hqbKuParts(s) { // "العراق - بغداد" أو أسماء مفردة
+    return s.split(/(\s-\s|\s•\s)/).map(p => HQB_KU[p] || hqbKuWord(p) || p).join('');
+}
+function hqbKuWord(s) { return HQB_KU[s] || null; }
+function hqbKuTime(s) {
+    const m = s.match(/^([\d٠-٩]{1,2}[:：][\d٠-٩]{2}(?:[:：][\d٠-٩]{2})?)\s*(ص|م)$/);
+    return m ? m[1] + ' ' + (m[2] === 'ص' ? 'پ.ن' : 'د.ن') : null;
+}
+const HQB_KU_RULES = [
+    [/^سورة (.+)$/, m => 'سورەتی ' + m[1]],
+    [/^يبدأ من سورة (.+) • الآية (.+)$/, m => 'لە سورەتی ' + m[1] + ' • ئایەتی ' + m[2] + ' دەست پێدەکات'],
+    [/^(مكية|مدنية) • (.+) آية$/, m => (m[1] === 'مكية' ? 'مەککی' : 'مەدەنی') + ' • ' + m[2] + ' ئایەت'],
+    [/^الجزء (.+) من (.+)$/, m => 'جوزئی ' + m[1] + ' لە ' + m[2]],
+    [/^الجزء (.+)$/, m => 'جوزئی ' + m[1]],
+    [/^صفحة (.+) من (.+)$/, m => 'لاپەڕە ' + m[1] + ' لە ' + m[2]],
+    [/^أهلاً بك$/, () => 'بەخێربێیت'],
+    [/^أهلاً،? (.+)$/, m => 'بەخێربێیت ' + m[1]],
+    [/^مساء الخير(?: يا)?\s*(.*)$/, m => ('ئێوارەت باش ' + m[1]).trim()],
+    [/^صباح الخير(?: يا)?\s*(.*)$/, m => ('بەیانیت باش ' + m[1]).trim()],
+    [/^متبقي لصلاة (.+)$/, m => 'ماوە بۆ نوێژی ' + (m[1] === '...' ? '...' : (HQB_KU[m[1]] || m[1]))],
+    [/^حان الآن موعد أذان (.+)$/, m => 'ئێستا کاتی بانگی ' + (HQB_KU[m[1]] || m[1]) + 'یە'],
+    [/^باقٍ (.+) دقيقة على أذان (.+)$/, m => m[1] + ' خولەک ماوە بۆ بانگی ' + (HQB_KU[m[2]] || m[2])],
+    [/^([\d٠-٩]+) د$/, m => m[1] + ' خ'],
+    [/^([\d٠-٩]+) دقيقة$/, m => m[1] + ' خولەک'],
+    [/^مناسبات شهر (.+)$/, m => 'بۆنەکانی مانگی ' + (hqbKuDate(m[1]) || m[1])],
+    [/^مناسبات يوم (.+)$/, m => 'بۆنەکانی ڕۆژی ' + (hqbKuDate(m[1]) || m[1])],
+    [/^الموقع المعتمد: (.+)$/, m => 'شوێنی پەسەندکراو: ' + hqbKuParts(m[1])],
+    [/^(.+) • (Asia\/.+)$/, m => hqbKuParts(m[1]) + ' • ' + m[2]],
+    [/^تقدّم الختمة: (.+)$/, m => 'پێشکەوتنی خەتمە: ' + m[1]],
+    [/^ختمتي ج(.+)$/, m => 'خەتمەکەم ج' + m[1]],
+    [/^هذه ختمتك رقم (.+) • تقبّل الله منك$/, m => 'ئەمە خەتمەی ژمارە ' + m[1] + 'ـتە • خودا لێت قبووڵ بکات'],
+    [/^شهر رمضان (.+) هـ$/, m => 'مانگی ڕەمەزان ' + m[1] + ' ک'],
+    [/^تم اعتماد مواقيت (.+)$/, m => 'کاتەکانی ' + hqbKuParts(m[1]) + ' پەسەند کران'],
+    [/^تم تحديث واعتماد مواقيت \((.+)\)$/, m => 'کاتەکانی (' + hqbKuParts(m[1]) + ') نوێ کرانەوە'],
+    [/^جاري الحفظ\.\.\. (.+)$/, m => 'پاشەکەوت دەکرێت... ' + m[1]],
+    [/^جاري ضبط أوقات الصلاة لـ \((.+)\)\.\.\.$/, m => 'ڕێکخستنی کاتەکانی نوێژ بۆ (' + hqbKuParts(m[1]) + ')...'],
+    [/^المساجد المكتشفة \((.+)\)$/, m => 'مزگەوتە دۆزراوەکان (' + m[1] + ')'],
+    [/^تقبل الله، إجمالي القراءات: (.+)$/, m => 'خودا قبووڵی بکات، کۆی خوێندنەوەکان: ' + m[1]],
+    [/^القارئ: (.+)$/, m => 'قورئانخوێن: ' + m[1]],
+    [/^(.+) • تلاوة السورة كاملة$/, m => m[1] + ' • تیلاوەتی تەواوی سورەت'],
+    [/^إهداء ثواب الفاتحة إلى: (?:المرحوم|المرحومة) (.+)$/, m => 'پێشکەشکردنی سەوابی فاتیحە بۆ: خوالێخۆشبوو ' + m[1]],
+    [/^أتممت بحمد الله تحدي (.+) تسبيحة بنجاح تام، تقبل الله أعمالكم وأسعد قلوبكم\.$/, m => 'بە سوپاسی خودا ئاڵنگاری ' + m[1] + ' تەسبیحت بە تەواوی ئەنجامدا، خودا کردەوەکانتان قبووڵ بکات و دڵتان شاد بکات.'],
+    [/^دعاء يوم (.+)$/, m => 'دوعای ڕۆژی ' + (HQB_KU_MONTHS[m[1]] || m[1])],
+];
+
+function hqbKuTr(raw, el) {
+    const s = raw.trim();
+    if (!s || !/[ء-ي]/.test(s)) return null;
+    let out = HQB_KU[s];
+    if (out === undefined && s.length <= 2 && el && el.closest && el.closest('#calendar-weekdays-grid,#tracker-body')) out = HQB_KU_WEEK[s];
+    if (out === undefined) out = hqbKuTime(s);
+    if (out == null && (s === 'ص' || s === 'م') && el && /[\d٠-٩][:：][\d٠-٩]/.test((el.parentElement || el).textContent)) out = s === 'ص' ? 'پ.ن' : 'د.ن';
+    if (out == null) for (const [re, fn] of HQB_KU_RULES) { const m = s.match(re); if (m) { out = fn(m); break; } }
+    if (out == null && /[\d٠-٩]/.test(s)) out = hqbKuDate(s);
+    if (out == null) return null;
+    const lead = raw.match(/^\s*/)[0], trail = raw.match(/\s*$/)[0];
+    return lead + out + trail;
+}
+
+const hqbKuText = new WeakMap();   // عقدة نصية -> {ar, ku}
+const hqbKuAttr = new WeakMap();   // عنصر -> {attr: {ar, ku}}
+const hqbKuDone = new Set();
+const HQB_KU_ATTRS = ['placeholder', 'title', 'aria-label'];
+
+function hqbKuSkip(el) { return !el || (el.closest && el.closest(HQB_KU_SKIP)); }
+function hqbKuNode(n) {
+    const p = n.parentElement;
+    if (hqbKuSkip(p)) return;
+    const rec = hqbKuText.get(n);
+    if (rec && n.nodeValue === rec.ku) return;
+    const t = hqbKuTr(n.nodeValue, p);
+    if (t == null || t === n.nodeValue) return;
+    hqbKuText.set(n, { ar: n.nodeValue, ku: t });
+    hqbKuDone.add(n);
+    n.nodeValue = t;
+    p.classList.add('ku-t');
+}
+function hqbKuEl(el) {
+    if (hqbKuSkip(el)) return;
+    let rec = hqbKuAttr.get(el);
+    HQB_KU_ATTRS.forEach(a => {
+        const v = el.getAttribute(a);
+        if (!v || (rec && rec[a] && rec[a].ku === v)) return;
+        const t = hqbKuTr(v, el);
+        if (t == null || t === v) return;
+        if (!rec) { rec = {}; hqbKuAttr.set(el, rec); }
+        rec[a] = { ar: v, ku: t };
+        hqbKuDone.add(el);
+        el.setAttribute(a, t);
+    });
+}
+function hqbKuWalk(root) {
+    if (!root) return;
+    if (root.nodeType === 3) { hqbKuNode(root); return; }
+    if (root.nodeType !== 1 || hqbKuSkip(root)) return;
+    hqbKuEl(root);
+    root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(hqbKuEl);
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    const list = [];
+    while (w.nextNode()) list.push(w.currentNode);
+    list.forEach(hqbKuNode);
+}
+function hqbKuRestore() {
+    hqbKuDone.forEach(n => {
+        if (n.nodeType === 3) {
+            const r = hqbKuText.get(n);
+            if (r && n.nodeValue === r.ku) n.nodeValue = r.ar;
+            hqbKuText.delete(n);
+            if (n.parentElement) n.parentElement.classList.remove('ku-t');
+        } else {
+            const r = hqbKuAttr.get(n);
+            if (r) Object.keys(r).forEach(a => { if (n.getAttribute(a) === r[a].ku) n.setAttribute(a, r[a].ar); });
+            hqbKuAttr.delete(n);
+        }
+    });
+    hqbKuDone.clear();
+}
+
+let hqbKuObs = null, hqbKuQueue = new Set(), hqbKuPending = false;
+function hqbKuFlush() {
+    hqbKuPending = false;
+    const q = [...hqbKuQueue]; hqbKuQueue.clear();
+    q.forEach(n => { if (n.isConnected) hqbKuWalk(n); });
+}
+function hqbKuStart() {
+    hqbKuWalk(document.body);
+    if (hqbKuObs) return;
+    hqbKuObs = new MutationObserver(muts => {
+        for (const m of muts) {
+            if (m.type === 'childList') m.addedNodes.forEach(n => hqbKuQueue.add(n));
+            else if (m.type === 'characterData') hqbKuQueue.add(m.target);
+            else if (m.type === 'attributes') hqbKuQueue.add(m.target);
+        }
+        if (!hqbKuPending && hqbKuQueue.size) {
+            hqbKuPending = true;
+            // نترجم قبل الرسم التالي حتى لا يظهر النص العربي لحظة
+            Promise.resolve().then(hqbKuFlush);
+        }
+    });
+    hqbKuObs.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: HQB_KU_ATTRS });
+}
+function hqbKuStop() { if (hqbKuObs) { hqbKuObs.disconnect(); hqbKuObs = null; } hqbKuQueue.clear(); hqbKuRestore(); }
+
+function hqbApplyLang(l) {
+    const ku = l === 'ku';
+    document.documentElement.setAttribute('lang', ku ? 'ckb' : 'ar');
+    document.documentElement.setAttribute('dir', 'rtl');
+    const a = document.getElementById('lang-btn-ar'), k = document.getElementById('lang-btn-ku');
+    if (a && k) { a.className = ku ? '' : 'on'; k.className = ku ? 'on' : ''; }
+    if (ku) hqbKuStart(); else hqbKuStop();
+}
+function hqbSetLang(l) {
+    if (typeof playClickSound === 'function') playClickSound();
+    try { localStorage.setItem('hqb_lang', l); } catch (e) {}
+    hqbApplyLang(l);
+    showToast(l === 'ku' ? 'زمان گۆڕدرا بۆ کوردی' : 'تم اختيار اللغة العربية');
+}
+(function () {
+    const anchor = document.getElementById('lbl-theme');
+    const row = anchor && anchor.closest('.flex.justify-between');
+    if (row) row.insertAdjacentHTML('afterend', `<div class="flex justify-between items-center p-3 rounded-2xl bg-palette-mid border border-palette-purple">
+        <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-sm"><i class="fa-solid fa-language"></i></div>
+            <span class="font-bold text-xs lang-switch">اللغة • زمان</span>
+        </div>
+        <div class="theme-switch lang-switch">
+            <button id="lang-btn-ar" onclick="hqbSetLang('ar')">العربية</button>
+            <button id="lang-btn-ku" onclick="hqbSetLang('ku')" lang="ckb">کوردی</button>
+        </div>
+    </div>`);
+    hqbApplyLang(hqbLang());
+})();
+
 </script>
 </body>
 </html>
