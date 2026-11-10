@@ -1648,8 +1648,8 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
 </div>
 
 <div id="founders-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[70]">
-    <div class="w-full max-w-md bg-palette-mid border border-palette-muted/50 rounded-2xl p-5 shadow-2xl relative flex flex-col gap-3">
-        <div class="flex justify-between items-center pb-3 border-b border-palette-purple">
+    <div class="w-full max-w-[300px] bg-palette-mid border border-palette-muted/50 rounded-2xl p-3.5 shadow-2xl relative flex flex-col gap-2">
+        <div class="flex justify-between items-center pb-2 border-b border-palette-purple">
             <div class="flex items-center gap-2">
                 <div class="w-9 h-9 rounded-xl bg-palette-mauve text-palette-darkest flex items-center justify-center text-sm">
                     <i class="fa-solid fa-people-group"></i>
@@ -1664,26 +1664,24 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
             </button>
         </div>
 
-        <a href="https://www.instagram.com/t85ki" target="_blank" rel="noopener" onclick="playClickSound()" class="p-3 rounded-2xl bg-palette-light text-palette-darkest flex items-center gap-3 shadow-md active:scale-[.98] transition-all" style="text-decoration:none">
-            <div class="w-11 h-11 rounded-full bg-palette-darkest text-palette-light flex items-center justify-center text-lg font-black shrink-0"><i class="fa-solid fa-user-secret"></i></div>
+        <a href="https://www.instagram.com/t85ki" target="_blank" rel="noopener" onclick="playClickSound()" class="p-2 rounded-xl bg-palette-light text-palette-darkest flex items-center gap-3 shadow-md active:scale-[.98] transition-all" style="text-decoration:none">
+            <div class="w-9 h-9 rounded-full bg-palette-darkest text-palette-light flex items-center justify-center text-sm font-black shrink-0">Z</div>
             <div class="text-right min-w-0">
                 <span id="founders-founder-label" class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-palette-darkest text-palette-light mb-1">المؤسسة</span>
-                <h4 id="founders-founder-name" class="text-sm font-black truncate text-right">مجهول</h4>
+                <h4 id="founders-founder-name" class="text-sm font-black truncate text-right" dir="ltr">Zainab Ali</h4>
             </div>
             <i class="fa-brands fa-instagram text-xl mr-auto"></i>
         </a>
 
-        <div class="p-3 rounded-2xl bg-palette-mauve text-palette-darkest flex items-center gap-3 shadow-md">
-            <div id="founders-support-initial" class="w-11 h-11 rounded-full bg-palette-dark text-palette-mauve flex items-center justify-center text-lg font-black shrink-0">أ</div>
+        <div class="p-2 rounded-xl bg-palette-mauve text-palette-darkest flex items-center gap-3 shadow-md">
+            <div id="founders-support-initial" class="w-9 h-9 rounded-full bg-palette-dark text-palette-mauve flex items-center justify-center text-sm font-black shrink-0">أ</div>
             <div class="text-right min-w-0">
                 <span id="founders-support-label" class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-palette-dark text-palette-light mb-1">الداعم</span>
                 <h4 id="founders-support-name" class="text-sm font-black truncate">أحمد العامري</h4>
             </div>
         </div>
 
-        <button onclick="playClickSound(); closeModal('founders-modal')" class="w-full py-2.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-founders">
-            إغلاق
-        </button>
+        <span id="btn-close-founders" class="hidden"></span>
     </div>
 </div>
 
@@ -1902,7 +1900,10 @@ document.querySelectorAll('[data-app-logo]').forEach(i => { i.src = APP_LOGO_DAT
 
 let myDeviceId = localStorage.getItem('adhkar_device_id');
 if (!myDeviceId) {
-    myDeviceId = 'dev_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+    let rnd = '';
+    try { const a = new Uint8Array(18); crypto.getRandomValues(a); rnd = Array.from(a, x => x.toString(16).padStart(2, '0')).join(''); }
+    catch (e) { rnd = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2); }
+    myDeviceId = 'dev_' + rnd + Date.now().toString(36);
     localStorage.setItem('adhkar_device_id', myDeviceId);
 }
 
@@ -1922,8 +1923,8 @@ function showToast(message) {
 }
 
 function escapeHTML(str) {
-    if (!str) return '';
-    return str.replace(/[&<>'"]/g, tag => ({
+    if (str === null || str === undefined || str === '') return '';
+    return String(str).replace(/[&<>'"]/g, tag => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
     }[tag] || tag));
 }
@@ -4001,13 +4002,27 @@ const HQB_FATIHA_MAX = 5;
 function hqbMyNamesCount() {
     return deceasedList.filter(d => d.created_by === myDeviceId).length;
 }
-async function hqbMyNamesCountCloud() {
-    if (!supabaseClient || !navigator.onLine) return hqbMyNamesCount();
+async function hqbRpc(name, args) {
     try {
-        const { count, error } = await supabaseClient.from('fanus').select('id', { count: 'exact', head: true }).eq('created_by', myDeviceId);
-        if (error || typeof count !== 'number') return hqbMyNamesCount();
-        return count;
-    } catch (e) { return hqbMyNamesCount(); }
+        const { data, error } = await supabaseClient.rpc(name, args);
+        if (!error) return { ok: true, data };
+        const missing = error.code === 'PGRST202' || error.code === '42883' || /could not find the function/i.test(String(error.message || ''));
+        return { ok: false, missing, error };
+    } catch (e) { return { ok: false, missing: false, error: e }; }
+}
+async function hqbMyFanusIds() {
+    if (!supabaseClient || !navigator.onLine) return null;
+    const r = await hqbRpc('fanus_mine', { p_device: myDeviceId });
+    if (r.ok) return (r.data || []).map(x => (x && typeof x === 'object') ? x.fanus_mine : x);
+    if (!r.missing) return null;
+    try {
+        const { data, error } = await supabaseClient.from('fanus').select('id').eq('created_by', myDeviceId);
+        return error ? null : (data || []).map(x => x.id);
+    } catch (e) { return null; }
+}
+async function hqbMyNamesCountCloud() {
+    const ids = await hqbMyFanusIds();
+    return ids ? ids.length : hqbMyNamesCount();
 }
 function hqbRenderFatihaQuota() {
     const el = document.getElementById('fatiha-quota');
@@ -4025,17 +4040,20 @@ async function loadFatihaLocalList() {
         try {
             const { data, error } = await supabaseClient
                 .from('fanus')
-                .select('*')
+                .select('id, deceased_name, gender, views_count, reads_count')
                 .order('id', { ascending: false });
 
             if (!error && data) {
+                const mine = await hqbMyFanusIds();
+                const mineSet = new Set((mine || []).map(String));
+                const old = {}; if (!mine) deceasedList.forEach(d => { old[d.id] = d.created_by; });
                 deceasedList = data.map(item => ({
                     id: item.id,
                     name: item.deceased_name || item.name || "متوفى",
                     gender: item.gender || "ذكر",
                     views_count: item.views_count || 0,
                     reads_count: item.reads_count || 0,
-                    created_by: item.created_by || ''
+                    created_by: mine ? (mineSet.has(String(item.id)) ? myDeviceId : '') : (old[item.id] || '')
                 }));
                 localStorage.setItem('cached_fanus', JSON.stringify(deceasedList));
             } else {
@@ -4139,20 +4157,17 @@ async function addDeceasedCloud() {
 
     if (supabaseClient) {
         try {
-            const { error } = await supabaseClient
-                .from('fanus')
-                .insert([{ 
-                    deceased_name: name,
-                    gender: gender,
-                    views_count: 0,
-                    reads_count: 0,
-                    created_by: myDeviceId
-                }]);
+            let res = await hqbRpc('fanus_add', { p_name: name, p_gender: gender, p_device: myDeviceId });
+            let error = res.ok ? null : res.error;
+            if (!res.ok && res.missing) {
+                error = (await supabaseClient.from('fanus').insert([{ deceased_name: name, gender: gender, views_count: 0, reads_count: 0, created_by: myDeviceId }])).error;
+            }
 
             if (error) {
                 const msg = String(error.message || '');
                 if (msg.includes('fanus_limit')) showToast(`لا يمكنك إضافة أكثر من ${toEasternArabicDigits(HQB_FATIHA_MAX)} أسماء`);
                 else if (msg.includes('fanus_busy')) showToast('ضغط كبير الآن، حاول بعد دقيقة');
+                else if (msg.includes('fanus_bad')) showToast('اكتب الاسم فقط، بدون أرقام أو روابط أو رموز');
                 else showToast("تعذر الحفظ، تأكد من الاتصال");
                 return;
             }
@@ -4183,11 +4198,9 @@ async function deleteDeceasedCloud(id) {
 
     if (supabaseClient) {
         try {
-            const { error } = await supabaseClient
-                .from('fanus')
-                .delete()
-                .eq('id', id)
-                .eq('created_by', myDeviceId);
+            let res = await hqbRpc('fanus_delete', { p_id: id, p_device: myDeviceId });
+            let error = res.ok ? null : res.error;
+            if (!res.ok && res.missing) error = (await supabaseClient.from('fanus').delete().eq('id', id).eq('created_by', myDeviceId)).error;
 
             if (error) {
                 showToast("تعذر الحذف، حاول مرة أخرى");
@@ -4214,31 +4227,25 @@ async function openReadingModal(id) {
 
     if (supabaseClient && navigator.onLine) {
         try {
-            const { data: cur } = await supabaseClient
-                .from('fanus')
-                .select('views_count, reads_count')
-                .eq('id', id)
-                .single();
-
-            const newViews = ((cur && cur.views_count) || 0) + 1;
-            const { error } = await supabaseClient
-                .from('fanus')
-                .update({ views_count: newViews })
-                .eq('id', id);
-
-            if (error) {
-                console.error('views update error:', error);
-                showToast('تعذر تحديث عداد المشاهدات');
-            } else {
-                person.views_count = newViews;
-                if (cur) person.reads_count = cur.reads_count || person.reads_count || 0;
+            const cur = await hqbFanusHit(id, 'views');
+            if (cur) {
+                person.views_count = cur.views; person.reads_count = cur.reads;
                 document.getElementById('modal-views-count').innerText = toEasternArabicDigits(person.views_count);
                 document.getElementById('modal-reads-count').innerText = toEasternArabicDigits(person.reads_count || 0);
             }
-        } catch (e) {
-            console.error('views update exception:', e);
-        }
+        } catch (e) {}
     }
+}
+async function hqbFanusHit(id, kind) {
+    const r = await hqbRpc('fanus_hit', { p_id: id, p_kind: kind });
+    if (r.ok) { const d = r.data || {}; return { views: +d.views || 0, reads: +d.reads || 0 }; }
+    if (!r.missing) return null;
+    const col = kind === 'reads' ? 'reads_count' : 'views_count';
+    const { data: cur } = await supabaseClient.from('fanus').select('views_count, reads_count').eq('id', id).single();
+    const out = { views: (cur && cur.views_count) || 0, reads: (cur && cur.reads_count) || 0 };
+    out[kind] += 1;
+    const { error } = await supabaseClient.from('fanus').update({ [col]: out[kind] }).eq('id', id);
+    return error ? null : out;
 }
 
 async function finishReadingFatiha() {
@@ -4247,18 +4254,8 @@ async function finishReadingFatiha() {
 
         if (supabaseClient && navigator.onLine) {
             try {
-                const { data: cur } = await supabaseClient
-                    .from('fanus')
-                    .select('reads_count')
-                    .eq('id', activeDeceasedPerson.id)
-                    .single();
-                newReads = ((cur && cur.reads_count) || 0) + 1;
-
-                const { error } = await supabaseClient
-                    .from('fanus')
-                    .update({ reads_count: newReads })
-                    .eq('id', activeDeceasedPerson.id);
-                if (error) console.error('reads update error:', error);
+                const cur = await hqbFanusHit(activeDeceasedPerson.id, 'reads');
+                if (cur) newReads = cur.reads;
             } catch (e) {}
         }
 
@@ -5565,7 +5562,7 @@ function hqbApplySectionLabels() {
         'lbl-sec-conv': 'محوّل التاريخ',
         'lbl-sec-ist': 'الاستخارة'
     };
-    map['founders-founder-name'] = 'مجهول';
+    map['founders-founder-name'] = 'Zainab Ali';
     Object.keys(map).forEach(id => { const el = document.getElementById(id); if (el) el.innerText = map[id]; });
 }
 
@@ -7128,7 +7125,12 @@ async function hqbDeleteMyData() {
     });
     if (!ok) return;
     showToast('جاري الحذف...');
-    try { if (supabaseClient && navigator.onLine) await supabaseClient.from('fanus').delete().eq('created_by', myDeviceId); } catch (e) {}
+    try {
+        if (supabaseClient && navigator.onLine) {
+            const r = await hqbRpc('fanus_delete_mine', { p_device: myDeviceId });
+            if (!r.ok && r.missing) await supabaseClient.from('fanus').delete().eq('created_by', myDeviceId);
+        }
+    } catch (e) {}
     try { localStorage.clear(); } catch (e) {}
     try { indexedDB.deleteDatabase('haqibati_db'); } catch (e) {}
     setTimeout(() => location.reload(), 600);
