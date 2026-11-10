@@ -537,7 +537,15 @@ html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 .hqb-wp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; padding-bottom: 12px; }
 .hqb-wp-card { position: relative; display: block; width: 100%; height: 0; padding: 0 0 177.78% 0; overflow: hidden; margin: 0; }
 .hqb-wp-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.hqb-wp-title { position: absolute; bottom: 0; left: 0; right: 0; padding: 6px; font-size: 10px; font-weight: 700; color: #fff; text-align: center; background: linear-gradient(transparent, rgba(0,0,0,.7)); }
+.hqb-wp-foot { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 6px 7px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(transparent, rgba(0,0,0,.78)); }
+.hqb-wp-title { font-size: 10.5px; font-weight: 800; color: #fff; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hqb-wp-stats { display: flex; justify-content: space-between; gap: 4px; direction: rtl; }
+.hqb-wp-stats span { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 10px; font-weight: 800; color: #fff; white-space: nowrap; }
+.hqb-wp-stats i { font-size: 9px; color: #E9C778; }
+.hqb-wp-stats.live { padding: 8px 6px; border-radius: 12px; background: rgba(212,168,79,.14); }
+.hqb-wp-stats.live.hidden { display: none; }
+.hqb-wp-stats.live span { font-size: 12px; color: inherit; }
+.hqb-wp-stats.live i { font-size: 11px; color: #D4A84F; }
 
 .share-img-box { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; }
 .share-img-box > * { flex-shrink: 0; }
@@ -616,6 +624,7 @@ html.theme-day .hqb-ob-skip { color: #8A6417; }
 #pi-rakat-box, #pi-disclaimer, #prayer-info-card .p-4 > div:nth-of-type(4) { display: none !important; }
 
 html.theme-day div.fixed.inset-0[id$="-modal"] { background-color: rgba(21,49,74,.5) !important; }
+html.theme-day #prayer-times-modal > #prayer-modal-container { background: linear-gradient(180deg, #16293A 0%, #0F202B 38%, #0A151C 100%) !important; border-color: #2E4352 !important; box-shadow: 0 18px 40px rgba(21,49,74,.4) !important; }
 html.theme-day div.fixed.inset-0[id$="-modal"] > div[class*="bg-palette-"],
 html.theme-day div.fixed.inset-0[id$="-modal"] > div[class*="rounded"] { background: linear-gradient(180deg, #E8F2FA 0%, #F2F5F5 55%, #F6EEDF 100%) !important; border-color: rgba(255,255,255,.95) !important; box-shadow: 0 18px 40px rgba(21,49,74,.28) !important; }
 
@@ -638,6 +647,25 @@ html.theme-day .dua-row { color: #15314A; }
 html.theme-day .dua-row + .dua-row { border-top-color: rgba(21,49,74,.08); }
 html.theme-day .dua-row-ic { background: #0F202B; }
 html.theme-day .dua-row-go { color: #4A6680; }
+.cv-btn { position: relative; padding: 9px 10px; border-radius: 14px; background: #0F202B; border: 1px solid rgba(212,168,79,.3); display: flex; flex-direction: column; align-items: flex-start; gap: 1px; text-align: right; min-width: 0; }
+.cv-btn small { font-size: 9.5px; font-weight: 800; color: #A3B3BF; }
+.cv-btn b { font-size: 13px; font-weight: 900; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding-left: 14px; }
+.cv-btn i { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); font-size: 9px; color: #D4A84F; }
+.cv-sheet { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.6); display: none; align-items: flex-end; justify-content: center; }
+.cv-sheet.show { display: flex; }
+body:has(.cv-sheet.show) #back-to-sections-btn { display: none !important; }
+.cv-panel { width: 100%; max-width: 520px; max-height: 70vh; display: flex; flex-direction: column; background: #16262F; border-radius: 26px 26px 0 0; padding: 16px 14px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(212,168,79,.35); }
+.cv-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.cv-head b { font-size: 15px; font-weight: 900; color: #F3EBDD; }
+.cv-head button { width: 34px; height: 34px; border-radius: 12px; background: #22333F; color: #F3EBDD; }
+.cv-grid { display: grid; gap: 6px; overflow-y: auto; padding-bottom: 4px; }
+.cv-grid button { padding: 11px 2px; border-radius: 12px; background: #22333F; color: #F3EBDD; font-size: 13px; font-weight: 800; }
+.cv-grid button.on { background: #D4A84F; color: #0A151C; }
+html.theme-day .cv-btn { background: rgba(255,255,255,.75); border-color: rgba(201,151,63,.45); }
+html.theme-day .cv-btn b { color: #15314A; } html.theme-day .cv-btn small { color: #4A6680; }
+html.theme-day .cv-panel { background: #F4F8FB; } html.theme-day .cv-head b { color: #15314A; }
+html.theme-day .cv-head button, html.theme-day .cv-grid button { background: #FFFFFF; color: #15314A; box-shadow: 0 1px 3px rgba(21,49,74,.12); }
+html.theme-day .cv-grid button.on { background: #D4A84F; color: #0A151C; }
 .rd-modal { background: #0E1211; }
 .rd-modal.flex { display: flex; }
 .rd-shell { position: relative; width: 100%; max-width: 640px; margin: 0 auto; height: 100%; display: flex; flex-direction: column; background: var(--rd-page, #161B1A); }
@@ -1261,9 +1289,8 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
 
             <div class="bg-[#0A151C]/70 border border-[#2E4352] rounded-xl p-1.5 text-center text-[10px] text-[#F3EBDD] font-bold mb-2 flex items-center justify-center gap-2">
                 <i class="fa-solid fa-location-crosshairs text-[#D4A84F]"></i>
-                <span><span id="lbl-country-tag">الدولة</span>: <span id="selected-display-country" class="text-white underline">العراق</span></span>
-                <span>•</span>
-                <span><span id="lbl-city-tag">المدينة</span>: <span id="selected-display-city" class="text-white underline">القادسية (الديوانية)</span></span>
+                <span style="display:none"><span id="lbl-country-tag">الدولة</span><span id="selected-display-country">العراق</span></span>
+                <span><span id="lbl-city-tag">المحافظة</span>: <span id="selected-display-city" class="text-white">القادسية (الديوانية)</span></span>
             </div>
 
             <div id="country-wheel-box" class="hidden mb-2 bg-[#0C1B24] p-2 rounded-xl border border-[#2E4352]">
@@ -1340,10 +1367,6 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <span id="quran-modal-title">تلاوات القرآن الكريم</span>
             </h3>
             <div class="flex items-center gap-1.5">
-                <button onclick="playClickSound(); toggleQuranBackgroundPlay()" id="quran-bg-btn" class="px-2.5 py-1 rounded-xl bg-palette-mauve text-palette-darkest text-[11px] font-bold flex items-center gap-1 cursor-pointer">
-                    <i class="fa-solid fa-headphones"></i>
-                    <span id="quran-bg-status-text">الخلفية: مفعلة</span>
-                </button>
                 <button onclick="playClickSound(); closeModal('quran-modal')" class="w-8 h-8 rounded-full bg-palette-purple text-palette-light flex items-center justify-center text-sm cursor-pointer">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
@@ -1385,9 +1408,10 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
 
         <audio id="quran-audio-element" preload="metadata"></audio>
 
-        <button onclick="playClickSound(); closeModal('quran-modal')" class="w-full mt-2.5 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-quran-modal">
-            إغلاق نافذة التلاوات
-        </button>
+        <div class="grid grid-cols-2 gap-2 mt-2.5">
+            <button onclick="playClickSound(); stopQuranAudio()" class="py-2.5 rounded-xl bg-palette-mid border border-palette-mauve/50 text-palette-light font-bold text-xs cursor-pointer"><i class="fa-solid fa-stop ml-1"></i>إغلاق القرآن</button>
+            <button onclick="playClickSound(); closeModal('quran-modal')" class="py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-quran-modal">الخروج من القائمة</button>
+        </div>
     </div>
 </div>
 
@@ -1569,7 +1593,7 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <span id="fatiha-add-label">أضف اسماً (يحتاج إنترنت):</span>
             </h4>
             <div class="space-y-2">
-                <input type="text" id="deceased-input" maxlength="60" placeholder="اسم المتوفى (مثال: الحاج رشيد مجيد...)" class="w-full bg-palette-darkest border border-palette-purple rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-palette-mauve">
+                <input type="text" id="deceased-input" maxlength="60" placeholder="اسم المتوفى" class="w-full bg-palette-darkest border border-palette-purple rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-palette-mauve">
                 <p id="fatiha-quota" class="text-[10px] text-palette-muted px-1"></p>
                 <div class="flex items-center gap-4 px-1 py-0.5 text-xs text-palette-light">
                     <span class="font-bold text-palette-mauve text-[11px]" id="fatiha-gender-lbl">الجنس:</span>
@@ -2096,7 +2120,7 @@ const i18n = {
         currentLocationSub: "الموقع المعتمد: العراق - القادسية (الديوانية)",
         country: "الدولة",
         changeCity: "تغيير المحافظة",
-        city: "المدينة",
+        city: "المحافظة",
         selectCountry: "اختر الدولة:",
         selectCity: "اختر المحافظة:",
         saveLocation: "حفظ الموقع",
@@ -2107,7 +2131,7 @@ const i18n = {
         recitationNamePh: "اسم التلاوة",
         recitationUrlPh: "رابط مباشر للتلاوة (mp3)",
         saveRecitation: "حفظ التلاوة",
-        closeQuranModal: "إغلاق نافذة التلاوات",
+        closeQuranModal: "الخروج من القائمة",
         nowPlaying: "جاري التشغيل...",
         blessedRecitation: "تلاوة مباركة",
         suppModalTitle: "مفاتيح الجنان",
@@ -2122,7 +2146,7 @@ const i18n = {
         fatihaModalTitle: "الفاتحة على أرواح الموتى",
         fatihaModalSub: "أسماء الموتى لقراءة الفاتحة",
         fatihaAddLabel: "أضف اسماً (يحتاج إنترنت):",
-        deceasedInputPh: "اسم المتوفى (مثال: الحاج رشيد مجيد...)",
+        deceasedInputPh: "اسم المتوفى",
         fatihaGenderLbl: "الجنس:",
         fatihaMaleLbl: "المرحوم (ذكر)",
         fatihaFemaleLbl: "المرحومة (أنثى)",
@@ -2203,7 +2227,6 @@ function applyLanguageUI() {
     setTxt('btn-save-location', t.saveLocation);
 
     setTxt('quran-modal-title', t.quranModalTitle);
-    setTxt('quran-bg-status-text', isQuranBackgroundPlayOn ? t.quranBgEnabled : t.quranBgDisabled);
     setTxt('quran-modal-subtitle', t.quranModalSubtitle);
     const rcN = document.getElementById('rc-n');
     const rcU = document.getElementById('rc-u');
@@ -5361,20 +5384,68 @@ function renderConverter() {
     document.getElementById('conv-body').innerHTML = `
         <div class="hqb-card space-y-2">
             <p class="text-xs font-black text-palette-mauve"><i class="fa-solid fa-calendar ml-1"></i>من ميلادي إلى هجري</p>
-            <input id="conv-g-input" type="date" class="hqb-input" value="${hqbDateKey()}" onchange="hqbConvG2H()">
+            <input id="conv-g-input" type="hidden" value="${hqbDateKey()}">
+            <div class="grid gap-1.5" style="grid-template-columns:1fr 1.7fr 1.1fr">
+                <button id="conv-g-d-btn" class="cv-btn" onclick="cvPick('gd')"></button>
+                <button id="conv-g-m-btn" class="cv-btn" onclick="cvPick('gm')"></button>
+                <button id="conv-g-y-btn" class="cv-btn" onclick="cvPick('gy')"></button>
+            </div>
             <div id="conv-g-out" class="rounded-xl bg-palette-dark p-3 text-center"></div>
         </div>
         <div class="hqb-card space-y-2">
             <p class="text-xs font-black text-palette-mauve"><i class="fa-solid fa-moon ml-1"></i>من هجري إلى ميلادي</p>
-            <div class="grid grid-cols-3 gap-1.5">
-                <input id="conv-h-d" type="number" min="1" max="30" value="${h.day}" class="hqb-input text-center" oninput="hqbConvH2G()">
-                <select id="conv-h-m" class="hqb-input" onchange="hqbConvH2G()">${months.map((m, i) => `<option value="${i + 1}" ${i + 1 === h.month ? 'selected' : ''}>${m}</option>`).join('')}</select>
-                <input id="conv-h-y" type="number" min="1300" max="1600" value="${h.year}" class="hqb-input text-center" oninput="hqbConvH2G()">
+            <div class="grid gap-1.5" style="grid-template-columns:1fr 1.7fr 1.1fr">
+                <input id="conv-h-d" type="hidden" value="${h.day}"><input id="conv-h-m" type="hidden" value="${h.month}"><input id="conv-h-y" type="hidden" value="${h.year}">
+                <button id="conv-h-d-btn" class="cv-btn" onclick="cvPick('hd')"></button>
+                <button id="conv-h-m-btn" class="cv-btn" onclick="cvPick('hm')"></button>
+                <button id="conv-h-y-btn" class="cv-btn" onclick="cvPick('hy')"></button>
             </div>
             <div id="conv-h-out" class="rounded-xl bg-palette-dark p-3 text-center"></div>
         </div>
         <p class="text-[9px] text-palette-muted text-center leading-relaxed">قد يختلف التاريخ يوماً حسب رؤية الهلال.</p>`;
-    hqbConvG2H(); hqbConvH2G();
+    cvSync(); hqbConvG2H(); hqbConvH2G();
+}
+const CV_GM = ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'أيار', 'حزيران', 'تموز', 'آب', 'أيلول', 'تشرين الأول', 'تشرين الثاني', 'كانون الأول'];
+function cvG() { const [y, m, d] = document.getElementById('conv-g-input').value.split('-').map(Number); return { y, m, d }; }
+function cvH() { return { d: +document.getElementById('conv-h-d').value, m: +document.getElementById('conv-h-m').value, y: +document.getElementById('conv-h-y').value }; }
+function cvSync() {
+    const g = cvG(), h = cvH(), set = (id, lbl, val) => { const b = document.getElementById(id); if (b) b.innerHTML = `<small>${lbl}</small><b>${val}</b><i class="fa-solid fa-chevron-down"></i>`; };
+    set('conv-g-d-btn', 'اليوم', hqbNum(g.d)); set('conv-g-m-btn', 'الشهر', CV_GM[g.m - 1]); set('conv-g-y-btn', 'السنة', hqbNum(g.y));
+    set('conv-h-d-btn', 'اليوم', hqbNum(h.d)); set('conv-h-m-btn', 'الشهر', HIJRI_MONTHS_AR[h.m - 1]); set('conv-h-y-btn', 'السنة', hqbNum(h.y));
+}
+function cvPick(k) {
+    playClickSound();
+    const g = cvG(), h = cvH(), rng = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
+    const nowY = new Date().getFullYear(), hNow = getHijriDateFromGregorian(new Date()).year;
+    const cfg = {
+        gd: ['اختر اليوم', rng(1, new Date(g.y, g.m, 0).getDate()).map(v => [v, hqbNum(v)]), g.d, 7],
+        gm: ['اختر الشهر', CV_GM.map((n, i) => [i + 1, n]), g.m, 3],
+        gy: ['اختر السنة', rng(nowY - 90, nowY + 30).map(v => [v, hqbNum(v)]), g.y, 4],
+        hd: ['اختر اليوم', rng(1, 30).map(v => [v, hqbNum(v)]), h.d, 7],
+        hm: ['اختر الشهر', HIJRI_MONTHS_AR.map((n, i) => [i + 1, n]), h.m, 3],
+        hy: ['اختر السنة', rng(hNow - 95, hNow + 30).map(v => [v, hqbNum(v)]), h.y, 4]
+    }[k];
+    let box = document.getElementById('cv-sheet');
+    if (!box) { box = document.createElement('div'); box.id = 'cv-sheet'; box.className = 'cv-sheet'; document.getElementById('converter-modal').appendChild(box); }
+    box.innerHTML = `<div class="cv-panel"><div class="cv-head"><b>${cfg[0]}</b><button onclick="playClickSound(); cvClose()" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="cv-grid" style="grid-template-columns:repeat(${cfg[3]},1fr)">${cfg[1].map(([v, l]) => `<button class="${v === cfg[2] ? 'on' : ''}" onclick="cvSet('${k}', ${v})">${l}</button>`).join('')}</div></div>`;
+    box.onclick = e => { if (e.target === box) cvClose(); };
+    box.classList.add('show');
+    const on = box.querySelector('.on'); if (on) on.scrollIntoView({ block: 'center' });
+}
+function cvClose() { const b = document.getElementById('cv-sheet'); if (b) b.classList.remove('show'); }
+function cvSet(k, v) {
+    playClickSound();
+    if (k[0] === 'g') {
+        const g = cvG(); if (k === 'gd') g.d = v; if (k === 'gm') g.m = v; if (k === 'gy') g.y = v;
+        g.d = Math.min(g.d, new Date(g.y, g.m, 0).getDate());
+        document.getElementById('conv-g-input').value = `${g.y}-${String(g.m).padStart(2, '0')}-${String(g.d).padStart(2, '0')}`;
+        hqbConvG2H();
+    } else {
+        document.getElementById({ hd: 'conv-h-d', hm: 'conv-h-m', hy: 'conv-h-y' }[k]).value = v;
+        hqbConvH2G();
+    }
+    cvSync(); cvClose();
 }
 function hqbConvG2H() {
     const v = document.getElementById('conv-g-input').value;
@@ -5602,6 +5673,7 @@ setTimeout(hqbCacheAdhan, 1500);
 <div id="share-img-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[120]">
     <div class="share-img-box w-full max-w-sm bg-palette-dark border border-palette-purple rounded-[24px] p-4 space-y-3 text-center">
         <img id="share-img-preview" alt="صورة المشاركة" class="w-full rounded-xl border border-palette-purple">
+        <div id="wp-live-stats" class="hqb-wp-stats live hidden"></div>
         <p class="text-[10px] text-palette-muted" id="lbl-share-hint">يمكنك أيضاً الضغط مطولاً على الصورة لحفظها</p>
         <div class="flex gap-2">
             <button onclick="hqbShareImgSend()" class="flex-1 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-black text-xs"><i class="fa-solid fa-share-nodes ml-1"></i><span id="lbl-share-send">مشاركة</span></button>
@@ -5759,6 +5831,7 @@ async function hqbMakeShareImage(title, text, foot) {
 let hqbShareBlob = null, hqbShareUrl = '';
 async function hqbShareImage(title, text, foot) {
     showToast('جاري تجهيز الصورة...');
+    hqbWpCur = null; document.getElementById('wp-live-stats').classList.add('hidden');
     const c = await hqbMakeShareImage(title, text, foot);
     hqbShareUrl = c.toDataURL('image/png');
     hqbShareBlob = null;
@@ -5771,7 +5844,7 @@ async function hqbShareImgSend() {
     try {
         if (hqbShareBlob && navigator.canShare) {
             const f = new File([hqbShareBlob], 'haram.png', { type: 'image/png' });
-            if (navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); return; }
+            if (navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); hqbWpHit('shares'); return; }
         }
     } catch (e) { if (e && e.name === 'AbortError') return; }
     hqbShareImgSave();
@@ -5780,6 +5853,7 @@ function hqbShareImgSave() {
     const a = document.createElement('a');
     a.href = hqbShareUrl; a.download = 'haram.png';
     document.body.appendChild(a); a.click(); a.remove();
+    hqbWpHit('downloads');
     showToast('إذا لم تُحفظ الصورة، اضغط عليها مطولاً واختر حفظ');
 }
 const RD_SIZES = [16, 18, 20, 22, 25, 28, 32];
@@ -7197,8 +7271,26 @@ function hqbMapWp(rows) {
     return (rows || []).map(r => ({
         title: String(r.title || '').trim(),
         url: String(r.image_url || r.url || '').trim(),
-        category: String(r.category || '').trim()
+        category: String(r.category || '').trim(),
+        id: r.id, views: +r.views || 0, downloads: +r.downloads || 0, shares: +r.shares || 0
     })).filter(w => /^https?:\/\//i.test(w.url));
+}
+let hqbWpCur = null;
+const hqbWpDone = new Set();
+function hqbWpFmt(n) { n = +n || 0; return hqbNum(n >= 1000000 ? (n / 1000000).toFixed(1).replace('.0', '') + ' م' : n >= 1000 ? (n / 1000).toFixed(1).replace('.0', '') + ' ألف' : n); }
+function hqbWpStats(w) {
+    return `<span><i class="fa-solid fa-eye"></i>${hqbWpFmt(w.views)}</span><span><i class="fa-solid fa-download"></i>${hqbWpFmt(w.downloads)}</span><span><i class="fa-solid fa-share-nodes"></i>${hqbWpFmt(w.shares)}</span>`;
+}
+function hqbWpHit(kind) {
+    const w = hqbWpCur;
+    if (!w || w.id === undefined || w.id === null) return;
+    const key = w.id + ':' + kind;
+    if (hqbWpDone.has(key)) return;
+    hqbWpDone.add(key);
+    w[kind] = (w[kind] || 0) + 1;
+    const st = document.getElementById('wp-live-stats'); if (st) st.innerHTML = hqbWpStats(w);
+    const cs = document.querySelector(`.hqb-wp-stats[data-wp="${w.id}"]`); if (cs) cs.innerHTML = hqbWpStats(w);
+    if (supabaseClient && navigator.onLine) { try { supabaseClient.rpc('wp_hit', { p_id: w.id, p_kind: kind }).then(() => {}, () => {}); } catch (e) {} }
 }
 hqbFill(HQB_WALLPAPERS, hqbMapWp(hqbLS('hqb_wp_cache', [])));
 function openWallpapers() {
@@ -7233,7 +7325,7 @@ function hqbRenderWallpapers() {
     box.innerHTML = `<div class="hqb-wp-grid">` + HQB_WALLPAPERS.map((w, i) => (hqbWpCat && w.category !== hqbWpCat) ? '' : `
         <button onclick="hqbOpenWallpaper(${i})" class="hqb-wp-card rounded-2xl border border-palette-purple bg-palette-mid">
             <img src="${escapeHTML(w.url)}" alt="${escapeHTML(w.title || '')}" loading="lazy" decoding="async">
-            ${w.title ? `<span class="hqb-wp-title">${escapeHTML(w.title)}</span>` : ''}
+            <span class="hqb-wp-foot">${w.title ? `<span class="hqb-wp-title">${escapeHTML(w.title)}</span>` : ''}<span class="hqb-wp-stats" data-wp="${w.id}">${hqbWpStats(w)}</span></span>
         </button>`).join('') + `</div>`;
 }
 function hqbOpenWallpaper(i) {
@@ -7241,6 +7333,9 @@ function hqbOpenWallpaper(i) {
     const w = HQB_WALLPAPERS[i];
     if (!w) return;
     document.getElementById('share-img-preview').src = w.url;
+    hqbWpCur = w;
+    const st = document.getElementById('wp-live-stats'); st.innerHTML = hqbWpStats(w); st.classList.remove('hidden');
+    hqbWpHit('views');
     hqbShareUrl = w.url; hqbShareBlob = null;
     fetch(w.url).then(r => r.blob()).then(b => { hqbShareBlob = b; }).catch(() => {});
     openModal('share-img-modal');
@@ -7913,6 +8008,15 @@ const HQB_KU = {
 "ابدأ": "دەست پێبکە",
 "الرضوية": "ڕەزەوی",
 "الزينبية": "زەینەبی",
+"الخروج من القائمة": "دەرچوون لە لیست",
+"المحافظة": "پارێزگا",
+"إغلاق القرآن": "وەستاندنی قورئان",
+"اختر اليوم": "ڕۆژ هەڵبژێرە",
+"اختر الشهر": "مانگ هەڵبژێرە",
+"اختر السنة": "ساڵ هەڵبژێرە",
+"المشاهدات": "بینینەکان",
+"التحميلات": "داگرتنەکان",
+"المشاركات": "هاوبەشکردنەکان",
 "القبلة والمساجد": "قیبلە و مزگەوتەکان",
 "الاتجاه": "ئاراستە",
 "تحديث موقعي": "نوێکردنەوەی شوێنم",
@@ -8135,7 +8239,7 @@ const HQB_KU = {
 "كميل • التوسل • العهد • الفرج وغيرها": "کومەیل • تەوەسسول • عەهد • فەرەج و هیتر",
 "أدعية أيام الأسبوع للإمام زين العابدين": "دوعای ڕۆژەکانی هەفتە بۆ ئیمام زەینولعابیدین",
 "أدعية أيام الأسبوع من الصحيفة السجادية": "دوعای ڕۆژەکانی هەفتە لە سەحیفەی سەججادیە",
-"اسم المتوفى (مثال: الحاج رشيد مجيد...)": "ناوی مردوو (نموونە: حاجی ڕەشید مەجید...)",
+"اسم المتوفى": "ناوی مردوو",
 "يُقرأ ليلة الجمعة وليلة النصف من شعبان": "لە شەوی هەینی و شەوی نیوەی شەعبان دەخوێنرێت",
 "شهادة سيدة نساء العالمين فاطمة الزهراء": "شەهادەتی گەورەی ئافرەتانی جیهان فاتیمەی زەهرا",
 "١١٤ سورة • بحث • علامات • ترجمة • تلاوة": "١١٤ سورەت • گەڕان • نیشانە • وەرگێڕان • تیلاوەت",
