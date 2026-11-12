@@ -664,6 +664,8 @@ html.theme-day .dua-row { color: #15314A; }
 html.theme-day .dua-row + .dua-row { border-top-color: rgba(21,49,74,.08); }
 html.theme-day .dua-row-ic { background: #0F202B; }
 html.theme-day .dua-row-go { color: #4A6680; }
+.z-head { font-size: 13px; font-weight: 800; color: #A3B3BF; padding: 10px 4px 2px; }
+html.theme-day .z-head { color: #4A6680; }
 .cv-btn { position: relative; padding: 9px 10px; border-radius: 14px; background: #0F202B; border: 1px solid rgba(212,168,79,.3); display: flex; flex-direction: column; align-items: flex-start; gap: 1px; text-align: right; min-width: 0; }
 .cv-btn small { font-size: 9.5px; font-weight: 800; color: #A3B3BF; }
 .cv-btn b { font-size: 13px; font-weight: 900; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding-left: 14px; }
@@ -5776,28 +5778,15 @@ function hqbZNode(catId, secId) {
 }
 function hqbZGo(kind, id) {
     playClickSound();
-    const catId = kind === 'cat' ? id : hqbZPath[0].id;
-    let secId = kind === 'sec' ? id : '';
-    const add = [{ kind, id }];
-    let n = hqbZNode(catId, secId);
-    while (n.subs.length === 1 && !n.items.length) {
-        secId = n.subs[0].id; add.push({ kind: 'sec', id: secId });
-        n = hqbZNode(catId, secId);
-    }
-    if (!n.subs.length && n.items.length === 1) { hqbOpenZiyara(n.items[0].id); return; }
-    hqbZPath.push(...add);
+    const catId = kind === 'cat' ? id : hqbZPath[0].id, secId = kind === 'sec' ? id : '';
+    const subs = (hqbZData.secs || []).filter(x => x.cat === catId && x.parent === secId);
+    const items = (hqbZData.items || []).filter(x => x.cat === catId && x.sec === secId);
+    if (!subs.length && items.length === 1) { hqbOpenZiyara(items[0].id); return; }
+    hqbZPath.push({ kind, id });
     hqbRenderZiyarat();
 }
-function hqbZBack() {
-    playClickSound();
-    hqbZPath.pop();
-    while (hqbZPath.length > 1) {
-        const top = hqbZPath[hqbZPath.length - 1], n = hqbZNode(hqbZPath[0].id, top.kind === 'sec' ? top.id : '');
-        if (n.subs.length === 1 && !n.items.length) hqbZPath.pop(); else break;
-    }
-    if (hqbZPath.length === 1) { const n = hqbZNode(hqbZPath[0].id, ''); if (n.subs.length === 1 && !n.items.length) hqbZPath.pop(); }
-    hqbRenderZiyarat();
-}
+function hqbZBack() { playClickSound(); hqbZPath.pop(); hqbRenderZiyarat(); }
+
 function hqbZCount(catId, secId) {
     const secs = hqbZData.secs || [], items = hqbZData.items || [];
     const sub = s => secs.filter(x => x.parent === s).reduce((n, x) => n + hqbZCount(catId, x.id), 0);
@@ -5839,7 +5828,13 @@ function hqbRenderZiyarat() {
     const crumbs = [cat.title].concat(hqbZPath.slice(1).map(p => (secs.find(x => x.id === p.id) || {}).title || '')).map(escapeHTML).join(' <i class="fa-solid fa-chevron-left text-[8px] mx-1 opacity-60"></i> ');
     let html = `<button onclick="hqbZBack()" class="w-full p-2.5 rounded-xl bg-palette-mid border border-palette-purple text-palette-light text-xs font-bold flex items-center gap-2"><i class="fa-solid fa-arrow-right text-palette-mauve"></i>رجوع</button>
         <p class="text-[10px] text-palette-muted font-bold px-1">${crumbs}</p>`;
-    html += subSecs.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-folder-open', x.title, cnt(hqbZCount(cat.id, x.id)), true)).join('');
+    const isLeaf = x => !secs.some(y => y.parent === x.id) && items.filter(y => y.sec === x.id).length === 1;
+    const leaves = subSecs.filter(isLeaf), folders = subSecs.filter(x => !isLeaf(x));
+    html += leaves.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-book-open-reader', x.title, '', true)).join('');
+    if (folders.length) {
+        html += `<p class="z-head">الأقسام الفرعية</p>`;
+        html += folders.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-layer-group', x.title, cnt(hqbZCount(cat.id, x.id)), false)).join('');
+    }
     html += list.map((z, i) => `
         <div onclick="playClickSound(); hqbOpenZiyara('${z.id}')" class="p-3 rounded-xl ${i % 2 ? 'bg-palette-purple' : 'bg-palette-dark'} flex items-center justify-between gap-2 cursor-pointer active:scale-[.98] transition-all">
             <h4 class="font-bold text-palette-light text-xs sm:text-sm truncate"><i class="fa-solid fa-star text-[10px] text-palette-mauve ml-1"></i>${escapeHTML(z.title)}</h4>
