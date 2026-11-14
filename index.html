@@ -702,6 +702,19 @@ html.theme-day .cv-grid button.on { background: #D4A84F; color: #0A151C; }
 .rd-bar { display: flex; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: var(--rd-page, #161B1A); border-top: 1px solid var(--rd-line, rgba(255,255,255,.07)); position: relative; z-index: 3; }
 .rd-bar button { flex: 1; height: 54px; border-radius: 18px; background: var(--rd-card, #111413); color: var(--rd-mute, #9AA19E); font-size: 20px; display: flex; align-items: center; justify-content: center; transition: background .15s, color .15s; }
 .rd-bar button.on { background: #D4A84F; color: #0A151C; }
+.rd-bar button { position: relative; overflow: hidden; border: 1px solid var(--rd-line, rgba(255,255,255,.07)); border-radius: 20px 20px 20px 6px; }
+.rd-bar button::after { content: ''; position: absolute; top: 5px; left: 50%; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: #D4A84F; opacity: .55; }
+.rd-bar button.on::after { background: #0A151C; opacity: .6; }
+.rd-bar svg { width: 28px; height: 28px; overflow: visible; margin-top: 4px; }
+.rd-bar .rd-ln { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.rd-bar .rd-soft { opacity: .55; }
+.rd-bar .rd-acc { stroke: #D4A84F; }
+.rd-bar .rd-fill { fill: #D4A84F; }
+.rd-bar button.on .rd-acc { stroke: #0A151C; }
+.rd-bar button.on .rd-fill { fill: #0A151C; }
+.rd-bar .rd-g1 { font: 700 21px 'Amiri', serif; fill: currentColor; }
+.rd-bar .rd-g2 { font: 700 13px 'Amiri', serif; fill: #D4A84F; }
+.rd-bar button.on .rd-g2 { fill: #0A151C; }
 .rd-sheet { position: absolute; left: 0; right: 0; bottom: calc(74px + env(safe-area-inset-bottom)); z-index: 2; background: var(--rd-page, #161B1A); border-radius: 26px 26px 0 0; box-shadow: 0 -12px 30px rgba(0,0,0,.35); padding: 16px 16px 18px; max-height: 62vh; overflow-y: auto; }
 .rd-sheet.hidden { display: none; }
 .rd-sh-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
@@ -840,6 +853,26 @@ html.theme-day .ai-bubble b { color: #8A6417; }
 html.theme-day .ai-bubble .ai-h, html.theme-day .ai-bubble .ai-li span:first-child, html.theme-day .ai-sugs button i { color: #946512; }
 
 
+.no-mascot .np-top { padding-left: 0 !important; }
+.no-mascot .np-wrap .np-card { padding-left: 12px !important; }
+#hqb-main { gap: clamp(8px, 1.5vh, 16px); margin-top: clamp(6px, 1.2vh, 14px); }
+#hqb-tasbih { flex: 1 1 auto; justify-content: space-between; }
+#hqb-tasbih #dhikr-arabic { font-size: clamp(18px, 2.9vh, 27px); min-height: clamp(44px, 7vh, 84px); }
+#hqb-tasbih #counter-btn { width: clamp(96px, 16vh, 172px); height: clamp(96px, 16vh, 172px); }
+#hqb-tasbih #counter-value { font-size: clamp(26px, 4.4vh, 44px); }
+@media (max-height: 720px) {
+    #hqb-header { padding: 6px 10px; margin-top: 0; }
+    #hqb-header button { width: 34px; height: 34px; }
+    #hqb-tasbih { padding-top: 8px; padding-bottom: 8px; }
+    #hqb-tasbih > div:first-child { margin-bottom: 0; }
+    body > footer { display: none; }
+}
+@media (max-width: 345px) {
+    #hqb-today .np-card { gap: 7px; padding-right: 9px; }
+    #hqb-today .np-main b { font-size: 14px; }
+    #hqb-today .np-side b { font-size: 13px; }
+    #hqb-tasbih { padding-left: 10px; padding-right: 10px; }
+}
 .np-top { min-height: 40px; display: flex; align-items: center; padding-left: 56px; }
 .np-wrap { position: relative; }
 .np-wrap .np-card { padding-left: 56px; }
@@ -911,7 +944,7 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
     </div>
 </div>
 
-<header class="w-full max-w-md bg-palette-dark border border-palette-purple rounded-2xl p-3 flex justify-between items-center shadow-lg mt-1">
+<header id="hqb-header" class="w-full max-w-md bg-palette-dark border border-palette-purple rounded-2xl p-3 flex justify-between items-center shadow-lg mt-1">
     <div class="min-w-0 pr-1">
         <h1 class="hidden" id="app-header-title">حرم</h1>
         <p id="user-display-tag" class="hidden"></p>
@@ -921,13 +954,13 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
     </button>
 </header>
 
-<main class="w-full max-w-md flex-1 flex flex-col justify-start items-center mt-3 mb-2 gap-3">
+<main id="hqb-main" class="w-full max-w-md flex-1 flex flex-col justify-start items-center mt-3 mb-2 gap-3">
 
 <div id="hqb-events" class="w-full"></div>
 
 <div id="hqb-today" class="w-full"></div>
 
-<div class="w-full bg-palette-mid border border-palette-purple rounded-2xl px-4 py-3 text-center shadow-xl relative overflow-hidden flex flex-col justify-between ">
+<div id="hqb-tasbih" class="w-full bg-palette-mid border border-palette-purple rounded-2xl px-4 py-3 text-center shadow-xl relative overflow-hidden flex flex-col justify-between ">
     <div class="flex justify-between items-center text-[11px] font-bold mb-1">
         <span id="dhikr-category" class="bg-palette-mauve text-palette-darkest px-2.5 py-0.5 rounded-full shadow-sm">الاستغفار</span>
         <div class="flex items-center gap-1.5">
@@ -1176,6 +1209,11 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <span class="set-ic"><i class="fa-solid fa-hands-praying"></i></span>
                 <span class="set-tx"><b>إشعار دعاء اليوم</b><small>يصلك دعاء اليوم مع بداية كل يوم</small></span>
                 <span class="hqb-switch" id="daily-dua-notif-btn"></span>
+            </button>
+            <button class="set-row" onclick="hqbToggleMascot()">
+                <span class="set-ic"><i class="fa-solid fa-child-reaching"></i></span>
+                <span class="set-tx"><b>المساعد في الشاشة الرئيسية</b><small>عند الإخفاء يبقى في «أقسام أخرى»</small></span>
+                <span class="hqb-switch" id="mascot-switch"></span>
             </button>
         </div>
 
@@ -1486,11 +1524,9 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
         </div>
         <div id="rd-sheet" class="rd-sheet hidden"></div>
         <div class="rd-bar">
-            <button data-rd="font" onclick="rdTool('font')" aria-label="تنسيق الخط"><i class="fa-solid fa-font"></i></button>
-            <button data-rd="awake" onclick="rdToggleAwake()" aria-label="إبقاء الشاشة مضاءة"><i class="fa-solid fa-mobile-screen"></i></button>
-            <button data-rd="scroll" onclick="rdTool('scroll')" aria-label="التمرير التلقائي"><i class="fa-solid fa-angles-down"></i></button>
-            <button data-rd="light" onclick="rdTool('light')" aria-label="الإضاءة"><i class="fa-solid fa-sun"></i></button>
-            <button data-rd="play" onclick="rdTool('play')" aria-label="الاستماع"><i class="fa-solid fa-play"></i></button>
+            <button data-rd="font" onclick="rdTool('font')" aria-label="تنسيق الخط"><svg viewBox="0 0 32 32" aria-hidden="true"><text x="13" y="24" text-anchor="middle" class="rd-g1">ع</text><text x="25" y="25" text-anchor="middle" class="rd-g2">ع</text><path d="M5 30h22" class="rd-ln"/></svg></button>
+            <button data-rd="scroll" onclick="rdTool('scroll')" aria-label="التمرير التلقائي"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="7" y="3.5" width="18" height="25" rx="5" class="rd-ln"/><path d="M11.5 9.5h9M11.5 13.5h6" class="rd-ln rd-soft"/><path d="M12 18.5l4 3.5 4-3.5M12 22.5l4 3.5 4-3.5" class="rd-ln rd-acc"/></svg></button>
+            <button data-rd="light" onclick="rdTool('light')" aria-label="الإضاءة"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 7a9 9 0 1 0 0 18z" class="rd-fill"/><circle cx="16" cy="16" r="9" class="rd-ln"/><path d="M16 2.5v2.5M16 27v2.5M6.5 6.5l1.8 1.8M23.7 23.7l1.8 1.8M2.5 16H5M27 16h2.5M6.5 25.5l1.8-1.8M23.7 8.3l1.8-1.8" class="rd-ln rd-acc"/></svg></button>
         </div>
         <audio id="rd-audio" preload="none"></audio>
     </div>
@@ -6308,7 +6344,7 @@ function hqbRenderToday() {
     const btn = (icon, label, act) => `<button onclick="hqbRunAct('${act}')" class="h-[46px] justify-center px-1 whitespace-nowrap overflow-hidden rounded-xl bg-palette-mid border border-palette-purple text-palette-light flex flex-col items-center gap-1 active:scale-95 transition-all"><i class="fa-solid ${icon} text-palette-mauve text-sm"></i><span class="text-[10px] font-bold">${label}</span></button>`;
 
     box.innerHTML = `
-    <div class="w-full rounded-2xl bg-palette-dark border border-palette-purple px-3 pt-2.5 pb-3 shadow-lg space-y-1.5">
+    <div class="w-full rounded-2xl bg-palette-dark border border-palette-purple px-3 pt-2.5 pb-3 shadow-lg space-y-1.5${localStorage.getItem('hqb_mascot_off') === '1' ? ' no-mascot' : ''}">
         <div class="np-top">
             <div class="min-w-0">
                 <p class="text-[15px] font-black text-palette-light truncate">${greet}</p>
@@ -8864,7 +8900,18 @@ const HQB_MASCOT_LEGS = 'data:image/webp;base64,' +
     'j24v/Q03YP63aGXsUp1jPdQNBBQSdtn30tX+SQKxAEnT7dabe796jmLUtkBfWbFj09N32dE46mj3/6ng+836p2/CrU3XnU4Pj5Uo1NBCopuWaqDAztRpPJ582RcXsYLdli+Z4+/jzQPbIYBpHNLjkLPfRu6Ta0CgGr7onnsOaZpDf2c3VGGlkMetLL8ig/I5tcPtH7GY6w2rorSjP/dYMuBS24MTOG3U8kYoCJF1NDdXRg6Hxfjl/mp05T72VN6TRvEqn9lTmtdc1TCDIDcdhNx1cdTbi5jBUDCjbPdFWANsiH5ldF7P5FgAE3/ks4zl/8ULv/f54BjBznhGqQPt+MyXZbdTA77x/1E7/+w65zJ6/wQQAAAAAA==';
 document.querySelectorAll('img.hqb-face').forEach(im => { if (!im.src) im.src = HQB_MASCOT_UP; });
 let hqbMascotTapped = false;
+function hqbMascotOn() { return localStorage.getItem('hqb_mascot_off') !== '1'; }
+function hqbSyncMascotSwitch() { const b = document.getElementById('mascot-switch'); if (b) b.classList.toggle('on', hqbMascotOn()); }
+function hqbToggleMascot() {
+    playClickSound();
+    localStorage.setItem('hqb_mascot_off', hqbMascotOn() ? '1' : '0');
+    hqbSyncMascotSwitch();
+    hqbRenderToday();
+    showToast(hqbMascotOn() ? 'ظهر المساعد في الشاشة الرئيسية' : 'أُخفي المساعد، تجده في «أقسام أخرى»');
+}
+setTimeout(hqbSyncMascotSwitch, 0);
 function hqbMascotHTML() {
+    if (!hqbMascotOn()) return '';
     return `<div class="seat-mascot" onclick="hqbMascotTap(event)" role="button" aria-label="مساعد حرم">
         <img class="sm-legs" src="${HQB_MASCOT_LEGS}" alt="">
         <img class="sm-up" src="${HQB_MASCOT_UP}" alt="">
