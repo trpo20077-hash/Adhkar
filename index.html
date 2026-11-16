@@ -551,6 +551,67 @@ html[lang="ckb"] .ku-t { overflow-wrap: anywhere; word-break: normal; line-heigh
 html[lang="ckb"] .ku-t.truncate, html[lang="ckb"] .truncate > .ku-t { white-space: normal; overflow: visible; text-overflow: clip; }
 html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 
+.wpx-box { height: 100%; height: 100dvh; max-width: 640px; }
+.wpx-top { display: flex; align-items: center; gap: 8px; padding: calc(12px + env(safe-area-inset-top)) 12px 8px; }
+.wpx-ttl { flex: 1; min-width: 0; }
+.wpx-ttl b { display: block; font-size: 18px; font-weight: 900; color: #F3EBDD; }
+.wpx-ttl small { font-size: 11px; font-weight: 700; color: #A3B3BF; }
+.wpx-ib { width: 42px; height: 42px; border-radius: 14px; background: #22333F; color: #F3EBDD; flex-shrink: 0; }
+.wpx-ib.on { background: #D4A84F; color: #0F202B; }
+.wpx-search { padding: 0 12px 8px; }
+.wpx-chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 2px 12px 8px; flex-shrink: 0; }
+.wpx-chips::-webkit-scrollbar { display: none; }
+.wpx-chip { padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: #22333F; color: #A3B3BF; white-space: nowrap; flex-shrink: 0; }
+.wpx-chip.on { background: #D4A84F; color: #0F202B; }
+.wpx-sortrow { display: flex; justify-content: flex-start; padding: 0 12px 8px; flex-shrink: 0; }
+.wpx-sort { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: #A3B3BF; }
+.wpx-sort i { color: #D4A84F; }
+.wpx-sort select { background: transparent; color: #F3EBDD; font-weight: 800; font-size: 12px; border: 0; outline: 0; }
+.wpx-sort select option { color: #15314A; }
+.wpx-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0 10px calc(16px + env(safe-area-inset-bottom)); }
+.wpx-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(120px, 34vw, 200px); grid-auto-flow: dense; gap: 6px; }
+.wpx-tile { position: relative; border-radius: 14px; overflow: hidden; background: linear-gradient(110deg, #1A2B37 30%, #22333F 50%, #1A2B37 70%); background-size: 250% 100%; animation: wpxShimmer 1.4s linear infinite; }
+.wpx-tile.big { grid-column: span 2; grid-row: span 2; }
+.wpx-tile.big.alt { grid-column: 2 / span 2; }
+.wpx-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s; }
+.wpx-tile img.ok { opacity: 1; }
+.wpx-tile.err { animation: none; }
+.wpx-tile.err::after { content: '\f03e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #4A6680; font-size: 20px; }
+.wpx-tile-fav { position: absolute; top: 6px; left: 6px; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,.45); color: #E9C778; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+@keyframes wpxShimmer { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+.wpx-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 70px 20px; }
+.wpx-empty i { font-size: 28px; color: #D4A84F; margin-bottom: 4px; }
+.wpx-empty p { font-size: 14px; font-weight: 800; color: #F3EBDD; }
+.wpx-empty small { font-size: 11.5px; color: #A3B3BF; }
+.wpv-track { position: absolute; inset: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain; }
+.wpv-track::-webkit-scrollbar { display: none; }
+.wpv-slide { position: relative; flex: 0 0 100%; height: 100%; scroll-snap-align: center; scroll-snap-stop: always; display: flex; align-items: center; justify-content: center; }
+.wpv-slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; }
+.wpv-slide img.ok { opacity: 1; }
+.wpv-spin { position: absolute; color: rgba(255,255,255,.6); font-size: 22px; }
+.wpv-slide.ok .wpv-spin, .wpv-slide.err .wpv-spin { display: none; }
+.wpv-top, .wpv-bottom { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px; pointer-events: none; }
+.wpv-top { top: 0; padding-top: calc(12px + env(safe-area-inset-top)); background: linear-gradient(rgba(0,0,0,.55), transparent); }
+.wpv-bottom { bottom: 0; padding-bottom: calc(16px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, rgba(0,0,0,.6)); }
+.wpv-top > *, .wpv-bottom > * { pointer-events: auto; }
+.wpv-btn { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.42); color: #fff; font-size: 16px; flex-shrink: 0; backdrop-filter: blur(6px); }
+.wpv-btn.on { color: #E9C778; }
+.wpv-info { margin-right: auto; text-align: left; color: #fff; min-width: 0; }
+.wpv-info b { display: block; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 48vw; }
+.wpv-info small { font-size: 11px; opacity: .8; }
+.wpv-stats { display: flex; flex-direction: column; gap: 4px; margin-left: auto; }
+.wpv-stats span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: #fff; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.42); width: fit-content; }
+.wpv-stats i { font-size: 11px; color: #E9C778; }
+.wpv-save { height: 46px; padding: 0 18px; border-radius: 999px; background: #D4A84F; color: #0F202B; font-size: 14px; font-weight: 900; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.wpv-save:disabled { opacity: .6; }
+body:has(#wallpapers-modal:not(.hidden)) #back-to-sections-btn, body:has(#wp-viewer:not(.hidden)) #back-to-sections-btn { display: none !important; }
+html.theme-day .wpx-ttl b, html.theme-day .wpx-sort select, html.theme-day .wpx-empty p { color: #15314A; }
+html.theme-day .wpx-ttl small, html.theme-day .wpx-sort, html.theme-day .wpx-empty small { color: #4A6680; }
+html.theme-day .wpx-ib, html.theme-day .wpx-chip { background: #FFFFFF; color: #15314A; box-shadow: 0 1px 3px rgba(21,49,74,.1); }
+html.theme-day .wpx-chip { color: #4A6680; }
+html.theme-day .wpx-chip.on, html.theme-day .wpx-ib.on { background: #946512; color: #FFFFFF; }
+html.theme-day .wpx-sort i { color: #946512; }
+html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F6F9 50%, #E3EAF0 70%); background-size: 250% 100%; }
 .hqb-wp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; padding-bottom: 12px; }
 .hqb-wp-card { position: relative; display: block; width: 100%; height: 0; padding: 0 0 177.78% 0; overflow: hidden; margin: 0; }
 .hqb-wp-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -1231,7 +1292,7 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                     <span class="dua-row-tx"><span id="lbl-sec-ist">الاستخارة</span><small class="dua-row-sub">بالمسبحة أو بالقرآن الكريم</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openWallpapers();" class="dua-row">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openWallpapers(true);" class="dua-row">
                     <span class="dua-row-ic"><i class="fa-solid fa-image"></i></span>
                     <span class="dua-row-tx"><span>خلفيات دينية</span><small class="dua-row-sub">خلفيات للهاتف تحمّلها وتشاركها</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
@@ -8014,7 +8075,7 @@ function hqbRenderDailyDuaRow() {
 }
 
 const HQB_WALLPAPERS = [];
-let hqbWpCat = '';
+let hqbWpCat = '', hqbWpSort = 'new', hqbWpFavOnly = false, hqbWpQ = '', hqbWpList = [], hqbWpIdx = -1;
 function hqbMapWp(rows) {
     return (rows || []).map(r => ({
         title: String(r.title || '').trim(),
@@ -8037,73 +8098,221 @@ function hqbWpHit(kind) {
     hqbWpDone.add(key);
     w[kind] = (w[kind] || 0) + 1;
     const st = document.getElementById('wp-live-stats'); if (st) st.innerHTML = hqbWpStats(w);
-    const cs = document.querySelector(`.hqb-wp-stats[data-wp="${w.id}"]`); if (cs) cs.innerHTML = hqbWpStats(w);
+    hqbWpViewerStats();
     if (supabaseClient && navigator.onLine) { try { supabaseClient.rpc('wp_hit', { p_id: w.id, p_kind: kind }).then(() => {}, () => {}); } catch (e) {} }
 }
 hqbFill(HQB_WALLPAPERS, hqbMapWp(hqbLS('hqb_wp_cache', [])));
-function openWallpapers() {
+function hqbWpFavs() { return hqbLS('hqb_wp_favs', []); }
+function hqbWpIsFav(w) { return w && hqbWpFavs().includes(String(w.id)); }
+
+let hqbWpFromSec = false;
+function openWallpapers(fromSec) {
+    hqbWpFromSec = !!fromSec;
     openModal('wallpapers-modal');
-    hqbRenderWallpapers();
+    hqbRenderWallpapers(true);
     hqbFetchTable('religious_wallpapers', 'hqb_wp_cache').then(rows => {
         if (rows) { hqbFill(HQB_WALLPAPERS, hqbMapWp(rows)); hqbRenderWallpapers(); }
     });
 }
 let hqbWpCats = [''];
-function hqbWpPick(i) { playClickSound(); hqbWpCat = hqbWpCats[i] || ''; hqbRenderWallpapers(); }
-function hqbRenderWallpapers() {
+function hqbWpPick(i) { playClickSound(); hqbWpCat = hqbWpCats[i] || ''; hqbRenderWallpapers(true); }
+function hqbWpSetSort(v) { hqbWpSort = v; hqbRenderWallpapers(true); }
+function hqbWpToggleFavs() {
+    playClickSound();
+    hqbWpFavOnly = !hqbWpFavOnly;
+    document.getElementById('wpx-fav-btn').classList.toggle('on', hqbWpFavOnly);
+    hqbRenderWallpapers(true);
+}
+function hqbWpToggleSearch() {
+    playClickSound();
+    const bar = document.getElementById('wpx-search');
+    const show = bar.classList.contains('hidden');
+    bar.classList.toggle('hidden', !show);
+    if (show) setTimeout(() => { try { document.getElementById('wpx-q').focus(); } catch (e) {} }, 100);
+    else { document.getElementById('wpx-q').value = ''; hqbWpQ = ''; hqbRenderWallpapers(true); }
+}
+let hqbWpQT = 0;
+function hqbWpSearch(v) { clearTimeout(hqbWpQT); hqbWpQT = setTimeout(() => { hqbWpQ = arNormalize(v || ''); hqbRenderWallpapers(true); }, 200); }
+
+function hqbRenderWallpapers(top) {
     const box = document.getElementById('wallpapers-grid');
     const chips = document.getElementById('wallpapers-cats');
+    if (!box) return;
     const cats = [...new Set(HQB_WALLPAPERS.map(w => w.category).filter(Boolean))];
     if (hqbWpCat && !cats.includes(hqbWpCat)) hqbWpCat = '';
+    hqbWpCats = ['', ...cats];
     if (chips) {
-        chips.classList.toggle('hidden', cats.length < 2);
-        hqbWpCats = ['', ...cats];
-        chips.innerHTML = hqbWpCats.map((c, i) => `<button onclick="hqbWpPick(${i})" class="px-3 py-1.5 rounded-full text-[11px] font-bold whitespace-nowrap shrink-0 ${c === hqbWpCat ? 'bg-palette-mauve text-palette-darkest' : 'bg-palette-mid text-palette-light border border-palette-purple'}">${c ? escapeHTML(c) : 'الكل'}</button>`).join('');
+        chips.classList.toggle('hidden', cats.length < 1);
+        const keep = chips.scrollLeft;
+        chips.innerHTML = hqbWpCats.map((c, i) => `<button onclick="hqbWpPick(${i})" class="wpx-chip ${c === hqbWpCat ? 'on' : ''}">${c ? escapeHTML(c) : 'الكل'}</button>`).join('');
+        chips.scrollLeft = keep;
     }
-    if (!HQB_WALLPAPERS.length) {
-        box.className = 'flex-1 overflow-y-auto';
-        box.innerHTML = `<div class="flex flex-col items-center justify-center text-center gap-3 py-16">
-            <div class="w-16 h-16 rounded-full border border-dashed border-palette-muted/60 text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-image"></i></div>
-            <p class="text-sm font-bold text-palette-light">لا توجد خلفيات بعد</p>
-            <p class="text-[11px] text-palette-muted leading-relaxed max-w-[240px]">ستظهر الخلفيات الدينية هنا عند إضافتها.</p>
-        </div>`;
+    const favs = hqbWpFavs();
+    let list = HQB_WALLPAPERS.filter(w => (!hqbWpCat || w.category === hqbWpCat)
+        && (!hqbWpFavOnly || favs.includes(String(w.id)))
+        && (!hqbWpQ || arNormalize(w.title + ' ' + w.category).includes(hqbWpQ)));
+    const num = w => Number(w.id) || 0;
+    if (hqbWpSort === 'new') list = list.slice().sort((a, b) => num(b) - num(a));
+    else if (hqbWpSort === 'views') list = list.slice().sort((a, b) => b.views - a.views);
+    else if (hqbWpSort === 'downloads') list = list.slice().sort((a, b) => b.downloads - a.downloads);
+    hqbWpList = list;
+    const cnt = document.getElementById('wpx-count');
+    if (cnt) cnt.innerText = list.length ? hqbNum(list.length) + ' خلفية' : '';
+    if (!list.length) {
+        const msg = !HQB_WALLPAPERS.length ? ['fa-image', 'لا توجد خلفيات بعد', 'ستظهر الخلفيات هنا عند إضافتها.']
+            : hqbWpFavOnly ? ['fa-bookmark', 'لا توجد خلفيات محفوظة', 'افتح أي خلفية واضغط النجمة لتجدها هنا.']
+            : ['fa-magnifying-glass', 'لا توجد نتائج', 'جرّب قسماً آخر أو كلمة أخرى.'];
+        box.innerHTML = `<div class="wpx-empty"><i class="fa-solid ${msg[0]}"></i><p>${msg[1]}</p><small>${msg[2]}</small></div>`;
         return;
     }
-    box.className = 'flex-1 overflow-y-auto';
-    box.innerHTML = `<div class="hqb-wp-grid">` + HQB_WALLPAPERS.map((w, i) => (hqbWpCat && w.category !== hqbWpCat) ? '' : `
-        <button onclick="hqbOpenWallpaper(${i})" class="hqb-wp-card rounded-2xl border border-palette-purple bg-palette-mid">
-            <img src="${escapeHTML(w.url)}" alt="${escapeHTML(w.title || '')}" loading="lazy" decoding="async">
-            <span class="hqb-wp-foot">${w.title ? `<span class="hqb-wp-title">${escapeHTML(w.title)}</span>` : ''}<span class="hqb-wp-stats" data-wp="${w.id}">${hqbWpStats(w)}</span></span>
-        </button>`).join('') + `</div>`;
+    box.innerHTML = `<div class="wpx-grid">` + list.map((w, i) => {
+        const k = i % 10, cls = list.length < 5 ? '' : k === 0 ? 'big' : k === 6 ? 'big alt' : '';
+        return `<button onclick="hqbOpenWallpaper(${i})" class="wpx-tile ${cls}" aria-label="${escapeHTML(w.title || 'خلفية')}">
+            <img src="${escapeHTML(w.url)}" alt="" loading="lazy" decoding="async" onload="this.classList.add('ok')" onerror="this.parentNode.classList.add('err')">
+            ${favs.includes(String(w.id)) ? '<span class="wpx-tile-fav"><i class="fa-solid fa-star"></i></span>' : ''}
+        </button>`;
+    }).join('') + `</div>`;
+    if (top) box.scrollTop = 0;
 }
+
+// ===== عارض الخلفية بملء الشاشة مع السحب بين الخلفيات =====
 function hqbOpenWallpaper(i) {
     playClickSound();
-    const w = HQB_WALLPAPERS[i];
-    if (!w) return;
-    document.getElementById('share-img-preview').src = w.url;
+    if (!hqbWpList[i]) return;
+    const track = document.getElementById('wpv-track');
+    track.innerHTML = hqbWpList.map((w, k) => `<div class="wpv-slide" data-k="${k}"><img data-src="${escapeHTML(w.url)}" alt=""><i class="fa-solid fa-spinner fa-spin wpv-spin"></i></div>`).join('');
+    openModal('wp-viewer');
+    requestAnimationFrame(() => {
+        const sl = track.children[i];
+        if (sl) track.scrollLeft = sl.offsetLeft - (track.clientWidth - sl.clientWidth) / 2;
+        hqbWpGoto(i, true);
+    });
+}
+function hqbWpGoto(i, force) {
+    if (!force && i === hqbWpIdx) return;
+    hqbWpIdx = i;
+    const track = document.getElementById('wpv-track');
+    [i - 1, i, i + 1].forEach(k => {
+        const sl = track.children[k]; if (!sl) return;
+        const im = sl.querySelector('img');
+        if (im && !im.src) { im.onload = () => { im.classList.add('ok'); sl.classList.add('ok'); }; im.onerror = () => sl.classList.add('err'); im.src = im.dataset.src; }
+    });
+    const w = hqbWpList[i];
     hqbWpCur = w;
-    const st = document.getElementById('wp-live-stats'); st.innerHTML = hqbWpStats(w); st.classList.remove('hidden');
+    document.getElementById('wpv-title').innerText = w.title || w.category || 'خلفية';
+    document.getElementById('wpv-pos').innerText = hqbNum(i + 1) + ' / ' + hqbNum(hqbWpList.length);
+    hqbWpViewerStats();
     hqbWpHit('views');
-    hqbShareUrl = w.url; hqbShareBlob = null;
-    fetch(w.url).then(r => r.blob()).then(b => { hqbShareBlob = b; }).catch(() => {});
-    openModal('share-img-modal');
+}
+let hqbWpScrollT = 0, hqbWpFavDirty = false;
+function hqbWpOnScroll() {
+    clearTimeout(hqbWpScrollT);
+    hqbWpScrollT = setTimeout(() => {
+        const track = document.getElementById('wpv-track');
+        const mid = track.getBoundingClientRect().left + track.clientWidth / 2;
+        let best = 0, bd = 1e9;
+        [...track.children].forEach((sl, k) => { const r = sl.getBoundingClientRect(); const d = Math.abs(r.left + r.width / 2 - mid); if (d < bd) { bd = d; best = k; } });
+        hqbWpGoto(best);
+    }, 90);
+}
+function hqbWpViewerStats() {
+    const w = hqbWpCur, el = document.getElementById('wpv-stats');
+    if (!w || !el) return;
+    el.innerHTML = `<span><i class="fa-solid fa-eye"></i>${hqbWpFmt(w.views)}</span><span><i class="fa-solid fa-download"></i>${hqbWpFmt(w.downloads)}</span>`;
+    const fb = document.getElementById('wpv-fav');
+    if (fb) { const on = hqbWpIsFav(w); fb.classList.toggle('on', on); fb.innerHTML = `<i class="fa-${on ? 'solid' : 'regular'} fa-star"></i>`; }
+}
+function hqbWpCloseViewer() {
+    playClickSound();
+    closeModal('wp-viewer');
+    hqbWpIdx = -1;
+    document.getElementById('wpv-track').innerHTML = '';
+    if (hqbWpFavDirty) { hqbWpFavDirty = false; hqbRenderWallpapers(); }
+}
+function hqbWpToggleFav() {
+    playClickSound();
+    const w = hqbWpCur; if (!w) return;
+    let f = hqbWpFavs(); const id = String(w.id);
+    if (f.includes(id)) { f = f.filter(x => x !== id); showToast('أُزيلت من المحفوظات'); }
+    else { f.unshift(id); showToast('حُفظت في المحفوظات'); }
+    hqbSaveLS('hqb_wp_favs', f.slice(0, 300));
+    hqbWpFavDirty = true;
+    hqbWpViewerStats();
+}
+async function hqbWpBlob(w) {
+    const r = await fetch(w.url, { mode: 'cors' });
+    if (!r.ok) throw new Error('fetch');
+    return await r.blob();
+}
+function hqbWpExt(b) { return /png/.test(b.type) ? 'png' : /webp/.test(b.type) ? 'webp' : 'jpg'; }
+async function hqbWpSave() {
+    playClickSound();
+    const w = hqbWpCur; if (!w) return;
+    const btn = document.getElementById('wpv-save'); btn.disabled = true;
+    try {
+        const b = await hqbWpBlob(w);
+        const u = URL.createObjectURL(b);
+        const a = document.createElement('a');
+        a.href = u; a.download = 'haram-' + (w.id || Date.now()) + '.' + hqbWpExt(b);
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(u), 4000);
+        hqbWpHit('downloads');
+        showToast('تم حفظ الخلفية في الصور أو التنزيلات');
+    } catch (e) {
+        window.open(w.url, '_blank');
+        showToast('اضغط على الصورة مطولاً واختر «حفظ الصورة»');
+    } finally { btn.disabled = false; }
+}
+async function hqbWpShare() {
+    playClickSound();
+    const w = hqbWpCur; if (!w) return;
+    try {
+        const b = await hqbWpBlob(w);
+        const f = new File([b], 'haram.' + hqbWpExt(b), { type: b.type || 'image/jpeg' });
+        if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); hqbWpHit('shares'); return; }
+    } catch (e) { if (e && e.name === 'AbortError') return; }
+    if (navigator.share) { try { await navigator.share({ url: w.url }); hqbWpHit('shares'); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    hqbWpSave();
 }
 
 (function () {
     document.body.insertAdjacentHTML('beforeend', `
-    <div id="wallpapers-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
-        <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] p-4 shadow-2xl flex flex-col overflow-hidden">
-            <div class="flex justify-between items-center mb-3 pb-2 border-b border-palette-purple">
-                <div class="flex items-center gap-2">
-                    <div class="w-9 h-9 rounded-xl bg-palette-mid text-palette-mauve flex items-center justify-center text-sm"><i class="fa-solid fa-image"></i></div>
-                    <h3 class="text-sm sm:text-base font-bold text-palette-light">خلفيات دينية</h3>
-                </div>
-                <button onclick="playClickSound(); closeModal('wallpapers-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+    <div id="wallpapers-modal" class="fixed inset-0 bg-black/85 hidden items-stretch justify-center p-0 z-50">
+        <div class="wpx-box w-full bg-palette-dark flex flex-col overflow-hidden">
+            <div class="wpx-top">
+                <button onclick="playClickSound(); closeModal('wallpapers-modal'); if (hqbWpFromSec) openModal('app-sections-fullscreen-modal');" class="srch-x" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+                <div class="wpx-ttl"><b>الخلفيات</b><small id="wpx-count"></small></div>
+                <button onclick="hqbWpToggleSearch()" class="wpx-ib" aria-label="بحث"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button id="wpx-fav-btn" onclick="hqbWpToggleFavs()" class="wpx-ib" aria-label="المحفوظات"><i class="fa-solid fa-bookmark"></i></button>
             </div>
-            <div id="wallpapers-cats" class="hidden flex gap-1.5 overflow-x-auto pb-2 mb-1 shrink-0"></div>
-            <div id="wallpapers-grid" class="flex-1 overflow-y-auto"></div>
+            <div id="wpx-search" class="wpx-search hidden"><div class="srch-field"><i class="fa-solid fa-magnifying-glass"></i><input id="wpx-q" type="search" placeholder="ابحث في الخلفيات..." oninput="hqbWpSearch(this.value)" autocomplete="off"></div></div>
+            <div id="wallpapers-cats" class="wpx-chips hidden"></div>
+            <div class="wpx-sortrow">
+                <label class="wpx-sort"><i class="fa-solid fa-arrow-down-wide-short"></i>
+                    <select onchange="hqbWpSetSort(this.value)" aria-label="ترتيب الخلفيات">
+                        <option value="new">الأحدث</option>
+                        <option value="views">الأكثر مشاهدة</option>
+                        <option value="downloads">الأكثر تحميلاً</option>
+                    </select>
+                </label>
+            </div>
+            <div id="wallpapers-grid" class="wpx-scroll"></div>
         </div>
-    </div>`);
+    </div>
+    <div id="wp-viewer" class="fixed inset-0 hidden z-[130] bg-black">
+        <div id="wpv-track" class="wpv-track" onscroll="hqbWpOnScroll()"></div>
+        <div class="wpv-top">
+            <button onclick="hqbWpCloseViewer()" class="wpv-btn" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+            <button id="wpv-fav" onclick="hqbWpToggleFav()" class="wpv-btn" aria-label="حفظ في المحفوظات"><i class="fa-regular fa-star"></i></button>
+            <div class="wpv-info"><b id="wpv-title"></b><small id="wpv-pos"></small></div>
+        </div>
+        <div class="wpv-bottom">
+            <div id="wpv-stats" class="wpv-stats"></div>
+            <button onclick="hqbWpShare()" class="wpv-btn" aria-label="مشاركة"><i class="fa-solid fa-share-nodes"></i></button>
+            <button id="wpv-save" onclick="hqbWpSave()" class="wpv-save"><i class="fa-solid fa-download"></i>حفظ الخلفية</button>
+        </div>
+    </div>
+</div>`);
     SECTION_MODALS.push('wallpapers-modal');
 
     hqbRenderDailyDuaRow();
@@ -8133,8 +8342,10 @@ function mqLoadLeaflet() {
     });
     return mqLeafletP;
 }
+// مفتاح خرائط CARTO (مجاني حتى 5 ملايين صورة خريطة شهرياً). يُفضَّل تقييده بموقع التطبيق من حساب CARTO
+const MQ_CARTO_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfNGg4N3o5cWwiLCJqdGkiOiJhNzA3YzE3YThmMjI4OTI5ODNmZTg3MTY4MDY1NWE1YyJ9.pNH4SS1r2H-zH1rNzC-Cf0zGFwsIUQwVQ9fCgcqOsS8';
 function mqTileUrl() {
-    return 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+    return 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=' + encodeURIComponent(MQ_CARTO_KEY);
 }
 function mqStatus(t) { const el = document.getElementById('mq-status'); if (el) el.innerText = t; }
 function mqFmt(d) { return d < 1000 ? `${hqbNum(Math.round(d))} م` : `${hqbNum((d / 1000).toFixed(1))} كم`; }
@@ -8205,10 +8416,14 @@ function mqGmapsBtn(la, lo) {
 async function mqFetch(la, lo, r) {
     const around = `(around:${r},${la},${lo})`;
     const q = `[out:json][timeout:25];(nwr["amenity"="place_of_worship"]["religion"="muslim"]${around};nwr["building"="mosque"]${around};nwr["amenity"="place_of_worship"]["name"~"مسجد|جامع|حسينية|مرقد|مقام|Mosque|Masjid",i]${around};);out center 120;`;
-    const els = await new Promise((resolve, reject) => {
-        let failed = 0, done = false;
-        OVERPASS.forEach(u => overpassRequest(u, q).then(x => { if (!done) { done = true; resolve(x); } }).catch(() => { failed++; if (failed === OVERPASS.length && !done) reject(new Error('fail')); }));
-    });
+    // نجرّب الخوادم واحداً بعد الآخر (بدءاً من خادم عشوائي لتوزيع الضغط)، لأن إرسال الطلب لها كلها معاً قد يجعلها ترفضه
+    const start = Math.floor(Math.random() * OVERPASS.length);
+    const order = OVERPASS.map((_, k) => OVERPASS[(start + k) % OVERPASS.length]);
+    let els = null;
+    for (const u of order) {
+        try { els = await overpassRequest(u, q); break; } catch (e) {}
+    }
+    if (!els) throw new Error('fail');
     const seen = new Set();
     return els.filter(e => { const k = e.type + e.id; if (seen.has(k)) return false; seen.add(k); return true; }).map(e => {
         const y = e.lat != null ? e.lat : (e.center && e.center.lat), x = e.lon != null ? e.lon : (e.center && e.center.lon);
