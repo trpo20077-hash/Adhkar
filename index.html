@@ -665,6 +665,13 @@ html.theme-day .dua-row + .dua-row { border-top-color: rgba(21,49,74,.08); }
 html.theme-day .dua-row-ic { background: #0F202B; }
 html.theme-day .dua-row-go { color: #4A6680; }
 .z-head { font-size: 13px; font-weight: 800; color: #A3B3BF; padding: 10px 4px 2px; }
+.dua-row-sub { display: block; font-size: 11px; font-weight: 600; color: #A3B3BF; line-height: 1.5; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dua-row-n { width: 32px; height: 32px; border-radius: 10px; border: 1px solid rgba(212,168,79,.35); color: #D4A84F; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.dua-row-ic.sec-face { padding: 0; overflow: hidden; background: #0A151C; }
+.dua-row-ic.sec-face img { width: 100%; height: 100%; object-fit: cover; }
+.dua-group + .z-head { padding-top: 16px; }
+html.theme-day .dua-row-sub { color: #4A6680; }
+html.theme-day .dua-row-n { color: #946512; border-color: rgba(148,101,18,.35); }
 html.theme-day .z-head { color: #4A6680; }
 .cv-btn { position: relative; padding: 9px 10px; border-radius: 14px; background: #0F202B; border: 1px solid rgba(212,168,79,.3); display: flex; flex-direction: column; align-items: flex-start; gap: 1px; text-align: right; min-width: 0; }
 .cv-btn small { font-size: 9.5px; font-weight: 800; color: #A3B3BF; }
@@ -1142,76 +1149,97 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <i class="fa-solid fa-xmark text-sm"></i>
             </button>
         </div>
-        <div class="flex-1 overflow-y-auto pr-1">
-            <div class="w-full grid grid-cols-2 gap-3">
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openMushaf();" class="col-span-2 py-5 px-4 rounded-3xl bg-palette-mauve text-palette-darkest flex items-center justify-between gap-3 active:scale-95 transition-all cursor-pointer shadow-lg">
-                    <div class="flex items-center gap-3"><div class="w-14 h-14 rounded-2xl bg-palette-darkest text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-book-quran"></i></div>
-                    <div class="text-right"><span class="block font-black text-sm" id="lbl-sec-mushaf">المصحف الشريف</span><span class="block text-[10px] font-bold opacity-75" id="lbl-sec-mushaf-sub">قراءة • بحث • تلاوة • ترجمة</span></div></div>
-                    <i class="fa-solid fa-chevron-left text-sm mushaf-dir-icon"></i>
+                <div class="flex-1 overflow-y-auto pr-1 space-y-1 pb-2">
+            <p class="z-head">القرآن والأدعية</p>
+            <div class="dua-group">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openMushaf();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-book-quran"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-mushaf">المصحف الشريف</span><small class="dua-row-sub" id="lbl-sec-mushaf-sub">قراءة • بحث • تلاوة • ترجمة</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAssistant();" class="col-span-2 py-4 px-4 rounded-3xl bg-palette-mid border border-palette-mauve/40 flex items-center justify-between gap-3 active:scale-[.98] transition-all">
-                    <div class="flex items-center gap-3"><div class="w-14 h-14 rounded-2xl bg-palette-dark overflow-hidden shrink-0"><img class="hqb-face" alt=""></div>
-                    <div class="text-right"><span class="block font-black text-sm text-palette-light">مساعد حرم</span><span class="block text-[10px] font-bold text-palette-muted">اسأل عن دعاء أو حكم أو نظّم عبادتك</span></div></div>
-                    <i class="fa-solid fa-chevron-left text-sm text-palette-muted"></i>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openDuasHub();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-book-open"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-duas">الأدعية والزيارات</span><small class="dua-row-sub" id="lbl-sec-duas-sub">المفاتيح • الزيارات • دعاء اليوم</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="col-span-2 py-4 px-3 rounded-3xl bg-palette-mid border border-palette-mauve/40 flex flex-col items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer shadow-md">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-mosque"></i></div>
-                    <span class="block font-black text-xs text-palette-light text-center" id="lbl-sec-prayer">أوقات الصلاة</span>
-                    <span class="block text-[9px] font-bold text-palette-muted text-center leading-tight" id="lbl-sec-prayer-sub">المواقيت • القبلة • المساجد القريبة</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('quran-modal'); loadQuranRecitersList();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-headphones"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-rec">تلاوات وقراء</span><small class="dua-row-sub">استمع للقرآن بأصوات القرّاء</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openDuasHub();" class=" py-4 px-3 rounded-3xl bg-palette-mid border border-palette-mauve/40 flex flex-col items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer shadow-md">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-book-open"></i></div>
-                    <span class="block font-black text-xs text-palette-light text-center" id="lbl-sec-duas">الأدعية والزيارات</span>
-                    <span class="block text-[9px] font-bold text-palette-muted text-center leading-tight" id="lbl-sec-duas-sub">المفاتيح • الزيارات • دعاء اليوم</span>
-                </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('fatiha-modal'); loadFatihaLocalList();" class=" py-4 px-3 rounded-3xl bg-palette-mid border border-palette-mauve/40 flex flex-col items-center justify-center gap-2.5 active:scale-95 transition-all cursor-pointer shadow-md">
-                    <div class="w-14 h-14 rounded-2xl bg-palette-dark text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-moon"></i></div>
-                    <span class="block font-black text-xs text-palette-light text-center" id="lbl-sec-fatiha">الفاتحة</span>
-                    <span class="block text-[9px] font-bold text-palette-muted text-center leading-tight" id="lbl-sec-fatiha-sub">اقرأ لأرواح المؤمنين</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('fatiha-modal'); loadFatihaLocalList();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-moon"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-fatiha">الفاتحة</span><small class="dua-row-sub" id="lbl-sec-fatiha-sub">اقرأ لأرواح المؤمنين</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
             </div>
-            <button onclick="closeModal('app-sections-fullscreen-modal'); openArbaeen();" class="arb-entry mt-3">
-                <span class="arb-entry-ic"><i class="fa-solid fa-person-walking"></i></span>
-                <span class="arb-entry-tx"><b>طريق الأربعين</b><small>احسب مسيرك إلى كربلاء وشارك بطاقتك</small></span>
-                <i class="fa-solid fa-chevron-left arb-go"></i>
-            </button>
-            <p class="text-[11px] font-black text-palette-muted mt-4 mb-2 px-1" id="lbl-more-sections">المزيد</p>
-            <div class="w-full grid grid-cols-3 gap-2.5">
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('quran-modal'); loadQuranRecitersList();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-headphones"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-rec">تلاوات وقراء</span>
+            <p class="z-head">الصلاة</p>
+            <div class="dua-group">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('prayer-times-modal'); initPrayerTimesInterface();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-mosque"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-prayer">أوقات الصلاة</span><small class="dua-row-sub" id="lbl-sec-prayer-sub">المواقيت • القبلة • المساجد</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openTracker();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-list-check"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-tracker">سجل صلواتي</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAdhanSettings();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-bullhorn"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-adhan">الأذان والتنبيهات</span><small class="dua-row-sub">صوت الأذان وتنبيهات الصلاة</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAdhanSettings();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-bullhorn"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-adhan">الأذان والتنبيهات</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openTracker();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-list-check"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-tracker">سجل صلواتي</span><small class="dua-row-sub">تابع صلواتك اليومية</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('calendar-modal'); initHijriCalendarModal();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-calendar-days"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-cal">التقويم</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('rakat-counter-modal'); initRakatModalHome();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-hand-pointer"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-rakat">عداد الركع</span><small class="dua-row-sub">حتى لا تسهو في صلاتك</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('rakat-counter-modal'); initRakatModalHome();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-hand-pointer"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-rakat">عداد الركع</span>
+            </div>
+            <p class="z-head">التقويم والمناسبات</p>
+            <div class="dua-group">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('calendar-modal'); initHijriCalendarModal();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-calendar-days"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-cal">التقويم</span><small class="dua-row-sub">الهجري والميلادي والمناسبات</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-trophy"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-chal">التحديات</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openArbaeen();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-person-walking"></i></span>
+                    <span class="dua-row-tx"><span>طريق الأربعين</span><small class="dua-row-sub">احسب مسيرك إلى كربلاء وشارك بطاقتك</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openImsakiya();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-utensils"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-imsak">إمساكية رمضان</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openImsakiya();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-utensils"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-imsak">إمساكية رمضان</span><small class="dua-row-sub">مواعيد السحور والإفطار</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openConverter();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-right-left"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-conv">محوّل التاريخ</span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openConverter();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-right-left"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-conv">محوّل التاريخ</span><small class="dua-row-sub">بين الهجري والميلادي</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openIstikhara();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-hand-holding-heart"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight" id="lbl-sec-ist">الاستخارة</span>
+            </div>
+            <p class="z-head">أدوات</p>
+            <div class="dua-group">
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAssistant();" class="dua-row">
+                    <span class="dua-row-ic sec-face"><img class="hqb-face" alt=""></span>
+                    <span class="dua-row-tx"><span>مساعد حرم</span><small class="dua-row-sub">اسأل عن دعاء أو حكم أو نظّم عبادتك</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openIstikhara();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-hand-holding-heart"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-ist">الاستخارة</span><small class="dua-row-sub">بالمسبحة أو بالقرآن الكريم</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openWallpapers();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-image"></i></span>
+                    <span class="dua-row-tx"><span>خلفيات دينية</span><small class="dua-row-sub">خلفيات للهاتف تحمّلها وتشاركها</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
+                </button>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-trophy"></i></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-chal">التحديات</span><small class="dua-row-sub">من ٥٠ إلى ٥٠٠ تسبيحة</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
             </div>
         </div>
@@ -1874,10 +1902,10 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
         </div>
 
         <a href="https://www.instagram.com/t85ki" target="_blank" rel="noopener" onclick="playClickSound()" class="p-2 rounded-xl bg-palette-light text-palette-darkest flex items-center gap-3 shadow-md active:scale-[.98] transition-all" style="text-decoration:none">
-            <div class="w-9 h-9 rounded-full bg-palette-darkest text-palette-light flex items-center justify-center text-sm font-black shrink-0">Z</div>
+            <div class="w-9 h-9 rounded-full bg-palette-darkest text-palette-light flex items-center justify-center text-sm font-black shrink-0">ح</div>
             <div class="text-right min-w-0">
                 <span id="founders-founder-label" class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-palette-darkest text-palette-light mb-1">المؤسسة</span>
-                <h4 id="founders-founder-name" class="text-sm font-black truncate text-right" dir="ltr">Zainab Ali</h4>
+                <h4 id="founders-founder-name" class="text-sm font-black truncate text-right">حرم</h4>
             </div>
             <i class="fa-brands fa-instagram text-xl mr-auto"></i>
         </a>
@@ -3798,24 +3826,12 @@ function hqbRenderSupList(list, container) {
         return;
     }
     activeSupplicationsList = list;
-    let html = '';
-    list.forEach((sup, i) => {
-        const tone = (i % 2 === 0) ? 'bg-palette-dark' : 'bg-palette-purple';
-        html += `
-            <div onclick="playClickSound(); openDuaDetailModal('${sup.id}')" class="p-3 rounded-xl ${tone} flex items-center justify-between cursor-pointer transition-all shadow-md group">
-                <div class="space-y-0.5 text-right overflow-hidden pr-1">
-                    <h4 class="font-bold text-palette-light text-xs sm:text-sm flex items-center gap-1.5 truncate">
-                        <i class="fa-solid fa-star text-[10px] text-palette-mauve shrink-0"></i>
-                        <span class="truncate">${escapeHTML(sup.title)}</span>
-                    </h4>
-                    <p class="text-[9px] text-palette-mauve font-medium truncate">${escapeHTML(sup.desc || '')}</p>
-                </div>
-                <div class="w-7 h-7 rounded-full bg-palette-light text-palette-darkest flex items-center justify-center text-xs shrink-0">
-                    <i class="fa-solid fa-chevron-left text-[10px]"></i>
-                </div>
-            </div>
-        `;
-    });
+    const html = `<div class="dua-group">` + list.map((sup, i) => `
+            <button onclick="playClickSound(); openDuaDetailModal('${sup.id}')" class="dua-row">
+                <span class="dua-row-n">${hqbNum(i + 1)}</span>
+                <span class="dua-row-tx">${escapeHTML(sup.title)}${sup.desc ? `<small class="dua-row-sub">${escapeHTML(sup.desc)}</small>` : ''}</span>
+                <i class="fa-solid fa-chevron-left dua-row-go"></i>
+            </button>`).join('') + `</div>`;
     container.innerHTML = html;
 }
 
@@ -5809,7 +5825,7 @@ function hqbApplySectionLabels() {
         'lbl-sec-conv': 'محوّل التاريخ',
         'lbl-sec-ist': 'الاستخارة'
     };
-    map['founders-founder-name'] = 'Zainab Ali';
+    map['founders-founder-name'] = 'حرم';
     Object.keys(map).forEach(id => { const el = document.getElementById(id); if (el) el.innerText = map[id]; });
 }
 
@@ -5984,14 +6000,13 @@ function hqbZCount(catId, secId) {
     return items.filter(x => x.cat === catId).length;
 }
 function hqbZRow(onclick, icon, title, sub, gold) {
-    return `<div onclick="${onclick}" class="p-3 rounded-xl ${gold ? 'bg-palette-mauve text-palette-darkest' : 'bg-palette-mid text-palette-light'} border border-palette-purple flex items-center justify-between gap-2 cursor-pointer active:scale-[.98] transition-all">
-        <div class="flex items-center gap-2.5 min-w-0">
-            <span class="w-9 h-9 rounded-xl ${gold ? 'bg-palette-darkest/15' : 'bg-palette-dark text-palette-mauve'} flex items-center justify-center shrink-0"><i class="fa-solid ${icon} text-sm"></i></span>
-            <div class="text-right min-w-0"><h4 class="font-black text-xs sm:text-sm truncate">${escapeHTML(title)}</h4>${sub ? `<p class="text-[10px] font-bold opacity-70 truncate">${sub}</p>` : ''}</div>
-        </div>
-        <i class="fa-solid fa-chevron-left text-[11px] opacity-70 shrink-0"></i>
-    </div>`;
+    return `<button onclick="playClickSound(); ${onclick}" class="dua-row">
+        <span class="dua-row-ic"><i class="fa-solid ${icon}"></i></span>
+        <span class="dua-row-tx">${escapeHTML(title)}${sub ? `<small class="dua-row-sub">${sub}</small>` : ''}</span>
+        <i class="fa-solid fa-chevron-left dua-row-go"></i>
+    </button>`;
 }
+const hqbZGroup = rows => rows.length ? `<div class="dua-group">${rows.join('')}</div>` : '';
 function hqbRenderZiyarat() {
     const box = document.getElementById('ziyarat-list');
     if (!box) return;
@@ -6000,7 +6015,7 @@ function hqbRenderZiyarat() {
     const titleEl = document.getElementById('lbl-ziyarat-title');
     if (!hqbZPath.length) {
         if (titleEl) titleEl.innerText = 'الزيارات';
-        box.innerHTML = cats.length ? cats.map((c, i) => hqbZRow(`hqbZGo('cat','${c.id}')`, c.icon, c.title, cnt(hqbZCount(c.id)), false)).join('')
+        box.innerHTML = cats.length ? hqbZGroup(cats.map((c, i) => hqbZRow(`hqbZGo('cat','${c.id}')`, c.icon, c.title, cnt(hqbZCount(c.id)), false)))
             : `<div class="flex flex-col items-center justify-center text-center gap-3 py-16">
                 <div class="w-16 h-16 rounded-full border border-dashed border-palette-muted/60 text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-mosque"></i></div>
                 <p class="text-sm font-bold text-palette-light">لا توجد زيارات بعد</p>
@@ -6020,16 +6035,19 @@ function hqbRenderZiyarat() {
         <p class="text-[10px] text-palette-muted font-bold px-1">${crumbs}</p>`;
     const isLeaf = x => !secs.some(y => y.parent === x.id) && items.filter(y => y.sec === x.id).length === 1;
     const leaves = subSecs.filter(isLeaf), folders = subSecs.filter(x => !isLeaf(x));
-    html += leaves.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-book-open-reader', x.title, '', true)).join('');
+    html += hqbZGroup(leaves.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-book-open-reader', x.title, '', true)));
     if (folders.length) {
         html += `<p class="z-head">الأقسام الفرعية</p>`;
-        html += folders.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-layer-group', x.title, cnt(hqbZCount(cat.id, x.id)), false)).join('');
+        html += hqbZGroup(folders.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-layer-group', x.title, cnt(hqbZCount(cat.id, x.id)), false)));
     }
-    html += list.map((z, i) => `
-        <div onclick="playClickSound(); hqbOpenZiyara('${z.id}')" class="p-3 rounded-xl ${i % 2 ? 'bg-palette-purple' : 'bg-palette-dark'} flex items-center justify-between gap-2 cursor-pointer active:scale-[.98] transition-all">
-            <h4 class="font-bold text-palette-light text-xs sm:text-sm truncate"><i class="fa-solid fa-star text-[10px] text-palette-mauve ml-1"></i>${escapeHTML(z.title)}</h4>
-            <div class="w-7 h-7 rounded-full bg-palette-light text-palette-darkest flex items-center justify-center shrink-0"><i class="fa-solid fa-chevron-left text-[10px]"></i></div>
-        </div>`).join('');
+    if (list.length) {
+        if (subSecs.length) html += `<p class="z-head">الزيارات</p>`;
+        html += hqbZGroup(list.map((z, i) => `<button onclick="playClickSound(); hqbOpenZiyara('${z.id}')" class="dua-row">
+            <span class="dua-row-n">${hqbNum(i + 1)}</span>
+            <span class="dua-row-tx">${escapeHTML(z.title)}</span>
+            <i class="fa-solid fa-chevron-left dua-row-go"></i>
+        </button>`));
+    }
     if (!subSecs.length && !list.length) html += `<div class="flex flex-col items-center text-center gap-2 py-14"><i class="fa-solid fa-box-open text-2xl text-palette-mauve"></i><p class="text-xs font-bold text-palette-light">لا توجد زيارات هنا بعد</p></div>`;
     box.innerHTML = html;
     box.scrollTop = 0;
@@ -6488,6 +6506,7 @@ function arbRemainKm() { return arbPos ? geo(arbPos.lat, arbPos.lng, ARB_KARBALA
 function openArbaeen() {
     playClickSound();
     openModal('arbaeen-modal');
+    const ch = document.getElementById('arb-chips'); if (ch) ch._h = undefined;
     hqbArbRender();
     if (arbWatch == null && arbState().km > 0) hqbArbPeek();
 }
@@ -6656,56 +6675,81 @@ async function hqbArbZiyara() {
     else showToast('زيارة الأربعين غير مضافة بعد في قسم الزيارات');
 }
 
-function hqbArbRender() {
-    const box = document.getElementById('arb-body');
-    const m = document.getElementById('arbaeen-modal');
-    if (!box || !m || m.classList.contains('hidden')) return;
-    const s = arbState(), on = arbWatch != null;
-    const rem = arbRemainKm(), walked = s.km || 0;
-    const pct = rem == null ? (walked ? 100 : 0) : Math.max(0, Math.min(100, walked / Math.max(walked + rem, 0.001) * 100));
-    const from = s.route === 'other' ? 'نقطة البداية' : arbRouteName(s.route);
-    const mins = Math.round(((s.today && s.today.d === hqbDateKey()) ? s.today.sec : 0) / 60);
-    const gps = !arbPos ? '' : arbPos.acc > 35 ? `<span class="arb-warn"><i class="fa-solid fa-satellite-dish"></i> إشارة GPS ضعيفة (${toEasternArabicDigits(Math.round(arbPos.acc))} م)</span>` : (s.car && on ? '<span class="arb-warn"><i class="fa-solid fa-car"></i> سرعتك كسرعة سيارة، لا تُحسب المسافة</span>' : '');
-    document.getElementById('arb-live').innerHTML = on ? '<span class="arb-live">التتبع يعمل</span>' : '<span class="arb-live off">متوقف</span>';
+function hqbArbSet(id, html) {
+    const el = document.getElementById(id);
+    if (el && el._h !== html) { el.innerHTML = html; el._h = html; }
+    return el;
+}
+function hqbArbBuild(box) {
     box.innerHTML = `
     <div class="arb-card">
-        <div class="arb-chips">${ARB_ROUTES.map(r => `<button class="arb-chip ${r[0] === s.route ? 'on' : ''}" onclick="hqbArbSetRoute('${r[0]}')">${r[0] === 'other' ? r[1] : 'من ' + r[1]}</button>`).join('')}</div>
+        <div id="arb-chips" class="arb-chips"></div>
         <div class="arb-route">
             <svg viewBox="0 0 360 150" aria-hidden="true">
-                <path id="arb-path-bg" d="M325 110 C 260 30, 160 140, 38 40" fill="none" class="arb-ln-bg" stroke-width="7" stroke-linecap="round"/>
+                <path d="M325 110 C 260 30, 160 140, 38 40" fill="none" class="arb-ln-bg" stroke-width="7" stroke-linecap="round"/>
                 <path id="arb-path" d="M325 110 C 260 30, 160 140, 38 40" fill="none" class="arb-ln" stroke-width="7" stroke-linecap="round"/>
                 <circle cx="325" cy="110" r="7" class="arb-dot"/>
                 <circle cx="38" cy="40" r="7" fill="none" class="arb-ring" stroke-width="3"/>
                 <circle id="arb-me-h" r="15" class="arb-dot" opacity=".22"/>
                 <circle id="arb-me" r="8" class="arb-dot arb-me"/>
             </svg>
-            <div class="arb-city" style="right:4px;bottom:0"><i class="fa-solid fa-person-walking"></i>${escapeHTML(from)}<small>البداية</small></div>
+            <div id="arb-from" class="arb-city" style="right:4px;bottom:0"></div>
             <div class="arb-city" style="left:2px;top:0">كربلاء المقدسة<small>الوجهة</small></div>
         </div>
-        <div class="arb-barl"><span>${toEasternArabicDigits(Math.round(pct))}٪ من الطريق</span><span>${rem == null ? 'حدد موقعك لمعرفة المتبقي' : 'المسافة المباشرة إلى كربلاء'}</span></div>
-        <div class="arb-bar"><i style="width:${pct}%"></i></div>
-        ${gps}
+        <div id="arb-barl" class="arb-barl"></div>
+        <div class="arb-bar"><i id="arb-bar-fill"></i></div>
+        <div id="arb-gps"></div>
     </div>
-    <div class="arb-pillar ${arbNear ? 'ok' : ''}">
-        <div class="arb-pi"><i class="fa-solid fa-signs-post"></i></div>
+    <div id="arb-pillar" class="arb-pillar"></div>
+    <div class="arb-stats">
+        <div class="arb-st"><small>مشيت</small><b id="arb-walked"></b></div>
+        <div class="arb-st"><small>متبقٍّ إلى كربلاء</small><b id="arb-rem"></b></div>
+        <div class="arb-st"><small>مدة المشي اليوم</small><b id="arb-time"></b></div>
+        <div class="arb-st"><small>أيام المسير</small><b id="arb-days"></b></div>
+    </div>
+    <div id="arb-btns" class="arb-btns"></div>
+    <button class="arb-row" onclick="hqbArbZiyara()"><span class="arb-ic"><i class="fa-solid fa-book-open-reader"></i></span><span class="arb-rt"><b>زيارة الأربعين</b><small>تُفتح في قارئ الأدعية</small></span><i class="fa-solid fa-chevron-left arb-go"></i></button>
+    <p class="arb-note">تُحسب المسافة التي مشيتها من GPS وهذه الشاشة مفتوحة. المتبقّي مسافة مباشرة، والطريق الفعلي أطول قليلاً.</p>
+    <div id="arb-reset" class="text-center"></div>`;
+    box._built = true;
+}
+// يُحدَّث كل جزء فقط إذا تغيّر محتواه، حتى لا ينقطع التمرير أو الضغط أثناء وصول قراءات GPS
+function hqbArbRender() {
+    const box = document.getElementById('arb-body');
+    const m = document.getElementById('arbaeen-modal');
+    if (!box || !m || m.classList.contains('hidden')) return;
+    if (!box._built) hqbArbBuild(box);
+    const s = arbState(), on = arbWatch != null;
+    const rem = arbRemainKm(), walked = s.km || 0;
+    const pct = rem == null ? (walked ? 100 : 0) : Math.max(0, Math.min(100, walked / Math.max(walked + rem, 0.001) * 100));
+    const from = s.route === 'other' ? 'نقطة البداية' : arbRouteName(s.route);
+    const mins = Math.round(((s.today && s.today.d === hqbDateKey()) ? s.today.sec : 0) / 60);
+    hqbArbSet('arb-live', on ? '<span class="arb-live">التتبع يعمل</span>' : '<span class="arb-live off">متوقف</span>');
+    const chips = document.getElementById('arb-chips');
+    const keep = chips ? chips.scrollLeft : 0;
+    const changed = chips && chips._h === undefined;
+    hqbArbSet('arb-chips', ARB_ROUTES.map(r => `<button class="arb-chip ${r[0] === s.route ? 'on' : ''}" onclick="hqbArbSetRoute('${r[0]}')">${r[0] === 'other' ? r[1] : 'من ' + r[1]}</button>`).join(''));
+    if (chips) {
+        if (changed) { const on1 = chips.querySelector('.arb-chip.on'); if (on1) try { on1.scrollIntoView({ inline: 'center', block: 'nearest' }); } catch (e) {} }
+        else chips.scrollLeft = keep;
+    }
+    hqbArbSet('arb-from', `<i class="fa-solid fa-person-walking"></i>${escapeHTML(from)}<small>البداية</small>`);
+    hqbArbSet('arb-barl', `<span>${toEasternArabicDigits(Math.round(pct))}٪ من الطريق</span><span>${rem == null ? 'حدد موقعك لمعرفة المتبقي' : 'المسافة المباشرة إلى كربلاء'}</span>`);
+    const fill = document.getElementById('arb-bar-fill'); if (fill) fill.style.width = pct + '%';
+    hqbArbSet('arb-gps', !arbPos ? '' : arbPos.acc > 35 ? `<span class="arb-warn"><i class="fa-solid fa-satellite-dish"></i> إشارة GPS ضعيفة (${toEasternArabicDigits(Math.round(arbPos.acc))} م)</span>` : (s.car && on ? '<span class="arb-warn"><i class="fa-solid fa-car"></i> سرعتك كسرعة سيارة، لا تُحسب المسافة</span>' : ''));
+    const pl = document.getElementById('arb-pillar'); if (pl) pl.classList.toggle('ok', !!arbNear);
+    hqbArbSet('arb-pillar', `<div class="arb-pi"><i class="fa-solid fa-signs-post"></i></div>
         <div class="arb-pt">${arbNear
             ? `<small>أقرب عمود معتمد • على بعد ${toEasternArabicDigits(arbNear.dist)} م</small><b>العمود ${toEasternArabicDigits(arbNear.num)}</b>`
             : `<small>رقم العمود</small><p>لا يوجد عمود معتمد قريب منك بعد. إذا كنت عند عمود، أضف رقمه ليستفيد الزوار.</p>`}</div>
-        <button class="arb-addp" onclick="hqbArbReport()"><i class="fa-solid fa-plus"></i> أنا عند العمود</button>
-    </div>
-    <div class="arb-stats">
-        <div class="arb-st"><small>مشيت</small><b>${arbKm(walked)}<span>كم</span></b></div>
-        <div class="arb-st"><small>متبقٍّ إلى كربلاء</small><b>${rem == null ? '—' : arbKm(rem)}<span>${rem == null ? '' : 'كم'}</span></b></div>
-        <div class="arb-st"><small>مدة المشي اليوم</small><b>${toEasternArabicDigits(Math.floor(mins / 60))}:${toEasternArabicDigits(String(mins % 60).padStart(2, '0'))}<span>ساعة</span></b></div>
-        <div class="arb-st"><small>أيام المسير</small><b>${toEasternArabicDigits((s.days || []).length)}<span>يوم</span></b></div>
-    </div>
-    <div class="arb-btns">
-        <button class="arb-btn ${on ? 's' : 'p'}" onclick="hqbArbToggle()"><i class="fa-solid ${on ? 'fa-pause' : 'fa-play'}"></i>${on ? 'إيقاف مؤقت' : (walked ? 'متابعة المشي' : 'ابدأ المشي')}</button>
-        <button class="arb-btn ${on ? 'p' : 's'}" onclick="hqbArbShare()"><i class="fa-solid fa-share-nodes"></i>شارك مسيرتي</button>
-    </div>
-    <button class="arb-row" onclick="hqbArbZiyara()"><span class="arb-ic"><i class="fa-solid fa-book-open-reader"></i></span><span class="arb-rt"><b>زيارة الأربعين</b><small>تُفتح في قارئ الأدعية</small></span><i class="fa-solid fa-chevron-left arb-go"></i></button>
-    <p class="arb-note">تُحسب المسافة التي مشيتها من GPS وهذه الشاشة مفتوحة. المتبقّي مسافة مباشرة، والطريق الفعلي أطول قليلاً.</p>
-    ${walked ? '<button class="arb-reset" onclick="hqbArbReset()"><i class="fa-solid fa-rotate-left ml-1"></i>بدء مسير جديد</button>' : ''}`;
+        <button class="arb-addp" onclick="hqbArbReport()"><i class="fa-solid fa-plus"></i> أنا عند العمود</button>`);
+    hqbArbSet('arb-walked', `${arbKm(walked)}<span>كم</span>`);
+    hqbArbSet('arb-rem', rem == null ? '—' : `${arbKm(rem)}<span>كم</span>`);
+    hqbArbSet('arb-time', `${toEasternArabicDigits(Math.floor(mins / 60))}:${toEasternArabicDigits(String(mins % 60).padStart(2, '0'))}<span>ساعة</span>`);
+    hqbArbSet('arb-days', `${toEasternArabicDigits((s.days || []).length)}<span>يوم</span>`);
+    hqbArbSet('arb-btns', `<button class="arb-btn ${on ? 's' : 'p'}" onclick="hqbArbToggle()"><i class="fa-solid ${on ? 'fa-pause' : 'fa-play'}"></i>${on ? 'إيقاف مؤقت' : (walked ? 'متابعة المشي' : 'ابدأ المشي')}</button>
+        <button class="arb-btn ${on ? 'p' : 's'}" onclick="hqbArbShare()"><i class="fa-solid fa-share-nodes"></i>شارك مسيرتي</button>`);
+    hqbArbSet('arb-reset', walked ? '<button class="arb-reset" onclick="hqbArbReset()"><i class="fa-solid fa-rotate-left ml-1"></i>بدء مسير جديد</button>' : '');
     try {
         const pp = document.getElementById('arb-path'), L = pp.getTotalLength(), at = pp.getPointAtLength(L * pct / 100);
         pp.style.strokeDasharray = (L * pct / 100) + ' ' + L;
@@ -8061,14 +8105,6 @@ function hqbOpenWallpaper(i) {
         </div>
     </div>`);
     SECTION_MODALS.push('wallpapers-modal');
-
-    const ist = document.getElementById('lbl-sec-ist');
-    const tile = ist ? ist.closest('button') : null;
-    if (tile) tile.insertAdjacentHTML('afterend', `
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openWallpapers();" class="py-3.5 px-1 rounded-2xl bg-palette-mid border border-palette-purple flex flex-col items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer">
-                    <div class="w-10 h-10 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-lg"><i class="fa-solid fa-image"></i></div>
-                    <span class="font-bold text-[10px] text-palette-light text-center leading-tight">خلفيات دينية</span>
-                </button>`);
 
     hqbRenderDailyDuaRow();
     hqbRenderToday();
