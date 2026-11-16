@@ -1805,12 +1805,12 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
     <div class="hijri-dark-modal w-full max-w-md h-full sm:h-[92vh] sm:rounded-2xl flex flex-col overflow-hidden shadow-2xl border border-palette-muted/40">
         <div class="flex justify-between items-center px-4 pt-4 pb-2.5 bg-palette-light" style="color:#1F1915">
             <div class="flex items-center gap-2.5">
-                <button onclick="playClickSound(); closeModal('calendar-modal')" class="w-8 h-8 rounded-full flex items-center justify-center bg-palette-darkest cursor-pointer" style="color:#F5EDE6">
+                <button onclick="playClickSound(); closeModal('calendar-modal')" class="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer" style="background:#15314A;color:#F3EBDD" aria-label="رجوع">
                     <i class="fa-solid fa-arrow-right text-sm"></i>
                 </button>
                 <h3 class="text-base font-black" id="calendar-modal-title" style="color:#1F1915">التقويم الهجري والمناسبات</h3>
             </div>
-            <button onclick="playClickSound(); resetHijriToToday()" class="px-2.5 py-1.5 rounded-lg bg-palette-darkest text-[10px] font-bold flex items-center gap-1 cursor-pointer" style="color:#F5EDE6">
+            <button onclick="playClickSound(); resetHijriToToday()" class="px-3 py-1.5 rounded-lg text-[11px] font-bold flex items-center gap-1 cursor-pointer" style="background:#15314A;color:#F3EBDD">
                 <i class="fa-solid fa-arrows-up-down text-[10px]"></i>
                 <span id="btn-hijri-today">اليوم</span>
             </button>
@@ -2630,10 +2630,10 @@ const OVERPASS = [
     'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
 ];
 
-function overpassRequest(url, query) {
+function overpassRequest(url, query, ms) {
     return new Promise((resolve, reject) => {
         const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
-        const timer = setTimeout(() => { if (ctrl) ctrl.abort(); reject(new Error('timeout')); }, 16000);
+        const timer = setTimeout(() => { if (ctrl) ctrl.abort(); reject(new Error('timeout')); }, ms || 16000);
         fetch(url, { method: 'POST', body: 'data=' + encodeURIComponent(query), signal: ctrl ? ctrl.signal : undefined })
             .then(r => { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
             .then(j => { clearTimeout(timer); if (!j || !Array.isArray(j.elements)) throw new Error('bad'); resolve(j.elements); })
@@ -4559,11 +4559,11 @@ const PRIVACY_CONTENT = {
         sections: [
             ["1. مقدمة", "نلتزم بحماية خصوصيتك. توضح هذه السياسة المعلومات التي يتعامل معها تطبيق «حرم» وكيف تُستخدم. التطبيق مجاني، ولا يحتوي على إعلانات، ولا نبيع بياناتك ولا نشاركها مع أي جهة إعلانية."],
             ["2. الاسم", "الاسم الذي تكتبه عند الدخول اختياري، ويُحفظ على جهازك فقط ليظهر في الترحيب. يمكنك تغييره من الإعدادات في أي وقت. لا نطلب بريداً إلكترونياً ولا رقم هاتف ولا إنشاء حساب."],
-            ["3. الموقع الجغرافي", "يُطلب الموقع فقط عند استخدامك لأوقات الصلاة التلقائية أو خريطة المساجد، وبعد عرض توضيح وموافقتك. تُرسل الإحداثيات لحظياً إلى خدمة Aladhan لحساب أوقات الصلاة، وإلى خدمات OpenStreetMap (Nominatim وOverpass) لمعرفة اسم المدينة والمساجد القريبة، وتُعرض الخريطة من خدمة CARTO. لا نحفظ موقعك على خوادمنا، ولا يُستخدم الموقع في الخلفية. الاستثناء الوحيد: في «طريق الأربعين» يُحسب مسيرك على جهازك فقط، وإذا ضغطت «أنا عند العمود» يُرسل رقم العمود وإحداثيات مكانك ودقة GPS إلى خادمنا مع معرّف مجهول لجهازك، لبناء خريطة أعمدة يستفيد منها الزوار. ولا يظهر للآخرين إلا رقم العمود."],
+            ["3. الموقع الجغرافي", "يُطلب الموقع فقط عند استخدامك لأوقات الصلاة التلقائية أو خريطة المساجد، وبعد عرض توضيح وموافقتك. تُرسل الإحداثيات لحظياً إلى خدمة Aladhan لحساب أوقات الصلاة، وإلى خدمات OpenStreetMap (Nominatim وOverpass) لمعرفة اسم المدينة والمساجد القريبة، وتُعرض الخريطة من OpenStreetMap، وإذا لم تصل هذه الخدمات من شبكتك يمر طلب البحث عن المساجد عبر خادمنا دون أن نحفظه. لا نحفظ موقعك على خوادمنا، ولا يُستخدم الموقع في الخلفية. الاستثناء الوحيد: في «طريق الأربعين» يُحسب مسيرك على جهازك فقط، وإذا ضغطت «أنا عند العمود» يُرسل رقم العمود وإحداثيات مكانك ودقة GPS إلى خادمنا مع معرّف مجهول لجهازك، لبناء خريطة أعمدة يستفيد منها الزوار. ولا يظهر للآخرين إلا رقم العمود."],
             ["4. قسم الفاتحة (محتوى يضيفه المستخدمون)", "عند إضافة اسم متوفى يُحفظ الاسم والجنس وعدد القراءات والمشاهدات على خادم Supabase، مع معرّف عشوائي مجهول لجهازك يتيح لك وحدك حذف ما أضفته. الأسماء تظهر لجميع المستخدمين، فلا تكتب معلومات شخصية أو أرقام تواصل. قبل النشر يُفحص الاسم بقواعد ثابتة، ثم يُرسل عبر خادمنا إلى Google Gemini لمراجعته آلياً، دون أي معلومة عنك. ويمكن لأي مستخدم الإبلاغ عن اسم، فيُخفى تلقائياً بعد بلاغين من شبكتين مختلفتين."],
             ["5. التخزين على جهازك", "تُحفظ على جهازك فقط: اسمك والإعدادات واللغة، وسجل الصلوات والتحديات، والعلامات وآخر موضع قراءة في المصحف، وأدعيتك المفضّلة، ونسخة من القرآن والأدعية للعمل دون إنترنت."],
             ["6. الإشعارات", "إذا فعّلت الأذان أو التنبيهات يطلب التطبيق إذن الإشعارات لعرضها فقط، ويمكنك إيقافها من الإعدادات."],
-            ["7. خدمات الأطراف الثالثة", "يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap وCARTO (المدن وخريطة المساجد)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام، وGoogle Gemini (مساعد حرم). لكل خدمة سياسة خصوصية خاصة بها."],
+            ["7. خدمات الأطراف الثالثة", "يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap (المدن وخريطة المساجد، وقد يمر طلب البحث عن المساجد عبر خادمنا دون أن نحفظه)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام، وGoogle Gemini (مساعد حرم). لكل خدمة سياسة خصوصية خاصة بها."],
             ["8. مساعد حرم (الذكاء الاصطناعي)", "عند استخدامك لمساعد حرم تُرسل رسالتك ومعلومات يومك (التاريخ، المدينة، أوقات الصلاة، اسمك إن كتبته) إلى خدمة Google Gemini لتوليد الرد، عبر خادم التطبيق دون أي معلومات تواصل. تُحفظ المحادثة على جهازك فقط، ويُسجَّل عدد رسائلك اليومي لمنع الإساءة. الردود يولّدها الذكاء الاصطناعي وقد تخطئ، ولا تُغني عن الرجوع لمرجع التقليد. يمكنك الإبلاغ عن أي رد غير لائق من زر «إبلاغ»."],
             ["9. الحماية من الإساءة", "لحماية التطبيق من الرسائل المزعجة والتلاعب، يقرأ خادمنا عنوان شبكتك (IP) لحظياً ويحوّله فوراً إلى رمز مشفّر باتجاه واحد لا يمكن إرجاعه إلى العنوان الأصلي. يُستخدم هذا الرمز فقط لعدّ المحاولات ووضع حدود لها: عدد الأسماء المضافة في قسم الفاتحة، والبلاغات، وإضافة أعمدة طريق الأربعين، ورسائل مساعد حرم، وعدّاد المشاهدات والتحميلات والمشاركات للخلفيات (يُحسب مرة واحدة يومياً لكل شبكة). لا يُربط الرمز باسمك ولا بأي معلومة تعريفية، وتُحذف سجلاته تلقائياً بعد أيام قليلة."],
             ["10. الأطفال", "التطبيق مناسب لجميع الأعمار، ولا نجمع عمداً أي بيانات شخصية من الأطفال."],
@@ -8342,10 +8342,9 @@ function mqLoadLeaflet() {
     });
     return mqLeafletP;
 }
-// مفتاح خرائط CARTO (مجاني حتى 5 ملايين صورة خريطة شهرياً). يُفضَّل تقييده بموقع التطبيق من حساب CARTO
-const MQ_CARTO_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfNGg4N3o5cWwiLCJqdGkiOiJhNzA3YzE3YThmMjI4OTI5ODNmZTg3MTY4MDY1NWE1YyJ9.pNH4SS1r2H-zH1rNzC-Cf0zGFwsIUQwVQ9fCgcqOsS8';
+// خريطة OpenStreetMap الأساسية: مجانية ولا تحتاج مفتاحاً، وتظهر بها أسماء الأماكن بالعربية
 function mqTileUrl() {
-    return 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=' + encodeURIComponent(MQ_CARTO_KEY);
+    return 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 }
 function mqStatus(t) { const el = document.getElementById('mq-status'); if (el) el.innerText = t; }
 function mqFmt(d) { return d < 1000 ? `${hqbNum(Math.round(d))} م` : `${hqbNum((d / 1000).toFixed(1))} كم`; }
@@ -8401,7 +8400,7 @@ async function mqInitMap() {
     const L = window.L;
     mqMap = L.map('mq-map', { zoomControl: false, attributionControl: true, minZoom: 3 });
     mqMap.attributionControl.setPrefix(false);
-    mqTiles = L.tileLayer(mqTileUrl(), { maxZoom: 19, subdomains: 'abcd', attribution: '© OpenStreetMap © CARTO' }).addTo(mqMap);
+    mqTiles = L.tileLayer(mqTileUrl(), { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(mqMap);
     L.control.zoom({ position: 'bottomleft' }).addTo(mqMap);
     mqMap.fitBounds(MQ_IRAQ);
     mqLayer = L.layerGroup().addTo(mqMap);
@@ -8420,8 +8419,20 @@ async function mqFetch(la, lo, r) {
     const start = Math.floor(Math.random() * OVERPASS.length);
     const order = OVERPASS.map((_, k) => OVERPASS[(start + k) % OVERPASS.length]);
     let els = null;
-    for (const u of order) {
-        try { els = await overpassRequest(u, q); break; } catch (e) {}
+    // محاولتان مباشرتان من الهاتف، ثم عبر خادم التطبيق إذا كانت خوادم Overpass لا تصل من شبكة المستخدم
+    for (const u of order.slice(0, 2)) {
+        try { els = await overpassRequest(u, q, 10000); break; } catch (e) {}
+    }
+    if (!els && supabaseClient) {
+        try {
+            const { data, error } = await supabaseClient.functions.invoke('islamic-assistant', { body: { action: 'mosques', device: myDeviceId, lat: la, lng: lo, r: Math.max(200, Math.min(15000, Math.round(r))) } });
+            if (!error && data && Array.isArray(data.elements)) els = data.elements;
+        } catch (e) {}
+    }
+    if (!els) {
+        for (const u of order.slice(2)) {
+            try { els = await overpassRequest(u, q, 12000); break; } catch (e) {}
+        }
     }
     if (!els) throw new Error('fail');
     const seen = new Set();
@@ -8919,7 +8930,7 @@ const HQB_KU = {
 "إغلاق النافذة (يستمر الأذان)": "داخستنی پەنجەرە (بانگ بەردەوام دەبێت)",
 "الأذان يعمل الآن": "ئێستا بانگ لێدەدرێت",
 "إيقاف": "وەستاندن",
-"يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap وCARTO (المدن وخريطة المساجد)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام، وGoogle Gemini (مساعد حرم). لكل خدمة سياسة خصوصية خاصة بها.": "بەرنامەکە پشت بەمانە دەبەستێت: Supabase (بەشی فاتیحە و دوعا و تیلاوەتەکان)، AlQuran Cloud و Islamic Network (دەقی قورئان و تیلاوەتەکان)، Aladhan (کاتەکانی نوێژ)، OpenStreetMap و CARTO (شارەکان و نەخشەی مزگەوتەکان)، Google Maps (کاتێک ڕێنمایی بۆ مزگەوتێک داوا دەکەیت)، فۆنتەکانی Google، و بەستەری هەژمارەکانی عەتەبە پیرۆزەکان لە ئینستاگرام، و Google Gemini (یاریدەدەری حەرەم). هەر خزمەتگوزارییەک سیاسەتی تایبەتمەندی خۆی هەیە.",
+"يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap (المدن وخريطة المساجد، وقد يمر طلب البحث عن المساجد عبر خادمنا دون أن نحفظه)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام، وGoogle Gemini (مساعد حرم). لكل خدمة سياسة خصوصية خاصة بها.": "بەرنامەکە پشت بەمانە دەبەستێت: Supabase (بەشی فاتیحە و دوعا و تیلاوەتەکان)، AlQuran Cloud و Islamic Network (دەقی قورئان و تیلاوەتەکان)، Aladhan (کاتەکانی نوێژ)، OpenStreetMap و CARTO (شارەکان و نەخشەی مزگەوتەکان)، Google Maps (کاتێک ڕێنمایی بۆ مزگەوتێک داوا دەکەیت)، فۆنتەکانی Google، و بەستەری هەژمارەکانی عەتەبە پیرۆزەکان لە ئینستاگرام، و Google Gemini (یاریدەدەری حەرەم). هەر خزمەتگوزارییەک سیاسەتی تایبەتمەندی خۆی هەیە.",
 "ليل": "شەو",
 "نهار": "ڕۆژ",
 "فتح": "کردنەوە",
