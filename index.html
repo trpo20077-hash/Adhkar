@@ -7,7 +7,7 @@
 <!-- يمنع المتصفح من قلب الألوان إجبارياً (الوضع الداكن الإجباري في بعض الهواتف والأجهزة اللوحية) -->
 <meta name="color-scheme" content="dark" id="meta-color-scheme">
 <title>حرم - أذكار واستغفار والقرآن الكريم</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Amiri+Quran&family=Tajawal:wght@400;500;700;800;900&family=Noto+Sans+Arabic:wght@400;500;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Amiri+Quran&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Tajawal:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700;800;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -38,7 +38,7 @@ tailwind.config = {
 <style>
 html, body {
     margin: 0; padding: 0; width: 100%; min-height: 100vh;
-    font-family: 'Tajawal', sans-serif;
+    font-family: var(--f-ui);
     user-select: none; -webkit-user-select: none;
 }
 html.dark {
@@ -209,7 +209,7 @@ body.has-back-btn :is(#prayer-times-modal,#daily-supplications-modal,#supplicati
 .pi-hills { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; }
 .pi-star { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #fff; animation: star-twinkle 3s ease-in-out infinite; }
 .pi-dot { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #2E4352; background: #0F202B; color: #D4A84F; display: flex; align-items: center;
-    justify-content: center; font-weight: 900; font-size: 13px; cursor: pointer; transition: transform .18s ease, background .18s ease, color .18s ease; }
+    justify-content: center; font-weight: 700; font-size: 13px; cursor: pointer; transition: transform .18s ease, background .18s ease, color .18s ease; }
 .pi-dot:active { transform: scale(.88); }
 .pi-dot.done { background: #D4A84F; color: #0A151C; border-color: #D4A84F; transform: scale(1.08); }
 @keyframes pi-pop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
@@ -225,8 +225,8 @@ body.has-back-btn :is(#adhan-modal,#tracker-modal,#imsakiya-modal,#converter-mod
 .ayah-card { background: #22333F; border: 1px solid #1A2B37; border-radius: 18px; padding: 12px 14px; transition: border-color .2s, background .2s; }
 .ayah-card.playing { border-color: #D4A84F; background: #2a3c48; }
 .ayah-card.flash { border-color: #D4A84F; }
-.ayah-num { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 4px; margin: 0 4px; border-radius: 999px; border: 1.5px solid #D4A84F; color: #D4A84F; font-family: 'Tajawal', sans-serif; font-size: 11px; font-weight: 700; vertical-align: middle; }
-.ayah-tr { font-family: 'Tajawal', sans-serif; font-size: 12px; line-height: 1.7; color: #A3B3BF; direction: ltr; text-align: left; margin-top: 6px; border-top: 1px dashed #1A2B37; padding-top: 6px; }
+.ayah-num { display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; padding: 0 4px; margin: 0 4px; border-radius: 999px; border: 1.5px solid #D4A84F; color: #D4A84F; font-family: var(--f-ui); font-size: 11px; font-weight: 700; vertical-align: middle; }
+.ayah-tr { font-family: var(--f-ui); font-size: 12px; line-height: 1.7; color: #A3B3BF; direction: ltr; text-align: left; margin-top: 6px; border-top: 1px dashed #1A2B37; padding-top: 6px; }
 .ayah-actions { display: none; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
 .ayah-card.open .ayah-actions { display: flex; }
 .ayah-act { height: 32px; padding: 0 10px; border-radius: 10px; background: #0F202B; color: #F3EBDD; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
@@ -234,7 +234,7 @@ body.has-back-btn :is(#adhan-modal,#tracker-modal,#imsakiya-modal,#converter-mod
 .bismillah { text-align: center; font-family: 'Amiri Quran', 'Amiri', serif; font-size: 24px; color: #D4A84F; padding: 6px 0 12px; }
 .surah-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 16px; background: #22333F; border: 1px solid #1A2B37; cursor: pointer; }
 .surah-row:active { transform: scale(.98); }
-.surah-idx { width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: #0F202B; color: #D4A84F; font-size: 11px; font-weight: 800; }
+.surah-idx { width: 34px; height: 34px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: #0F202B; color: #D4A84F; font-size: 11px; font-weight: 700; }
 .hqb-card { background: #22333F; border: 1px solid #1A2B37; border-radius: 20px; padding: 12px; }
 .hqb-switch { width: 42px; height: 24px; border-radius: 999px; background: #0F202B; position: relative; transition: background .2s; flex-shrink: 0; border: 1px solid #1A2B37; }
 .hqb-switch::after { content: ''; position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; border-radius: 50%; background: #A3B3BF; transition: all .2s; }
@@ -244,12 +244,12 @@ html[dir="ltr"] .hqb-switch::after { right: auto; left: 2px; }
 html[dir="ltr"] .hqb-switch.on::after { left: 20px; }
 .hqb-input { width: 100%; background: #0F202B; border: 1px solid #1A2B37; border-radius: 12px; padding: 9px 11px; color: #F3EBDD; font-size: 12px; outline: none; }
 .hqb-input:focus { border-color: #D4A84F; }
-.hqb-btn { padding: 9px 12px; border-radius: 12px; background: #D4A84F; color: #0A151C; font-weight: 800; font-size: 11px; }
+.hqb-btn { padding: 9px 12px; border-radius: 12px; background: #D4A84F; color: #0A151C; font-weight: 700; font-size: 11px; }
 .hqb-btn.ghost { background: #0F202B; color: #F3EBDD; border: 1px solid #1A2B37; }
 .trk-btn { border-radius: 16px; padding: 10px 4px; background: #0F202B; border: 1px solid #1A2B37; color: #F3EBDD; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; transition: all .2s; }
 .trk-btn.done { background: #D4A84F; color: #0A151C; border-color: #D4A84F; }
 .imsak-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; font-size: 11px; }
-.imsak-table th { color: #D4A84F; font-weight: 800; padding: 6px 4px; font-size: 11px; position: sticky; top: 0; background: #0F202B; z-index: 1; }
+.imsak-table th { color: #D4A84F; font-weight: 700; padding: 6px 4px; font-size: 11px; position: sticky; top: 0; background: #0F202B; z-index: 1; }
 .imsak-table td { background: #22333F; color: #F3EBDD; padding: 8px 4px; text-align: center; font-weight: 700; }
 .imsak-table tr td:first-child { border-radius: 0 12px 12px 0; }
 .imsak-table tr td:last-child { border-radius: 12px 0 0 12px; }
@@ -268,16 +268,16 @@ html[dir="ltr"] .imsak-table tr td:last-child { border-radius: 0 12px 12px 0; }
 .ist-note { font-size: 11px; font-weight: 700; color: #A3B3BF; }
 .ist-src { font-size: 10px; line-height: 1.8; color: #A3B3BF; text-align: center; padding: 0 8px; }
 .ist-count { display: flex; align-items: baseline; justify-content: center; gap: 6px; }
-.ist-count b { font-size: 34px; font-weight: 900; color: #F3EBDD; line-height: 1; }
-.ist-count small { font-size: 12px; font-weight: 800; color: #A3B3BF; }
+.ist-count b { font-size: 34px; font-weight: 700; color: #F3EBDD; line-height: 1; }
+.ist-count small { font-size: 12px; font-weight: 700; color: #A3B3BF; }
 .ist-no { background: #0F202B; color: #F3EBDD; border: 1px solid #2E4352; }
 .ist-no i { color: #D4A84F; }
 .ist-edge { position: relative; height: 54px; border-radius: 12px; cursor: pointer; touch-action: none; border: 2px solid #D4A84F; background: repeating-linear-gradient(90deg, #F6EEDC 0 2px, #E3D6B8 2px 3px); box-shadow: inset 0 0 0 3px #1F7A4A; }
 .ist-mark { display: none; position: absolute; top: -6px; bottom: -6px; width: 4px; margin-right: -2px; border-radius: 3px; background: #C9302C; }
 .ist-page { margin-top: 6px; padding: 14px 12px; border-radius: 16px; background: #FBF6E9; border: 1px solid #E0CFA4; text-align: center; }
-.ist-page small { display: block; font-size: 10px; font-weight: 800; color: #8A6B1F; margin-bottom: 4px; }
+.ist-page small { display: block; font-size: 10px; font-weight: 700; color: #8A6B1F; margin-bottom: 4px; }
 .ist-page .ist-verse { font-family: 'Amiri Quran', 'Amiri', serif; font-size: 21px; line-height: 2.2; color: #1B1F22; }
-.ist-page b { display: block; font-size: 11px; font-weight: 800; color: #8A6B1F; margin-top: 6px; }
+.ist-page b { display: block; font-size: 11px; font-weight: 700; color: #8A6B1F; margin-top: 6px; }
 .ist-page .hqb-btn.ghost, html.theme-day .ist-page .hqb-btn.ghost { background: transparent !important; color: #8A6B1F !important; border: 1px solid #C9973F !important; }
 html.theme-day .ist-tx, html.theme-day .ist-tx p, html.theme-day .ist-count b { color: #15314A; }
 html.theme-day .ist-ar { color: #946512 !important; }
@@ -310,7 +310,7 @@ div.fixed.inset-0[id$="-modal"] > div { max-height: 100%; }
 .mp-ayah.flash { background: rgba(212,168,79,.35); }
 .mp-num { display: inline-flex; align-items: center; justify-content: center; min-width: 1.45em; height: 1.45em; margin: 0 .2em; padding: 0 .15em;
     border: 1.5px solid #C9A04A; border-radius: 50%; font-family: 'Amiri', serif; font-size: .58em; line-height: 1; color: #8A6417; vertical-align: middle; background: #FBF3DE; }
-.mp-foot { position: absolute; bottom: 7px; left: 0; right: 0; text-align: center; font-size: 11px; font-weight: 700; color: #9A7425; font-family: 'Tajawal', sans-serif; }
+.mp-foot { position: absolute; bottom: 7px; left: 0; right: 0; text-align: center; font-size: 11px; font-weight: 700; color: #9A7425; font-family: var(--f-ui); }
 .mp-flip-out { z-index: 3; animation: mpFlipOut .6s cubic-bezier(.45,.05,.3,1) forwards; }
 .mp-flip-in { z-index: 3; animation: mpFlipIn .6s cubic-bezier(.45,.05,.3,1) forwards; }
 .mp-flip-out::after, .mp-flip-in::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to right, rgba(0,0,0,.28), rgba(0,0,0,0) 70%); animation: mpShade .6s ease forwards; }
@@ -324,10 +324,10 @@ div.fixed.inset-0[id$="-modal"] > div { max-height: 100%; }
 .mp-sheet.open { opacity: 1; pointer-events: auto; }
 .mp-sheet-panel { width: 100%; max-height: 75%; overflow-y: auto; background: #0F202B; border-top: 1px solid rgba(212,168,79,.5); border-radius: 24px 24px 0 0; padding: 14px; transform: translateY(100%); transition: transform .3s cubic-bezier(.2,.9,.25,1); }
 .mp-sheet.open .mp-sheet-panel { transform: none; }
-.mp-rec-grp { font-size: 11px; font-weight: 900; color: #D4A84F; margin: 10px 4px 6px; }
+.mp-rec-grp { font-size: 11px; font-weight: 700; color: #D4A84F; margin: 10px 4px 6px; }
 .mp-rec-row { width: 100%; display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: #22333F; border: 1px solid #1A2B37; text-align: right; }
 .mp-rec-row.on { border-color: #D4A84F; background: rgba(212,168,79,.14); }
-.mp-rec-av { width: 36px; height: 36px; border-radius: 12px; background: #0A151C; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; flex-shrink: 0; }
+.mp-rec-av { width: 36px; height: 36px; border-radius: 12px; background: #0A151C; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0; }
 .mp-rec-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .mp-rec-tx b { font-size: 12px; color: #F3EBDD; }
 .mp-rec-tx small { font-size: 10.5px; color: #A3B3BF; font-weight: 700; margin-top: 2px; }
@@ -359,10 +359,10 @@ div.fixed.inset-0[id$="-modal"] > div { max-height: 100%; }
 @keyframes evtIn { from { opacity: 0; transform: translateY(8px) scale(.7); } to { opacity: 1; transform: none; } }
 @keyframes evtTap { 0% { transform: scale(1); } 40% { transform: scale(.85); } 100% { transform: scale(1.05); } }
 @keyframes evtShake { 0%, 86%, 100% { transform: rotate(0); } 88% { transform: rotate(-14deg); } 91% { transform: rotate(12deg); } 94% { transform: rotate(-8deg); } 97% { transform: rotate(4deg); } }
-.evt-name { font-size: 10px; font-weight: 800; color: #E6DBD1; white-space: nowrap; }
+.evt-name { font-size: 10px; font-weight: 700; color: #E6DBD1; white-space: nowrap; }
 .evt-label { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0 6px 0 2px; border-right: 1px solid #22333F; align-self: stretch; }
 .evt-label i { color: #D4A84F; font-size: 11px; }
-.evt-label span { font-size: 10px; font-weight: 900; color: #D4A84F; }
+.evt-label span { font-size: 10px; font-weight: 700; color: #D4A84F; }
 
 .text-\[8px\] { font-size: 10px !important; }
 .text-\[9px\] { font-size: 10.5px !important; }
@@ -394,7 +394,7 @@ body.hqb-modal-open .app-stars { visibility: hidden; }
 
 .kh-ring { --p: 0; width: 58px; height: 58px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
     background: conic-gradient(#0A151C calc(var(--p) * 1%), rgba(0,0,0,.14) 0); }
-.kh-ring span { width: 46px; height: 46px; border-radius: 50%; background: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #0A151C; }
+.kh-ring span { width: 46px; height: 46px; border-radius: 50%; background: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #0A151C; }
 
 html.theme-day.dark { background: linear-gradient(180deg, #8FBFE3 0%, #B9D8EE 30%, #E3ECEF 62%, #F4E7CF 100%) fixed, #E3ECEF !important; color: #15314A; }
 html.theme-day body.dark { color: #15314A; }
@@ -463,13 +463,13 @@ html.theme-day .theme-switch button { color: #4A6680; }
 html.theme-day .theme-switch button.on { color: #0A151C; }
 
 .mq-tabs { display: flex; gap: 6px; margin: 0 12px 10px; padding: 4px; border-radius: 14px; background: #0F202B; }
-.mq-tab { flex: 1; padding: 9px 6px; border-radius: 11px; font-size: 12px; font-weight: 800; color: #A3B3BF; }
+.mq-tab { flex: 1; padding: 9px 6px; border-radius: 11px; font-size: 12px; font-weight: 700; color: #A3B3BF; }
 .mq-tab.on { background: #D4A84F; color: #0A151C; }
 .mq-pane { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 .mq-pane.hidden, .qd-pane.hidden { display: none; }
 .qd-pane { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0 12px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .qd-targets { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
-.qd-chip { display: flex; align-items: center; gap: 7px; padding: 9px 10px; border-radius: 13px; background: #22333F; color: #F3EBDD; font-size: 11.5px; font-weight: 800; border: 1.5px solid transparent; text-align: right; }
+.qd-chip { display: flex; align-items: center; gap: 7px; padding: 9px 10px; border-radius: 13px; background: #22333F; color: #F3EBDD; font-size: 11.5px; font-weight: 700; border: 1.5px solid transparent; text-align: right; }
 .qd-chip i { color: #D4A84F; font-size: 13px; width: 16px; text-align: center; }
 .qd-chip.on { border-color: #D4A84F; background: rgba(212,168,79,.18); }
 .qd-dial-wrap { position: relative; width: min(74vw, 270px); aspect-ratio: 1; margin-top: 14px; }
@@ -479,20 +479,20 @@ html.theme-day .theme-switch button.on { color: #0A151C; }
 .qd-ring { fill: none; stroke: rgba(212,168,79,.25); stroke-width: 1.5; }
 .qd-tick { stroke: rgba(243,235,221,.35); stroke-width: 1.2; }
 .qd-tick.b { stroke: rgba(243,235,221,.8); stroke-width: 2; }
-.qd-lbl { fill: #F3EBDD; font: 800 15px 'Tajawal', sans-serif; }
+.qd-lbl { fill: #F3EBDD; font: 700 15px var(--f-ui); }
 .qd-lbl.n { fill: #E5484D; }
 .qd-mark { position: absolute; inset: 0; pointer-events: none; }
 .qd-mark span { position: absolute; top: 15%; left: 50%; transform: translate(-50%, -50%); width: 38px; height: 38px; border-radius: 12px; background: #D4A84F; color: #0A151C; display: flex; align-items: center; justify-content: center; font-size: 17px; box-shadow: 0 4px 12px rgba(0,0,0,.35); }
 .qd-center { position: absolute; inset: 30%; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: #0A151C; box-shadow: inset 0 0 0 1.5px rgba(212,168,79,.3); }
-.qd-center b { font-size: 28px; font-weight: 900; color: #F3EBDD; line-height: 1.1; }
-.qd-center small { font-size: 10.5px; font-weight: 800; color: #A3B3BF; padding: 0 6px; }
+.qd-center b { font-size: 28px; font-weight: 700; color: #F3EBDD; line-height: 1.1; }
+.qd-center small { font-size: 10.5px; font-weight: 700; color: #A3B3BF; padding: 0 6px; }
 .qd-dial-wrap.ok .qd-center { background: #1F7A4A; }
 .qd-dial-wrap.ok .qd-center small { color: #E7F7EE; }
 .qd-dial-wrap.ok .qd-arrow { color: #2FBF71; }
 .qd-info { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px; }
 .qd-info div { padding: 9px 10px; border-radius: 13px; background: #22333F; display: flex; flex-direction: column; gap: 2px; text-align: center; }
 .qd-info small { font-size: 10px; color: #A3B3BF; font-weight: 700; }
-.qd-info b { font-size: 16px; color: #F3EBDD; font-weight: 900; }
+.qd-info b { font-size: 16px; color: #F3EBDD; font-weight: 700; }
 .qd-status { font-size: 10.5px; line-height: 1.7; color: #A3B3BF; font-weight: 700; text-align: center; }
 .qd-btns { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .mq-cta.ghost { background: transparent; border: 1.5px solid #D4A84F; color: #D4A84F; }
@@ -505,27 +505,27 @@ html.theme-day .mq-cta.ghost { color: #946512; border-color: #C9973F; }
 .mq-wrap { position: relative; flex: 1 1 auto; min-height: 220px; margin: 0 12px; border-radius: 18px; overflow: hidden; border: 1px solid rgba(212,168,79,.35); }
 .mq-map { position: absolute; inset: 0; background: #0A151C; }
 .mq-list { flex: 0 0 auto; max-height: 38%; overflow-y: auto; padding: 10px 12px 14px; display: flex; flex-direction: column; gap: 6px; }
-.mq-cta { width: 100%; padding: 11px; border-radius: 14px; background: #D4A84F; color: #0A151C; font-weight: 900; font-size: 12px; }
+.mq-cta { width: 100%; padding: 11px; border-radius: 14px; background: #D4A84F; color: #0A151C; font-weight: 700; font-size: 12px; }
 .mq-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 14px; background: #22333F; border: 1.5px solid transparent; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .mq-item:active { transform: scale(.98); }
 .mq-item.sel { border-color: #D4A84F; background: rgba(212,168,79,.16); }
-.mq-num { width: 26px; height: 26px; border-radius: 9px; background: #D4A84F; color: #0A151C; font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.mq-num { width: 26px; height: 26px; border-radius: 9px; background: #D4A84F; color: #0A151C; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .mq-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .mq-tx b { font-size: 12px; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .mq-tx small { font-size: 11px; color: #A3B3BF; font-weight: 700; }
 .mq-go { width: 34px; height: 34px; border-radius: 11px; background: #0F202B; color: #D4A84F; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .mq-me { position: absolute; right: 10px; bottom: 10px; z-index: 500; width: 42px; height: 42px; border-radius: 14px; background: #D4A84F; color: #0A151C; font-size: 17px; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
-.mq-area { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 500; padding: 8px 14px; border-radius: 999px; background: #0F202B; color: #F3EBDD; font-size: 11px; font-weight: 800; border: 1px solid #D4A84F; box-shadow: 0 4px 14px rgba(0,0,0,.35); white-space: nowrap; }.mq-pin span { width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #D4A84F; border: 2px solid #0A151C; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 8px rgba(0,0,0,.4); }
+.mq-area { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 500; padding: 8px 14px; border-radius: 999px; background: #0F202B; color: #F3EBDD; font-size: 11px; font-weight: 700; border: 1px solid #D4A84F; box-shadow: 0 4px 14px rgba(0,0,0,.35); white-space: nowrap; }
+.mq-pin span { width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #D4A84F; border: 2px solid #0A151C; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 8px rgba(0,0,0,.4); }
 .mq-pin i { transform: rotate(45deg); color: #0A151C; font-size: 12px; }
 .mq-me-pin span { display: block; width: 18px; height: 18px; border-radius: 50%; background: #3B82F6; border: 3px solid #fff; box-shadow: 0 0 0 0 rgba(59,130,246,.6); animation: mqPulse 2s infinite; }
 @keyframes mqPulse { 0% { box-shadow: 0 0 0 0 rgba(59,130,246,.55); } 100% { box-shadow: 0 0 0 16px rgba(59,130,246,0); } }
-.mq-pop { display: flex; flex-direction: column; gap: 3px; font-family: 'Tajawal', sans-serif; text-align: right; direction: rtl; min-width: 150px; }
+.mq-pop { display: flex; flex-direction: column; gap: 3px; font-family: var(--f-ui); text-align: right; direction: rtl; min-width: 150px; }
 .mq-pop b { font-size: 13px; color: #0A151C; }
 .mq-pop span { font-size: 11px; color: #555; }
-.mq-pop a { margin-top: 4px; text-align: center; padding: 6px; border-radius: 10px; background: #D4A84F; color: #0A151C !important; font-weight: 800; font-size: 12px; text-decoration: none; }
-.leaflet-container { font-family: 'Tajawal', sans-serif; }
+.mq-pop a { margin-top: 4px; text-align: center; padding: 6px; border-radius: 10px; background: #D4A84F; color: #0A151C !important; font-weight: 700; font-size: 12px; text-decoration: none; }.leaflet-container { font-family: var(--f-ui); }
 .theme-switch { display: flex; gap: 3px; padding: 3px; border-radius: 999px; background: #0F202B; border: 1px solid #1A2B37; }
-.theme-switch button { padding: 8px 13px; border-radius: 999px; font-size: 12.5px; font-weight: 800; color: #A3B3BF; display: flex; align-items: center; gap: 5px; transition: background .2s, color .2s; }
+.theme-switch button { padding: 8px 13px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #A3B3BF; display: flex; align-items: center; gap: 5px; transition: background .2s, color .2s; }
 .theme-switch button.on { background: #D4A84F; color: #0A151C; }
 
 .khatm-text { font-family: 'Amiri', serif; font-size: 18px; line-height: 2.1; white-space: pre-line; color: inherit; }
@@ -558,19 +558,19 @@ html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 .wpx-box { height: 100%; height: 100dvh; max-width: 640px; }
 .wpx-top { display: flex; align-items: center; gap: 8px; padding: calc(12px + env(safe-area-inset-top)) 12px 8px; }
 .wpx-ttl { flex: 1; min-width: 0; }
-.wpx-ttl b { display: block; font-size: 18px; font-weight: 900; color: #F3EBDD; }
+.wpx-ttl b { display: block; font-size: 18px; font-weight: 700; color: #F3EBDD; }
 .wpx-ttl small { font-size: 11px; font-weight: 700; color: #A3B3BF; }
 .wpx-ib { width: 42px; height: 42px; border-radius: 14px; background: #22333F; color: #F3EBDD; flex-shrink: 0; }
 .wpx-ib.on { background: #D4A84F; color: #0F202B; }
 .wpx-search { padding: 0 12px 8px; }
 .wpx-chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 2px 12px 8px; flex-shrink: 0; }
 .wpx-chips::-webkit-scrollbar { display: none; }
-.wpx-chip { padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 800; background: #22333F; color: #A3B3BF; white-space: nowrap; flex-shrink: 0; }
+.wpx-chip { padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700; background: #22333F; color: #A3B3BF; white-space: nowrap; flex-shrink: 0; }
 .wpx-chip.on { background: #D4A84F; color: #0F202B; }
 .wpx-sortrow { display: flex; justify-content: flex-start; padding: 0 12px 8px; flex-shrink: 0; }
-.wpx-sort { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: #A3B3BF; }
+.wpx-sort { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #A3B3BF; }
 .wpx-sort i { color: #D4A84F; }
-.wpx-sort select { background: transparent; color: #F3EBDD; font-weight: 800; font-size: 12px; border: 0; outline: 0; }
+.wpx-sort select { background: transparent; color: #F3EBDD; font-weight: 700; font-size: 12px; border: 0; outline: 0; }
 .wpx-sort select option { color: #15314A; }
 .wpx-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0 10px calc(16px + env(safe-area-inset-bottom)); }
 .wpx-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: clamp(120px, 34vw, 200px); grid-auto-flow: dense; gap: 6px; }
@@ -580,12 +580,12 @@ html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 .wpx-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s; }
 .wpx-tile img.ok { opacity: 1; }
 .wpx-tile.err { animation: none; }
-.wpx-tile.err::after { content: '\f03e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #4A6680; font-size: 20px; }
+.wpx-tile.err::after { content: '\f03e'; font-family: 'Font Awesome 6 Free'; font-weight: 700; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #4A6680; font-size: 20px; }
 .wpx-tile-fav { position: absolute; top: 6px; left: 6px; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,.45); color: #E9C778; font-size: 11px; display: flex; align-items: center; justify-content: center; }
 @keyframes wpxShimmer { from { background-position: 100% 0; } to { background-position: -150% 0; } }
 .wpx-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 70px 20px; }
 .wpx-empty i { font-size: 28px; color: #D4A84F; margin-bottom: 4px; }
-.wpx-empty p { font-size: 14px; font-weight: 800; color: #F3EBDD; }
+.wpx-empty p { font-size: 14px; font-weight: 700; color: #F3EBDD; }
 .wpx-empty small { font-size: 11.5px; color: #A3B3BF; }
 .wpv-track { position: absolute; inset: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain; }
 .wpv-track::-webkit-scrollbar { display: none; }
@@ -601,12 +601,12 @@ html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 .wpv-btn { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.42); color: #fff; font-size: 16px; flex-shrink: 0; backdrop-filter: blur(6px); }
 .wpv-btn.on { color: #E9C778; }
 .wpv-info { margin-right: auto; text-align: left; color: #fff; min-width: 0; }
-.wpv-info b { display: block; font-size: 13px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 48vw; }
+.wpv-info b { display: block; font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 48vw; }
 .wpv-info small { font-size: 11px; opacity: .8; }
 .wpv-stats { display: flex; flex-direction: column; gap: 4px; margin-left: auto; }
-.wpv-stats span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: #fff; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.42); width: fit-content; }
+.wpv-stats span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #fff; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,.42); width: fit-content; }
 .wpv-stats i { font-size: 11px; color: #E9C778; }
-.wpv-save { height: 46px; padding: 0 18px; border-radius: 999px; background: #D4A84F; color: #0F202B; font-size: 14px; font-weight: 900; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.wpv-save { height: 46px; padding: 0 18px; border-radius: 999px; background: #D4A84F; color: #0F202B; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .wpv-save:disabled { opacity: .6; }
 body:has(#wallpapers-modal:not(.hidden)) #back-to-sections-btn, body:has(#wp-viewer:not(.hidden)) #back-to-sections-btn { display: none !important; }
 html.theme-day .wpx-ttl b, html.theme-day .wpx-sort select, html.theme-day .wpx-empty p { color: #15314A; }
@@ -620,9 +620,9 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 .hqb-wp-card { position: relative; display: block; width: 100%; height: 0; padding: 0 0 177.78% 0; overflow: hidden; margin: 0; }
 .hqb-wp-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .hqb-wp-foot { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px 6px 7px; display: flex; flex-direction: column; gap: 4px; background: linear-gradient(transparent, rgba(0,0,0,.78)); }
-.hqb-wp-title { font-size: 10.5px; font-weight: 800; color: #fff; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hqb-wp-title { font-size: 10.5px; font-weight: 700; color: #fff; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .hqb-wp-stats { display: flex; justify-content: space-between; gap: 4px; direction: rtl; }
-.hqb-wp-stats span { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 10px; font-weight: 800; color: #fff; white-space: nowrap; }
+.hqb-wp-stats span { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 10px; font-weight: 700; color: #fff; white-space: nowrap; }
 .hqb-wp-stats i { font-size: 9px; color: #E9C778; }
 .hqb-wp-stats.live { padding: 8px 6px; border-radius: 12px; background: rgba(212,168,79,.14); }
 .hqb-wp-stats.live.hidden { display: none; }
@@ -635,7 +635,7 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 .adhan-mini { position: fixed; left: 14px; bottom: calc(env(safe-area-inset-bottom, 0px) + 150px); z-index: 125; display: none; width: 62px; height: 62px; border-radius: 50%; background: #D4A84F; color: #0A151C; border: 3px solid #0F202B; box-shadow: 0 8px 22px rgba(0,0,0,.4); flex-direction: column; align-items: center; justify-content: center; gap: 1px; cursor: pointer; }
 .adhan-mini::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(212,168,79,.6); animation: adhanPulse 1.6s ease-out infinite; }
 .adhan-mini i { font-size: 15px; }
-.adhan-mini small { font-size: 9.5px; font-weight: 900; line-height: 1; }
+.adhan-mini small { font-size: 9.5px; font-weight: 700; line-height: 1; }
 @keyframes adhanPulse { from { transform: scale(.9); opacity: 1; } to { transform: scale(1.35); opacity: 0; } }
 
 .hqb-ob { position: fixed; inset: 0; z-index: 140; display: flex; flex-direction: column; background: #0A151C; color: #F3EBDD; animation: hqbObIn .35s ease; }
@@ -643,7 +643,7 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 @keyframes hqbObIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .hqb-ob-top { display: flex; align-items: center; justify-content: space-between; padding: calc(env(safe-area-inset-top, 0px) + 14px) 18px 10px; }
 .hqb-ob-back { width: 36px; height: 36px; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #F3EBDD; font-size: 15px; }
-.hqb-ob-title { font-size: 16px; font-weight: 800; }
+.hqb-ob-title { font-size: 16px; font-weight: 700; }
 .hqb-ob-count { width: 36px; text-align: center; font-size: 12px; color: #A3B3BF; font-weight: 700; }
 .hqb-ob-bar { display: flex; gap: 6px; padding: 0 18px 6px; direction: rtl; }
 .hqb-ob-bar i { flex: 1; height: 4px; border-radius: 99px; background: #1A2B37; transition: background .3s; }
@@ -652,7 +652,7 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 .hqb-ob-step { max-width: 460px; margin: 0 auto; text-align: center; animation: hqbObIn .3s ease; }
 .hqb-ob-logo { width: 96px; height: 96px; border-radius: 26px; margin: 6px auto 14px; display: block; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
 .hqb-ob-ic { width: 76px; height: 76px; border-radius: 24px; margin: 4px auto 14px; display: flex; align-items: center; justify-content: center; background: #22333F; color: #D4A84F; font-size: 30px; }
-.hqb-ob-h { font-size: 21px; font-weight: 900; line-height: 1.5; margin-bottom: 6px; }
+.hqb-ob-h { font-size: 21px; font-weight: 700; line-height: 1.5; margin-bottom: 6px; }
 .hqb-ob-p { font-size: 13px; color: #A3B3BF; line-height: 1.8; margin-bottom: 18px; }
 .hqb-ob-note { font-size: 11px; color: #A3B3BF; margin-top: 12px; }
 .hqb-ob-list { background: #0F202B; border: 1px solid #1A2B37; border-radius: 22px; overflow: hidden; text-align: right; margin-bottom: 12px; transition: opacity .2s; }
@@ -661,7 +661,7 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 .hqb-ob-row + .hqb-ob-row { border-top: 1px solid #1A2B37; }
 .hqb-ob-rowic { width: 40px; height: 40px; border-radius: 13px; background: #22333F; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 .hqb-ob-rowtx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.hqb-ob-rowtx b { font-size: 14px; font-weight: 800; }
+.hqb-ob-rowtx b { font-size: 14px; font-weight: 700; }
 .hqb-ob-rowtx small { font-size: 11px; color: #A3B3BF; line-height: 1.5; }
 .hqb-ob-check { width: 38px; height: 38px; border-radius: 999px; background: #22333F; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
 .hqb-ob-check.on { background: #D4A84F; color: #0A151C; }
@@ -673,10 +673,10 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 .hqb-ob-theme .pv { width: 100%; height: 120px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 34px; }
 .hqb-ob-theme.day .pv { background: linear-gradient(180deg, #8FBFE3, #DCEBF6); color: #F2B33D; }
 .hqb-ob-theme.night .pv { background: linear-gradient(180deg, #0A151C, #22333F); color: #F3EBDD; }
-.hqb-ob-theme b { font-size: 14px; font-weight: 800; }
+.hqb-ob-theme b { font-size: 14px; font-weight: 700; }
 .hqb-ob-demo { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 22px; background: #0F202B; border: 1px solid #1A2B37; text-align: right; margin-bottom: 12px; box-shadow: 0 10px 0 -5px #0F202B, 0 10px 0 -4px #1A2B37; }
 .hqb-ob-now { font-size: 11px; color: #A3B3BF; flex-shrink: 0; }
-.hqb-ob-gps { width: 100%; padding: 14px; border-radius: 18px; background: #22333F; border: 1px solid #D4A84F; color: #D4A84F; font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.hqb-ob-gps { width: 100%; padding: 14px; border-radius: 18px; background: #22333F; border: 1px solid #D4A84F; color: #D4A84F; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .hqb-ob-cur { font-size: 12px; color: #A3B3BF; margin: 12px 0; }
 .hqb-ob-cur b { color: #F3EBDD; }
 .hqb-ob-cities { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center; }
@@ -684,8 +684,8 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 .hqb-ob-cities button.on { background: #D4A84F; border-color: #D4A84F; color: #0A151C; }
 .hqb-ob-val { font-size: 12px; color: #A3B3BF; font-weight: 700; flex-shrink: 0; max-width: 45%; text-align: left; }
 .hqb-ob-foot { display: flex; align-items: center; gap: 12px; padding: 12px 18px calc(env(safe-area-inset-bottom, 0px) + 16px); }
-.hqb-ob-next { flex: 1; padding: 16px; border-radius: 20px; background: #D4A84F; color: #0A151C; font-size: 16px; font-weight: 900; }
-.hqb-ob-skip { padding: 16px 18px; color: #D4A84F; font-size: 15px; font-weight: 800; }
+.hqb-ob-next { flex: 1; padding: 16px; border-radius: 20px; background: #D4A84F; color: #0A151C; font-size: 16px; font-weight: 700; }
+.hqb-ob-skip { padding: 16px 18px; color: #D4A84F; font-size: 15px; font-weight: 700; }
 html.theme-day .hqb-ob { background: linear-gradient(180deg, #8FBFE3 0%, #CFE3F2 55%, #EAF2F8 100%); color: #0A151C; }
 html.theme-day .hqb-ob-back, html.theme-day .hqb-ob-theme { color: #0A151C; }
 html.theme-day .hqb-ob-count, html.theme-day .hqb-ob-p, html.theme-day .hqb-ob-note, html.theme-day .hqb-ob-rowtx small, html.theme-day .hqb-ob-now, html.theme-day .hqb-ob-cur, html.theme-day .hqb-ob-val { color: #3E5A70; }
@@ -744,7 +744,7 @@ html.theme-day .dua-row-go { color: #4A6680; }
 .prb-thumb button { position: absolute; top: 5px; left: 5px; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,.65); color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center; }
 .prb-pick.hidden, .prb-thumb.hidden { display: none; }
 .prb-note { font-size: 10px; color: #8EA2B2; margin: 8px 4px 0; line-height: 1.7; }
-.prb-send { width: 100%; padding: 14px; border-radius: 16px; background: #D4A84F; color: #15314A; font-weight: 900; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.prb-send { width: 100%; padding: 14px; border-radius: 16px; background: #D4A84F; color: #15314A; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .prb-send:disabled { opacity: .6; }
 .prb-ok { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; background: rgba(212,168,79,.15); color: #D4A84F; border: 1.5px solid rgba(212,168,79,.5); }
 html.theme-day .prb-chip { color: #15314A; border-color: rgba(21,49,74,.18); background: rgba(255,255,255,.7); }
@@ -761,9 +761,9 @@ body:has(#problem-modal:not(.hidden)) #back-to-sections-btn { display: none !imp
 .zx-arch .f { fill: currentColor; }
 html.theme-day .zx-arch { color: #946512; }
 body:has(#ziyarat-modal:not(.hidden)) #back-to-sections-btn { display: none !important; }
-.z-head { font-size: 13px; font-weight: 800; color: #A3B3BF; padding: 10px 4px 2px; }
-.dua-row-sub { display: block; font-size: 11px; font-weight: 600; color: #A3B3BF; line-height: 1.5; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.dua-row-n { width: 32px; height: 32px; border-radius: 10px; border: 1px solid rgba(212,168,79,.35); color: #D4A84F; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.z-head { font-size: 13px; font-weight: 700; color: #A3B3BF; padding: 10px 4px 2px; }
+.dua-row-sub { display: block; font-size: 11px; font-weight: 500; color: #A3B3BF; line-height: 1.5; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dua-row-n { width: 32px; height: 32px; border-radius: 10px; border: 1px solid rgba(212,168,79,.35); color: #D4A84F; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .dua-row-ic.sec-face { padding: 0; overflow: hidden; background: #0A151C; }
 .dua-row-ic.sec-face img { width: 100%; height: 100%; object-fit: cover; }
 .dua-group + .z-head { padding-top: 16px; }
@@ -771,24 +771,107 @@ html.theme-day .dua-row-sub { color: #4A6680; }
 html.theme-day .dua-row-n { color: #946512; border-color: rgba(148,101,18,.35); }
 html.theme-day .z-head { color: #4A6680; }
 .cv-btn { position: relative; padding: 9px 10px; border-radius: 14px; background: #0F202B; border: 1px solid rgba(212,168,79,.3); display: flex; flex-direction: column; align-items: flex-start; gap: 1px; text-align: right; min-width: 0; }
-.cv-btn small { font-size: 9.5px; font-weight: 800; color: #A3B3BF; }
-.cv-btn b { font-size: 13px; font-weight: 900; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding-left: 14px; }
+.cv-btn small { font-size: 9.5px; font-weight: 700; color: #A3B3BF; }
+.cv-btn b { font-size: 13px; font-weight: 700; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding-left: 14px; }
 .cv-btn i { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); font-size: 9px; color: #D4A84F; }
 .cv-sheet { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.6); display: none; align-items: flex-end; justify-content: center; }
 .cv-sheet.show { display: flex; }
 body:has(.cv-sheet.show) #back-to-sections-btn { display: none !important; }
 .cv-panel { width: 100%; max-width: 520px; max-height: 70vh; display: flex; flex-direction: column; background: #16262F; border-radius: 26px 26px 0 0; padding: 16px 14px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(212,168,79,.35); }
 .cv-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.cv-head b { font-size: 15px; font-weight: 900; color: #F3EBDD; }
+.cv-head b { font-size: 15px; font-weight: 700; color: #F3EBDD; }
 .cv-head button { width: 34px; height: 34px; border-radius: 12px; background: #22333F; color: #F3EBDD; }
 .cv-grid { display: grid; gap: 6px; overflow-y: auto; padding-bottom: 4px; }
-.cv-grid button { padding: 11px 2px; border-radius: 12px; background: #22333F; color: #F3EBDD; font-size: 13px; font-weight: 800; }
+.cv-grid button { padding: 11px 2px; border-radius: 12px; background: #22333F; color: #F3EBDD; font-size: 13px; font-weight: 700; }
 .cv-grid button.on { background: #D4A84F; color: #0A151C; }
 html.theme-day .cv-btn { background: rgba(255,255,255,.75); border-color: rgba(201,151,63,.45); }
 html.theme-day .cv-btn b { color: #15314A; } html.theme-day .cv-btn small { color: #4A6680; }
 html.theme-day .cv-panel { background: #F4F8FB; } html.theme-day .cv-head b { color: #15314A; }
 html.theme-day .cv-head button, html.theme-day .cv-grid button { background: #FFFFFF; color: #15314A; box-shadow: 0 1px 3px rgba(21,49,74,.12); }
 html.theme-day .cv-grid button.on { background: #D4A84F; color: #0A151C; }
+
+
+/* ===== واجهة الكمبيوتر والجهاز اللوحي الأفقي (من 1000 بكسل) ===== */
+#hqb-desk { display: none; }
+@media (min-width: 1000px) {
+    body.hqb-desk-on > #hqb-header, body.hqb-desk-on > #hqb-main, body.hqb-desk-on > footer { display: none !important; }
+    body.hqb-desk-on #hqb-desk { display: flex; }
+    body.hqb-desk-on #back-to-sections-btn { display: none !important; }
+}
+#hqb-desk { position: relative; z-index: 1; width: 100%; max-width: 1500px; margin: 0 auto; min-height: 100vh; min-height: 100dvh; gap: 20px; padding: 20px; box-sizing: border-box; color: #F3EBDD; direction: rtl; text-align: right; }
+.dk-side { width: 236px; flex-shrink: 0; position: sticky; top: 20px; align-self: flex-start; height: calc(100dvh - 40px); display: flex; flex-direction: column; gap: 2px; padding: 16px 12px; border-radius: 24px; background: rgba(12,27,40,.82); border: 1px solid rgba(212,168,79,.16); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); overflow-y: auto; }
+.dk-brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 16px; }
+.dk-brand img { width: 42px; height: 42px; border-radius: 12px; }
+.dk-brand b { font-size: 20px; font-weight: 700; display: block; }
+.dk-brand small { font-size: 11px; color: #9FB3C2; }
+.dk-nav { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; font-weight: 700; font-size: 14px; color: #F3EBDD; width: 100%; text-align: right; transition: background .15s; }
+.dk-nav i { width: 18px; text-align: center; color: #D4A84F; }
+.dk-nav:hover { background: rgba(255,255,255,.06); }
+.dk-nav.on { background: #D4A84F; color: #15314A; }
+.dk-nav.on i { color: #15314A; }
+.dk-side-foot { margin-top: auto; padding: 10px 12px 2px; font-size: 11px; color: #9FB3C2; }
+.dk-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.dk-top { display: flex; align-items: center; gap: 14px; }
+.dk-top .g { flex: 1; min-width: 0; }
+.dk-top .g b { font-size: 24px; font-weight: 700; display: block; }
+.dk-top .g small { font-size: 13px; color: #9FB3C2; }
+.dk-search { width: 360px; height: 46px; border-radius: 14px; display: flex; align-items: center; gap: 10px; padding: 0 14px; font-size: 13px; color: #9FB3C2; }
+.dk-search i { color: #D4A84F; }
+.dk-card { background: rgba(19,40,58,.78); border: 1px solid rgba(212,168,79,.16); border-radius: 22px; padding: 18px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-sizing: border-box; }
+.dk-ttl { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 15px; font-weight: 700; }
+.dk-ttl i { color: #D4A84F; }
+.dk-ttl small { margin-right: auto; font-size: 11px; color: #9FB3C2; font-weight: 700; }
+.dk-pray { display: flex; align-items: center; gap: 20px; }
+.dk-np { display: flex; align-items: center; gap: 14px; min-width: 290px; padding: 14px 20px; border-radius: 18px; background: linear-gradient(135deg, #E9C46A, #D4A84F); color: #15314A; text-align: right; }
+.dk-np .ic { width: 50px; height: 50px; border-radius: 14px; background: #15314A; color: #E9C46A; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.dk-np small { font-size: 12px; font-weight: 700; opacity: .8; display: block; }
+.dk-np b { font-size: 23px; font-weight: 700; display: block; }
+.dk-np span.l { font-size: 12px; font-weight: 700; }
+.dk-times { flex: 1; display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.dk-t { text-align: center; padding: 12px 4px; border-radius: 14px; background: rgba(255,255,255,.05); border: 1px solid transparent; }
+.dk-t small { display: block; font-size: 12px; color: #9FB3C2; font-weight: 700; }
+.dk-t b { font-size: 17px; }
+.dk-t.on { background: rgba(212,168,79,.16); border-color: #D4A84F; }
+.dk-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: stretch; }
+.dk-grid #hqb-tasbih { height: 100%; margin: 0; }
+.dk-evts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 8px; }
+.dk-evt { text-align: center; display: block; }
+.dk-evt .r { display: block; width: 62px; height: 62px; margin: 0 auto 6px; border-radius: 50%; border: 2px solid #D4A84F; padding: 2px; box-sizing: border-box; transition: transform .15s; }
+.dk-evt:hover .r { transform: scale(1.06); }
+.dk-evt.seen .r { border-color: rgba(212,168,79,.35); }
+.dk-evt img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.dk-evt span.n { font-size: 12px; font-weight: 700; }
+.dk-col { display: flex; flex-direction: column; gap: 16px; }
+.dk-occ p { font-size: 14px; font-weight: 700; color: #D4A84F; margin-bottom: 10px; }
+.dk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.dk-chip { padding: 7px 14px; border-radius: 10px; background: #D4A84F; color: #15314A; font-weight: 700; font-size: 12px; }
+.dk-chip.o { background: rgba(255,255,255,.06); color: inherit; border: 1px solid rgba(212,168,79,.35); }
+.dk-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex: 1; }
+.dk-q { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-height: 92px; font-weight: 700; font-size: 13px; }
+.dk-q i { font-size: 22px; color: #D4A84F; }
+.dk-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dk-row { display: flex; align-items: center; gap: 14px; width: 100%; text-align: right; }
+.dk-row .ic { width: 46px; height: 46px; border-radius: 14px; background: rgba(212,168,79,.15); color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.dk-row .tx { flex: 1; min-width: 0; }
+.dk-row .tx b { font-size: 14px; display: block; }
+.dk-row .tx small { font-size: 12px; color: #9FB3C2; }
+.dk-row .go { font-size: 12px; font-weight: 700; color: #D4A84F; white-space: nowrap; }
+.dk-bar { height: 6px; border-radius: 6px; background: rgba(255,255,255,.07); margin-top: 8px; overflow: hidden; }
+.dk-bar i { display: block; height: 100%; border-radius: 6px; background: #D4A84F; }
+.dk-card button, button.dk-card { cursor: pointer; }
+button.dk-card:hover, .dk-q:hover { border-color: rgba(212,168,79,.45); }
+html.theme-day #hqb-desk { color: #15314A; }
+html.theme-day .dk-side { background: rgba(255,255,255,.72); border-color: rgba(21,49,74,.10); }
+html.theme-day .dk-card { background: rgba(255,255,255,.84); border-color: rgba(21,49,74,.10); }
+html.theme-day .dk-nav { color: #15314A; }
+html.theme-day .dk-nav i, html.theme-day .dk-ttl i, html.theme-day .dk-q i, html.theme-day .dk-search i, html.theme-day .dk-row .ic, html.theme-day .dk-row .go, html.theme-day .dk-occ p { color: #946512; }
+html.theme-day .dk-nav.on, html.theme-day .dk-nav.on i { color: #15314A; }
+html.theme-day .dk-nav:hover { background: rgba(21,49,74,.05); }
+html.theme-day .dk-brand small, html.theme-day .dk-side-foot, html.theme-day .dk-top .g small, html.theme-day .dk-search, html.theme-day .dk-t small, html.theme-day .dk-row .tx small, html.theme-day .dk-ttl small { color: #5B6F80; }
+html.theme-day .dk-t, html.theme-day .dk-chip.o { background: rgba(21,49,74,.05); }
+html.theme-day .dk-t.on { background: rgba(212,168,79,.18); }
+html.theme-day .dk-bar { background: rgba(21,49,74,.08); }
+
 /* ===== الألوان: التطبيق يتحكم بها بنفسه، لا المتصفح ===== */
 :root { color-scheme: dark; }
 html.theme-day { color-scheme: dark; }
@@ -830,7 +913,7 @@ html.theme-day { color-scheme: dark; }
 .rd-modal.flex { display: flex; }
 .rd-shell { position: relative; width: 100%; max-width: 640px; margin: 0 auto; height: 100%; display: flex; flex-direction: column; background: var(--rd-page, #161B1A); }
 .rd-head { display: flex; align-items: center; gap: 10px; padding: calc(10px + env(safe-area-inset-top)) 12px 10px; }
-.rd-title { flex: 1; min-width: 0; text-align: center; font-weight: 900; font-size: 15px; color: var(--rd-fg, #ECE7DF); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rd-title { flex: 1; min-width: 0; text-align: center; font-weight: 700; font-size: 15px; color: var(--rd-fg, #ECE7DF); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rd-hbtn { width: 40px; height: 40px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--rd-fg, #ECE7DF); background: var(--rd-btn, rgba(255,255,255,.06)); font-size: 16px; flex-shrink: 0; }
 .rd-body { position: relative; flex: 1 1 auto; min-height: 0; }
 .rd-scroll { position: absolute; inset: 0; overflow-y: auto; padding: 4px 14px 0; -webkit-overflow-scrolling: touch; }
@@ -859,12 +942,12 @@ html.theme-day { color-scheme: dark; }
 .rd-sheet { position: absolute; left: 0; right: 0; bottom: calc(74px + env(safe-area-inset-bottom)); z-index: 2; background: var(--rd-page, #161B1A); border-radius: 26px 26px 0 0; box-shadow: 0 -12px 30px rgba(0,0,0,.35); padding: 16px 16px 18px; max-height: 62vh; overflow-y: auto; }
 .rd-sheet.hidden { display: none; }
 .rd-sh-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.rd-sh-head b { font-size: 17px; font-weight: 900; color: var(--rd-fg, #ECE7DF); }
+.rd-sh-head b { font-size: 17px; font-weight: 700; color: var(--rd-fg, #ECE7DF); }
 .rd-sh-head button { width: 34px; height: 34px; border-radius: 12px; color: var(--rd-fg, #ECE7DF); background: var(--rd-btn, rgba(255,255,255,.06)); }
-.rd-lbl { display: block; font-size: 12px; font-weight: 800; color: var(--rd-mute, #9AA19E); margin: 12px 2px 8px; }
+.rd-lbl { display: block; font-size: 12px; font-weight: 700; color: var(--rd-mute, #9AA19E); margin: 12px 2px 8px; }
 .rd-range { width: 100%; accent-color: #D4A84F; height: 28px; }
 .rd-rrow { display: flex; align-items: center; gap: 10px; }
-.rd-rrow span { font-size: 12px; font-weight: 800; color: var(--rd-mute, #9AA19E); flex-shrink: 0; }
+.rd-rrow span { font-size: 12px; font-weight: 700; color: var(--rd-mute, #9AA19E); flex-shrink: 0; }
 .rd-fontsel { display: flex; gap: 8px; align-items: stretch; }
 .rd-fontsel button { width: 52px; border-radius: 16px; background: var(--rd-card, #111413); color: #D4A84F; font-size: 16px; }
 .rd-fontsel div { flex: 1; border-radius: 16px; background: var(--rd-card, #111413); color: var(--rd-fg, #ECE7DF); text-align: center; padding: 12px 6px; font-size: 18px; }
@@ -872,18 +955,18 @@ html.theme-day { color-scheme: dark; }
 .rd-colors button { border-radius: 16px; background: var(--rd-card, #111413); color: var(--rd-fg, #ECE7DF); padding: 10px 4px; font-family: 'Amiri', serif; font-size: 14px; line-height: 1.6; border: 2px solid transparent; }
 .rd-colors button.on { border-color: #D4A84F; }
 .rd-bgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.rd-bgs button { border-radius: 16px; padding: 14px 6px; font-weight: 900; font-size: 13px; border: 2px solid transparent; }
+.rd-bgs button { border-radius: 16px; padding: 14px 6px; font-weight: 700; font-size: 13px; border: 2px solid transparent; }
 .rd-bgs button.on { border-color: #D4A84F; }
-.rd-main-btn { width: 100%; margin-top: 16px; padding: 14px; border-radius: 18px; background: #D4A84F; color: #0A151C; font-weight: 900; font-size: 14px; }
+.rd-main-btn { width: 100%; margin-top: 16px; padding: 14px; border-radius: 18px; background: #D4A84F; color: #0A151C; font-weight: 700; font-size: 14px; }
 .rd-main-btn.stop { background: transparent; border: 2px solid #D4A84F; color: #D4A84F; }
 .rd-note { font-size: 11.5px; line-height: 1.8; color: var(--rd-mute, #9AA19E); font-weight: 700; text-align: center; }
 .rd-player { display: flex; align-items: center; gap: 12px; }
 .rd-player .rd-pp { width: 58px; height: 58px; border-radius: 50%; background: #D4A84F; color: #0A151C; font-size: 20px; flex-shrink: 0; }
 .rd-player .rd-pmeta { flex: 1; min-width: 0; }
-.rd-player b { display: block; font-size: 14px; font-weight: 900; color: var(--rd-fg, #ECE7DF); }
+.rd-player b { display: block; font-size: 14px; font-weight: 700; color: var(--rd-fg, #ECE7DF); }
 .rd-player small { display: block; font-size: 11px; font-weight: 700; color: var(--rd-mute, #9AA19E); font-family: monospace; }
 
-.set-title { font-size: 20px; font-weight: 800; color: #F3EBDD; }
+.set-title { font-size: 20px; font-weight: 700; color: #F3EBDD; }
 .set-head { font-size: 12px; font-weight: 700; color: #A3B3BF; margin: 16px 6px 8px; }
 .set-group { background: #0F202B; border: 1px solid #1A2B37; border-radius: 20px; overflow: hidden; }
 .set-group + .set-group { margin-top: 12px; }
@@ -914,7 +997,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .set-tx b { font-size: 14px; font-weight: 700; }
 .set-tx small { font-size: 12px; color: #A3B3BF; line-height: 1.5; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .set-tx small:empty { display: none; }
-.set-mail { font-family: 'Tajawal', sans-serif; text-align: right; }
+.set-mail { font-family: var(--f-ui); text-align: right; }
 .set-go { font-size: 12px; color: #A3B3BF; flex-shrink: 0; }
 .set-row.danger b, .set-row.danger .set-ic { color: #E39A9A; }
 .hqb-close { width: 40px; height: 40px; border-radius: 999px; background: #22333F; color: #F3EBDD; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
@@ -923,8 +1006,7 @@ html.theme-day .set-head, html.theme-day .set-tx small, html.theme-day .set-go {
 html.theme-day .set-group { background: rgba(255,255,255,.85); border-color: rgba(255,255,255,.95); }
 html.theme-day .set-row { color: #15314A; }
 html.theme-day .set-row + .set-row { border-top-color: rgba(21,49,74,.08); }
-html.theme-day .set-ic { background: #0F202B; }
-html.theme-day .set-row.danger b, html.theme-day .set-row.danger .set-ic { color: #B84A4A; }
+html.theme-day .set-ic { background: #0F202B; }html.theme-day .set-row.danger b, html.theme-day .set-row.danger .set-ic { color: #B84A4A; }
 html.theme-day .hqb-close { background: rgba(255,255,255,.9); color: #15314A; }
 html.theme-day .hqb-switch { background: #C9D6E0; border-color: #B5C6D3; }
 html.theme-day .hqb-switch::after { background: #FFFFFF; }
@@ -935,8 +1017,8 @@ html.theme-day .hqb-switch.on::after { background: #0A151C; }
 .text-\[10px\] { font-size: 11.5px !important; line-height: 1.5 !important; }
 .text-\[11px\] { font-size: 12.5px !important; line-height: 1.5 !important; }
 .text-xs { font-size: 13px !important; line-height: 1.55 !important; }
-.font-black { font-weight: 800 !important; }
-.font-mono { font-family: 'Tajawal', sans-serif !important; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.font-black { font-weight: 700 !important; }
+.font-mono { font-family: var(--f-ui) !important; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
 .hqb-switch { background: #22333F; border-color: #33475A; }
 
 div[id$="-modal"] button.w-9.h-9.rounded-full, div[id$="-modal"] button.w-8.h-8.rounded-full { width: 40px !important; height: 40px !important; }
@@ -948,73 +1030,74 @@ html.theme-day #footer-app-name { color: #15314A !important; }
 html.theme-day #footer-app-pre { color: #946512 !important; }
 .set-group .theme-switch { background: #0A151C; }
 html.theme-day .set-group .theme-switch { background: #E3ECF3; }
-.np-ai { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border-radius: 14px; background: #22333F; border: 1px solid rgba(212,168,79,.45); color: #D4A84F; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+.np-ai { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border-radius: 14px; background: #22333F; border: 1px solid rgba(212,168,79,.45); color: #D4A84F; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 .np-card { width: 100%; min-height: 44px; display: flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 16px; background: linear-gradient(135deg, #D4A84F, #B88A35); color: #0A151C; text-align: right; box-shadow: 0 8px 20px rgba(212,168,79,.18); }
 .np-card:active { transform: scale(.99); }
 .np-ic { width: 34px; height: 34px; border-radius: 14px; background: rgba(10,21,28,.88); color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .np-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .np-main small { font-size: 10.5px; font-weight: 700; opacity: .75; }
-.np-main b { font-size: 16px; font-weight: 800; line-height: 1.3; }
+.np-main b { font-size: 16px; font-weight: 700; line-height: 1.3; }
 .np-side { display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0; }
-.np-side b { font-size: 15px; font-weight: 800; }
-.np-side small { font-size: 12px; font-weight: 800; font-variant-numeric: tabular-nums; opacity: .8; }
+.np-side b { font-size: 15px; font-weight: 700; }
+.np-side small { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; opacity: .8; }
 .np-go { font-size: 13px; }
 html.theme-day .np-ai { background: rgba(255,255,255,.9); color: #8A6417; }
 html.theme-day .np-card, html.theme-day .np-card b, html.theme-day .np-card small { color: #0A151C !important; }
 .arb-box { height: 100%; height: 100dvh; max-width: 640px; }
 .arb-top { display: flex; align-items: center; gap: 10px; padding: calc(12px + env(safe-area-inset-top)) 12px 10px; }
-.arb-ttl b { display: block; font-size: 18px; font-weight: 900; color: #F3EBDD; }
+.arb-ttl b { display: block; font-size: 18px; font-weight: 700; color: #F3EBDD; }
 .arb-ttl small { font-size: 11px; font-weight: 700; color: #A3B3BF; }
-.arb-live { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; color: #4FBF7A; white-space: nowrap; }
+.arb-live { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: #4FBF7A; white-space: nowrap; }
 .arb-live::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #4FBF7A; box-shadow: 0 0 0 4px rgba(79,191,122,.2); }
 .arb-live.off { color: #A3B3BF; } .arb-live.off::before { background: #A3B3BF; box-shadow: none; }
 .arb-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 4px 12px calc(18px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 10px; }
 .arb-card { background: #1A2B37; border-radius: 22px; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
 .arb-chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
 .arb-chips::-webkit-scrollbar { display: none; }
-.arb-chip { padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; background: #22333F; color: #A3B3BF; white-space: nowrap; flex-shrink: 0; }
+.arb-chip { padding: 7px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; background: #22333F; color: #A3B3BF; white-space: nowrap; flex-shrink: 0; }
 .arb-chip.on { background: #D4A84F; color: #0F202B; }
 .arb-route { position: relative; height: clamp(120px, 20vh, 150px); }
 .arb-route svg { width: 100%; height: 100%; }
 .arb-ln-bg { stroke: #2C4050; } .arb-ln { stroke: #D4A84F; } .arb-dot { fill: #D4A84F; } .arb-ring { stroke: #D4A84F; } .arb-me { stroke: #1A2B37; stroke-width: 3; }
-.arb-city { position: absolute; font-size: 12px; font-weight: 900; color: #F3EBDD; text-align: center; }
+.arb-city { position: absolute; font-size: 12px; font-weight: 700; color: #F3EBDD; text-align: center; }
 .arb-city i { display: block; color: #D4A84F; font-size: 16px; margin-bottom: 2px; }
 .arb-city small { display: block; font-size: 10px; color: #A3B3BF; font-weight: 700; }
-.arb-barl { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; font-weight: 800; color: #A3B3BF; }.arb-bar { height: 10px; border-radius: 99px; background: #22333F; overflow: hidden; }
+.arb-barl { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; font-weight: 700; color: #A3B3BF; }
+.arb-bar { height: 10px; border-radius: 99px; background: #22333F; overflow: hidden; }
 .arb-bar i { display: block; height: 100%; background: linear-gradient(90deg, #E8C77A, #D4A84F); border-radius: 99px; margin-left: auto; margin-right: 0; }
-.arb-warn { font-size: 11px; font-weight: 800; color: #E3A44A; }
+.arb-warn { font-size: 11px; font-weight: 700; color: #E3A44A; }
 .arb-pillar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px; border-radius: 20px; background: #1A2B37; border: 1.5px dashed #2C4050; }
 .arb-pillar.ok { border: 1.5px solid rgba(212,168,79,.5); background: linear-gradient(135deg, rgba(212,168,79,.18), rgba(212,168,79,.04)); }
 .arb-pi { width: 50px; height: 50px; border-radius: 16px; background: #22333F; color: #D4A84F; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 .arb-pillar.ok .arb-pi { background: #D4A84F; color: #0F202B; }
 .arb-pt { flex: 1; min-width: 0; }
-.arb-pt small { display: block; font-size: 11px; font-weight: 800; color: #A3B3BF; }
-.arb-pt b { font-size: clamp(26px, 8vw, 36px); font-weight: 900; color: #D4A84F; line-height: 1.2; }
+.arb-pt small { display: block; font-size: 11px; font-weight: 700; color: #A3B3BF; }
+.arb-pt b { font-size: clamp(26px, 8vw, 36px); font-weight: 700; color: #D4A84F; line-height: 1.2; }
 .arb-pt p { font-size: 12px; font-weight: 700; color: #F3EBDD; line-height: 1.7; }
-.arb-addp { width: 100%; height: 42px; border-radius: 14px; background: #22333F; color: #F3EBDD; font-size: 13px; font-weight: 900; border: 1.5px solid #D4A84F; }
+.arb-addp { width: 100%; height: 42px; border-radius: 14px; background: #22333F; color: #F3EBDD; font-size: 13px; font-weight: 700; border: 1.5px solid #D4A84F; }
 .arb-addp i { color: #D4A84F; margin-left: 4px; }
 .arb-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .arb-st { background: #1A2B37; border-radius: 16px; padding: 10px 12px; }
-.arb-st small { display: block; font-size: 11px; font-weight: 800; color: #A3B3BF; }
-.arb-st b { font-size: clamp(22px, 7.4vw, 30px); font-weight: 900; color: #F3EBDD; line-height: 1.25; }
-.arb-st b span { font-size: 12px; color: #A3B3BF; font-weight: 800; margin-right: 4px; }
+.arb-st small { display: block; font-size: 11px; font-weight: 700; color: #A3B3BF; }
+.arb-st b { font-size: clamp(22px, 7.4vw, 30px); font-weight: 700; color: #F3EBDD; line-height: 1.25; }
+.arb-st b span { font-size: 12px; color: #A3B3BF; font-weight: 700; margin-right: 4px; }
 .arb-btns { display: flex; gap: 8px; }
-.arb-btn { flex: 1; height: 50px; border-radius: 16px; font-size: 14px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.arb-btn { flex: 1; height: 50px; border-radius: 16px; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .arb-btn.p { background: #D4A84F; color: #0F202B; }
 .arb-btn.s { background: #22333F; color: #F3EBDD; border: 1.5px solid #2C4050; }
 .arb-row { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 16px; background: #1A2B37; text-align: right; width: 100%; }
 .arb-ic { width: 38px; height: 38px; border-radius: 12px; background: #22333F; color: #D4A84F; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .arb-rt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.arb-rt b { font-size: 13.5px; font-weight: 900; color: #F3EBDD; }
+.arb-rt b { font-size: 13.5px; font-weight: 700; color: #F3EBDD; }
 .arb-rt small { font-size: 10.5px; font-weight: 700; color: #A3B3BF; }
 .arb-go { color: #A3B3BF; font-size: 11px; }
 .arb-note { font-size: 10.5px; font-weight: 700; color: #A3B3BF; text-align: center; line-height: 1.7; }
-.arb-reset { font-size: 11.5px; font-weight: 800; color: #A3B3BF; text-decoration: underline; align-self: center; padding: 4px 10px; }
-.arb-num-in { width: 100%; margin-top: 6px; height: 50px; border-radius: 14px; background: #0A151C; border: 1.5px solid #D4A84F; color: #F3EBDD; font-size: 22px; font-weight: 900; text-align: center; outline: 0; }
+.arb-reset { font-size: 11.5px; font-weight: 700; color: #A3B3BF; text-decoration: underline; align-self: center; padding: 4px 10px; }
+.arb-num-in { width: 100%; margin-top: 6px; height: 50px; border-radius: 14px; background: #0A151C; border: 1.5px solid #D4A84F; color: #F3EBDD; font-size: 22px; font-weight: 700; text-align: center; outline: 0; }
 .arb-entry { width: 100%; display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 20px; text-align: right; background: linear-gradient(135deg, rgba(212,168,79,.22), rgba(212,168,79,.05)); border: 1.5px solid rgba(212,168,79,.5); }
 .arb-entry-ic { width: 44px; height: 44px; border-radius: 14px; background: #D4A84F; color: #0F202B; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
 .arb-entry-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.arb-entry-tx b { font-size: 14px; font-weight: 900; color: #F3EBDD; }
+.arb-entry-tx b { font-size: 14px; font-weight: 700; color: #F3EBDD; }
 .arb-entry-tx small { font-size: 10.5px; font-weight: 700; color: #A3B3BF; }
 body:has(#arbaeen-modal:not(.hidden)) #back-to-sections-btn { display: none !important; }
 html.theme-day .arb-ttl b, html.theme-day .arb-city, html.theme-day .arb-pt p, html.theme-day .arb-st b, html.theme-day .arb-rt b, html.theme-day .arb-entry-tx b { color: #15314A; }
@@ -1037,19 +1120,19 @@ html.theme-day .arb-entry { background: linear-gradient(135deg, rgba(148,101,18,
 .srch-field { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: 14px; background: #0A151C; border: 1.5px solid #D4A84F; }
 .srch-field i { color: #D4A84F; font-size: 14px; }
 .srch-field input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: #F3EBDD; font-size: 15px; font-weight: 700; }
-.srch-field input::placeholder { color: #A3B3BF; font-weight: 600; }
+.srch-field input::placeholder { color: #A3B3BF; font-weight: 500; }
 .srch-field input::-webkit-search-cancel-button { filter: invert(.7); }
 .srch-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 10px 12px calc(16px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 8px; }
-.srch-head { font-size: 12px; font-weight: 800; color: #D4A84F; padding: 2px 4px; }
+.srch-head { font-size: 12px; font-weight: 700; color: #D4A84F; padding: 2px 4px; }
 .srch-row { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 16px; background: #22333F; text-align: right; width: 100%; }
 .srch-ic { width: 38px; height: 38px; border-radius: 12px; background: #0F202B; color: #D4A84F; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .srch-tx { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.srch-tx b { font-size: 13.5px; font-weight: 900; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.srch-tx b { font-size: 13.5px; font-weight: 700; color: #F3EBDD; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .srch-tx small { font-size: 10.5px; font-weight: 700; color: #A3B3BF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .srch-go { color: #A3B3BF; font-size: 11px; }
 .srch-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 60px 20px; }
 .srch-empty i { font-size: 28px; color: #D4A84F; margin-bottom: 4px; }
-.srch-empty p { font-size: 14px; font-weight: 800; color: #F3EBDD; }
+.srch-empty p { font-size: 14px; font-weight: 700; color: #F3EBDD; }
 .srch-empty small { font-size: 11.5px; color: #A3B3BF; line-height: 1.7; }
 .rd-fav.on { color: #D4A84F; }
 body:has(#search-modal:not(.hidden)) #back-to-sections-btn { display: none !important; }
@@ -1070,28 +1153,28 @@ html.theme-day .ai-full { border-color: rgba(21,49,74,.12); }
 .hqb-face { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; transform: scale(1.3); transform-origin: 50% 12%; display: block; }
 .ai-avatar { overflow: hidden; width: 42px; height: 42px; border-radius: 14px; background: linear-gradient(135deg, #D4A84F, #B88A35); color: #0A151C; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
 .ai-avatar.big { width: 64px; height: 64px; border-radius: 20px; font-size: 26px; margin: 0 auto 12px; }
-.ai-title { font-size: 16px; font-weight: 800; color: #F3EBDD; }
+.ai-title { font-size: 16px; font-weight: 700; color: #F3EBDD; }
 .ai-sub { font-size: 12px; color: #A3B3BF; }
 .ai-list { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; -webkit-overflow-scrolling: touch; }
 .ai-welcome { margin: auto 0; text-align: center; padding: 8px 4px; }
-.ai-welcome h4 { font-size: 18px; font-weight: 800; color: #F3EBDD; margin-bottom: 6px; }
+.ai-welcome h4 { font-size: 18px; font-weight: 700; color: #F3EBDD; margin-bottom: 6px; }
 .ai-welcome p { font-size: 13.5px; color: #A3B3BF; line-height: 1.8; margin-bottom: 16px; }
 .ai-sugs { display: flex; flex-direction: column; gap: 8px; text-align: right; }
-.ai-sugs button { display: flex; align-items: center; gap: 10px; padding: 12px 14px; min-height: 48px; border-radius: 16px; background: #0F202B; border: 1px solid #1A2B37; color: #F3EBDD; font-size: 13.5px; font-weight: 600; text-align: right; }
+.ai-sugs button { display: flex; align-items: center; gap: 10px; padding: 12px 14px; min-height: 48px; border-radius: 16px; background: #0F202B; border: 1px solid #1A2B37; color: #F3EBDD; font-size: 13.5px; font-weight: 500; text-align: right; }
 .ai-sugs button i { color: #D4A84F; width: 18px; text-align: center; flex-shrink: 0; }
 .ai-msg { display: flex; flex-direction: column; max-width: 88%; }
 .ai-msg.me { align-self: flex-start; }
 .ai-msg.bot { align-self: flex-end; }
 .ai-bubble { padding: 11px 14px; border-radius: 18px; font-size: 14.5px; line-height: 1.9; word-wrap: break-word; }
-.ai-msg.me .ai-bubble { background: #D4A84F; color: #0A151C; font-weight: 600; border-bottom-right-radius: 6px; }
+.ai-msg.me .ai-bubble { background: #D4A84F; color: #0A151C; font-weight: 500; border-bottom-right-radius: 6px; }
 .ai-msg.bot .ai-bubble { background: #0F202B; border: 1px solid #1A2B37; color: #F3EBDD; border-bottom-left-radius: 6px; }
 .ai-msg.err .ai-bubble { color: #E39A9A; font-size: 13px; }
 .ai-bubble p { margin: 0; }
-.ai-bubble .ai-h { font-weight: 800; color: #D4A84F; margin-top: 4px; }
+.ai-bubble .ai-h { font-weight: 700; color: #D4A84F; margin-top: 4px; }
 .ai-bubble .ai-li { display: flex; gap: 6px; }
-.ai-bubble .ai-li span:first-child { color: #D4A84F; font-weight: 800; flex-shrink: 0; }
+.ai-bubble .ai-li span:first-child { color: #D4A84F; font-weight: 700; flex-shrink: 0; }
 .ai-bubble .ai-gap { height: 8px; }
-.ai-bubble b { color: #F3D9A0; font-weight: 800; }
+.ai-bubble b { color: #F3D9A0; font-weight: 700; }
 .ai-acts { display: flex; gap: 6px; margin-top: 6px; }
 .ai-acts button { display: flex; align-items: center; gap: 5px; height: 32px; padding: 0 10px; border-radius: 10px; font-size: 12px; font-weight: 700; color: #A3B3BF; background: transparent; }
 .ai-acts button:active { background: rgba(163,179,191,.12); }
@@ -1147,13 +1230,65 @@ html.theme-day .ai-bubble .ai-h, html.theme-day .ai-bubble .ai-li span:first-chi
 .sm-legs { position: absolute; left: 0; top: 0; width: 41px; height: auto; z-index: 1; transform-origin: 50% 0; animation: smSwing 2.6s ease-in-out infinite; pointer-events: none; user-select: none; -webkit-user-drag: none; filter: drop-shadow(0 3px 4px rgba(0,0,0,.25)); }
 .seat-mascot.press .sm-up { animation: smPress .45s cubic-bezier(.3,1.6,.5,1); }
 .sm-spark { position: absolute; left: 38px; top: -60px; font-size: 9px; color: #F3D9A0; animation: smSpark 4.6s ease-in-out infinite; pointer-events: none; z-index: 3; }
-.sm-bubble { position: absolute; left: 46px; top: -58px; white-space: nowrap; background: #F3EBDD; color: #0A151C; font-size: 12px; font-weight: 800; padding: 6px 10px; border-radius: 14px 14px 14px 4px; box-shadow: 0 6px 16px rgba(0,0,0,.3); opacity: 0; transform: translateY(6px) scale(.85); transform-origin: 0 100%; transition: opacity .25s, transform .3s cubic-bezier(.3,1.5,.5,1); pointer-events: none; z-index: 4; }
+.sm-bubble { position: absolute; left: 46px; top: -58px; white-space: nowrap; background: #F3EBDD; color: #0A151C; font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 14px 14px 14px 4px; box-shadow: 0 6px 16px rgba(0,0,0,.3); opacity: 0; transform: translateY(6px) scale(.85); transform-origin: 0 100%; transition: opacity .25s, transform .3s cubic-bezier(.3,1.5,.5,1); pointer-events: none; z-index: 4; }
 .sm-bubble.show { opacity: 1; transform: none; }
 html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
 @keyframes smBreath { 0%, 100% { transform: rotate(0) scaleY(1); } 25% { transform: rotate(-1.5deg) scaleY(1.012); } 50% { transform: rotate(0) scaleY(1); } 75% { transform: rotate(1.5deg) scaleY(1.012); } }
 @keyframes smSwing { 0%, 100% { transform: rotate(5deg); } 50% { transform: rotate(-5deg); } }
 @keyframes smSpark { 0%, 70%, 100% { opacity: 0; transform: scale(.4) rotate(0); } 78% { opacity: 1; transform: scale(1.15) rotate(25deg); } 88% { opacity: 0; transform: scale(.6) rotate(50deg); } }
 @keyframes smPress { 0% { transform: scale(1); } 35% { transform: scaleY(.9) scaleX(1.05); } 70% { transform: scaleY(1.05); } 100% { transform: scale(1); } }
+
+
+/* ===================== نظام التصميم الموحّد ===================== */
+:root {
+    /* الخط: خط واحد للواجهة، وخط النسخ للقرآن والأدعية فقط */
+    --f-ui: 'IBM Plex Sans Arabic', 'Noto Sans Arabic', 'Tajawal', system-ui, sans-serif;
+    --f-text: 'Amiri', 'Scheherazade New', serif;
+    --fs-title: 17px; --fs-h: 12px; --fs-body: 14px; --fs-cap: 12px; --fs-tiny: 11px;
+    --fw-r: 400; --fw-m: 500; --fw-b: 700;
+    --lh-ui: 1.5; --lh-text: 2;
+    /* المسافات */
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px;
+    /* الزوايا */
+    --r-sm: 10px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+    /* الألوان (ليلي) */
+    --c-surface: #0F202B; --c-surface-2: #13283A; --c-border: #1A2B37;
+    --c-text: #F3EBDD; --c-muted: #A3B3BF; --c-accent: #D4A84F; --c-accent-ink: #15314A;
+    --c-accent-soft: rgba(212,168,79,.12); --c-press: rgba(212,168,79,.08); --c-danger: #E39A9A;
+}
+html.theme-day {
+    --c-surface: rgba(255,255,255,.88); --c-surface-2: #FFFFFF; --c-border: rgba(21,49,74,.08);
+    --c-text: #15314A; --c-muted: #4A6680; --c-accent: #946512; --c-accent-soft: rgba(212,168,79,.16);
+    --c-press: rgba(21,49,74,.05); --c-danger: #B84A4A;
+}
+body { font-family: var(--f-ui); line-height: var(--lh-ui); font-synthesis: none; }
+button, input, select, textarea { font-family: inherit; }
+.font-black, .font-extrabold { font-weight: var(--fw-b) !important; }
+.font-semibold { font-weight: var(--fw-m) !important; }
+.font-amiri, .font-quran { line-height: var(--lh-text); }
+
+/* المجموعات والصفوف: الأقسام والأدعية والإعدادات */
+.dua-group, .set-group { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-lg); overflow: hidden; box-shadow: none; }
+html.theme-day .dua-group, html.theme-day .set-group { background: var(--c-surface); border-color: var(--c-border); }
+.dua-row, .set-row { min-height: 60px; gap: var(--sp-3); padding: var(--sp-3) 14px; color: var(--c-text); }
+html.theme-day .dua-row, html.theme-day .set-row { color: var(--c-text); }
+.dua-row + .dua-row, .set-row + .set-row, html.theme-day .dua-row + .dua-row, html.theme-day .set-row + .set-row { border-top: 1px solid var(--c-border); }
+.dua-row:active, .set-row:active { background: var(--c-press); }
+.dua-row-ic, .set-ic, html.theme-day .dua-row-ic, html.theme-day .set-ic { width: 36px; height: 36px; border-radius: var(--r-sm); background: var(--c-accent-soft); color: var(--c-accent); font-size: 15px; }
+.dua-row-tx, .set-tx b { font-size: var(--fs-body); font-weight: var(--fw-m); line-height: var(--lh-ui); }
+.dua-row-sub, .set-tx small, html.theme-day .dua-row-sub, html.theme-day .set-tx small { font-size: var(--fs-cap); font-weight: var(--fw-r); color: var(--c-muted); line-height: var(--lh-ui); margin-top: 0; }
+.dua-row-go, .set-go, html.theme-day .dua-row-go, html.theme-day .set-go { font-size: var(--fs-tiny); color: var(--c-muted); }
+.dua-row-n, html.theme-day .dua-row-n { width: 30px; height: 30px; border-radius: var(--r-sm); border: 0; background: var(--c-accent-soft); color: var(--c-accent); font-size: 13px; font-weight: var(--fw-m); }
+.z-head, .set-head, html.theme-day .z-head, html.theme-day .set-head { font-size: var(--fs-h); font-weight: var(--fw-m); color: var(--c-muted); padding: var(--sp-3) var(--sp-1) var(--sp-1); letter-spacing: 0; }
+.set-head { margin: var(--sp-4) var(--sp-1) var(--sp-2); padding: 0; }
+.dua-group + .z-head { padding-top: var(--sp-4); }
+.set-row.danger b, .set-row.danger .set-ic, html.theme-day .set-row.danger b, html.theme-day .set-row.danger .set-ic { color: var(--c-danger); }
+.set-row.danger .set-ic { background: rgba(227,154,154,.12); }
+/* عناوين النوافذ */
+#lbl-sections-title, #lbl-hub-title, .set-title, #supplications-modal h3 { font-size: var(--fs-title) !important; font-weight: var(--fw-b) !important; }
+/* تعليمة القائمة: نص هادئ بدل شريط ذهبي */
+.supp-hint { background: none !important; color: var(--c-muted) !important; font-size: var(--fs-h) !important; font-weight: var(--fw-m) !important; padding: var(--sp-1) var(--sp-1) 0 !important; box-shadow: none !important; text-align: right !important; }
+
 
 </style>
 </head>
@@ -1278,7 +1413,7 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 </div>
                 <h3 class="text-sm sm:text-base font-bold text-palette-light" id="lbl-sections-title">أقسام أخرى</h3>
             </div>
-            <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center cursor-pointer">
+            <button onclick="playClickSound(); hqbSecTrail = false; closeModal('app-sections-fullscreen-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center cursor-pointer">
                 <i class="fa-solid fa-xmark text-sm"></i>
             </button>
         </div>
@@ -1355,7 +1490,7 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
             <p class="z-head">أدوات</p>
             <div class="dua-group">
                 <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAssistant();" class="dua-row">
-                    <span class="dua-row-ic sec-face"><img class="hqb-face" alt=""></span>
+                    <span class="dua-row-ic"><i class="fa-solid fa-comments"></i></span>
                     <span class="dua-row-tx"><span>مساعد حرم</span><small class="dua-row-sub">اسأل عن دعاء أو حكم أو نظّم عبادتك</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
@@ -1369,14 +1504,13 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                     <span class="dua-row-tx"><span>خلفيات دينية</span><small class="dua-row-sub">خلفيات للهاتف تحمّلها وتشاركها</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="dua-row">
-                    <span class="dua-row-ic"><i class="fa-solid fa-trophy"></i></span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-trophy"></i></span>
                     <span class="dua-row-tx"><span id="lbl-sec-chal">التحديات</span><small class="dua-row-sub">من ٥٠ إلى ٥٠٠ تسبيحة</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
             </div>
         </div>
-        <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal')" class="w-full py-3.5 rounded-2xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">
+        <button onclick="playClickSound(); hqbSecTrail = false; closeModal('app-sections-fullscreen-modal')" class="w-full py-3.5 rounded-2xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg cursor-pointer">
             إغلاق
         </button>
     </div>
@@ -1492,7 +1626,8 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
             </button>
         </div>
 
-        <p class="set-head">الأصوات والتنبيهات</p><div class="set-group">
+        <p class="set-head">الأصوات والتنبيهات</p>
+        <div class="set-group">
             <button class="set-row" onclick="toggleButtonSound()">
                 <span class="set-ic"><i class="fa-solid fa-volume-high"></i></span>
                 <span class="set-tx"><b id="lbl-sound">أصوات الأزرار</b></span>
@@ -1851,7 +1986,7 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
-        <div id="supp-modal-subtitle" class="text-[11px] text-palette-darkest mb-2 font-bold text-center bg-palette-mauve p-1.5 rounded-xl">
+        <div id="supp-modal-subtitle" class="supp-hint text-[11px] text-palette-darkest mb-2 font-bold text-center bg-palette-mauve p-1.5 rounded-xl">
             <i class="fa-solid fa-hand-pointer ml-1"></i> اختر الدعاء لقراءته:
         </div>
         <div id="supplications-content" class="overflow-y-auto space-y-2.5 pr-1 flex-1 text-sm"></div>
@@ -1986,8 +2121,7 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <h4 id="detail-title" class="font-bold text-white text-xs sm:text-sm leading-snug">عنوان المناسبة</h4>
             </div>
         </div>
-        <div class="p-3 rounded-xl bg-palette-darkest border border-palette-purple text-xs leading-relaxed text-palette-light font-medium max-h-60 overflow-y-auto select-text text-justify space-y-2">
-            <p id="detail-description">تفاصيل المناسبة...</p>
+        <div class="p-3 rounded-xl bg-palette-darkest border border-palette-purple text-xs leading-relaxed text-palette-light font-medium max-h-60 overflow-y-auto select-text text-justify space-y-2"><p id="detail-description">تفاصيل المناسبة...</p>
         </div>
         <button onclick="playClickSound(); closeModal('event-detail-modal')" class="w-full py-2.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-return-calendar">
             العودة للتقويم
@@ -2073,7 +2207,8 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
 </div>
 
 <div id="founders-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[70]">
-    <div class="w-full max-w-[300px] bg-palette-mid border border-palette-muted/50 rounded-2xl p-3.5 shadow-2xl relative flex flex-col gap-2"><div class="flex justify-between items-center pb-2 border-b border-palette-purple">
+    <div class="w-full max-w-[300px] bg-palette-mid border border-palette-muted/50 rounded-2xl p-3.5 shadow-2xl relative flex flex-col gap-2">
+        <div class="flex justify-between items-center pb-2 border-b border-palette-purple">
             <div class="flex items-center gap-2">
                 <div class="w-9 h-9 rounded-xl bg-palette-mauve text-palette-darkest flex items-center justify-center text-sm">
                     <i class="fa-solid fa-people-group"></i>
@@ -2611,8 +2746,7 @@ function applyLanguageUI() {
     setTxt('lbl-founders-desc', t.foundersSub);
     setTxt('btn-open-founders', t.view);
     setTxt('lbl-instagram-title', t.instagramTitle);
-    setTxt('lbl-privacy-btn', 'سياسة الخصوصية');
-    setTxt('btn-save-settings', t.saveClose);
+    setTxt('lbl-privacy-btn', 'سياسة الخصوصية');setTxt('btn-save-settings', t.saveClose);
     setTxt('btn-open-radar', t.open);
 
     setTxt('prayer-modal-title', t.prayerModalTitle);
@@ -2751,7 +2885,8 @@ function geo(a, b, c, d) {
 }
 const OVERPASS = [
     'https://overpass-api.de/api/interpreter',
-    'https://overpass.kumi.systems/api/interpreter','https://overpass.private.coffee/api/interpreter',
+    'https://overpass.kumi.systems/api/interpreter',
+    'https://overpass.private.coffee/api/interpreter',
     'https://maps.mail.ru/osm/tools/overpass/api/interpreter'
 ];
 
@@ -3580,8 +3715,7 @@ function handleZahraTap() {
     updateZahraUI();
 }
 
-let activeChallengeTarget = 0;
-let currentChallengeCount = 0;
+let activeChallengeTarget = 0;let currentChallengeCount = 0;
 
 function initChallengesInterface() {
     const body = document.getElementById('challenges-modal-body');
@@ -3679,7 +3813,8 @@ function saveCustomRecitations() {
 let activeQuranIndex = -1;
 
 function loadQuranRecitersList() {
-    const container = document.getElementById('quran-reciters-list');if (typeof hqbLoadRemoteRecitations === 'function' && Date.now() - hqbRecFetchedAt > 20000) {
+    const container = document.getElementById('quran-reciters-list');
+    if (typeof hqbLoadRemoteRecitations === 'function' && Date.now() - hqbRecFetchedAt > 20000) {
         hqbLoadRemoteRecitations().then(added => { if (added) loadQuranRecitersList(); });
     }
 
@@ -3975,8 +4110,10 @@ function closeModal(id) {
     if (typeof hqbSyncModalState === 'function') hqbSyncModalState();
 }
 
+// هل جاء المستخدم من شاشة «أقسام أخرى»؟ الرجوع يعيده إليها فقط في هذه الحالة
+let hqbSecTrail = false;
 function openModal(id) {
-    if (id === 'app-sections-fullscreen-modal') hqbFromHub = false;
+    if (id === 'app-sections-fullscreen-modal') { hqbFromHub = false; hqbSecTrail = true; }
     const m = document.getElementById(id);
     if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
     if (SECTION_MODALS.includes(id)) updateBackBtn(true);
@@ -3999,7 +4136,8 @@ function backToSections() {
         const m = document.getElementById(id);
         if (m && !m.classList.contains('hidden')) closeModal(id);
     });
-    openModal('app-sections-fullscreen-modal');
+    // فُتح القسم من الشاشة الرئيسية: الرجوع يعيد للرئيسية، لا لشاشة الأقسام
+    if (hqbSecTrail) openModal('app-sections-fullscreen-modal');
 }
 
 let activeSupplicationsList = [];
@@ -4347,8 +4485,7 @@ function showEventDetails(title, date, story) {
 
 const adhkarList = [
     { ar: "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ", cat: "الاستغفار" },
-    { ar: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ", cat: "التسبيح" },
-    { ar: "لا إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لا شَرِيكَ لَهُ", cat: "التوحيد" },
+    { ar: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ", cat: "التسبيح" },{ ar: "لا إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لا شَرِيكَ لَهُ", cat: "التوحيد" },
     { ar: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ", cat: "الصلاة على محمد وآل محمد" },
     { ar: "لا حَوْلَ وَلا قُوَّةَ إِلاَّ بِاللَّهِ الْعَلِيِّ الْعَظِيمِ", cat: "الحوقلة" },
     { ar: "سُبْحَانَ اللَّهِ ، وَالْحَمْدُ لِلَّهِ ، وَلا إِلَهَ إِلاَّ اللَّهُ ، وَاللَّهُ أَكْبَرُ", cat: "التسبيحات الأربعة" },
@@ -4428,7 +4565,8 @@ function reportDeceasedName(id) {
     const subject = encodeURIComponent('بلاغ عن محتوى - سجل رقم ' + id);
     const body = encodeURIComponent('الاسم المبلّغ عنه: ' + target.name + '\n' + 'رقم السجل: ' + id + '\n' + 'سبب البلاغ: ');
     showToast('تم الإبلاغ وإخفاء الاسم من قائمتك');
-    loadFatihaLocalList();window.location.href = 'mailto:zanb68950@gmail.com?subject=' + subject + '&body=' + body;
+    loadFatihaLocalList();
+    window.location.href = 'mailto:zanb68950@gmail.com?subject=' + subject + '&body=' + body;
 }
 
 const HQB_FATIHA_MAX = 6, HQB_FATIHA_DAY = 3;
@@ -5157,8 +5295,7 @@ function mushafTapAyah(a) {
     bar.innerHTML = `
         <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-black text-palette-mauve">الآية ${toEasternArabicDigits(a)}</span>
-            <button onclick="mpCloseBar()" class="w-7 h-7 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
-        </div>
+            <button onclick="mpCloseBar()" class="w-7 h-7 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button></div>
         ${mushafShowTr && ay && ay.e ? `<p class="ayah-tr" style="margin:0 0 8px;border:0;padding:0">${escapeHTML(ay.e)}</p>` : ''}
         <div class="flex flex-wrap gap-1.5">
             <button class="ayah-act" onclick="playClickSound(); mushafPlayFrom(${i})"><i class="fa-solid fa-play"></i>استماع</button>
@@ -5203,7 +5340,8 @@ async function mushafCopy(a) {
 }
 
 async function mushafShare(a) {
-    const txt = mushafShareText(a);if (navigator.share) { try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    const txt = mushafShareText(a);
+    if (navigator.share) { try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
     mushafCopy(a);
 }
 
@@ -5984,8 +6122,7 @@ function cvG() { const [y, m, d] = document.getElementById('conv-g-input').value
 function cvH() { return { d: +document.getElementById('conv-h-d').value, m: +document.getElementById('conv-h-m').value, y: +document.getElementById('conv-h-y').value }; }
 function cvSync() {
     const g = cvG(), h = cvH(), set = (id, lbl, val) => { const b = document.getElementById(id); if (b) b.innerHTML = `<small>${lbl}</small><b>${val}</b><i class="fa-solid fa-chevron-down"></i>`; };
-    set('conv-g-d-btn', 'اليوم', hqbNum(g.d)); set('conv-g-m-btn', 'الشهر', CV_GM[g.m - 1]); set('conv-g-y-btn', 'السنة', hqbNum(g.y));
-    set('conv-h-d-btn', 'اليوم', hqbNum(h.d)); set('conv-h-m-btn', 'الشهر', HIJRI_MONTHS_AR[h.m - 1]); set('conv-h-y-btn', 'السنة', hqbNum(h.y));
+    set('conv-g-d-btn', 'اليوم', hqbNum(g.d)); set('conv-g-m-btn', 'الشهر', CV_GM[g.m - 1]); set('conv-g-y-btn', 'السنة', hqbNum(g.y));set('conv-h-d-btn', 'اليوم', hqbNum(h.d)); set('conv-h-m-btn', 'الشهر', HIJRI_MONTHS_AR[h.m - 1]); set('conv-h-y-btn', 'السنة', hqbNum(h.y));
 }
 function cvPick(k) {
     playClickSound();
@@ -6001,7 +6138,8 @@ function cvPick(k) {
     }[k];
     let box = document.getElementById('cv-sheet');
     if (!box) { box = document.createElement('div'); box.id = 'cv-sheet'; box.className = 'cv-sheet'; document.getElementById('converter-modal').appendChild(box); }
-    box.innerHTML = `<div class="cv-panel"><div class="cv-head"><b>${cfg[0]}</b><button onclick="playClickSound(); cvClose()" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button></div><div class="cv-grid" style="grid-template-columns:repeat(${cfg[3]},1fr)">${cfg[1].map(([v, l]) => `<button class="${v === cfg[2] ? 'on' : ''}" onclick="cvSet('${k}', ${v})">${l}</button>`).join('')}</div></div>`;
+    box.innerHTML = `<div class="cv-panel"><div class="cv-head"><b>${cfg[0]}</b><button onclick="playClickSound(); cvClose()" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="cv-grid" style="grid-template-columns:repeat(${cfg[3]},1fr)">${cfg[1].map(([v, l]) => `<button class="${v === cfg[2] ? 'on' : ''}" onclick="cvSet('${k}', ${v})">${l}</button>`).join('')}</div></div>`;
     box.onclick = e => { if (e.target === box) cvClose(); };
     box.classList.add('show');
     const on = box.querySelector('.on'); if (on) on.scrollIntoView({ block: 'center' });
@@ -6231,37 +6369,15 @@ setTimeout(hqbCacheAdhan, 1500);
             </div>
             <button onclick="playClickSound(); closeModal('duas-hub-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
         </div>
-        <div class="flex-1 overflow-y-auto space-y-2.5 pr-1">
-            <button onclick="hqbHubGo('mafatih')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
-                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-book-open"></i></div>
-                <div class="flex-1"><p class="font-black text-xs text-palette-light" id="lbl-hub-0">مفاتيح الجنان</p><p class="text-[10px] text-palette-muted font-bold" id="lbl-hub-0-sub">كميل • التوسل • العهد • الفرج وغيرها</p></div>
-                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
-            </button>
-            <button onclick="hqbHubGo('ziyarat')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
-                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-kaaba"></i></div>
-                <div class="flex-1"><p class="font-black text-xs text-palette-light" id="lbl-hub-1">الزيارات</p><p class="text-[10px] text-palette-muted font-bold" id="lbl-hub-1-sub">زيارات المعصومين عليهم السلام</p></div>
-                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
-            </button>
-            <button onclick="hqbHubGo('day')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
-                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-calendar-check"></i></div>
-                <div class="flex-1"><p class="font-black text-xs text-palette-light" id="lbl-hub-2">دعاء اليوم</p><p class="text-[10px] text-palette-muted font-bold" id="lbl-hub-2-sub">أدعية أيام الأسبوع من الصحيفة السجادية</p></div>
-                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
-            </button>
-            <button onclick="hqbHubGo('tasbih')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
-                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-hands-holding-circle"></i></div>
-                <div class="flex-1"><p class="font-black text-xs text-palette-light" id="lbl-hub-3">التسبيحات</p><p class="text-[10px] text-palette-muted font-bold" id="lbl-hub-3-sub">تسبيح كل يوم من أيام الأسبوع</p></div>
-                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
-            </button>
-            <button onclick="hqbHubGo('munajat')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
-                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-person-praying"></i></div>
-                <div class="flex-1"><p class="font-black text-xs text-palette-light" id="lbl-hub-4">المناجاة</p><p class="text-[10px] text-palette-muted font-bold" id="lbl-hub-4-sub">المناجيات الخمس عشرة للإمام السجاد (ع)</p></div>
-                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
-            </button>
-            <button onclick="hqbHubGo('awdhat')" class="w-full p-3.5 rounded-2xl bg-palette-mid border border-palette-purple flex items-center gap-3 text-right active:scale-[.98] transition-all">
-                <div class="w-12 h-12 rounded-xl bg-palette-dark text-palette-mauve flex items-center justify-center text-xl shrink-0"><i class="fa-solid fa-shield-heart"></i></div>
-                <div class="flex-1"><p class="font-black text-xs text-palette-light" id="lbl-hub-5">العوذات</p><p class="text-[10px] text-palette-muted font-bold" id="lbl-hub-5-sub">عوذات النبي وأهل البيت (ع)</p></div>
-                <i class="fa-solid fa-chevron-left text-[10px] text-palette-muted"></i>
-            </button>
+        <div class="flex-1 overflow-y-auto pr-1">
+            <div class="dua-group">
+                <button onclick="hqbHubGo('mafatih')" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-book-open"></i></span><span class="dua-row-tx"><span id="lbl-hub-0">مفاتيح الجنان</span><span class="dua-row-sub" id="lbl-hub-0-sub">كميل • التوسل • العهد • الفرج وغيرها</span></span><i class="fa-solid fa-chevron-left dua-row-go"></i></button>
+                <button onclick="hqbHubGo('ziyarat')" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-kaaba"></i></span><span class="dua-row-tx"><span id="lbl-hub-1">الزيارات</span><span class="dua-row-sub" id="lbl-hub-1-sub">زيارات المعصومين عليهم السلام</span></span><i class="fa-solid fa-chevron-left dua-row-go"></i></button>
+                <button onclick="hqbHubGo('day')" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-calendar-check"></i></span><span class="dua-row-tx"><span id="lbl-hub-2">دعاء اليوم</span><span class="dua-row-sub" id="lbl-hub-2-sub">أدعية أيام الأسبوع من الصحيفة السجادية</span></span><i class="fa-solid fa-chevron-left dua-row-go"></i></button>
+                <button onclick="hqbHubGo('tasbih')" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-hands-holding-circle"></i></span><span class="dua-row-tx"><span id="lbl-hub-3">التسبيحات</span><span class="dua-row-sub" id="lbl-hub-3-sub">تسبيح كل يوم من أيام الأسبوع</span></span><i class="fa-solid fa-chevron-left dua-row-go"></i></button>
+                <button onclick="hqbHubGo('munajat')" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-person-praying"></i></span><span class="dua-row-tx"><span id="lbl-hub-4">المناجاة</span><span class="dua-row-sub" id="lbl-hub-4-sub">المناجيات الخمس عشرة للإمام السجاد (ع)</span></span><i class="fa-solid fa-chevron-left dua-row-go"></i></button>
+                <button onclick="hqbHubGo('awdhat')" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-shield-heart"></i></span><span class="dua-row-tx"><span id="lbl-hub-5">العوذات</span><span class="dua-row-sub" id="lbl-hub-5-sub">عوذات النبي وأهل البيت (ع)</span></span><i class="fa-solid fa-chevron-left dua-row-go"></i></button>
+            </div>
         </div>
     </div>
 </div>
@@ -6447,7 +6563,7 @@ async function hqbMakeShareImage(title, text, foot) {
     try {
         if (document.fonts && document.fonts.load) {
             await Promise.race([
-                Promise.all([document.fonts.load('48px Amiri'), document.fonts.load('bold 40px Tajawal')]),
+                Promise.all([document.fonts.load('48px Amiri'), document.fonts.load("bold 40px 'IBM Plex Sans Arabic'")]),
                 new Promise(r => setTimeout(r, 1500))
             ]);
         }
@@ -6472,7 +6588,7 @@ async function hqbMakeShareImage(title, text, foot) {
     x.textAlign = 'center';
     x.textBaseline = 'middle';
     x.fillStyle = '#D4A84F';
-    x.font = 'bold 46px Tajawal, sans-serif';
+    x.font = "bold 46px 'IBM Plex Sans Arabic', Tajawal, sans-serif";
     x.fillText(title || '', W / 2, 290);
     x.fillStyle = 'rgba(212,168,79,0.6)';
     x.fillRect(W / 2 - 90, 335, 180, 3);
@@ -6491,9 +6607,9 @@ async function hqbMakeShareImage(title, text, foot) {
     const startY = top + ((bottom - top) - lines.length * lh) / 2 + lh / 2;
     lines.forEach((l, i) => x.fillText(l, W / 2, startY + i * lh));
 
-    if (foot) { x.fillStyle = '#D4A84F'; x.font = 'bold 30px Tajawal, sans-serif'; x.fillText(foot, W / 2, H - 150); }
+    if (foot) { x.fillStyle = '#D4A84F'; x.font = "bold 30px 'IBM Plex Sans Arabic', Tajawal, sans-serif"; x.fillText(foot, W / 2, H - 150); }
     x.fillStyle = '#A3B3BF';
-    x.font = 'bold 28px Tajawal, sans-serif';
+    x.font = "bold 28px 'IBM Plex Sans Arabic', Tajawal, sans-serif";
     x.fillText('تطبيق حرم • Google Play', W / 2, H - 95);
     return c;
 }
@@ -6681,7 +6797,8 @@ function rdStopScroll() { rdScrollOn = false; cancelAnimationFrame(rdRaf); rdMar
     if (!sc) return;
     const hold = () => { rdHold = true; clearTimeout(rdHoldT); };
     const release = () => { clearTimeout(rdHoldT); rdHoldT = setTimeout(() => { rdHold = false; rdLastT = 0; }, 900); };
-    sc.addEventListener('touchstart', hold, { passive: true });sc.addEventListener('touchend', release, { passive: true });
+    sc.addEventListener('touchstart', hold, { passive: true });
+    sc.addEventListener('touchend', release, { passive: true });
     sc.addEventListener('mousedown', hold);
     sc.addEventListener('mouseup', release);
     sc.addEventListener('click', () => { if (rdOpenTool) rdCloseSheet(); });
@@ -6718,8 +6835,7 @@ function rdPlayPause() {
     if (au.paused) {
         if (au.dataset.src !== rdCur.audio) { au.src = rdCur.audio; au.dataset.src = rdCur.audio; }
         try { const qa = document.getElementById('quran-audio-element'); if (qa && !qa.paused) stopQuranAudio(); } catch (e) {}
-        au.play().catch(() => showToast('تعذر تشغيل الصوت، تأكد من الإنترنت'));
-    } else au.pause();
+        au.play().catch(() => showToast('تعذر تشغيل الصوت، تأكد من الإنترنت'));} else au.pause();
 }
 function rdSeek(v) { const au = document.getElementById('rd-audio'); if (au.duration) au.currentTime = v / 1000 * au.duration; }
 function rdStopAudio() { const au = document.getElementById('rd-audio'); if (au) { au.pause(); au.removeAttribute('src'); au.dataset.src = ''; try { au.load(); } catch (e) {} } }
@@ -6764,6 +6880,7 @@ function hqbSearchIndex() {
 }
 let hqbSearchIdx = null, hqbSearchT = 0;
 function openHqbSearch() {
+    hqbSecTrail = false;
     playClickSound();
     hqbSearchIdx = null;
     openModal('search-modal');
@@ -7117,9 +7234,9 @@ async function hqbArbShare() {
     const s = arbState(), km = s.km || 0;
     if (km < 0.1) { showToast('ابدأ المشي أولاً، ثم شارك مسيرتك'); return; }
     showToast('جاري تجهيز البطاقة...');
-    try { await Promise.all([document.fonts.load("900 80px 'Tajawal'"), document.fonts.load("700 40px 'Tajawal'")]); } catch (e) {}
+    try { await Promise.all([document.fonts.load("700 80px 'IBM Plex Sans Arabic'"), document.fonts.load("700 40px 'IBM Plex Sans Arabic'")]); } catch (e) {}
     const W = 1080, H = 1920, c = document.createElement('canvas'); c.width = W; c.height = H;
-    const g = c.getContext('2d'), gold = '#D4A84F', F = "'Tajawal', sans-serif";
+    const g = c.getContext('2d'), gold = '#D4A84F', F = "'IBM Plex Sans Arabic', 'Tajawal', sans-serif";
     let bg = g.createRadialGradient(W / 2, 0, 50, W / 2, 300, 1500);
     bg.addColorStop(0, '#3A2414'); bg.addColorStop(0.45, '#0F202B'); bg.addColorStop(1, '#081118');
     g.fillStyle = bg; g.fillRect(0, 0, W, H);
@@ -7231,6 +7348,7 @@ const HQB_WEEK_ACTS = {
 };
 
 function hqbRunAct(a) {
+    hqbSecTrail = (a === 'sections');
     if (a === 'assistant') { playClickSound(); openAssistant(); return; }
     if (a === 'khatma') { hqbFromHub = false; hqbKhContinue(); return; }
     if (a === 'wallpapers') { playClickSound(); openWallpapers(); return; }
@@ -7287,6 +7405,7 @@ function hqbUserName() {
 function hqbRenderToday() {
     const box = document.getElementById('hqb-today');
     if (!box) return;
+    if (typeof hqbDeskRender === 'function' && document.body.classList.contains('hqb-desk-on')) setTimeout(hqbDeskRender, 0);
     const hr = new Date().getHours();
     const name = hqbUserName();
     const greet = (hr < 12 ? 'صباح الخير' : 'مساء الخير') + (name ? ' يا ' + escapeHTML(name) : '');
@@ -7330,6 +7449,134 @@ function hqbRenderToday() {
         </div>
     </div>`;
 }
+
+
+// ===== واجهة الكمبيوتر =====
+const HQB_DESK_MQ = window.matchMedia('(min-width: 1000px)');
+function hqbDeskGo(a) {
+    playClickSound();
+    hqbSecTrail = false;
+    hqbFromHub = false;
+    const M = {
+        mushaf: () => openMushaf(),
+        duas: () => openDuasHub(),
+        ziyarat: () => openZiyarat(),
+        prayer: () => { openModal('prayer-times-modal'); initPrayerTimesInterface(); },
+        calendar: () => { openModal('calendar-modal'); initHijriCalendarModal(); },
+        arbaeen: () => openArbaeen(),
+        fatiha: () => { openModal('fatiha-modal'); loadFatihaLocalList(); },
+        assistant: () => openAssistant(),
+        wallpapers: () => openWallpapers(),
+        sections: () => openModal('app-sections-fullscreen-modal'),
+        settings: () => openModal('settings-modal'),
+        search: () => openHqbSearch(),
+        dailydua: () => openDailySupplicationsModal(),
+        khatma: () => hqbKhContinue(),
+        mafatih: () => { openModal('supplications-modal'); loadSupplicationsList(); },
+        kahf: () => { openMushaf(); mushafOpenSurah(18, 1); },
+        read: () => { const l = hqbLS('hqb_mushaf_last', null); openMushaf(); if (l) mushafOpenSurah(l.s, l.a); }
+    };
+    try { (M[a] || (() => {}))(); } catch (e) { console.warn(e); }
+}
+// أقرب مناسبة خلال الشهرين القادمين من تقويم التطبيق نفسه
+function hqbDeskNextOcc() {
+    const base = new Date(); base.setHours(12, 0, 0, 0);
+    for (let i = 0; i < 70; i++) {
+        const dt = new Date(base.getTime() + i * 86400000);
+        const h = getHijriDateFromGregorian(dt);
+        const o = HQB_OCCASIONS[h.month + '-' + h.day];
+        if (o) return { o, days: i, h };
+    }
+    return null;
+}
+function hqbDeskRender() {
+    let d = document.getElementById('hqb-desk');
+    if (!d) return;
+    const name = hqbUserName();
+    const hr = new Date().getHours();
+    const greet = (hr < 12 ? 'صباح الخير' : 'مساء الخير') + (name ? ' يا ' + escapeHTML(name) : '');
+    const h = getHijriDateFromGregorian(new Date());
+    const hijri = `${hqbNum(h.day)} ${HIJRI_MONTH_NAMES[h.month - 1] || ''} ${hqbNum(h.year)} هـ`;
+    const greg = new Date().toLocaleDateString('ar-IQ', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    const np = hqbNextPrayer();
+    const t = hqbTodayTimings || {};
+    const P = [['Fajr', 'الفجر'], ['Sunrise', 'الشروق'], ['Dhuhr', 'الظهر'], ['Asr', 'العصر'], ['Maghrib', 'المغرب'], ['Isha', 'العشاء']];
+    const seen = typeof hqbEvtSeenMap === 'function' ? hqbEvtSeenMap() : {};
+    const occToday = HQB_OCCASIONS[h.month + '-' + h.day] || HQB_WEEK_ACTS[new Date().getDay()] || null;
+    const nx = hqbDeskNextOcc();
+    const last = hqbLS('hqb_mushaf_last', null);
+    const pct = last ? Math.min(100, Math.round((surahStartGlobal(last.s) + last.a) / 6236 * 100)) : 0;
+    const sName = last && typeof SURAH_NAMES !== 'undefined' ? SURAH_NAMES[last.s - 1] : '';
+    const kh = typeof hqbKhInfo === 'function' ? hqbKhInfo() : null;
+    const nav = [['fa-house', 'الرئيسية', ''], ['fa-book-quran', 'المصحف الشريف', 'mushaf'], ['fa-book-open', 'الأدعية والزيارات', 'duas'], ['fa-clock', 'أوقات الصلاة', 'prayer'], ['fa-calendar-days', 'التقويم والمناسبات', 'calendar'], ['fa-person-walking', 'طريق الأربعين', 'arbaeen'], ['fa-hands-praying', 'الفاتحة', 'fatiha'], ['fa-robot', 'مساعد حرم', 'assistant'], ['fa-image', 'خلفيات دينية', 'wallpapers'], ['fa-table-cells-large', 'كل الأقسام', 'sections'], ['fa-sliders', 'الإعدادات', 'settings']];
+    const chip = (label, act, o) => `<button class="dk-chip ${o ? 'o' : ''}" onclick="hqbDeskGo('${act}')">${escapeHTML(label)}</button>`;
+    const occActs = o => (o.acts || []).map(([l, a], i) => chip(l, a === 'mafatih' || a === 'kahf' || a === 'dailydua' || a === 'prayer' ? a : 'duas', i > 0)).join('');
+    let side = d.querySelector('.dk-side');
+    if (!side) {
+        d.innerHTML = `<aside class="dk-side"></aside><section class="dk-main">
+            <div class="dk-top"><div class="g"></div><button class="dk-search dk-card" onclick="hqbDeskGo('search')"><i class="fa-solid fa-magnifying-glass"></i>ابحث في الأدعية والزيارات والقرآن…</button></div>
+            <div class="dk-card dk-pray"></div>
+            <div class="dk-grid"><div id="dk-tasbih-slot"></div><div class="dk-card dk-evbox"></div><div class="dk-col"></div></div>
+            <div class="dk-bottom"></div></section>`;
+        side = d.querySelector('.dk-side');
+    }
+    side.innerHTML = `<div class="dk-brand"><img src="${APP_LOGO_DATA}" alt=""><div><b>حرم</b><small>أدعية وزيارات وقرآن</small></div></div>
+        ${nav.map(([i, l, a]) => `<button class="dk-nav ${a ? '' : 'on'}" onclick="${a ? `hqbDeskGo('${a}')` : 'playClickSound()'}"><i class="fa-solid ${i}"></i>${l}</button>`).join('')}
+        <div class="dk-side-foot">تطبيق حرم</div>`;
+    d.querySelector('.dk-top .g').innerHTML = `<b>${greet}</b><small>${escapeHTML(greg)} · ${hijri}${typeof activeCity === 'string' ? ' · ' + escapeHTML(activeCity) : ''}</small>`;
+    d.querySelector('.dk-pray').innerHTML = `
+        <button class="dk-np" onclick="hqbDeskGo('prayer')">
+            <span class="ic"><i class="fa-solid fa-mosque"></i></span>
+            ${np ? `<span><small>الصلاة القادمة</small><b>${np.name} ${format12Hour(np.time)}</b><span class="l" id="dk-np-left" dir="ltr">${hqbFmtLeft(np.left)}</span></span>`
+                 : `<span><small>أوقات الصلاة</small><b>اختر مدينتك</b></span>`}
+        </button>
+        <div class="dk-times">${P.map(([k, l]) => `<div class="dk-t ${np && np.time === t[k] && np.name === l ? 'on' : ''}"><small>${l}</small><b>${t[k] ? format12Hour(t[k]) : '--:--'}</b></div>`).join('')}</div>`;
+    d.querySelector('.dk-evbox').innerHTML = `<div class="dk-ttl"><i class="fa-solid fa-bullhorn"></i>أحداث العتبات</div>
+        <div class="dk-evts">${HQB_SHRINES.map(x => `<a class="dk-evt ${seen[x.id] ? 'seen' : ''}" href="${x.url}" target="_blank" rel="noopener" onclick="hqbEvtSeen('${x.id}'); setTimeout(hqbDeskRender, 300)"><span class="r"><img src="${x.img}" alt="${x.ar}" loading="lazy"></span><span class="n">${x.ar}</span></a>`).join('')}</div>`;
+    d.querySelector('.dk-col').innerHTML = `
+        <div class="dk-card dk-occ">
+            <div class="dk-ttl"><i class="fa-solid fa-star-and-crescent"></i>${occToday ? 'اليوم' : 'أعمال اليوم'}<small>${hijri}</small></div>
+            ${occToday ? `<p>${escapeHTML(occToday.t)}</p><div class="dk-chips">${occActs(occToday)}${chip('دعاء اليوم', 'dailydua', true)}</div>`
+                       : `<div class="dk-chips">${chip('دعاء اليوم', 'dailydua')}${chip('مفاتيح الجنان', 'mafatih', true)}</div>`}
+        </div>
+        <div class="dk-quick">
+            <button class="dk-card dk-q" onclick="hqbDeskGo('ziyarat')"><i class="fa-solid fa-kaaba"></i>الزيارات</button>
+            <button class="dk-card dk-q" onclick="hqbDeskGo('khatma')"><i class="fa-solid fa-book-quran"></i>${kh ? `ختمتي ج${hqbNum(kh.juz)}` : 'ابدأ الختمة'}</button>
+            <button class="dk-card dk-q" onclick="hqbDeskGo('fatiha')"><i class="fa-solid fa-hands-praying"></i>الفاتحة</button>
+            <button class="dk-card dk-q" onclick="hqbDeskGo('sections')"><i class="fa-solid fa-table-cells-large"></i>كل الأقسام</button>
+        </div>`;
+    d.querySelector('.dk-bottom').innerHTML = `
+        <button class="dk-card dk-row" onclick="hqbDeskGo('${last ? 'read' : 'mushaf'}')"><span class="ic"><i class="fa-solid fa-book-open-reader"></i></span>
+            <span class="tx"><b>${last ? 'أكمل القراءة' : 'المصحف الشريف'}</b><small>${last ? `سورة ${escapeHTML(sName || '')} · الآية ${hqbNum(last.a)}` : 'ابدأ القراءة من أي سورة'}</small>${last ? `<span class="dk-bar"><i style="width:${pct}%"></i></span>` : ''}</span>
+            <span class="go">${last ? hqbNum(pct) + '٪' : 'افتح ›'}</span></button>
+        <button class="dk-card dk-row" onclick="hqbDeskGo('calendar')"><span class="ic"><i class="fa-solid fa-calendar-days"></i></span>
+            <span class="tx"><b>المناسبة القادمة</b><small>${nx ? `${escapeHTML(nx.o.t)} · ${nx.days === 0 ? 'اليوم' : nx.days === 1 ? 'غداً' : 'بعد ' + hqbNum(nx.days) + ' أيام'}` : 'افتح التقويم لرؤية المناسبات'}</small></span>
+            <span class="go">التقويم ›</span></button>`;
+}
+function hqbDeskSync() {
+    const on = HQB_DESK_MQ.matches;
+    document.body.classList.toggle('hqb-desk-on', on);
+    let d = document.getElementById('hqb-desk');
+    if (on && !d) { d = document.createElement('div'); d.id = 'hqb-desk'; document.body.insertBefore(d, document.body.firstChild); }
+    const tb = document.getElementById('hqb-tasbih');
+    if (on) {
+        hqbDeskRender();
+        const slot = document.getElementById('dk-tasbih-slot');
+        if (tb && slot && tb.parentElement !== slot) slot.appendChild(tb);} else if (tb) {
+        const main = document.getElementById('hqb-main');
+        if (main && tb.parentElement !== main) main.appendChild(tb);
+    }
+}
+if (HQB_DESK_MQ.addEventListener) HQB_DESK_MQ.addEventListener('change', hqbDeskSync); else HQB_DESK_MQ.addListener(hqbDeskSync);
+setInterval(() => {
+    if (!document.body.classList.contains('hqb-desk-on') || document.hidden) return;
+    const el = document.getElementById('dk-np-left');
+    const np = hqbNextPrayer();
+    if (!np) return;
+    if (np.left <= 1 || !el) { hqbDeskRender(); return; }
+    el.innerText = hqbFmtLeft(np.left);
+}, 1000);
+setInterval(() => { if (document.body.classList.contains('hqb-desk-on')) hqbDeskRender(); }, 60000);
 
 function hqbApplyNewLabels() {
     const map = {
@@ -7459,7 +7706,8 @@ function mpPickRec(id) {
     mpCloseReciters();
     const r = mpRec();
     showToast('القارئ: ' + (r.ar));
-    if (wasPlaying) mushafPlaySurah();}
+    if (wasPlaying) mushafPlaySurah();
+}
 
 function mpPlaySurahFile() {
     const r = mpRec(), s = mushafState.surah;
@@ -7803,8 +8051,7 @@ const HQB_SHRINES = [
         '6+CK01/Nng8QpnGxzl1TNi9D9HE8pbP+auipQSkqUQABkk9K0buha2mNiCtSZDStoIyQFZPPyFZC09KI9ICW2ufdg5Kv2j4eQ+2uic8x2QEWqOCMHb/ADNI0QL3IB6x28eeFKz/ABH205h91hBbVEkKIUrinbg8SfGmhlyS6493bjCxt7srAzkA54A8uOKAW6/Mjf8AMtf5q3VfNPsrnTTKeQyn0RZU28hxRQpJSQk5OMkH8KzOT1IbUpUOSlIBJJ24A/6qAyRP90Y/w0/wFZaxxRiKyOHBtPI56VloBCM02nGm0AUUUUAUUUUAleXvhCdn9zm9ojlxtbKlNzYjTrhSP6wZQfwQK9Q1hehx5Cgp5lC1AYBUM8KhrZDWzNRRRUki0UUUAUcqKKAKc' +
         'OVNpwPCgFqJ6gtTdteRLjkIafXsWz0SsgncPAcDkeNSuo12gOhmzMrPISUf5VVhkxUq3s1pbU1oqPWzsaDqRLO1H+1spcUvhxUVEZx48B9lWD2RpaS3cg1yBaBPjwVxqlu02a4nVsDJTj0IZ5cytVWn2Cz0So10bK8uhTZIKsnGDxri4UNZKf5M62VLeNrtotGWcdz/AIqaz1hmoUtglAytBC0jxIOce/lT0OIebStB3IWMjzFfQnEIjqzVndldvtzmFj1Xn0n5vilJ8fE9PbyfpPVnpJRb7g5+m+a08r+s+qr63n19vPj6o0uqzqMqKkqgqPLmWT4H6vgfcadpbSyrqpMyWkphpOUp5F4j/wAfPrXzyuzPxvDrp29tdzLcuIsOtS6KAiKRz38Me' +
         'Q4n8Aa2iccTXPe/2spXx2OENNDxTzUr3gcPL219Cam6wkoYbSr5wQAfbislITS0A1VJSnnSUAUUUUAUUUGgEooooAooooBaKQUtAFNcdQy2px1aW20AqUpRwEgdSTypVEJBKiABxJPSoVfmlazuliat15YjR4r3xg5EeYLonsgFKVlIUMICuKVK4FQBwcCgJO3dBNSr0Jta0bCUyXEbWQcHHEkFQ/Z4edclGqHoF4i2iayqYXIbT65kNClp7xbvd42JB2o67ieQOeRNc75Yi63mXpK7Qp1inSpD7FtdUgOonMtISpToJTtxxwUK5jhxrlaJZtui7PJ0zaNQhme5KLseNeY6ooYSpY3IZQoAqRjcUgFQBPhQFm1Ee09HeadaT4y2+meiq6Teolt39' +
-        '+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
+        '+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' +
@@ -7817,7 +8064,8 @@ const HQB_SHRINES = [
         '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
-        '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
+        '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' },
     { id: 'kadhim', ar: 'الكاظمية', url: 'https://www.instagram.com/aljawadain.iq', img: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCADcANwDASIAAhEBAxEB/8QAHAAAAAcBAQAAAAAAAAAAAAAAAQIDBAUGBwgA/8QASBAAAQIEBAMFBQUFBQcEAwAAAQIDAAQFEQYSITEHE0EiUWFxgRQyUpGhCBUjQmIzcoKxwRZDkrLRJFNjc6LS8BdEo+FVwvH/x' +
@@ -7912,8 +8160,7 @@ const HQB_SHRINES = [
         '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
-        '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
+        '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' +
@@ -7923,7 +8170,8 @@ const HQB_SHRINES = [
         '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
-        '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
+        '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' +
@@ -8226,9 +8474,7 @@ const HQB_FULL_DUAS = [
 
 يا سَيِّدِي يا مَنْ عَلَيْهِ مُعَوَّلِي، يا مَنْ إِلَيْهِ شَكَوْتُ أَحْوالِي، يا رَبِّ يا رَبِّ يا رَبِّ، قَوِّ عَلى خِدْمَتِكَ جَوارِحِي، وَاشْدُدْ عَلَى الْعَزِيمَةِ جَوانِحِي، وَهَبْ لِيَ الْجِدَّ فِي خَشْيَتِكَ، وَالدَّوامَ فِي الْاِتِّصالِ بِخِدْمَتِكَ، حَتّى أَسْرَحَ إِلَيْكَ فِي مَيادِينِ السّابِقِينَ، وَأُسْرِعَ إِلَيْكَ فِي الْبارِزِينَ، وَأَشْتاقَ إِلى قُرْبِكَ فِي الْمُشْتاقِينَ، وَأَدْنُوَ مِنْكَ دُنُوَّ الْمُخْلِصِينَ، وَأَخافَكَ مَخافَةَ الْمُوقِنِينَ، وَأَجْتَمِعَ فِي جِوارِكَ مَعَ الْمُؤْمِنِينَ.
 
-اللّهُمَّ وَمَنْ أَرادَنِي بِسُوءٍ فَأَرِدْهُ، وَمَنْ كادَنِي فَكِدْهُ، وَاجْعَلْنِي مِنْ أَحْسَنِ عَبِيدِكَ نَصِيباً عِنْدَكَ، وَأَقْرَبِهِمْ مَنْزِلَةً مِنْكَ، وَأَخَصِّهِمْ زُلْفَةً لَدَيْكَ، فَإِنَّهُ لا يُنالُ ذلِكَ إِلّا بِفَضْلِكَ، وَجُدْ لِي بِجُودِكَ، وَاعْطِفْ عَلَيَّ بِمَجْدِكَ، وَاحْفَظْنِي بِرَحْمَتِكَ، وَاجْعَلْ لِسانِي بِذِكْرِكَ لَهِجاً، وَقَلْبِي بِحُبِّكَ مُتَيَّماً، وَمُنَّ عَلَيَّ بِحُسْنِ إِجابَتِكَ، وَأَقِلْنِي عَثْرَتِي، وَاغْفِرْ زَلَّتِي، فَإِنَّكَ قَضَيْتَ عَلى عِبادِكَ بِعِبادَتِكَ، وَأَمَرْتَهُمْ بِدُعائِكَ، وَضَمِنْتَ لَهُمُ الْإِجابَةَ، فَإِلَيْكَ يا رَبِّ نَصَبْتُ وَجْهِي، وَإِلَيْكَ يا رَبِّ مَدَدْتُ يَدِي، فَبِعِزَّتِكَ اسْتَجِبْ لِي دُعائِي، وَبَلِّغْنِي مُنايَ، وَلا تَقْطَعْ مِنْ فَضْلِكَ رَجائِي، وَاكْفِنِي شَرَّ الْجِنِّ وَالْإِنْسِ مِنْ أَعْدائِي.
-
-يا سَرِيعَ الرِّضا، اغْفِرْ لِمَنْ لا يَمْلِكُ إِلَّا الدُّعاءَ، فَإِنَّكَ فَعّالٌ لِما تَشاءُ، يا مَنِ اسْمُهُ دَواءٌ، وَذِكْرُهُ شِفاءٌ، وَطاعَتُهُ غِنىً، ارْحَمْ مَنْ رَأْسُ مالِهِ الرَّجاءُ، وَسِلاحُهُ الْبُكاءُ، يا سابِغَ النِّعَمِ، يا دافِعَ النِّقَمِ، يا نُورَ الْمُسْتَوْحِشِينَ فِي الظُّلَمِ، يا عالِماً لا يُعَلَّمُ، صَلِّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَافْعَلْ بِي ما أَنْتَ أَهْلُهُ، وَصَلَّى اللهُ عَلى رَسُولِهِ وَالْأَئِمَّةِ الْمَيامِينِ مِنْ آلِهِ، وَسَلَّمَ تَسْلِيماً كَثِيراً.`
+اللّهُمَّ وَمَنْ أَرادَنِي بِسُوءٍ فَأَرِدْهُ، وَمَنْ كادَنِي فَكِدْهُ، وَاجْعَلْنِي مِنْ أَحْسَنِ عَبِيدِكَ نَصِيباً عِنْدَكَ، وَأَقْرَبِهِمْ مَنْزِلَةً مِنْكَ، وَأَخَصِّهِمْ زُلْفَةً لَدَيْكَ، فَإِنَّهُ لا يُنالُ ذلِكَ إِلّا بِفَضْلِكَ، وَجُدْ لِي بِجُودِكَ، وَاعْطِفْ عَلَيَّ بِمَجْدِكَ، وَاحْفَظْنِي بِرَحْمَتِكَ، وَاجْعَلْ لِسانِي بِذِكْرِكَ لَهِجاً، وَقَلْبِي بِحُبِّكَ مُتَيَّماً، وَمُنَّ عَلَيَّ بِحُسْنِ إِجابَتِكَ، وَأَقِلْنِي عَثْرَتِي، وَاغْفِرْ زَلَّتِي، فَإِنَّكَ قَضَيْتَ عَلى عِبادِكَ بِعِبادَتِكَ، وَأَمَرْتَهُمْ بِدُعائِكَ، وَضَمِنْتَ لَهُمُ الْإِجابَةَ، فَإِلَيْكَ يا رَبِّ نَصَبْتُ وَجْهِي، وَإِلَيْكَ يا رَبِّ مَدَدْتُ يَدِي، فَبِعِزَّتِكَ اسْتَجِبْ لِي دُعائِي، وَبَلِّغْنِي مُنايَ، وَلا تَقْطَعْ مِنْ فَضْلِكَ رَجائِي، وَاكْفِنِي شَرَّ الْجِنِّ وَالْإِنْسِ مِنْ أَعْدائِي.يا سَرِيعَ الرِّضا، اغْفِرْ لِمَنْ لا يَمْلِكُ إِلَّا الدُّعاءَ، فَإِنَّكَ فَعّالٌ لِما تَشاءُ، يا مَنِ اسْمُهُ دَواءٌ، وَذِكْرُهُ شِفاءٌ، وَطاعَتُهُ غِنىً، ارْحَمْ مَنْ رَأْسُ مالِهِ الرَّجاءُ، وَسِلاحُهُ الْبُكاءُ، يا سابِغَ النِّعَمِ، يا دافِعَ النِّقَمِ، يا نُورَ الْمُسْتَوْحِشِينَ فِي الظُّلَمِ، يا عالِماً لا يُعَلَّمُ، صَلِّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَافْعَلْ بِي ما أَنْتَ أَهْلُهُ، وَصَلَّى اللهُ عَلى رَسُولِهِ وَالْأَئِمَّةِ الْمَيامِينِ مِنْ آلِهِ، وَسَلَّمَ تَسْلِيماً كَثِيراً.`
 },
 {
     id: 'd-tawassul', key: 'التوسل',
@@ -8252,7 +8498,9 @@ const HQB_FULL_DUAS = [
 
 اللّهُمَّ إِنْ حالَ بَيْنِي وَبَيْنَهُ الْمَوْتُ الَّذِي جَعَلْتَهُ عَلى عِبادِكَ حَتْماً مَقْضِيّاً، فَأَخْرِجْنِي مِنْ قَبْرِي، مُؤْتَزِراً كَفَنِي، شاهِراً سَيْفِي، مُجَرِّداً قَناتِي، مُلَبِّياً دَعْوَةَ الدّاعِي فِي الْحاضِرِ وَالْبادِي.
 
-اللّهُمَّ أَرِنِي الطَّلْعَةَ الرَّشِيدَةَ، وَالْغُرَّةَ الْحَمِيدَةَ، وَاكْحُلْ ناظِرِي بِنَظْرَةٍ مِنِّي إِلَيْهِ، وَعَجِّلْ فَرَجَهُ، وَسَهِّلْ مَخْرَجَهُ، وَأَوْسِعْ مَنْهَجَهُ، وَاسْلُكْ بِي مَحَجَّتَهُ، وَأَنْفِذْ أَمْرَهُ، وَاشْدُدْ أَزْرَهُ، وَاعْمُرِ اللّهُمَّ بِهِ بِلادَكَ، وَأَحْيِ بِهِ عِبادَكَ، فَإِنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ: ﴿ظَهَرَ الْفَسادُ فِي الْبَرِّ وَالْبَحْرِ بِما كَسَبَتْ أَيْدِي النّاسِ﴾، فَأَظْهِرِ اللّهُمَّ لَنا وَلِيَّكَ وَابْنَ بِنْتِ نَبِيِّكَ، الْمُسَمّى بِاسْمِ رَسُولِكَ، حَتّى لا يَظْفَرَ بِشَيْءٍ مِنَ الْباطِلِ إِلّا مَزَّقَهُ، وَيُحِقَّ الْحَقَّ وَيُحَقِّقَهُ.وَاجْعَلْهُ اللّهُمَّ مَفْزَعاً لِمَظْلُومِ عِبادِكَ، وَناصِراً لِمَنْ لا يَجِدُ لَهُ ناصِراً غَيْرَكَ، وَمُجَدِّداً لِما عُطِّلَ مِنْ أَحْكامِ كِتابِكَ، وَمُشَيِّداً لِما وَرَدَ مِنْ أَعْلامِ دِينِكَ وَسُنَنِ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، وَاجْعَلْهُ اللّهُمَّ مِمَّنْ حَصَّنْتَهُ مِنْ بَأْسِ الْمُعْتَدِينَ.
+اللّهُمَّ أَرِنِي الطَّلْعَةَ الرَّشِيدَةَ، وَالْغُرَّةَ الْحَمِيدَةَ، وَاكْحُلْ ناظِرِي بِنَظْرَةٍ مِنِّي إِلَيْهِ، وَعَجِّلْ فَرَجَهُ، وَسَهِّلْ مَخْرَجَهُ، وَأَوْسِعْ مَنْهَجَهُ، وَاسْلُكْ بِي مَحَجَّتَهُ، وَأَنْفِذْ أَمْرَهُ، وَاشْدُدْ أَزْرَهُ، وَاعْمُرِ اللّهُمَّ بِهِ بِلادَكَ، وَأَحْيِ بِهِ عِبادَكَ، فَإِنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ: ﴿ظَهَرَ الْفَسادُ فِي الْبَرِّ وَالْبَحْرِ بِما كَسَبَتْ أَيْدِي النّاسِ﴾، فَأَظْهِرِ اللّهُمَّ لَنا وَلِيَّكَ وَابْنَ بِنْتِ نَبِيِّكَ، الْمُسَمّى بِاسْمِ رَسُولِكَ، حَتّى لا يَظْفَرَ بِشَيْءٍ مِنَ الْباطِلِ إِلّا مَزَّقَهُ، وَيُحِقَّ الْحَقَّ وَيُحَقِّقَهُ.
+
+وَاجْعَلْهُ اللّهُمَّ مَفْزَعاً لِمَظْلُومِ عِبادِكَ، وَناصِراً لِمَنْ لا يَجِدُ لَهُ ناصِراً غَيْرَكَ، وَمُجَدِّداً لِما عُطِّلَ مِنْ أَحْكامِ كِتابِكَ، وَمُشَيِّداً لِما وَرَدَ مِنْ أَعْلامِ دِينِكَ وَسُنَنِ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، وَاجْعَلْهُ اللّهُمَّ مِمَّنْ حَصَّنْتَهُ مِنْ بَأْسِ الْمُعْتَدِينَ.
 
 اللّهُمَّ وَسُرَّ نَبِيَّكَ مُحَمَّداً صَلَّى اللهُ عَلَيْهِ وَآلِهِ بِرُؤْيَتِهِ، وَمَنْ تَبِعَهُ عَلى دَعْوَتِهِ، وَارْحَمِ اسْتِكانَتَنا بَعْدَهُ.
 
@@ -8951,8 +9199,7 @@ function qdGreatCircle(lat1, lon1, lat2, lon2, n) {
     const out = [];
     for (let i = 0; i <= n; i++) {
         const t = i / n, A = Math.sin((1 - t) * d) / Math.sin(d), B = Math.sin(t * d) / Math.sin(d);
-        const x = A * Math.cos(p1) * Math.cos(l1) + B * Math.cos(p2) * Math.cos(l2);
-        const y = A * Math.cos(p1) * Math.sin(l1) + B * Math.cos(p2) * Math.sin(l2);
+        const x = A * Math.cos(p1) * Math.cos(l1) + B * Math.cos(p2) * Math.cos(l2);const y = A * Math.cos(p1) * Math.sin(l1) + B * Math.cos(p2) * Math.sin(l2);
         const z = A * Math.sin(p1) + B * Math.sin(p2);
         out.push([Math.atan2(z, Math.sqrt(x * x + y * y)) / R, Math.atan2(y, x) / R]);
     }
@@ -8977,7 +9224,8 @@ function qdPaneHTML() {
                 </svg>
                 <div id="qd-mark" class="qd-mark"><span><i class="fa-solid ${qdT().icon}"></i></span></div>
             </div>
-            <div class="qd-center"><b id="qd-diff">--</b><small id="qd-hint">جاري تحديد موقعك</small></div></div>
+            <div class="qd-center"><b id="qd-diff">--</b><small id="qd-hint">جاري تحديد موقعك</small></div>
+        </div>
         <div class="qd-info">
             <div><small>الاتجاه من الشمال الحقيقي</small><b id="qd-bear">--</b></div>
             <div><small>المسافة</small><b id="qd-dist">--</b></div>
@@ -9749,8 +9997,7 @@ const HQB_KU_RULES = [
     [/^ختمتي ج(.+)$/, m => 'خەتمەکەم ج' + m[1]],
     [/^هذه ختمتك رقم (.+) • تقبّل الله منك$/, m => 'ئەمە خەتمەی ژمارە ' + m[1] + 'ـتە • خودا لێت قبووڵ بکات'],
     [/^شهر رمضان (.+) هـ$/, m => 'مانگی ڕەمەزان ' + m[1] + ' ک'],
-    [/^تم اعتماد مواقيت (.+)$/, m => 'کاتەکانی ' + hqbKuParts(m[1]) + ' پەسەند کران'],
-    [/^تم اعتماد مواقيت \((.+)\)$/, m => 'کاتەکانی (' + hqbKuParts(m[1]) + ') نوێ کرانەوە'],
+    [/^تم اعتماد مواقيت (.+)$/, m => 'کاتەکانی ' + hqbKuParts(m[1]) + ' پەسەند کران'],[/^تم اعتماد مواقيت \((.+)\)$/, m => 'کاتەکانی (' + hqbKuParts(m[1]) + ') نوێ کرانەوە'],
     [/^جاري الحفظ\.\.\. (.+)$/, m => 'پاشەکەوت دەکرێت... ' + m[1]],
     [/^جاري ضبط أوقات الصلاة لـ \((.+)\)\.\.\.$/, m => 'ڕێکخستنی کاتەکانی نوێژ بۆ (' + hqbKuParts(m[1]) + ')...'],
     [/^المساجد المكتشفة \((.+)\)$/, m => 'مزگەوتە دۆزراوەکان (' + m[1] + ')'],
@@ -9759,7 +10006,8 @@ const HQB_KU_RULES = [
     [/^(.+) • تلاوة السورة كاملة$/, m => m[1] + ' • تیلاوەتی تەواوی سورەت'],
     [/^إهداء ثواب الفاتحة إلى: (?:المرحوم|المرحومة) (.+)$/, m => 'پێشکەشکردنی سەوابی فاتیحە بۆ: خوالێخۆشبوو ' + m[1]],
     [/^أكملت تحدي (.+) تسبيحة، تقبل الله منك\.$/, m => 'ئاڵنگاری ' + m[1] + ' تەسبیحت تەواو کرد، خودا لێت قبووڵ بکات.'],
-    [/^الموقع الحالي: (.+)$/, m => 'شوێنی ئێستا: ' + hqbKuParts(m[1])],[/^(.+) من (.+) مفعّلة$/, m => m[1] + ' لە ' + m[2] + ' چالاکە'],
+    [/^الموقع الحالي: (.+)$/, m => 'شوێنی ئێستا: ' + hqbKuParts(m[1])],
+    [/^(.+) من (.+) مفعّلة$/, m => m[1] + ' لە ' + m[2] + ' چالاکە'],
     [/^بقي لك (.+) من (.+) أسماء$/, m => m[1] + ' ناو لە ' + m[2] + ' ناوت ماوە'],
     [/^وصلت للحد: (.+) أسماء لكل مستخدم$/, m => 'گەیشتیتە سنوور: ' + m[1] + ' ناو بۆ هەر بەکارهێنەرێک'],
     [/^لا يمكنك إضافة أكثر من (.+) أسماء$/, m => 'ناتوانیت لە ' + m[1] + ' ناو زیاتر زیاد بکەیت'],
@@ -10147,6 +10395,7 @@ function hqbMascotTap(e) {
     setTimeout(() => { if (m) m.classList.remove('press'); openAssistant(); }, 260);
 }
 hqbRenderToday();
+hqbDeskSync();
 setTimeout(hqbMascotHint, 3500);
 setTimeout(hqbMascotHint, 45000);
 const HQB_AI_STORE = 'hqb_ai_chat';
