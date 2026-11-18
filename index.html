@@ -283,9 +283,9 @@ html.theme-day .ist-note, html.theme-day .ist-src, html.theme-day .ist-count sma
 html.theme-day .ist-no { background: #FFFFFF; color: #15314A; border-color: #C8D6E2; }
 html[dir="ltr"] .mushaf-dir-icon { transform: rotate(180deg); }
 
-body.has-back-btn :is(#duas-hub-modal,#ziyarat-modal) { padding-bottom: 76px !important; }
+body.has-back-btn #duas-hub-modal { padding-bottom: 76px !important; }
 
-body.has-back-btn :is(#duas-hub-modal,#ziyarat-modal) > div { height: 100% !important; }
+body.has-back-btn #duas-hub-modal > div { height: 100% !important; }
 div.fixed.inset-0[id$="-modal"] { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 div.fixed.inset-0[id$="-modal"] > div { max-height: 100%; }
 .overflow-y-auto { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
@@ -628,10 +628,11 @@ html.theme-day .wpx-tile { background: linear-gradient(110deg, #E3EAF0 30%, #F2F
 .share-img-box { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; }
 .share-img-box > * { flex-shrink: 0; }
 #share-img-preview { flex-shrink: 1; min-height: 0; width: auto; max-width: 100%; max-height: calc(100vh - 170px); max-height: calc(100dvh - 170px); object-fit: contain; margin-left: auto; margin-right: auto; display: block; }
-.adhan-mini { position: fixed; left: 12px; right: 12px; top: calc(env(safe-area-inset-top, 0px) + 10px); z-index: 125; display: none; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 999px; background: #0F202B; border: 1px solid #D4A84F; box-shadow: 0 8px 24px rgba(0,0,0,.45); color: #F3EBDD; }
-.adhan-mini-ic { width: 30px; height: 30px; border-radius: 999px; background: #D4A84F; color: #0A151C; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
-.adhan-mini-txt { flex: 1; font-size: 12px; font-weight: 800; }
-.adhan-mini-btn { padding: 6px 14px; border-radius: 999px; background: #D4A84F; color: #0A151C; font-size: 11px; font-weight: 900; flex-shrink: 0; }
+.adhan-mini { position: fixed; left: 14px; bottom: calc(env(safe-area-inset-bottom, 0px) + 150px); z-index: 125; display: none; width: 62px; height: 62px; border-radius: 50%; background: #D4A84F; color: #0A151C; border: 3px solid #0F202B; box-shadow: 0 8px 22px rgba(0,0,0,.4); flex-direction: column; align-items: center; justify-content: center; gap: 1px; cursor: pointer; }
+.adhan-mini::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(212,168,79,.6); animation: adhanPulse 1.6s ease-out infinite; }
+.adhan-mini i { font-size: 15px; }
+.adhan-mini small { font-size: 9.5px; font-weight: 900; line-height: 1; }
+@keyframes adhanPulse { from { transform: scale(.9); opacity: 1; } to { transform: scale(1.35); opacity: 0; } }
 
 .hqb-ob { position: fixed; inset: 0; z-index: 140; display: flex; flex-direction: column; background: #0A151C; color: #F3EBDD; animation: hqbObIn .35s ease; }
 .hqb-ob.out { opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s; }
@@ -725,6 +726,37 @@ html.theme-day .dua-row { color: #15314A; }
 html.theme-day .dua-row + .dua-row { border-top-color: rgba(21,49,74,.08); }
 html.theme-day .dua-row-ic { background: #0F202B; }
 html.theme-day .dua-row-go { color: #4A6680; }
+.prb-lbl { font-size: 11px; font-weight: 700; color: var(--hqb-muted, #9FB3C2); margin: 0 4px 8px; }
+.prb-chip { padding: 7px 13px; border-radius: 999px; font-size: 12px; font-weight: 700; border: 1px solid rgba(212,168,79,.35); color: #F3EBDD; background: transparent; }
+.prb-chip.on { background: #D4A84F; color: #15314A; border-color: #D4A84F; }
+.prb-ta { width: 100%; min-height: 150px; resize: vertical; padding: 14px; border-radius: 18px; font-size: 14px; line-height: 1.9; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); color: #F3EBDD; outline: none; font-family: inherit; }
+.prb-ta:focus { border-color: rgba(212,168,79,.6); }
+.prb-count { font-size: 10px; color: #8EA2B2; margin: 6px 4px 0; text-align: left; }
+.prb-count.max { color: #E59A7A; }
+.prb-pick { width: 86px; height: 120px; border-radius: 14px; border: 1.5px dashed rgba(212,168,79,.5); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #D4A84F; font-size: 11px; font-weight: 700; cursor: pointer; }
+.prb-pick i { font-size: 18px; }
+.prb-thumb { width: 86px; height: 120px; border-radius: 14px; overflow: hidden; position: relative; border: 1px solid rgba(212,168,79,.4); background: #0F202B; }
+.prb-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.prb-thumb button { position: absolute; top: 5px; left: 5px; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,.65); color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center; }
+.prb-pick.hidden, .prb-thumb.hidden { display: none; }
+.prb-note { font-size: 10px; color: #8EA2B2; margin: 8px 4px 0; line-height: 1.7; }
+.prb-send { width: 100%; padding: 14px; border-radius: 16px; background: #D4A84F; color: #15314A; font-weight: 900; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.prb-send:disabled { opacity: .6; }
+.prb-ok { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; background: rgba(212,168,79,.15); color: #D4A84F; border: 1.5px solid rgba(212,168,79,.5); }
+html.theme-day .prb-chip { color: #15314A; border-color: rgba(21,49,74,.18); background: rgba(255,255,255,.7); }
+html.theme-day .prb-chip.on { background: #D4A84F; color: #15314A; border-color: #D4A84F; }
+html.theme-day .prb-ta { background: #fff; border-color: rgba(21,49,74,.1); color: #15314A; }
+html.theme-day .prb-lbl, html.theme-day .prb-count, html.theme-day .prb-note { color: #5B6F80; }
+html.theme-day .prb-pick { color: #946512; border-color: rgba(148,101,18,.45); }
+html.theme-day .prb-ok { color: #946512; }
+body:has(#problem-modal:not(.hidden)) #back-to-sections-btn { display: none !important; }
+.zx-sub { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.zx-arch { width: 40px; height: 46px; flex-shrink: 0; color: #D4A84F; }
+.zx-arch .a { fill: rgba(212,168,79,.07); stroke: currentColor; stroke-width: 1.5; }
+.zx-arch .l { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.zx-arch .f { fill: currentColor; }
+html.theme-day .zx-arch { color: #946512; }
+body:has(#ziyarat-modal:not(.hidden)) #back-to-sections-btn { display: none !important; }
 .z-head { font-size: 13px; font-weight: 800; color: #A3B3BF; padding: 10px 4px 2px; }
 .dua-row-sub { display: block; font-size: 11px; font-weight: 600; color: #A3B3BF; line-height: 1.5; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dua-row-n { width: 32px; height: 32px; border-radius: 10px; border: 1px solid rgba(212,168,79,.35); color: #D4A84F; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -1456,6 +1488,11 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <span class="set-tx"><b id="lbl-instagram-title">الدعم الفني</b><small dir="ltr" class="set-mail">zanb68950@gmail.com</small></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
             </a>
+            <button class="set-row" onclick="hqbPrbOpen()">
+                <span class="set-ic"><i class="fa-solid fa-bug"></i></span>
+                <span class="set-tx"><b id="lbl-problem">الإبلاغ عن مشكلة</b><small id="lbl-problem-sub">اكتب المشكلة وأرفق صورة لها</small></span>
+                <i class="fa-solid fa-chevron-left set-go"></i>
+            </button>
             <button class="set-row" onclick="playClickSound(); openPrivacyPolicy()">
                 <span class="set-ic"><i class="fa-solid fa-shield-halved"></i></span>
                 <span class="set-tx"><b id="lbl-privacy-btn">سياسة الخصوصية</b></span>
@@ -1469,6 +1506,42 @@ html.theme-day .sm-bubble { background: #0F202B; color: #F3EBDD; }
                 <span class="set-tx"><b id="lbl-del-data">حذف بياناتي</b><small id="lbl-del-data-sub">حذف الأسماء التي أضفتها وكل بيانات التطبيق</small></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
             </button>
+        </div>
+    </div>
+</div>
+
+<div id="problem-modal" class="fixed inset-0 bg-black/85 hidden items-stretch justify-center p-0 z-50" style="z-index:70">
+    <div class="wpx-box w-full bg-palette-dark flex flex-col overflow-hidden">
+        <div class="wpx-top">
+            <button onclick="playClickSound(); closeModal('problem-modal')" class="srch-x" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+            <div class="wpx-ttl"><b>الإبلاغ عن مشكلة</b><small>يصل بلاغك لفريق «حرم» مباشرة</small></div>
+        </div>
+        <div id="prb-form" class="flex-1 overflow-y-auto px-4 pt-2 pb-10 space-y-4">
+            <div>
+                <p class="prb-lbl">نوع المشكلة</p>
+                <div id="prb-cats" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div>
+                <p class="prb-lbl">اكتب المشكلة</p>
+                <textarea id="prb-msg" class="prb-ta" maxlength="500" rows="6" placeholder="مثال: الأذان لم يشتغل في صلاة الفجر، أو في زيارة كذا كلمة خطأ…" oninput="hqbPrbCount()"></textarea>
+                <p id="prb-count" class="prb-count">٠ / ٥٠٠</p>
+            </div>
+            <div>
+                <p class="prb-lbl">صورة للمشكلة (اختياري)</p>
+                <div class="flex gap-3 items-center">
+                    <div id="prb-thumb" class="prb-thumb hidden"><img id="prb-thumb-img" alt=""><button onclick="hqbPrbClearImg()" aria-label="حذف الصورة"><i class="fa-solid fa-xmark"></i></button></div>
+                    <label id="prb-pick" class="prb-pick"><i class="fa-solid fa-camera"></i><span>إرفاق صورة</span><input id="prb-file" type="file" accept="image/jpeg,image/png,image/webp,image/*" class="hidden" onchange="hqbPrbPick(this)"></label>
+                </div>
+                <p class="prb-note">تأكد أن الصورة لا تحتوي على معلومات شخصية. تُصغَّر الصورة تلقائياً قبل الإرسال.</p>
+            </div>
+            <button id="prb-send" onclick="hqbPrbSend()" class="prb-send"><i class="fa-solid fa-paper-plane"></i><span>إرسال البلاغ</span></button>
+            <p class="prb-note text-center">يمكنك إرسال ٣ بلاغات في اليوم. يُرسل معها نوع جهازك ومتصفحك فقط لمساعدتنا على فهم المشكلة.</p>
+        </div>
+        <div id="prb-done" class="hidden flex-1 flex flex-col items-center justify-center text-center px-8 gap-3">
+            <span class="prb-ok"><i class="fa-solid fa-check"></i></span>
+            <b class="text-lg text-palette-light">وصل بلاغك، شكراً لك</b>
+            <p class="text-xs text-palette-muted leading-relaxed">سيطّلع عليه فريق «حرم» ويعمل على حل المشكلة في التحديثات القادمة إن شاء الله.</p>
+            <button onclick="playClickSound(); closeModal('problem-modal')" class="prb-send mt-3" style="max-width:220px">تم</button>
         </div>
     </div>
 </div>
@@ -4566,13 +4639,118 @@ const PRIVACY_CONTENT = {
             ["7. خدمات الأطراف الثالثة", "يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وAladhan (أوقات الصلاة)، وOpenStreetMap (المدن وخريطة المساجد، وقد يمر طلب البحث عن المساجد عبر خادمنا دون أن نحفظه)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام، وGoogle Gemini (مساعد حرم). لكل خدمة سياسة خصوصية خاصة بها."],
             ["8. مساعد حرم (الذكاء الاصطناعي)", "عند استخدامك لمساعد حرم تُرسل رسالتك ومعلومات يومك (التاريخ، المدينة، أوقات الصلاة، اسمك إن كتبته) إلى خدمة Google Gemini لتوليد الرد، عبر خادم التطبيق دون أي معلومات تواصل. تُحفظ المحادثة على جهازك فقط، ويُسجَّل عدد رسائلك اليومي لمنع الإساءة. الردود يولّدها الذكاء الاصطناعي وقد تخطئ، ولا تُغني عن الرجوع لمرجع التقليد. يمكنك الإبلاغ عن أي رد غير لائق من زر «إبلاغ»."],
             ["9. الحماية من الإساءة", "لحماية التطبيق من الرسائل المزعجة والتلاعب، يقرأ خادمنا عنوان شبكتك (IP) لحظياً ويحوّله فوراً إلى رمز مشفّر باتجاه واحد لا يمكن إرجاعه إلى العنوان الأصلي. يُستخدم هذا الرمز فقط لعدّ المحاولات ووضع حدود لها: عدد الأسماء المضافة في قسم الفاتحة، والبلاغات، وإضافة أعمدة طريق الأربعين، ورسائل مساعد حرم، وعدّاد المشاهدات والتحميلات والمشاركات للخلفيات (يُحسب مرة واحدة يومياً لكل شبكة). لا يُربط الرمز باسمك ولا بأي معلومة تعريفية، وتُحذف سجلاته تلقائياً بعد أيام قليلة."],
-            ["10. الأطفال", "التطبيق مناسب لجميع الأعمار، ولا نجمع عمداً أي بيانات شخصية من الأطفال."],
-            ["11. حذف بياناتك", "يمكنك حذف كل بياناتك في أي وقت من: الإعدادات ← «حذف بياناتي»، فتُحذف الأسماء التي أضفتها من خادمنا وتُمسح بيانات التطبيق من جهازك. ويمكنك أيضاً طلب الحذف بمراسلتنا على البريد أدناه."],
-            ["12. التعديلات", "قد نحدّث هذه السياسة، ويظهر تاريخ آخر تحديث أعلاه."],
-            ["13. التواصل", "للاستفسارات أو الدعم الفني: zanb68950@gmail.com"]
+            ["10. الإبلاغ عن مشكلة", "عند استخدامك لـ«الإبلاغ عن مشكلة» يُحفظ على خادمنا: نوع المشكلة، والنص الذي تكتبه، والصورة إن أرفقتها، ونوع جهازك ومتصفحك وحجم الشاشة، ورقم عشوائي لجهازك، دون اسمك أو موقعك. تُحفظ الصور في مخزن خاص لا يصل إليه إلا فريق «حرم»، وتُستخدم البلاغات فقط لإصلاح المشاكل. لا ترفق صوراً فيها معلومات شخصية."],
+            ["11. الأطفال", "التطبيق مناسب لجميع الأعمار، ولا نجمع عمداً أي بيانات شخصية من الأطفال."],
+            ["12. حذف بياناتك", "يمكنك حذف كل بياناتك في أي وقت من: الإعدادات ← «حذف بياناتي»، فتُحذف الأسماء التي أضفتها والبلاغات التي أرسلتها وصورها من خادمنا وتُمسح بيانات التطبيق من جهازك. ويمكنك أيضاً طلب الحذف بمراسلتنا على البريد أدناه."],
+            ["13. التعديلات", "قد نحدّث هذه السياسة، ويظهر تاريخ آخر تحديث أعلاه."],
+            ["14. التواصل", "للاستفسارات أو الدعم الفني: zanb68950@gmail.com"]
         ]
     },
 };
+
+// ===== الإبلاغ عن مشكلة =====
+const HQB_PRB_CATS = ['خطأ في نص دعاء', 'الأذان', 'أوقات الصلاة', 'المصحف', 'شيء آخر'];
+let hqbPrbCat = '', hqbPrbImg = '';
+function hqbPrbOpen() {
+    playClickSound();
+    const m = document.getElementById('problem-modal');
+    if (m && m.parentElement !== document.body) document.body.appendChild(m);
+    document.getElementById('prb-form').classList.remove('hidden');
+    document.getElementById('prb-done').classList.add('hidden');
+    hqbPrbRenderCats();
+    hqbPrbCount();
+    openModal('problem-modal');
+}
+function hqbPrbRenderCats() {
+    document.getElementById('prb-cats').innerHTML = HQB_PRB_CATS.map(c =>
+        `<button type="button" class="prb-chip ${c === hqbPrbCat ? 'on' : ''}" onclick="hqbPrbSetCat(this.dataset.c)" data-c="${escapeHTML(c)}">${escapeHTML(c)}</button>`).join('');
+}
+function hqbPrbSetCat(c) { playClickSound(); hqbPrbCat = HQB_PRB_CATS.includes(c) ? c : ''; hqbPrbRenderCats(); }
+function hqbPrbCount() {
+    const t = document.getElementById('prb-msg'), el = document.getElementById('prb-count');
+    const n = t.value.length;
+    el.innerText = `${hqbNum(n)} / ${hqbNum(500)}`;
+    el.classList.toggle('max', n >= 500);
+}
+function hqbPrbClearImg() {
+    playClickSound();
+    hqbPrbImg = '';
+    document.getElementById('prb-file').value = '';
+    document.getElementById('prb-thumb').classList.add('hidden');
+    document.getElementById('prb-pick').classList.remove('hidden');
+}
+// تصغير الصورة على الهاتف قبل الإرسال: أقصى بُعد 1280 بكسل، بصيغة JPEG
+function hqbPrbPick(inp) {
+    const f = inp.files && inp.files[0];
+    if (!f) return;
+    if (!/^image\//.test(f.type)) { showToast('اختر صورة فقط'); inp.value = ''; return; }
+    if (f.size > 25 * 1024 * 1024) { showToast('الصورة كبيرة جداً'); inp.value = ''; return; }
+    const url = URL.createObjectURL(f);
+    const img = new Image();
+    img.onload = () => {
+        const k = Math.min(1, 1280 / Math.max(img.naturalWidth, img.naturalHeight));
+        const c = document.createElement('canvas');
+        c.width = Math.max(1, Math.round(img.naturalWidth * k));
+        c.height = Math.max(1, Math.round(img.naturalHeight * k));
+        const g = c.getContext('2d');
+        g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height);
+        g.drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        let q = 0.82, d = c.toDataURL('image/jpeg', q);
+        while (d.length > 2.6 * 1024 * 1024 && q > 0.4) { q -= 0.12; d = c.toDataURL('image/jpeg', q); }
+        if (!/^data:image\/jpeg;base64,/.test(d)) { showToast('تعذّر قراءة الصورة'); return; }
+        hqbPrbImg = d;
+        document.getElementById('prb-thumb-img').src = d;
+        document.getElementById('prb-thumb').classList.remove('hidden');
+        document.getElementById('prb-pick').classList.add('hidden');
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); showToast('تعذّر قراءة الصورة'); inp.value = ''; };
+    img.src = url;
+}
+function hqbPrbInfo() {
+    const ua = navigator.userAgent || '';
+    const os = (ua.match(/Android [\d.]+|iPhone OS [\d_]+|iPad; CPU OS [\d_]+|Windows NT [\d.]+|Mac OS X [\d_]+/) || [''])[0].replace(/_/g, '.');
+    const br = (ua.match(/(SamsungBrowser|EdgA?|OPR|Firefox|CriOS|Chrome|Version)\/[\d.]+/) || [''])[0];
+    const dev = (ua.match(/;\s*([^;)]+)\s+Build\//) || ['', ''])[1];
+    return [os, dev, br, `${screen.width}x${screen.height}`, document.documentElement.classList.contains('theme-day') ? 'نهاري' : 'ليلي'].filter(Boolean).join(' | ').slice(0, 300);
+}
+async function hqbPrbSend() {
+    playClickSound();
+    const msg = document.getElementById('prb-msg').value.trim();
+    if (!hqbPrbCat) { showToast('اختر نوع المشكلة'); return; }
+    if (msg.length < 10) { showToast('اكتب المشكلة بوضوح (١٠ أحرف على الأقل)'); return; }
+    if (!navigator.onLine || !supabaseClient) { showToast('تحتاج اتصالاً بالإنترنت لإرسال البلاغ'); return; }
+    const btn = document.getElementById('prb-send');
+    btn.disabled = true;
+    btn.querySelector('span').innerText = 'جاري الإرسال...';
+    try {
+        const { data, error } = await supabaseClient.functions.invoke('islamic-assistant', {
+            body: { action: 'problem', device: myDeviceId, category: hqbPrbCat, message: msg, image: hqbPrbImg || null, info: hqbPrbInfo(), lang: currentLanguage }
+        });
+        const code = String((data && data.error) || '');
+        if (error || code || !data || !data.ok) {
+            const M = {
+                prb_limit: 'أرسلت ٣ بلاغات اليوم، يمكنك الإرسال غداً',
+                prb_busy: 'البلاغات كثيرة اليوم، حاول غداً',
+                prb_short: 'اكتب المشكلة بوضوح (١٠ أحرف على الأقل)',
+                prb_img: 'الصورة غير مقبولة، جرّب صورة أخرى',
+                prb_bad: 'اختر نوع المشكلة'
+            };
+            showToast(M[code] || 'تعذّر الإرسال، حاول مرة أخرى');
+            return;
+        }
+        document.getElementById('prb-msg').value = '';
+        hqbPrbCat = '';
+        if (hqbPrbImg) hqbPrbClearImg();
+        document.getElementById('prb-form').classList.add('hidden');
+        document.getElementById('prb-done').classList.remove('hidden');
+    } catch (e) {
+        showToast('حدث خطأ في الاتصال');
+    } finally {
+        btn.disabled = false;
+        btn.querySelector('span').innerText = 'إرسال البلاغ';
+    }
+}
 
 function openPrivacyPolicy() {
     const c = PRIVACY_CONTENT[currentLanguage] || PRIVACY_CONTENT.ar;
@@ -5422,10 +5600,20 @@ function hqbPlayAdhan() {
     try { pr = el.play(); } catch (e) { hqbAdhanStatus('', true); return; }
     if (pr) pr.then(() => hqbAdhanStatus('', false)).catch(err => {
         if (!hqbAdhanPlaying) return;
-        if (err && err.name === 'AbortError') { setTimeout(() => { if (hqbAdhanPlaying && el.paused) el.play().catch(() => hqbAdhanStatus('اضغط تشغيل لسماع الأذان', true)); }, 300); return; }
+        if (err && err.name === 'AbortError') { setTimeout(() => { if (hqbAdhanPlaying && el.paused) el.play().catch(() => hqbAdhanStatus('اضغط في أي مكان لسماع الأذان', true)); }, 300); return; }
         if (el.error) { try { el.load(); } catch (e) {} }
-        hqbAdhanStatus('اضغط تشغيل لسماع الأذان', true);
+        hqbAdhanStatus('المتصفح منع التشغيل التلقائي، اضغط في أي مكان لسماع الأذان', true);
+        hqbAdhanWaitTap();
     });
+}
+// إذا منع المتصفح التشغيل التلقائي، أول لمسة في أي مكان من الشاشة تشغّل الأذان
+function hqbAdhanWaitTap() {
+    const go = () => {
+        document.removeEventListener('pointerdown', go, true);
+        const el = hqbAdhanEl();
+        if (hqbAdhanPlaying && el && el.paused) el.play().then(() => hqbAdhanStatus('', false)).catch(() => {});
+    };
+    document.addEventListener('pointerdown', go, true);
 }
 
 function hqbStopSound() {
@@ -5449,11 +5637,9 @@ function hqbCloseAdhanAlert() {
 function hqbAdhanMini(show) {
     let b = document.getElementById('adhan-mini');
     if (!b && show) {
-        document.body.insertAdjacentHTML('beforeend', `<div id="adhan-mini" class="adhan-mini">
-            <span class="adhan-mini-ic"><i class="fa-solid fa-mosque"></i></span>
-            <span class="adhan-mini-txt">الأذان يعمل الآن</span>
-            <button onclick="hqbStopAdhan()" class="adhan-mini-btn"><i class="fa-solid fa-stop ml-1"></i>إيقاف</button>
-        </div>`);
+        document.body.insertAdjacentHTML('beforeend', `<button id="adhan-mini" class="adhan-mini" onclick="hqbStopAdhan()" aria-label="إيقاف الأذان">
+            <i class="fa-solid fa-stop"></i><small>إيقاف</small>
+        </button>`);
         b = document.getElementById('adhan-mini');
     }
     if (b) b.style.display = show ? 'flex' : 'none';
@@ -5975,19 +6161,13 @@ setTimeout(hqbCacheAdhan, 1500);
     </div>
 </div>
 
-<div id="ziyarat-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
-    <div class="w-full max-w-lg h-[92vh] bg-palette-dark border border-palette-purple rounded-[28px] p-4 shadow-2xl relative flex flex-col overflow-hidden">
-        <div class="flex justify-between items-center mb-3 pb-2 border-b border-palette-purple">
-            <div class="flex items-center gap-2">
-                <div class="w-9 h-9 rounded-xl bg-palette-mid text-palette-mauve flex items-center justify-center text-sm"><i class="fa-solid fa-kaaba"></i></div>
-                <div>
-                    <h3 class="text-sm sm:text-base font-bold text-palette-light" id="lbl-ziyarat-title">الزيارات</h3>
-                    <p class="text-[9px] text-palette-muted" id="lbl-ziyarat-sub">تُحفظ للعمل بدون إنترنت</p>
-                </div>
-            </div>
-            <button onclick="playClickSound(); closeModal('ziyarat-modal')" class="w-9 h-9 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+<div id="ziyarat-modal" class="fixed inset-0 bg-black/85 hidden items-stretch justify-center p-0 z-50" style="z-index:70">
+    <div class="wpx-box w-full bg-palette-dark flex flex-col overflow-hidden">
+        <div class="wpx-top">
+            <button onclick="hqbZTopBack()" class="srch-x" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+            <div class="wpx-ttl"><b id="lbl-ziyarat-title">الزيارات</b><small id="lbl-ziyarat-sub" class="zx-sub">تعمل بدون إنترنت</small></div>
         </div>
-        <div id="ziyarat-list" class="flex-1 overflow-y-auto space-y-2 pr-1"></div>
+        <div id="ziyarat-list" class="flex-1 overflow-y-auto space-y-2 px-3 pt-1 pb-8"></div>
     </div>
 </div>
 
@@ -6034,6 +6214,8 @@ async function hqbLoadRemoteZiyarat() {
 }
 function openZiyarat() {
     hqbZPath = [];
+    const zm = document.getElementById('ziyarat-modal');
+    if (zm && zm.parentElement !== document.body) document.body.appendChild(zm);
     openModal('ziyarat-modal');
     hqbRenderZiyarat();
     hqbLoadRemoteZiyarat().then(hqbRenderZiyarat);
@@ -6053,6 +6235,7 @@ function hqbZGo(kind, id) {
     hqbRenderZiyarat();
 }
 function hqbZBack() { playClickSound(); hqbZPath.pop(); hqbRenderZiyarat(); }
+function hqbZTopBack() { if (hqbZPath.length) hqbZBack(); else backToSections(); }
 
 function hqbZCount(catId, secId) {
     const secs = hqbZData.secs || [], items = hqbZData.items || [];
@@ -6060,9 +6243,14 @@ function hqbZCount(catId, secId) {
     if (secId) return items.filter(x => x.sec === secId).length + sub(secId);
     return items.filter(x => x.cat === catId).length;
 }
+const HQB_Z_ARCH = '<path class="a" d="M5 44V22Q5 11 20 3Q35 11 35 22V44Z"/>';
+const HQB_Z_SVG = {
+    dome: `<svg class="zx-arch" viewBox="0 0 40 46" aria-hidden="true">${HQB_Z_ARCH}<path class="l" d="M12 37H28M14 37V31Q14 25 20 22Q26 25 26 31V37M20 22V18.5"/><path class="f" d="M20 14.6a2.1 2.1 0 1 0 1.6 3.5a2.6 2.6 0 1 1 -1.6 -3.5z"/><path class="l" d="M18.4 37V33.5Q20 31.6 21.6 33.5V37"/></svg>`,
+    book: `<svg class="zx-arch" viewBox="0 0 40 46" aria-hidden="true">${HQB_Z_ARCH}<path class="l" d="M11 26Q15.5 23.5 20 26Q24.5 23.5 29 26V36Q24.5 33.5 20 36Q15.5 33.5 11 36ZM20 26V36"/><path class="l" d="M20 17V20.5M18.3 18.7H21.7"/></svg>`
+};
 function hqbZRow(onclick, icon, title, sub, gold) {
     return `<button onclick="playClickSound(); ${onclick}" class="dua-row">
-        <span class="dua-row-ic"><i class="fa-solid ${icon}"></i></span>
+        ${HQB_Z_SVG[icon] || `<span class="dua-row-ic"><i class="fa-solid ${icon}"></i></span>`}
         <span class="dua-row-tx">${escapeHTML(title)}${sub ? `<small class="dua-row-sub">${sub}</small>` : ''}</span>
         <i class="fa-solid fa-chevron-left dua-row-go"></i>
     </button>`;
@@ -6076,7 +6264,8 @@ function hqbRenderZiyarat() {
     const titleEl = document.getElementById('lbl-ziyarat-title');
     if (!hqbZPath.length) {
         if (titleEl) titleEl.innerText = 'الزيارات';
-        box.innerHTML = cats.length ? hqbZGroup(cats.map((c, i) => hqbZRow(`hqbZGo('cat','${c.id}')`, c.icon, c.title, cnt(hqbZCount(c.id)), false)))
+        const subEl0 = document.getElementById('lbl-ziyarat-sub'); if (subEl0) subEl0.innerText = 'تعمل بدون إنترنت';
+        box.innerHTML = cats.length ? hqbZGroup(cats.map((c, i) => hqbZRow(`hqbZGo('cat','${c.id}')`, 'dome', c.title, cnt(hqbZCount(c.id)), false)))
             : `<div class="flex flex-col items-center justify-center text-center gap-3 py-16">
                 <div class="w-16 h-16 rounded-full border border-dashed border-palette-muted/60 text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-mosque"></i></div>
                 <p class="text-sm font-bold text-palette-light">لا توجد زيارات بعد</p>
@@ -6092,14 +6281,15 @@ function hqbRenderZiyarat() {
     const subSecs = secs.filter(x => x.cat === cat.id && x.parent === parentId);
     const list = items.filter(x => x.cat === cat.id && x.sec === parentId);
     const crumbs = [cat.title].concat(hqbZPath.slice(1).map(p => (secs.find(x => x.id === p.id) || {}).title || '')).map(escapeHTML).join(' <i class="fa-solid fa-chevron-left text-[8px] mx-1 opacity-60"></i> ');
-    let html = `<button onclick="hqbZBack()" class="w-full p-2.5 rounded-xl bg-palette-mid border border-palette-purple text-palette-light text-xs font-bold flex items-center gap-2"><i class="fa-solid fa-arrow-right text-palette-mauve"></i>رجوع</button>
-        <p class="text-[10px] text-palette-muted font-bold px-1">${crumbs}</p>`;
+    const subEl = document.getElementById('lbl-ziyarat-sub');
+    if (subEl) subEl.innerHTML = hqbZPath.length > 1 ? crumbs : (list.length ? hqbNum(list.length) + ' زيارة' : 'اختر قسماً');
+    let html = '';
     const isLeaf = x => !secs.some(y => y.parent === x.id) && items.filter(y => y.sec === x.id).length === 1;
     const leaves = subSecs.filter(isLeaf), folders = subSecs.filter(x => !isLeaf(x));
-    html += hqbZGroup(leaves.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-book-open-reader', x.title, '', true)));
+    html += hqbZGroup(leaves.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'book', x.title, '', true)));
     if (folders.length) {
         html += `<p class="z-head">الأقسام الفرعية</p>`;
-        html += hqbZGroup(folders.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'fa-layer-group', x.title, cnt(hqbZCount(cat.id, x.id)), false)));
+        html += hqbZGroup(folders.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'dome', x.title, cnt(hqbZCount(cat.id, x.id)), false)));
     }
     if (list.length) {
         if (subSecs.length) html += `<p class="z-head">الزيارات</p>`;
@@ -7927,7 +8117,7 @@ async function hqbDeleteMyData() {
     const ok = await hqbConfirm({
         icon: 'fa-trash-can', danger: true,
         title: 'حذف بياناتي',
-        body: '<p>سيُحذف من خادمنا كل اسم أضفته في قسم الفاتحة، وتُمسح كل بيانات التطبيق من هذا الهاتف (اسمك، الإعدادات، سجل الصلوات، المصحف المحفوظ).</p><p>لا يمكن التراجع عن هذا.</p>',
+        body: '<p>سيُحذف من خادمنا كل اسم أضفته في قسم الفاتحة وكل بلاغ أرسلته، وتُمسح كل بيانات التطبيق من هذا الهاتف (اسمك، الإعدادات، سجل الصلوات، المصحف المحفوظ).</p><p>لا يمكن التراجع عن هذا.</p>',
         ok: 'حذف', cancel: 'إلغاء'
     });
     if (!ok) return;
@@ -7936,6 +8126,7 @@ async function hqbDeleteMyData() {
         if (supabaseClient && navigator.onLine) {
             const r = await hqbRpc('fanus_delete_mine', { p_device: myDeviceId });
             if (!r.ok && r.missing) await supabaseClient.from('fanus').delete().eq('created_by', myDeviceId);
+            try { await supabaseClient.functions.invoke('islamic-assistant', { body: { action: 'problem_delete', device: myDeviceId } }); } catch (e) {}
         }
     } catch (e) {}
     try { localStorage.clear(); } catch (e) {}
