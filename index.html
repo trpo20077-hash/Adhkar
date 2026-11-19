@@ -98,9 +98,10 @@ body.dark { background: transparent !important; color: #F3EBDD; }
     top: -180px; left: 50%; margin-left: -260px; pointer-events: none;
     background: radial-gradient(circle, rgba(212,168,79,0.16), transparent 65%);
 }
-.splash-sky { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+.splash-sky { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 22%, transparent 32%); mask-image: linear-gradient(to bottom, #000 0%, #000 22%, transparent 32%); }
 .splash-sea {
-    position: absolute; left: 0; right: 0; bottom: 0; height: 34%;
+    position: absolute; left: 0; right: 0; bottom: 0; height: min(22%, 180px);
     direction: ltr; overflow: hidden; pointer-events: none; z-index: 1;
 }
 .splash-sea .wave { position: absolute; left: 0; width: 200%; }
@@ -595,8 +596,7 @@ html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 .wpv-slide img.ok { opacity: 1; }
 .wpv-spin { position: absolute; color: rgba(255,255,255,.6); font-size: 22px; }
 .wpv-slide.ok .wpv-spin, .wpv-slide.err .wpv-spin { display: none; }
-.wpv-top, .wpv-bottom { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px; pointer-events: none; }
-.wpv-top { top: 0; padding-top: calc(12px + env(safe-area-inset-top)); background: linear-gradient(rgba(0,0,0,.55), transparent); }
+.wpv-top, .wpv-bottom { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px; pointer-events: none; }.wpv-top { top: 0; padding-top: calc(12px + env(safe-area-inset-top)); background: linear-gradient(rgba(0,0,0,.55), transparent); }
 .wpv-bottom { bottom: 0; padding-bottom: calc(16px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, rgba(0,0,0,.6)); }
 .wpv-top > *, .wpv-bottom > * { pointer-events: auto; }
 .wpv-btn { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.42); color: #fff; font-size: 16px; flex-shrink: 0; backdrop-filter: blur(6px); }
@@ -1139,8 +1139,7 @@ html.theme-day .arb-entry { background: linear-gradient(135deg, rgba(148,101,18,
 .rd-fav.on { color: #D4A84F; }
 body:has(#search-modal:not(.hidden)) #back-to-sections-btn { display: none !important; }
 html.theme-day .srch-top { border-color: rgba(21,49,74,.1); }
-html.theme-day .srch-x, html.theme-day .srch-row { background: #FFFFFF; color: #15314A; box-shadow: 0 1px 3px rgba(21,49,74,.1); }
-html.theme-day .srch-field { background: #FFFFFF; }
+html.theme-day .srch-x, html.theme-day .srch-row { background: #FFFFFF; color: #15314A; box-shadow: 0 1px 3px rgba(21,49,74,.1); }html.theme-day .srch-field { background: #FFFFFF; }
 html.theme-day .srch-field input, html.theme-day .srch-tx b, html.theme-day .srch-empty p { color: #15314A; }
 html.theme-day .srch-tx small, html.theme-day .srch-go, html.theme-day .srch-empty small { color: #4A6680; }
 html.theme-day .srch-ic { background: #EEF3F7; color: #946512; }
@@ -1390,7 +1389,6 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
 </div>
 
 <div id="splash-screen">
-    <div class="splash-pattern"></div>
     <div class="splash-glow"></div>
     <div class="splash-sky" aria-hidden="true"><div class="stars-a"></div><div class="stars-b"></div></div>
     <div class="splash-sea" aria-hidden="true">
@@ -1414,7 +1412,7 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
             <p class="text-[11px] text-palette-muted font-medium mt-1" id="app-desc-splash">القرآن الكريم، الأدعية ومواقيت الصلاة</p>
         </div>
 
-        <div class="splash-rise w-full min-h-[66px] flex items-center justify-center rounded-2xl bg-black/20 border border-palette-mauve/20 px-4 py-3" style="animation-delay:.35s">
+        <div class="splash-rise w-full min-h-[66px] flex items-center justify-center rounded-2xl bg-black/30 border border-palette-mauve/20 px-4 py-3" style="animation-delay:.35s">
             <p id="splash-dhikr" class="font-amiri text-lg text-palette-light leading-relaxed transition-opacity duration-500">أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ</p>
         </div>
 
@@ -1422,7 +1420,7 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
 
         <div id="swipe-track" class="splash-rise swipe-track w-full" style="animation-delay:.6s">
             <div id="swipe-fill" class="swipe-fill"></div>
-            <div id="swipe-label" class="swipe-label"><span id="btn-guest-login">اسحب للدخول</span></div>
+            <div id="swipe-label" class="swipe-label"><span id="btn-guest-login">اضغط أو اسحب للدخول</span></div>
             <div id="swipe-handle" class="swipe-handle" role="button" tabindex="0" aria-label="دخول">
                 <i class="fa-solid fa-angles-left text-sm"></i>
             </div>
@@ -1758,8 +1756,7 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
             </button>
             <button class="set-row" onclick="openAbout()">
                 <span class="set-ic"><i class="fa-solid fa-circle-info"></i></span>
-                <span class="set-tx"><b>عن التطبيق</b><small>الإصدار • سياسة الخصوصية • فريق العمل</small></span>
-                <i class="fa-solid fa-chevron-left set-go"></i>
+                <span class="set-tx"><b>عن التطبيق</b><small>الإصدار • سياسة الخصوصية • فريق العمل</small></span><i class="fa-solid fa-chevron-left set-go"></i>
             </button>
             <button class="set-row" onclick="openContact()">
                 <span class="set-ic"><i class="fa-solid fa-headset"></i></span>
@@ -2404,8 +2401,7 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
         <div id="mushaf-read-view" class="hidden flex-1 flex-col min-h-0">
             <div class="flex items-center justify-between gap-1.5 mb-2 flex-wrap">
                 <div class="flex items-center gap-1.5">
-                    <button onclick="playClickSound(); mushafFont(-2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[11px] font-bold">أ-</button>
-                    <button onclick="playClickSound(); mushafFont(2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[13px] font-bold">أ+</button>
+                    <button onclick="playClickSound(); mushafFont(-2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[11px] font-bold">أ-</button><button onclick="playClickSound(); mushafFont(2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[13px] font-bold">أ+</button>
                     <button onclick="playClickSound(); mushafToggleTr()" id="mushaf-tr-btn" style="display:none" class="h-8 px-2.5 rounded-xl bg-palette-mid text-palette-light text-[10px] font-bold"><i class="fa-solid fa-language ml-1"></i><span id="mushaf-tr-lbl">الترجمة</span></button>
                 </div>
                 <div class="flex items-center gap-1.5">
@@ -2683,7 +2679,7 @@ function initSwipeLogin() {
         if (!dragging) return;
         dragging = false; smooth(true);
         if (dx > maxD * 0.85) finish();
-        else if (dx < 6) nudge();
+        else if (dx < 6) finish();
         else setPos(0);
     };
     handle.addEventListener('pointerup', release);
@@ -2693,7 +2689,10 @@ function initSwipeLogin() {
     });
 
     const input = document.getElementById('splash-name-input');
-    if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); nudge(); } });
+    if (input) input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); input.blur(); finish(); } });
+    // الضغط على أي مكان في الشريط يكفي للدخول، والسحب يبقى يعمل كما هو
+    track.addEventListener('click', e => { if (!dragging && !handle.contains(e.target)) finish(); });
+    track.style.cursor = 'pointer';
 
     handle.style.setProperty('--hint', (isRtl() ? '-8px' : '8px'));
     handle.classList.add('swipe-hint');
@@ -2723,7 +2722,7 @@ const i18n = {
     ar: {
         appName: "حرم",
         appDesc: "القرآن الكريم، الأدعية ومواقيت الصلاة",
-        guestLogin: "اسحب للدخول",
+        guestLogin: "اضغط أو اسحب للدخول",
         splashNamePh: "اكتب اسمك (اختياري)",
         prayerTimes: "أوقات الصلاة",
         dailyDua: "دعاء اليوم",
@@ -3314,8 +3313,7 @@ function savePrayerChanges() {
 
 const PRAYER_INFO = [
     { key: 'Fajr', end: 'Sunrise', scene: 'fajr', orb: 'moon', rakat: 2,
-      ar: { sub: 'صلاة الصبح', note: 'صلاة الفجر ركعتان، يبدأ وقتها بطلوع الفجر الصادق وينتهي بطلوع الشمس.', nafila: 'يُستحب أداء نافلة الفجر (ركعتان) قبل الفريضة.' } },
-    { key: 'Sunrise', end: 'Dhuhr', scene: 'sunrise', orb: 'sun', rakat: 0,
+      ar: { sub: 'صلاة الصبح', note: 'صلاة الفجر ركعتان، يبدأ وقتها بطلوع الفجر الصادق وينتهي بطلوع الشمس.', nafila: 'يُستحب أداء نافلة الفجر (ركعتان) قبل الفريضة.' } },{ key: 'Sunrise', end: 'Dhuhr', scene: 'sunrise', orb: 'sun', rakat: 0,
       ar: { sub: 'طلوع الشمس', note: 'ليس وقت صلاة فريضة، وبطلوع الشمس ينتهي وقت صلاة الفجر.', nafila: 'وقت مناسب للذكر وتعقيبات الصلاة والدعاء.' } },
     { key: 'Dhuhr', end: 'Asr', scene: 'dhuhr', orb: 'sun', rakat: 4,
       ar: { sub: 'زوال الشمس', note: 'صلاة الظهر أربع ركعات، ويدخل وقتها بزوال الشمس.', nafila: 'نافلة الظهر ثماني ركعات تُصلّى قبل الفريضة.' } },
@@ -4327,8 +4325,7 @@ function openDuaDetailModal(id) {
 
 
 const weeklySupplications = [
-    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالِّرِضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },
-    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغِفرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
+    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالِّرِضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },{ dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغِفرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
     { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ وَالحَمْدُ حَقُّهُ كَما يَسْتِحِقُّهُ حَمْداً كَثِيراً ، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي ؛ إِنَّ النَّفْسَ لأَمّارَةٌ بِالسُّوءِ إِلّا ما رَحِمَ رَبِّي ، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطانِ الَّذِي يَزِيدُنِي ذَنْباً إِلى ذَنْبِي ، وَأَحْتَرِزُ بِهِ مِنْ كُلِّ جَبّارٍ فاجِرٍ ، وَسُلْطانٍ جائِرٍ ، وَعَدُوٍّ قاهِرٍ . اَللّهُمَّ اجْعَلْنِي مِنْ جُنْدِكَ فَإِنَّ جُنْدَكَ هُمُ الغالِبُونَ ، وَاجْعَلْنِي مِنْ حِزْبِكَ فَإِنَّ حِزْبَكَ هُمُ المُفْلِحُونَ ، وَاجْعَلْنِي مِنْ أوْلِيائِكَ فَإِنَّ أَوْلِياَءَكَ لا خَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنُونَ . اَللّهُمَّ أصْلِحْ لِي دِينِي فَإِنَّهُ عِصْمَةُ أَمْرِي ، وَأصْلِحْ لِي آخِرَتِي فَإِنَّها دارُ مَقَرِّي ، وَإِلَيْها مِن مُجاوَرَةِ اللِّئامِ مَفَرِّي ، وَاجْعَلِ الحَياةَ زِيادَةً لِي فِي كُلِّ خَيْرٍ ، وَالوَفاةَ راحَةً لِي مِنْ كلِّ شَرٍ ، اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَتَمامِ عِدَّةِ المُرْسَلِينَ ، وَعَلى آلِهِ الطَّيِّبِينَ الطَّاهِرِينَ وَأَصْحابِهِ المُنْتَجَبِينَ، وَهَبْ لِي فِي الثُّلاثاءِ ثَلاثًا : لاتَدَعْ لِي ذَنْباً إِلّا غَفَرْتَهُ ، وَلا غَمّاً إِلّا أَذْهَبْتَهُ ، وَلا عَدُوّاً إِلّا دَفَعْتَهُ . بِـ (( بِسْمِ اللهِ )) خَيْرِ الأَسْماء ، بِسْمِ اللهِ رَبِّ الأَرْضِ وَالسَّمَاءِ ، أَسْتَدْفِعُ كُلَّ مَكْرُوهٍ أَوَّلُهُ سَخَطُهُ ، وَأَسْتَجْلِبُ كُلَّ مَحْبُوبٍ أَوَّلُهُ رِضاهُ، فَاخْتِمْ لِي مِنْكَ بِالغُفْرانِ يا وَلِيَّ الإِحْسانِ ." },
     { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلّهِ الَّذِي جَعَلَ اللَّيْلَ لِباساً ، وَالنَّوْمَ سُباتَاً ، وَجَعَلَ النَّهارَ نُشُوراً . لَكَ الْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي ، وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً حَمْداً دَائِمَاً لا يَنْقَطِعُ أَبَداً ، وَلا يُحْصِي لَهُ الْخَلائِقُ عَدَدَاً .اَللَّهُمَّ لَكَ الْحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ ، وَقَدَّرْتَ وَقَضَيْتَ ، وَأَمَتَّ وَأَحْيَيْتَ ، وَأَمْرَضْتَ وَشَفَيْتَ ، وَعَافَيْتَ وَأَبْلَيْتَ ، وَعَلَى الْعَرْشِ اسْتَوَيْتَ ، وَعَلَى الْمُلْكِ احْتَوَيْتَ .أَدْعُوكَ دُعآءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ ، وَانْقَطَعَتْ حِيلَتُهُ ، وَاقْتَرَبَ أَجَلُهُ ، وَتَدانَى فِي الدُّنْيا أَمَلُهُ ، وَاشْتَدَّتْ إلى رَحْمَتِكَ فاقَتُهُ ، وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ ، وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ ، وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ . فَصَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ ، وَعَلى أَهْلِ بَيْتِهِ الطَّيِّبِينَ الطَّاهِرِينَ ، وَارْزُقْنِي شَفاعَةَ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ ، وَلا تَحْرِمْنِي صُحْبَتَهُ إنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ . اَللَّهُمَّ اقْضِ لِي فِي الأَرْبِعآءِ أَرْبَعَاً : اِجْعَلْ قُوَّتِي فِي طاعَتِكَ ، وَنَشاطِي فِي عِبادَتِكَ ، وَرَغْبَتِي فِي ثَوَابِكَ ، وَزُهْدِي فِيما يُوجِبُ لِي أَلِيمَ عِقابِكَ ، إنَّكَ لَطِيفٌ لِما تَشَآءُ ." },
     { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِماً بِقُدْرَتِهِ ، وَجاءَ بِالنَّهارِ مُبْصِراً بِرَحْمَتِهِ ، وَكَسانِي ضِياءَهُ وَأَنا فِي نِعْمَتِهِ . اَللّهُمَّ فَكَما أَبْقَيْتَنِي لَهُ فَأَبْقِنِي لأَمْثالِهِ ، وَصَلِّ عَلى النَّبِيّ مُحَمَّدٍ وَآلِهِ ، وَلا تَفْجَعْنِي فِيهِ وَفِي غَيْرِهِ مِنَ اللَّيالِي وَالأَيّامِ بِارْتِكابِ المَحارِمِ وَاكْتِسابِ المَآثِمِ ، وَارْزُقْنِي خَيْرَهُ وَخَيْرَ ما فِيهِ وَخَيْرَ ما بَعْدَهُ ، وَاصْرِفْ عَنِّي شَرَّهُ وَشَرَّ ما فِيهِ وَشَرَّ ما بَعْدَهُ . اَللّهُمَّ إِنِّي بِذِمَّةِ الإِسْلامِ أَتَوَسَّلُ إِلَيْكَ ، وَبِحُرْمَةِ القُرْآنِ أَعْتَمِدُ عَلَيْكَ ، وَبِمُحَمَّدٍ المُصْطَفى ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ أَسْتَشْفِعُ لَدَيْكَ ، فَاعْرِفِ اللّهُمَّ ذِمَّتِي الَّتِي رَجَوْتُ بِها قَضاءَ حاجَتِي ، يا أَرْحَمَ الرَّاحِمِينَ . اَللّهُمَّ اقْضِ لِي فِي الخَمِيسِ خَمْساً ، لا يَتَّسِعُ لَهَا إِلَّا كَرَمُكَ ، وَلا يُطِيقُها إِلَّا نِعَمُكَ : سَلامَةً أَقْوَى بِها عَلى طاعَتِكَ ، وَعِبادَةً أَسْتَحِقُّ بِها جَزِيلَ مَثُوبَتِكَ ، وَسَعَةً فِي الحَالِ مِنَ الرِّزْقِ الحَلالِ ، وَأَنْ تُؤْمِنَنِي فِي مَواقِفِ الخَوْفِ بِأَمْنِكَ ، وَتَجْعَلَنِي مِنْ طَوارِقِ الهُمُومِ وَالغُمُومِ فِي حِصْنِكَ ، وَصَلِّ عَلى مُحمَّدٍ وَآلِ مُحَمَّدٍ ، وَاجْعَلْ تَوَسُّلِي بِهِ شافِعاً يَوْمَ القِيامَةِ نافِعاً ، إِنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ ." },
@@ -4971,8 +4968,7 @@ async function finishReadingFatiha() {
             } catch (e) {}
         }
 
-        activeDeceasedPerson.reads_count = newReads;
-        showToast(`تقبل الله، إجمالي القراءات: ${toEasternArabicDigits(newReads)}`);
+        activeDeceasedPerson.reads_count = newReads;showToast(`تقبل الله، إجمالي القراءات: ${toEasternArabicDigits(newReads)}`);
     }
 
     closeModal('reading-fatiha-modal');
@@ -5783,8 +5779,7 @@ function renderAdhanSettings() {
             ${ADHAN_PRAYERS.map(p => `
                 <div class="flex items-center justify-between py-1.5">
                     <div class="flex items-center gap-2"><span class="text-xs font-bold text-palette-light w-14">${p.ar}</span>
-                    <span class="font-mono text-[11px] text-palette-muted">${t && t[p.k] ? format12Hour(t[p.k]) : '--:--'}</span></div>
-                    <button class="hqb-switch ${c.prayers[p.k] ? 'on' : ''}" onclick="playClickSound(); hqbAdhanPrayer('${p.k}')"></button>
+                    <span class="font-mono text-[11px] text-palette-muted">${t && t[p.k] ? format12Hour(t[p.k]) : '--:--'}</span></div><button class="hqb-switch ${c.prayers[p.k] ? 'on' : ''}" onclick="playClickSound(); hqbAdhanPrayer('${p.k}')"></button>
                 </div>`).join('')}
         </div>
         <div class="hqb-card">
@@ -6567,8 +6562,7 @@ setTimeout(hqbCacheAdhan, 1500);
         <p class="text-[10px] text-palette-muted" id="lbl-share-hint">يمكنك أيضاً الضغط مطولاً على الصورة لحفظها</p>
         <div class="flex gap-2">
             <button onclick="hqbShareImgSend()" class="flex-1 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-black text-xs"><i class="fa-solid fa-share-nodes ml-1"></i><span id="lbl-share-send">مشاركة</span></button>
-            <button onclick="playClickSound(); hqbShareImgSave()" class="flex-1 py-2.5 rounded-xl bg-palette-mid text-palette-light font-bold text-xs"><i class="fa-solid fa-download ml-1"></i><span id="lbl-share-save">حفظ</span></button>
-            <button onclick="playClickSound(); closeModal('share-img-modal')" class="w-11 py-2.5 rounded-xl bg-palette-purple text-palette-light text-xs"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="playClickSound(); hqbShareImgSave()" class="flex-1 py-2.5 rounded-xl bg-palette-mid text-palette-light font-bold text-xs"><i class="fa-solid fa-download ml-1"></i><span id="lbl-share-save">حفظ</span></button><button onclick="playClickSound(); closeModal('share-img-modal')" class="w-11 py-2.5 rounded-xl bg-palette-purple text-palette-light text-xs"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
 </div>
@@ -7367,8 +7361,7 @@ function rdRenderSheet() {
             return;
         }
         const playing = !au.paused;
-        s.innerHTML = rdHead('الاستماع') + `
-            <div class="rd-player">
+        s.innerHTML = rdHead('الاستماع') + `<div class="rd-player">
                 <button class="rd-pp" onclick="rdPlayPause()" aria-label="تشغيل"><i class="fa-solid ${playing ? 'fa-pause' : 'fa-play'}"></i></button>
                 <div class="rd-pmeta"><b>${escapeHTML(rdCur.reciter || 'تلاوة الدعاء')}</b><small id="rd-time">${rdFmt(au.currentTime)} / ${rdFmt(au.duration)}</small></div>
             </div>
@@ -8024,7 +8017,7 @@ function hqbRenderToday() {
     const pct = last ? Math.min(100, Math.round((surahStartGlobal(last.s) + last.a) / 6236 * 100)) : 0;
 
     const chip = ([label, act]) => `<button onclick="hqbRunAct('${act}')" class="px-3 py-1.5 rounded-full bg-palette-darkest border border-palette-mauve/40 text-palette-light text-[10px] font-bold active:scale-95 transition-all">${escapeHTML(label)}</button>`;
-    const btn = (icon, label, act) => `<button onclick="hqbRunAct('${act}')" class="h-[46px] justify-center px-1 whitespace-nowrap overflow-hidden rounded-xl bg-palette-mid border border-palette-purple text-palette-light flex flex-col items-center gap-1 active:scale-95 transition-all"><i class="fa-solid ${icon} text-palette-mauve text-sm"></i><span class="text-[10px] font-bold">${label}</span></button>`;
+    const btn = (icon, label, act) => `<button onclick="hqbRunAct('${act}')" class="hqb-qa min-h-[46px] justify-center px-1 py-1.5 rounded-xl bg-palette-mid border border-palette-purple text-palette-light flex flex-col items-center gap-1 active:scale-95 transition-all"><i class="fa-solid ${icon} text-palette-mauve text-sm"></i><span class="text-[10px] font-bold">${label}</span></button>`;
 
     box.innerHTML = `
     <div class="w-full rounded-2xl bg-palette-dark border border-palette-purple px-3 pt-2.5 pb-3 shadow-lg space-y-1.5${localStorage.getItem('hqb_mascot_off') === '1' ? ' no-mascot' : ''}">
@@ -8155,8 +8148,7 @@ function hqbDeskRender() {
         </div>`;
     d.querySelector('.dk-bottom').innerHTML = `
         <button class="dk-card dk-row" onclick="hqbDeskGo('${last ? 'read' : 'mushaf'}')"><span class="ic"><i class="fa-solid fa-book-open-reader"></i></span>
-            <span class="tx"><b>${last ? 'أكمل القراءة' : 'المصحف الشريف'}</b><small>${last ? `سورة ${escapeHTML(sName || '')} · الآية ${hqbNum(last.a)}` : 'ابدأ القراءة من أي سورة'}</small>${last ? `<span class="dk-bar"><i style="width:${pct}%"></i></span>` : ''}</span>
-            <span class="go">${last ? hqbNum(pct) + '٪' : 'افتح ›'}</span></button>
+            <span class="tx"><b>${last ? 'أكمل القراءة' : 'المصحف الشريف'}</b><small>${last ? `سورة ${escapeHTML(sName || '')} · الآية ${hqbNum(last.a)}` : 'ابدأ القراءة من أي سورة'}</small>${last ? `<span class="dk-bar"><i style="width:${pct}%"></i></span>` : ''}</span><span class="go">${last ? hqbNum(pct) + '٪' : 'افتح ›'}</span></button>
         <button class="dk-card dk-row" onclick="hqbDeskGo('calendar')"><span class="ic"><i class="fa-solid fa-calendar-days"></i></span>
             <span class="tx"><b>المناسبة القادمة</b><small>${nx ? `${escapeHTML(nx.o.t)} · ${nx.days === 0 ? 'اليوم' : nx.days === 1 ? 'غداً' : 'بعد ' + hqbNum(nx.days) + ' أيام'}` : 'افتح التقويم لرؤية المناسبات'}</small></span>
             <span class="go">التقويم ›</span></button>`;
@@ -8672,8 +8664,7 @@ const HQB_SHRINES = [
         '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
-        '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
+        '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' +
@@ -8798,8 +8789,7 @@ const HQB_SHRINES = [
         '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
-        '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
+        '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' +
@@ -9111,9 +9101,7 @@ const HQB_FULL_DUAS = [
 
 اللّهُمَّ إِنْ حالَ بَيْنِي وَبَيْنَهُ الْمَوْتُ الَّذِي جَعَلْتَهُ عَلى عِبادِكَ حَتْماً مَقْضِيّاً، فَأَخْرِجْنِي مِنْ قَبْرِي، مُؤْتَزِراً كَفَنِي، شاهِراً سَيْفِي، مُجَرِّداً قَناتِي، مُلَبِّياً دَعْوَةَ الدّاعِي فِي الْحاضِرِ وَالْبادِي.
 
-اللّهُمَّ أَرِنِي الطَّلْعَةَ الرَّشِيدَةَ، وَالْغُرَّةَ الْحَمِيدَةَ، وَاكْحُلْ ناظِرِي بِنَظْرَةٍ مِنِّي إِلَيْهِ، وَعَجِّلْ فَرَجَهُ، وَسَهِّلْ مَخْرَجَهُ، وَأَوْسِعْ مَنْهَجَهُ، وَاسْلُكْ بِي مَحَجَّتَهُ، وَأَنْفِذْ أَمْرَهُ، وَاشْدُدْ أَزْرَهُ، وَاعْمُرِ اللّهُمَّ بِهِ بِلادَكَ، وَأَحْيِ بِهِ عِبادَكَ، فَإِنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ: ﴿ظَهَرَ الْفَسادُ فِي الْبَرِّ وَالْبَحْرِ بِما كَسَبَتْ أَيْدِي النّاسِ﴾، فَأَظْهِرِ اللّهُمَّ لَنا وَلِيَّكَ وَابْنَ بِنْتِ نَبِيِّكَ، الْمُسَمّى بِاسْمِ رَسُولِكَ، حَتّى لا يَظْفَرَ بِشَيْءٍ مِنَ الْباطِلِ إِلّا مَزَّقَهُ، وَيُحِقَّ الْحَقَّ وَيُحَقِّقَهُ.
-
-وَاجْعَلْهُ اللّهُمَّ مَفْزَعاً لِمَظْلُومِ عِبادِكَ، وَناصِراً لِمَنْ لا يَجِدُ لَهُ ناصِراً غَيْرَكَ، وَمُجَدِّداً لِما عُطِّلَ مِنْ أَحْكامِ كِتابِكَ، وَمُشَيِّداً لِما وَرَدَ مِنْ أَعْلامِ دِينِكَ وَسُنَنِ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، وَاجْعَلْهُ اللّهُمَّ مِمَّنْ حَصَّنْتَهُ مِنْ بَأْسِ الْمُعْتَدِينَ.
+اللّهُمَّ أَرِنِي الطَّلْعَةَ الرَّشِيدَةَ، وَالْغُرَّةَ الْحَمِيدَةَ، وَاكْحُلْ ناظِرِي بِنَظْرَةٍ مِنِّي إِلَيْهِ، وَعَجِّلْ فَرَجَهُ، وَسَهِّلْ مَخْرَجَهُ، وَأَوْسِعْ مَنْهَجَهُ، وَاسْلُكْ بِي مَحَجَّتَهُ، وَأَنْفِذْ أَمْرَهُ، وَاشْدُدْ أَزْرَهُ، وَاعْمُرِ اللّهُمَّ بِهِ بِلادَكَ، وَأَحْيِ بِهِ عِبادَكَ، فَإِنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ: ﴿ظَهَرَ الْفَسادُ فِي الْبَرِّ وَالْبَحْرِ بِما كَسَبَتْ أَيْدِي النّاسِ﴾، فَأَظْهِرِ اللّهُمَّ لَنا وَلِيَّكَ وَابْنَ بِنْتِ نَبِيِّكَ، الْمُسَمّى بِاسْمِ رَسُولِكَ، حَتّى لا يَظْفَرَ بِشَيْءٍ مِنَ الْباطِلِ إِلّا مَزَّقَهُ، وَيُحِقَّ الْحَقَّ وَيُحَقِّقَهُ.وَاجْعَلْهُ اللّهُمَّ مَفْزَعاً لِمَظْلُومِ عِبادِكَ، وَناصِراً لِمَنْ لا يَجِدُ لَهُ ناصِراً غَيْرَكَ، وَمُجَدِّداً لِما عُطِّلَ مِنْ أَحْكامِ كِتابِكَ، وَمُشَيِّداً لِما وَرَدَ مِنْ أَعْلامِ دِينِكَ وَسُنَنِ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، وَاجْعَلْهُ اللّهُمَّ مِمَّنْ حَصَّنْتَهُ مِنْ بَأْسِ الْمُعْتَدِينَ.
 
 اللّهُمَّ وَسُرَّ نَبِيَّكَ مُحَمَّداً صَلَّى اللهُ عَلَيْهِ وَآلِهِ بِرُؤْيَتِهِ، وَمَنْ تَبِعَهُ عَلى دَعْوَتِهِ، وَارْحَمِ اسْتِكانَتَنا بَعْدَهُ.
 
@@ -9915,8 +9903,7 @@ function qdOnOrient(e) {
     else if (qdGotAbs || (typeof e.webkitCompassHeading !== 'number' && !e.absolute)) return;
     let h = qdHeadingFrom(e);
     if (h === null || isNaN(h)) return;
-    const so = (screen.orientation && typeof screen.orientation.angle === 'number') ? screen.orientation.angle : (window.orientation || 0);
-    h = h + so;
+    const so = (screen.orientation && typeof screen.orientation.angle === 'number') ? screen.orientation.angle : (window.orientation || 0);h = h + so;
     const lat = qdPos ? qdPos.lat : hqbLocParams().lat, lng = qdPos ? qdPos.lng : hqbLocParams().lng;
     h = (h + qdDecl(lat, lng, qdYear()) + 720) % 360;
     const R = Math.PI / 180;
@@ -10544,8 +10531,7 @@ const HQB_KU = {
 "جاري تحديد موقعك...": "شوێنەکەت دیاری دەکرێت...",
 "تم رفض إذن الموقع، فعّله من إعدادات الجهاز": "مۆڵەتی شوێن ڕەتکرایەوە، لە ڕێکخستنەکانی ئامێرەوە چالاکی بکە",
 "بدون إنترنت: تُعرض آخر مواقيت محفوظة": "بەبێ ئینتەرنێت: دوایین کاتە پاشەکەوتکراوەکان پیشان دەدرێن",
-"جاري تجهيز الصورة...": "وێنەکە ئامادە دەکرێت...",
-"إذا لم تُحفظ الصورة، اضغط عليها مطولاً واختر حفظ": "ئەگەر وێنەکە پاشەکەوت نەبوو، بۆ ماوەیەک دایبگرە و پاشەکەوت هەڵبژێرە",
+"جاري تجهيز الصورة...": "وێنەکە ئامادە دەکرێت...","إذا لم تُحفظ الصورة، اضغط عليها مطولاً واختر حفظ": "ئەگەر وێنەکە پاشەکەوت نەبوو، بۆ ماوەیەک دایبگرە و پاشەکەوت هەڵبژێرە",
 "تعذر تشغيل التلاوة، تأكد من الإنترنت": "تیلاوەتەکە لێنەدرا، دڵنیابە لە ئینتەرنێت",
 "اكتب الاسم فقط، بدون أرقام أو روابط أو معلومات تواصل": "تەنها ناوەکە بنووسە، بەبێ ژمارە یان بەستەر یان زانیاری پەیوەندی",
 "جاري الحذف...": "دەسڕدرێتەوە...",
