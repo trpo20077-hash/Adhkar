@@ -523,7 +523,8 @@ html.theme-day .mq-cta.ghost { color: #946512; border-color: #C9973F; }
 .mq-pop { display: flex; flex-direction: column; gap: 3px; font-family: var(--f-ui); text-align: right; direction: rtl; min-width: 150px; }
 .mq-pop b { font-size: 13px; color: #0A151C; }
 .mq-pop span { font-size: 11px; color: #555; }
-.mq-pop a { margin-top: 4px; text-align: center; padding: 6px; border-radius: 10px; background: #D4A84F; color: #0A151C !important; font-weight: 700; font-size: 12px; text-decoration: none; }.leaflet-container { font-family: var(--f-ui); }
+.mq-pop a { margin-top: 4px; text-align: center; padding: 6px; border-radius: 10px; background: #D4A84F; color: #0A151C !important; font-weight: 700; font-size: 12px; text-decoration: none; }
+.leaflet-container { font-family: var(--f-ui); }
 .theme-switch { display: flex; gap: 3px; padding: 3px; border-radius: 999px; background: #0F202B; border: 1px solid #1A2B37; }
 .theme-switch button { padding: 8px 13px; border-radius: 999px; font-size: 12.5px; font-weight: 700; color: #A3B3BF; display: flex; align-items: center; gap: 5px; transition: background .2s, color .2s; }
 .theme-switch button.on { background: #D4A84F; color: #0A151C; }
@@ -1006,7 +1007,8 @@ html.theme-day .set-head, html.theme-day .set-tx small, html.theme-day .set-go {
 html.theme-day .set-group { background: rgba(255,255,255,.85); border-color: rgba(255,255,255,.95); }
 html.theme-day .set-row { color: #15314A; }
 html.theme-day .set-row + .set-row { border-top-color: rgba(21,49,74,.08); }
-html.theme-day .set-ic { background: #0F202B; }html.theme-day .set-row.danger b, html.theme-day .set-row.danger .set-ic { color: #B84A4A; }
+html.theme-day .set-ic { background: #0F202B; }
+html.theme-day .set-row.danger b, html.theme-day .set-row.danger .set-ic { color: #B84A4A; }
 html.theme-day .hqb-close { background: rgba(255,255,255,.9); color: #15314A; }
 html.theme-day .hqb-switch { background: #C9D6E0; border-color: #B5C6D3; }
 html.theme-day .hqb-switch::after { background: #FFFFFF; }
@@ -1290,6 +1292,90 @@ html.theme-day .dua-row, html.theme-day .set-row { color: var(--c-text); }
 .supp-hint { background: none !important; color: var(--c-muted) !important; font-size: var(--fs-h) !important; font-weight: var(--fw-m) !important; padding: var(--sp-1) var(--sp-1) 0 !important; box-shadow: none !important; text-align: right !important; }
 
 
+
+/* ===================== بوابة الحج • عن التطبيق • اتصل بنا • تصحيح التاريخ ===================== */
+.hj-wrap { flex: 1; overflow-y: auto; padding: 4px 16px 32px; }
+.hj-banner { position: relative; border-radius: 20px; overflow: hidden; height: 168px; margin: 4px 0 16px; background: linear-gradient(160deg, #13283A 0%, #0A151C 100%); border: 1px solid var(--c-border); }
+.hj-banner svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hj-banner .tx { position: absolute; right: 18px; bottom: 16px; left: 18px; }
+.hj-banner b { display: block; font-size: 22px; font-weight: 700; color: #F3EBDD; }
+.hj-banner small { display: block; font-size: 12px; color: #C9D4DC; margin-top: 2px; }
+.hj-tawaf { margin-top: 16px; width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: var(--r-lg); background: var(--c-accent); color: #15314A; text-align: right; }
+.hj-tawaf .ic { width: 44px; height: 44px; border-radius: 12px; background: rgba(21,49,74,.12); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.hj-tawaf .t { flex: 1; min-width: 0; }
+.hj-tawaf .t b { display: block; font-size: 15px; font-weight: 700; }
+.hj-tawaf .t small { display: block; font-size: 12px; opacity: .8; }
+.hj-tawaf:active { filter: brightness(.95); }
+html.theme-day .hj-tawaf { background: #D4A84F; }
+
+.hj-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; color: var(--c-accent); background: var(--c-accent-soft); padding: 4px 10px; border-radius: 999px; margin: 6px 0 10px; }
+.hj-h { font-size: 20px; font-weight: 700; color: var(--c-text); line-height: 1.5; margin-bottom: 8px; }
+.hj-text { white-space: pre-line; font-size: calc(16px * var(--hj-fs, 1)); line-height: 2.05; color: var(--c-text); font-weight: 400; word-wrap: break-word; }
+.hj-next { margin-top: 22px; width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: var(--r-lg); background: var(--c-surface); border: 1px solid var(--c-border); text-align: right; color: var(--c-text); }
+.hj-next .ar { width: 40px; height: 40px; border-radius: 12px; background: var(--c-accent-soft); color: var(--c-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hj-next small { display: block; font-size: 11px; color: var(--c-muted); }
+.hj-next b { display: block; font-size: 14px; font-weight: 500; }
+.hj-pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--c-border); background: var(--c-surface); }
+.hj-pager button { width: 52px; height: 46px; border-radius: 14px; background: var(--c-accent-soft); color: var(--c-accent); font-size: 16px; display: flex; align-items: center; justify-content: center; }
+.hj-pager button:disabled { opacity: .3; }
+.hj-pager span { font-size: 14px; font-weight: 500; color: var(--c-muted); }
+.hj-fs { display: flex; gap: 6px; }
+.hj-fs.hidden { display: none; }
+.hj-fs button { width: 34px; height: 34px; border-radius: 10px; background: var(--c-accent-soft); color: var(--c-accent); font-size: 12px; font-weight: 700; }
+
+/* عدّاد الطواف */
+.tw-box { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; gap: 14px; }
+.tw-ic { width: 104px; height: 104px; border-radius: 50%; background: var(--c-accent-soft); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-size: 38px; }
+.tw-box h3 { font-size: 22px; font-weight: 700; color: var(--c-text); }
+.tw-box p { font-size: 14px; color: var(--c-muted); }
+.tw-cta { width: 100%; max-width: 360px; padding: 15px; border-radius: 16px; background: var(--c-accent); color: #15314A; font-weight: 700; font-size: 15px; margin-top: 8px; }
+html.theme-day .tw-cta { background: #D4A84F; }
+.tw-num { display: flex; align-items: baseline; gap: 6px; direction: ltr; }
+.tw-num b { font-size: 76px; font-weight: 700; color: var(--c-accent); line-height: 1; }
+.tw-num span { font-size: 26px; color: var(--c-muted); }
+.tw-press { position: relative; width: min(66vw, 250px); height: min(66vw, 250px); border-radius: 50%; margin: 10px 0; -webkit-tap-highlight-color: transparent; }
+.tw-press svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+.tw-press .core { position: absolute; inset: 14px; border-radius: 50%; background: var(--c-surface); border: 1px solid var(--c-border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--c-accent); transition: transform .12s; }
+.tw-press:active .core { transform: scale(.96); }
+.tw-press .core i { font-size: 34px; }
+.tw-press .core span { font-size: 15px; font-weight: 700; }
+.tw-reset { width: 54px; height: 54px; border-radius: 50%; background: var(--c-surface); border: 1px solid var(--c-border); color: var(--c-muted); font-size: 18px; }
+.tw-dots { display: flex; gap: 8px; direction: rtl; }
+.tw-dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--c-border); }
+.tw-dots i.on { background: var(--c-accent); }
+
+/* القائمة السفلية (اتصل بنا • تصحيح التاريخ) */
+.hqb-bs { align-items: flex-end !important; justify-content: center; }
+.hqb-bs-panel { width: 100%; max-width: 640px; background: var(--c-surface-2, #13283A); border-radius: 24px 24px 0 0; padding: 10px 18px calc(18px + env(safe-area-inset-bottom)); animation: hqbBsUp .28s cubic-bezier(.2,.9,.25,1); max-height: 85vh; overflow-y: auto; }
+html.theme-day .hqb-bs-panel { background: #FFFFFF; }
+@keyframes hqbBsUp { from { transform: translateY(100%); } to { transform: none; } }
+.hqb-bs-grab { width: 44px; height: 5px; border-radius: 9px; background: var(--c-border); margin: 0 auto 14px; }
+html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
+.hqb-bs-ttl { font-size: 16px; font-weight: 700; color: var(--c-text); margin-bottom: 6px; }
+.hqb-bs-sub { font-size: 12px; color: var(--c-muted); margin-bottom: 8px; }
+.hqb-bs-row { width: 100%; display: flex; align-items: center; gap: 14px; padding: 10px 2px; text-align: right; color: var(--c-text); font-size: 15px; font-weight: 500; text-decoration: none; }
+.hqb-bs-row .ic { width: 46px; height: 46px; border-radius: 14px; background: var(--c-accent-soft); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; color: var(--c-accent); }
+.hqb-bs-row .ic.fb { color: #1877F2; }
+.hqb-bs-row .ic.ig { color: #E1306C; }
+.hqb-bs-row .ic.x { color: var(--c-text); }
+.hqb-bs-row .ic.yt { color: #FF0000; }
+.hqb-bs-row .ic.wa { color: #25D366; }
+.hqb-bs-row .ic.tg { color: #229ED9; }
+.hqb-bs-row:active { opacity: .7; }
+.hqb-bs-opt { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 14px 4px; font-size: 15px; font-weight: 500; color: var(--c-text); text-align: right; }
+.hqb-bs-opt + .hqb-bs-opt { border-top: 1px solid var(--c-border); }
+.hqb-bs-opt.on { color: var(--c-accent); }
+.hqb-bs-opt .ck { width: 26px; height: 26px; border-radius: 8px; background: var(--c-accent); color: #15314A; display: none; align-items: center; justify-content: center; font-size: 12px; }
+.hqb-bs-opt.on .ck { display: flex; }
+.set-val { font-size: 12px; font-weight: 500; color: var(--c-accent); flex-shrink: 0; }
+
+/* عن التطبيق */
+.ab-row { width: 100%; display: flex; align-items: center; gap: 12px; padding: 16px 14px; color: var(--c-text); text-align: right; font-size: 14px; font-weight: 500; }
+.ab-row + .ab-row { border-top: 1px solid var(--c-border); }
+.ab-row .v { margin-right: auto; color: var(--c-muted); font-weight: 400; direction: ltr; }
+.ab-row i.l { width: 20px; text-align: center; color: var(--c-accent); }
+.ab-foot { text-align: center; font-size: 12px; color: var(--c-muted); margin-top: 16px; }
+
 </style>
 </head>
 <script>try{if(localStorage.getItem("hqb_theme")!=="night")document.documentElement.classList.add("theme-day")}catch(e){document.documentElement.classList.add("theme-day")}</script>
@@ -1487,6 +1573,14 @@ html.theme-day .dua-row, html.theme-day .set-row { color: var(--c-text); }
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
             </div>
+            <p class="z-head">الحج والعمرة</p>
+            <div class="dua-group">
+                <button onclick="closeModal('app-sections-fullscreen-modal'); openHajj();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-kaaba"></i></span>
+                    <span class="dua-row-tx"><span>بوابة الحج</span><small class="dua-row-sub">أحكام الإحرام • مناسك الحج والعمرة • عداد الطواف</small></span>
+                    <i class="fa-solid fa-chevron-left dua-row-go"></i>
+                </button>
+            </div>
             <p class="z-head">أدوات</p>
             <div class="dua-group">
                 <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openAssistant();" class="dua-row">
@@ -1504,7 +1598,8 @@ html.theme-day .dua-row, html.theme-day .set-row { color: var(--c-text); }
                     <span class="dua-row-tx"><span>خلفيات دينية</span><small class="dua-row-sub">خلفيات للهاتف تحمّلها وتشاركها</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
-                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="dua-row"><span class="dua-row-ic"><i class="fa-solid fa-trophy"></i></span>
+                <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('challenges-modal'); initChallengesInterface();" class="dua-row">
+                    <span class="dua-row-ic"><i class="fa-solid fa-trophy"></i></span>
                     <span class="dua-row-tx"><span id="lbl-sec-chal">التحديات</span><small class="dua-row-sub">من ٥٠ إلى ٥٠٠ تسبيحة</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
@@ -1626,6 +1721,15 @@ html.theme-day .dua-row, html.theme-day .set-row { color: var(--c-text); }
             </button>
         </div>
 
+        <p class="set-head">التقويم</p>
+        <div class="set-group">
+            <button class="set-row" onclick="openHijriAdj()">
+                <span class="set-ic"><i class="fa-regular fa-calendar"></i></span>
+                <span class="set-tx"><b>تصحيح التاريخ الهجري</b></span>
+                <span class="set-val" id="hijri-adj-val">تصحيح تلقائي</span>
+            </button>
+        </div>
+
         <p class="set-head">الأصوات والتنبيهات</p>
         <div class="set-group">
             <button class="set-row" onclick="toggleButtonSound()">
@@ -1652,16 +1756,16 @@ html.theme-day .dua-row, html.theme-day .set-row { color: var(--c-text); }
                 <span class="set-tx"><b id="lbl-mosque-radar">القبلة والمساجد</b><small id="lbl-mosque-desc">الكعبة • المراقد • أقرب المساجد</small></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
             </button>
-            <button class="set-row" onclick="playClickSound(); openModal('founders-modal')">
-                <span class="set-ic"><i class="fa-solid fa-people-group"></i></span>
-                <span class="set-tx"><b id="lbl-founders">المؤسسون</b><small id="lbl-founders-desc">فريق العمل</small></span>
+            <button class="set-row" onclick="openAbout()">
+                <span class="set-ic"><i class="fa-solid fa-circle-info"></i></span>
+                <span class="set-tx"><b>عن التطبيق</b><small>الإصدار • سياسة الخصوصية • فريق العمل</small></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
             </button>
-            <a href="mailto:zanb68950@gmail.com" onclick="playClickSound()" class="set-row">
+            <button class="set-row" onclick="openContact()">
                 <span class="set-ic"><i class="fa-solid fa-headset"></i></span>
-                <span class="set-tx"><b id="lbl-instagram-title">الدعم الفني</b><small dir="ltr" class="set-mail">zanb68950@gmail.com</small></span>
+                <span class="set-tx"><b>اتصل بنا</b><small>البريد الإلكتروني وحساباتنا</small></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
-            </a>
+            </button>
             <button class="set-row" onclick="hqbShareApp()">
                 <span class="set-ic"><i class="fa-solid fa-share-nodes"></i></span>
                 <span class="set-tx"><b id="lbl-share-app">مشاركة التطبيق</b><small id="lbl-share-app-sub">أرسل «حرم» لأهلك وأصدقائك</small></span>
@@ -2121,7 +2225,8 @@ html.theme-day .dua-row, html.theme-day .set-row { color: var(--c-text); }
                 <h4 id="detail-title" class="font-bold text-white text-xs sm:text-sm leading-snug">عنوان المناسبة</h4>
             </div>
         </div>
-        <div class="p-3 rounded-xl bg-palette-darkest border border-palette-purple text-xs leading-relaxed text-palette-light font-medium max-h-60 overflow-y-auto select-text text-justify space-y-2"><p id="detail-description">تفاصيل المناسبة...</p>
+        <div class="p-3 rounded-xl bg-palette-darkest border border-palette-purple text-xs leading-relaxed text-palette-light font-medium max-h-60 overflow-y-auto select-text text-justify space-y-2">
+            <p id="detail-description">تفاصيل المناسبة...</p>
         </div>
         <button onclick="playClickSound(); closeModal('event-detail-modal')" class="w-full py-2.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-return-calendar">
             العودة للتقويم
@@ -2746,7 +2851,8 @@ function applyLanguageUI() {
     setTxt('lbl-founders-desc', t.foundersSub);
     setTxt('btn-open-founders', t.view);
     setTxt('lbl-instagram-title', t.instagramTitle);
-    setTxt('lbl-privacy-btn', 'سياسة الخصوصية');setTxt('btn-save-settings', t.saveClose);
+    setTxt('lbl-privacy-btn', 'سياسة الخصوصية');
+    setTxt('btn-save-settings', t.saveClose);
     setTxt('btn-open-radar', t.open);
 
     setTxt('prayer-modal-title', t.prayerModalTitle);
@@ -3715,7 +3821,8 @@ function handleZahraTap() {
     updateZahraUI();
 }
 
-let activeChallengeTarget = 0;let currentChallengeCount = 0;
+let activeChallengeTarget = 0;
+let currentChallengeCount = 0;
 
 function initChallengesInterface() {
     const body = document.getElementById('challenges-modal-body');
@@ -4303,8 +4410,16 @@ const ALL_HIJRI_EVENTS = {
     ]
 };
 
+// تصحيح التاريخ الهجري: إزاحة يدوية من الإعدادات (−٢ إلى +٢ يوم)، والصفر = الحساب التلقائي
+function hqbHijriAdj() {
+    let v = 0;
+    try { v = parseInt(localStorage.getItem('hqb_hijri_adj') || '0', 10); } catch (e) {}
+    return [-2, -1, 0, 1, 2].includes(v) ? v : 0;
+}
 function getHijriDateFromGregorian(dateObj) {
     try {
+        const adj = hqbHijriAdj();
+        if (adj) dateObj = new Date(dateObj.getTime() + adj * 86400000);
         const parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', {
             day: 'numeric', month: 'numeric', year: 'numeric'
         }).formatToParts(dateObj);
@@ -4485,7 +4600,8 @@ function showEventDetails(title, date, story) {
 
 const adhkarList = [
     { ar: "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ", cat: "الاستغفار" },
-    { ar: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ", cat: "التسبيح" },{ ar: "لا إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لا شَرِيكَ لَهُ", cat: "التوحيد" },
+    { ar: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ", cat: "التسبيح" },
+    { ar: "لا إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لا شَرِيكَ لَهُ", cat: "التوحيد" },
     { ar: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ", cat: "الصلاة على محمد وآل محمد" },
     { ar: "لا حَوْلَ وَلا قُوَّةَ إِلاَّ بِاللَّهِ الْعَلِيِّ الْعَظِيمِ", cat: "الحوقلة" },
     { ar: "سُبْحَانَ اللَّهِ ، وَالْحَمْدُ لِلَّهِ ، وَلا إِلَهَ إِلاَّ اللَّهُ ، وَاللَّهُ أَكْبَرُ", cat: "التسبيحات الأربعة" },
@@ -5295,7 +5411,8 @@ function mushafTapAyah(a) {
     bar.innerHTML = `
         <div class="flex items-center justify-between mb-2">
             <span class="text-[11px] font-black text-palette-mauve">الآية ${toEasternArabicDigits(a)}</span>
-            <button onclick="mpCloseBar()" class="w-7 h-7 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button></div>
+            <button onclick="mpCloseBar()" class="w-7 h-7 rounded-full bg-palette-mid text-palette-light flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+        </div>
         ${mushafShowTr && ay && ay.e ? `<p class="ayah-tr" style="margin:0 0 8px;border:0;padding:0">${escapeHTML(ay.e)}</p>` : ''}
         <div class="flex flex-wrap gap-1.5">
             <button class="ayah-act" onclick="playClickSound(); mushafPlayFrom(${i})"><i class="fa-solid fa-play"></i>استماع</button>
@@ -6122,7 +6239,8 @@ function cvG() { const [y, m, d] = document.getElementById('conv-g-input').value
 function cvH() { return { d: +document.getElementById('conv-h-d').value, m: +document.getElementById('conv-h-m').value, y: +document.getElementById('conv-h-y').value }; }
 function cvSync() {
     const g = cvG(), h = cvH(), set = (id, lbl, val) => { const b = document.getElementById(id); if (b) b.innerHTML = `<small>${lbl}</small><b>${val}</b><i class="fa-solid fa-chevron-down"></i>`; };
-    set('conv-g-d-btn', 'اليوم', hqbNum(g.d)); set('conv-g-m-btn', 'الشهر', CV_GM[g.m - 1]); set('conv-g-y-btn', 'السنة', hqbNum(g.y));set('conv-h-d-btn', 'اليوم', hqbNum(h.d)); set('conv-h-m-btn', 'الشهر', HIJRI_MONTHS_AR[h.m - 1]); set('conv-h-y-btn', 'السنة', hqbNum(h.y));
+    set('conv-g-d-btn', 'اليوم', hqbNum(g.d)); set('conv-g-m-btn', 'الشهر', CV_GM[g.m - 1]); set('conv-g-y-btn', 'السنة', hqbNum(g.y));
+    set('conv-h-d-btn', 'اليوم', hqbNum(h.d)); set('conv-h-m-btn', 'الشهر', HIJRI_MONTHS_AR[h.m - 1]); set('conv-h-y-btn', 'السنة', hqbNum(h.y));
 }
 function cvPick(k) {
     playClickSound();
@@ -6392,6 +6510,56 @@ setTimeout(hqbCacheAdhan, 1500);
     </div>
 </div>
 
+
+<div id="hajj-modal" class="fixed inset-0 bg-black/85 hidden items-stretch justify-center p-0 z-50" style="z-index:70">
+    <div class="wpx-box w-full bg-palette-dark flex flex-col overflow-hidden">
+        <div class="wpx-top">
+            <button onclick="hqbHajjBack()" class="srch-x" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+            <div class="wpx-ttl"><b id="hj-title">بوابة الحج</b><small id="hj-sub"></small></div>
+            <div id="hj-fs" class="hj-fs hidden">
+                <button onclick="hqbHajjFont(-1)" aria-label="تصغير الخط">أ-</button>
+                <button onclick="hqbHajjFont(1)" aria-label="تكبير الخط">أ+</button>
+            </div>
+        </div>
+        <div id="hj-body" class="flex-1 flex flex-col overflow-hidden"></div>
+    </div>
+</div>
+
+<div id="about-modal" class="fixed inset-0 bg-black/85 hidden items-stretch justify-center p-0 z-50" style="z-index:65">
+    <div class="wpx-box w-full bg-palette-dark flex flex-col overflow-hidden">
+        <div class="wpx-top">
+            <button onclick="playClickSound(); closeModal('about-modal')" class="srch-x" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+            <div class="wpx-ttl"><b>عن التطبيق</b></div>
+        </div>
+        <div class="flex-1 overflow-y-auto px-4 pt-2 pb-10">
+            <div class="set-group">
+                <div class="ab-row"><i class="fa-solid fa-code-branch l"></i><span>إصدار التطبيق</span><span class="v" id="ab-ver"></span></div>
+                <div class="ab-row"><i class="fa-regular fa-calendar l"></i><span>تاريخ آخر تحديث</span><span class="v" id="ab-date"></span></div>
+                <button class="ab-row" onclick="playClickSound(); openPrivacyPolicy()"><i class="fa-solid fa-shield-halved l"></i><span>سياسة الخصوصية</span><i class="fa-solid fa-chevron-left set-go" style="margin-right:auto"></i></button>
+                <button class="ab-row" onclick="playClickSound(); openModal('founders-modal')"><i class="fa-solid fa-people-group l"></i><span>فريق العمل</span><i class="fa-solid fa-chevron-left set-go" style="margin-right:auto"></i></button>
+            </div>
+            <p class="ab-foot" id="ab-foot"></p>
+        </div>
+    </div>
+</div>
+
+<div id="contact-modal" class="fixed inset-0 bg-black/60 hidden hqb-bs p-0" style="z-index:80" onclick="if (event.target === this) closeModal('contact-modal')">
+    <div class="hqb-bs-panel">
+        <div class="hqb-bs-grab"></div>
+        <p class="hqb-bs-ttl">راسلنا بواسطة…</p>
+        <div id="contact-list"></div>
+    </div>
+</div>
+
+<div id="hijri-adj-modal" class="fixed inset-0 bg-black/60 hidden hqb-bs p-0" style="z-index:80" onclick="if (event.target === this) closeModal('hijri-adj-modal')">
+    <div class="hqb-bs-panel">
+        <div class="hqb-bs-grab"></div>
+        <p class="hqb-bs-ttl">تصحيح التاريخ الهجري</p>
+        <p class="hqb-bs-sub" id="hijri-adj-today"></p>
+        <div id="hijri-adj-list"></div>
+    </div>
+</div>
+
 <div id="share-img-modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center p-3 z-[120]">
     <div class="share-img-box w-full max-w-sm bg-palette-dark border border-palette-purple rounded-[24px] p-4 space-y-3 text-center">
         <img id="share-img-preview" alt="صورة المشاركة" class="w-full rounded-xl border border-palette-purple">
@@ -6404,6 +6572,444 @@ setTimeout(hqbCacheAdhan, 1500);
         </div>
     </div>
 </div>
+<script>
+// ===================== بوابة الحج: النصوص كما أرسلتها المؤسسة حرفياً =====================
+const HQB_HAJJ_TARK = `( 1 ) الصيد البرّي.
+( 2 ) مجامعة النساء.
+( 3 ) تقبيل النساء.
+( 4 ) لمس النساء .
+( 5 ) النظر إلى المرأة وملاعبتها.
+( 6 ) الاستمناء.
+( 7 ) عقد النكاح.
+( 8 ) استعمال الطيب.
+( 9 ) لبس المخيط .
+( 10 ) التكحّل.
+( 11 ) النظر في المرآة.
+( 12 ) لبس الخفّ والجوراب للرجال.
+( 13 ) الفسوق.
+( 14 ) المجادلة.
+( 15 ) قتل هوام الجسد.
+( 16 ) التزيّن.
+( 17 ) الادّهان.
+( 18 ) إزالة الشعر من البدن.
+(19) ستر الرأس للرجال
+(20) ستر الوجه للنساء.
+( 21 ) التظليل للرجال.
+( 22 ) إخراج الدم من البدن.
+( 23 ) التقليم.
+( 24 ) قلع الضرس عند بعض الفقهاء.
+(25) حمل السلاح .`;
+
+const HQB_HAJJ = {
+    intro: {
+        t: 'مقدمة عن الحج',
+        x: `الحج: هو أحد أركان الدين ومن أوكدِ فرائض المسلمين قال الله تعالى (ولِلَّهِ عَلى النّاسِ حِجُّ البَيْتِ مَنِ اسْتَطاعَ إلَيْهِ سَبِيلا) .
+فالحجُّ فريضةُ الإسلام وركن الإيمان ومن أعظم العبادات والقربات ..
+وإنّ تركَ الحجّ لاسيّما ما عرض به تاركه من لزوم كفره إعراضه عنه، بقولهِ عزّ وجَل {..وَمَنْ كَفَرَ فَإِنَّ اللَّهَ غَنِيٌّ عَنِ الْعَالَمِينَ}
+وعن الإمام الصادق عليه السلام قال: (من مات ولم يحج حجة الاسلام لم يمنعه من ذلك حاجة تجحف به أو مرض لا يطيق فيه الحج أو سلطان يمنعه فليمت يهوديا أو نصرانيا)
+وعنهم عليهم السلام: (بني الاسلام على خمسٍ: على الصلاة والزكاة والحج والصوم والولاية)
+والحجُّ فرضه ونفله عظيم فضله، خطير أجره، جزيل ثوابه، جليل جزاؤه.
+ويكفي ما تضمّنه الحجّ من وفود العبد على سيدهِ، ونزوله في بيته ومحل ضيافته وأمنه. وعلى الكريم إكرام ضيفه.
+فعن الإمام الصادق (عليه السلام): الحاج والمعتمر وفد الله، إنْ سألوه أعطاهم، وإن دعوه أجابهم، وإن شفّعوا شفّعهم، وإن سكتوا بدأهم، ويعوضون بالدرهم ألف درهم .
+إن الروايات الورادة عن النبي وأهل بيته عليهم السلام كثيرة ومستفيضة يضيق عن حصرها المقام .
+
+أجزاء وواجبات حج التمتع :
+
+يتألف حج التمتّع من عبادتين:
+الأولى: عمرة التمتّع.
+الثانية: حج التمتّع.
+ويجب أن يأتي الحاج بالعمرة قبل الحج في نفس السنة.`
+    },
+    ihram: {
+        t: 'أحكام الإحرام',
+        x: `فإذا لبّى انعقد الإحرام ووجب عليه ترك مجموعة من الأمور وهي خمسة وعشرون كما يلي:
+
+` + HQB_HAJJ_TARK
+    },
+    umrah: [
+        { t: 'الإحرام : الواجب الأول', x: `والمقصود بالإحرام : هو ارتداء ثوبي الإحرام وهما الرداء والإزار بعد التجرد عما يجب المحرم اجتنابه.
+
+وهو أول عمل في الحج والعمرة ويجب أن يكون مصحوباً بالنية ومن ثم التلبية ويعد من أركان الحج والعمرة ويسمى من يقوم بهذا العمل مُحرِماً.
+
+ويجب عليه حال الإحرام الاجتناب عن أمور تسمى (تروك الإجرام).
+ويشترط في الإحرام أن يكون من أماكن معينة خصصتها الشريعة الإسلامية للإحرام منها، ويسمى كل منها ميقاتاً, وأهم تلك المواقيت هو ذو الحليفة، ويقع بالقرب من المدينة المنورة، وهو ميقات أهل المدينة المنورة وكل من أراد الحج أو العمرة من طريق المدينة المنورة، ويكون الإحرام من مسجد الشجرة وهو مسجد معروف هناك وعدم كفاية الإحرام من خارج المسجد المذكور لغير عذر .
+
+وتوجد مواقيت أخرى مثل:
+وادي العقيق، وهو ميقات أهل العراق ونجد، وكل من يمرّ عليه .
+الجحفة، وهي ميقات أهل الشام ومصر والمغرب، وكلّ من يمرّ عليها.
+يلملم، وهو ميقات أهل اليمن، وكل من يمرّ من ذلك الطريق.
+قرن المنازل، وهو ميقات أهل الطائف، وكل من يمرّ من ذلك الطريق.
+مكّة، وهي ميقات حجّ التمتّع.
+أدنى الحل- كالحديبية والجعرانة والتنعيم - وهو ميقات لكل عمرة مفردة لمن كان بمكة.
+
+ويستحب إضافة هذه الجملة:
+" إنّ الحمد والنعمة لك والملك، لا شريك لك "
+
+فإذا لبّى انعقد الإحرام ووجب عليه ترك مجموعة من الأمور وهي خمسة وعشرون كما يلي:
+` + HQB_HAJJ_TARK },
+        { t: 'الطواف : الواجب الثاني', x: `الطواف وهو الواجب الثاني من واجبات عمرة التمتع
+
+ويشترط به:
+1 - النية: حيث ينوي الطواف حول البيت ويقول: أطوف حول البيت سبعة أشواط لعمرة التمتع لحج التمتّع لحجة الإسلام قربة الى الله تعالى .
+ويكون عقد النية قبل الحجر الأسود ولو بقليل، ثم يبدأ بالطواف على أن تكون الكعبة المشرفة على يسار الطائف ولا يجوز له استقبالها ولا استدبارها .
+
+2 - الطهارة من الحدث والخبث .` },
+        { t: 'صلاة الطواف : الواجب الثالث', x: `صلاة الطواف :
+
+وهي الواجب الثالث من واجبات عمرة التمتع، وهي ركعتان يؤتى بهما بعد الطواف مباشرةً ، ويجب الإتيان بها قريباً من مقام إبراهيم (عليه السلام ).
+
+ونيتها أن يقول: أصلي ركعتي طواف عمرة التمتع لحج التمتع لحجة الإسلام لوجوبه قربة الى الله تعالى .` },
+        { t: 'السعي : الواجب الرابع', x: `السعي:
+أسعى بين الصفا والمروة سبعة أشواط لعمرة التمتّع لحجّ التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى .
+
+وهو الواجب الرابع من واجبات عمرة التمتّع.
+
+ويكون السعي بعد الطواف وصلاته، ويكون السعي سبعة أشواط يبتدئ الشوط الأول من الصفا وينتهي بالمروة، والشوط الثاني يبتدئ من المروة إلى الصفا وهكذا إلى أن يتم سبعة أشواط عند المروة .
+
+ويجب استقبال المروة عند الذهاب إليها، واستقبال الصفا عند الذهاب إليها .` },
+        { t: 'التقصير : الواجب الخامس', x: `التقصير :
+وهو الواجب الخامس من واجبات عمرة التمتّع .
+
+نيّته: أقصر للإحلال من إحرام عمرة التمتع لحج التمتع لحجة الإسلام لوجوبه قربة الى الله تعالى .
+
+ويتحقّق بقصّ شعر الرأس أو اللحية أو الشارب.
+
+وإذا قصّر المحرم في عمرة التمتّع حلّ له جميع ما كان يحرم عليه بالإحرام .` }
+    ],
+    hajj: [
+        { t: 'الإحرام : الواجب الأول', x: `الإحرام: نيته
+أُحرم لحجّ التمتّع حجة الإسلام لوجوبه قربة إلى الله تعالى. ويقول
+" لبّيك اللهم لبّيك، لبّيك لا شريك لك لبّيك "
+
+ويستحب إضافة :
+" إنّ الحمد والنعمة لك والملك، لا شريك لك "
+
+ويكون ميقات حج التمتّع من مكة المكرمة.
+والواجب هو الإحرام قبل زوال يوم التاسع من ذي الحجة الحرام، بحيث يتمكن من الوقوف الاختياري في عرفات .` },
+        { t: 'الوقوف بعرفات : الواجب الثاني', x: `ثانياً: الوقوف بعرفات:
+
+وهو الواجب الثاني من واجبات حجّ التمتّع ونيته:
+أقف بعرفات لحج التمتّع لحجة الإسلام قربة إلى الله تعالى.
+
+ويجب الوقوف بعرفات في اليوم التاسع من ذي الحجّة الحرام من أول الزوال إلى الغروب ويجوز تأخيره عن الزوال بمقدار الاتيان بالغسل وأداء صلاتي الظهر والعصر جمعاً.` },
+        { t: 'الوقوف بالمزدلفة: الواجب الثالث', x: `ثالثاً: الوقوف بالمزدلفة:
+
+وهو الواجب الثالث من واجبات حج التمتّع، ونيّته هي :
+أقف في المزدلفة لحج التمتّع لحجة الإسلام قربة إلى الله تعالى.
+
+ويجب الوقوف جزءاً من الليل ولا يجوز له النفر ( يعني الخروج) من مزدلفة إلا بعد طلوع الشمس من يوم العيد.` },
+        { t: 'رمي جمرة العقبة: الواجب الرابع', x: `الرابع: رمي جمرة العقبة.
+
+وهي الواجب الرابع من واجبات حجّ التمتّع ونيتها:
+أرمي جمرة العقبة بسبع حصيات لحج التمتّع لحجة الإسلام قربة إلى الله تعالى.
+
+ويكون الرمي في اليوم العاشر من ذي الحجة الحرام أثناء النهار .` },
+        { t: 'الذبح أو النحر في منى : الواجب الخامس', x: `الخامس: الذبح أو النحر في منى .
+
+وهو الخامس من واجبات حجّ التمتّع ونيّته:
+أذبح الهدي لحج التمتّع لحجة الإسلام قربة إلى الله تعالى.
+
+ويجب الإتيان بالهدي بعد الرمي من يوم العيد.
+ويكفي في الهدي أن يكون شاةً، ويشترط في الهدي أن يكون تام الأعضاء.
+تجوز الاستنابة في ذبح الهدي ولابد أن تكون النية من النائب .` },
+        { t: 'الحلق أو التقصير: الواجب السادس', x: `السادس: الحلق أو التقصير.
+
+الواجب السادس من واجبات حجّ التمتّع ونيّته:
+أحلّق أو أقصر للإحلال من إحرام حج التمتّع لحجة الإسلام قربة إلى الله تعالى.
+
+ويكون الحلق أو التقصير بعد الرمي وتحصيل الهدي والحلق أفضل من التقصير .` },
+        { t: 'طواف الحج: العمل السابع', x: `السابع: طواف الحج :
+
+ويشترط به:
+1 - النية: حيث ينوي الطواف حول البيت ويقول: أطوف حول البيت سبعة أشواط لحج التمتّع لحجة الإسلام قربة الى الله تعالى .
+ويكون عقد النية قبل الحجر الأسود ولو بقليل، ثم يبدأ بالطواف على أن تكون الكعبة المشرفة على يسار الطائف ولا يجوز له استقبالها ولا استدبارها .
+
+2 - الطهارة من الحدث والخبث .` },
+        { t: 'صلاة الطواف : الواجب الثامن', x: `صلاة الطواف :
+
+هي ركعتان يؤتى بهما بعد الطواف مباشرةً ، ويجب الإتيان بها قريباً من مقام إبراهيم (عليه السلام ).
+
+ونيتها أن يقول: أصلي ركعتي طواف عمرة التمتع لحج التمتع لحجة الإسلام لوجوبه قربة الى الله تعالى .` },
+        { t: 'السعي: العمل التاسع', x: `العمل التاسع: السعي .
+
+وهو الواجب التاسع من واجبات حجّ التمتّع ونيته:
+أسعى بين الصفا والمروة سبعة أشواط طواف حج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى .` },
+        { t: 'طواف النساء: العمل العاشر', x: `العاشر: طواف النساء .
+
+وهو الواجب العاشر من واجبات حجّ التمتّع ونيته:
+أطوف حول البيت سبعة أشواط طواف النساء لحج التمتّع لحجة الإسلام قربة إلى الله تعالى.
+ويكون عقد النية قبل الحجر الأسود ولو بقليل، ثم يبدأ بالطواف على أن تكون الكعبة المشرفة على يسار الطائف ولا يجوز له استقبالها ولا استدبارها .
+
+ويشترط به:
+1 - النية
+2 - الطهارة من الحدث والخبث .
+3- يجب طواف النساء على الرجال وعلى النساء .` },
+        { t: 'صلاة طواف النساء: الواجب الحادي عشر', x: `صلاة طواف النساء
+
+وهي الواجب الحادي عشر من واجبات حجّ التمتّع ونيتها:
+أصلي ركعتي طواف النساء لحجّ التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.
+
+وهي ركعتان يؤتى بهما بعد الطواف مباشرةً ، ويجب الإتيان بها قريباً من مقام إبراهيم (عليه السلام ).` },
+        { t: 'المبيت في منى: الواجب الثاني عشر', x: `المبيت في منى ليلة الحادي عشر والثاني عشر من شهر ذي الحجة الحرام.
+
+وهو الواجب الثاني عشر من واجبات حجّ التمتّع ونيته:
+أبيتُ في منى لحجة التمتّع لحجة الإسلام قربة إلى الله تعالى.
+
+ولا يشترط المبيت تمام الليل فإذا مكث فيها أول الليل إلى منتصفه جاز له الخروج بعده .
+وإذا خرج أول الليل منها وجب عليه الرجوع قبل منتصف الليل .` },
+        { t: 'رمي الجمار: الواجب الثالث عشر', x: `رمي الجمار
+
+وهو الواجب الثالث عشر من واجبات الحج: رمي الجمرات الثلاث: الأولى والوسطى وجمرة العقبة.
+ونيتها:
+أرمي الجمرة الأولى بسبع حصيات لحج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.
+
+ثم أرمي الجمرة الوسطى بسبع حصيات لحج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.
+ثم أرمي جمرة العقبة بسبع حصيات لحج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.` }
+    ]
+};
+
+// ===================== بوابة الحج =====================
+const HQB_HAJJ_SECS = {
+    umrah: { list: () => HQB_HAJJ.umrah, name: 'مناسك عمرة التمتع' },
+    hajj: { list: () => HQB_HAJJ.hajj, name: 'مناسك حجة التمتع' },
+    intro: { list: () => [HQB_HAJJ.intro], name: 'مقدمة عن الحج' },
+    ihram: { list: () => [HQB_HAJJ.ihram], name: 'أحكام الإحرام' }
+};
+let hqbHajjView = 'hub', hqbHajjSec = null, hqbHajjIdx = 0;
+const HQB_HAJJ_BANNER = `<svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+        <linearGradient id="hjSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B3A52"/><stop offset="1" stop-color="#0A151C"/></linearGradient>
+        <linearGradient id="hjFade" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#0A151C" stop-opacity=".85"/><stop offset=".55" stop-color="#0A151C" stop-opacity=".2"/><stop offset="1" stop-color="#0A151C" stop-opacity="0"/></linearGradient>
+    </defs>
+    <rect width="400" height="170" fill="url(#hjSky)"/>
+    <g fill="none" stroke="#D4A84F" stroke-opacity=".14" stroke-width="1.2">
+        ${Array.from({ length: 9 }, (_, i) => `<path d="M${i * 46 - 6} 170 V118 a20 20 0 0 1 40 0 V170"/>`).join('')}
+    </g>
+    <circle cx="300" cy="34" r="12" fill="#F3EBDD" fill-opacity=".9"/><circle cx="306" cy="30" r="11" fill="#1B3A52"/>
+    <g transform="translate(36 52)">
+        <polygon points="0,26 70,10 128,26 58,44" fill="#22333F"/>
+        <polygon points="0,26 58,44 58,116 0,100" fill="#0B1218"/>
+        <polygon points="58,44 128,26 128,98 58,116" fill="#121C24"/>
+        <polygon points="0,42 58,60 58,70 0,52" fill="#D4A84F"/>
+        <polygon points="58,60 128,42 128,52 58,70" fill="#B88A35"/>
+        <rect x="80" y="70" width="18" height="30" rx="2" transform="skewY(-14)" fill="#D4A84F" fill-opacity=".85"/>
+    </g>
+    <rect width="400" height="170" fill="url(#hjFade)"/>
+</svg>`;
+
+function openHajj() {
+    playClickSound();
+    hqbHajjView = 'hub';
+    const m = document.getElementById('hajj-modal');
+    if (m && m.parentElement !== document.body) document.body.appendChild(m);
+    hqbHajjRender();
+    openModal('hajj-modal');
+}
+function hqbHajjBack() {
+    playClickSound();
+    if (hqbHajjView !== 'hub') { hqbHajjView = 'hub'; hqbHajjRender(); return; }
+    closeModal('hajj-modal');
+    if (hqbSecTrail) openModal('app-sections-fullscreen-modal');
+}
+function hqbHajjOpen(sec, i) {
+    playClickSound();
+    hqbHajjSec = sec; hqbHajjIdx = i || 0; hqbHajjView = 'read';
+    hqbHajjRender();
+}
+function hqbHajjGo(d) {
+    const list = HQB_HAJJ_SECS[hqbHajjSec].list();
+    const n = hqbHajjIdx + d;
+    if (n < 0 || n >= list.length) return;
+    playClickSound();
+    hqbHajjIdx = n;
+    hqbHajjRender();
+}
+function hqbHajjFont(d) {
+    playClickSound();
+    let f = parseFloat(localStorage.getItem('hqb_hajj_fs') || '1');
+    f = Math.min(1.6, Math.max(.85, Math.round((f + d * .1) * 100) / 100));
+    try { localStorage.setItem('hqb_hajj_fs', String(f)); } catch (e) {}
+    const t = document.querySelector('#hj-body .hj-text');
+    if (t) t.style.setProperty('--hj-fs', f);
+}
+function hqbHajjRender() {
+    const body = document.getElementById('hj-body');
+    const ttl = document.getElementById('hj-title'), sub = document.getElementById('hj-sub');
+    const fs = document.getElementById('hj-fs');
+    if (!body) return;
+    fs.classList.toggle('hidden', hqbHajjView !== 'read');
+    if (hqbHajjView === 'hub') {
+        ttl.innerText = 'بوابة الحج'; sub.innerText = 'يعمل بدون إنترنت';
+        const row = (sec, ic, label, extra) => `<button class="dua-row" onclick="hqbHajjOpen('${sec}', 0)">
+            <span class="dua-row-ic"><i class="fa-solid ${ic}"></i></span>
+            <span class="dua-row-tx"><span>${label}</span>${extra ? `<small class="dua-row-sub">${extra}</small>` : ''}</span>
+            <i class="fa-solid fa-chevron-left dua-row-go"></i></button>`;
+        body.innerHTML = `<div class="hj-wrap">
+            <div class="hj-banner">${HQB_HAJJ_BANNER}<div class="tx"><b>بوابة الحج</b><small>أحكام الإحرام، مناسك الحج، مناسك العمرة</small></div></div>
+            <div class="dua-group">
+                ${row('intro', 'fa-lightbulb', 'مقدمة عن الحج')}
+                ${row('ihram', 'fa-file-lines', 'أحكام الإحرام', 'تروك الإحرام الخمسة والعشرون')}
+                ${row('umrah', 'fa-mosque', 'مناسك عمرة التمتع', `${hqbNum(HQB_HAJJ.umrah.length)} واجبات`)}
+                ${row('hajj', 'fa-kaaba', 'مناسك حجة التمتع', `${hqbNum(HQB_HAJJ.hajj.length)} واجباً`)}
+            </div>
+            <button class="hj-tawaf" onclick="hqbTawafOpen()">
+                <span class="ic"><i class="fa-solid fa-arrows-rotate"></i></span>
+                <span class="t"><b>عداد الطواف</b><small>اضغط على الزر عند إكمالك كل شوط</small></span>
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+        </div>`;
+        body.scrollTop = 0;
+        return;
+    }
+    if (hqbHajjView === 'tawaf') { hqbTawafRender(); return; }
+    const S = HQB_HAJJ_SECS[hqbHajjSec], list = S.list(), it = list[hqbHajjIdx], many = list.length > 1;
+    const next = list[hqbHajjIdx + 1];
+    ttl.innerText = it.t; sub.innerText = many ? S.name : '';
+    const f = parseFloat(localStorage.getItem('hqb_hajj_fs') || '1');
+    body.innerHTML = `<div class="hj-wrap" id="hj-scroll">
+            ${many ? `<span class="hj-badge"><i class="fa-solid fa-shoe-prints"></i>${S.name} • ${hqbNum(hqbHajjIdx + 1)} من ${hqbNum(list.length)}</span>` : '<div style="height:8px"></div>'}
+            <h2 class="hj-h">${escapeHTML(it.t)}</h2>
+            <div class="hj-text" data-noku style="--hj-fs:${f}">${escapeHTML(it.x)}</div>
+            ${next ? `<button class="hj-next" onclick="hqbHajjGo(1)"><span class="ar"><i class="fa-solid fa-chevron-left"></i></span><span><small>التالي</small><b>${escapeHTML(next.t)}</b></span></button>` : ''}
+        </div>
+        ${many ? `<div class="hj-pager">
+            <button onclick="hqbHajjGo(-1)" ${hqbHajjIdx === 0 ? 'disabled' : ''} aria-label="السابق"><i class="fa-solid fa-chevron-right"></i></button>
+            <span>${hqbNum(hqbHajjIdx + 1)} / ${hqbNum(list.length)}</span>
+            <button onclick="hqbHajjGo(1)" ${!next ? 'disabled' : ''} aria-label="التالي"><i class="fa-solid fa-chevron-left"></i></button>
+        </div>` : ''}`;
+    const sc = document.getElementById('hj-scroll'); if (sc) sc.scrollTop = 0;
+}
+
+// ===================== عداد الطواف =====================
+function hqbTawafGet() { const n = parseInt(localStorage.getItem('hqb_tawaf') || '-1', 10); return isNaN(n) ? -1 : n; }
+function hqbTawafSet(n) { try { localStorage.setItem('hqb_tawaf', String(n)); } catch (e) {} }
+function hqbTawafOpen() { playClickSound(); hqbHajjView = 'tawaf'; hqbHajjRender(); }
+function hqbTawafRender() {
+    const body = document.getElementById('hj-body');
+    document.getElementById('hj-title').innerText = 'عداد الطواف';
+    document.getElementById('hj-sub').innerText = 'سبعة أشواط';
+    const n = hqbTawafGet();
+    if (n < 0) {
+        body.innerHTML = `<div class="tw-box">
+            <div class="tw-ic"><i class="fa-solid fa-arrows-rotate"></i></div>
+            <h3>عداد الطواف</h3>
+            <p>اضغط على الزر عند إكمالك كل شوط</p>
+            <button class="tw-cta" onclick="hqbTawafStart()">ابدأ الطواف</button>
+        </div>`;
+        return;
+    }
+    if (n >= 7) {
+        body.innerHTML = `<div class="tw-box">
+            <div class="tw-ic"><i class="fa-solid fa-circle-check"></i></div>
+            <h3>تقبّل الله منكم صالح الأعمال</h3>
+            <p>لقد أكملتم أشواط الطواف السبعة</p>
+            <button class="tw-cta" onclick="hqbTawafStart()">مرة أخرى</button>
+        </div>`;
+        return;
+    }
+    const C = 2 * Math.PI * 46, off = C * (1 - n / 7);
+    body.innerHTML = `<div class="tw-box">
+        <div class="tw-num"><b>${hqbNum(n)}</b><span>/ ${hqbNum(7)}</span></div>
+        <p>اضغط على الزر عند إكمالك كل شوط</p>
+        <div class="tw-dots">${Array.from({ length: 7 }, (_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('')}</div>
+        <button class="tw-press" onclick="hqbTawafTap()" aria-label="اكتمل شوط">
+            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="var(--c-border)" stroke-width="5"/><circle cx="50" cy="50" r="46" fill="none" stroke="var(--c-accent)" stroke-width="5" stroke-linecap="round" stroke-dasharray="${C.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}" style="transition:stroke-dashoffset .35s"/></svg>
+            <span class="core"><i class="fa-solid fa-hand-pointer"></i><span>اضغط</span></span>
+        </button>
+        <button class="tw-reset" onclick="hqbTawafReset()" aria-label="إعادة"><i class="fa-solid fa-rotate-right"></i></button>
+    </div>`;
+}
+function hqbTawafStart() { playClickSound(); hqbTawafSet(0); hqbTawafRender(); }
+function hqbTawafTap() {
+    const n = Math.min(7, hqbTawafGet() + 1);
+    hqbTawafSet(n);
+    try { if (navigator.vibrate) navigator.vibrate(n >= 7 ? [60, 80, 60] : 40); } catch (e) {}
+    playClickSound();
+    hqbTawafRender();
+}
+async function hqbTawafReset() {
+    playClickSound();
+    if (hqbTawafGet() > 0) {
+        const ok = await hqbConfirm({ icon: 'fa-rotate-right', title: 'إعادة العداد', body: '<p>سيعود العدّ إلى الصفر.</p>', ok: 'إعادة', cancel: 'إلغاء' });
+        if (!ok) return;
+    }
+    hqbTawafSet(0); hqbTawafRender();
+}
+
+// ===================== عن التطبيق =====================
+const HQB_APP_VERSION = '1.0.0';
+const HQB_APP_UPDATED = '19/11/2026';
+function openAbout() {
+    playClickSound();
+    const m = document.getElementById('about-modal');
+    if (m && m.parentElement !== document.body) document.body.appendChild(m);
+    document.getElementById('ab-ver').innerText = HQB_APP_VERSION;
+    document.getElementById('ab-date').innerText = HQB_APP_UPDATED;
+    document.getElementById('ab-foot').innerText = `تطبيق حرم • © ${new Date().getFullYear()} Zainab Ali`;
+    openModal('about-modal');
+}
+
+// ===================== اتصل بنا =====================
+// ضعي رابط كل حساب بين علامتي الاقتباس، والحساب الفارغ لا يظهر في القائمة
+const HQB_CONTACT = {
+    email: 'zanb68950@gmail.com',
+    facebook: '',
+    instagram: 'https://www.instagram.com/t85ki',
+    x: '',
+    youtube: ''
+};
+const HQB_X_SVG = '<svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8.1-9.3L1 2h7l4.8 6.3L18.9 2Zm-1.2 18h1.9L7.1 4H5.1l12.6 16Z"/></svg>';
+function openContact() {
+    playClickSound();
+    const m = document.getElementById('contact-modal');
+    if (m && m.parentElement !== document.body) document.body.appendChild(m);
+    const C = HQB_CONTACT, rows = [];
+    const row = (href, cls, ic, label) => `<a class="hqb-bs-row" href="${href}" ${href.startsWith('mailto:') ? '' : 'target="_blank" rel="noopener"'} onclick="playClickSound()"><span class="ic ${cls}">${ic}</span><span>${label}</span></a>`;
+    if (C.email) rows.push(row('mailto:' + C.email, '', '<i class="fa-regular fa-envelope"></i>', 'البريد الإلكتروني'));
+    if (C.facebook) rows.push(row(C.facebook, 'fb', '<i class="fa-brands fa-facebook"></i>', 'الفيس بوك'));
+    if (C.instagram) rows.push(row(C.instagram, 'ig', '<i class="fa-brands fa-instagram"></i>', 'الإنستجرام'));
+    if (C.x) rows.push(row(C.x, 'x', HQB_X_SVG, 'إكس (تويتر)'));
+    if (C.youtube) rows.push(row(C.youtube, 'yt', '<i class="fa-brands fa-youtube"></i>', 'اليوتيوب'));
+    document.getElementById('contact-list').innerHTML = rows.join('');
+    openModal('contact-modal');
+}
+
+// ===================== تصحيح التاريخ الهجري =====================
+const HQB_HIJRI_ADJ_OPTS = [[0, 'تصحيح تلقائي'], [1, 'إضافة يوم'], [2, 'إضافة يومين'], [-1, 'إنقاص يوم'], [-2, 'إنقاص يومين']];
+function hqbHijriAdjLabel() { const v = hqbHijriAdj(); return (HQB_HIJRI_ADJ_OPTS.find(o => o[0] === v) || HQB_HIJRI_ADJ_OPTS[0])[1]; }
+function hqbHijriAdjSync() {
+    const el = document.getElementById('hijri-adj-val');
+    if (el) el.innerText = hqbHijriAdjLabel();
+}
+function openHijriAdj() {
+    playClickSound();
+    const m = document.getElementById('hijri-adj-modal');
+    if (m && m.parentElement !== document.body) document.body.appendChild(m);
+    hqbHijriAdjRender();
+    openModal('hijri-adj-modal');
+}
+function hqbHijriAdjRender() {
+    const v = hqbHijriAdj();
+    const h = getHijriDateFromGregorian(new Date());
+    document.getElementById('hijri-adj-today').innerText = `تاريخ اليوم: ${hqbNum(h.day)} ${HIJRI_MONTH_NAMES[h.month - 1] || ''} ${hqbNum(h.year)} هـ`;
+    document.getElementById('hijri-adj-list').innerHTML = HQB_HIJRI_ADJ_OPTS.map(([k, l]) =>
+        `<button class="hqb-bs-opt ${k === v ? 'on' : ''}" onclick="hqbHijriAdjSet(${k})"><span>${l}</span><span class="ck"><i class="fa-solid fa-check"></i></span></button>`).join('');
+}
+function hqbHijriAdjSet(k) {
+    playClickSound();
+    try { localStorage.setItem('hqb_hijri_adj', String(k)); } catch (e) {}
+    todayGregorian = new Date();
+    todayHijri = getHijriDateFromGregorian(todayGregorian);
+    hqbHijriAdjRender();
+    hqbHijriAdjSync();
+    try { hqbRenderToday(); } catch (e) {}
+    try { if (typeof hqbDeskRender === 'function') hqbDeskRender(); } catch (e) {}
+    const cal = document.getElementById('calendar-modal');
+    if (cal && !cal.classList.contains('hidden')) { try { initHijriCalendarModal(); } catch (e) {} }
+    setTimeout(() => closeModal('hijri-adj-modal'), 250);
+}
+hqbHijriAdjSync();
+</script>
 <script>
 
 const HQB_PLAY_URL = 'https://play.google.com/store/search?q=%D8%AD%D8%B1%D9%85&c=apps';
@@ -6835,7 +7441,8 @@ function rdPlayPause() {
     if (au.paused) {
         if (au.dataset.src !== rdCur.audio) { au.src = rdCur.audio; au.dataset.src = rdCur.audio; }
         try { const qa = document.getElementById('quran-audio-element'); if (qa && !qa.paused) stopQuranAudio(); } catch (e) {}
-        au.play().catch(() => showToast('تعذر تشغيل الصوت، تأكد من الإنترنت'));} else au.pause();
+        au.play().catch(() => showToast('تعذر تشغيل الصوت، تأكد من الإنترنت'));
+    } else au.pause();
 }
 function rdSeek(v) { const au = document.getElementById('rd-audio'); if (au.duration) au.currentTime = v / 1000 * au.duration; }
 function rdStopAudio() { const au = document.getElementById('rd-audio'); if (au) { au.pause(); au.removeAttribute('src'); au.dataset.src = ''; try { au.load(); } catch (e) {} } }
@@ -7467,6 +8074,7 @@ function hqbDeskGo(a) {
         fatiha: () => { openModal('fatiha-modal'); loadFatihaLocalList(); },
         assistant: () => openAssistant(),
         wallpapers: () => openWallpapers(),
+        hajj: () => openHajj(),
         sections: () => openModal('app-sections-fullscreen-modal'),
         settings: () => openModal('settings-modal'),
         search: () => openHqbSearch(),
@@ -7562,7 +8170,8 @@ function hqbDeskSync() {
     if (on) {
         hqbDeskRender();
         const slot = document.getElementById('dk-tasbih-slot');
-        if (tb && slot && tb.parentElement !== slot) slot.appendChild(tb);} else if (tb) {
+        if (tb && slot && tb.parentElement !== slot) slot.appendChild(tb);
+    } else if (tb) {
         const main = document.getElementById('hqb-main');
         if (main && tb.parentElement !== main) main.appendChild(tb);
     }
@@ -8051,7 +8660,8 @@ const HQB_SHRINES = [
         '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
-        '+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
+        '+yLts1YZSwUykAOJUHAv1l4+Zgowc+IOMVvXizxb7ETGl953aVhwbFbTkAj+dZ2xcoOKLQaUk2UVdNJW7UUpmZMfkIW20G0hG0DGSc8R511dE2aNoS7fGEGZMkIcHdOtuKSUqR5YHMVZCuz6zOYyZfDh/Tf6UHs9sysetMGPB7/AErmQwroSUotbPbLKhKPCyRxJbM6OiRHcDjaxkKFMVGcZWpcYpwo5U0r5pPiD0P4VFZtnuGj2TNsC3pMdAy/DeVvJH9pJ558RTrf2m2uQhIltOx1nHFPrp/CulzoxepvTPHwN9Y9STKfStKm34zwChhSS3vSR4cMilEhCAlDTDysDASlopAHvwBXMb1zp1wZF0ZSfBQI/lWzB1Jb7qpxFtcVMU2Bu7tOAnPLJ' +
+        'OBV1OL9GVcWvVGyWHZPGTtQ1z7pJzu/aPh5D8aGT6S8ZGP0YGxrzHVXvwMeQ86Cy7J/3kpS3/coOQf2j19nL21sVYgWuHqG8PtBVusk6zi/bEvMw57pSHkZwfmncBwI3AHB5itu73hm1rhMKS45InSExmW2wCrJBKlcf1UpClHyHmKhN6bterY9wa1ZEgORdPJU47eY4KFR5IJVhnOSChGwq5gqVtweIoCQaY1ibu58W3qELJfkbiu2uu7ytI/XaXgB1HmnOOuKklVzqV2e3amYmqIsGdDC0Lj3h1pbTbeSOL2z14zgHJxHqZ57M4rstu3/AEshLm6RqeykBSXEYVPYSRwOBwkJ8xhf7dAS2itW2XWDeoLc63SW5MZ0eq4g/aCOYIPAg8QeBraoA' +
         'pDS0hNAFGaKBQGhYLoi9WO33Nsgplxm3xj6yQT+Nb9Vr8H6+i79ncaKpQLtseXEUOu3O9H/AGqx7qsqoT2tkIKWkpRUknM1NZjqLT1xs4mOwvTo64/pDQBW2FDGQDwP+tQ2QXfQrtNc11cmmbM243KmQoURttgtJypB3IUpRHgOGeFWDIjtS2HGH0b2nElKk5xke0cvbUU1BCXbLBNiXVtV6sclBYl4RiUhpeElR2jDuAck4CsDPrEcQOXpzUOp06fs6b7Bfuc6ba5E1cmAhCJLfrI7tAR8wLKFgk5A3JwAa6Em23V/vrazdoGpGEcHYV5iJIT9VTzSdoV5KQTUPi3y69lTNgbOo2NR6IkyfRETHIqnH4DYQSgFxokLHAJBKf4VJNPMwZNuto0Df' +
         'HPi5ibIS+p9a3mnVLQsqHr4UspcIVhJAyDk0BoKUnTTvdhd70eTxABFxth4+HEtjgf7ocKlFr1Deyhlb8CFeYbqtqbjZZCVI54yptasgeO1a6i9vfh3yZP1XKXcSLNc/QEiKpS2p7jYbbLobwe7T3uR6p5JOSRmt+6wbI5qSXCZs93tt1SmO4ZdmUG1SEOqKS4pIO1aUKSQreknwBoCfMvtSWkusuJcbVyWk5B9hrJVYjUj9okan1ChstacsFv9BtUVs4RKebUoOKShP/yBDQIHQ451KomsIsW2vOXh5tmRb4cd6eUpIShbic4SPAngOPl40BI6qrtN7P5LIe1Bp1tanB68mG2PnjqtA8fFPXmOPOyod0jTbfEnIUttqWhC2g6goWd4yAUniD5U2' +
         'Le7fNmCJGkpfdLAkgtgqQWyopBCwNp4g8M564rK6mNseGReuxwe0UNoSFcdbSxHhnDDYBkSSPVZHh5qPQfyq+rRaYlkgtwobextHEk8VLPVRPUmuHI1NpvTlqYetirduuu+RBjtOoY9PcOCSkqwMncMk10L3qmFYW2UPoefnyB/s9vjJ7yQ+eoSkdB1UcJHUisMTDjQunV9zW/Idr7I7FcB3WFvTq5nTTUqCuUW1qfbU/h5tW0KQkIxx3J3HmMBPWozebhfr9cLvpN1T1nufozV2s09g5Qgpxlp0jgSlwEK6KQv7WuavXqCz2S1T2XIci9triyZ0dpWIkpJ2LZxg7F8HE5KhtOCNw4j2HnMki8vTpS7/C2uS5zirRp5CxlO3OXZRH9klBUT1Q0n+' +
@@ -8160,7 +8770,8 @@ const HQB_SHRINES = [
         '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
-        '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
+        'SiSSdgDGnsas+HyllnIJSgBCUSZEc/Wq/hiQ18pMIEEqgH71NWb6FKCTcBapjQyD10ry1sns7iRcMJUkNtykpgkiETIPLU8qtNhcJhJkAaRJSKotgpL6glKlZULAMJiDG1WC1UhEeFQCQIywIrFJ6Yucdlzt7pKtlDy0VT9q5AEyI9aqNm9lBUpZgcpFSzL5yGFZxm2021rVRlSre4mC6hErcXiQYCh9edRNxiaVKUMwgakydK4Xt0tCoCxJOk1EfF5y4SpIG2qiRMCpvy5WPbYynGSW2dr29zBWVa0SZJTmOUztUBiWLKUU+MBSeSVKBiRqa6v3aAp0lSZPmsxNQFzcpL7o7xDhjdKzWZPbNkYa8ERi+JPLuFOEEDzCz4T561W7xGclxeUyPlmT' +
+        'M6n0qTxVMqUpDhI3V45Ch5etRjwUthD8TmzBIkSkDz+laYcDNFdxIOFxaEFHdhAhJGs86gSYzeLMAeflVmfQ4Xc6lIzZc0QNtqirrQZyEjNI85FbIMVJEFdO52shMhOg6CkMO904lQzacqeLaQuQUCDO/OmIZOpAggcvKtVUzNYj0P2d44ca4cZ71UvW34Sp3IGxqz1kPYziihi13YuKUe9Zzp0/ZNa9Ir02NY51pnAyIdtjQKE0VCtAkOar/EHGdjw7eItLkjOtsOb8iSP4VP1537UMUGMca36kuHu7Yi1RB08Ag//ACzVWT0gSJrsSx0WXEL+FOKhu/alAP8A6iJI+qSr6VuEivJ2HYi/hWIW1/bKyv2ziXUHqDMfwr1LhGKW+N4Xa4lamWbpo' +
         'Op6TuPUGR7VWt8aLSQ8mTvXRJ0rltSwaYVGXEK0owS7zJBBSEkHqoVlF3cZ31ZSSRISD9a1LidQGBXR3+X/AKhWNG4DN0ovKAb7z5j4Y0515zrH4i/Q73Svw3+pP2l02GENqStQTvp086e2brKFhCMqCFeHx8vaqi5iABIGWFmQMpVpGv2pzb4slspnOnKRJUEpA+vKuBKDfKOuaDYXjTTOZxbKMyydJM1OWuJoW4tptaQpCAVDIdRWa2HFOHKuFh++t2hmlIVcpITpyAqYsOM7PvVJD7KgUmFNpccO36Ums06ZfYGky/jFG221qS44rKmQA19af2eMBba3AxcSmcsM6k6nzqijiGycaGRrEHArfJZXKhz1HgqQtcYYSpSG8Nxh1pfhGXC7oncn9' +
         'kVR1z1wmKkolmu8VS4AoW1w35hTeUjXf71DuXa2yqHsoUoAgR5b0yvsXU42oDA8ecypyA/1U+NNNDJqI+MfOfNw5jZIXKQcNWMo6yd96tGqXtFoduuGSKrt5xK5uEykzBUmSKiXMwLhTcKUoiPCQM1MHLx5wrCMExZKgVBR+A6H9VNRiJaWsO4ZiKEhEAfBqGv1pnY0MWhN6+FNlKs5yJMTG9RS3XWmUJUpS8s5iEcztXG/xFhx0k2t0khBMLtlDWd6aP4rZ5UtqK0ykaKbWkiBTYxa9A9HUPqA7xRAcEoICSJqJvX3FuhtKUK1giY1Jok4pZFa4uJUPFqpQM+4ri8+wXkONXQJI2KwcpnrzrQtp+BbW0Hidk7a5SAsjbaZI+aPf99RF0gtOKlKk' +
         'JjYjUVI3WIuqbLAdW4ATBIB3Mn9wqIu7pRcWpxUqKtdwImtNfAia2XTsouVI4vtWTOoKY6FKvptW81517MFlztAwuJAKlHz0yKr0UK9J0/8I4Gd+IChQoVuMZHcQ4w3w/gd9ijhEWzKlpB/MrZI91EV5bcfW64txxRU4tRUpR5kmSfrWs9uvEwQ1Z8OsL8SyLq5AOwGiEn3k+wrHc9Jse3ovFcHSa1vsP4syKe4aunNFEv2hJ5/nR/9h/irJTtXazvH8Pu2by1dU0+wsONrG6VAyDSoy09jHHZ60mjqB4O4pt+L8CZxFnKh35LhoH/dODceh3HQ1PTWtPYgYcRMXF1gd61atB59TctoKsoUQQYn2rFl4bcKdJvH0M5vEUtJAjpJnWt2eMsODMUyh' +
@@ -8474,7 +9085,9 @@ const HQB_FULL_DUAS = [
 
 يا سَيِّدِي يا مَنْ عَلَيْهِ مُعَوَّلِي، يا مَنْ إِلَيْهِ شَكَوْتُ أَحْوالِي، يا رَبِّ يا رَبِّ يا رَبِّ، قَوِّ عَلى خِدْمَتِكَ جَوارِحِي، وَاشْدُدْ عَلَى الْعَزِيمَةِ جَوانِحِي، وَهَبْ لِيَ الْجِدَّ فِي خَشْيَتِكَ، وَالدَّوامَ فِي الْاِتِّصالِ بِخِدْمَتِكَ، حَتّى أَسْرَحَ إِلَيْكَ فِي مَيادِينِ السّابِقِينَ، وَأُسْرِعَ إِلَيْكَ فِي الْبارِزِينَ، وَأَشْتاقَ إِلى قُرْبِكَ فِي الْمُشْتاقِينَ، وَأَدْنُوَ مِنْكَ دُنُوَّ الْمُخْلِصِينَ، وَأَخافَكَ مَخافَةَ الْمُوقِنِينَ، وَأَجْتَمِعَ فِي جِوارِكَ مَعَ الْمُؤْمِنِينَ.
 
-اللّهُمَّ وَمَنْ أَرادَنِي بِسُوءٍ فَأَرِدْهُ، وَمَنْ كادَنِي فَكِدْهُ، وَاجْعَلْنِي مِنْ أَحْسَنِ عَبِيدِكَ نَصِيباً عِنْدَكَ، وَأَقْرَبِهِمْ مَنْزِلَةً مِنْكَ، وَأَخَصِّهِمْ زُلْفَةً لَدَيْكَ، فَإِنَّهُ لا يُنالُ ذلِكَ إِلّا بِفَضْلِكَ، وَجُدْ لِي بِجُودِكَ، وَاعْطِفْ عَلَيَّ بِمَجْدِكَ، وَاحْفَظْنِي بِرَحْمَتِكَ، وَاجْعَلْ لِسانِي بِذِكْرِكَ لَهِجاً، وَقَلْبِي بِحُبِّكَ مُتَيَّماً، وَمُنَّ عَلَيَّ بِحُسْنِ إِجابَتِكَ، وَأَقِلْنِي عَثْرَتِي، وَاغْفِرْ زَلَّتِي، فَإِنَّكَ قَضَيْتَ عَلى عِبادِكَ بِعِبادَتِكَ، وَأَمَرْتَهُمْ بِدُعائِكَ، وَضَمِنْتَ لَهُمُ الْإِجابَةَ، فَإِلَيْكَ يا رَبِّ نَصَبْتُ وَجْهِي، وَإِلَيْكَ يا رَبِّ مَدَدْتُ يَدِي، فَبِعِزَّتِكَ اسْتَجِبْ لِي دُعائِي، وَبَلِّغْنِي مُنايَ، وَلا تَقْطَعْ مِنْ فَضْلِكَ رَجائِي، وَاكْفِنِي شَرَّ الْجِنِّ وَالْإِنْسِ مِنْ أَعْدائِي.يا سَرِيعَ الرِّضا، اغْفِرْ لِمَنْ لا يَمْلِكُ إِلَّا الدُّعاءَ، فَإِنَّكَ فَعّالٌ لِما تَشاءُ، يا مَنِ اسْمُهُ دَواءٌ، وَذِكْرُهُ شِفاءٌ، وَطاعَتُهُ غِنىً، ارْحَمْ مَنْ رَأْسُ مالِهِ الرَّجاءُ، وَسِلاحُهُ الْبُكاءُ، يا سابِغَ النِّعَمِ، يا دافِعَ النِّقَمِ، يا نُورَ الْمُسْتَوْحِشِينَ فِي الظُّلَمِ، يا عالِماً لا يُعَلَّمُ، صَلِّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَافْعَلْ بِي ما أَنْتَ أَهْلُهُ، وَصَلَّى اللهُ عَلى رَسُولِهِ وَالْأَئِمَّةِ الْمَيامِينِ مِنْ آلِهِ، وَسَلَّمَ تَسْلِيماً كَثِيراً.`
+اللّهُمَّ وَمَنْ أَرادَنِي بِسُوءٍ فَأَرِدْهُ، وَمَنْ كادَنِي فَكِدْهُ، وَاجْعَلْنِي مِنْ أَحْسَنِ عَبِيدِكَ نَصِيباً عِنْدَكَ، وَأَقْرَبِهِمْ مَنْزِلَةً مِنْكَ، وَأَخَصِّهِمْ زُلْفَةً لَدَيْكَ، فَإِنَّهُ لا يُنالُ ذلِكَ إِلّا بِفَضْلِكَ، وَجُدْ لِي بِجُودِكَ، وَاعْطِفْ عَلَيَّ بِمَجْدِكَ، وَاحْفَظْنِي بِرَحْمَتِكَ، وَاجْعَلْ لِسانِي بِذِكْرِكَ لَهِجاً، وَقَلْبِي بِحُبِّكَ مُتَيَّماً، وَمُنَّ عَلَيَّ بِحُسْنِ إِجابَتِكَ، وَأَقِلْنِي عَثْرَتِي، وَاغْفِرْ زَلَّتِي، فَإِنَّكَ قَضَيْتَ عَلى عِبادِكَ بِعِبادَتِكَ، وَأَمَرْتَهُمْ بِدُعائِكَ، وَضَمِنْتَ لَهُمُ الْإِجابَةَ، فَإِلَيْكَ يا رَبِّ نَصَبْتُ وَجْهِي، وَإِلَيْكَ يا رَبِّ مَدَدْتُ يَدِي، فَبِعِزَّتِكَ اسْتَجِبْ لِي دُعائِي، وَبَلِّغْنِي مُنايَ، وَلا تَقْطَعْ مِنْ فَضْلِكَ رَجائِي، وَاكْفِنِي شَرَّ الْجِنِّ وَالْإِنْسِ مِنْ أَعْدائِي.
+
+يا سَرِيعَ الرِّضا، اغْفِرْ لِمَنْ لا يَمْلِكُ إِلَّا الدُّعاءَ، فَإِنَّكَ فَعّالٌ لِما تَشاءُ، يا مَنِ اسْمُهُ دَواءٌ، وَذِكْرُهُ شِفاءٌ، وَطاعَتُهُ غِنىً، ارْحَمْ مَنْ رَأْسُ مالِهِ الرَّجاءُ، وَسِلاحُهُ الْبُكاءُ، يا سابِغَ النِّعَمِ، يا دافِعَ النِّقَمِ، يا نُورَ الْمُسْتَوْحِشِينَ فِي الظُّلَمِ، يا عالِماً لا يُعَلَّمُ، صَلِّ عَلى مُحَمَّدٍ وَآلِ مُحَمَّدٍ، وَافْعَلْ بِي ما أَنْتَ أَهْلُهُ، وَصَلَّى اللهُ عَلى رَسُولِهِ وَالْأَئِمَّةِ الْمَيامِينِ مِنْ آلِهِ، وَسَلَّمَ تَسْلِيماً كَثِيراً.`
 },
 {
     id: 'd-tawassul', key: 'التوسل',
@@ -9199,7 +9812,8 @@ function qdGreatCircle(lat1, lon1, lat2, lon2, n) {
     const out = [];
     for (let i = 0; i <= n; i++) {
         const t = i / n, A = Math.sin((1 - t) * d) / Math.sin(d), B = Math.sin(t * d) / Math.sin(d);
-        const x = A * Math.cos(p1) * Math.cos(l1) + B * Math.cos(p2) * Math.cos(l2);const y = A * Math.cos(p1) * Math.sin(l1) + B * Math.cos(p2) * Math.sin(l2);
+        const x = A * Math.cos(p1) * Math.cos(l1) + B * Math.cos(p2) * Math.cos(l2);
+        const y = A * Math.cos(p1) * Math.sin(l1) + B * Math.cos(p2) * Math.sin(l2);
         const z = A * Math.sin(p1) + B * Math.sin(p2);
         out.push([Math.atan2(z, Math.sqrt(x * x + y * y)) / R, Math.atan2(y, x) / R]);
     }
@@ -9997,7 +10611,8 @@ const HQB_KU_RULES = [
     [/^ختمتي ج(.+)$/, m => 'خەتمەکەم ج' + m[1]],
     [/^هذه ختمتك رقم (.+) • تقبّل الله منك$/, m => 'ئەمە خەتمەی ژمارە ' + m[1] + 'ـتە • خودا لێت قبووڵ بکات'],
     [/^شهر رمضان (.+) هـ$/, m => 'مانگی ڕەمەزان ' + m[1] + ' ک'],
-    [/^تم اعتماد مواقيت (.+)$/, m => 'کاتەکانی ' + hqbKuParts(m[1]) + ' پەسەند کران'],[/^تم اعتماد مواقيت \((.+)\)$/, m => 'کاتەکانی (' + hqbKuParts(m[1]) + ') نوێ کرانەوە'],
+    [/^تم اعتماد مواقيت (.+)$/, m => 'کاتەکانی ' + hqbKuParts(m[1]) + ' پەسەند کران'],
+    [/^تم اعتماد مواقيت \((.+)\)$/, m => 'کاتەکانی (' + hqbKuParts(m[1]) + ') نوێ کرانەوە'],
     [/^جاري الحفظ\.\.\. (.+)$/, m => 'پاشەکەوت دەکرێت... ' + m[1]],
     [/^جاري ضبط أوقات الصلاة لـ \((.+)\)\.\.\.$/, m => 'ڕێکخستنی کاتەکانی نوێژ بۆ (' + hqbKuParts(m[1]) + ')...'],
     [/^المساجد المكتشفة \((.+)\)$/, m => 'مزگەوتە دۆزراوەکان (' + m[1] + ')'],
