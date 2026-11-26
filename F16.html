@@ -1,13 +1,19 @@
 extends Node3D
 
-var speed := 20.0
-var turn_speed := 1.5
+var speed := 25.0
+var pitch_speed := 1.2
+var roll_speed := 2.0
+var yaw_speed := 0.8
 
 func _process(delta):
+	# الطيران للأمام
 	translate(Vector3(0, 0, -speed * delta))
 
-	var dir := Input.get_axis("ui_left", "ui_right")
-	rotate_y(-dir * turn_speed * delta)
+	# فوق وتحت (سهم فوق = ترتفع المقدمة)
+	var pitch := Input.get_axis("ui_up", "ui_down")
+	rotate_object_local(Vector3.RIGHT, pitch * pitch_speed * delta)
 
-	var pitch := Input.get_axis("ui_down", "ui_up")
-	rotate_object_local(Vector3.RIGHT, pitch * turn_speed * delta)
+	# يمين ويسار: ميلان الطائرة مع انعطاف
+	var roll := Input.get_axis("ui_left", "ui_right")
+	rotate_object_local(Vector3.FORWARD, roll * roll_speed * delta)
+	rotate_y(-roll * yaw_speed * delta)
