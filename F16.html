@@ -4,13 +4,10 @@ var speed := 20.0
 var turn_speed := 1.5
 
 func _process(delta):
-	# الأمام تلقائياً (الطيران)
 	translate(Vector3(0, 0, -speed * delta))
 
-	# يمين / يسار
 	var dir := Input.get_axis("ui_left", "ui_right")
 	rotate_y(-dir * turn_speed * delta)
 
-	# أعلى / أسفل
 	var pitch := Input.get_axis("ui_down", "ui_up")
 	rotate_object_local(Vector3.RIGHT, pitch * turn_speed * delta)
