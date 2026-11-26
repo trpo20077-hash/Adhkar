@@ -6,15 +6,12 @@ var roll_speed := 2.0
 var turn_speed := 0.9
 
 func _physics_process(delta):
-	# فوق وتحت
 	var pitch := Input.get_axis("ui_down", "ui_up")
 	rotate_object_local(Vector3.RIGHT, pitch * pitch_speed * delta)
 
-	# يمين ويسار: ميلان مع انعطاف
 	var roll := Input.get_axis("ui_right", "ui_left")
 	rotate_object_local(Vector3.FORWARD, roll * roll_speed * delta)
 	rotate_y(roll * turn_speed * delta)
 
-	# الطيران للأمام حسب اتجاه أنف الطائرة
 	velocity = global_transform.basis.z * speed
 	move_and_slide()
