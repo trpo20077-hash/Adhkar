@@ -7,13 +7,13 @@ var yaw_speed := 0.8
 
 func _process(delta):
 	# الطيران للأمام
-	translate(Vector3(0, 0, -speed * delta))
+	translate(Vector3(0, 0, speed * delta))
 
-	# فوق وتحت (سهم فوق = ترتفع المقدمة)
+	# فوق وتحت
 	var pitch := Input.get_axis("ui_up", "ui_down")
 	rotate_object_local(Vector3.RIGHT, pitch * pitch_speed * delta)
 
-	# يمين ويسار: ميلان الطائرة مع انعطاف
+	# يمين ويسار
 	var roll := Input.get_axis("ui_left", "ui_right")
 	rotate_object_local(Vector3.FORWARD, roll * roll_speed * delta)
 	rotate_y(-roll * yaw_speed * delta)
