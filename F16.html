@@ -1,49 +1,16 @@
-extends Camera3D
+extends Node3D
 
-@export var forward_speed: float = 40.0
-@export var pitch_speed: float = 1.8
-@export var roll_speed: float = 2.4
-@export var yaw_speed: float = 1.2
-@export var boost_multiplier: float = 1.8
+var speed := 20.0
+var turn_speed := 1.5
 
-@onready var aircraft: Node3D = get_parent() as Node3D
+func _process(delta):
+	# الأمام تلقائياً (الطيران)
+	translate(Vector3(0, 0, -speed * delta))
 
-func _ready() -> void:
-	current = true
-	if aircraft == null:
-		aircraft = self
+	# يمين / يسار
+	var dir := Input.get_axis("ui_left", "ui_right")
+	rotate_y(-dir * turn_speed * delta)
 
-func _process(delta: float) -> void:
-	if aircraft == null:
-		return
-
-	var current_speed := forward_speed
-	if Input.is_key_pressed(KEY_SHIFT):
-		current_speed *= boost_multiplier
-
-	# طيران مستمر للأمام حسب اتجاه الطائرة (-Z هو الأمام في Godot)
-	aircraft.translate_object_local(Vector3(0.0, 0.0, -current_speed * delta))
-
-	# رفع وخفض مقدمة الطائرة (Pitch) بأسهم أعلى/أسفل أو W/S
-	var pitch_input := 0.0
-	if Input.is_key_pressed(KEY_UP) or Input.is_key_pressed(KEY_W):
-		pitch_input += 1.0
-	if Input.is_key_pressed(KEY_DOWN) or Input.is_key_pressed(KEY_S):
-		pitch_input -= 1.0
-	aircraft.rotate_object_local(Vector3.RIGHT, pitch_input * pitch_speed * delta)
-
-	# ميلان الأجنحة (Roll) بأسهم يمين/يسار أو A/D
-	var roll_input := 0.0
-	if Input.is_key_pressed(KEY_LEFT) or Input.is_key_pressed(KEY_A):
-		roll_input += 1.0
-	if Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_D):
-		roll_input -= 1.0
-	aircraft.rotate_object_local(Vector3.BACK, roll_input * roll_speed * delta)
-
-	# انعطاف أفقي خفيف (Yaw) بمفتاحي Q و E
-	var yaw_input := 0.0
-	if Input.is_key_pressed(KEY_Q):
-		yaw_input += 1.0
-	if Input.is_key_pressed(KEY_E):
-		yaw_input -= 1.0
-	aircraft.rotate_object_local(Vector3.UP, yaw_input * yaw_speed * delta)
+	# أعلى / أسفل
+	var pitch := Input.get_axis("ui_down", "ui_up")
+	rotate_object_local(Vector3.RIGHT, pitch * turn_speed * delta)
