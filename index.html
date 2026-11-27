@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- حماية: يمنع تضمين التطبيق في موقع تصيّد (clickjacking)، ويمنع إرسال النماذج أو تغيير الروابط الأساسية لمواقع غريبة، ويرفع أي رابط http إلى https -->
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="theme-color" content="#0F202B" id="meta-theme-color">
 <!-- يمنع المتصفح من قلب الألوان إجبارياً (الوضع الداكن الإجباري في بعض الهواتف والأجهزة اللوحية) -->
 <meta name="color-scheme" content="dark" id="meta-color-scheme">
@@ -137,7 +141,7 @@ html[dir="ltr"] .swipe-handle i { transform: scaleX(-1); }
 .swipe-hint { animation: swipe-hint 1.6s ease-in-out infinite; }
 
 .prayer-theme { background: linear-gradient(180deg, #16293A 0%, #0F202B 38%, #0A151C 100%); }
-.prayer-sky { position: absolute; top: 0; left: 0; right: 0; height: 200px; overflow: hidden; pointer-events: none; }
+.prayer-sky { position: absolute; top: 58px; left: 0; right: 0; height: 200px; overflow: hidden; pointer-events: none; }
 .prayer-sky .stars {
     position: absolute; inset: 0; opacity: 0.85; background-size: 200px 140px;
     background-image:
@@ -596,7 +600,8 @@ html[lang="ckb"] .ku-t.whitespace-nowrap { white-space: normal; }
 .wpv-slide img.ok { opacity: 1; }
 .wpv-spin { position: absolute; color: rgba(255,255,255,.6); font-size: 22px; }
 .wpv-slide.ok .wpv-spin, .wpv-slide.err .wpv-spin { display: none; }
-.wpv-top, .wpv-bottom { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px; pointer-events: none; }.wpv-top { top: 0; padding-top: calc(12px + env(safe-area-inset-top)); background: linear-gradient(rgba(0,0,0,.55), transparent); }
+.wpv-top, .wpv-bottom { position: absolute; left: 0; right: 0; display: flex; align-items: center; gap: 8px; padding: 12px 14px; pointer-events: none; }
+.wpv-top { top: 0; padding-top: calc(12px + env(safe-area-inset-top)); background: linear-gradient(rgba(0,0,0,.55), transparent); }
 .wpv-bottom { bottom: 0; padding-bottom: calc(16px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, rgba(0,0,0,.6)); }
 .wpv-top > *, .wpv-bottom > * { pointer-events: auto; }
 .wpv-btn { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,.42); color: #fff; font-size: 16px; flex-shrink: 0; backdrop-filter: blur(6px); }
@@ -1139,7 +1144,8 @@ html.theme-day .arb-entry { background: linear-gradient(135deg, rgba(148,101,18,
 .rd-fav.on { color: #D4A84F; }
 body:has(#search-modal:not(.hidden)) #back-to-sections-btn { display: none !important; }
 html.theme-day .srch-top { border-color: rgba(21,49,74,.1); }
-html.theme-day .srch-x, html.theme-day .srch-row { background: #FFFFFF; color: #15314A; box-shadow: 0 1px 3px rgba(21,49,74,.1); }html.theme-day .srch-field { background: #FFFFFF; }
+html.theme-day .srch-x, html.theme-day .srch-row { background: #FFFFFF; color: #15314A; box-shadow: 0 1px 3px rgba(21,49,74,.1); }
+html.theme-day .srch-field { background: #FFFFFF; }
 html.theme-day .srch-field input, html.theme-day .srch-tx b, html.theme-day .srch-empty p { color: #15314A; }
 html.theme-day .srch-tx small, html.theme-day .srch-go, html.theme-day .srch-empty small { color: #4A6680; }
 html.theme-day .srch-ic { background: #EEF3F7; color: #946512; }
@@ -1209,6 +1215,21 @@ html.theme-day .ai-bubble .ai-h, html.theme-day .ai-bubble .ai-li span:first-chi
 #hqb-tasbih #dhikr-arabic { font-size: clamp(18px, 2.9vh, 27px); min-height: clamp(44px, 7vh, 84px); }
 #hqb-tasbih #counter-btn { width: clamp(96px, 16vh, 172px); height: clamp(96px, 16vh, 172px); }
 #hqb-tasbih #counter-value { font-size: clamp(26px, 4.4vh, 44px); }
+/* سطر المناسبة (ليلة الجمعة، ليلة الأربعاء...) مدمج في سطر واحد حتى تبقى الرئيسية بطول الشاشة */
+.hqb-occ { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 10px; }
+.hqb-occ-t { min-width: 0; font-size: 11px; font-weight: 900; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.hqb-occ-a { display: flex; gap: 6px; flex-shrink: 0; }
+body.hqb-has-occ #hqb-tasbih #counter-btn { width: clamp(90px, 13.5vh, 156px); height: clamp(90px, 13.5vh, 156px); }
+body.hqb-has-occ #hqb-tasbih #dhikr-arabic { min-height: clamp(38px, 5.5vh, 72px); }
+/* ضبط تلقائي: إذا صارت الرئيسية أطول من الشاشة تُصغَّر على مرحلتين حتى تتّسع بلا تمرير */
+body.hqb-fit1 #hqb-main { gap: 6px; margin-top: 4px; }
+body.hqb-fit1 #hqb-tasbih { padding-top: 8px; padding-bottom: 8px; }
+body.hqb-fit1 #hqb-tasbih #counter-btn { width: clamp(80px, 12vh, 140px); height: clamp(80px, 12vh, 140px); }
+body.hqb-fit1 #hqb-tasbih #dhikr-arabic { min-height: clamp(32px, 4.5vh, 60px); font-size: clamp(17px, 2.6vh, 24px); }
+body.hqb-fit2 #hqb-tasbih #counter-btn { width: clamp(70px, 10vh, 118px); height: clamp(70px, 10vh, 118px); }
+body.hqb-fit2 #hqb-tasbih #dhikr-arabic { min-height: 0; font-size: clamp(16px, 2.3vh, 22px); }
+body.hqb-fit2 #hqb-today .hqb-qa { min-height: 40px; }
+body.hqb-fit2 #hqb-header { padding-top: 6px; padding-bottom: 6px; }
 @media (max-height: 720px) {
     #hqb-header { padding: 6px 10px; margin-top: 0; }
     #hqb-header button { width: 34px; height: 34px; }
@@ -1376,6 +1397,112 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
 .ab-foot { text-align: center; font-size: 12px; color: var(--c-muted); margin-top: 16px; }
 
 </style>
+<style>
+.hqb-rel-card{width:100%;display:flex;align-items:center;gap:12px;padding:14px;border-radius:20px;text-align:right;border:1px solid transparent;transition:transform .15s}
+.hqb-rel-card:active{transform:scale(.98)}
+.hqb-rel-card.bad{background:#8e1c1c;border-color:#b93636;color:#fff}
+.hqb-rel-card.ok{background:#14532d;border-color:#22813f;color:#fff}
+.hqb-rel-card .ri{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);font-size:18px;flex:0 0 auto}
+.hqb-rel-card .rt{flex:1;display:flex;flex-direction:column;line-height:1.5}
+.hqb-rel-card .rt b{font-size:14px;font-weight:900}
+.hqb-rel-card .rt small{font-size:10.5px;opacity:.85}
+.hqb-rel-card .ra{opacity:.8}
+.hqb-mode{display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 6px;border-radius:14px;border:1.5px solid transparent;background:rgba(127,127,127,.12);font-size:11px;line-height:1.4}
+.hqb-mode i{font-size:16px;opacity:.8}
+.hqb-mode b{font-weight:900}
+.hqb-mode small{font-size:9.5px;opacity:.75}
+.hqb-mode.on{border-color:#C9A75E;background:rgba(201,167,94,.18)}
+.hqb-rel-row{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid rgba(127,127,127,.15)}
+.hqb-rel-row:last-child{border-bottom:0}
+.hqb-rel-row .st{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex:0 0 auto}
+.hqb-rel-row.ok .st{background:#22a04b}
+.hqb-rel-row.bad .st{background:#c63b3b}
+.hqb-rel-row .tx{flex:1;display:flex;flex-direction:column;line-height:1.5}
+.hqb-rel-row .tx b{font-size:12px;font-weight:900}
+.hqb-rel-row .tx small{font-size:10px;opacity:.7}
+.hqb-rel-row button{flex:0 0 auto;padding:6px 14px;border-radius:999px;background:#C9A75E;color:#1b1404;font-size:11px;font-weight:900}
+</style>
+<style>
+/* ===== كل نافذة شاشة كاملة مثل شاشة مساعد حرم ===== */
+.hqb-page{padding:0!important;align-items:stretch!important}
+.hqb-page > div:first-child{width:100%!important;max-width:640px!important;height:100%!important;max-height:none!important;margin:0 auto!important;border-radius:0!important;border-top-width:0!important;border-bottom-width:0!important;box-shadow:none!important;padding-top:max(14px,env(safe-area-inset-top))!important}
+@media(max-width:660px){.hqb-page > div:first-child{border-width:0!important}}
+body :is(#app-sections-fullscreen-modal,#challenges-modal,#rakat-counter-modal,#zahra-tasbeeh-modal,#settings-modal,#qibla-modal,#prayer-times-modal,#quran-modal,#supplications-modal,#dua-list-modal,#daily-supplications-modal,#calendar-modal,#fatiha-modal,#reading-fatiha-modal,#founders-modal,#privacy-modal,#mushaf-modal,#adhan-modal,#tracker-modal,#imsakiya-modal,#converter-modal,#istikhara-modal,#duas-hub-modal).hqb-page{padding:0!important}
+body :is(#app-sections-fullscreen-modal,#challenges-modal,#rakat-counter-modal,#zahra-tasbeeh-modal,#settings-modal,#qibla-modal,#prayer-times-modal,#quran-modal,#supplications-modal,#dua-list-modal,#daily-supplications-modal,#calendar-modal,#fatiha-modal,#reading-fatiha-modal,#founders-modal,#privacy-modal,#mushaf-modal,#adhan-modal,#tracker-modal,#imsakiya-modal,#converter-modal,#istikhara-modal,#duas-hub-modal).hqb-page > div:first-child{height:100%!important;max-height:none!important}
+body.has-back-btn :is(#app-sections-fullscreen-modal,#challenges-modal,#rakat-counter-modal,#zahra-tasbeeh-modal,#settings-modal,#qibla-modal,#prayer-times-modal,#quran-modal,#supplications-modal,#dua-list-modal,#daily-supplications-modal,#calendar-modal,#fatiha-modal,#reading-fatiha-modal,#founders-modal,#privacy-modal,#mushaf-modal,#adhan-modal,#tracker-modal,#imsakiya-modal,#converter-modal,#istikhara-modal,#duas-hub-modal).hqb-page > div:first-child{padding-bottom:78px!important}
+/* ===== شاشة مواقيت الصلاة الجديدة ===== */
+#prayer-times-modal .prayer-sky{display:none}
+.pt-hero{display:flex;align-items:center;gap:16px;padding:14px;margin:6px 0 10px;border-radius:22px;background:linear-gradient(135deg,#13283a,#0c1b26);border:1px solid #2E4352;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.pt-ring{position:relative;width:132px;height:132px;flex:0 0 auto}
+.pt-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.pt-ring circle{fill:none;stroke-width:8}
+.pt-ring .bg{stroke:rgba(255,255,255,.08)}
+.pt-ring .fg{stroke:#D4A84F;stroke-linecap:round;transition:stroke-dashoffset .8s ease}
+.pt-ring-in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.25}
+.pt-ring-in span{font-size:11px;font-weight:800;color:#D4A84F}
+.pt-ring-in b{font-family:ui-monospace,monospace;font-size:19px;font-weight:900;color:#fff;letter-spacing:.5px;margin:3px 0}
+.pt-ring-in small{font-size:10.5px;color:rgba(243,235,221,.7);font-weight:700}
+.pt-meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;text-align:right}
+.pt-meta span{font-size:10.5px;color:rgba(243,235,221,.65);font-weight:700}
+.pt-meta b{font-family:ui-monospace,monospace;font-size:20px;font-weight:900;color:#F3EBDD;margin-bottom:4px}
+#pt-date{line-height:1.6;color:#D4A84F!important}
+#prayer-times-display{padding:4px 2px}
+#prayer-times-display .prayer-row{background:transparent;border:0;border-bottom:1px solid rgba(46,67,82,.7);border-radius:0;padding:12px 6px;margin:0}
+#prayer-times-display .prayer-row:last-child{border-bottom:0}
+#prayer-times-display .prayer-row .p-icon{background:rgba(212,168,79,.1);color:#D4A84F;border-radius:12px}
+#prayer-times-display .prayer-row .p-name{font-size:13.5px}
+#prayer-times-display .prayer-row .p-time{background:transparent;font-size:14px;padding:0}
+#prayer-times-display .prayer-row.passed{opacity:.42}
+#prayer-times-display .next-prayer-highlight{background:linear-gradient(90deg,rgba(212,168,79,.0),rgba(212,168,79,.16))!important;border-radius:16px!important;border:1px solid rgba(212,168,79,.45)!important;margin:4px 0!important}
+#prayer-times-display .next-prayer-highlight .p-name{color:#F3EBDD!important}
+#prayer-times-display .next-prayer-highlight .p-desc{color:rgba(243,235,221,.7)!important}
+#prayer-times-display .next-prayer-highlight .p-time{background:transparent!important;color:#D4A84F!important;font-size:16px}
+#prayer-times-display .next-prayer-highlight .p-icon{background:#D4A84F!important;color:#0A151C!important}
+</style>
+<style>
+/* ===== الختمات ===== */
+.kh-shell{padding:0!important;overflow:hidden}
+.kh-head{display:flex;align-items:center;gap:10px;padding:14px 16px 10px}
+.kh-head h3{flex:1;font-size:19px;font-weight:900;color:var(--kh-tx,inherit)}
+.kh-hbtn{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:16px;opacity:.9}
+.kh-plus{border:2px solid currentColor;width:38px;height:38px;border-radius:11px;font-size:14px}
+.kh-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:2px 16px 14px;border-bottom:1px solid rgba(127,127,127,.18)}
+.kh-tabs button{height:46px;border-radius:15px;font-weight:800;font-size:14px;opacity:.75;transition:background .2s,color .2s,opacity .2s}
+.kh-tabs button.on{background:#C9A75E;color:#1b1404;opacity:1;box-shadow:0 8px 20px -10px rgba(201,167,94,.7)}
+.kh-add{margin:12px 16px 0;padding:14px;border-radius:18px;background:rgba(127,127,127,.1);border:1px solid rgba(201,167,94,.35);display:flex;flex-direction:column;gap:10px}
+.kh-add.hidden{display:none!important}
+.kh-add h4{font-size:13px;font-weight:900;color:#C9A75E}
+.kh-add input[type=text]{width:100%;height:46px;border-radius:13px;padding:0 14px;font-size:14px;background:rgba(0,0,0,.18);border:1px solid rgba(127,127,127,.3);color:inherit;outline:none}
+.kh-add input[type=text]:focus{border-color:#C9A75E}
+#fatiha-quota{font-size:11px;opacity:.7}
+.kh-gender{display:flex;align-items:center;gap:16px;font-size:13px;font-weight:700}
+.kh-gender label{display:flex;align-items:center;gap:6px}
+.kh-gender input{accent-color:#C9A75E}
+.kh-add-row{display:flex;gap:8px}
+.kh-btn{flex:1;height:44px;border-radius:13px;background:#C9A75E;color:#1b1404;font-weight:900;font-size:13.5px;display:inline-flex;align-items:center;justify-content:center;padding:0 16px}
+.kh-btn.ghost{flex:0 0 auto;background:transparent;color:inherit;border:1px solid rgba(127,127,127,.35)}
+.kh-sec{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 8px}
+.kh-sec b{font-size:15px;font-weight:900}
+.kh-sec span{font-size:13px;opacity:.55;font-weight:700}
+.kh-list{padding:2px 14px 18px;display:flex;flex-direction:column;gap:12px}
+.kh-card{border-radius:22px;padding:16px 18px;border:1px solid rgba(127,127,127,.22);background:rgba(127,127,127,.07);cursor:pointer;transition:transform .15s,border-color .2s}
+.kh-card:active{transform:scale(.985)}
+.kh-card:hover{border-color:rgba(201,167,94,.45)}
+.kh-top{display:flex;align-items:center;gap:12px}
+.kh-ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(201,167,94,.14);color:#C9A75E;font-size:18px;flex:0 0 auto}
+.kh-meta{flex:1;font-size:12.5px;opacity:.6;font-weight:700}
+.kh-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border-radius:999px;background:rgba(201,167,94,.12);color:#C9A75E;font-size:12px;font-weight:800}
+.kh-chip i,.kh-cnt i{width:7px;height:7px;border-radius:50%;background:#C9A75E;display:inline-block}
+.kh-tx{margin:12px 2px 10px;font-size:15px;line-height:1.85;font-weight:700;word-break:break-word}
+.kh-foot{display:flex;align-items:center;justify-content:space-between}
+.kh-cnt{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;opacity:.8}
+.kh-acts{display:flex;gap:6px}
+.kh-acts button{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:13px;opacity:.65;border:1px solid rgba(127,127,127,.25)}
+.kh-acts button:hover{opacity:1;color:#C9A75E}
+.kh-empty{text-align:center;padding:40px 10px;opacity:.75;display:flex;flex-direction:column;align-items:center;gap:10px}
+.kh-empty i{font-size:26px;color:#C9A75E}
+.kh-empty .kh-btn{flex:0 0 auto}
+</style>
 </head>
 <script>try{if(localStorage.getItem("hqb_theme")!=="night")document.documentElement.classList.add("theme-day")}catch(e){document.documentElement.classList.add("theme-day")}</script>
 <script>try{if(localStorage.getItem("hqb_lang")==="ku")document.documentElement.setAttribute("lang","ckb")}catch(e){}</script>
@@ -1521,7 +1648,7 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
                 </button>
                 <button onclick="playClickSound(); closeModal('app-sections-fullscreen-modal'); openModal('fatiha-modal'); loadFatihaLocalList();" class="dua-row">
                     <span class="dua-row-ic"><i class="fa-solid fa-moon"></i></span>
-                    <span class="dua-row-tx"><span id="lbl-sec-fatiha">الفاتحة</span><small class="dua-row-sub" id="lbl-sec-fatiha-sub">اقرأ لأرواح المؤمنين</small></span>
+                    <span class="dua-row-tx"><span id="lbl-sec-fatiha">الختمات</span><small class="dua-row-sub" id="lbl-sec-fatiha-sub">الفاتحة على أرواح المؤمنين</small></span>
                     <i class="fa-solid fa-chevron-left dua-row-go"></i>
                 </button>
             </div>
@@ -1756,7 +1883,8 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
             </button>
             <button class="set-row" onclick="openAbout()">
                 <span class="set-ic"><i class="fa-solid fa-circle-info"></i></span>
-                <span class="set-tx"><b>عن التطبيق</b><small>الإصدار • سياسة الخصوصية • فريق العمل</small></span><i class="fa-solid fa-chevron-left set-go"></i>
+                <span class="set-tx"><b>عن التطبيق</b><small>الإصدار • سياسة الخصوصية • فريق العمل</small></span>
+                <i class="fa-solid fa-chevron-left set-go"></i>
             </button>
             <button class="set-row" onclick="openContact()">
                 <span class="set-ic"><i class="fa-solid fa-headset"></i></span>
@@ -1765,10 +1893,10 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
             </button>
             <button class="set-row" onclick="hqbShareApp()">
                 <span class="set-ic"><i class="fa-solid fa-share-nodes"></i></span>
-                <span class="set-tx"><b id="lbl-share-app">مشاركة التطبيق</b><small id="lbl-share-app-sub">أرسل «حرم» لأهلك وأصدقائك</small></span>
+                <span class="set-tx"><b id="lbl-share-app">مشاركة التطبيق</b><small id="lbl-share-app-sub">أرسل تطبيق حرم لأهلك وأصدقائك</small></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
             </button>
-            <button class="set-row" onclick="hqbRateApp()">
+            <button class="set-row" id="hqb-rate-row" onclick="hqbRateApp()">
                 <span class="set-ic"><i class="fa-solid fa-star"></i></span>
                 <span class="set-tx"><b id="lbl-rate-app">قيّم التطبيق</b><small id="lbl-rate-app-sub">رأيك على Google Play يساعدنا كثيراً</small></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
@@ -1781,11 +1909,6 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
             <button class="set-row" onclick="hqbPrbOpen()">
                 <span class="set-ic"><i class="fa-solid fa-bug"></i></span>
                 <span class="set-tx"><b id="lbl-problem">الإبلاغ عن مشكلة</b><small id="lbl-problem-sub">اكتب المشكلة وأرفق صورة لها</small></span>
-                <i class="fa-solid fa-chevron-left set-go"></i>
-            </button>
-            <button class="set-row" onclick="playClickSound(); openPrivacyPolicy()">
-                <span class="set-ic"><i class="fa-solid fa-shield-halved"></i></span>
-                <span class="set-tx"><b id="lbl-privacy-btn">سياسة الخصوصية</b></span>
                 <i class="fa-solid fa-chevron-left set-go"></i>
             </button>
         </div>
@@ -1804,7 +1927,7 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
     <div class="wpx-box w-full bg-palette-dark flex flex-col overflow-hidden">
         <div class="wpx-top">
             <button onclick="playClickSound(); closeModal('problem-modal')" class="srch-x" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
-            <div class="wpx-ttl"><b>الإبلاغ عن مشكلة</b><small>يصل بلاغك لفريق «حرم» مباشرة</small></div>
+            <div class="wpx-ttl"><b>الإبلاغ عن مشكلة</b><small>يصل بلاغك لفريق تطبيق حرم مباشرة</small></div>
         </div>
         <div id="prb-form" class="flex-1 overflow-y-auto px-4 pt-2 pb-10 space-y-4">
             <div>
@@ -1830,7 +1953,7 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
         <div id="prb-done" class="hidden flex-1 flex flex-col items-center justify-center text-center px-8 gap-3">
             <span class="prb-ok"><i class="fa-solid fa-check"></i></span>
             <b class="text-lg text-palette-light">وصل بلاغك، شكراً لك</b>
-            <p class="text-xs text-palette-muted leading-relaxed">سيطّلع عليه فريق «حرم» ويعمل على حل المشكلة في التحديثات القادمة إن شاء الله.</p>
+            <p class="text-xs text-palette-muted leading-relaxed">سيطّلع عليه فريق تطبيق حرم ويعمل على حل المشكلة في التحديثات القادمة إن شاء الله.</p>
             <button onclick="playClickSound(); closeModal('problem-modal')" class="prb-send mt-3" style="max-width:220px">تم</button>
         </div>
     </div>
@@ -1923,17 +2046,19 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
                 </div>
             </div>
 
-            <div class="h-12 shrink-0"></div>
-
-            <div class="p-2.5 rounded-xl bg-[#0A151C]/90 border border-[#2E4352] mb-2 flex items-center justify-between shadow-lg">
-                <div class="text-right space-y-0.5">
-                    <span class="text-[9px] text-[#D4A84F] font-bold block" id="lbl-live-clock"><i class="fa-solid fa-clock ml-1"></i>الساعة الآن</span>
-                    <div id="live-current-clock" class="font-mono text-sm sm:text-base font-black text-white tracking-wider">--:--:--</div>
+            <div class="pt-hero">
+                <div class="pt-ring">
+                    <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="52"/><circle id="pt-ring-arc" class="fg" cx="60" cy="60" r="52"/></svg>
+                    <div class="pt-ring-in">
+                        <span id="next-prayer-label">الصلاة القادمة</span>
+                        <b id="next-prayer-countdown">--:--:--</b>
+                        <small id="pt-next-time"></small>
+                    </div>
                 </div>
-                <div class="h-6 w-[1px] bg-[#2E4352]"></div>
-                <div class="text-left space-y-0.5">
-                    <span id="next-prayer-label" class="text-[9px] text-[#D4A84F] font-bold block">متبقي لصلاة ...</span>
-                    <div id="next-prayer-countdown" class="font-mono text-sm sm:text-base font-black text-[#F3EBDD] tracking-wider">--:--:--</div>
+                <div class="pt-meta">
+                    <span id="lbl-live-clock">الساعة الآن</span>
+                    <b id="live-current-clock">--:--:--</b>
+                    <span id="pt-date"></span>
                 </div>
             </div>
 
@@ -2232,51 +2357,34 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
 </div>
 
 <div id="fatiha-modal" class="fixed inset-0 bg-black/85 hidden items-center justify-center p-2 z-50">
-    <div class="w-full max-w-lg h-[92vh] bg-palette-mid border border-palette-muted/50 rounded-2xl p-3 sm:p-5 shadow-2xl relative flex flex-col">
-        <div class="flex justify-between items-center mb-2 pb-2 border-b border-palette-purple">
-            <div class="flex items-center gap-2">
-                <div class="w-9 h-9 rounded-xl bg-palette-light text-palette-darkest flex items-center justify-center text-base">
-                    <i class="fa-solid fa-hands-praying"></i>
-                </div>
-                <div>
-                    <h3 class="text-sm sm:text-base font-bold text-palette-light" id="fatiha-modal-title">الفاتحة على أرواح الموتى</h3>
-                    <p class="text-[9px] text-palette-light/80" id="fatiha-modal-sub">أسماء الموتى لقراءة الفاتحة</p>
-                </div>
-            </div>
-            <button onclick="playClickSound(); closeModal('fatiha-modal')" class="w-8 h-8 rounded-full bg-palette-purple text-palette-light flex items-center justify-center">
-                <i class="fa-solid fa-xmark text-xs"></i>
-            </button>
+    <div class="kh-shell w-full max-w-lg h-[92vh] bg-palette-mid border border-palette-muted/50 rounded-2xl relative flex flex-col">
+        <div class="kh-head">
+            <button onclick="playClickSound(); closeModal('fatiha-modal')" class="kh-hbtn" aria-label="رجوع"><i class="fa-solid fa-arrow-right"></i></button>
+            <h3 id="fatiha-modal-title">الختمات</h3>
+            <button onclick="playClickSound(); hqbKhAdd()" class="kh-hbtn kh-plus" aria-label="إضافة ختمة"><i class="fa-solid fa-plus"></i></button>
         </div>
-        <div class="p-3 rounded-xl bg-palette-dark border border-palette-purple mb-2.5 space-y-2">
-            <h4 class="font-bold text-palette-mauve text-xs flex items-center gap-1.5">
-                <i class="fa-solid fa-user-plus text-xs"></i>
-                <span id="fatiha-add-label">أضف اسماً (يحتاج إنترنت):</span>
-            </h4>
-            <div class="space-y-2">
-                <input type="text" id="deceased-input" maxlength="50" placeholder="اسم المتوفى" class="w-full bg-palette-darkest border border-palette-purple rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-palette-mauve">
-                <p id="fatiha-quota" class="text-[10px] text-palette-muted px-1"></p>
-                <div class="flex items-center gap-4 px-1 py-0.5 text-xs text-palette-light">
-                    <span class="font-bold text-palette-mauve text-[11px]" id="fatiha-gender-lbl">الجنس:</span>
-                    <label class="flex items-center gap-1 cursor-pointer text-[11px]">
-                        <input type="radio" name="deceased-gender" value="ذكر" checked class="accent-palette-mauve">
-                        <span id="fatiha-male-lbl">المرحوم (ذكر)</span>
-                    </label>
-                    <label class="flex items-center gap-1 cursor-pointer text-[11px]">
-                        <input type="radio" name="deceased-gender" value="أنثى" class="accent-palette-mauve">
-                        <span id="fatiha-female-lbl">المرحومة (أنثى)</span>
-                    </label>
-                </div>
-
-                <button id="btn-add-deceased" onclick="playClickSound(); addDeceasedCloud()" class="w-full py-2 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-md flex items-center justify-center gap-1 cursor-pointer">
-                    <i class="fa-solid fa-plus text-[10px]"></i>
-                    <span id="fatiha-save-btn">حفظ وإضافة للسحابة</span>
-                </button>
+        <p id="fatiha-modal-sub" class="hidden">الفاتحة على أرواح المؤمنين</p>
+        <div class="kh-tabs">
+            <button id="kh-tab-all" class="on" onclick="playClickSound(); hqbKhTab('all')">الكل</button>
+            <button id="kh-tab-mine" onclick="playClickSound(); hqbKhTab('mine')">ختماتي</button>
+        </div>
+        <div id="kh-add" class="kh-add hidden">
+            <h4 id="fatiha-add-label"><i class="fa-solid fa-book-open ml-1"></i>ختمة جديدة (تحتاج إنترنت)</h4>
+            <input type="text" id="deceased-input" maxlength="50" placeholder="اسم المتوفى">
+            <p id="fatiha-quota"></p>
+            <div class="kh-gender">
+                <span id="fatiha-gender-lbl">على روح:</span>
+                <label><input type="radio" name="deceased-gender" value="ذكر" checked><span id="fatiha-male-lbl">المرحوم</span></label>
+                <label><input type="radio" name="deceased-gender" value="أنثى"><span id="fatiha-female-lbl">المرحومة</span></label>
+            </div>
+            <div class="kh-add-row">
+                <button id="btn-add-deceased" onclick="playClickSound(); addDeceasedCloud()" class="kh-btn"><i class="fa-solid fa-plus ml-1"></i><span id="fatiha-save-btn">إنشاء الختمة</span></button>
+                <button onclick="playClickSound(); hqbKhAdd(false)" class="kh-btn ghost">إلغاء</button>
             </div>
         </div>
-        <div id="fatiha-list-content" class="overflow-y-auto space-y-2 pr-1 flex-1 text-sm"></div>
-        <button onclick="playClickSound(); closeModal('fatiha-modal')" class="w-full mt-2 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-bold text-xs shadow-lg cursor-pointer" id="btn-close-fatiha-modal">
-            إغلاق النافذة
-        </button>
+        <div class="kh-sec"><b id="kh-sec-title">الختمات المتاحة</b><span id="kh-count"></span></div>
+        <div id="fatiha-list-content" class="kh-list flex-1 overflow-y-auto"></div>
+        <button class="hidden" id="btn-close-fatiha-modal"></button>
     </div>
 </div>
 
@@ -2401,7 +2509,8 @@ html.theme-day .hqb-bs-grab { background: rgba(21,49,74,.15); }
         <div id="mushaf-read-view" class="hidden flex-1 flex-col min-h-0">
             <div class="flex items-center justify-between gap-1.5 mb-2 flex-wrap">
                 <div class="flex items-center gap-1.5">
-                    <button onclick="playClickSound(); mushafFont(-2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[11px] font-bold">أ-</button><button onclick="playClickSound(); mushafFont(2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[13px] font-bold">أ+</button>
+                    <button onclick="playClickSound(); mushafFont(-2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[11px] font-bold">أ-</button>
+                    <button onclick="playClickSound(); mushafFont(2)" class="w-8 h-8 rounded-xl bg-palette-mid text-palette-light text-[13px] font-bold">أ+</button>
                     <button onclick="playClickSound(); mushafToggleTr()" id="mushaf-tr-btn" style="display:none" class="h-8 px-2.5 rounded-xl bg-palette-mid text-palette-light text-[10px] font-bold"><i class="fa-solid fa-language ml-1"></i><span id="mushaf-tr-lbl">الترجمة</span></button>
                 </div>
                 <div class="flex items-center gap-1.5">
@@ -2556,6 +2665,8 @@ function showToast(message) {
     }, 3000);
 }
 
+// معرّف آمن للاستخدام داخل onclick (يمنع حقن الكود عبر بيانات الخادم)
+function hqbSafeId(v) { return String(v === null || v === undefined ? '' : v).replace(/[^\w\-]/g, ''); }
 function escapeHTML(str) {
     if (str === null || str === undefined || str === '') return '';
     return String(str).replace(/[&<>'"]/g, tag => ({
@@ -2729,7 +2840,7 @@ const i18n = {
         supplications: "مفاتيح الجنان",
         quranRecitations: "تلاوات وقراء",
         calendar: "التقويم",
-        fatiha: "الفاتحة",
+        fatiha: "الختمات",
         newDhikr: "ذكر جديد",
         prev: "السابق",
         next: "التالي",
@@ -2781,14 +2892,14 @@ const i18n = {
         todayEventsHeading: "مناسبات اليوم",
         monthEventsHeading: "مناسبات الشهر كاملة",
         returnCalendar: "العودة للتقويم",
-        fatihaModalTitle: "الفاتحة على أرواح الموتى",
-        fatihaModalSub: "أسماء الموتى لقراءة الفاتحة",
-        fatihaAddLabel: "أضف اسماً (يحتاج إنترنت):",
+        fatihaModalTitle: "الختمات",
+        fatihaModalSub: "الفاتحة على أرواح المؤمنين",
+        fatihaAddLabel: "ختمة جديدة (تحتاج إنترنت)",
         deceasedInputPh: "اسم المتوفى",
-        fatihaGenderLbl: "الجنس:",
-        fatihaMaleLbl: "المرحوم (ذكر)",
-        fatihaFemaleLbl: "المرحومة (أنثى)",
-        fatihaSaveBtn: "حفظ وإضافة للسحابة",
+        fatihaGenderLbl: "على روح:",
+        fatihaMaleLbl: "المرحوم",
+        fatihaFemaleLbl: "المرحومة",
+        fatihaSaveBtn: "إنشاء الختمة",
         closeFatihaModal: "إغلاق النافذة",
         lblViews: "المشاهدات",
         lblReads: "القراءات",
@@ -3011,7 +3122,7 @@ function getPositionSmart() {
     return hqbConfirm({
         icon: 'fa-location-dot',
         title: 'استخدام موقعك',
-        body: '<p>يستخدم «حرم» موقعك فقط من أجل:</p><p>• حساب أوقات الصلاة لمدينتك.</p><p>• إيجاد المساجد القريبة على الخريطة.</p><p>يُستخدم الموقع أثناء استخدامك لهذه الميزات فقط، ولا يُحفظ على خوادمنا.</p>',
+        body: '<p>يستخدم تطبيق حرم موقعك فقط من أجل:</p><p>• حساب أوقات الصلاة لمدينتك.</p><p>• إيجاد المساجد القريبة على الخريطة.</p><p>يُستخدم الموقع أثناء استخدامك لهذه الميزات فقط، ولا يُحفظ على خوادمنا.</p>',
         ok: 'متابعة',
         cancel: 'ليس الآن'
     }).then(ok => {
@@ -3021,7 +3132,35 @@ function getPositionSmart() {
     });
 }
 
-function hqbGetPosition() {
+// الإضافة الأصلية في تطبيق الأندرويد (الأذان كمنبه + الموقع). على الويب ترجع null
+// كل نافذة رئيسية تُعرض كشاشة كاملة مثل شاشة مساعد حرم
+(function () {
+    const ids = ['app-sections-fullscreen-modal', 'challenges-modal', 'rakat-counter-modal', 'zahra-tasbeeh-modal', 'settings-modal', 'qibla-modal', 'prayer-times-modal', 'quran-modal', 'supplications-modal', 'dua-list-modal', 'daily-supplications-modal', 'calendar-modal', 'fatiha-modal', 'reading-fatiha-modal', 'founders-modal', 'privacy-modal', 'mushaf-modal', 'adhan-modal', 'tracker-modal', 'imsakiya-modal', 'converter-modal', 'istikhara-modal', 'duas-hub-modal'];
+    const go = () => ids.forEach(id => { const m = document.getElementById(id); if (m) m.classList.add('hqb-page'); });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+})();
+function hqbHN() {
+    try { return (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform() && window.Capacitor.Plugins && window.Capacitor.Plugins.HaramNative) || null; } catch (e) { return null; }
+}
+function hqbGetPosition(opt) {
+    const HN = hqbHN();
+    if (HN) {
+        opt = opt || {};
+        return HN.getLocation({ timeout: opt.timeout || 20000, maxAgeSec: opt.maxAgeSec || 600 })
+            .then(r => ({ coords: { latitude: r.lat, longitude: r.lng, accuracy: r.acc } }))
+            .catch(async e => {
+                const code = (e && e.code) || '';
+                if (code === 'DENIED') throw { code: 1 };
+                if (code === 'OFF') {
+                    if (!opt.silent) {
+                        const ok = await hqbConfirm({ icon: 'fa-location-dot', title: 'خدمة الموقع مغلقة', body: '<p>شغّل «الموقع» من إعدادات الهاتف، ثم ارجع للتطبيق واضغط تحديد موقعي مرة أخرى.</p>', ok: 'فتح الإعدادات', cancel: 'إلغاء' });
+                        if (ok) { try { await HN.openLocationSettings(); } catch (x) {} }
+                    }
+                    throw { code: 2, off: true };
+                }
+                throw { code: 3 };
+            });
+    }
     return new Promise((resolve, reject) => {
         if (!navigator.geolocation) { reject({ code: 0 }); return; }
         navigator.geolocation.getCurrentPosition(resolve, err => {
@@ -3038,24 +3177,62 @@ const arabCountriesData = {
         timezone: "Asia/Baghdad",
         method: 0,
         cities: {
-            "بغداد": { lat: 33.3152, lng: 44.3661 },
-            "البصرة": { lat: 30.5085, lng: 47.7835 },
-            "نينوى (الموصل)": { lat: 36.34, lng: 43.13 },
-            "أربيل": { lat: 36.1901, lng: 44.0091 },
-            "السليمانية": { lat: 35.5575, lng: 45.4367 },
-            "دهوك": { lat: 36.8679, lng: 42.9884 },
-            "كركوك": { lat: 35.4681, lng: 44.3922 },
-            "الأنبار (الرمادي)": { lat: 33.425, lng: 43.295 },
-            "ديالى (بعقوبة)": { lat: 33.75, lng: 44.6333 },
+            "بغداد": { lat: 33.34058, lng: 44.40088 },
+            "البصرة": { lat: 30.50852, lng: 47.7804 },
+            "نينوى (الموصل)": { lat: 36.335, lng: 43.11889 },
+            "أربيل": { lat: 36.19117, lng: 44.00943 },
+            "السليمانية": { lat: 35.56496, lng: 45.4329 },
+            "دهوك": { lat: 36.86608, lng: 42.9879 },
+            "كركوك": { lat: 35.46806, lng: 44.39222 },
+            "الأنبار (الرمادي)": { lat: 33.42056, lng: 43.30778 },
+            "ديالى (بعقوبة)": { lat: 33.75403, lng: 44.60518 },
             "صلاح الدين (تكريت)": { lat: 34.6071, lng: 43.6782 },
-            "بابل (الحلة)": { lat: 32.4828, lng: 44.4225 },
-            "كربلاء المقدسة": { lat: 32.616, lng: 44.0249 },
-            "النجف الأشرف": { lat: 32.0292, lng: 44.3361 },
-            "القادسية (الديوانية)": { lat: 31.9934, lng: 44.9219 },
-            "واسط (الكوت)": { lat: 32.5083, lng: 45.8197 },
-            "ذي قار (الناصرية)": { lat: 31.057, lng: 46.2571 },
-            "ميسان (العمارة)": { lat: 31.8417, lng: 47.1444 },
-            "المثنى (السماوة)": { lat: 31.3156, lng: 45.2894 }
+            "بابل (الحلة)": { lat: 32.46367, lng: 44.41963 },
+            "كربلاء المقدسة": { lat: 32.61603, lng: 44.02488 },
+            "النجف الأشرف": { lat: 32.02594, lng: 44.34625 },
+            "القادسية (الديوانية)": { lat: 31.99289, lng: 44.92552 },
+            "واسط (الكوت)": { lat: 32.5128, lng: 45.81817 },
+            "ذي قار (الناصرية)": { lat: 31.05799, lng: 46.25726 },
+            "ميسان (العمارة)": { lat: 31.83561, lng: 47.14483 },
+            "المثنى (السماوة)": { lat: 31.33198, lng: 45.2944 },
+            "الكوفة": { lat: 32.05114, lng: 44.44017 },
+            "المشخاب": { lat: 31.80437, lng: 44.4893 },
+            "الشامية": { lat: 31.96257, lng: 44.60075 },
+            "عفك": { lat: 32.0643, lng: 45.24743 },
+            "غماس": { lat: 31.74311, lng: 44.6196 },
+            "الشنافية": { lat: 31.58376, lng: 44.64675 },
+            "الرميثة": { lat: 31.52845, lng: 45.20377 },
+            "الهندية (طويريج)": { lat: 32.54193, lng: 44.22469 },
+            "المسيب": { lat: 32.77872, lng: 44.29005 },
+            "المحاويل": { lat: 32.66138, lng: 44.40854 },
+            "القاسم": { lat: 32.29799, lng: 44.68282 },
+            "الإسكندرية": { lat: 32.8873, lng: 44.34619 },
+            "الكاظمية": { lat: 33.38, lng: 44.338 },
+            "المحمودية": { lat: 33.06221, lng: 44.36564 },
+            "أبو غريب": { lat: 33.30563, lng: 44.18477 },
+            "سامراء": { lat: 34.1959, lng: 43.88568 },
+            "بيجي": { lat: 34.92915, lng: 43.48878 },
+            "الشرقاط": { lat: 35.51722, lng: 43.22806 },
+            "طوز خورماتو": { lat: 34.88808, lng: 44.63256 },
+            "الفلوجة": { lat: 33.34913, lng: 43.78599 },
+            "القائم": { lat: 34.39251, lng: 40.98945 },
+            "المقدادية": { lat: 33.97861, lng: 44.93694 },
+            "الخالص": { lat: 33.80809, lng: 44.53343 },
+            "خانقين": { lat: 34.3482, lng: 45.39065 },
+            "الكوت - الحي": { lat: 32.17419, lng: 46.04345 },
+            "النعمانية": { lat: 32.55621, lng: 45.41293 },
+            "الصويرة": { lat: 32.92556, lng: 44.77583 },
+            "الشطرة": { lat: 31.40906, lng: 46.1727 },
+            "قلعة سكر": { lat: 31.8632, lng: 46.07321 },
+            "الزبير": { lat: 30.39213, lng: 47.70175 },
+            "أبو الخصيب": { lat: 30.4431, lng: 47.87802 },
+            "القرنة": { lat: 31.01547, lng: 47.43362 },
+            "الفاو": { lat: 29.97421, lng: 48.47309 },
+            "أم قصر": { lat: 30.0362, lng: 47.91951 },
+            "زاخو": { lat: 37.14871, lng: 42.68591 },
+            "سوران": { lat: 36.65558, lng: 44.54217 },
+            "رانية": { lat: 36.25511, lng: 44.88239 },
+            "كلار": { lat: 34.62805, lng: 45.31852 }
         }
     }
 };
@@ -3148,7 +3325,7 @@ function updateLivePrayerClockAndCountdown() {
         { key: 'Asr', name: 'العصر', sec: parse24HourToSeconds(currentRawPrayerTimings.Asr), idx: 3 },
         { key: 'Maghrib', name: 'المغرب', sec: parse24HourToSeconds(currentRawPrayerTimings.Maghrib), idx: 4 },
         { key: 'Isha', name: 'العشاء', sec: parse24HourToSeconds(currentRawPrayerTimings.Isha), idx: 5 },
-        { key: 'Midnight', name: 'منتصف الليل', sec: parse24HourToSeconds(currentRawPrayerTimings.Midnight), idx: 6 }
+        { key: 'Midnight', name: 'صلاة الليل', sec: parse24HourToSeconds(currentRawPrayerTimings.Midnight), idx: 6 }
     ];
 
     schedule.forEach(item => {
@@ -3170,8 +3347,32 @@ function updateLivePrayerClockAndCountdown() {
     const remM = Math.floor((diffSeconds % 3600) / 60);
     const remS = diffSeconds % 60;
 
-    labelEl.innerText = `متبقي لصلاة ${nextPrayer.name}`;
+    labelEl.innerText = `متبقي على ${nextPrayer.name}`;
     countdownEl.innerText = toEasternArabicDigits(`${String(remH).padStart(2, '0')}:${String(remM).padStart(2, '0')}:${String(remS).padStart(2, '0')}`);
+    // حلقة التقدّم من الوقت السابق إلى القادم + تعتيم الأوقات التي مضت
+    try {
+        const prevs = sorted.filter(p => p.sec <= nowSeconds);
+        const prevSec = prevs.length ? prevs[prevs.length - 1].sec : (parse24HourToSeconds(currentRawPrayerTimings.Isha) - 24 * 3600);
+        const nextSec = nowSeconds + diffSeconds;
+        const frac = Math.min(1, Math.max(0, (nowSeconds - prevSec) / Math.max(1, nextSec - prevSec)));
+        const arc = document.getElementById('pt-ring-arc');
+        if (arc) { const L = 2 * Math.PI * 52; arc.style.strokeDasharray = L; arc.style.strokeDashoffset = L * (1 - frac); }
+        const nt = document.getElementById('pt-next-time');
+        if (nt) nt.innerText = format12Hour(currentRawPrayerTimings[nextPrayer.key] || '');
+        const dt = document.getElementById('pt-date');
+        if (dt && !dt.dataset.done) {
+            dt.dataset.done = '1';
+            let tx = '';
+            try { tx = new Intl.DateTimeFormat('ar-IQ-u-ca-islamic-umalqura', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date()); } catch (e) {}
+            try { tx += (tx ? ' • ' : '') + new Intl.DateTimeFormat('ar-IQ', { weekday: 'long', day: 'numeric', month: 'long' }).format(new Date()); } catch (e) {}
+            dt.innerText = tx;
+        }
+        for (let i = 0; i < 7; i++) {
+            const card = document.getElementById(`prayer-card-${i}`);
+            const it = schedule.find(x => x.idx === i);
+            if (card && it) card.classList.toggle('passed', i !== nextPrayer.idx && it.sec <= nowSeconds);
+        }
+    } catch (e) {}
 
     for (let i = 0; i < 7; i++) {
         const card = document.getElementById(`prayer-card-${i}`);
@@ -3313,7 +3514,8 @@ function savePrayerChanges() {
 
 const PRAYER_INFO = [
     { key: 'Fajr', end: 'Sunrise', scene: 'fajr', orb: 'moon', rakat: 2,
-      ar: { sub: 'صلاة الصبح', note: 'صلاة الفجر ركعتان، يبدأ وقتها بطلوع الفجر الصادق وينتهي بطلوع الشمس.', nafila: 'يُستحب أداء نافلة الفجر (ركعتان) قبل الفريضة.' } },{ key: 'Sunrise', end: 'Dhuhr', scene: 'sunrise', orb: 'sun', rakat: 0,
+      ar: { sub: 'صلاة الصبح', note: 'صلاة الفجر ركعتان، يبدأ وقتها بطلوع الفجر الصادق وينتهي بطلوع الشمس.', nafila: 'يُستحب أداء نافلة الفجر (ركعتان) قبل الفريضة.' } },
+    { key: 'Sunrise', end: 'Dhuhr', scene: 'sunrise', orb: 'sun', rakat: 0,
       ar: { sub: 'طلوع الشمس', note: 'ليس وقت صلاة فريضة، وبطلوع الشمس ينتهي وقت صلاة الفجر.', nafila: 'وقت مناسب للذكر وتعقيبات الصلاة والدعاء.' } },
     { key: 'Dhuhr', end: 'Asr', scene: 'dhuhr', orb: 'sun', rakat: 4,
       ar: { sub: 'زوال الشمس', note: 'صلاة الظهر أربع ركعات، ويدخل وقتها بزوال الشمس.', nafila: 'نافلة الظهر ثماني ركعات تُصلّى قبل الفريضة.' } },
@@ -3340,7 +3542,7 @@ function openPrayerInfo(idx) {
     activePrayerIdx = idx;
     prayerRakatDone = 0;
     const L = info.ar;
-    const names = ['الفجر', 'الشروق', 'الظهر', 'العصر', 'المغرب', 'العشاء', 'منتصف الليل الشرعي'];
+    const names = ['الفجر', 'الشروق', 'الظهر', 'العصر', 'المغرب', 'العشاء', 'صلاة الليل'];
 
     const sheet = document.getElementById('prayer-info-sheet');
     const scene = document.getElementById('pi-scene');
@@ -3491,13 +3693,13 @@ function renderPrayerCardsUI(timings) {
     const displayContainer = document.getElementById('prayer-times-display');
 
     const prayers = [
-        { name: "الفجر", time: format12Hour(timings.Fajr), desc: "وقت الإمساك", icon: "fa-cloud-moon" },
-        { name: "الشروق", time: format12Hour(timings.Sunrise), desc: "ينتهي وقت الفجر", icon: "fa-sun" },
-        { name: "الظهر", time: format12Hour(timings.Dhuhr), desc: "منتصف النهار", icon: "fa-sun" },
-        { name: "العصر", time: format12Hour(timings.Asr), desc: "الصلاة الوسطى", icon: "fa-cloud-sun" },
-        { name: "المغرب", time: format12Hour(timings.Maghrib), desc: "وقت الإفطار", icon: "fa-moon" },
-        { name: "العشاء", time: format12Hour(timings.Isha), desc: "آخر صلاة في اليوم", icon: "fa-star" },
-        { name: "منتصف الليل الشرعي", time: format12Hour(timings.Midnight), desc: "وقت صلاة الليل", icon: "fa-star-and-crescent" }
+        { name: "الفجر", time: format12Hour(timings.Fajr), desc: "أذان الصبح", icon: "fa-cloud-moon" },
+        { name: "الشروق", time: format12Hour(timings.Sunrise), desc: "ينتهي وقت صلاة الصبح", icon: "fa-sun" },
+        { name: "الظهر", time: format12Hour(timings.Dhuhr), desc: "أذان الظهر", icon: "fa-sun" },
+        { name: "العصر", time: format12Hour(timings.Asr), desc: "وقت فضيلة العصر", icon: "fa-cloud-sun" },
+        { name: "المغرب", time: format12Hour(timings.Maghrib), desc: "أذان المغرب", icon: "fa-moon" },
+        { name: "العشاء", time: format12Hour(timings.Isha), desc: "وقت فضيلة العشاء", icon: "fa-star" },
+        { name: "صلاة الليل", time: format12Hour(timings.Midnight), desc: "", icon: "fa-star-and-crescent" }
     ];
 
     let html = '';
@@ -3513,7 +3715,6 @@ function renderPrayerCardsUI(timings) {
                             <h4 class="p-name font-bold text-xs">${p.name}</h4>
                             <span id="prayer-badge-${idx}" class="hidden text-[8px] bg-[#0A151C] text-[#D4A84F] px-1.5 py-0.5 rounded-full font-black">القادمة</span>
                         </div>
-                        <p class="p-desc text-[9px] font-medium">${p.desc}</p>
                     </div>
                 </div>
                 <span class="p-time font-mono text-xs font-black tracking-wider px-2.5 py-1 rounded-lg shrink-0">${p.time}</span>
@@ -3525,7 +3726,7 @@ function renderPrayerCardsUI(timings) {
     updateLivePrayerClockAndCountdown();
 }
 
-// حساب أوقات الصلاة على الهاتف (طريقة جعفري: الفجر 16°، المغرب 4°، العشاء 14°، منتصف الليل من الغروب للفجر)
+// حساب أوقات الصلاة على الهاتف (الفجر 18°، المغرب 4°، العشاء 14°، مطابق لمواقيت العراق المعتمدة)
 const HQB_PT = (() => {
     const dtr = d => d * Math.PI / 180, rtd = r => r * 180 / Math.PI;
     const sin = d => Math.sin(dtr(d)), cos = d => Math.cos(dtr(d)), tan = d => Math.tan(dtr(d));
@@ -3565,7 +3766,7 @@ const HQB_PT = (() => {
         const asrTime = (f, t) => { const dec = sunPos(jd + t).decl; return angleTime(-acot(f + tan(Math.abs(lat - dec))), t); };
         const p = h => h / 24;
         const T = {
-            fajr: angleTime(16, p(5), true), sunrise: angleTime(0.833, p(6), true), dhuhr: midDay(p(12)),
+            fajr: angleTime(18, p(5), true), sunrise: angleTime(0.833, p(6), true), dhuhr: midDay(p(12)),
             asr: asrTime(1, p(13)), sunset: angleTime(0.833, p(18)), maghrib: angleTime(4, p(18)), isha: angleTime(14, p(18))
         };
         const off = tzOffset(tz, y, m, d) - lng / 15;
@@ -3577,7 +3778,7 @@ const HQB_PT = (() => {
         if (isNaN(T.maghrib) || fixH(T.maghrib - T.sunset) > night / 2) T.maghrib = T.sunset + night / 2;
         T.imsak = T.fajr - 10 / 60;
         T.midnight = T.sunset + fixH(T.fajr - T.sunset) / 2;
-        const f = h => { if (isNaN(h)) return '--:--'; h = fixH(h + 0.5 / 60); const H = Math.floor(h), M = Math.floor((h - H) * 60); return String(H).padStart(2, '0') + ':' + String(M).padStart(2, '0'); };
+        const f = h => { if (isNaN(h)) return '--:--'; h = fixH(h + 0.001 / 60); const H = Math.floor(h), M = Math.floor((h - H) * 60); return String(H).padStart(2, '0') + ':' + String(M).padStart(2, '0'); };
         return { Imsak: f(T.imsak), Fajr: f(T.fajr), Sunrise: f(T.sunrise), Dhuhr: f(T.dhuhr), Asr: f(T.asr), Sunset: f(T.sunset), Maghrib: f(T.maghrib), Isha: f(T.isha), Midnight: f(T.midnight) };
     }
     return { compute, tzOffset };
@@ -3942,8 +4143,8 @@ function loadQuranRecitersList() {
     }).join('');
 }
 
-function deleteCustomRecitation(i) {
-    if (!confirm('حذف هذه التلاوة؟')) return;
+async function deleteCustomRecitation(i) {
+    if (!(await hqbConfirm({ icon: 'fa-trash-can', title: 'حذف التلاوة', body: '<p>هل تريد حذف هذه التلاوة من قائمتك؟</p>', ok: 'حذف', cancel: 'إلغاء' }))) return;
     playClickSound();
     if (activeQuranIndex === i) stopQuranAudio();
     else if (activeQuranIndex > i) activeQuranIndex--;
@@ -4306,7 +4507,7 @@ function hqbRenderSupList(list, container) {
     }
     activeSupplicationsList = list;
     const html = `<div class="dua-group">` + list.map((sup, i) => `
-            <button onclick="playClickSound(); openDuaDetailModal('${sup.id}')" class="dua-row">
+            <button onclick="playClickSound(); openDuaDetailModal('${hqbSafeId(sup.id)}')" class="dua-row">
                 <span class="dua-row-n">${hqbNum(i + 1)}</span>
                 <span class="dua-row-tx">${escapeHTML(sup.title)}${sup.desc ? `<small class="dua-row-sub">${escapeHTML(sup.desc)}</small>` : ''}</span>
                 <i class="fa-solid fa-chevron-left dua-row-go"></i>
@@ -4325,7 +4526,8 @@ function openDuaDetailModal(id) {
 
 
 const weeklySupplications = [
-    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالِّرِضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },{ dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغِفرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
+    { dayName: "دعاء يوم الأحد", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : بِسْمِ اللهِ الَّذِي لاَ أَرْجُو إِلاَّ فَضْلَهُ ، وَلاَ أَخْشَى إلاَّ عَدْلَهُ ، وَلا أَعْتَمِدُ إلاَّ قَوْلَهُ ، وَلا أَتَمَسَّكُ [ولا اُمْسِكُ ]إلاَّ بِحَبْلِهِ . بِكَ أَسْتَجِيرُ يا ذَا الْعَفْوِ وَالِّرِضْوانِ مِنَ الظُّلْمِ وَالْعُدْوانِ ، وَمِنْ غِيَرِ الزَّمانِ ، وَتَواتُرِ الاَحْزانِ ، [ وَمِنْ طَوارِقِ الْحَدَثَانِ ]، وَمِنِ انْقِضآءِ الْمُدَّةِ قَبْلَ التَّأَهُّبِ وَالْعُدَّةِ . وَإيَّاكَ أَسْتَرْشِدُ لِما فِيهِ الصَّلاحُ وَالاِصْلاحُ ، وَبِكَ أَسْتَعِينُ فِيما يَقْتَرِنُ بِهِ النَّجاحُ وَالاِنْجاحُ . وَإيَّاكَ أَرْغَبُ فِي لِباسِ الْعافِيَةِ وَتَمامِها ، وَشُمُولِ السَّلامَةِ وَدَوامِها ، وَأَعُوذُ بِكَ يارَبِّ مِنْ هَمَزاتِ الشَّياطِينِ ، وَأَحْتَرِزُ بِسُلْطانِكَ مِنْ جَوْرِ السَّلاطِينِ ، فَتَقَبَّلْ ما كانَ مِنْ صَلاتِي وَصَوْمِي ، واجْعَلْ غدي وَمَا بَعْدَهُ أفَضَلَ من سَاعَتي وَيَوْمِي ، وَأَعِزَّنِي فِي عَشِيرَتِي وَقَوْمِي ، وَاحْفَظْنِي فِي يَقْظَتِي وَنَوْمِي ، فَأَنْتَ اللَّهُ خَيْرٌ حافِظاً ، وَأَنْتَ أَرْحَمُ الرَّاحِمِينَ. اَللَّهُمَّ إنِّي أَبْرَأُ إلَيْكَ فِي يَوْمِي هذا وَ[ في ] ما بَعْدَهُ مِنَ الآحَادِ مِنَ الشِّرْكِ وَالإلْحَادِ ، وَأُخْلِصُ لَكَ دُعآئِي تَعَرُّضَاً لِلإجابَةِ [وأُقِيمُ على طاعتِكَ رجاءً للإثابَةِ ] . فَصَلِّ عَلَى مُحَمَّد وَآلِ مُحَمَّد خَيْرِ خَلْقِكَ ، الدَّاعِي إلَى حَقِّكَ ، وَأَعِزَّنِي بِعِزِّكَ الَّذِي لا يُضامُ ، وَاحْفَظْنِي بِعَيْنِك الَّتِي لاتَنامُ ، وَاخْتِمْ بِالِانْقِطَاعِ إلَيْكَ أَمْرِي ، وَبِالْمَغْفِرَةِ عُمْرِي ، إنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ ." },
+    { dayName: "دعاء يوم الإثنين", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلَّهِ الَّذِي لَمْ يُشْهِدْ أَحَدَاً حِينَ فَطَرَ السَّمَواتِ وَالاَرْضَ ، وَلا اتَّخَذَ مُعِيناً حِينَ بَرَأَ النَّسَماتِ . لَمْ يُشارَكْ فِي الإلهِيَّةِ ، وَلَمْ يُظَاهَرْ فِي الْوَحْدانِيَّةِ . كَلَّتِ الأَلْسُنُ عَنْ غايَةِ صِفَتِهِ ، وَ [انْحَسَرَتِ ] الْعُقُولُ عَنْ كُنْهِ مَعْرِفَتِهِ ، وَتَوَاضَعَتِ الْجَبابِرَةُ لِهَيْبَتِهِ ، وَعَنَتِ الْوُجُوهُ لِخَشْيَتِهِ ، وَانْقَادَ كُلُّ عَظِيمٍ لِعَظَمَتِهِ . فَلَكَ الْحَمْدُ مُتَوَاتِراً مُتَّسِقاً ، وَمُتَوَالِياً مُسْتَوْسِقَاً . وَصَلَواتُهُ عَلَى رَسُولِهِ أَبَدَاً ، وَسَلامُهُ دَآئِماً سَرْمَدَاً . اَللَّهُمَّ اجْعَلْ أَوَّلَ يَوْمِي هذَا صَلاحَاً ، وَأَوْسَطَهُ فَلاحَاً ، وَآخِرَهُ نَجاحَاً ، وَأَعُوذُ بِكَ مِنْ يَوْمٍ أَوَّلُهُ فَزَعٌ ، وَأَوْسَطُهُ جَزَعٌ ، وَآخِرُهُ وَجَعٌ . اَللَّهُمَّ إنِّي أَسْتَغِفرُكَ لِكُلِّ نَذْرٍ نَذَرْتُهُ ، وَلِكُلِّ وَعْدٍ وَعَدتُّهُ ، وَلِكُلِّ عَهْدٍ عاهَدتُّهُ ، ثُمَّ لَمْ أَفِ لَكَ بِهِ . وَأَسْأَلُكَ فِي مَظالِمِ عِبادِكَ عِنْدِي ، فَأَيُّما عَبْدٍ مِنْ عَبِيدِكَ ، أَوْ أَمَةٍ مِنْ إمآئِكَ ، كَانَتْ لَهُ قِبَلِي مَظْلَمَةٌ ظَلَمْتُها إيَّاهُ فِي نَفْسِهِ ، أَوْ فِي عِرْضِهِ ، أَوْ فِي مالِهِ ، أَوْ فِي أَهْلِهِ وَوَلَدِهِ ، أَوْ غَيْبَةٌ اغْتَبْتُهُ بِها ، أَوْ تَحامُلٌ عَلَيْهِ بِمَيْل أَوْ هَوًى ، أَوْ أَنَفَةٍ، أَوْ حَمِيَّةٍ ، أَوْ رِيآءٍ ، أَوْ عَصَبِيَّةٍ ـ غائِباً كانَ أَوْ شاهِداً ، وَحَيًّا كانَ أَوْ مَيِّتاً ـ ، فَقَصُرَتْ يَدِي ، وَضاقَ وُسْعِي عَنْ رَدِّها إلَيْهِ ، وَالتَّحَلُّلِ مِنْهُ . فَأَسْأَلُكَ ـ يا مَنْ يَمْلِكُ الْحاجاتِ ، وَهِيَ مُسْتَجِيبَةٌ بِمَشِيَّتِهِ [ لِمَشِيَّتِهِ ] ، وَمُسْرِعَةٌ إلى إرَادَتِهِ ـ أَنْ تُصَلِّيَ عَلَى مُحَمَّدٍ وَآلِ مُحَمَّدٍ ، وَأَنْ تُرْضِيَهُ عَنِّي بِما شِئْتَ ، وَتَهَبَ لِي مِنْ عِنْدِكَ رَحْمَةً ، إنَّهُ لا تَنْقُصُكَ الْمَغْفِرَةُ ، وَلا تَضُرُّكَ المَوْهِبَةُ يا أَرْحَمَ الرَّاحِمِينَ . اَللَّهُمَّ أَوْلِنِي فِي كُلِّ يَوْمِ إثْنَيْنِ نِعْمَتَيْنِ مِنْكَ ثِنْتَيْنِ : سَعادَةً فِي أَوَّلِهِ بِطاعَتِكَ ، وَنِعْمَةً فِي آخِرِهِ بِمَغْفِرَتِكَ ، يا مَنْ هُوَ الاِلهُ ، وَلا يَغْفِرُ الذُّنُوبَ سِواهُ ." },
     { dayName: "دعاء يوم الثلاثاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ وَالحَمْدُ حَقُّهُ كَما يَسْتِحِقُّهُ حَمْداً كَثِيراً ، وَأَعُوذُ بِهِ مِنْ شَرِّ نَفْسِي ؛ إِنَّ النَّفْسَ لأَمّارَةٌ بِالسُّوءِ إِلّا ما رَحِمَ رَبِّي ، وَأَعُوذُ بِهِ مِنْ شَرِّ الشَّيْطانِ الَّذِي يَزِيدُنِي ذَنْباً إِلى ذَنْبِي ، وَأَحْتَرِزُ بِهِ مِنْ كُلِّ جَبّارٍ فاجِرٍ ، وَسُلْطانٍ جائِرٍ ، وَعَدُوٍّ قاهِرٍ . اَللّهُمَّ اجْعَلْنِي مِنْ جُنْدِكَ فَإِنَّ جُنْدَكَ هُمُ الغالِبُونَ ، وَاجْعَلْنِي مِنْ حِزْبِكَ فَإِنَّ حِزْبَكَ هُمُ المُفْلِحُونَ ، وَاجْعَلْنِي مِنْ أوْلِيائِكَ فَإِنَّ أَوْلِياَءَكَ لا خَوْفٌ عَلَيْهِمْ وَلاهُمْ يَحْزَنُونَ . اَللّهُمَّ أصْلِحْ لِي دِينِي فَإِنَّهُ عِصْمَةُ أَمْرِي ، وَأصْلِحْ لِي آخِرَتِي فَإِنَّها دارُ مَقَرِّي ، وَإِلَيْها مِن مُجاوَرَةِ اللِّئامِ مَفَرِّي ، وَاجْعَلِ الحَياةَ زِيادَةً لِي فِي كُلِّ خَيْرٍ ، وَالوَفاةَ راحَةً لِي مِنْ كلِّ شَرٍ ، اللّهُمَّ صَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ وَتَمامِ عِدَّةِ المُرْسَلِينَ ، وَعَلى آلِهِ الطَّيِّبِينَ الطَّاهِرِينَ وَأَصْحابِهِ المُنْتَجَبِينَ، وَهَبْ لِي فِي الثُّلاثاءِ ثَلاثًا : لاتَدَعْ لِي ذَنْباً إِلّا غَفَرْتَهُ ، وَلا غَمّاً إِلّا أَذْهَبْتَهُ ، وَلا عَدُوّاً إِلّا دَفَعْتَهُ . بِـ (( بِسْمِ اللهِ )) خَيْرِ الأَسْماء ، بِسْمِ اللهِ رَبِّ الأَرْضِ وَالسَّمَاءِ ، أَسْتَدْفِعُ كُلَّ مَكْرُوهٍ أَوَّلُهُ سَخَطُهُ ، وَأَسْتَجْلِبُ كُلَّ مَحْبُوبٍ أَوَّلُهُ رِضاهُ، فَاخْتِمْ لِي مِنْكَ بِالغُفْرانِ يا وَلِيَّ الإِحْسانِ ." },
     { dayName: "دعاء يوم الأربعاء", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلْحَمْدُ لِلّهِ الَّذِي جَعَلَ اللَّيْلَ لِباساً ، وَالنَّوْمَ سُباتَاً ، وَجَعَلَ النَّهارَ نُشُوراً . لَكَ الْحَمْدُ أَنْ بَعَثْتَنِي مِنْ مَرْقَدِي ، وَلَوْ شِئْتَ جَعَلْتَهُ سَرْمَداً حَمْداً دَائِمَاً لا يَنْقَطِعُ أَبَداً ، وَلا يُحْصِي لَهُ الْخَلائِقُ عَدَدَاً .اَللَّهُمَّ لَكَ الْحَمْدُ أَنْ خَلَقْتَ فَسَوَّيْتَ ، وَقَدَّرْتَ وَقَضَيْتَ ، وَأَمَتَّ وَأَحْيَيْتَ ، وَأَمْرَضْتَ وَشَفَيْتَ ، وَعَافَيْتَ وَأَبْلَيْتَ ، وَعَلَى الْعَرْشِ اسْتَوَيْتَ ، وَعَلَى الْمُلْكِ احْتَوَيْتَ .أَدْعُوكَ دُعآءَ مَنْ ضَعُفَتْ وَسِيلَتُهُ ، وَانْقَطَعَتْ حِيلَتُهُ ، وَاقْتَرَبَ أَجَلُهُ ، وَتَدانَى فِي الدُّنْيا أَمَلُهُ ، وَاشْتَدَّتْ إلى رَحْمَتِكَ فاقَتُهُ ، وَعَظُمَتْ لِتَفْرِيطِهِ حَسْرَتُهُ ، وَكَثُرَتْ زَلَّتُهُ وَعَثْرَتُهُ ، وَخَلُصَتْ لِوَجْهِكَ تَوْبَتُهُ . فَصَلِّ عَلى مُحَمَّدٍ خاتَمِ النَّبِيِّينَ ، وَعَلى أَهْلِ بَيْتِهِ الطَّيِّبِينَ الطَّاهِرِينَ ، وَارْزُقْنِي شَفاعَةَ مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَآلِهِ ، وَلا تَحْرِمْنِي صُحْبَتَهُ إنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ . اَللَّهُمَّ اقْضِ لِي فِي الأَرْبِعآءِ أَرْبَعَاً : اِجْعَلْ قُوَّتِي فِي طاعَتِكَ ، وَنَشاطِي فِي عِبادَتِكَ ، وَرَغْبَتِي فِي ثَوَابِكَ ، وَزُهْدِي فِيما يُوجِبُ لِي أَلِيمَ عِقابِكَ ، إنَّكَ لَطِيفٌ لِما تَشَآءُ ." },
     { dayName: "دعاء يوم الخميس", text: "بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ : اَلحَمْدُ للهِ الَّذِي أَذْهَبَ اللَّيْلَ مُظْلِماً بِقُدْرَتِهِ ، وَجاءَ بِالنَّهارِ مُبْصِراً بِرَحْمَتِهِ ، وَكَسانِي ضِياءَهُ وَأَنا فِي نِعْمَتِهِ . اَللّهُمَّ فَكَما أَبْقَيْتَنِي لَهُ فَأَبْقِنِي لأَمْثالِهِ ، وَصَلِّ عَلى النَّبِيّ مُحَمَّدٍ وَآلِهِ ، وَلا تَفْجَعْنِي فِيهِ وَفِي غَيْرِهِ مِنَ اللَّيالِي وَالأَيّامِ بِارْتِكابِ المَحارِمِ وَاكْتِسابِ المَآثِمِ ، وَارْزُقْنِي خَيْرَهُ وَخَيْرَ ما فِيهِ وَخَيْرَ ما بَعْدَهُ ، وَاصْرِفْ عَنِّي شَرَّهُ وَشَرَّ ما فِيهِ وَشَرَّ ما بَعْدَهُ . اَللّهُمَّ إِنِّي بِذِمَّةِ الإِسْلامِ أَتَوَسَّلُ إِلَيْكَ ، وَبِحُرْمَةِ القُرْآنِ أَعْتَمِدُ عَلَيْكَ ، وَبِمُحَمَّدٍ المُصْطَفى ـ صَلَّى الله عَلَيْهِ وَآلِهِ ـ أَسْتَشْفِعُ لَدَيْكَ ، فَاعْرِفِ اللّهُمَّ ذِمَّتِي الَّتِي رَجَوْتُ بِها قَضاءَ حاجَتِي ، يا أَرْحَمَ الرَّاحِمِينَ . اَللّهُمَّ اقْضِ لِي فِي الخَمِيسِ خَمْساً ، لا يَتَّسِعُ لَهَا إِلَّا كَرَمُكَ ، وَلا يُطِيقُها إِلَّا نِعَمُكَ : سَلامَةً أَقْوَى بِها عَلى طاعَتِكَ ، وَعِبادَةً أَسْتَحِقُّ بِها جَزِيلَ مَثُوبَتِكَ ، وَسَعَةً فِي الحَالِ مِنَ الرِّزْقِ الحَلالِ ، وَأَنْ تُؤْمِنَنِي فِي مَواقِفِ الخَوْفِ بِأَمْنِكَ ، وَتَجْعَلَنِي مِنْ طَوارِقِ الهُمُومِ وَالغُمُومِ فِي حِصْنِكَ ، وَصَلِّ عَلى مُحمَّدٍ وَآلِ مُحَمَّدٍ ، وَاجْعَلْ تَوَسُّلِي بِهِ شافِعاً يَوْمَ القِيامَةِ نافِعاً ، إِنَّكَ أَنْتَ أَرْحَمُ الرَّاحِمِينَ ." },
@@ -4668,10 +4870,10 @@ const REPORTED_KEY = 'adhkar_reported_ids';
 function getReportedIds() {
     try { return JSON.parse(localStorage.getItem(REPORTED_KEY)) || []; } catch (e) { return []; }
 }
-function reportDeceasedName(id) {
+async function reportDeceasedName(id) {
     const target = deceasedList.find(i => i.id === id);
     if (!target) return;
-    if (!confirm('هل تريد الإبلاغ عن هذا الاسم كمحتوى غير لائق؟')) return;
+    if (!(await hqbConfirm({ icon: 'fa-flag', title: 'الإبلاغ عن الاسم', body: '<p>هل تريد الإبلاغ عن هذا الاسم كمحتوى غير لائق؟</p>', ok: 'إبلاغ', cancel: 'إلغاء' }))) return;
     const ids = getReportedIds();
     if (!ids.includes(id)) ids.push(id);
     try { localStorage.setItem(REPORTED_KEY, JSON.stringify(ids)); } catch (e) {}
@@ -4711,11 +4913,7 @@ async function hqbMyFanusIds() {
     if (!supabaseClient || !navigator.onLine) return null;
     const r = await hqbRpc('fanus_mine', { p_device: myDeviceId });
     if (r.ok) return (r.data || []).map(x => (x && typeof x === 'object') ? x.fanus_mine : x);
-    if (!r.missing) return null;
-    try {
-        const { data, error } = await supabaseClient.from('fanus').select('id').eq('created_by', myDeviceId);
-        return error ? null : (data || []).map(x => x.id);
-    } catch (e) { return null; }
+    return null;   // أمان: لا وصول مباشر للجدول، فقط عبر دوال الخادم المحمية
 }
 async function hqbMyNamesCountCloud() {
     const ids = await hqbMyFanusIds();
@@ -4729,9 +4927,23 @@ function hqbRenderFatihaQuota() {
     el.style.color = left ? '' : '#D4A84F';
 }
 
+// ===== الختمات: تبويب «الكل/ختماتي» ونموذج الإضافة =====
+let hqbKhTabNow = 'all';
+function hqbKhTab(t) {
+    hqbKhTabNow = t;
+    ['all', 'mine'].forEach(k => { const b = document.getElementById('kh-tab-' + k); if (b) b.classList.toggle('on', k === t); });
+    loadFatihaLocalList();
+}
+function hqbKhAdd(show) {
+    const box = document.getElementById('kh-add'); if (!box) return;
+    const on = show === undefined ? box.classList.contains('hidden') : !!show;
+    box.classList.toggle('hidden', !on);
+    if (on) setTimeout(() => { const i = document.getElementById('deceased-input'); if (i) i.focus(); }, 80);
+}
+
 async function loadFatihaLocalList() {
     const container = document.getElementById('fatiha-list-content');
-    container.innerHTML = `<div class="text-center py-5 text-xs text-palette-mauve"><i class="fa-solid fa-spinner fa-spin ml-2"></i>جاري تحميل الأسماء...</div>`;
+    if (!container.querySelector('.kh-card')) container.innerHTML = `<div class="kh-empty"><i class="fa-solid fa-spinner fa-spin"></i><p>جاري تحميل الختمات...</p></div>`;
 
     if (supabaseClient) {
         try {
@@ -4770,45 +4982,39 @@ async function loadFatihaLocalList() {
     const reportedIds = getReportedIds();
     const visibleList = deceasedList.filter(item => !reportedIds.includes(item.id));
 
-    if (visibleList.length === 0) {
-        container.innerHTML = `<p class="text-xs text-center text-palette-mauve py-5">لا توجد أسماء بعد.</p>`;
+
+    const mineList = visibleList.filter(it => it.created_by && it.created_by === myDeviceId);
+    const list = hqbKhTabNow === 'mine' ? mineList : visibleList;
+    const cnt = document.getElementById('kh-count'); if (cnt) cnt.innerText = String(list.length);
+    const st = document.getElementById('kh-sec-title'); if (st) st.innerText = hqbKhTabNow === 'mine' ? 'ختماتي' : 'الختمات المتاحة';
+    if (!list.length) {
+        container.innerHTML = hqbKhTabNow === 'mine'
+            ? `<div class="kh-empty"><i class="fa-solid fa-book-open"></i><p>لم تنشئ ختمة بعد.</p><button class="kh-btn" onclick="playClickSound(); hqbKhAdd(true)"><i class="fa-solid fa-plus ml-1"></i>ختمة جديدة</button></div>`
+            : `<div class="kh-empty"><i class="fa-solid fa-book-open"></i><p>لا توجد ختمات بعد.</p></div>`;
         return;
     }
-
     let html = '';
-    visibleList.forEach((item, i) => {
+    list.forEach(item => {
         const prefix = item.gender === 'أنثى' ? 'المرحومة' : 'المرحوم';
         const isOwner = (item.created_by && item.created_by === myDeviceId);
-        const tone = (i % 2 === 0) ? 'bg-palette-dark' : 'bg-palette-purple';
-
         html += `
-            <div class="p-3 rounded-xl ${tone} flex items-center justify-between gap-2.5">
-                <div class="text-right overflow-hidden space-y-0.5">
-                    <h4 class="font-bold text-white text-xs truncate">${prefix} ${escapeHTML(item.name)}</h4>
-                    <div class="flex items-center gap-2.5 text-[9px] text-palette-mauve font-medium">
-                        <span><i class="fa-solid fa-eye ml-1"></i>${toEasternArabicDigits(item.views_count)} مشاهدة</span>
-                        <span><i class="fa-solid fa-check-double ml-1"></i>${toEasternArabicDigits(item.reads_count)} قراءة</span>
-                    </div>
+            <div class="kh-card" role="button" tabindex="0" onclick="playClickSound(); openReadingModal(${item.id})">
+                <div class="kh-top">
+                    <span class="kh-ic"><i class="fa-solid fa-book-open"></i></span>
+                    <span class="kh-meta">الفاتحة · غير محدود</span>
+                    <span class="kh-chip"><i></i>قيد التقدم</span>
                 </div>
-                <div class="flex items-center gap-1.5 shrink-0">
-                    <button onclick="playClickSound(); openReadingModal(${item.id})" class="px-2.5 py-1.5 rounded-xl bg-palette-light text-palette-darkest font-bold text-xs shadow-md cursor-pointer">
-                        <i class="fa-solid fa-book-open ml-1"></i> اقرأ الفاتحة
-                    </button>
-                    <button onclick="playClickSound(); hqbShareFatiha(${item.id})" class="w-7 h-7 rounded-xl bg-palette-mauve text-palette-darkest flex items-center justify-center cursor-pointer" title="أرسل لأهله">
-                        <i class="fa-solid fa-share-nodes text-xs"></i>
-                    </button>
-                    ${isOwner ? `
-                    <button onclick="playClickSound(); deleteDeceasedCloud(${item.id})" class="w-7 h-7 rounded-xl bg-palette-muted text-palette-darkest flex items-center justify-center cursor-pointer" title="حذف السجل">
-                        <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
-                    ` : `
-                    <button onclick="playClickSound(); reportDeceasedName(${item.id})" class="w-7 h-7 rounded-xl bg-palette-mauve text-palette-darkest flex items-center justify-center cursor-pointer" title="إبلاغ عن محتوى">
-                        <i class="fa-solid fa-flag text-xs"></i>
-                    </button>
-                    `}
+                <p class="kh-tx">الفاتحة على روح ${prefix} ${escapeHTML(item.name)}</p>
+                <div class="kh-foot">
+                    <span class="kh-cnt"><i></i><bdi>${Number(item.reads_count) || 0}/∞</bdi></span>
+                    <span class="kh-acts">
+                        <button onclick="event.stopPropagation(); playClickSound(); hqbShareFatiha(${item.id})" aria-label="مشاركة"><i class="fa-solid fa-share-nodes"></i></button>
+                        ${isOwner
+                            ? `<button onclick="event.stopPropagation(); playClickSound(); deleteDeceasedCloud(${item.id})" aria-label="حذف"><i class="fa-solid fa-trash-can"></i></button>`
+                            : `<button onclick="event.stopPropagation(); playClickSound(); reportDeceasedName(${item.id})" aria-label="إبلاغ"><i class="fa-solid fa-flag"></i></button>`}
+                    </span>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
     container.innerHTML = html;
 }
@@ -4870,8 +5076,10 @@ async function addDeceasedCloud() {
     }
 
     nameInput.value = "";
+    hqbKhAdd(false);
+    hqbKhTabNow = 'mine'; ['all', 'mine'].forEach(k => { const b = document.getElementById('kh-tab-' + k); if (b) b.classList.toggle('on', k === 'mine'); });
     await loadFatihaLocalList();
-    showToast("تمت إضافة الاسم");
+    showToast("تم إنشاء الختمة");
 }
 
 async function deleteDeceasedCloud(id) {
@@ -4886,13 +5094,12 @@ async function deleteDeceasedCloud(id) {
         return;
     }
 
-    if (!confirm("هل أنت متأكد من حذف هذا الاسم؟")) return;
+    if (!(await hqbConfirm({ icon: 'fa-trash-can', title: 'حذف الاسم', body: `<p>هل تريد حذف اسم ${escapeHTML(target.name || '')} من القائمة؟</p><p>لن يظهر للآخرين بعد الحذف.</p>`, ok: 'حذف', cancel: 'إلغاء' }))) return;
 
     if (supabaseClient) {
         try {
             let res = await hqbRpc('fanus_delete', { p_id: id, p_device: myDeviceId });
-            let error = res.ok ? null : res.error;
-            if (!res.ok && res.missing) error = (await supabaseClient.from('fanus').delete().eq('id', id).eq('created_by', myDeviceId)).error;
+            const error = res.ok ? null : res.error;
 
             if (error) {
                 showToast("تعذر الحذف، حاول مرة أخرى");
@@ -4948,13 +5155,7 @@ async function openReadingModal(id) {
 async function hqbFanusHit(id, kind) {
     const r = await hqbRpc('fanus_hit', { p_id: id, p_kind: kind });
     if (r.ok) { const d = r.data || {}; return { views: +d.views || 0, reads: +d.reads || 0 }; }
-    if (!r.missing) return null;
-    const col = kind === 'reads' ? 'reads_count' : 'views_count';
-    const { data: cur } = await supabaseClient.from('fanus').select('views_count, reads_count').eq('id', id).single();
-    const out = { views: (cur && cur.views_count) || 0, reads: (cur && cur.reads_count) || 0 };
-    out[kind] += 1;
-    const { error } = await supabaseClient.from('fanus').update({ [col]: out[kind] }).eq('id', id);
-    return error ? null : out;
+    return null;
 }
 
 async function finishReadingFatiha() {
@@ -4968,7 +5169,8 @@ async function finishReadingFatiha() {
             } catch (e) {}
         }
 
-        activeDeceasedPerson.reads_count = newReads;showToast(`تقبل الله، إجمالي القراءات: ${toEasternArabicDigits(newReads)}`);
+        activeDeceasedPerson.reads_count = newReads;
+        showToast(`تقبل الله، إجمالي القراءات: ${toEasternArabicDigits(newReads)}`);
     }
 
     closeModal('reading-fatiha-modal');
@@ -4981,7 +5183,7 @@ const PRIVACY_CONTENT = {
         close: "إغلاق",
         updated: "آخر تحديث: نوفمبر 2026",
         sections: [
-            ["1. مقدمة", "نلتزم بحماية خصوصيتك. توضح هذه السياسة المعلومات التي يتعامل معها تطبيق «حرم» وكيف تُستخدم. التطبيق مجاني، ولا يحتوي على إعلانات، ولا نبيع بياناتك ولا نشاركها مع أي جهة إعلانية."],
+            ["1. مقدمة", "نلتزم بحماية خصوصيتك. توضح هذه السياسة المعلومات التي يتعامل معها تطبيق حرم وكيف تُستخدم. التطبيق مجاني، ولا يحتوي على إعلانات، ولا نبيع بياناتك ولا نشاركها مع أي جهة إعلانية."],
             ["2. الاسم", "الاسم الذي تكتبه عند الدخول اختياري، ويُحفظ على جهازك فقط ليظهر في الترحيب. يمكنك تغييره من الإعدادات في أي وقت. لا نطلب بريداً إلكترونياً ولا رقم هاتف ولا إنشاء حساب."],
             ["3. الموقع الجغرافي", "يُطلب الموقع فقط عند استخدامك لأوقات الصلاة التلقائية أو خريطة المساجد، وبعد عرض توضيح وموافقتك. تُرسل الإحداثيات لحظياً إلى خدمة Aladhan لحساب أوقات الصلاة، وإلى خدمات OpenStreetMap (Nominatim وOverpass) لمعرفة اسم المدينة والمساجد القريبة، وتُعرض الخريطة من OpenStreetMap، وإذا لم تصل هذه الخدمات من شبكتك يمر طلب البحث عن المساجد عبر خادمنا دون أن نحفظه. لا نحفظ موقعك على خوادمنا، ولا يُستخدم الموقع في الخلفية. الاستثناء الوحيد: في «طريق الأربعين» يُحسب مسيرك على جهازك فقط، وإذا ضغطت «أنا عند العمود» يُرسل رقم العمود وإحداثيات مكانك ودقة GPS إلى خادمنا مع معرّف مجهول لجهازك، لبناء خريطة أعمدة يستفيد منها الزوار. ولا يظهر للآخرين إلا رقم العمود."],
             ["4. قسم الفاتحة (محتوى يضيفه المستخدمون)", "عند إضافة اسم متوفى يُحفظ الاسم والجنس وعدد القراءات والمشاهدات على خادم Supabase، مع معرّف عشوائي مجهول لجهازك يتيح لك وحدك حذف ما أضفته. الأسماء تظهر لجميع المستخدمين، فلا تكتب معلومات شخصية أو أرقام تواصل. قبل النشر يُفحص الاسم بقواعد ثابتة، ثم يُرسل عبر خادمنا إلى Google Gemini لمراجعته آلياً، دون أي معلومة عنك. ويمكن لأي مستخدم الإبلاغ عن اسم، فيُخفى تلقائياً بعد بلاغين من شبكتين مختلفتين."],
@@ -4990,7 +5192,7 @@ const PRIVACY_CONTENT = {
             ["7. خدمات الأطراف الثالثة", "يعتمد التطبيق على: Supabase (قسم الفاتحة والأدعية والتلاوات)، وAlQuran Cloud وIslamic Network (نص القرآن والتلاوات)، وOpenStreetMap (المدن وخريطة المساجد، وقد يمر طلب البحث عن المساجد عبر خادمنا دون أن نحفظه)، وخرائط Google (عند طلبك الاتجاهات إلى مسجد)، وخطوط Google، وروابط حسابات العتبات المقدسة في إنستغرام، وGoogle Gemini (مساعد حرم). لكل خدمة سياسة خصوصية خاصة بها."],
             ["8. مساعد حرم (الذكاء الاصطناعي)", "عند استخدامك لمساعد حرم تُرسل رسالتك ومعلومات يومك (التاريخ، المدينة، أوقات الصلاة، اسمك إن كتبته) إلى خدمة Google Gemini لتوليد الرد، عبر خادم التطبيق دون أي معلومات تواصل. تُحفظ المحادثة على جهازك فقط، ويُسجَّل عدد رسائلك اليومي لمنع الإساءة. الردود يولّدها الذكاء الاصطناعي وقد تخطئ، ولا تُغني عن الرجوع لمرجع التقليد. يمكنك الإبلاغ عن أي رد غير لائق من زر «إبلاغ»."],
             ["9. الحماية من الإساءة", "لحماية التطبيق من الرسائل المزعجة والتلاعب، يقرأ خادمنا عنوان شبكتك (IP) لحظياً ويحوّله فوراً إلى رمز مشفّر باتجاه واحد لا يمكن إرجاعه إلى العنوان الأصلي. يُستخدم هذا الرمز فقط لعدّ المحاولات ووضع حدود لها: عدد الأسماء المضافة في قسم الفاتحة، والبلاغات، وإضافة أعمدة طريق الأربعين، ورسائل مساعد حرم، وعدّاد المشاهدات والتحميلات والمشاركات للخلفيات (يُحسب مرة واحدة يومياً لكل شبكة). لا يُربط الرمز باسمك ولا بأي معلومة تعريفية، وتُحذف سجلاته تلقائياً بعد أيام قليلة."],
-            ["10. الإبلاغ عن مشكلة", "عند استخدامك لـ«الإبلاغ عن مشكلة» يُحفظ على خادمنا: نوع المشكلة، والنص الذي تكتبه، والصورة إن أرفقتها، ونوع جهازك ومتصفحك وحجم الشاشة، ورقم عشوائي لجهازك، دون اسمك أو موقعك. تُحفظ الصور في مخزن خاص لا يصل إليه إلا فريق «حرم»، وتُستخدم البلاغات فقط لإصلاح المشاكل. لا ترفق صوراً فيها معلومات شخصية."],
+            ["10. الإبلاغ عن مشكلة", "عند استخدامك لـ«الإبلاغ عن مشكلة» يُحفظ على خادمنا: نوع المشكلة، والنص الذي تكتبه، والصورة إن أرفقتها، ونوع جهازك ومتصفحك وحجم الشاشة، ورقم عشوائي لجهازك، دون اسمك أو موقعك. تُحفظ الصور في مخزن خاص لا يصل إليه إلا فريق تطبيق حرم، وتُستخدم البلاغات فقط لإصلاح المشاكل. لا ترفق صوراً فيها معلومات شخصية."],
             ["11. الأطفال", "التطبيق مناسب لجميع الأعمار، ولا نجمع عمداً أي بيانات شخصية من الأطفال."],
             ["12. حذف بياناتك", "يمكنك حذف كل بياناتك في أي وقت من: الإعدادات ← «حذف بياناتي»، فتُحذف الأسماء التي أضفتها والبلاغات التي أرسلتها وصورها من خادمنا وتُمسح بيانات التطبيق من جهازك. ويمكنك أيضاً طلب الحذف بمراسلتنا على البريد أدناه."],
             ["13. التعديلات", "قد نحدّث هذه السياسة، ويظهر تاريخ آخر تحديث أعلاه."],
@@ -5195,7 +5397,7 @@ function mushafApplyLang() {
     document.getElementById('mushaf-next-btn').innerText = 'السورة التالية';
     document.getElementById('mushaf-prev-btn').innerText = 'السورة السابقة';
     const sel = document.getElementById('mushaf-reciter');
-    sel.innerHTML = MUSHAF_RECITERS.map(r => `<option value="${r.id}" ${r.id === mushafReciter ? 'selected' : ''}>${r.ar}</option>`).join('');
+    sel.innerHTML = MUSHAF_RECITERS.map(r => `<option value="${escapeHTML(r.id)}" ${r.id === mushafReciter ? 'selected' : ''}>${escapeHTML(r.ar)}</option>`).join('');
     mushafUpdateDlLabel();
     mpRecLabel();
 }
@@ -5442,7 +5644,7 @@ function mushafToggleMark(a) {
 }
 
 function mushafShareText(a) {
-    return `﴿${mushafAyahText(a)}﴾\n[${SURAH_NAMES[mushafState.surah - 1]}: ${toEasternArabicDigits(a)}]\n\n— من تطبيق حرم`;
+    return `﴿${mushafAyahText(a)}﴾\n[${SURAH_NAMES[mushafState.surah - 1]}: ${toEasternArabicDigits(a)}]\n\n— من تطبيق حرم\n${HQB_SITE_URL}`;
 }
 
 async function mushafCopy(a) {
@@ -5454,7 +5656,7 @@ async function mushafCopy(a) {
 
 async function mushafShare(a) {
     const txt = mushafShareText(a);
-    if (navigator.share) { try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    if (await hqbNativeShare({ text: txt })) return;
     mushafCopy(a);
 }
 
@@ -5707,6 +5909,31 @@ function hqbUseGps() {
     });
 }
 
+// تحديث تلقائي صامت للموقع عند فتح التطبيق: فقط إذا اختار المستخدم «تحديد موقعي (GPS)» سابقاً
+async function hqbAutoLocate() {
+    if (!hqbHN() || localStorage.getItem('hqb_loc_ok') !== '1' || activeCountry !== HQB_CUSTOM_COUNTRY) return;
+    const last = +localStorage.getItem('hqb_autoloc_at') || 0;
+    if (Date.now() - last < 30 * 60 * 1000) return;
+    try { localStorage.setItem('hqb_autoloc_at', String(Date.now())); } catch (e) {}
+    let pos; try { pos = await hqbGetPosition({ silent: true, timeout: 15000, maxAgeSec: 1800 }); } catch (e) { return; }
+    const lat = pos.coords.latitude, lng = pos.coords.longitude, cur = hqbLocParams();
+    if (geo(cur.lat, cur.lng, lat, lng).dist < 15000) return;      // نفس المدينة تقريباً: لا تغيير
+    let name = 'موقعي الحالي';
+    try {
+        const ctl = ('AbortController' in window) ? new AbortController() : null;
+        const t = ctl ? setTimeout(() => ctl.abort(), 6000) : 0;
+        const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&zoom=10&accept-language=ar&lat=${lat}&lon=${lng}`, ctl ? { signal: ctl.signal } : {});
+        clearTimeout(t);
+        const ad = (await r.json()).address;
+        if (ad) name = [ad.city || ad.town || ad.village || ad.county || ad.state, ad.country].filter(Boolean).join('، ') || name;
+    } catch (e) {}
+    let tz; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (e) {}
+    hqbSetCustomLocation({ name, lat: +lat.toFixed(4), lng: +lng.toFixed(4), tz: tz || 'Asia/Baghdad' });
+    try { await hqbRefreshTodayTimings(true); hqbScheduleNextAdhan(); } catch (e) {}
+}
+setTimeout(hqbAutoLocate, 4000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(hqbAutoLocate, 1500); });
+
 function hqbLocParams() {
     const info = arabCountriesData[activeCountry] || arabCountriesData['العراق'];
     const c = info.cities[activeCity] || Object.values(info.cities)[0] || { lat: 31.9934, lng: 44.9219 };
@@ -5743,7 +5970,7 @@ const ADHAN_VOICES = [
     ] }
 ];
 function hqbAdhanCfg() {
-    const d = { on: true, prayers: { Fajr: true, Dhuhr: true, Asr: false, Maghrib: true, Isha: false }, pre: 0, voice: 0, volume: 1, v2: true };
+    const d = { on: true, prayers: { Fajr: true, Dhuhr: false, Asr: true, Maghrib: false, Isha: true }, pre: 0, voice: 0, volume: 1, v2: true, mode: 'alarm' };
     const c = hqbLS('hqb_adhan', null);
     if (!c) return d;
     const m = Object.assign(d, c, { prayers: Object.assign(d.prayers, c.prayers || {}) });
@@ -5754,8 +5981,30 @@ function hqbAdhanCfg() {
 }
 function hqbSaveAdhanCfg(c) { hqbSaveLS('hqb_adhan', c); }
 
+// تنبيه مرة واحدة على الأندرويد: يشرح للمستخدم أن يسمح للتطبيق بالعمل في الخلفية حتى يصله الأذان
+async function hqbBatteryHint() {
+    if (!HQB_LN) return;                                   // على الأندرويد فقط
+    if (localStorage.getItem('hqb_batt_hint') === '1') return;
+    const c = hqbAdhanCfg();
+    if (!c.on || !ADHAN_PRAYERS.some(p => c.prayers[p.k])) return;  // بعد تفعيل أذان واحد على الأقل
+    try { localStorage.setItem('hqb_batt_hint', '1'); } catch (e) {}
+    if (hqbHN()) {
+        const go = await hqbConfirm({ icon: 'fa-bell', title: 'حتى يصلك الأذان دائماً', body: '<p>افتح «موثوقية منبه الصلاة» واجعل كل البنود باللون الأخضر، فيصلك الأذان كاملاً حتى والتطبيق مغلق والهاتف صامت.</p>', ok: 'افتحها الآن', cancel: 'لاحقاً' });
+        if (go) { openAdhanSettings(); setTimeout(openAdhanReliability, 150); }
+        return;
+    }
+    await hqbConfirm({
+        icon: 'fa-bell',
+        title: 'حتى يصلك الأذان دائماً',
+        body: '<p>بعض الهواتف (شاومي، أوبو، هواوي وغيرها) توقف التطبيقات في الخلفية لتوفير البطارية، فقد يتأخر الأذان أو لا يصلك.</p><p>الحل: افتحي إعدادات الهاتف ← التطبيقات ← تطبيق حرم ← البطارية، واختاري <b>«بلا قيود»</b> أو «السماح بالعمل في الخلفية».</p>',
+        ok: 'فهمت', cancel: 'لاحقاً'
+    });
+}
+
 function openAdhanSettings() {
+    hqbRelOpen = false;
     openModal('adhan-modal');
+    hqbRelRefresh();
     hqbRefreshTodayTimings(false).then(() => renderAdhanSettings());
     renderAdhanSettings();
 }
@@ -5779,13 +6028,27 @@ function renderAdhanSettings() {
             ${ADHAN_PRAYERS.map(p => `
                 <div class="flex items-center justify-between py-1.5">
                     <div class="flex items-center gap-2"><span class="text-xs font-bold text-palette-light w-14">${p.ar}</span>
-                    <span class="font-mono text-[11px] text-palette-muted">${t && t[p.k] ? format12Hour(t[p.k]) : '--:--'}</span></div><button class="hqb-switch ${c.prayers[p.k] ? 'on' : ''}" onclick="playClickSound(); hqbAdhanPrayer('${p.k}')"></button>
+                    <span class="font-mono text-[11px] text-palette-muted">${t && t[p.k] ? format12Hour(t[p.k]) : '--:--'}</span></div>
+                    <button class="hqb-switch ${c.prayers[p.k] ? 'on' : ''}" onclick="playClickSound(); hqbAdhanPrayer('${p.k}')"></button>
                 </div>`).join('')}
         </div>
         <div class="hqb-card">
             <p class="text-xs font-bold text-palette-mauve mb-2">تذكير قبل الأذان</p>
             <div class="grid grid-cols-5 gap-1.5">${preOpts.map(m => `<button onclick="playClickSound(); hqbAdhanSet('pre', ${m})" class="py-2 rounded-xl text-[10px] font-bold ${c.pre === m ? 'bg-palette-mauve text-palette-darkest' : 'bg-palette-dark text-palette-light'}">${m === 0 ? 'بدون' : (hqbNum(m) + ' د')}</button>`).join('')}</div>
         </div>
+        ${hqbHN() ? `
+        <button id="hqb-rel-card" onclick="playClickSound(); openAdhanReliability()" class="hqb-rel-card ${hqbRelOk() ? 'ok' : 'bad'}">
+            <span class="ri"><i class="fa-solid ${hqbRelOk() ? 'fa-circle-check' : 'fa-alarm-clock'}"></i></span>
+            <span class="rt"><b>موثوقية منبه الصلاة</b><small>${hqbRelOk() ? 'كل شيء جاهز ليصلك الأذان في وقته' : 'تأكد من وصول الأذان إليك في وقته'}</small></span>
+            <i class="fa-solid fa-chevron-left ra"></i>
+        </button>
+        <div class="hqb-card space-y-2">
+            <p class="text-xs font-bold text-palette-mauve">نوع صوت الأذان</p>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="playClickSound(); hqbAdhanSet('mode','alarm')" class="hqb-mode ${c.mode !== 'notif' ? 'on' : ''}"><i class="fa-solid fa-alarm-clock"></i><b>صوت المنبه</b><small>يعمل حتى والهاتف صامت</small></button>
+                <button onclick="playClickSound(); hqbAdhanSet('mode','notif')" class="hqb-mode ${c.mode === 'notif' ? 'on' : ''}"><i class="fa-solid fa-bell"></i><b>صوت الإشعارات</b><small>يصمت مع وضع الصامت</small></button>
+            </div>
+        </div>` : ''}
         <div class="hqb-card space-y-2">
             <p class="text-xs font-bold text-palette-mauve">صوت الأذان</p>
             <div class="flex items-center gap-2 p-2.5 rounded-xl bg-palette-mauve text-palette-darkest">
@@ -5793,8 +6056,8 @@ function renderAdhanSettings() {
             </div>
         </div>
         <div class="hqb-card flex items-center justify-between gap-3">
-            <div><p class="text-sm font-black text-palette-light">إشعار المواقيت كل ساعتين</p>
-            <p class="text-[10px] text-palette-muted">الفجر والشروق والظهر والمغرب، بدون صوت</p></div>
+            <div><p class="text-sm font-black text-palette-light">${hqbHN() ? 'إشعار مواقيت الصلاة' : 'إشعار المواقيت كل ساعتين'}</p>
+            <p class="text-[10px] text-palette-muted">${hqbHN() ? 'يبقى في شريط الإشعارات ويُظهر أوقات اليوم والصلاة القادمة' : 'الفجر والشروق والظهر والمغرب، بدون صوت'}</p></div>
             <button class="hqb-switch ${hqbPtOn() ? 'on' : ''}" onclick="playClickSound(); hqbPtToggle()"></button>
         </div>
         <div class="hqb-card space-y-2">
@@ -5802,12 +6065,231 @@ function renderAdhanSettings() {
             <p class="text-[10px] text-palette-muted leading-relaxed">${perm === 'granted' ? 'الإشعارات مسموحة ✓' : perm === 'unsupported' ? 'هذا الجهاز لا يدعم الإشعارات من التطبيق، وسيُرفع الأذان ما دام التطبيق مفتوحاً.' : 'اسمح بالإشعارات ليصلك تنبيه الأذان.'}</p>
             ${perm === 'default' ? `<button onclick="playClickSound(); hqbAskNotify()" class="hqb-btn w-full"><i class="fa-solid fa-bell ml-1"></i>السماح بالإشعارات</button>` : ''}
             <button onclick="hqbFireAdhan('Dhuhr', true)" class="hqb-btn ghost w-full"><i class="fa-solid fa-volume-high ml-1"></i>تجربة الأذان الآن</button>
-            <p class="text-[9px] text-palette-muted leading-relaxed">اترك التطبيق مفتوحاً أو في الخلفية حتى يُرفع الأذان.</p>
+            ${hqbHN() ? `<button onclick="hqbTestLater()" class="hqb-btn ghost w-full"><i class="fa-solid fa-stopwatch ml-1"></i>تجربة بعد دقيقة (أغلق التطبيق وانتظر)</button>` : ''}
+            <p class="text-[9px] text-palette-muted leading-relaxed">${HQB_LN ? "يصلك تنبيه الأذان حتى والهاتف مقفل." : "اترك التطبيق مفتوحاً أو في الخلفية حتى يُرفع الأذان."}</p>
         </div>`;
 }
 
+// ===== موثوقية منبه الصلاة (تطبيق الأندرويد فقط) =====
+let hqbRel = null;
+try { hqbRel = JSON.parse(localStorage.getItem('hqb_rel_cache') || 'null'); } catch (e) {}
+function hqbRelOk() { const r = hqbRel; if (!r) return false; return r.notifications && r.exact && r.battery && r.file && (hqbAdhanCfg().mode === 'notif' || r.alarmVol > 0); }
+async function hqbRelRefresh() {
+    const HN = hqbHN(); if (!HN) return null;
+    try { hqbRel = await HN.status(); localStorage.setItem('hqb_rel_cache', JSON.stringify(hqbRel)); } catch (e) {}
+    const card = document.getElementById('hqb-rel-card');
+    if (card) {
+        const ok = hqbRelOk();
+        card.className = 'hqb-rel-card ' + (ok ? 'ok' : 'bad');
+        card.querySelector('.ri').innerHTML = `<i class="fa-solid ${ok ? 'fa-circle-check' : 'fa-alarm-clock'}"></i>`;
+        card.querySelector('.rt small').innerText = ok ? 'كل شيء جاهز ليصلك الأذان في وقته' : 'تأكد من وصول الأذان إليك في وقته';
+    }
+    if (hqbRelOpen) renderAdhanReliability();
+    return hqbRel;
+}
+let hqbRelOpen = false;
+function openAdhanReliability() { hqbRelOpen = true; renderAdhanReliability(); hqbRelRefresh(); }
+function hqbRelBack() { playClickSound(); hqbRelOpen = false; renderAdhanSettings(); }
+const HQB_OEM_AUTOSTART = ['xiaomi', 'redmi', 'poco', 'oppo', 'realme', 'oneplus', 'vivo', 'iqoo', 'huawei', 'honor', 'tecno', 'infinix', 'itel', 'meizu', 'asus', 'letv', 'samsung'];
+function renderAdhanReliability() {
+    const r = hqbRel || {}, c = hqbAdhanCfg();
+    const maker = String(r.maker || '').toLowerCase();
+    const row = (ok, icon, title, desc, btn, act) => `
+        <div class="hqb-rel-row ${ok ? 'ok' : 'bad'}">
+            <span class="st"><i class="fa-solid ${ok ? 'fa-check' : 'fa-xmark'}"></i></span>
+            <div class="tx"><b><i class="fa-solid ${icon} ml-1"></i>${title}</b><small>${desc}</small></div>
+            ${!ok && btn ? `<button onclick="playClickSound(); ${act}">${btn}</button>` : ''}
+        </div>`;
+    const volPct = r.alarmMax > 0 ? Math.round(r.alarmVol / r.alarmMax * 100) : 0;
+    const next = r.next ? new Date(r.next) : null;
+    const nextTx = next ? next.toLocaleString('ar-IQ', { weekday: 'long', hour: 'numeric', minute: '2-digit' }) : '—';
+    document.getElementById('adhan-title').innerText = 'موثوقية منبه الصلاة';
+    document.getElementById('adhan-sub').innerText = 'اجعل كل البنود خضراء ليصلك الأذان في وقته';
+    document.getElementById('adhan-body').innerHTML = `
+        <button onclick="hqbRelBack()" class="hqb-btn ghost w-full mb-1"><i class="fa-solid fa-arrow-right ml-1"></i>رجوع لإعدادات الأذان</button>
+        <div class="hqb-card space-y-2">
+            ${row(r.notifications, 'fa-bell', 'الإشعارات', r.notifications ? 'مسموحة' : 'مغلقة — لن يظهر زر إيقاف الأذان', 'سماح', 'hqbRelNotif()')}
+            ${row(r.exact, 'fa-clock', 'المنبهات الدقيقة', r.exact ? 'مسموحة — يُرفع الأذان في الدقيقة نفسها' : 'غير مسموحة — قد يتأخر الأذان', 'سماح', 'hqbRelDo(\'openExactAlarm\')')}
+            ${row(r.battery, 'fa-battery-full', 'البطارية بلا قيود', r.battery ? 'التطبيق مستثنى من توفير البطارية' : 'الهاتف قد يوقف الأذان لتوفير البطارية', 'سماح', 'hqbRelDo(\'requestBattery\')')}
+            ${c.mode === 'notif'
+                ? row(true, 'fa-bell', 'صوت الإشعارات', 'الأذان يتبع صوت الإشعارات ووضع الصامت', '', '')
+                : row(r.alarmVol > 0, 'fa-volume-high', 'صوت المنبه', r.alarmVol > 0 ? `مستوى صوت المنبه ${hqbNum(volPct)}٪` : 'صوت المنبه صفر — ارفعه من أزرار الصوت', '', '')}
+            ${row(r.file, 'fa-file-audio', 'ملف الأذان', r.file ? 'محفوظ في الهاتف ويعمل بدون إنترنت' : 'غير محفوظ — سيُستخدم صوت المنبه العادي', 'تحميل', 'hqbRelFile()')}
+        </div>
+        ${HQB_OEM_AUTOSTART.some(m => maker.indexOf(m) !== -1) ? `
+        <div class="hqb-card space-y-2">
+            <p class="text-xs font-bold text-palette-mauve">التشغيل التلقائي (${escapeHTML(r.maker || '')})</p>
+            <p class="text-[10px] text-palette-muted leading-relaxed">بعض الهواتف تحتاج تفعيل «التشغيل التلقائي» أو «السماح بالعمل في الخلفية» لتطبيق حرم. لا يمكن للتطبيق معرفة هذا الإعداد، فتحقق منه بنفسك.</p>
+            <button onclick="playClickSound(); hqbRelDo('openAutostart')" class="hqb-btn ghost w-full"><i class="fa-solid fa-gear ml-1"></i>فتح إعدادات التشغيل التلقائي</button>
+        </div>` : ''}
+        <div class="hqb-card space-y-2">
+            <p class="text-xs font-bold text-palette-mauve">الأذان القادم</p>
+            <p class="text-[11px] text-palette-light">${escapeHTML(nextTx)}${r.count ? ` • ${hqbNum(r.count)} أذان مجدول` : ''}</p>
+            <button onclick="hqbFireAdhan('Dhuhr', true)" class="hqb-btn w-full"><i class="fa-solid fa-volume-high ml-1"></i>تجربة الأذان الآن</button>
+            <button onclick="hqbTestLater()" class="hqb-btn ghost w-full"><i class="fa-solid fa-stopwatch ml-1"></i>تجربة بعد دقيقة (أغلق التطبيق وانتظر)</button>
+        </div>`;
+}
+async function hqbRelDo(fn) { const HN = hqbHN(); if (!HN) return; try { await HN[fn](); } catch (e) {} }
+async function hqbRelNotif() {
+    try { if (HQB_LN) { const r = await HQB_LN.requestPermissions(); if (r && r.display === 'granted') { try { localStorage.setItem('hqb_native_perm', 'granted'); } catch (e) {} hqbRelRefresh(); return; } } } catch (e) {}
+    hqbRelDo('openNotifications');
+}
+async function hqbRelFile() { showToast('جاري تحميل الأذان...'); const ok = await hqbEnsureAdhanFile(true); showToast(ok ? 'تم حفظ الأذان في الهاتف' : 'تعذر التحميل، تأكد من الإنترنت'); hqbRelRefresh(); }
+async function hqbTestLater() {
+    playClickSound();
+    const HN = hqbHN(); if (!HN) return;
+    try { await HN.testAdhan({ delay: 60, mode: hqbAdhanCfg().mode || 'alarm' }); showToast('سيُرفع أذان تجريبي بعد دقيقة، أغلق التطبيق الآن'); } catch (e) { showToast('تعذرت الجدولة'); }
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden && hqbHN()) hqbRelRefresh(); });
+
+// يحفظ ملف الأذان داخل الهاتف ليشغّله المنبه بدون إنترنت
+let hqbAdhanFileBusy = false;
+async function hqbEnsureAdhanFile(force) {
+    const HN = hqbHN();
+    if (!HN || hqbAdhanFileBusy) return false;
+    hqbAdhanFileBusy = true;
+    try {
+        if (!force) { const s = await HN.hasAdhanFile(); if (s && s.ok) return true; }
+        let blob = null;
+        try { blob = await idbGet('adhan_file_v1'); } catch (e) {}
+        if (blob && blob.size > 20000 && HQB_FS) {
+            try {
+                await HQB_FS.writeFile({ path: 'adhan.mp3', data: await hqbBlobToB64(blob), directory: 'DATA' });
+                const s2 = await HN.hasAdhanFile();
+                if (s2 && s2.ok) return true;
+            } catch (e) {}
+        }
+        const r = await HN.downloadAdhan({ url: ADHAN_URL });
+        return !!(r && r.ok);
+    } catch (e) { return false; }
+    finally { hqbAdhanFileBusy = false; }
+}
+
 function hqbAdhanSet(k, v) { const c = hqbAdhanCfg(); c[k] = v; hqbSaveAdhanCfg(c); renderAdhanSettings(); hqbScheduleNextAdhan(); }
-function hqbAdhanPrayer(k) { const c = hqbAdhanCfg(); c.prayers[k] = !c.prayers[k]; hqbSaveAdhanCfg(c); renderAdhanSettings(); hqbScheduleNextAdhan(); }
+function hqbAdhanPrayer(k) { const c = hqbAdhanCfg(); c.prayers[k] = !c.prayers[k]; hqbSaveAdhanCfg(c); renderAdhanSettings(); hqbScheduleNextAdhan(); if (c.prayers[k]) hqbBatteryHint(); }
+
+// ===== نسخة الأندرويد: الإشعارات عبر Capacitor LocalNotifications =====
+// في المتصفح لا يتغيّر شيء. داخل التطبيق تُستبدل إشعارات المتصفح (غير المدعومة) بإشعارات الهاتف،
+// ويُجدول الأذان مسبقاً لخمسة أيام فيصل والهاتف مقفل والتطبيق مغلق.
+const HQB_NATIVE = (() => {
+    try { return !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()); } catch (e) { return false; }
+})();
+const HQB_LN = (() => { try { return HQB_NATIVE && window.Capacitor.Plugins && window.Capacitor.Plugins.LocalNotifications || null; } catch (e) { return null; } })();
+// أيقونة شريط الإشعارات (شكل شعار حرم) على لون خلفية الشعار الكحلي
+const HQB_NI = { smallIcon: 'ic_stat_icon_config_sample', iconColor: '#1C3349' };
+// ===== المشاركة: نافذة أندرويد الأصلية داخل التطبيق، ونافذة المتصفح على الويب =====
+const HQB_SHARE = (() => { try { return HQB_NATIVE && window.Capacitor.Plugins && window.Capacitor.Plugins.Share || null; } catch (e) { return null; } })();
+const HQB_FS = (() => { try { return HQB_NATIVE && window.Capacitor.Plugins && window.Capacitor.Plugins.Filesystem || null; } catch (e) { return null; } })();
+function hqbIsCancel(e) { const m = String((e && (e.message || e.name)) || '').toLowerCase(); return (e && e.name === 'AbortError') || m.indexOf('cancel') !== -1 || m.indexOf('abort') !== -1; }
+// يرجع 'ok' عند المشاركة، 'cancel' عند الإلغاء، false إن لم تتوفر المشاركة
+async function hqbNativeShare(o) {
+    if (HQB_SHARE) {
+        try { await HQB_SHARE.share({ title: o.title || 'حرم', text: o.text || undefined, url: o.url || undefined, dialogTitle: 'مشاركة' }); return 'ok'; }
+        catch (e) { if (hqbIsCancel(e)) return 'cancel'; }
+    }
+    if (navigator.share) {
+        try { await navigator.share(o); return 'ok'; }
+        catch (e) { if (hqbIsCancel(e)) return 'cancel'; }
+    }
+    return false;
+}
+function hqbBlobToB64(b) { return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1] || ''); r.onerror = rej; r.readAsDataURL(b); }); }
+async function hqbNativeShareFile(blob, name) {
+    if (HQB_SHARE && HQB_FS && blob) {
+        try {
+            const data = await hqbBlobToB64(blob);
+            const w = await HQB_FS.writeFile({ path: name, data: data, directory: 'CACHE' });
+            await HQB_SHARE.share({ title: 'حرم', files: [w.uri], dialogTitle: 'مشاركة' });
+            return 'ok';
+        } catch (e) { if (hqbIsCancel(e)) return 'cancel'; }
+    }
+    try {
+        if (blob && navigator.canShare) {
+            const f = new File([blob], name, { type: blob.type || 'image/png' });
+            if (navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); return 'ok'; }
+        }
+    } catch (e) { if (hqbIsCancel(e)) return 'cancel'; }
+    return false;
+}
+if (HQB_LN) {
+    const mapPerm = p => (p && p.display === 'granted') ? 'granted' : (p && p.display === 'denied') ? 'denied' : 'default';
+    let hqbNPerm = localStorage.getItem('hqb_native_perm') || 'default';
+    const setPerm = v => { hqbNPerm = v; try { localStorage.setItem('hqb_native_perm', v); } catch (e) {} };
+    let nid = 50;
+    const NativeNotification = function (title, opts) {
+        opts = opts || {};
+        nid = nid >= 900 ? 50 : nid + 1;
+        try { HQB_LN.schedule({ notifications: [{ id: nid, title: String(title || ''), body: String(opts.body || ''), channelId: opts.silent ? 'haram_quiet' : 'haram_main', ...HQB_NI }] }); } catch (e) {}
+    };
+    Object.defineProperty(NativeNotification, 'permission', { get: () => hqbNPerm });
+    NativeNotification.requestPermission = async () => {
+        try { const r = await HQB_LN.requestPermissions(); setPerm(mapPerm(r)); } catch (e) {}
+        try { hqbNativeScheduleAdhan(); } catch (e) {}
+        return hqbNPerm;
+    };
+    try { window.Notification = NativeNotification; } catch (e) {}
+    (async () => {
+        try {
+            await HQB_LN.createChannel({ id: 'haram_main', name: 'الأذان والتنبيهات', importance: 5, visibility: 1, vibration: true });
+            await HQB_LN.createChannel({ id: 'haram_quiet', name: 'مواقيت الصلاة', importance: 2, visibility: 1, vibration: false });
+        } catch (e) {}
+        try { setPerm(mapPerm(await HQB_LN.checkPermissions())); } catch (e) {}
+        try { hqbNativeScheduleAdhan(); } catch (e) {}
+    })();
+}
+async function hqbNativeScheduleAdhan() {
+    if (!HQB_LN) return;
+    const HN = hqbHN();
+    try {
+        const old = await HQB_LN.getPending();
+        const ids = (old && old.notifications || []).map(n => ({ id: n.id })).filter(n => n.id >= 1000 && n.id < 2000);
+        if (ids.length) await HQB_LN.cancel({ notifications: ids });
+    } catch (e) {}
+    const c = hqbAdhanCfg();
+    if (!c.on) { if (HN) { hqbNativeTimes(); try { await HN.scheduleAdhan({ items: [], mode: c.mode || 'alarm' }); } catch (e) {} } return; }
+    const p = hqbLocParams(), list = [], alarms = [], now = Date.now();
+    const days = HN ? 14 : 5;
+    for (let day = 0; day < days; day++) {
+        const [y, m, d] = hqbTzYMD(p.tz, new Date(now + day * 86400000));
+        const t = hqbTimingsFor(p.lat, p.lng, p.tz, [y, m, d]);
+        const off = HQB_PT.tzOffset(p.tz, y, m, d);
+        ADHAN_PRAYERS.forEach((pr, i) => {
+            if (!c.prayers[pr.k] || !t[pr.k] || t[pr.k].indexOf(':') < 0) return;
+            const [H, M] = t[pr.k].split(':').map(Number);
+            const at = Date.UTC(y, m - 1, d, H, M) - off * 3600000;
+            const base = 1000 + day * 20 + i * 2;
+            const title = `حان الآن موعد صلاة ${pr.ar}`;
+            const body = (typeof activeCity === 'string' && activeCity ? activeCity + ' • ' : '') + format12Hour(t[pr.k]);
+            if (at > now + 30000) {
+                if (HN) alarms.push({ id: base, at: at, title: title, body: body });
+                else list.push({ id: base, title: title, body: body, channelId: 'haram_main', schedule: { at: new Date(at), allowWhileIdle: true }, ...HQB_NI });
+            }
+            const pre = at - (c.pre || 0) * 60000;
+            if (c.pre > 0 && pre > now + 30000 && day < 5) list.push({ id: base + 1, title: `صلاة ${pr.ar} بعد ${toEasternArabicDigits(c.pre)} دقيقة`, body: format12Hour(t[pr.k]), channelId: 'haram_quiet', schedule: { at: new Date(pre), allowWhileIdle: true }, ...HQB_NI });
+        });
+    }
+    if (HN) {
+        hqbNativeTimes();
+        try { await HN.scheduleAdhan({ items: alarms, mode: c.mode || 'alarm' }); } catch (e) {}
+        hqbEnsureAdhanFile(false).then(() => hqbRelRefresh());
+    }
+    if (list.length && Notification.permission === 'granted') { try { await HQB_LN.schedule({ notifications: list }); } catch (e) {} }
+}
+
+// إشعار المواقيت الدائم (تطبيق الأندرويد): يُرسل أوقات ١٤ يوماً ويتحدّث وحده مع كل صلاة
+async function hqbNativeTimes() {
+    const HN = hqbHN(); if (!HN) return;
+    const p = hqbLocParams(), days = [], now = Date.now();
+    const keys = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+    for (let day = 0; day < 14; day++) {
+        const [y, m, d] = hqbTzYMD(p.tz, new Date(now + day * 86400000));
+        const t = hqbTimingsFor(p.lat, p.lng, p.tz, [y, m, d]);
+        const off = HQB_PT.tzOffset(p.tz, y, m, d), o = {};
+        keys.forEach(k => { if (t[k] && t[k].indexOf(':') > 0) { const [H, M] = t[k].split(':').map(Number); o[k] = Date.UTC(y, m - 1, d, H, M) - off * 3600000; } });
+        days.push({ d: `${y}-${m}-${d}`, t: o });
+    }
+    try { await HN.setTimesNotification({ on: hqbPtOn(), city: typeof activeCity === 'string' ? activeCity : '', tz: p.tz, days }); } catch (e) {}
+}
 
 async function hqbAskNotify() {
     if (!('Notification' in window)) return;
@@ -5831,6 +6313,12 @@ function hqbNotify(title, body) {
 const HQB_PT_EVERY = 2 * 60 * 60 * 1000;
 function hqbPtOn() { return localStorage.getItem('hqb_pt_notif') !== '0'; }
 async function hqbPtToggle() {
+    if (hqbHN()) {
+        const on = !hqbPtOn();
+        localStorage.setItem('hqb_pt_notif', on ? '1' : '0');
+        if (on && HQB_LN) { try { const r = await HQB_LN.checkPermissions(); if (!r || r.display !== 'granted') await HQB_LN.requestPermissions(); } catch (e) {} }
+        renderAdhanSettings(); hqbNativeTimes(); return;
+    }
     if (hqbPtOn()) { localStorage.setItem('hqb_pt_notif', '0'); renderAdhanSettings(); return; }
     if (!('Notification' in window)) { showToast('الإشعارات غير مدعومة على هذا الجهاز'); return; }
     let perm = Notification.permission;
@@ -5857,6 +6345,7 @@ function hqbPtText() {
     return { title: `${next[1]} بعد ${leftTx}` + (activeCity ? ` • ${activeCity}` : ''), body };
 }
 function hqbPtTick() {
+    if (hqbHN()) return;   // في تطبيق الأندرويد يتولاه إشعار المواقيت الدائم
     if (!hqbPtOn() || !('Notification' in window) || Notification.permission !== 'granted') return;
     const last = +localStorage.getItem('hqb_pt_last') || 0;
     if (Date.now() - last < HQB_PT_EVERY - 60000) return;
@@ -5963,6 +6452,7 @@ function hqbAdhanWaitTap() {
 
 function hqbStopSound() {
     hqbAdhanPlaying = false;
+    try { const HN = hqbHN(); if (HN) HN.stopAdhan(); } catch (e) {}
     const el = hqbAdhanEl();
     if (el) { try { el.pause(); el.currentTime = 0; } catch (e) {} }
 }
@@ -6001,6 +6491,14 @@ function hqbFireAdhan(key, isTest) {
     const a = document.getElementById('adhan-alert');
     a.classList.remove('hidden'); a.classList.add('flex');
     hqbAdhanMini(false);
+    const HN = hqbHN();
+    if (HN) {
+        // داخل التطبيق: الصوت يأتي من منبه الهاتف نفسه (نفس طريقة الأذان والتطبيق مغلق)
+        hqbAdhanPlaying = true;
+        hqbAdhanStatus('', false);
+        if (isTest) { try { HN.testAdhan({ delay: 0, mode: c.mode || 'alarm' }); } catch (e) {} }
+        return;
+    }
     hqbPlayAdhan();
     if (!isTest) hqbNotify(title, sub);
 }
@@ -6037,6 +6535,7 @@ function hqbAdhanTick() {
 let hqbNextAdhanTimer = null;
 function hqbScheduleNextAdhan() {
     clearTimeout(hqbNextAdhanTimer);
+    try { hqbNativeScheduleAdhan(); } catch (e) {}
     const c = hqbAdhanCfg();
     if (!c.on || !hqbTodayTimings) return;
     let parts; try { parts = getCityCurrentTimeParts(); } catch (e) { return; }
@@ -6562,7 +7061,8 @@ setTimeout(hqbCacheAdhan, 1500);
         <p class="text-[10px] text-palette-muted" id="lbl-share-hint">يمكنك أيضاً الضغط مطولاً على الصورة لحفظها</p>
         <div class="flex gap-2">
             <button onclick="hqbShareImgSend()" class="flex-1 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest font-black text-xs"><i class="fa-solid fa-share-nodes ml-1"></i><span id="lbl-share-send">مشاركة</span></button>
-            <button onclick="playClickSound(); hqbShareImgSave()" class="flex-1 py-2.5 rounded-xl bg-palette-mid text-palette-light font-bold text-xs"><i class="fa-solid fa-download ml-1"></i><span id="lbl-share-save">حفظ</span></button><button onclick="playClickSound(); closeModal('share-img-modal')" class="w-11 py-2.5 rounded-xl bg-palette-purple text-palette-light text-xs"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="playClickSound(); hqbShareImgSave()" class="flex-1 py-2.5 rounded-xl bg-palette-mid text-palette-light font-bold text-xs"><i class="fa-solid fa-download ml-1"></i><span id="lbl-share-save">حفظ</span></button>
+            <button onclick="playClickSound(); closeModal('share-img-modal')" class="w-11 py-2.5 rounded-xl bg-palette-purple text-palette-light text-xs"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
 </div>
@@ -6635,6 +7135,9 @@ const HQB_HAJJ = {
 قرن المنازل، وهو ميقات أهل الطائف، وكل من يمرّ من ذلك الطريق.
 مكّة، وهي ميقات حجّ التمتّع.
 أدنى الحل- كالحديبية والجعرانة والتنعيم - وهو ميقات لكل عمرة مفردة لمن كان بمكة.
+
+ثم يلبّي، وصورة التلبية الواجبة:
+" لبّيك اللهم لبّيك، لبّيك لا شريك لك لبّيك "
 
 ويستحب إضافة هذه الجملة:
 " إنّ الحمد والنعمة لك والملك، لا شريك لك "
@@ -6758,7 +7261,9 @@ const HQB_HAJJ = {
 أرمي الجمرة الأولى بسبع حصيات لحج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.
 
 ثم أرمي الجمرة الوسطى بسبع حصيات لحج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.
-ثم أرمي جمرة العقبة بسبع حصيات لحج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.` }
+ثم أرمي جمرة العقبة بسبع حصيات لحج التمتّع لحجة الإسلام لوجوبه قربة إلى الله تعالى.
+
+ويجب الرمي في اليوم الحادي عشر، والثاني عشر، وإذا بات ليلة الثالث عشر في منى وجب الرمي في اليوم الثالث عشر أيضاً على الأظهر.` }
     ]
 };
 
@@ -6771,24 +7276,32 @@ const HQB_HAJJ_SECS = {
 };
 let hqbHajjView = 'hub', hqbHajjSec = null, hqbHajjIdx = 0;
 const HQB_HAJJ_BANNER = `<svg viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-        <linearGradient id="hjSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B3A52"/><stop offset="1" stop-color="#0A151C"/></linearGradient>
-        <linearGradient id="hjFade" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#0A151C" stop-opacity=".85"/><stop offset=".55" stop-color="#0A151C" stop-opacity=".2"/><stop offset="1" stop-color="#0A151C" stop-opacity="0"/></linearGradient>
-    </defs>
-    <rect width="400" height="170" fill="url(#hjSky)"/>
-    <g fill="none" stroke="#D4A84F" stroke-opacity=".14" stroke-width="1.2">
-        ${Array.from({ length: 9 }, (_, i) => `<path d="M${i * 46 - 6} 170 V118 a20 20 0 0 1 40 0 V170"/>`).join('')}
-    </g>
-    <circle cx="300" cy="34" r="12" fill="#F3EBDD" fill-opacity=".9"/><circle cx="306" cy="30" r="11" fill="#1B3A52"/>
-    <g transform="translate(36 52)">
-        <polygon points="0,26 70,10 128,26 58,44" fill="#22333F"/>
-        <polygon points="0,26 58,44 58,116 0,100" fill="#0B1218"/>
-        <polygon points="58,44 128,26 128,98 58,116" fill="#121C24"/>
-        <polygon points="0,42 58,60 58,70 0,52" fill="#D4A84F"/>
-        <polygon points="58,60 128,42 128,52 58,70" fill="#B88A35"/>
-        <rect x="80" y="70" width="18" height="30" rx="2" transform="skewY(-14)" fill="#D4A84F" fill-opacity=".85"/>
-    </g>
-    <rect width="400" height="170" fill="url(#hjFade)"/>
+<defs>
+<linearGradient id="hjS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22405A"/><stop offset=".55" stop-color="#6E8196"/><stop offset="1" stop-color="#E2C590"/></linearGradient>
+<linearGradient id="hjG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D8C7A6"/><stop offset="1" stop-color="#B9A27C"/></linearGradient>
+<linearGradient id="hjT" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#0A151C" stop-opacity=".92"/><stop offset=".45" stop-color="#0A151C" stop-opacity=".55"/><stop offset="1" stop-color="#0A151C" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="400" height="170" fill="url(#hjS)"/>
+<circle cx="70" cy="34" r="9" fill="#F6E7C4" opacity=".9"/>
+<g fill="#8B96A1"><rect x="22" y="30" width="9" height="84"/><path d="M20 30H33L26.5 14Z"/><rect x="369" y="30" width="9" height="84"/><path d="M367 30H380L373.5 14Z"/></g>
+<g fill="#A6AFB8"><rect x="19" y="52" width="15" height="4" rx="1"/><rect x="366" y="52" width="15" height="4" rx="1"/></g>
+<rect x="0" y="70" width="400" height="44" fill="#9AA4AE"/>
+<rect x="0" y="68" width="400" height="5" fill="#B4BCC4"/>
+<path d="M-10 112V92Q-10 80 3 76Q16 80 16 92V112Z" fill="#5E6B78"/><path d="M26 112V92Q26 80 39 76Q52 80 52 92V112Z" fill="#5E6B78"/><path d="M62 112V92Q62 80 75 76Q88 80 88 92V112Z" fill="#5E6B78"/><path d="M98 112V92Q98 80 111 76Q124 80 124 92V112Z" fill="#5E6B78"/><path d="M134 112V92Q134 80 147 76Q160 80 160 92V112Z" fill="#5E6B78"/><path d="M170 112V92Q170 80 183 76Q196 80 196 92V112Z" fill="#5E6B78"/><path d="M206 112V92Q206 80 219 76Q232 80 232 92V112Z" fill="#5E6B78"/><path d="M242 112V92Q242 80 255 76Q268 80 268 92V112Z" fill="#5E6B78"/><path d="M278 112V92Q278 80 291 76Q304 80 304 92V112Z" fill="#5E6B78"/><path d="M314 112V92Q314 80 327 76Q340 80 340 92V112Z" fill="#5E6B78"/><path d="M350 112V92Q350 80 363 76Q376 80 376 92V112Z" fill="#5E6B78"/><path d="M386 112V92Q386 80 399 76Q412 80 412 92V112Z" fill="#5E6B78"/>
+<rect x="0" y="112" width="400" height="58" fill="url(#hjG)"/>
+<g transform="translate(-78 0)"><ellipse cx="200" cy="148" rx="168" ry="20" fill="#CDBB98" opacity=".6"/>
+<g transform="translate(51.7 143.9) scale(0.96)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(58.3 141.4) scale(0.93)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(69.8 139.0) scale(0.91)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(85.7 136.9) scale(0.89)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E8E2D4"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(105.5 135.1) scale(0.88)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(128.5 133.7) scale(0.87)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(154.0 132.7) scale(0.86)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(181.0 132.1) scale(0.85)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(208.6 132.0) scale(0.85)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E8E2D4"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(236.0 132.4) scale(0.85)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(262.1 133.3) scale(0.86)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(286.2 134.5) scale(0.87)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(307.3 136.2) scale(0.89)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(324.7 138.2) scale(0.91)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E8E2D4"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(337.9 140.5) scale(0.93)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(346.4 143.0) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(349.9 145.5) scale(0.97)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(108.8 147.5) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E6DFCF"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(120.1 145.1) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(137.8 143.2) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(160.5 141.8) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(186.5 141.1) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E6DFCF"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(213.5 141.1) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(239.5 141.8) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(262.2 143.2) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(279.9 145.1) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E6DFCF"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(291.2 147.5) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g>
+<g>
+<polygon points="150,80 205,72 250,82 196,91" fill="#2A2A2A"/>
+<polygon points="150,80 196,91 196,150 150,140" fill="#111"/>
+<polygon points="196,91 250,82 250,141 196,150" fill="#1C1C1C"/>
+<polygon points="150,93 196,104 196,112 150,101" fill="#C9A24C"/>
+<polygon points="196,104 250,95 250,103 196,112" fill="#E0BB62"/>
+<path d="M150 101L196 112 196 114 150 103Z" fill="#8E6F2A"/>
+<polygon points="214,114 229,111.5 229,138 214,140.5" fill="#D9B45C"/><polygon points="216.5,116 226.5,114.3 226.5,136.4 216.5,138.1" fill="none" stroke="#9C7A30" stroke-width=".8"/>
+</g>
+<g transform="translate(348.3 148.1) scale(0.99)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E8E2D4"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(341.7 150.6) scale(1.02)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(330.2 153.0) scale(1.04)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(314.3 155.1) scale(1.06)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(294.5 156.9) scale(1.07)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(271.5 158.3) scale(1.08)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E8E2D4"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(246.0 159.3) scale(1.09)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(219.0 159.9) scale(1.10)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(191.4 160.0) scale(1.10)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(164.0 159.6) scale(1.10)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(137.9 158.7) scale(1.09)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E8E2D4"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(113.8 157.5) scale(1.08)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(92.7 155.8) scale(1.06)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(75.3 153.8) scale(1.04)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(62.1 151.5) scale(1.02)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(53.6 149.0) scale(1.00)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E8E2D4"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(50.1 146.5) scale(0.98)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(295.0 150.0) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E6DFCF"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(291.2 152.5) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(279.9 154.9) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(262.2 156.8) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(239.5 158.2) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E6DFCF"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(213.5 158.9) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(186.5 158.9) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(160.5 158.2) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(137.8 156.8) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#E6DFCF"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(120.1 154.9) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(108.8 152.5) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g><g transform="translate(105.0 150.0) scale(0.95)"><path d="M-4 0Q-5 -9 0 -11Q5 -9 4 0Z" fill="#F4F1EA"/><circle cx="0" cy="-13.2" r="2.6" fill="#3A2A20"/></g></g>
+<rect width="400" height="170" fill="url(#hjT)"/>
 </svg>`;
 
 function openHajj() {
@@ -7006,7 +7519,7 @@ hqbHijriAdjSync();
 </script>
 <script>
 
-const HQB_PLAY_URL = 'https://play.google.com/store/search?q=%D8%AD%D8%B1%D9%85&c=apps';
+const HQB_PLAY_URL = 'https://trpo20077-hash.github.io/Adhkar/haram-page.html';
 
 const HQB_Z_CATS = [];
 let hqbZData = hqbLS('hqb_z_cache', null) || { cats: [], secs: [], items: [] };
@@ -7071,7 +7584,7 @@ const HQB_Z_SVG = {
 };
 function hqbZRow(onclick, icon, title, sub, gold) {
     return `<button onclick="playClickSound(); ${onclick}" class="dua-row">
-        ${HQB_Z_SVG[icon] || `<span class="dua-row-ic"><i class="fa-solid ${icon}"></i></span>`}
+        <span class="dua-row-ic"><i class="fa-solid ${({ dome: 'fa-mosque', book: 'fa-book-open' })[icon] || icon}"></i></span>
         <span class="dua-row-tx">${escapeHTML(title)}${sub ? `<small class="dua-row-sub">${sub}</small>` : ''}</span>
         <i class="fa-solid fa-chevron-left dua-row-go"></i>
     </button>`;
@@ -7086,10 +7599,12 @@ function hqbRenderZiyarat() {
     if (!hqbZPath.length) {
         if (titleEl) titleEl.innerText = 'الزيارات';
         const subEl0 = document.getElementById('lbl-ziyarat-sub'); if (subEl0) subEl0.innerText = 'تعمل بدون إنترنت';
-        box.innerHTML = cats.length ? hqbZGroup(cats.map((c, i) => hqbZRow(`hqbZGo('cat','${c.id}')`, 'dome', c.title, cnt(hqbZCount(c.id)), false)))
-            : `<div class="flex flex-col items-center justify-center text-center gap-3 py-16">
-                <div class="w-16 h-16 rounded-full border border-dashed border-palette-muted/60 text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid fa-mosque"></i></div>
-                <p class="text-sm font-bold text-palette-light">لا توجد زيارات بعد</p>
+        box.innerHTML = cats.length ? hqbZGroup(cats.map((c, i) => hqbZRow(`hqbZGo('cat','${hqbSafeId(c.id)}')`, 'dome', c.title, cnt(hqbZCount(c.id)), false)))
+            : `<div class="flex flex-col items-center justify-center text-center gap-3 py-16 px-6">
+                <div class="w-16 h-16 rounded-full border border-dashed border-palette-muted/60 text-palette-mauve flex items-center justify-center text-2xl"><i class="fa-solid ${navigator.onLine ? 'fa-mosque' : 'fa-wifi'}"></i></div>
+                <p class="text-sm font-bold text-palette-light">${navigator.onLine ? 'جارٍ تحميل الزيارات…' : 'تحتاج الزيارات اتصالاً بالإنترنت أول مرة'}</p>
+                <p class="text-[11px] text-palette-mauve leading-relaxed">${navigator.onLine ? 'إن لم تظهر خلال لحظات، تأكد من اتصالك وأعد المحاولة.' : 'بعد فتحها مرة واحدة متصلاً، تبقى محفوظة وتعمل بدون إنترنت.'}</p>
+                <button onclick="playClickSound(); hqbLoadRemoteZiyarat().then(hqbRenderZiyarat)" class="mt-1 px-5 py-2.5 rounded-xl bg-palette-mauve text-palette-darkest text-xs font-black"><i class="fa-solid fa-rotate-right ml-1"></i>إعادة المحاولة</button>
             </div>`;
         box.scrollTop = 0;
         return;
@@ -7107,14 +7622,14 @@ function hqbRenderZiyarat() {
     let html = '';
     const isLeaf = x => !secs.some(y => y.parent === x.id) && items.filter(y => y.sec === x.id).length === 1;
     const leaves = subSecs.filter(isLeaf), folders = subSecs.filter(x => !isLeaf(x));
-    html += hqbZGroup(leaves.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'book', x.title, '', true)));
+    html += hqbZGroup(leaves.map(x => hqbZRow(`hqbZGo('sec','${hqbSafeId(x.id)}')`, 'book', x.title, '', true)));
     if (folders.length) {
         html += `<p class="z-head">الأقسام الفرعية</p>`;
-        html += hqbZGroup(folders.map(x => hqbZRow(`hqbZGo('sec','${x.id}')`, 'dome', x.title, cnt(hqbZCount(cat.id, x.id)), false)));
+        html += hqbZGroup(folders.map(x => hqbZRow(`hqbZGo('sec','${hqbSafeId(x.id)}')`, 'dome', x.title, cnt(hqbZCount(cat.id, x.id)), false)));
     }
     if (list.length) {
         if (subSecs.length) html += `<p class="z-head">الزيارات</p>`;
-        html += hqbZGroup(list.map((z, i) => `<button onclick="playClickSound(); hqbOpenZiyara('${z.id}')" class="dua-row">
+        html += hqbZGroup(list.map((z, i) => `<button onclick="playClickSound(); hqbOpenZiyara('${hqbSafeId(z.id)}')" class="dua-row">
             <span class="dua-row-n">${hqbNum(i + 1)}</span>
             <span class="dua-row-tx">${escapeHTML(z.title)}</span>
             <i class="fa-solid fa-chevron-left dua-row-go"></i>
@@ -7226,12 +7741,9 @@ async function hqbShareImage(title, text, foot) {
 }
 async function hqbShareImgSend() {
     playClickSound();
-    try {
-        if (hqbShareBlob && navigator.canShare) {
-            const f = new File([hqbShareBlob], 'haram.png', { type: 'image/png' });
-            if (navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); hqbWpHit('shares'); return; }
-        }
-    } catch (e) { if (e && e.name === 'AbortError') return; }
+    const r = await hqbNativeShareFile(hqbShareBlob, 'haram.png');
+    if (r === 'ok') { hqbWpHit('shares'); return; }
+    if (r === 'cancel') return;
     hqbShareImgSave();
 }
 function hqbShareImgSave() {
@@ -7361,7 +7873,8 @@ function rdRenderSheet() {
             return;
         }
         const playing = !au.paused;
-        s.innerHTML = rdHead('الاستماع') + `<div class="rd-player">
+        s.innerHTML = rdHead('الاستماع') + `
+            <div class="rd-player">
                 <button class="rd-pp" onclick="rdPlayPause()" aria-label="تشغيل"><i class="fa-solid ${playing ? 'fa-pause' : 'fa-play'}"></i></button>
                 <div class="rd-pmeta"><b>${escapeHTML(rdCur.reciter || 'تلاوة الدعاء')}</b><small id="rd-time">${rdFmt(au.currentTime)} / ${rdFmt(au.duration)}</small></div>
             </div>
@@ -7605,7 +8118,7 @@ async function hqbArbToggle() {
     if (localStorage.getItem('hqb_loc_ok') !== '1') {
         const ok = await hqbConfirm({
             icon: 'fa-person-walking', title: 'تتبّع المشي',
-            body: '<p>يستخدم «حرم» موقعك لحساب المسافة التي مشيتها والمسافة الباقية إلى كربلاء.</p><p>• يعمل التتبع فقط وهذه الشاشة مفتوحة.</p><p>• لا يُرسل موقعك إلى خادمنا إلا إذا ضغطت «أنا عند العمود».</p>',
+            body: '<p>يستخدم تطبيق حرم موقعك لحساب المسافة التي مشيتها والمسافة الباقية إلى كربلاء.</p><p>• يعمل التتبع فقط وهذه الشاشة مفتوحة.</p><p>• لا يُرسل موقعك إلى خادمنا إلا إذا ضغطت «أنا عند العمود».</p>',
             ok: 'متابعة', cancel: 'إلغاء'
         });
         if (!ok) return;
@@ -7902,9 +8415,7 @@ async function hqbShareFatiha(id) {
     if (!p) return;
     const f = p.gender === 'أنثى';
     const txt = `اقرأ سورة الفاتحة لروح ${f ? 'المرحومة' : 'المرحوم'} ${p.name}\n${f ? 'رحمها الله وأسكنها' : 'رحمه الله وأسكنه'} فسيح جناته\n\nالاسم موجود في قسم «الفاتحة» في تطبيق حرم:\n${HQB_PLAY_URL}`;
-    if (navigator.share) {
-        try { await navigator.share({ text: txt }); return; } catch (e) { if (e && e.name === 'AbortError') return; }
-    }
+    if (await hqbNativeShare({ text: txt })) return;
     try { await navigator.clipboard.writeText(txt); }
     catch (e) { const t = document.createElement('textarea'); t.value = txt; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (er) {} t.remove(); }
     showToast('تم النسخ، الصقها في واتساب أو أي تطبيق');
@@ -8002,6 +8513,23 @@ function hqbUserName() {
     try { const a = JSON.parse(localStorage.getItem('adhkar_user_auth')); return (a && a.custom && a.name) ? a.name : ''; } catch (e) { return ''; }
 }
 
+function hqbFitHome() {
+    const b = document.body;
+    if (!b || !document.getElementById('hqb-main')) return;
+    b.classList.remove('hqb-fit1', 'hqb-fit2');
+    const over = () => document.documentElement.scrollHeight - window.innerHeight > 2;
+    if (!over()) return;
+    b.classList.add('hqb-fit1');
+    if (!over()) return;
+    b.classList.add('hqb-fit2');
+}
+let hqbFitT = null;
+function hqbFitSoon() { clearTimeout(hqbFitT); hqbFitT = setTimeout(hqbFitHome, 120); }
+window.addEventListener('resize', hqbFitSoon);
+window.addEventListener('orientationchange', hqbFitSoon);
+window.addEventListener('load', hqbFitSoon);
+try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(hqbFitSoon); } catch (e) {}
+
 function hqbRenderToday() {
     const box = document.getElementById('hqb-today');
     if (!box) return;
@@ -8013,6 +8541,7 @@ function hqbRenderToday() {
     const hijri = `${hqbNum(h.day)} ${HIJRI_MONTH_NAMES[h.month - 1] || ''} ${hqbNum(h.year)} هـ`;
     const np = hqbNextPrayer();
     const occ = HQB_OCCASIONS[h.month + '-' + h.day] || HQB_WEEK_ACTS[new Date().getDay()] || null;
+    document.body.classList.toggle('hqb-has-occ', !!occ);
     const last = hqbLS('hqb_mushaf_last', null);
     const pct = last ? Math.min(100, Math.round((surahStartGlobal(last.s) + last.a) / 6236 * 100)) : 0;
 
@@ -8037,9 +8566,9 @@ function hqbRenderToday() {
         </button>
         </div>
         ${occ ? `
-        <div class="rounded-xl bg-palette-mid/70 border border-palette-mauve/25 p-2.5 space-y-2">
-            <p class="text-[11px] font-black text-palette-mauve"><i class="fa-solid fa-star-and-crescent ml-1"></i>${escapeHTML(occ.t)}</p>
-            ${occ.acts.length ? `<div class="flex flex-wrap gap-1.5">${occ.acts.map(chip).join('')}</div>` : ''}
+        <div class="hqb-occ rounded-xl bg-palette-mid/70 border border-palette-mauve/25">
+            <p class="hqb-occ-t text-palette-mauve"><i class="fa-solid fa-star-and-crescent ml-1"></i>${escapeHTML(occ.t)}</p>
+            ${occ.acts.length ? `<div class="hqb-occ-a">${occ.acts.map(chip).join('')}</div>` : ''}
         </div>` : ''}
         <div class="grid grid-cols-4 gap-2">
             ${btn('fa-calendar-check', 'دعاء اليوم', 'dailydua')}
@@ -8048,6 +8577,7 @@ function hqbRenderToday() {
             ${btn('fa-table-cells-large', 'أقسام أخرى', 'sections')}
         </div>
     </div>`;
+    hqbFitSoon();
 }
 
 
@@ -8109,7 +8639,7 @@ function hqbDeskRender() {
     const pct = last ? Math.min(100, Math.round((surahStartGlobal(last.s) + last.a) / 6236 * 100)) : 0;
     const sName = last && typeof SURAH_NAMES !== 'undefined' ? SURAH_NAMES[last.s - 1] : '';
     const kh = typeof hqbKhInfo === 'function' ? hqbKhInfo() : null;
-    const nav = [['fa-house', 'الرئيسية', ''], ['fa-book-quran', 'المصحف الشريف', 'mushaf'], ['fa-book-open', 'الأدعية والزيارات', 'duas'], ['fa-clock', 'أوقات الصلاة', 'prayer'], ['fa-calendar-days', 'التقويم والمناسبات', 'calendar'], ['fa-person-walking', 'طريق الأربعين', 'arbaeen'], ['fa-hands-praying', 'الفاتحة', 'fatiha'], ['fa-robot', 'مساعد حرم', 'assistant'], ['fa-image', 'خلفيات دينية', 'wallpapers'], ['fa-table-cells-large', 'كل الأقسام', 'sections'], ['fa-sliders', 'الإعدادات', 'settings']];
+    const nav = [['fa-house', 'الرئيسية', ''], ['fa-book-quran', 'المصحف الشريف', 'mushaf'], ['fa-book-open', 'الأدعية والزيارات', 'duas'], ['fa-clock', 'أوقات الصلاة', 'prayer'], ['fa-calendar-days', 'التقويم والمناسبات', 'calendar'], ['fa-person-walking', 'طريق الأربعين', 'arbaeen'], ['fa-hands-praying', 'الختمات', 'fatiha'], ['fa-robot', 'مساعد حرم', 'assistant'], ['fa-image', 'خلفيات دينية', 'wallpapers'], ['fa-table-cells-large', 'كل الأقسام', 'sections'], ['fa-sliders', 'الإعدادات', 'settings']];
     const chip = (label, act, o) => `<button class="dk-chip ${o ? 'o' : ''}" onclick="hqbDeskGo('${act}')">${escapeHTML(label)}</button>`;
     const occActs = o => (o.acts || []).map(([l, a], i) => chip(l, a === 'mafatih' || a === 'kahf' || a === 'dailydua' || a === 'prayer' ? a : 'duas', i > 0)).join('');
     let side = d.querySelector('.dk-side');
@@ -8143,12 +8673,13 @@ function hqbDeskRender() {
         <div class="dk-quick">
             <button class="dk-card dk-q" onclick="hqbDeskGo('ziyarat')"><i class="fa-solid fa-kaaba"></i>الزيارات</button>
             <button class="dk-card dk-q" onclick="hqbDeskGo('khatma')"><i class="fa-solid fa-book-quran"></i>${kh ? `ختمتي ج${hqbNum(kh.juz)}` : 'ابدأ الختمة'}</button>
-            <button class="dk-card dk-q" onclick="hqbDeskGo('fatiha')"><i class="fa-solid fa-hands-praying"></i>الفاتحة</button>
+            <button class="dk-card dk-q" onclick="hqbDeskGo('fatiha')"><i class="fa-solid fa-hands-praying"></i>الختمات</button>
             <button class="dk-card dk-q" onclick="hqbDeskGo('sections')"><i class="fa-solid fa-table-cells-large"></i>كل الأقسام</button>
         </div>`;
     d.querySelector('.dk-bottom').innerHTML = `
         <button class="dk-card dk-row" onclick="hqbDeskGo('${last ? 'read' : 'mushaf'}')"><span class="ic"><i class="fa-solid fa-book-open-reader"></i></span>
-            <span class="tx"><b>${last ? 'أكمل القراءة' : 'المصحف الشريف'}</b><small>${last ? `سورة ${escapeHTML(sName || '')} · الآية ${hqbNum(last.a)}` : 'ابدأ القراءة من أي سورة'}</small>${last ? `<span class="dk-bar"><i style="width:${pct}%"></i></span>` : ''}</span><span class="go">${last ? hqbNum(pct) + '٪' : 'افتح ›'}</span></button>
+            <span class="tx"><b>${last ? 'أكمل القراءة' : 'المصحف الشريف'}</b><small>${last ? `سورة ${escapeHTML(sName || '')} · الآية ${hqbNum(last.a)}` : 'ابدأ القراءة من أي سورة'}</small>${last ? `<span class="dk-bar"><i style="width:${pct}%"></i></span>` : ''}</span>
+            <span class="go">${last ? hqbNum(pct) + '٪' : 'افتح ›'}</span></button>
         <button class="dk-card dk-row" onclick="hqbDeskGo('calendar')"><span class="ic"><i class="fa-solid fa-calendar-days"></i></span>
             <span class="tx"><b>المناسبة القادمة</b><small>${nx ? `${escapeHTML(nx.o.t)} · ${nx.days === 0 ? 'اليوم' : nx.days === 1 ? 'غداً' : 'بعد ' + hqbNum(nx.days) + ' أيام'}` : 'افتح التقويم لرؤية المناسبات'}</small></span>
             <span class="go">التقويم ›</span></button>`;
@@ -8282,9 +8813,9 @@ function mpRecLabel() {
 function mpOpenReciters() {
     const row = r => {
         const on = r.id === mushafReciter;
-        return `<button onclick="mpPickRec('${r.id}')" class="mp-rec-row ${on ? 'on' : ''}">
+        return `<button onclick="mpPickRec('${hqbSafeId(r.id)}')" class="mp-rec-row ${on ? 'on' : ''}">
             <span class="mp-rec-av">${escapeHTML((r.ar).trim().charAt(0))}</span>
-            <span class="mp-rec-tx"><b>${escapeHTML(r.ar)}</b><small>${r.type === 'surah' ? (r.note || 'تلاوة السورة كاملة') : 'آية بآية مع تظليل الآية'}</small></span>
+            <span class="mp-rec-tx"><b>${escapeHTML(r.ar)}</b><small>${r.type === 'surah' ? escapeHTML(r.note || 'تلاوة السورة كاملة') : 'آية بآية مع تظليل الآية'}</small></span>
             ${on ? '<i class="fa-solid fa-circle-check mp-rec-ck"></i>' : ''}
         </button>`;
     };
@@ -8664,7 +9195,8 @@ const HQB_SHRINES = [
         '2F3Gp0mDPnQ7Dd2zGiz0OBRFyLGxMkE/O3NgpCjwUtOf1gTLblD0tZL23f7pOjW6SuJ6JskzQ2y4jhzbUdqlAeruxnBxUTtkRi4WabpdV4Z+J7ekCLJb/S74jhzEebcCsAsuJUgnj/RDlQEgtNmvtpDi9STGb7b7QhL1tdQ0tU91xLagtboHqrWQohISPPnXKRf7BEhJ1lqC1znbrbnkxWpEu2FqW21Ic9RLaMAkBK8YGVeqrmTx050F/tEv2nbdfXJcT4ugy5kpEJ9TKjObcQwFpUk5ASStaf2hzrbtmhb1fbpbrredcm/Wm3KU/bmWojbZL4BSl15SDtcUjJxgAbhyHEUBG5yEdsM6+3CHO1QvSbJiQ/RoCg03c8FRfOxwA7QFIyRgkAjBOBVw' +
         'C1W5SIgEGMUxAn0bLQ/QgDCdueWBWDTduuNosseFdbw5eZre7vJrjKWlO5USPVTwGAccPCunzoApONKaSgCiiigOPq/ULWlNMXO9vY2w2FOJB/WXyQn3qIHvrw+9IckOreeXvdcUVrUf1lE5J+0mr7+E/rMNswNJRnPWcImywDySMhtJ9pyr3CvPW+vPa9vRSQzeDV//Bl18G3JGjJzuA4VSYBUevNxsf5h+9XnvNbNtuUq0XCNcIL6mJUVxLzLieaFpOQaR6PYXQ+gNFRfs411D7QtLxrvH2tv/wBFLYB4sPAesn2HmD1BFSivQXClzSUUAtFJSigNO4wF3D0dAkrZabeDjzaUhQkJAPqKzyGSDw4+rjlmqyvvYglWobxqa1vRHpLp9KhwXmA2k' +
         'P7UpWhbo4lpYR83GAVE+22aKArS/wBlt12Kf/UkMOodaK2YaXlCDE6eqngXVjhlavEbUgZrg2STeY1ujWtzsvlTNVWaKiI1cZCEpgrDAPdOpdzk54EJSM5OMgcRcb0ONIWhbzDbqmzlBWkK2nxGetRnU2g5OpLjIkp1Zf7Yw9FRH9GgvJQhtaHAtLqeGQrmD4g+6gIZau0zRdxvjF8hQL6dUuMejzLVFtzvfOrwAA7kbMowQFFQABPHFbw7ftPLtkab6DcO9beS1dW0xXHBaElRSrvVBOCcjGE5zz5CrBegS/jGNJZmJ7hhhaFMOIJLrh27VlYPQBQPA/O4YrQdtuo5jbn/ALxEtairckQogc3cR88ufOyOHAJPnQHDbuol6j01cp8QRG79Alwe5' +
-        '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
+        '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' +
@@ -8789,7 +9321,8 @@ const HQB_SHRINES = [
         '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
-        'm+LLeP5kIsbsgdQcmNj+O5fxFfPZr7k8deHU8WeEdW0RgC13bMIif4ZR8yH/AL6Ar4cYMpKspVhwQex7is5rU6qLurH2d8GNF/sL4aaLCU2y3MRvJP8AekO4f+O7R+FdtjNR2dollaQ2sS7Y4Y1jQegUAD+VTgcVa0OZ6u4zqMUoBp2KPbvRcLCYo70qjNKVoTCw0cUtLtoxgimIbS05mVFJYgADJJ7Vxfin4hW2mI8GnPHLP0MrAlEPsB1NRKSirsqMHJ2R0+papZaRbG5vriOCMdCx5b2A715D8SfiVFremT6Xp8GISQ3nOeWI7Y6bT0PXNcvrmtXGqMZ7q5muJHHLSHp9B2rClZVgkCEEnnBPU1wVsS5JqJ6WHw0YtSkej/D34prpWlWum6nb' +'s8KcLMr/ADRg/wAIU/wjoAOgr1zTdVstXtxcWNyk8ZGcqeR9R2r5huFt2ld4UWEHkKvQcCtHQdevdFlWa2vZ4nX7uw8Ee46UsPiWklIMThYyk3A+mKM1w/hP4lWuqFLTUsQ3OOJQuEf6+ldyCrLuBBB6EdDXoxkpK6PNnBxdmJRmnge1G0elMmxHTZIo542ilRXjcbWVhkMD1FTYA7UbQSPrQOx8fT+AtIXXNb0ELLasNXEUN0sh2W8YeQbNnAJxtwTzxxXNS+HZwkcVu1xdxbmUzeUYkbpyA+D+Y7V2XxA1f7N4l1oW8DveSX0j3KQv+6iYOflJ/iOPY9+lVYNR1Gd4yJY7YMwJ5PoD7DOM/lXDXmr6dDopJ9TPsvDOoSEOsEhUIy7jMvXPHf8A' +
+        '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' +
@@ -8861,6 +9394,8 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) hqbR
 async function hqbDlPromptCheck() {
     try {
         if (!navigator.onLine || await idbGet('quran_full_done')) return;
+        // لا نزعج المستخدم الجديد: لا يظهر قبل إنهاء الإعداد، ولا قبل الفتح الثالث للتطبيق
+        if (localStorage.getItem('hqb_onboard_done') !== '1' || (+localStorage.getItem('hqb_launches') || 0) < 3) return;
         const later = +(localStorage.getItem('hqb_dl_later') || 0);
         if (Date.now() - later < 3 * 86400000) return;
         const box = document.getElementById('hqb-dl-prompt');
@@ -8908,26 +9443,22 @@ async function hqbDlPromptGo() {
 document.body.insertAdjacentHTML('beforeend', '<div id="hqb-dl-prompt" class="hqb-dl-prompt"></div>');
 
 // ===== مشاركة التطبيق وتقييمه =====
-const HQB_SITE_URL = 'https://trpo20077-hash.github.io/';
+const HQB_SITE_URL = 'https://trpo20077-hash.github.io/Adhkar/haram-page.html';
 // عند نشر التطبيق على Google Play ضعي هنا اسم الحزمة، مثل: 'com.haram.app'
-const HQB_PLAY_PACKAGE = '';
+const HQB_PLAY_PACKAGE = 'com.zainabali.haram';
 async function hqbShareApp() {
     playClickSound();
-    const url = HQB_SITE_URL;
-    const text = 'تطبيق «حرم»: الأدعية والزيارات والمصحف وأوقات الصلاة والأذان، ويعمل بدون إنترنت.';
-    try {
-        if (navigator.share) { await navigator.share({ title: 'حرم', text, url }); return; }
-    } catch (e) { if (e && e.name === 'AbortError') return; }
-    try {
-        await navigator.clipboard.writeText(text + '\n' + url);
-        showToast('تم نسخ رابط التطبيق، الصقه في أي محادثة');
-    } catch (e) {
-        window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + url), '_blank', 'noopener');
-    }
+    // يفتح موقع حرم، وفيه نافذة المشاركة لكل المنصات
+    let w = null;
+    try { w = window.open(HQB_SITE_URL, '_blank'); } catch (e) {}
+    if (w) { try { w.opener = null; } catch (e) {} }
+    else { location.href = HQB_SITE_URL; }
 }
+// زر التقييم لا يظهر إلا بعد وضع اسم الحزمة، أي بعد النشر على Google Play
+(function () { const r = document.getElementById('hqb-rate-row'); if (r && !HQB_PLAY_PACKAGE) r.style.display = 'none'; })();
 function hqbRateApp() {
     playClickSound();
-    if (!HQB_PLAY_PACKAGE) { showToast('التقييم متاح بعد نزول «حرم» على Google Play قريباً إن شاء الله'); return; }
+    if (!HQB_PLAY_PACKAGE) { showToast('التقييم متاح بعد نزول تطبيق حرم على Google Play قريباً إن شاء الله'); return; }
     const web = 'https://play.google.com/store/apps/details?id=' + encodeURIComponent(HQB_PLAY_PACKAGE);
     if (/Android/i.test(navigator.userAgent)) location.href = 'market://details?id=' + encodeURIComponent(HQB_PLAY_PACKAGE);
     else window.open(web, '_blank', 'noopener');
@@ -8993,7 +9524,8 @@ async function hqbOfflineAll() {
     hqbOfflineLabel();
 }
 hqbOfflineLabel();
-setTimeout(hqbDlPromptCheck, 7000);
+try { localStorage.setItem('hqb_launches', String((+localStorage.getItem('hqb_launches') || 0) + 1)); } catch (e) {}
+setTimeout(hqbDlPromptCheck, 25000);
 hqbApplyNewLabels();
 </script>
 <script>
@@ -9101,7 +9633,9 @@ const HQB_FULL_DUAS = [
 
 اللّهُمَّ إِنْ حالَ بَيْنِي وَبَيْنَهُ الْمَوْتُ الَّذِي جَعَلْتَهُ عَلى عِبادِكَ حَتْماً مَقْضِيّاً، فَأَخْرِجْنِي مِنْ قَبْرِي، مُؤْتَزِراً كَفَنِي، شاهِراً سَيْفِي، مُجَرِّداً قَناتِي، مُلَبِّياً دَعْوَةَ الدّاعِي فِي الْحاضِرِ وَالْبادِي.
 
-اللّهُمَّ أَرِنِي الطَّلْعَةَ الرَّشِيدَةَ، وَالْغُرَّةَ الْحَمِيدَةَ، وَاكْحُلْ ناظِرِي بِنَظْرَةٍ مِنِّي إِلَيْهِ، وَعَجِّلْ فَرَجَهُ، وَسَهِّلْ مَخْرَجَهُ، وَأَوْسِعْ مَنْهَجَهُ، وَاسْلُكْ بِي مَحَجَّتَهُ، وَأَنْفِذْ أَمْرَهُ، وَاشْدُدْ أَزْرَهُ، وَاعْمُرِ اللّهُمَّ بِهِ بِلادَكَ، وَأَحْيِ بِهِ عِبادَكَ، فَإِنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ: ﴿ظَهَرَ الْفَسادُ فِي الْبَرِّ وَالْبَحْرِ بِما كَسَبَتْ أَيْدِي النّاسِ﴾، فَأَظْهِرِ اللّهُمَّ لَنا وَلِيَّكَ وَابْنَ بِنْتِ نَبِيِّكَ، الْمُسَمّى بِاسْمِ رَسُولِكَ، حَتّى لا يَظْفَرَ بِشَيْءٍ مِنَ الْباطِلِ إِلّا مَزَّقَهُ، وَيُحِقَّ الْحَقَّ وَيُحَقِّقَهُ.وَاجْعَلْهُ اللّهُمَّ مَفْزَعاً لِمَظْلُومِ عِبادِكَ، وَناصِراً لِمَنْ لا يَجِدُ لَهُ ناصِراً غَيْرَكَ، وَمُجَدِّداً لِما عُطِّلَ مِنْ أَحْكامِ كِتابِكَ، وَمُشَيِّداً لِما وَرَدَ مِنْ أَعْلامِ دِينِكَ وَسُنَنِ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، وَاجْعَلْهُ اللّهُمَّ مِمَّنْ حَصَّنْتَهُ مِنْ بَأْسِ الْمُعْتَدِينَ.
+اللّهُمَّ أَرِنِي الطَّلْعَةَ الرَّشِيدَةَ، وَالْغُرَّةَ الْحَمِيدَةَ، وَاكْحُلْ ناظِرِي بِنَظْرَةٍ مِنِّي إِلَيْهِ، وَعَجِّلْ فَرَجَهُ، وَسَهِّلْ مَخْرَجَهُ، وَأَوْسِعْ مَنْهَجَهُ، وَاسْلُكْ بِي مَحَجَّتَهُ، وَأَنْفِذْ أَمْرَهُ، وَاشْدُدْ أَزْرَهُ، وَاعْمُرِ اللّهُمَّ بِهِ بِلادَكَ، وَأَحْيِ بِهِ عِبادَكَ، فَإِنَّكَ قُلْتَ وَقَوْلُكَ الْحَقُّ: ﴿ظَهَرَ الْفَسادُ فِي الْبَرِّ وَالْبَحْرِ بِما كَسَبَتْ أَيْدِي النّاسِ﴾، فَأَظْهِرِ اللّهُمَّ لَنا وَلِيَّكَ وَابْنَ بِنْتِ نَبِيِّكَ، الْمُسَمّى بِاسْمِ رَسُولِكَ، حَتّى لا يَظْفَرَ بِشَيْءٍ مِنَ الْباطِلِ إِلّا مَزَّقَهُ، وَيُحِقَّ الْحَقَّ وَيُحَقِّقَهُ.
+
+وَاجْعَلْهُ اللّهُمَّ مَفْزَعاً لِمَظْلُومِ عِبادِكَ، وَناصِراً لِمَنْ لا يَجِدُ لَهُ ناصِراً غَيْرَكَ، وَمُجَدِّداً لِما عُطِّلَ مِنْ أَحْكامِ كِتابِكَ، وَمُشَيِّداً لِما وَرَدَ مِنْ أَعْلامِ دِينِكَ وَسُنَنِ نَبِيِّكَ صَلَّى اللهُ عَلَيْهِ وَآلِهِ، وَاجْعَلْهُ اللّهُمَّ مِمَّنْ حَصَّنْتَهُ مِنْ بَأْسِ الْمُعْتَدِينَ.
 
 اللّهُمَّ وَسُرَّ نَبِيَّكَ مُحَمَّداً صَلَّى اللهُ عَلَيْهِ وَآلِهِ بِرُؤْيَتِهِ، وَمَنْ تَبِعَهُ عَلى دَعْوَتِهِ، وَارْحَمِ اسْتِكانَتَنا بَعْدَهُ.
 
@@ -9171,8 +9705,7 @@ async function hqbDeleteMyData() {
     showToast('جاري الحذف...');
     try {
         if (supabaseClient && navigator.onLine) {
-            const r = await hqbRpc('fanus_delete_mine', { p_device: myDeviceId });
-            if (!r.ok && r.missing) await supabaseClient.from('fanus').delete().eq('created_by', myDeviceId);
+            await hqbRpc('fanus_delete_mine', { p_device: myDeviceId });
             try { await supabaseClient.functions.invoke('islamic-assistant', { body: { action: 'problem_delete', device: myDeviceId } }); } catch (e) {}
         }
     } catch (e) {}
@@ -9497,7 +10030,7 @@ async function hqbWpSave() {
         hqbWpHit('downloads');
         showToast('تم حفظ الخلفية في الصور أو التنزيلات');
     } catch (e) {
-        window.open(w.url, '_blank');
+        if (/^https?:\/\//i.test(String(w.url || ''))) window.open(w.url, '_blank', 'noopener');
         showToast('اضغط على الصورة مطولاً واختر «حفظ الصورة»');
     } finally { btn.disabled = false; }
 }
@@ -9506,10 +10039,13 @@ async function hqbWpShare() {
     const w = hqbWpCur; if (!w) return;
     try {
         const b = await hqbWpBlob(w);
-        const f = new File([b], 'haram.' + hqbWpExt(b), { type: b.type || 'image/jpeg' });
-        if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f] }); hqbWpHit('shares'); return; }
-    } catch (e) { if (e && e.name === 'AbortError') return; }
-    if (navigator.share) { try { await navigator.share({ url: w.url }); hqbWpHit('shares'); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+        const r = await hqbNativeShareFile(b, 'haram.' + hqbWpExt(b));
+        if (r === 'ok') { hqbWpHit('shares'); return; }
+        if (r === 'cancel') return;
+    } catch (e) {}
+    const r2 = await hqbNativeShare({ url: w.url });
+    if (r2 === 'ok') { hqbWpHit('shares'); return; }
+    if (r2 === 'cancel') return;
     hqbWpSave();
 }
 
@@ -9903,7 +10439,8 @@ function qdOnOrient(e) {
     else if (qdGotAbs || (typeof e.webkitCompassHeading !== 'number' && !e.absolute)) return;
     let h = qdHeadingFrom(e);
     if (h === null || isNaN(h)) return;
-    const so = (screen.orientation && typeof screen.orientation.angle === 'number') ? screen.orientation.angle : (window.orientation || 0);h = h + so;
+    const so = (screen.orientation && typeof screen.orientation.angle === 'number') ? screen.orientation.angle : (window.orientation || 0);
+    h = h + so;
     const lat = qdPos ? qdPos.lat : hqbLocParams().lat, lng = qdPos ? qdPos.lng : hqbLocParams().lng;
     h = (h + qdDecl(lat, lng, qdYear()) + 720) % 360;
     const R = Math.PI / 180;
@@ -10402,6 +10939,7 @@ const HQB_KU = {
 "3. الموقع الجغرافي": "3. شوێنی جوگرافی",
 "صلاح الدين (تكريت)": "سەڵاحەدین (تکریت)",
 "منتصف الليل الشرعي": "نیوەشەوی شەرعی",
+"صلاة الليل": "نوێژی شەو",
 "مناسبات الشهر كاملة": "هەموو بۆنەکانی مانگ",
 "تعذّر تحميل الخريطة": "نەخشە بار نەبوو",
 "ابحث في هذه المنطقة": "لەم ناوچەیەدا بگەڕێ",
@@ -10531,7 +11069,8 @@ const HQB_KU = {
 "جاري تحديد موقعك...": "شوێنەکەت دیاری دەکرێت...",
 "تم رفض إذن الموقع، فعّله من إعدادات الجهاز": "مۆڵەتی شوێن ڕەتکرایەوە، لە ڕێکخستنەکانی ئامێرەوە چالاکی بکە",
 "بدون إنترنت: تُعرض آخر مواقيت محفوظة": "بەبێ ئینتەرنێت: دوایین کاتە پاشەکەوتکراوەکان پیشان دەدرێن",
-"جاري تجهيز الصورة...": "وێنەکە ئامادە دەکرێت...","إذا لم تُحفظ الصورة، اضغط عليها مطولاً واختر حفظ": "ئەگەر وێنەکە پاشەکەوت نەبوو، بۆ ماوەیەک دایبگرە و پاشەکەوت هەڵبژێرە",
+"جاري تجهيز الصورة...": "وێنەکە ئامادە دەکرێت...",
+"إذا لم تُحفظ الصورة، اضغط عليها مطولاً واختر حفظ": "ئەگەر وێنەکە پاشەکەوت نەبوو، بۆ ماوەیەک دایبگرە و پاشەکەوت هەڵبژێرە",
 "تعذر تشغيل التلاوة، تأكد من الإنترنت": "تیلاوەتەکە لێنەدرا، دڵنیابە لە ئینتەرنێت",
 "اكتب الاسم فقط، بدون أرقام أو روابط أو معلومات تواصل": "تەنها ناوەکە بنووسە، بەبێ ژمارە یان بەستەر یان زانیاری پەیوەندی",
 "جاري الحذف...": "دەسڕدرێتەوە...",
@@ -10733,7 +11272,9 @@ function hqbSetLang(l) {
 
 </script>
 <script>
-const HQB_OB_STEPS = 7;
+// ثلاث خطوات فقط: الترحيب والصلاحيات، ثم الموقع، ثم الأذان. «تخطي» يُنهي الإعداد كله بالقيم الافتراضية
+const HQB_OB_ORDER = [0, 5, 4];
+const HQB_OB_STEPS = HQB_OB_ORDER.length;
 let hqbObStep = 0;
 function hqbObDone() { return localStorage.getItem('hqb_onboard_done') === '1'; }
 function hqbObPerm() { return ('Notification' in window) ? Notification.permission : 'unsupported'; }
@@ -10752,7 +11293,7 @@ function hqbObOpen() {
         <div id="hqb-ob-body" class="hqb-ob-body"></div>
         <div class="hqb-ob-foot">
             <button id="hqb-ob-next" class="hqb-ob-next" onclick="hqbObGo(1)">التالي</button>
-            <button id="hqb-ob-skip" class="hqb-ob-skip" onclick="hqbObGo(1)">تخطي</button>
+            <button id="hqb-ob-skip" class="hqb-ob-skip" onclick="playClickSound(); hqbObFinish()">تخطي</button>
         </div>
     </div>`);
     document.body.classList.add('hqb-modal-open');
@@ -10791,13 +11332,15 @@ function hqbObSw(on, fn) { return `<button class="hqb-switch ${on ? 'on' : ''}" 
 function hqbObRender() {
     const body = document.getElementById('hqb-ob-body');
     if (!body) return;
-    const s = hqbObStep;
+    let s = hqbObStep;
     document.getElementById('hqb-ob-count').innerText = hqbNum(s + 1) + '/' + hqbNum(HQB_OB_STEPS);
     document.querySelectorAll('#hqb-ob-bar i').forEach((b, i) => b.classList.toggle('on', i <= s));
     document.getElementById('hqb-ob-back').style.visibility = s === 0 ? 'hidden' : 'visible';
     document.getElementById('hqb-ob-skip').style.display = s === HQB_OB_STEPS - 1 ? 'none' : '';
     document.getElementById('hqb-ob-next').innerText = s === HQB_OB_STEPS - 1 ? 'ابدأ استخدام التطبيق' : 'التالي';
     let h = '';
+    const sv = s;
+    s = HQB_OB_ORDER[s];
     if (s === 0) {
         const perm = hqbObPerm();
         h = `<img src="${APP_LOGO_DATA}" alt="" class="hqb-ob-logo">
@@ -10806,6 +11349,10 @@ function hqbObRender() {
             <div class="hqb-ob-list">
                 ${hqbObRow('fa-bell', 'الإشعارات', 'لتصلك تنبيهات الأذان والأدعية', hqbObCheck(perm === 'granted'), perm === 'default' ? 'hqbObAskNotify()' : '')}
                 ${hqbObRow('fa-location-dot', 'الموقع الجغرافي', hqbObGpsBusy ? 'جاري تحديد موقعك...' : 'لمعرفة أوقات الصلاة في مدينتك', hqbObCheck(hqbObLocSet()), 'hqbObGps()')}
+            </div>
+            <div class="hqb-ob-list sep">
+                ${hqbObRow('fa-language', 'العربية', '', hqbObRadio(hqbLang() !== 'ku'), "hqbObLang('ar')")}
+                <div class="hqb-ob-row lang-switch" onclick="hqbObLang('ku')"><span class="hqb-ob-rowic"><i class="fa-solid fa-language"></i></span><span class="hqb-ob-rowtx" lang="ckb" style="font-family:'Noto Sans Arabic','Tajawal',sans-serif"><b>کوردی</b></span>${hqbObRadio(hqbLang() === 'ku')}</div>
             </div>
             <p class="hqb-ob-note">يمكنك تعديل هذه الصلاحيات لاحقاً من إعدادات الجهاز.</p>`;
     } else if (s === 1) {
@@ -10830,7 +11377,8 @@ function hqbObRender() {
         const t = typeof hqbTodayTimings !== 'undefined' ? hqbTodayTimings : null;
         h = hqbObHead('fa-mosque', 'الأذان والتنبيهات', 'اختر الصلوات التي تريد لها أذاناً.') + `
             <div class="hqb-ob-list">${hqbObRow('fa-volume-high', 'تفعيل الأذان', 'أذان تلقائي عند دخول وقت كل صلاة', hqbObSw(c.on, "hqbObAdhan('on')"), "hqbObAdhan('on')")}</div>
-            <div class="hqb-ob-list sep ${c.on ? '' : 'dim'}">${ADHAN_PRAYERS.map(p => hqbObRow('fa-clock', p.ar, t && t[p.k] ? format12Hour(t[p.k]) : '', hqbObSw(c.prayers[p.k], `hqbObAdhan('${p.k}')`), `hqbObAdhan('${p.k}')`)).join('')}</div>`;
+            <div class="hqb-ob-list sep ${c.on ? '' : 'dim'}">${ADHAN_PRAYERS.map(p => hqbObRow('fa-clock', p.ar, t && t[p.k] ? format12Hour(t[p.k]) : '', hqbObSw(c.prayers[p.k], `hqbObAdhan('${p.k}')`), `hqbObAdhan('${p.k}')`)).join('')}</div>
+            <div class="hqb-ob-list">${hqbObRow('fa-hands-praying', 'إشعار دعاء اليوم', 'أدعية أيام الأسبوع من الصحيفة السجادية', hqbObSw(hqbDailyDuaOn(), 'hqbObDailyDua()'), 'hqbObDailyDua()')}</div>`;
     } else if (s === 5) {
         const iraq = (arabCountriesData['العراق'] || { cities: {} }).cities;
         h = hqbObHead('fa-location-dot', 'حدّد موقعك', 'اختر محافظتك أو استخدم الـ GPS.') + `
@@ -10849,6 +11397,7 @@ function hqbObRender() {
             ${hqbObRow('fa-location-dot', 'الموقع', '', `<span class="hqb-ob-val">${escapeHTML(activeCity)}</span>`, 'hqbObJump(5)')}
         </div>`;
     }
+    s = sv;
     const same = hqbObLast === s;
     const keep = body.scrollTop;
     body.innerHTML = `<div class="hqb-ob-step${same ? ' still' : ''}">${h}</div>`;
@@ -10873,6 +11422,7 @@ function hqbObAdhan(k) {
     if (k === 'on') c.on = !c.on; else c.prayers[k] = !c.prayers[k];
     hqbSaveAdhanCfg(c);
     if (c.on && hqbObPerm() === 'default') { try { Notification.requestPermission().then(() => {}); } catch (e) {} }
+    if (c.on && k !== 'on') setTimeout(hqbBatteryHint, 400);
     hqbObRender();
 }
 function hqbObCity(i) {
