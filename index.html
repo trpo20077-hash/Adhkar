@@ -9455,7 +9455,10 @@ const HQB_SITE_URL = 'https://trpo20077-hash.github.io/Adhkar/haram-page.html';
 const HQB_PLAY_PACKAGE = 'com.zainabali.haram';
 async function hqbShareApp() {
     playClickSound();
-    // يفتح موقع حرم، وفيه نافذة المشاركة لكل المنصات
+    // نافذة المشاركة الأصلية في الهاتف: تظهر فيها إنستغرام وواتساب وتيليجرام وغيرها، ويختار المستخدم الصديق مباشرة
+    const r = await hqbNativeShare({ title: 'تطبيق حرم', text: 'تطبيق حرم: القرآن الكريم والأدعية والزيارات ومواقيت الصلاة لمدن العراق، مجاني ويعمل بدون إنترنت', url: HQB_SITE_URL });
+    if (r) return;
+    // إن لم تتوفر نافذة المشاركة (متصفح الحاسوب) يفتح موقع حرم وفيه خيارات المشاركة
     let w = null;
     try { w = window.open(HQB_SITE_URL, '_blank'); } catch (e) {}
     if (w) { try { w.opener = null; } catch (e) {} }
